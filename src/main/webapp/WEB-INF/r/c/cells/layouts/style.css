@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* Sohu SNS Layouts Style
+ * Version: 1.0
+ * Created: 2008-12-22
+ * Update: 2008-12-22
+ * Author: Matt Wang (www.uiland.com)
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+
+/*** Columns Layout ***/
+.lay{/*fixed*/}
+
+
+/** 3 Columns: Percentage **/
+
+	/* s:25% | m:50% | e:25% */
+	/* 这种写法在IE6下不太稳定
+	.lay-s25p-m50p-e25p{}
+		.lay-s25p-m50p-e25p .layInt{padding:0 25%;}
+			.lay-s25p-m50p-e25p .colMain{float:left;width:100%;}
+			.lay-s25p-m50p-e25p .colSub{float:left;width:50%;margin:0 0 0 -150%;_margin:0 0 0 -75%;}
+			.lay-s25p-m50p-e25p .colExtra{float:right;width:50%;margin:0 -50% 0 0;}
+	*/
+	/*
+	.lay-s25p-m50p-e25p{}
+		.lay-s25p-m50p-e25p .layInt{padding:0 0 0 25%;}
+			.lay-s25p-m50p-e25p .colMain{float:left;width:66.66%;}
+			.lay-s25p-m50p-e25p .colSub{float:left;width:33.33%;margin:0 0 0 -100%;_margin:0 0 0 -75%;zoom:1;}
+			.lay-s25p-m50p-e25p .colExtra{float:right;width:33.33%;}
+	*/
+	.lay-s25p-m50p-e25p{}
+		.lay-s25p-m50p-e25p .colMain{float:left;width:49.99%;margin:0 0 0 25%;}
+		.lay-s25p-m50p-e25p .colSub{float:left;width:25%;margin:0 0 0 -75%;}
+		.lay-s25p-m50p-e25p .colExtra{float:right;width:24.99%;}
+
+	/* e:25% | m:50% | s:25% */
+	.lay-e25p-m50p-s25p{}
+		.lay-e25p-m50p-s25p .colMain{float:left;width:49.99%;margin:0 0 0 25%;}
+		.lay-e25p-m50p-s25p .colSub{float:right;width:24.99%;}
+		.lay-e25p-m50p-s25p .colExtra{float:left;width:25%;margin:0 0 0 -75%;}
+
+	/* m:25% | s:50% | e:25% */
+	.lay-m25p-s50p-e25p{}
+		.lay-m25p-s50p-e25p .colMain{float:left;width:24.99%;}
+		.lay-m25p-s50p-e25p .colSub{float:left;width:49.99%;}
+		.lay-m25p-s50p-e25p .colExtra{float:right;width:24.99%;}
+
+	/* m:25% | e:50% | s:25% */
+	.lay-m25p-e50p-s25p{}
+		.lay-m25p-e50p-s25p .colMain{float:left;width:24.99%;}
+		.lay-m25p-e50p-s25p .colSub{float:right;width:24.99%;}
+		.lay-m25p-e50p-s25p .colExtra{float:left;width:49.99%;}
+
+	/* s:25% | e:50% | m:25% */
+	.lay-s25p-e50p-m25p{}
+		.lay-s25p-e50p-m25p .colMain{float:right;width:24.99%;}
+		.lay-s25p-e50p-m25p .colSub{float:left;width:24.99%;}
+		.lay-s25p-e50p-m25p .colExtra{float:left;width:49.99%;}
+
+	/* e:25% | s:50% | m:25% */
+	.lay-e25p-s50p-m25p{}
+		.lay-e25p-s50p-m25p .colMain{float:right;width:24.99%;}
+		.lay-e25p-s50p-m25p .colSub{float:right;width:49.99%;}
+		.lay-e25p-s50p-m25p .colExtra{float:left;width:24.99%;}
+
+/** 3 Columns: Liquid, secondary columns fixed-width **/
+
+	/* s:200px | m:auto | e:200px */
+	.lay-s200-mAuto-e200{}
+		.lay-s200-mAuto-e200 .layInt{padding-left:200px;padding-right:200px;}
+			.lay-s200-mAuto-e200 .colMain{float:left;width:100%;}
+			.lay-s200-mAuto-e200 .colSub{position:relative;left:-200px;_left:200px;float:left;width:200px;margin:0 0 0 -100%;}
+			.lay-s200-mAuto-e200 .colExtra{float:right;width:200px;margin:0 -200px 0 0;}
+
+	/* e:200px | m:auto | s:200px */
+	.lay-e200-mAuto-s200{}
+		.lay-e200-mAuto-s200 .layInt{padding-left:200px;padding-right:200px;}
+			.lay-e200-mAuto-s200 .colMain{float:left;width:100%;}
+			.lay-e200-mAuto-s200 .colSub{float:right;width:200px;margin:0 -200px 0 0;}
+			.lay-e200-mAuto-s200 .colExtra{position:relative;left:-200px;_left:200px;float:left;width:200px;margin:0 0 0 -100%;}
+
+/** 3 Sections, 2 Columns:  **/
+
+	/* m,e:auto | s:200px */
+	.lay-meAuto-s200{}
+		.lay-meAuto-s200 .layInt{padding-right:200px;}
+			.lay-meAuto-s200 .colMain{float:left;width:100%;}
+			.lay-meAuto-s200 .colSub{float:right;width:200px;margin:0 -200px 0 0;}
+			.lay-meAuto-s200 .colExtra{float:left;width:100%;}
+
+	/* s:200px | m,e:auto */
+	.lay-s200-meAuto{}
+		.lay-s200-meAuto .layInt{padding-left:200px;}
+			.lay-s200-meAuto .colMain{float:right;width:100%;}
+			.lay-s200-meAuto .colSub{float:left;width:200px;margin:0 0 0 -200px;}
+			.lay-s200-meAuto .colExtra{float:right;width:100%;}
+

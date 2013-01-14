@@ -1,0 +1,14 @@
+.ui-icon-email {
+    background-image: url(../../i/jqm/aeset-icons-white.png);
+    -moz-background-size: 16px 16px;
+    -o-background-size: 16px 16px;
+    -webkit-background-size: 16px 16px;
+    background-size: 16px 16px;
+}
+.ui-icon-email {
+	background-position: 2px 3px;
+}
+
+ui-input-text {
+    width: 100%;
+}

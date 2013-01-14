@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	 <context:annotation-config />
+    <context:component-scan base-package="com.gemantic" /> 
+    
+    
+	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.dao.DataAccessException">
+					dataAccessFailure
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<bean id="filenameController"
+		class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
+		
+		
+		
+	<bean id="jstlViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<set>
+				<value>classpath:exception-messages-play</value>
+			</set>
+		</property>
+		<property name="useCodeAsDefaultMessage" value="true" />
+		<property name="defaultEncoding" value="UTF-8" />
+
+	</bean>
+
+
+
+	<bean id="tilesResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles2.TilesView" />
+		<property name="order" value="1" />
+		<property name="viewNames">
+			<list>
+				<value>*/room/play/*</value>
+				<value>*/room/list/*</value>
+				<value>*/record/list/*</value>
+				<value>*/player/detail</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+
+
+  	<bean id="proxy_config" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="stock" value-ref="keywizardServiceStockImpl">				
+				</entry>				
+			</map>
+		</constructor-arg>
+	</bean>
+	
+
+
+
+
+
+
+</beans>

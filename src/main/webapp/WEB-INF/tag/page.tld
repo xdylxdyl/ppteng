@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+    <!-- The version number of this tag library -->
+    <tlibversion>1.0</tlibversion>
+
+    <!-- The JSP specification version required to function -->
+    <jspversion>2.1</jspversion>
+
+    <!-- The short name of this tag library -->
+    <shortname>page</shortname>
+
+    <!-- Public URI that uniquely identifies this version of the tag library -->
+    <uri>http://www.gemantic.com/taglibs/page</uri>
+
+    <!-- General information about this tag library -->
+    <info>
+          page/size functions
+    </info>
+    
+    <tag>
+        <name>findPage</name>
+        <tag-class>com.gemantic.commons.tags.Page</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>totalCount</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>totalPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>currentPosition</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>order</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    
+</taglib>

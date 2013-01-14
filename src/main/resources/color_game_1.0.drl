@@ -1,0 +1,480 @@
+package com.gemantic.killer.common.model
+
+import com.gemantic.killer.common.model.Message;
+import com.gemantic.killer.common.model.Operater;
+import com.gemantic.killer.common.model.World;
+import com.gemantic.killer.model.Room;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Integer;
+import org.apache.commons.lang.math.RandomUtils;
+import com.gemantic.killer.util.MessageUtil;
+import org.apache.commons.lang.StringUtils;
+
+#create 
+#2.第一次进房间,更改房间的资源(hasPlayer)
+#3.生成Login Message
+rule "start game"
+	#no-loop true
+	lock-on-active
+	when	
+	   
+	    #eval (start())
+	    $room:Room(status==1,$createrID:createrID)
+	    $operate:Operater()
+	    $message:Message($subject:subject,predict=="start") 
+	            from $operate.getMessage()
+	     
+	     
+	then 
+	  #每一个环节都可以写成一个规则. 需要设置一个开关么.开了或者是关了.
+	  #关键是数据怎么传输 start之后 start 的权限要删了.
+	  
+	  #world 创建一个新的World,将Room的准备的人都复制给World 
+	  World w=new World($room.getName(),$room.getCreaterID(),$room.getVersion());
+	  $room.setWorld(w);
+	  
+	  #assign color messages
+	  Message question=new Message(-500L,"question","");
+	  Message solution=new Message(-500L,"solution","");
+	   List<Message> msgs=createColorMessage(10,question,solution);
+	  w.getMessages().addAll(msgs);
+	  w.getMessages().add(question);
+	  w.getMessages().add(solution);
+	  #send color messages
+	  
+	  
+	 
+	  
+	  
+	  #create rights
+	  List<Long> loginIDS=MessageUtil.getSubjectByPredict($room.getMessages(),"login");
+	  
+	   #create game start
+	  
+	 
+	  $message.setAccepts(loginIDS);
+	  $operate.getNextMessages().add($message);
+	  
+	  w.getMessages().add($message);
+	  
+	  for(Message m:msgs){
+	        m.setAccepts(loginIDS);
+	  }
+	  	  	  
+	  $operate.getNextMessages().addAll(msgs);
+	  
+	  
+	   #create countDown
+	  Message countDown=new Message(-500L,"countDown",String.valueOf(2*60*1000L));
+	  countDown.setAccepts(loginIDS);
+	  w.getMessages().add(countDown);
+	  $operate.getNextMessages().add(countDown);
+	  
+	 
+	  
+	  
+	  
+	  
+	  #怎么处理权限呢.是增加还是删除?还是全替换 这个权限比较简单.所有人的都一样.关键是其他游戏的呢?
+	  #如果我做的是Add_rights就简单多了.这个权限还真的很难处理.我还要维护自己的状态.暂时不管.权限更改单独写规则
+	  #权限信息也要发出去
+	  #不需要.发了也收不到. 权限本身应该是一个规则..
+	  #这个地方真是烦人啊.怎么处理游戏状态现在必须要有思路,可是到现在为止还是没有思路啊
+	  #$operate.getNextMessages().add(right_message_kick);
+	  #$operate.getNextMessages().add(right_message_say);
+	  #$operate.getNextMessages().add(right_message_ready);
+	  Message msg_answer=new Message($subject,"right","answer");
+	  msg_answer.setAccepts(loginIDS);	
+	  Message msg_say=new Message($subject,"right","say");
+	  msg_say.setAccepts(loginIDS);	
+	  
+	   Message msg_over=new Message($createrID,"right","over");
+	  msg_over.getAccepts().add($createrID);
+	  
+	  #删除权限(start)
+	  Map f=new HashMap();
+	  f.put(Message.class.getDeclaredField("predict"),"right");
+	  f.put(Message.class.getDeclaredField("content"),"start");
+	  List<Message> removeMessages=MessageUtil.getMessagesByFields($room.getMessages(),f);
+	 System.out.println( "  remove "+removeMessages.size());
+	 List<Message> newMessages=MessageUtil.removeMessage($room.getMessages(),removeMessages); 
+	 System.out.println($room.getMessages().size()+ " after remove "+newMessages.size());
+	    $room.setMessages(newMessages);
+	  
+	   w.getMessages().add(msg_answer);
+	   w.getMessages().add(msg_say);
+	   w.getMessages().add(msg_over);
+	  $operate.getNextMessages().add(msg_answer);
+	  $operate.getNextMessages().add(msg_say);
+	   $operate.getNextMessages().add(msg_over);
+	  #生成定时Message
+	  Message timer_over_msg=new Message(-500L,"over","游戏结束");
+	  timer_over_msg.setVersion( $message.getVersion());
+	  timer_over_msg.setWhere($room.getId());
+	  #两分钟
+	  timer_over_msg.setTime(2*60*1000L);
+	  timer_over_msg.setAccepts(loginIDS);
+	  $operate.getTimerMessages().add(timer_over_msg);
+	  
+	  $room.setStatus(0);
+	  update($operate);
+	  update($room); 
+	
+	  
+end
+
+
+
+#回答问题
+rule "answer"
+	#no-loop true
+	#取值和条件是不是要分开
+	lock-on-active
+	when	
+	   
+	    #eval (start())
+	    $room:Room()
+	    $operate:Operater()
+	    $message:Message($subject:subject,predict=="answer",$content:content,$answer_time:time) 
+	            from $operate.getMessage()
+	    $question_message:Message(predict=="solution",$question:content) 
+	            from $room.getWorld().getMessages()
+	     
+	     Message(predict=="start",$start_time:time,$admin:subject) 
+	            from $room.getWorld().getMessages()
+	then 
+	
+	
+	  System.out.println(" answer ");
+	  List<Long> loginIDS=MessageUtil.getSubjectByPredict($room.getMessages(),"login");
+	  #判断对不对
+	  String right=stringCompare($question,$content);
+	  Message result=new Message($subject,"result",right);
+	  result.setAccepts(loginIDS);	
+	  $operate.getNextMessages().add(result);
+	  
+	  
+	  Message use_time=new Message($subject,"use_time",((Long)($answer_time-$start_time)).toString());
+	  use_time.setAccepts(loginIDS);	
+	  $operate.getNextMessages().add(use_time);
+	  
+	   Message score=new Message($subject,"score",String.valueOf(StringUtils.countMatches(right, "对")));
+	  score.setAccepts(loginIDS);	
+	  $operate.getNextMessages().add(score);
+	  
+	  
+	  
+	  #right	
+	  Message msg_say=new Message($subject,"right","say");
+	  msg_say.getAccepts().add($subject);
+	  
+	 
+	  $room.getWorld().getMessages().add(msg_say);
+	
+	  $operate.getNextMessages().add(msg_say);
+	  $message.setAccepts(loginIDS);
+	   $operate.getNextMessages().add($message);
+	  
+	  
+	  update($operate);
+	  
+	  
+	  
+	  #更新Room
+	  $room.getWorld().getMessages().add(result);
+	  $room.getWorld().getMessages().add(use_time);
+	   $room.getWorld().getMessages().add($message);
+	  update($room);
+	
+	  
+end
+
+
+#所有人都回答或者是时间到了.
+rule "game over"
+	#no-loop true	
+	when	
+	  
+	    $room:Room(status==0,$world:world)
+	    
+	    $operate:Operater()
+	    $opMessage:Message($p:predict)
+	       from $operate.getMessage()
+	    	    
+	    $user_ready : ArrayList()	    
+	    from collect  (
+	      Message(predict=="ready")
+	      from $room.getMessages()
+	     )
+	    $user_answer : ArrayList()	    
+	    from collect  (
+	      Message(predict=="answer")
+	      from $world.getMessages()
+	     )
+	   
+	  # eval($user_ready.size()==$user_answer.size())
+	   
+	    #所有人回答问题     
+	  eval($user_ready.size()==$user_answer.size()||"over".equals($p))
+	   
+	     #or 	    
+	    #用户或者是定时发送结束指令
+	  
+	    
+	    
+	   
+	then 
+	
+	
+	System.out.println($room.getMessages()+"===================game over");
+    #要处理每一个人的权限
+	List<Long> loginIDS=MessageUtil.getSubjectByPredict($room.getMessages(),"login");
+
+  
+  #判断对不对 
+     
+  Message result=new Message(-500L,"over","");
+  result.setAccepts(loginIDS); 
+  $operate.getNextMessages().add(result); 
+  #重新发送权限
+  
+  
+  List<Message> newMessages=new ArrayList();
+  #over 要去掉
+  for(Message m:$room.getMessages()){
+        if(("right".equals(m.getPredict())&&"over".equals(m.getContent()))||"ready".equals(m.getPredict())){
+        
+        
+        }else{
+         List<Long> accepts=new ArrayList();
+         accepts.add(m.getSubject());
+         m.setAccepts(accepts);
+         if("login".equals(m.getPredict())){
+         }else{
+             
+            $operate.getNextMessages().add(m); 
+         }
+         newMessages.add(m);
+        
+        }
+       
+  }
+  
+  
+     
+  
+  
+  
+  $room.setMessages(newMessages);
+
+  #准备就绪要加上 如果没有删就不用加了啊.关键是这个Ready应该是Ready完之后就没有了的.
+    for(Long loginID:loginIDS){
+     List<Message> msgs=createMessage(loginID,"right","ready");	 
+      for(Message msg:msgs){
+          msg.getAccepts().add(loginID);
+      }
+     
+	  $room.getMessages().addAll(msgs);
+	  $operate.getNextMessages().addAll(msgs); 
+    }
+  	
+  
+  
+  update($operate);
+  
+  
+  
+  #更新Room world 要保存(怎么保存呢?)
+  $room.setWorld(new World());
+  $room.setStatus(1);
+  update($room); 
+	
+	
+	
+	
+	
+	
+	  
+end
+
+
+
+
+#3.生say Message
+rule "say room to all "
+	lock-on-active
+	when	
+	    $room:Room()
+	    $operate:Operater()
+	    
+	   
+	
+	    $message:Message(predict=="say",$subejct:subject,object==-500) 
+	            from $operate.getMessage()
+	     
+	     
+	     #能否写成函数呢,这段代码纯粹是为了获取到all_logint_ids
+	     $all_login_ids:ArrayList()
+	      from accumulate(
+	      $login_message:Message(predict=="login",$id:subject)
+	      from $room.getMessages(),
+	      init(List ls=new ArrayList();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+	
+        # from collect( Status( id==$uid ) )	
+	then 
+	   
+	   #send Message to every one
+	   Message send_login_message=(Message)$message.clone();
+	   send_login_message.setAccepts($all_login_ids);
+	   $operate.getNextMessages().add(send_login_message);
+	   update($operate);
+	   
+end
+
+
+#say
+
+#3.生say Message
+rule "say room to one "
+	lock-on-active
+	when	
+	    $room:Room()
+	    $operate:Operater()
+	    
+	   
+	
+	    $message:Message(predict=="say",$subejct:subject,object!=-500) 
+	            from $operate.getMessage()
+	
+        # from collect( Status( id==$uid ) )	
+	then 
+	  
+	  
+	   #send Message to every one
+	   
+	   Message send_login_message=(Message)$message.clone();
+	   send_login_message.getAccepts().add($message.getObject());
+	   send_login_message.getAccepts().add($message.getSubject());
+	   $operate.getNextMessages().add(send_login_message);
+	   update($operate);
+	   
+end
+
+
+
+
+
+function  List createColorMessage(int count,Message question,Message solution) {    
+		
+		List<Message> msgs=new ArrayList();   
+		 #可以写成静态变量
+	      Map<String,String> word_color=new HashMap();	      
+	      word_color.put("红","#FF0000");
+	      word_color.put("橙","#FF7F24");
+	      word_color.put("黄","#FFFF00");
+	      word_color.put("绿","#00FF00");
+	      word_color.put("青","#00EEEE");
+	      word_color.put("蓝","#0000FF");
+	      word_color.put("紫","#D02090");
+	      List<String> words=new ArrayList(word_color.keySet());
+	      List<String> colors=new ArrayList(word_color.values());
+	      StringBuffer questions=new StringBuffer();
+	      StringBuffer solutions=new StringBuffer();
+	      for(int i =0;i<count;i++){			
+				int index=RandomUtils.nextInt(words.size());
+				String w=words.get(index);
+				String w2=words.get(RandomUtils.nextInt(words.size()));
+				String color=colors.get(index);				
+				questions.append(color);
+				solutions.append(w);
+				if(i==count){
+					   
+				}else{
+				  questions.append(",");
+				  solutions.append(",");
+				}
+				Message msg=new Message(-500L,"assign",w2);
+				#这个要随机的.不能发正确答案
+				msg.setColor(color);		
+				msgs.add(msg);		
+			}
+			question.setContent(questions.toString());
+			solution.setContent(solutions.toString());
+	 
+return msgs;
+
+}
+
+function String stringCompare(String question,String answer ){
+
+       
+        StringBuffer right=new StringBuffer();
+        String[] q=question.split(",");
+		char[] a=answer.toCharArray();
+		int mcount=Math.min(q.length,a.length);
+		for(int i=0;i<mcount;i++){
+		
+			if(q[i].equals(String.valueOf(a[i]))){
+			    
+				right.append("对");
+				
+			}else{
+			    
+			    right.append("错");
+			
+			}
+			if(i==mcount){
+				
+				}else{
+					right.append(",");
+			}
+			
+		}
+	
+		int j=q.length-a.length;
+		if(j>0){
+		  for(int k=0;k<j;k++){
+		      right.append("错");
+		      if(k==j-1){
+		      
+		      
+		      
+		      }else{
+		      		      
+		         right.append(",");
+		         
+		      }
+		      
+		  }
+		
+		
+		}
+		
+		
+      return right.toString();
+}
+
+
+function  List createMessage(Long subject,String predict,String contents) {
+
+      List<Message> msgs=new ArrayList();      
+	  String[] right=contents.split(",");
+	  for(String r:right){
+	    Message msg=new Message(subject,predict,r);
+	    msgs.add(msg);
+	  }
+	
+	 
+return msgs;
+
+
+}
+
+

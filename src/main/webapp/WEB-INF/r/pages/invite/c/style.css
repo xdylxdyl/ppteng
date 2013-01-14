@@ -1,0 +1,46 @@
+@charset "utf-8";/* Sohu SNS invite
+ * Version: 1.0
+ * Created: 2008-12-26
+ * Update: 2008-12-29
+ * Author: QianCheng
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+/* index */
+.w550{width:550px;}
+.i-invite{background:url(i/inviteIcon.gif) no-repeat!important;}
+.i-msn{background:url(i/msnIcon.gif) no-repeat!important;margin:3px;}
+.invCopy{float:left;margin:5px 5px 5px 0}
+.invBox{display:block;padding:20px 30px;margin:0;}
+.invBox li{display:block;width:49.9%;height:50px;float:left;list-style-position:outside;list-style-type:none;margin-bottom:30px;line-height:25px;overflow:hidden;}
+ul.invBox{margin:0;}
+.invBox h4{color:#993300;font-size:14px;}
+.invBox p{color:#666;}
+
+/* index */
+dl.invForm{margin:30px 0;}
+.invTip{clear:both;position:relative;width:auto;height:30px;padding:0;margin:-10px 0 0 10px;}
+.invTip .error,.invTip .correct{ display:inline;}
+/* intWati */
+.invWati{width:210px;text-align:center;padding-top:60px;padding-bottom:50px;margin:50px auto;background:url(i/loading2.gif) no-repeat center top;}
+
+/* findFriend */
+.invList{padding:20px;}
+.invList h4{ margin:20px 5px;}
+.flBox{margin:10px 0;border:1px solid #990002; background:#fff;}
+.flTop{border-top:1px solid #CC6566;border-left:1px solid #CC6566;background:#990002;height:25px;color:#fff;}
+.flTop input{margin:1px 5px 0 20px;vertical-align:middle}
+.flTop label{}
+.canvas .flBox ul{display:block;width:auto;height:210px;overflow-y:scroll;margin:0;border-top:0px}
+.flBox li{list-style-position:outside;list-style-type:none;display:block;width:auto;height:58px;line-height:58px;margin:0 10px; padding:8px 0 0; background:#fff; border-bottom:1px dotted #bebebe;}
+.flBox li input,.flBox li img.avatar-48,.flBox li div{display:block;float:left;}
+.flBox li span{display:block;float:right;width:40%;color:#999; height:25px; overflow:hidden; }
+.flBox li input{margin:20px 5px 0 12px;display:inline;color:#333}
+.flBox li div{margin-left:10px;color:#333;overflow:hidden; width:330px; }
+
+/* sendInvite */
+.flBoxExt{clear:both}
+.sendI li{height:30px;line-height:30px;clear:both;}
+.sendI li input{margin:5px 5px 0 12px;display:inline;}
+.sendBottom{padding:10px 20px;}
+.sendBottom textarea{width:70%;height:60px;margin-right:20%;margin-bottom:10px;}

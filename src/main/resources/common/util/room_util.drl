@@ -1,0 +1,63 @@
+package drools.common
+
+import drools.common.*
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Collections;
+
+
+
+import org.apache.commons.lang.StringUtils;
+#需要重置的资源最好和不需要重置的资源分开,这样清除的时候容易很多,可以考虑把所有的资源都加上GameID.统一清空
+
+function String getRoomSetting(Room room,String name,String defaultValue) {
+
+   Map setting=room.getSetting();
+   String value=(String)setting.get(name);
+    if(StringUtils.isBlank(value)){
+       
+       return defaultValue;
+
+    }else{
+    
+    return value;
+    }
+
+}
+
+
+
+
+function Set convertString2Set(String value) {
+
+   Set s=new HashSet();
+   String[] aa=value.split(",");
+   for(String str:aa){
+      s.add(str);
+   }
+   
+    return s;
+}
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

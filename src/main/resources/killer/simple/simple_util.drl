@@ -1,0 +1,63 @@
+package drools.common
+
+import drools.common.*
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Collections;
+
+
+
+import org.apache.commons.lang.StringUtils;
+#需要重置的资源最好和不需要重置的资源分开,这样清除的时候容易很多,可以考虑把所有的资源都加上GameID.统一清空
+
+
+
+
+function void setRemainTime(String status,Game game,Room room) {
+
+     if("day"==status){
+       status="白天时间";
+     };
+     
+     if("night"==status){
+       status="晚上时间";
+     };
+     
+     if("lastword"==status){
+       status="遗言时间";
+     };
+     
+    
+     Long setting=Long.valueOf(getRoomSetting(room,status,"-1"));
+      Long lastTime=game.getLastTime();
+      Long time=lastTime+setting-System.currentTimeMillis();
+      if(time < 0){
+            LogUtil.log("=========== error ======= "+time);          
+      }else{
+          game.setRemainTime(time);
+      }
+     
+       
+}
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

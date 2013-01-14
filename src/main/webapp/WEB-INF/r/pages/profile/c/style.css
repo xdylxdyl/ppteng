@@ -1,0 +1,134 @@
+@charset "utf-8";
+/* Sohu SNS Profile style
+ * Version: 1.0
+ * Created: 2008-11-20
+ * Author: Matt Wang (www.uiland.com)
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+
+/*** Canvas Layout ***/
+#profileTabs{margin:0;padding:0 0 0 220px;border:0;}
+	#profileTabs li{margin:2px 3px 0;}
+		#profileTabs li a{padding:0 10px 0 0;background-image:url(i/tabs.gif);color:#930;}
+		#profileTabs li a span{height:20px;padding:2px 0 1px 10px;*padding:3px 0 0 10px;background-image:url(i/tabs.gif);line-height:20px;}
+	#profileTabs li.on{margin:0 3px;}
+		#profileTabs li.on a{color:#300;font-weight:bold;}
+		#profileTabs li.on a span{padding:3px 0 2px 10px;*padding:4px 0 1px 10px;}
+
+#profileWrap{background:#f7f5e6 url(i/canvas-xy.jpg) repeat;}
+	#profileWrapInt{min-height:500px;_height:500px;padding:10px;background:url(i/canvas-x.jpg) repeat-x;}
+
+
+/*** Profile Index ***/
+#profileIndexLay{margin:0;}
+	#profileIndexLay .layInt{padding:0 175px 0 195px;}
+	#profileIndexLay .colInt{margin:0;}
+		#profileIndexLay .colMain{position:relative;float:left;width:190px;margin:-40px 0 0 -190px;}
+		#profileIndexLay .colSub{float:left;width:100%;}
+			#profileIndexLay .colSub .colInt{padding:0 15px;}
+		#profileIndexLay .colExtra{position:relative;float:right;width:175px;margin:60px -175px 0 0;}
+
+#profileAvatar{width:200px;margin:0 -5px 0;padding:15px 0 0;background:url(i/profileAvatar.png) no-repeat;_background-image:url(i/profileAvatar.gif);}
+	#profileAvatar .avatarWrap{background:url(i/profileAvatar.png) no-repeat -200px 0;_background-image:url(i/profileAvatar.gif);text-align:center;}
+	#profileAvatar img{max-width:170px;max-height:200px;}
+
+#profileActions{width:200px;margin:0 -5px 5px;padding:10px 0 20px;background:url(i/profileAvatar.png) no-repeat -200px 100%;_background-image:url(i/profileAvatar.gif);text-align:center;}
+
+#profileStatus{min-height:60px;_height:60px;padding:0;}
+	#profileStatus .statusHead{zoom:1;}
+		#profileStatus .statusHead:after{content:'\0020';display:block;clear:both;height:0;}
+		#profileStatus .myName{float:left;color:#333;font:bold 18px/24px Tahoma,Verdana,Arial,Helvetica,sans-serif;}
+		#profileStatus .setImStatus{margin:3px 0 0 5px;}
+		#profileStatus .imStatus{float:left;}
+	#profileStatus .statusBody,
+	#profileStatus .statusComposer{overflow-x:hidden;width:100%;padding:5px 0 0;}
+		#profileStatus .myStatus{color:#666;}
+		#profileStatus .time{padding:0 5px;color:#999;}
+		#profileStatus .edit,
+		#profileStatus .del{padding:0 1px;}
+		#profileStatus .cancel{padding:0 5px;}
+		#profileStatus .statusComposer input.text{width:300px;}
+
+#profileComposer{}
+.wallComposer{margin:0 0 8px;padding:0 10px 0 0;background:url(i/wallComposer.gif) 100% 0;}
+	.wallComposerInt{overflow:hidden;height:125px;padding:5px 0 0 10px;background:url(i/wallComposer.gif) 0 0;}
+		.wallComposer h4{font-weight:normal;}
+		.wallComposer .composer{padding:3px;}
+			.wallComposer .composer textarea{ overflow:auto;width:100%;height:30px;margin:0 -3px;padding:2px;border:1px solid #dde0cd;}
+		.wallComposer .actions{}
+		.wallComposer .buttons{padding:12px 0;*padding:10px 0;}
+			.wallComposer .buttons .button{margin:0;}
+
+#profileFeed{}
+	.profileFeedFilters{margin:0;padding:7px 5px 0;}
+
+#profileSummary{}
+	#profileSummary dl{margin:0;zoom:1;}
+		#profileSummary dl:after{content:'\0020';display:block;clear:both;height:0;}
+		#profileSummary dt{_display:inline;float:left;clear:both;white-space:nowrap;}
+		#profileSummary dd{margin:0;}
+
+#profilePhoto{}
+	
+#profileWrap ul.friends li.friendItem{overflow:hidden;height:80px;}
+
+
+/*** Profile Info ***/
+/* layout */
+#profileInfo{padding:0 30px 20px;}
+
+#profileInfo .section{margin:0 0 5px;padding:1px;}
+	#profileInfo .sectionHead{padding:3px 7px;border-bottom:1px solid #baaa9a;zoom:1;}
+		#profileInfo .sectionHead:after{content:'\0020';display:block;clear:both;height:0;}
+		#profileInfo .sectionHead h3{float:left;margin:0;color:#300;}
+		#profileInfo .sectionHead .option{float:right;}
+	#profileInfo .sectionBody{padding:10px;}
+#profileInfo .section-load{}
+	#profileInfo .section-load .sectionBody{min-height:100px;_height:100px;visibility:hidden;}
+#profileInfo .section-edit{padding:0;border:1px solid #cecbba;background:#fffdf0;}
+	#profileInfo .section-edit .sectionHead{border-bottom:1px solid #cecbba;background:#f0edda;}
+#profileInfo.editAll .section{padding:0;border:1px solid #cecbba;background:#fffdf0;}
+	#profileInfo.editAll .sectionHead{border-bottom:0;background:#f0edda;cursor:pointer;}
+		#profileInfo.editAll .sectionHead h3{padding:0 0 0 20px;background:url(i/toggle.gif) no-repeat 0 -60px;}
+		#profileInfo.editAll .sectionHead .option{display:none;}
+	#profileInfo.editAll .sectionBody{display:none;}
+#profileInfo.editAll .section-edit{}
+	#profileInfo.editAll .section-edit .sectionHead{border-bottom:1px solid #cecbba;}
+		#profileInfo.editAll .section-edit .sectionHead h3{background-position:0 -20px;}
+	#profileInfo.editAll .section-edit .sectionBody{display:block;}
+
+#profileInfo dl.profileInfo{margin:0;padding:0 0 0 105px;zoom:1;}
+	#profileInfo dl.profileInfo:after{content:'\0020';display:block;clear:both;height:0;}
+	#profileInfo dl.profileInfo dt{_display:inline;float:left;clear:both;width:100px;margin:0 0 0 -105px;color:#666;text-align:left;white-space:nowrap;}
+	#profileInfo dl.profileInfo dd{float:left;width:100%;margin:0;padding:0 0 5px;}
+		#profileInfo dl.profileInfo dd p{margin:0;}
+
+#profileInfo dl.fieldset{padding:10px 0 0 105px;}
+	#profileInfo dl.fieldset dt{width:100px;margin:0 0 0 -105px;padding:2px 0 0;}
+	#profileInfo dl.fieldset dd{padding:0 0 10px;}
+		#profileInfo dl.fieldset dl.fieldset{padding:10px 0 3px 85px;border:1px solid #dedbca;background:#fff;}
+			 #profileInfo dl.fieldset dl.fieldset dt{width:80px;margin:0 0 0 -85px;}
+
+/* job & edu */
+#profileInfo .jobItem,
+#profileInfo .eduItem{padding:0 0 5px;}
+#profileInfo .delItem{padding:5px 0 !important;border-bottom:1px solid #ccc;text-indent:5px;}
+#profileInfo .addItem{margin:-10px 0 5px;padding:0 0 5px !important;border-bottom:1px solid #ccc;}
+	#profileInfo .addItem a{height:18px;margin:0 0 0 5px;padding:0 0 0 20px;background:url(i/add.gif) no-repeat;line-height:18px;zoom:1;}
+
+/* form */
+#profileInfo fieldset{margin:0;}
+
+#profileInfo input.company{width:300px;}
+#profileInfo input.adress{width:300px;}
+#profileInfo input.areaCode{width:40px;}
+#profileInfo input.tel{width:80px;}
+
+#profileInfo .schoolSelector{width:300px;}
+	#profileInfo .schoolSelector input.text{width:270px;}
+
+#profileInfo textarea.text{width:400px;}
+
+#profileInfo .radios li,
+#profileInfo .checkboxes li{width:15%;}

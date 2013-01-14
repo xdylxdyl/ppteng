@@ -1,0 +1,32 @@
+@charset "utf-8";/* Sohu SNS comment.css
+ * Version: 1.0
+ * Author: QianCheng
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+.commentBox li.commentC:after{content:'\0020';display:block;clear:both;height:0;}
+.commentBox li.commentC{zoom:1;}
+.commentBox{position:relative; line-height:16px; clear:both; margin-top:5px;}
+.commentBox ul{ margin:0; padding:0; list-style-type:none;}
+.commentBox li{margin:0; padding:7px; list-style-type:none; display:block; clear:both; background:#fefef4; border:1px solid #e9e5d9; margin-bottom:3px;}
+.commentBox li.commentC{padding:7px 20px 0 58px;_display:inline;}
+.commentBox li.commentC .commentAvatar{ margin-left:-52px;display:inline;width:42px;height:42px; float:left; text-align:center}
+.commentBox li.commentC .commentOption{margin:-5px -18px 0 0;text-align:right;width:18px; display:inline; float:right}
+.commentBox li.commentC .commentInfo{display:block;width:100%;padding:0;*text-overflow:ellipsis;-o-text-overflow:ellipsis;_float:left;_display:inline}
+.commentBox li.commentC .commentInfo h4{ font-weight:normal; line-height:16px; margin:0; padding:0;}
+.commentBox li.commentC .commentInfo h4 a{ margin-right:10px;}
+.commentBox li.commentC .commentInfo p{ margin:0 0 5px 0; width:100%; overflow:hidden}
+.commentBox .clickComment{margin:0; padding:7px; list-style-type:none; display:block; clear:both; background:#fefef4; border:1px solid #e9e5d9; margin-bottom:3px;_display:inline-block}
+.commentBox textarea.addInput{ border:1px solid #ccc; background:#fff; color:#999;width:98%;height:20px;margin:5px auto;*overflow-y:hidden}
+.commentBox li.newC{ background:#FDFDE5}
+.commentBox img{float:none;border:none;padding:0;margin:0;}
+.commentBox textarea.addComment{ width:98%; margin:5px auto; display:block;}
+.commentBox .corner{ display:block; width:10px; height:5px; background:url(i/comCorner.gif) no-repeat; position:absolute; top:-4px; left:7px}
+.commentBox-small{ width:300px;}
+.commentBox-large{ width:400px;}
+/* temp */
+.commentBoxSmall{ width:300px;}
+.commentBoxLarge{ width:400px;}
+.commentBox textarea.default{ color:#999;}
+
+/* 临时解决缺少32px头像问题 */
+.commentAvatar img.avatar-48{ width:32px; height:32px;}

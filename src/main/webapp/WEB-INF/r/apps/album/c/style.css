@@ -1,0 +1,237 @@
+@charset "utf-8";
+/* Sohu SNS App: Album
+ * Created: 2009-02-16
+ * Author: Matt Wang (www.uiland.com)
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+
+/*** Classes ***/
+
+/* page */
+.appHead .icon{background:url(i/appIcon-24.gif);}
+
+.appTabs{}
+	.appTabs li.orphan a span{display:inline;height:14px;line-height:14px;margin:4px 0 0 5px;padding:0 0 0 16px;*padding:2px 0 0 16px;background:url(i/icon.gif) no-repeat;}
+	.appTabs li.upload a span{background-position:0 0;}
+	.appTabs li.newAlbum a span{background-position:0 -20px;}
+
+.appCrumbs{padding:0 10px 5px;border-bottom:1px solid #ccb;}
+
+.opt{margin:0 0 0 5px;padding:0 0 0 16px;*padding:2px 0 0 16px;background:url(i/icon.gif) no-repeat;}
+	.opt-upload{background-position:0 0;}
+	.opt-newAlbum{background-position:0 -20px;}
+	.opt-edit{background-position:0 -40px;}
+	.opt-del{background-position:0 -60px;}
+	.opt-tag{background-position:0 -80px;}
+	.opt-setAvatar{background-position:0 -100px;}
+	.opt-manage{background-position:0 -120px;}
+	.opt-reverse{background-position:0 -140px;}
+	.opt-revert{background-position:0 -160px;}
+
+.i-setAvatar{background:url(i/icon.gif) 0 -100px no-repeat;}
+	.i-setAvatar:hover{background-position:0 -180px;}
+
+/* photo */
+.photo-full{max-width:600px;}	
+	.photo-130{max-width:130px;max-height:130px;padding:1px;border:1px solid #ccc;}
+	.photo-75{width:75px;height:75px;padding:1px;border:1px solid #ccc;}
+	.photo-50{width:50px;height:50px;padding:1px;border:1px solid #ccc;}
+	a:hover .photo-130,
+	a:hover .photo-75,
+	a:hover .photo-50{border-color:#9b0020;}
+
+table.photoList{width:100%;table-layout:fixed;border-spacing:0;}
+	table.photoList tr{background:url(i/line-dot.gif) repeat-x 0 bottom;}
+	table.photoList tr.end{/*background:none;*/}
+		table.photoList td{overflow:hidden;width:25%;padding:10px 0;border:0;text-align:center;vertical-align:bottom;}
+			table.photoList h5{margin:7px 0 0;font-weight:normal;}
+			table.photoList p{margin:0;}
+			table.photoList dl.fieldset{padding-left:52px;text-align:left;}
+				table.photoList dl.fieldset dt{width:48px;margin-left:-52px;}
+				table.photoList dl.fieldset textarea{width:120px;}
+				table.photoList dl.fieldset select{width:126px;}
+
+/* album */
+.albumItem{overflow:hidden;width:186px;height:145px;margin:0 auto;padding:15px 15px 15px 175px;background:url(i/album.gif) no-repeat;text-align:left;}
+	.albumItem .albumCover{_display:inline;float:left;width:140px;height:140px;margin:0 0 0 -155px;padding:1px;*padding:0 1px 2px;zoom:1;}
+		.albumItem .albumCover a{display:table-cell;width:140px;height:140px;text-align:center;vertical-align:middle;zoom:1;}
+			.albumItem .albumCover em{display:inline-block;width:0;height:100%;vertical-align:middle;}
+			.albumItem .albumCover img{display:inline-block;*margin:-2px 0 0;padding:1px;border:4px solid #e7e7e7 !important;vertical-align:middle;}
+	.albumItem .albumInfo{overflow:hidden;float:left;width:100%;height:80px;}
+		.albumItem .albumInfo h5{font-weight:normal;}
+			.albumItem .albumInfo h5 a{font-weight:bold;}
+		.albumItem .albumInfo p{margin:0;}
+		.albumItem .albumDesc{color:#333;}
+		.albumItem .albumTime{color:#999;}
+	.albumItem ul.albumSample{float:left;width:100%;margin:7px 0 0 -4px;list-style:none;}
+		.albumItem ul.albumSample li{_display:inline;float:left;width:auto;margin:0 4px;padding:0;}
+			.albumItem ul.albumSample img{width:50px;height:50px;}
+
+ul.albumList{margin:0 -10px;list-style:none;zoom:1;}
+	ul.albumList:after{content:'\0020';display:block;clear:both;height:0;}
+	ul.albumList li{_display:inline;float:left;width:49%;height:210px;padding:5px 0;text-align:center;}
+		ul.albumList ul.albumSample li{}
+		ul.albumList li .actions{padding:5px 0 0;}
+
+/* photoTag */
+.photoTagFrame{position:absolute;cursor:move;}
+	.photoTagFrame div.frame{display:none;*display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:#000;filter:alpha(opacity=0);}
+	.photoTagFrame span,
+	.photoTagFrame em{display:block;overflow:hidden;position:absolute;font:0/0 Arial;}
+	.photoTagFrame span{z-index:1;background:#9b0020 url(i/tagFrameLine.gif);}
+	.photoTagFrame em{z-index:2;width:6px;height:6px;border:1px solid #9b0020;background:#fff;}
+	.photoTagFrame span.t,
+	.photoTagFrame span.b{width:100%;height:1px;}
+	.photoTagFrame span.l,
+	.photoTagFrame span.r{width:1px;height:100%;}
+	.photoTagFrame span.t{top:0;left:0;}
+	.photoTagFrame span.r{top:0;right:0;}
+	.photoTagFrame span.b{bottom:0;left:0;}
+	.photoTagFrame span.l{top:0;left:0;}
+	.photoTagFrame em.n{top:-3px;left:50%;margin:0 0 0 -4px;cursor:n-resize;}
+	.photoTagFrame em.e{top:50%;right:-3px;margin:-4px 0 0 0;cursor:e-resize;}
+	.photoTagFrame em.w{top:50%;left:-3px;margin:-4px 0 0 0;cursor:w-resize;}
+	.photoTagFrame em.s{bottom:-3px;left:50%;margin:0 0 0 -4px;cursor:s-resize;}
+	.photoTagFrame em.nw{top:-3px;left:-3px;cursor:nw-resize;}
+	.photoTagFrame em.ne{top:-3px;right:-3px;cursor:ne-resize;}
+	.photoTagFrame em.se{right:-3px;bottom:-3px;cursor:se-resize;}
+	.photoTagFrame em.sw{bottom:-3px;left:-3px;cursor:sw-resize;}
+.photoTagEditor{position:absolute;width:160px;border:1px solid #9b0020;background:#f6f6ea;}
+	.photoTagEditor .body{overflow:hidden;padding:5px 10px 10px;line-height:24px;}
+		.photoTagEditor textarea.text{width:134px;}
+		.photoTagEditor .selector{width:140px;}
+	.photoTagEditor .foot{padding:10px;border-top:1px solid #ddd;background:#eceeda;text-align:center;}
+
+.photoTagBox{position:absolute;border:1px solid #9b0020;cursor:default;}
+	.photoTagBoxInt{position:relative;border:1px solid #fff;}
+		.photoTagBoxInt div.frame{display:none;*display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:#000;filter:alpha(opacity=0);}
+.photoTagBox-hover{}
+	.photoTagBox-hover .photoTagBoxInt{border-color:#ffc046;}
+.photoTagText{position:absolute;padding:5px 10px;background:#9b0020;color:#fff;}
+
+/* upload */
+.uploadTable{width:417px;border:1px solid #900;background:#fff;}
+	.uploadTable ul{width:400px;margin:0;list-style:none;}
+		.uploadTable li{*margin:0 0 -3px;padding:5px 10px;zoom:1;}
+		.uploadTable li:after{content:'\0020';display:block;clear:both;height:0;}
+			.uploadTable li .name{display:block;width:60%;float:left;}
+			.uploadTable li .size{display:block;width:25%;float:left;text-align:right;}
+			.uploadTable li .del{display:block;width:12%;float:right;text-align:center;}
+		.uploadTable li.finished{color:#60aa10;}
+		.uploadTable li.error{color:#f33;}
+			.uploadTable li.error .name{text-decoration:line-through;}
+	.uploadTable .head{border:1px solid #c66;border-color:#c66 #933 #600 #c66;background:#8f0222;color:#fff;}
+	.uploadTable .body{overflow-x:hidden;overflow-y:scroll;height:216px;}
+		.uploadTable .body ul{width:400px;}
+		.uploadTable .body li{border-bottom:1px dotted #ccc;background:url(i/uploadProgress.gif) repeat 0 0;}
+	.uploadTable .foot{border-top:1px solid #ddd;background:#eceeda;}
+
+
+/*** Content Layouts ***/
+#profileAlbum{}
+	#profileAlbum .section{margin:0 0 5px;padding:1px;}
+		#profileAlbum .sectionHead{padding:3px 7px;border-bottom:1px solid #baaa9a;zoom:1;}
+			#profileAlbum .sectionHead:after{content:'\0020';display:block;clear:both;height:0;}
+			#profileAlbum .sectionHead h3{float:left;margin:0;color:#300;}
+			#profileAlbum .sectionHead .option{float:right;}
+		#profileAlbum .sectionBody{padding:10px;}
+			#profileAlbum .sectionBody table.photoList tr{background:none;}
+
+#albumList{}
+	h3.albumTotal{margin:0 0 10px;padding:0 7px 2px;border-bottom:1px solid #ccc;color:#999;font-weight:400;}
+			
+#photoList{}
+	#photoList .albumInfo{width:50%;margin:-10px 0 0;padding:15px 20px 10px;/*border-top:1px solid #ccb;background:#eee;*/}
+		#photoList .albumDesc{color:#333;}
+		#photoList .albumTime{color:#999;}
+			#photoList .albumTime span{display:block;}
+
+#photoView{margin:10px 35px;padding:0 0 0 620px;zoom:1;}
+	#photoView:after{content:'\0020';display:block;clear:both;height:0;}
+	.photoViewer{_display:inline;float:left;width:618px;margin:0 0 0 -620px;border:1px solid #e3e3e3;}
+		.photoViewerInt{overflow:hidden;width:600px;margin:1px;padding:8px;background:#fff url(i/viewer.gif) repeat-x 0 100%;}
+		.photoViewer .photoImg{width:600px;height:370px;margin:0 0 10px;table-layout:auto;}
+			.photoViewer .photoImg td{padding:0;border:0;text-align:center;vertical-align:middle;}
+			.photoViewer .photoImg img{max-width:600px;}
+			.photoViewer .photoImg-prev{cursor:url(http://sns.sohu.com/r/apps/album/c/i/left.cur),auto;}
+			.photoViewer .photoImg-next{cursor:url(http://sns.sohu.com/r/apps/album/c/i/right.cur),auto;}
+			.photoViewer .photoImg-tag{cursor:crosshair;}
+		.photoViewer .photoInfo{}
+			.photoViewer .photoInfo p{margin:0;}
+			.photoViewer .photoDesc{}
+			.photoViewer .photoTags{font-family:'宋体';}
+				.photoViewer .photoTags .icon{vertical-align:middle;}
+	.photoPager{float:right;width:100%;margin:10px 0;padding:15px 0;background:#fff;text-align:center;}
+		.photoPager-prev,
+		.photoPager-next,
+		.photoPager-prev-disabled,
+		.photoPager-next-disabled{overflow:hidden;width:54px;height:18px;margin:0 auto;background:url(i/pager.jpg) no-repeat;text-indent:-9999px;cursor:pointer;}
+		.photoPager-prev{background-position:0 0;}
+		.photoPager-next{background-position:0 -54px;}
+		.photoPager-prev-disabled{background-position:0 -18px;cursor:default;}
+		.photoPager-next-disabled{background-position:0 -36px;cursor:default;}
+		.photoPagerList{overflow:hidden;position:relative;width:60px;height:300px;margin:5px auto;padding:0 5px;background:url(i/photoPagerList.gif) 50% 0 repeat-y;}
+			.photoPagerList ul{position:absolute;top:0;left:5px;z-index:1;margin:0 !important;}
+				.photoPagerList li{position:relative;width:54px;height:54px;*margin:0 0 -3px;padding:3px;list-style:none;}
+					.photoPagerList li img{display:block;width:50px;height:50px;}
+					.photoPagerList li a:hover img{border-color:#9b0020;}
+			.photoPager .current{position:absolute;top:50%;left:5px;z-index:2;width:54px;height:54px;margin:-28px 2px 0;border:1px solid #9b0020;}
+				.photoPager .current em{display:block;overflow:hidden;position:absolute;top:50%;left:-9px;width:0;height:0;margin:-4px 0 0;border-style:solid;border-width:4px;border-color:#fff #9b0020 #fff #fff;}
+
+#photoComment{margin:20px 35px;}
+
+#photoUpload{padding:5px 15px;}
+	#photoUpload h3{}
+	.uploadWrap{padding:15px 20px;background:#fefff5;}
+		.uploadWrap h4{margin:0 0 10px;font:normal 12px/20px Verdana,Geneva,sans-serif;}
+		.uploadWrap .buttons{margin:10px 0;}
+		.uploadTip{display:block;clear:both;height:18px;margin:0;padding:2px 0 0 2px;color:#999;}
+
+#photoEdit{}
+	#photoEdit .buttons{padding:10px;text-align:center;}
+
+#photoSort{}
+	.photoSort{border:1px solid #cbc2b3;border-width:1px 0;}
+		.photoSort .sortOpt{padding:5px 10px;background:#fdffea;text-align:right;}
+		.photoSort .sortWrap{position:relative;}
+			.photoSort ul.sortList{margin:0;padding:15px 0 15px 16px;list-style:none;zoom:1;}
+				.photoSort ul.sortList:after{content:'\0020';display:block;clear:both;height:0;}
+				.photoSort ul.sortList li{_display:inline;overflow:hidden;float:left;width:79px;height:79px;margin:3px;padding:16px;border:4px solid #e0decf;background:#fff;}
+					.photoSort ul.sortList li img{width:75px;height:75px;padding:1px;border:1px solid #ccc;}
+				.photoSort ul.sortList li.selected{border-color:#93021f;}
+				.photoSort ul.sortList li.target-left{border-left-color:#93021f;}
+				.photoSort ul.sortList li.target-right{border-right-color:#93021f;}
+			.photoSortFloater{position:absolute;overflow:hidden;width:79px;height:79px;padding:16px;border:4px solid #93021f;background:#fff;cursor:move;}
+				.photoSortFloater li{list-style:none;}
+				.photoSortFloater img{width:75px;height:75px;padding:1px;border:1px solid #ccc;}
+	#photoSort .buttons{padding:10px;text-align:center;}
+			
+#photoMove{}
+	.photoSelector{margin:-16px 0 10px;border:1px solid #cbc2b3;border-width:1px 0;}
+		.photoSelector .selectBar{padding:5px 10px;background:#fdffea;font-family:'宋体';zoom:1;}
+			.photoSelector .selectBar:after{content:'\0020';display:block;clear:both;height:0;}
+			.photoSelector .selectBar .pager{float:right;}
+		.photoSelector .selectWrap{}
+			.photoSelector ul.selectList{padding:10px 0;zoom:1;}
+				.photoSelector ul.selectList:after{content:'\0020';display:block;clear:both;height:0;}
+				.photoSelector  ul.selectList li{_display:inline;overflow:hidden;float:left;width:79px;height:100px;padding:10px 21px;text-align:center;}
+					.photoSelector  ul.selectList .photoCover{margin:0 0 5px;}
+						.photoSelector  ul.selectList .photoCover img{width:75px;height:75px;padding:1px;border:1px solid #ccc;cursor:pointer;}
+	#photoMove .buttons{padding:10px;text-align:center;}
+
+
+/*** Dialogs ***/
+.albumDialog{}
+	.albumDialog input.text{width:254px;}
+	.albumDialog textarea.text{width:256px;}
+	.albumDialog select.select{width:140px;}
+	.albumDialog dl.fieldset{padding:10px 0 5px 90px;}
+		.albumDialog dl.fieldset dt{width:84px;margin-left:-90px;}
+		.albumDialog dl.fieldset .formError{display:block;margin:2px 0 0;}
+.albumDialog-albumInfo{}
+.albumDialog-photoInfo{}
+.albumDialog-delAlbum{padding-bottom:10px;}
+	.albumDialog-delAlbum h4{margin:0 0 10px 0;}
+	.albumDialog-delAlbum p{margin:0 12px 2px;line-height:24px;}
+	.albumDialog-delAlbum p.radios{padding:0 5px;}

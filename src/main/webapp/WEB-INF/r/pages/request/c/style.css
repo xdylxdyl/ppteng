@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* Sohu SNS Request Style
+ * Version: 1.0
+ * Created: 2008-12-25
+ * Update: 2008-12-15
+ * Author: Matt Wang (www.uiland.com)
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+
+/* icons */
+.appHead .icon{background:url(i/appIcon-24.gif);}
+
+.i-del{background:url(i/del.gif) no-repeat;}
+
+/* tabs & actions */
+.tabs{margin:0 0 5px;}
+.actions{margin:0 10px 10px;text-align:right;}
+
+/* ul.reqList */
+ul.reqList{margin:0 0 10px;list-style:none;}
+	ul.reqList li{/*fixed*/padding:10px 7px;border-bottom:1px dotted #bdbdbd;}
+		ul.reqList .reqIcon{float:left;margin:3px 0;*margin:0;}
+		ul.reqList .reqOption{float:right;padding:5px 0 0;color:#a9a9a9;}
+			ul.reqList .reqOption .meta{font:11px/20px Verdana,Geneva,sans-serif;vertical-align:middle;}
+		ul.reqList .reqBody{overflow:hidden;margin:0 0 0 28px;word-wrap:break-word;}
+			ul.reqList .reqBody h4{font-weight:normal;}
+			ul.reqList .friendItem{margin:10px 0 0;}
+				ul.reqList .friendAvatar{float:left;}
+				ul.reqList .friendInfo{float:left;margin:0 0 0 10px;}
+					ul.reqList .friendInfo p,
+					ul.reqList .friendInfo blockquote,
+					ul.reqList .friendInfo .buttons{font-weight:normal;margin-bottom:7px;}
+		ul.reqList .msg{margin:0;}
+
+/* fix */
+.reqItem:after{content:'\0020';display:block;clear:both;height:0;}
+.reqItem{zoom:1;}

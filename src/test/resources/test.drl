@@ -1,0 +1,76 @@
+package simple.killer
+
+import simple.killer.*
+import com.gemantic.killer.common.model.*
+import com.gemantic.killer.common.model.Operater;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.commons.lang.math.RandomUtils;
+
+
+
+#========================action group start =========================
+
+
+
+rule 'start game'
+ lock-on-active 
+when
+    $m:Message(predict=="go")
+    $role:Role()
+	
+ 
+    
+then      
+	#分配角色,改变状态?房间的状态需要改变么
+	#分配角色 八人一杀,暂时不考虑两杀的情景
+
+	System.out.println("start game  =================");
+	System.out.println("old "+$role);
+	//$role.setProfession("police");
+	modify($role){
+	   setProfession($role.getProfession()+" i am father")
+	  }
+	
+	retract($role);
+	  
+	//update($role);
+	System.out.println("new "+$role);	
+	System.out.println("start game process over  =================");
+end
+
+
+
+
+
+
+rule 'game'
+lock-on-active
+when  
+    $role:Role()
+then
+    System.out.println(" print start =================");
+	System.out.println($role);
+	System.out.println(" print over  =================");
+end
+
+
+rule "add2" 
+        agenda-group "add" 
+        dialect "java" 
+        lock-on-active 
+        when 
+                eval(true) 
+        then 
+                System.out.println("add2"); 
+end 
+
+
+

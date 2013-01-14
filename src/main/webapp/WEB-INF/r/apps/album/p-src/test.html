@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link type="text/css" rel="stylesheet" href="../../../c/base/base.css" />
+<link type="text/css" rel="stylesheet" href="../../../c/themes/night/style.css" />
+<link type="text/css" rel="stylesheet" href="../../../c/cells/selector/style.css" />
+<link type="text/css" rel="stylesheet" href="../c/style.css" />
+</head>
+
+<body>
+<div class="cursorTest">
+	<img src="http://sns.sohu.com/r/i/temp/indexCover.jpg" />
+</div>
+
+<div style="margin:20px;padding:10px;background:#fff;">
+	<a class="opt opt-upload" href="#">上传照片</a>
+	<a class="opt opt-newAlbum" href="#">新建专辑</a>
+	<a class="opt opt-edit" href="#">编辑</a>
+	<a class="opt opt-del" href="#">删除</a>
+	<a class="opt opt-tag" href="#">标记</a>
+	<a class="opt opt-setAvatar" href="#">设为个人头像</a>
+	<a class="opt opt-manage" href="#">管理</a>
+	<a class="opt opt-reverse" href="#">倒序排列</a>
+	<a class="opt opt-revert" href="#">恢复原排列</a>
+</div>
+
+<div class="photoTagBox" style="top:170px;left:300px;">
+	<div class="photoTagBoxInt" style="width:236px;height:116px;"></div>
+</div>
+
+<div class="photoTagText" style="top:290px;left:300px;">
+	裤子不错啊！
+</div>
+
+<div class="photoTagFrame" style="top:30px;left:300px;width:240px;height:120px;">
+	<span class="t"></span>
+	<span class="r"></span>
+	<span class="b"></span>
+	<span class="l"></span>
+	<em class="n"></em>
+	<em class="e"></em>
+	<em class="w"></em>
+	<em class="s"></em>
+	<em class="nw"></em>
+	<em class="ne"></em>
+	<em class="se"></em>
+	<em class="sw"></em>
+</div>
+<div class="photoTagEditor" style="top:30px;left:550px;">
+	<div class="body">
+		<p>写下您想标记的句子：</p>
+		<textarea class="text" cols="10" rows="3"></textarea>
+		<p>或者您想标记的好友：</p>
+		<div class="selector selector-toggle"><a href="javascript:void(0);" class="toggle"></a>
+			<ol class="tokenList"><li><input type="text" style="display: none;" /></li></ol>
+		</div>
+	</div>
+	<div class="foot">
+		<span class="button button-main"><span><button type="submit">保存</button></span></span>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="取消">取消</a>
+	</div>
+</div>
+
+<div class="uploadTable">
+	<div class="head">
+		<ul>
+			<li>
+				<span class="name">照片</span>
+				<span class="size">大小</span>
+				<span class="del">移除</span>
+			</li>
+		</ul>
+	</div>
+	<div class="body">
+		<ul>
+			<li>
+				<span class="name">旅游.jpg</span>
+				<span class="size">2.4M</span>
+				<span class="del"><a class="icon i-del" href="#">删除</a></span>
+			</li>
+			<li>
+				<span class="name">旅游.jpg</span>
+				<span class="size">2.4M</span>
+				<span class="del"><a class="icon i-del" href="#">删除</a></span>
+			</li>
+			<li>
+				<span class="name">旅游.jpg</span>
+				<span class="size">2.4M</span>
+				<span class="del"><a class="icon i-del" href="#">删除</a></span>
+			</li>
+			<li>
+				<span class="name">旅游.jpg</span>
+				<span class="size">2.4M</span>
+				<span class="del"><a class="icon i-del" href="#">删除</a></span>
+			</li>
+			<li>
+				<span class="name">旅游.jpg</span>
+				<span class="size">2.4M</span>
+				<span class="del"><a class="icon i-del" href="#">删除</a></span>
+			</li>
+			<li style="background-position:-25%;">
+				<span class="name">旅游.jpg</span>
+				<span class="size">2.4M</span>
+				<span class="del"><a class="icon i-del" href="#">删除</a></span>
+			</li>
+			<li style="background-position:-50%;">
+				<span class="name">旅游.jpg</span>
+				<span class="size">2.4M</span>
+				<span class="del"><a class="icon i-del" href="#">删除</a></span>
+			</li>
+			<li style="background-position:-75%;">
+				<span class="name">旅游.jpg</span>
+				<span class="size">2.4M</span>
+				<span class="del"><a class="icon i-del" href="#">删除</a></span>
+			</li>
+			<li style="background-position:-100%;">
+				<span class="name">旅游.jpg</span>
+				<span class="size">2.4M</span>
+				<span class="del"><a class="icon i-del" href="#">删除</a></span>
+			</li>
+		</ul>
+	</div>
+	<div class="foot">
+		<ul>
+			<li>
+				<span class="name">共6张照片</span>
+				<span class="size">总计：105M</span>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="photoTagSelector" style="display: none; left: 345px; top: 157px;">
+	<label class="pts_name_input" id="label_name" for="name">键入任意名称或标签：</label>
+	<input type="text" value="" name="" id="pts_name_input" autocomplete="off" size="20" class="inputtext i_name" />
+	<span id="pts_choose_text">或选一个人：</span>
+	<div id="pts_userlist">
+		<div style="margin: 4px;">正在载入朋友…</div>
+	</div>
+	<div style="display: none;" id="pts_invite_section">请输入<span id="pts_invite_name">您的朋友</span>的电子邮箱。我们稍后会发送这个照片的链接并把他们添加到你的朋友列表中。
+		<div>
+			<label id="label_pts_invite_email" for="pts_invite_email">电邮：</label>
+			<input type="text" value="" name="pts_invite_email" id="pts_invite_email" class="inputtext" />
+		</div>
+	</div>
+	<div class="hidden_elem" id="pts_invite_msg"><strong>非Facebook用户？</strong>
+		<div><a class="Link to tag a non-Facebook friend in a photo" onclick="PhotoTagSelector.enterInviteMode()">点击这里以标记他们。</a></div>
+	</div>
+	<div class="buttons">
+		<input type="button" value="标记" name="tag" id="tag" class="inputbutton" />
+		<input type="button" value="取消" name="cancel" id="cancel" class="inputbutton inputaux" />
+	</div>
+</div>
+</div>
+
+</body>
+</html>

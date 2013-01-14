@@ -1,0 +1,35 @@
+package drools.common
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import org.apache.commons.lang.StringUtils;
+
+
+#必须有状态吧.没有状态就必须引入Game.每一个Game的状态又很难处理.每一个房间里有多少人.这些都应该是Query来处理的吧.
+#看来又要做不少重构的东西
+declare Room
+    creater:String
+	name: String
+	id:String
+	setting:Map
+	version:String
+	status:String
+	
+end
+
+declare Right
+       id:String
+       right:Set
+       isNotify:boolean
+end
+
+declare Player
+	id: String
+	name: String
+	status: String		
+end
+
+declare Snapshot
+    id:Long
+end
