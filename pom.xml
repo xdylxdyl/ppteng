@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>com.gemantic.commons</groupId>
 			<artifactId>commons-core</artifactId>
-			<version>1.88-SNAPSHOT</version>
+			<version>1.88</version>
 		</dependency>
 
 		<dependency>
@@ -386,13 +386,13 @@
         <repository>
             <id>nexus</id>
             <name>releases</name>
-            <url>http://42.121.113.70:8081/content/repositories/releases</url>
+            <url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
         </repository>
 
         <snapshotRepository>
             <id>nexus</id>
             <name>snapshots</name>
-            <url>http://42.121.113.70:8081/content/repositories/snapshots</url>
+            <url>http://42.121.113.70:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
