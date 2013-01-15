@@ -5,21 +5,21 @@
 <head>
 <title>${room.name}</title>
 <meta charset="utf-8">
-
-<link rel="stylesheet" href="<%=request.getContextPath() %>/r/c/kill/room.css?v=0.5">
+<c:set var="frontVersion" value="0.5"></c:set>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/r/c/kill/room.css?v=${frontVersion}">
 <script src="<%=request.getContextPath() %>/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/commons/model.js?v=0.7"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/commons/service.js?v=1.0"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/commons/base.js?v=1.3"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/commons/action.js?v=1.5"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/room/accept.js?v=1.5"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/room/view.js?v=1.1"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/commons/view.js?v=1.0"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=0.6"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/commons/model.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/commons/service.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/commons/base.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/commons/action.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/room/accept.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/room/view.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/commons/view.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 
 <script src="<%=request.getContextPath() %>/r/j-src/util/httpUtil.js"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=1.0"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=1.0"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
 
 <input type="hidden" id="uid" value="${uid}"> <!-- 玩家ID -->
 <input type="hidden"  id="rid" value="${room.id}"><!-- 房间ID -->

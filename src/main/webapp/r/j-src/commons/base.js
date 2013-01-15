@@ -110,6 +110,9 @@ resolvePredict.say = function(message) {
             message.color, message.object, name);
     } else {
 
+        versionFunction["say"](message);
+
+
     }
 
 
@@ -192,22 +195,7 @@ resolvePredict.kick = function(message) {
 };
 
 
-resolvePredict.timeChange = function(message) {
 
-    globalView.setGameStatus(message.subject);
-    gameAreaView.showConentForGamePhase(gameAreaView.Phase[status]);
-
-    var status = message.subject;
-    var p = playerService.getPlayer(globalView.getCurrentID());
-    if (playerStatus.die != p.status) {
-        gameAreaView.swithTopArea("killerArea");
-    }
-    gameAreaView.showContentForGameArea(gameAreaView.Hint[status]);
-    gameAreaView.showConentForGamePhase(gameAreaView.Phase[status]);
-    gameAreaView.autoBottom("section article");
-    controlView.clearCountDownTime();
-    controlView.setCountDownTime(message.object);
-};
 
 resolvePredict.right = function(message) {
 
@@ -228,48 +216,6 @@ resolvePredict.right = function(message) {
     }
 
 
-};
-
-resolvePredict.role = function(message) {
-
-
-    var name = idFindName(message.subject);
-    var role = "";
-    if ("killer" == message.object) {
-        role = "杀手";
-    } else {
-        role = "水民";
-    }
-
-
-    $("section article").append("<p style='color:#F00;'>【系统消息】 [" + name + "] 的身份为 " + role + "</p>");
-
-
-};
-
-resolvePredict.decryption = function(message) {
-
-    if ("killer" == message.object) {
-        var name = idFindName(message.subject);
-        $("section article").append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是真正的杀手</p>");
-    }
-
-};
-
-
-resolvePredict.assign = function(message) {
-    //本地存入自己身份
-    //杀手栏展示杀手名单
-    $("#assign").val(message.subject);
-    if (message.subject == "killer") {
-        var p = playerService.getPlayer(message.object);
-        var name = p.name;
-        p.role = "killer";
-        playerService.updatePlayer(p);
-        gameAreaView.showContentForRoleArea(gameAreaView.Hint.killerList + name);
-
-
-    }
 };
 
 
@@ -402,8 +348,6 @@ var initRoom = function() {
             //检验是否有玩家信息，如果没有玩家信息则应该为空房间，不需要继续处理下去
             if (data.person.length) {
                 versionFunction["parseDetail"](data);
-
-
             } else {
 
             }
@@ -431,7 +375,7 @@ var initRoom = function() {
 
         }
         if (data.person.length) {
-            roomService.parsePerson(null, data.person);
+            roomService.parsePerson(data.person);
             roomService.parseRoom(data.room);
 
         } else {
@@ -467,7 +411,7 @@ var initRoom = function() {
         var messages = eval(text);
         //应该是倒序
         showRecord(messages, 0);
-        gameAreaView.autoBottom("section article");
+        viewUtil.autoBottom("section article");
 
 
     }

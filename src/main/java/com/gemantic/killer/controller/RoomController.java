@@ -97,7 +97,7 @@ public class RoomController {
 
 		Map<Long, Integer> room_count = new HashMap();
 		List<Room> rooms = roomService.getList();
-		log.debug("get rooms " + rooms.toString());
+		log.info("get rooms " + rooms.toString());
 		List<Long> userIDS = new ArrayList();
 		for (Room r : rooms) {
 			userIDS.add(r.getCreaterID());

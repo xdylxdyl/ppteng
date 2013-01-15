@@ -109,11 +109,12 @@ $(document).ready(function() {
         playerList.order(command);
     });
     $("#object").change(function() {
-        if (gameAreaView.checkSayNotEmpty()) {
+        if (controlView.checkSayNotEmpty()) {
 
         } else {
 
-            gameAreaView.hintSay(gameAreaView.Hint[$("#command").val()]);
+            var content=  versionFunction["commandHint"]($("#command").val());
+            controlView.hintSay(content);
         }
     });
 

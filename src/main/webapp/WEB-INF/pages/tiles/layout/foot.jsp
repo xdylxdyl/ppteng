@@ -21,7 +21,7 @@
 				<option value="command">-指令-</option>
 			</select> <select id="object">
 				<option value="object">-对象-</option>
-			</select> <input type="text" class="nobg" value="00:00"> <input
+			</select> <input type="text" class="nobg" value="00:00" disabled="true"> <input
 				type="button" class="button" id="ready" value="准备游戏"> <input
 				type="button" class="button" id="start" value="开始游戏"> <input
 				type="button" class="button" id="replay" value="开始播放">
@@ -42,8 +42,8 @@
 		<div class="quiet" id="logout"></div>
 	</form>
 
-	
-		<!-- JiaThis Button BEGIN -->
+	<!-- 
+		JiaThis Button BEGIN
 		<div class="jiathis_style">
 			<span class="jiathis_txt">分享到：</span> <a
 				class="jiathis_button_tools_1"></a> <a
@@ -57,7 +57,7 @@
 		<script type="text/javascript"
 			src="http://v3.jiathis.com/code/jia.js?uid=1334627735062752"
 			charset="utf-8"></script>
-		<!-- JiaThis Button END -->
+		JiaThis Button END -->
 
 
 

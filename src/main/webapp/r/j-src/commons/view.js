@@ -44,11 +44,12 @@ var settingView = {
         $("#expContainer").hide();
 
 
-        versionFunction["initSetting"];
+       versionFunction["initSetting"]();
+        
 
 
         $("#submitSetting").bind("click", function() {
-            var s = settingView.getSettingGetParameter(versionFunction["getSettingParameter"]);
+            var s = versionFunction["getSettingParameter"]();
             var settingHtml = settingService.saveSetting(s);
             alert("你和洛洛一样聪明~都会更改设置了~~");
             settingView.showSetting(settingHtml);
@@ -259,9 +260,8 @@ var rightView = {
                 if (versionFunction["rightView"]) {
                     versionFunction["rightView"](right);
                 }
-
-
         }
+
 
 
     },
@@ -292,11 +292,20 @@ var rightView = {
         $("#sendSay").prop("disabled", true);
         $("#ready").prop("disabled", true);
         $("#command option:gt(0)").remove();
+    },
+    getContentByRight:function(right){
+        var c=commandCommonSetting[right];
+        if(c){
+            return c;
+        }else{
+            return versionFunction["rightContent"][right];
+        }
     }
 }
 
 
 var gameAreaView = {
+
 
     login:function(player) {
 

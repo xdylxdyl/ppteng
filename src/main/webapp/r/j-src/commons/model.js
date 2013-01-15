@@ -17,6 +17,12 @@ var expression = {
     "14" :" 面无表情的"
 };
 
+
+var commandCommonSetting={
+    kick:"果断一脚"
+}
+
+
 var userExpression = {
 };
 

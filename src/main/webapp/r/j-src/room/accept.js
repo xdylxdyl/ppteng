@@ -51,31 +51,90 @@ killController.parseMessage = function(message) {
         case "over" :
             gameView.over(message);
             break;
+        case "say":
+              killController.say(message);
+            break;
 
         default :
             console.log("未写到的动作：" + message.predict);
     }
 
 }
-killController.say = function(message) {
 
 
-    var status = globalView.getGameStatus();
-    if ("run" == status) {
-        var name;
-        if (message.object != -500) {
-            name = playerService.getPlayer(message.object).name;
-        }
-        gameAreaView.say(message.subject, playerService.getPlayer(message.subject).name, message.content, message.expression,
-            message.color, message.object, name);
+
+killController.role = function(message) {
+
+
+    var name = idFindName(message.subject);
+    var role = "";
+    if ("killer" == message.object) {
+        role = "杀手";
     } else {
+        role = "水民";
+    }
+
+
+    $("section article").append("<p style='color:#F00;'>【系统消息】 [" + name + "] 的身份为 " + role + "</p>");
+
+
+};
+
+killController.decryption = function(message) {
+
+    if ("killer" == message.object) {
+        var name = idFindName(message.subject);
+        $("section article").append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是真正的杀手</p>");
+    }
+
+};
+
+
+killController.assign = function(message) {
+    //本地存入自己身份
+    //杀手栏展示杀手名单
+    $("#assign").val(message.subject);
+    if (message.subject == "killer") {
+        var p = playerService.getPlayer(message.object);
+        var name = p.name;
+        p.role = "killer";
+        playerService.updatePlayer(p);
+        killGameAreaView.showContentForRoleArea(killGameAreaView.Hint.killerList + name);
+
 
     }
+};
+
+
+killController.timeChange = function(message) {
+
+    var status=message.subject;
+
+    globalView.setGameStatus(status);
+    killGameAreaView.showConentForGamePhase(killGameAreaView.Phase[status]);
+
+    var status = message.subject;
+    var p = playerService.getPlayer(globalView.getCurrentID());
+    if (playerStatus.die != p.status) {
+        killGameAreaView.swithTopArea("killerArea");
+    }
+    killGameAreaView.showContentForGameArea(killGameAreaView.Hint[status]);
+    killGameAreaView.showConentForGamePhase(killGameAreaView.Phase[status]);
+    viewUtil.autoBottom("section article");
+    controlView.clearCountDownTime();
+    controlView.setCountDownTime(message.object);
+};
+
+killController.say = function(message) {
+
+    var p=playerService.getPlayer(message.subject);
+    killGameAreaView.say(message.subject,p.name,message.content,message.expression,message.color,message.object,"");
 
 
 };
 
 killController.living = function(message) {
+     playerService.setStatus(message.subject, playerStatus.living);
     $("#" + message.subject).children("a").removeClass().addClass("living");
 };
 killController.status = function(message) {
@@ -91,19 +150,19 @@ killController.status = function(message) {
 killController.kill = function(message) {
 
     playerListView.kill(message.subject);
-    gameAreaView.kill(playerService.getPlayer(message.subject).name, playerService.getPlayer(message.object).name, message.expression, message.content);
+    killGameAreaView.kill(playerService.getPlayer(message.subject).name, playerService.getPlayer(message.object).name, message.expression, message.content);
 };
 killController.die = function(message) {
 
     playerService.setStatus(message.subject, playerStatus.die)
     playerListView.die();
-    gameAreaView.die(message.subject, playerService.getPlayer(message.subject).name, message.object);
+    killGameAreaView.die(message.subject, playerService.getPlayer(message.subject).name, message.object);
 
 };
 
 killController.vote = function(message) {
 
-    gameAreaView.vote(playerService.getPlayer(message.subject).name,
+    killGameAreaView.vote(playerService.getPlayer(message.subject).name,
         playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
 
 };

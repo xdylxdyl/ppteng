@@ -18,7 +18,12 @@ var settingPostParameter = function(rid, version, killCount, dayTime, nightTime,
             {"遗言时间":lastwordTime}
         ]
     }
+}
 
+
+var commandSimpleSetting = {
+    vote : "投他一票",
+    kill : "杀人灭口"
 
 }
 
@@ -28,7 +33,9 @@ var settingPostParameter = function(rid, version, killCount, dayTime, nightTime,
  */
 var killGameAreaView = {
 
-
+  getCommandHint:function(command){
+        return killGameAreaView.Hint[command];
+    },
     Hint:{
         vote:"人生就是这样,何必挣扎说自己不是杀手呢",
         kill:"杀谁都一样,你只是太闪亮了",
@@ -48,7 +55,7 @@ var killGameAreaView = {
     say:function(id, name, content, exp, color, subject, subjectName) {
         var express = controlView.showExpression(exp);
         var obj;
-        if (subjectName != null) {
+        if (subject != "-500") {
             obj = " 对 [" + subjectName + " ]";
         } else {
             obj = "";
@@ -199,18 +206,32 @@ var simpleRightView = {
     branchRight:function(right) {
         switch (right) {
             case "vote" :
-                this.commandRight(right);
+                simpleRightView.commandRight(right);
                 break;
             case "kill" :
-                this.commandRight(right);
+                simpleRightView.commandRight(right);
                 break;
             case "lastword" :
-                this.sayRight(right);
+                simpleRightView.sayRight(right);
                 break;
             default :
                 console.log("version view not process right: " + right);
         }
+    },
+
+    commandRight : function(right) {
+        $("#command option:gt(0)").remove();
+        var content = rightView.getContentByRight(right);
+        $("#command").append("<option value='" + right + "'>" + content + "</option>");
+    },
+     sayRight : function(right) {
+        $("#say").prop("disabled", false);
+        $("#sendSay").prop("disabled", false);
+        $("#say").attr("name", right);//? 这个有什么用处
     }
+
+
+
 }
 
 var simpleSettingView = {
@@ -260,29 +281,43 @@ var gameView = {
 
 
         killGameAreaView.showOver(recordID, obj);
-        killGameAreaView.showConentForGamePhase(gameAreaView.Phase[status]);
+        killGameAreaView.showConentForGamePhase(killGameAreaView.Phase["over"]);
     }
 
 
 }
 
-var simpleService={
-     parseDetail:function(data) {
-            roomService.parsePerson(data.person);
-            roomService.parseGame(data.game);
-            roomService.parseRoom(data.room);
-            roomService.parseRight(data.right);
-        }
+var simpleService = {
+    parseDetail:function(data) {
+        roomService.parsePerson(data.person);
+        roomService.parseGame(data.game);
+        roomService.parseRoom(data.room);
+        roomService.parseRight(data.right);
+    }
 }
 
-    versionFunction = {
-        "rightView":simpleRightView.branchRight,
-        "initSetting":simpleSettingView.initSetting,
-        "getSettingParameter":simpleSettingView.getSettingParameter,
-        "parseMessage":killController.parseMessage,
-        "parseDetail":simpleService.parseDetail,
-         "settingPostParameter":settingPostParameter
-    }
+versionFunction = {
+    //处理权限的展示
+    "rightView":simpleRightView.branchRight,
+    //处理权限对应的数据
+    "rightContent":commandSimpleSetting,
+    //初始化设置
+    "initSetting":simpleSettingView.initSetting,
+    //获取初始化参数
+    "getSettingParameter":simpleSettingView.getSettingParameter,
+    //解析消息
+    "parseMessage":killController.parseMessage,
+    //解析房间Detail,用于页面刷新及进入房间
+    "parseDetail":simpleService.parseDetail,
+    //设置参数
+    "settingPostParameter":settingPostParameter,
+    //游戏中发言
+    "say":killController.say,
+     //Command Hint
+    "commandHint":  killGameAreaView.getCommandHint
+
+
+}
 
 
 

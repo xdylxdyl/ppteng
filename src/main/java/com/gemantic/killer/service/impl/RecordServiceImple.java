@@ -219,6 +219,9 @@ public class RecordServiceImple implements RecordService {
 		try {
 			
 			Record r=this.getRecord(recordID);
+			if(r==null){
+				return new ArrayList();
+			}
 			List<String> lines = FileUtil.readFileAsList(r.getPath());
 			return lines;
 		} catch (IOException e) {

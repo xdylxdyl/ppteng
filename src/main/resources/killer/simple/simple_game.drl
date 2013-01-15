@@ -870,7 +870,7 @@ end
 
 
 #当前票数大于等于活着人数的一半
-rule 'game over kill win'
+rule 'game over killer win'
 ruleflow-group "game status"
 when
     #$operater:Operater()  
@@ -899,14 +899,14 @@ rule 'game over water win'
 ruleflow-group "game status"
 when
      #$operater:Operater()  
-     $game:Game($killerCount:killerCount,$waterCount:waterCount);
+     $game:Game($killerCount:killerCount,$waterCount:waterCount,$recordName:recordName);
      eval($killerCount == 0 )  
      $room:Room(status=="run")
       
 then 
      LogUtil.log("game over water start  ================="); 
   
-    Message gameOver=new Message("-500","over","water win");   
+    Message gameOver=new Message($recordName,"over","water win");   
     insert(gameOver);    
   
       LogUtil.log("game over water over  ================="); 
