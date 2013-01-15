@@ -149,7 +149,7 @@
 	</error-page>
 
 	<!-- not lock css/js file when jetty run :tomcat will be error -->
-	<!-- -->
+	<!-- 
 	<servlet>
 		<servlet-name>default</servlet-name>
 		<init-param>
@@ -157,6 +157,6 @@
 			<param-value>false</param-value>
 		</init-param>
 	</servlet>
-
+-->
   
 </web-app>
