@@ -90,6 +90,12 @@
 			<groupId>com.gemantic.commons</groupId>
 			<artifactId>commons-core</artifactId>
 			<version>1.88</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>dal-dao</artifactId>
+					<groupId>com.gemantic</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
