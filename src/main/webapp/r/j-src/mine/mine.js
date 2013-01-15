@@ -36,6 +36,19 @@ $(document).ready(function() {
         }
     };
 
+    var settingPostParameter = function(rid, version, row, column, count) {
+        return{
+            rid:rid,
+            version:version,
+            setting:[
+                {"行数":killCount},
+                {"列数":dayTime},
+                {"雷数":nightTime}
+            ]
+        }
+    }
+
+
     var wrongMine;
 
     var mineUtil = {
@@ -64,6 +77,16 @@ $(document).ready(function() {
     var bombStr = {
 
     };
+
+    var mineSettingView = {
+        initSetting:function() {
+
+        },
+        getSettingParameter:function() {
+            var params = jQuery("#setting").serialize();
+            return params;
+        }
+    }
 
 
     var mineView = {
@@ -113,7 +136,7 @@ $(document).ready(function() {
 
                     mineView.tagMine();
                     break;
-                 case "n":
+                case "n":
                     $(id).empty();
                     $(id).removeClass();
                     break;
@@ -180,10 +203,10 @@ $(document).ready(function() {
             //只重新显示.不用重新计算
             settingView.displaySetting();
 
-            if("win"==obj){
-                 $("section article").append("<p style='color:#F00'>【系统消息】 你居然赢了.~~赶紧的开始下一局</p>");
-            }else{
-                 $("section article").append("<p style='color:#F00'>【系统消息】 你果然输了,~~赶紧的开始下一局</p>");
+            if ("win" == obj) {
+                $("section article").append("<p style='color:#F00'>【系统消息】 你居然赢了.~~赶紧的开始下一局</p>");
+            } else {
+                $("section article").append("<p style='color:#F00'>【系统消息】 你果然输了,~~赶紧的开始下一局</p>");
             }
 
 
@@ -221,8 +244,6 @@ $(document).ready(function() {
 
 
             });
-
-
 
 
         }
@@ -310,8 +331,8 @@ $(document).ready(function() {
 
     versionFunction = {
         //"rightView":simpleRightView.branchRight,
-        //"initSetting":simpleSettingView.initSetting,
-        //"getSettingParameter":simpleSettingView.getSettingParameter,
+        "initSetting":mineSettingView.initSetting,
+        "getSettingParameter":mineSettingView.getSettingParameter,
         "parseMessage":mineService.parseMessage,
         "parseDetail":mineService.parseDetail
         //   "settingPostParameter":settingPostParameter

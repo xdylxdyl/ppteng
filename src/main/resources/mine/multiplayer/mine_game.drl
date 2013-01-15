@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import com.gemantic.common.util.json.GsonUtil;
-
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang.math.RandomUtils;
@@ -270,7 +269,7 @@ end
 
 
 
-#double Pane.周围必须全部是空或标为雷,才可以点击.否则不能点
+
 rule 'double click pane'
 ruleflow-group "user action"
 
