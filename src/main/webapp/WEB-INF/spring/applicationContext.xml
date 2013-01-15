@@ -107,8 +107,8 @@
 
 
 	<bean id="cookieUtil" class="com.gemantic.common.util.http.cookie.CookieUtil">
-		<property name="home" value="putaotent.com"></property>
-		<property name="domain" value="http://manager.gemantic.com:9090"></property>
+		<property name="home" value="ppteng.com"></property>
+		<property name="domain" value="http://www.ppteng.com:9090"></property>
 	</bean>
 
 
@@ -129,24 +129,10 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="dao" class="com.gemantic.dal.dao.impl.CompositeDaoImpl" />
 
 
 
 
-
-
-	<!-- performance -->
-
-	<aop:aspectj-autoproxy />
-	<bean id="aroundLoggingTime" class="com.gemantic.common.stat.aop.time.AroundTimeConsume" />
-	<aop:config>
-		<aop:aspect ref="aroundLoggingTime">
-			<aop:pointcut id="publicServiceMethod"
-				expression="execution(* com.gemantic..client.*.*(..))" />
-			<aop:around method="around" pointcut-ref="publicServiceMethod" />
-		</aop:aspect>
-	</aop:config>
 
 
 

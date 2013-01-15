@@ -72,14 +72,6 @@
 	</bean>
 
 
-  	<bean id="proxy_config" class="java.util.HashMap">
-		<constructor-arg>
-			<map>
-				<entry key="stock" value-ref="keywizardServiceStockImpl">				
-				</entry>				
-			</map>
-		</constructor-arg>
-	</bean>
 	
 
 
