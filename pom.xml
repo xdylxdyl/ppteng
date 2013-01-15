@@ -386,13 +386,13 @@
         <repository>
             <id>nexus</id>
             <name>releases</name>
-            <url>http://mvn.gemantic.com/content/repositories/releases</url>
+            <url>http://42.121.113.70:8081/content/repositories/releases</url>
         </repository>
 
         <snapshotRepository>
             <id>nexus</id>
             <name>snapshots</name>
-            <url>http://mvn.gemantic.com/content/repositories/snapshots</url>
+            <url>http://42.121.113.70:8081/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
