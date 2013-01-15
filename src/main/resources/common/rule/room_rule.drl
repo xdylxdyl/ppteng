@@ -592,7 +592,7 @@ end
 
 
 
-rule 'query'
+rule 'query rule'
 ruleflow-group "snapshot"
 #什么时候去判断要执行Snapshot呢?
 when
