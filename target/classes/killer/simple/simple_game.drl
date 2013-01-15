@@ -1,0 +1,1740 @@
+package drools.common
+
+import drools.common.*
+import com.gemantic.killer.common.model.Message
+import com.gemantic.killer.common.model.Operater;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang.StringUtils;
+import com.gemantic.killer.util.*;
+
+
+
+
+
+
+
+#========== retract unlimit message 
+/*
+*人不在的话,清除数据
+*/
+rule 'retract unlimit message'
+ruleflow-group "retract unlimit message"
+when
+	#conditions
+    
+    $message:Message($subject:subject)
+    $plaery:Player(id==$subject,status=="unready")	
+    Game()
+    
+    
+then      
+	#actions
+     LogUtil.log("retract unlimit message start================= ");
+       retract($message);  
+     LogUtil.log("retract unlimit message over ================="); 
+    
+end
+
+
+
+
+#========================query group start =========================
+
+
+
+/*
+*人不在的话,清除数据
+*/
+rule 'create snapshot'
+ruleflow-group "create snapshot"
+when
+	#conditions
+    
+    Message($id:id)
+    not Snapshot()
+    
+then      
+	#actions
+     LogUtil.log("create snapshot start================= ");
+     Snapshot snapshot=new Snapshot($id);   
+     insert(snapshot);
+     LogUtil.log("create snapshot over ================="); 
+    
+end
+
+/*
+*打印日志.清除Snapshot.并发的时候如何处理?两个人同时操作.出现并发怎么办?Message都有一个ID呢?
+*还有就是.当游戏结束的时候.没有Game了.这个时候该怎么处理?游戏结束的消息没有了.那么就不能执行了.
+*如果Game已经Over了,怎么把Over的信息记下来.记战例应该有一个明确的区分点,游戏开始和游戏结束.所以必须要在游戏结束前记录.现在的情况是Over的消息传过来后,游戏状态变了,所以战例没有记.
+*怎么能区分开呢.只要Game存在就好?
+*/
+rule 'log snapshot'
+ruleflow-group "log snapshot"
+when
+	#conditions
+    
+     
+     
+    $room:Room()
+    $allLogins:ArrayList()
+	      from accumulate(
+	      $person:Player()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($person);),
+	      result(ls)
+	      );
+	$game:Game($status:status)
+    $operater:Operater($id:id)  
+    $snapshot:Snapshot(id==$id)
+    $roles:ArrayList()
+	      from accumulate(
+	      $role:Role()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($role);),
+	      result(ls)
+	      );
+	 $votes:ArrayList()
+	      from accumulate(
+	      $vote:Vote()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($vote);),
+	      result(ls)
+	      );
+     
+    
+then      
+	#actions
+     LogUtil.log("log snapshot start================= ");
+     
+      Map m=new HashMap();
+      m.put("room",$room);
+      m.put("person",$allLogins);      
+       m.put("game",$game);    
+       m.put("roles",$roles);   
+       m.put("votes",$votes);  
+       m.put("time",System.currentTimeMillis());      
+      JSONObject json4=JSONObject.fromObject(m); 
+      JobLogger.logMessages($game.getRecordName(), $operater.getNextMessages());
+      //JobLogger.log($game.getRecordName(),json4.toString());
+     retract($snapshot);
+     LogUtil.log("log snapshot over ================="); 
+    
+end
+
+
+
+rule 'clear snapshot '
+ruleflow-group "remove snapshot"
+when
+	#conditions
+	
+	$snapshot:Snapshot($id:id)
+	not Message(id==$id)
+    
+     
+    
+then      
+	#actions
+     LogUtil.log("clear snapshot start================= ");
+     retract($snapshot);  
+     LogUtil.log("clear snapshot over ================="); 
+    
+end
+
+
+
+
+
+
+rule 'retract game'
+ruleflow-group "game over"
+when
+	#conditions
+	$room:Room(status=="unrun") 
+	$game:Game($status:status,$recordName:recordName)
+    $operater:Operater()  
+     
+    
+then      
+	#actions
+     LogUtil.log("remove snapshot start================= ");
+     $operater.setRecordID(Long.valueOf($recordName));
+     retract($game);  
+     
+     LogUtil.log("remove snapshot over ================="); 
+    
+end
+
+
+
+
+
+
+
+
+
+
+
+#========================action group start =========================
+
+
+/*
+*人不在的话,清除数据
+*/
+rule 'logout clear role'
+ruleflow-group "clear role action"
+when
+	#conditions
+    
+    $role:Role($id:id)
+    not Player(id==$id)
+    
+then      
+	#actions
+     LogUtil.log("logout clear role ================= ");   
+     retract($role);
+     LogUtil.log("logout clear role over ================="); 
+    
+end
+
+
+
+
+
+
+
+
+
+#这个是按动作来分的.其实也应该按结果来分.分成角色初始化的规则.权限规则,
+rule 'game init'
+ruleflow-group "game init"
+when
+	
+    $message:Message(predict=="start",$time:time)
+    
+  
+     $all_login_ids:HashSet()
+	      from accumulate(
+	      Player($id:id)	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+    
+    
+   
+    $allReadys:ArrayList()
+	      from accumulate(
+	      $person:Player(status=="ready")	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($person);),
+	      result(ls)
+	      );
+    
+    $room:Room(status=="unrun")    
+     $operater:Operater()
+then      
+
+	LogUtil.log("game init process start =================");
+	LogUtil.log($allReadys);
+	 int  killerCount=Integer.valueOf(getRoomSetting($room,"杀手人数","1"));#1*60*1000  
+	 int waterCount= $allReadys.size()-killerCount;
+	 
+	 Map<String,Integer> role_count=new HashMap();
+		role_count.put("killer", killerCount);
+		role_count.put("water", waterCount);
+		List<String> ls=new ArrayList();
+		List<Long> readyIDS=new ArrayList();
+	    for(Object o:$allReadys){
+	          Player p=(Player)o;
+			  ls.add(p.getId());
+			  readyIDS.add(Long.valueOf(p.getId()));
+		}
+		
+		
+			
+	
+	 String	rname=String.valueOf(RandomUtils.nextLong());	
+	
+	Map<String,String>	ids_role=RoleUtil.assingRole(role_count,ls);
+		LogUtil.log("============================ role is "+ids_role);
+		for(Object o: $allReadys){
+			      Player p=(Player)o;
+			      	LogUtil.log(p);
+			    String uid=p.getId();
+			    String role=ids_role.get(uid);
+			      p.setStatus("living");	  
+				  update(p);
+				  
+				  Role r=new Role(uid,role);
+				  insert(r);	  
+				  Message assignMessage=new Message(role,"assign",uid); 
+				  insert(assignMessage);	  
+				  
+				   Message livingMessage=new Message(uid,"living",""); 
+				  insert(livingMessage);
+				  
+				   Vote vote=new Vote(uid,new HashSet(),"");
+                   insert(vote);
+				 
+		
+		
+		JobLogger.logMessages(rname,Arrays.asList(new Message[]{new Message(uid,"ready",""),new Message(uid,"login","")}));	
+		
+	  	
+			
+		}
+	
+	
+	 
+	 
+	 
+	 
+	 
+	Game game=new Game("ready",$allReadys.size(),waterCount,killerCount,System.currentTimeMillis(),0L,$time,rname);
+	insert(game);
+	
+	
+	LogUtil.log(" game status  ================="+game);
+	//create log 
+		
+	
+	$room.setStatus("run");	
+	
+	update($room);
+	
+		LogUtil.log(" room status  ================="+$room);
+	
+	$operater.setGameStart(true);
+	$operater.setPlayers(readyIDS);
+	
+	
+	LogUtil.log("game init process over  =================");
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#========================role group start =========================
+#游戏开始的时候应该是清除所有的角色吧.不只是清楚Unready的角色
+rule 'clear all role when new game start'
+ruleflow-group "clear role"
+#这个也不对.马上清除用户就看不到了.应该是在开始之前清除一下角色.其实也不需要,因为游戏开始之后会给每一个人清除的.(除非是上局玩,这局没玩的玩家)
+when
+
+   
+ 
+   $message:Message(predict=="start")
+   $person:Player($id:id)
+   $role:Role(id==$id)
+   
+   
+then  
+
+   LogUtil.log("clear all role  start  ================="); 
+   retract($role); 
+   LogUtil.log("clear all role  over  ================="); 
+end
+
+
+
+
+rule 'clear killvote when not night '
+ruleflow-group "clear role"
+#这时候被杀的人没有死吧.
+when
+	
+   
+    #kill
+ 
+    $game:Game(status!="night")   
+    $room:Room(status=="run")  
+	$killed:KillVote()	     
+	
+    
+then     
+     LogUtil.log("clear killvote when not night   start=============");        
+     retract($killed);
+     LogUtil.log("clear killvote when not night   over =============");    
+end
+
+#========================say group over =========================
+
+
+
+#========================role group start =========================
+#游戏开始的时候应该是清除所有的角色吧.不只是清楚Unready的角色
+rule 'clear all vote when new game start'
+ruleflow-group "clear vote at start"
+#这个也不对.马上清除用户就看不到了.应该是在开始之前清除一下角色.其实也不需要,因为游戏开始之后会给每一个人清除的.(除非是上局玩,这局没玩的玩家)
+when
+
+   
+ 
+   $message:Message(predict=="start")
+   $person:Player($id:id)
+   $vote:Vote(id==$id)
+   
+   
+then  
+
+   LogUtil.log("clear vote at start  start  ================="); 
+   retract($vote); 
+   LogUtil.log("clear vote at start over  ================="); 
+end
+
+
+
+
+
+
+
+
+
+#========================say group over =========================
+
+
+
+
+
+
+
+
+
+
+#========================vote group start =========================
+
+rule 'change vote'
+ruleflow-group "vote"
+no-loop true 
+when
+    $message:Message($subject:subject,$object:object,predict=="vote")
+    $voter:Vote(id==$subject,$oldVoted:vote)
+    $right:Right(id==$subject,right contains "vote")
+    $newPlayer:Player(id==$object,status=="living")
+    $newPlayerVote:Vote(id==$object)
+    $oldPlayer:Player(id==$oldVoted,status=="living")
+    $oldPlayerVote:Vote(id==$oldVoted)
+    eval($oldVoted!=$object)
+then
+    LogUtil.log("change vote  start  ================="); 
+    
+    $voter.setVote($object);
+    $oldPlayerVote.getVoters().remove($subject);
+    $newPlayerVote.getVoters().add($subject);   
+    Message add=new Message($newPlayer.getId(),"set vote",String.valueOf($newPlayerVote.getVoters().size()));
+     insert(add);
+    Message subtract=new Message($oldPlayer.getId(),"set vote",String.valueOf($oldPlayerVote.getVoters().size()));
+     insert(subtract); 
+     update($voter);
+     update($newPlayer);
+     update($oldPlayer);
+     
+       
+     
+     
+    LogUtil.log("change vote over  ================="); 
+end
+
+#票自己的时候如何处理,为什么票自己之后,第二个人再投自己会执行三次.no Loop =true 究竟靠不靠谱,重复执行是因为之前已经存在多个Vote了.
+
+rule 'first vote'
+ruleflow-group "vote"
+no-loop true 
+when
+    $message:Message($subject:subject,$object:object,predict=="vote")
+    $voter:Vote(id==$subject,vote=="")
+    $right:Right(id==$subject,right contains "vote")
+    $newVoted:Player(id==$object,status=="living")
+    $newPlayerVoter:Vote(id==$object)
+    
+then
+    LogUtil.log("first vote start  ================="); 
+    
+    $voter.setVote($object);
+    update($voter);
+    
+    $newPlayerVoter.getVoters().add($subject);     
+     update($newPlayerVoter);
+    
+     Message add=new Message($newVoted.getId(),"set vote",String.valueOf($newPlayerVoter.getVoters().size()));
+     insert(add); 
+     
+      LogUtil.log("first vote over  ================="); 
+end
+
+
+
+#3.清空投票
+
+
+
+
+
+
+#奇怪,为什么没有执行这个规则,大爷的,这个规则根本就没有执行过,这个规则不对
+rule 'clear vote'
+ruleflow-group "clear vote"
+when
+    $message:Message($subject:subject,$object:object,predict=="clear vote")
+    $person:Vote($vote:vote,$voters:voters)  
+    eval($voters.size() > 0||$vote!="")
+then
+    LogUtil.log("clear vote start  ================="); 
+    
+    $person.setVote("");
+    $person.setVoters(new HashSet());
+     update($person);   
+      Message add=new Message($person.getId(),"set vote","0");
+     insert(add);
+     LogUtil.log("clear vote vote over  ================="); 
+end
+
+
+
+rule 'retract vote'
+ruleflow-group "clear vote"
+when
+    $message:Message($subject:subject,$object:object,predict=="retract vote")
+    $vote:Vote()  
+    
+then
+    LogUtil.log("retract vote start  =================");
+    LogUtil.log("retract vote start  ================= "+$vote);    
+    retract($vote);
+     LogUtil.log("retract vote vote over  ================="); 
+end
+
+
+
+rule 'clear retract vote message'
+ruleflow-group "clear vote"
+when
+    $message:Message($subject:subject,$object:object,predict=="retract vote")
+    not Vote()      
+then
+    LogUtil.log("retract vote  message clear start  =================");
+  
+    retract($message);
+     LogUtil.log("retract vote message clear  over  ================="); 
+end
+
+
+
+
+
+
+#========================vote group over =========================
+
+
+#========================kill group start =========================
+
+rule 'first kill'
+ruleflow-group "player status"
+ no-loop true
+#这里是负责更新玩家被杀手杀的票数
+when
+    $message:Message($subject:subject,$object:object,predict=="kill")
+    $person:Player(id==$object,status=="living")
+    $game:Game(status=="night")
+    not  KillVote(id==$subject)
+   
+ 
+then  
+ 
+     LogUtil.log("first kill start =================");      
+    
+     KillVote kv=new KillVote($subject,$object);
+     insert(kv);
+     
+     LogUtil.log("first kill start ================= "+kv);  
+  
+    LogUtil.log("first kill start over  ================="); 
+ 
+end
+
+
+rule 'change kill'
+ruleflow-group "player status"
+ no-loop true
+#这里是负责更新玩家被杀手杀的票数
+when
+    $message:Message($subject:subject,$object:object,predict=="kill")
+    $person:Player(id==$object,status=="living")
+    $game:Game(status=="night")
+    $kv:KillVote(id==$subject)
+   
+then  
+ 
+     LogUtil.log("change kill start ================="); 
+     $kv.setKill($object);
+     update($kv);     
+     
+   LogUtil.log("change kill start ================= "+$kv);  
+  
+    LogUtil.log("change kill over ================="); 
+ 
+end
+
+
+rule 'kill die '
+ruleflow-group "player status"
+#玩家被杀手投的数目等于当前活着的杀手数目
+when
+    $message:Message($subject:subject,$object:object,predict=="kill")    
+    $killVoters:ArrayList()
+	      from accumulate(
+	      $killed:KillVote(kill==$object)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($killed);),
+	      result(ls)
+	);    
+	
+	$allkillVoters:ArrayList()
+	      from accumulate(
+	      $killed:KillVote()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($killed);),
+	      result(ls)
+	);   
+    $person:Player(id==$object,status=="living")    
+    $game:Game(status=="night",$killerCount:killerCount)
+    eval($killVoters.size()==$killerCount) 
+ 
+then  
+ 
+    LogUtil.log("kill die  start=============="); 
+    
+    $person.setStatus("lastword");
+     update($person); 
+     
+     for(Object o:$allkillVoters){
+     
+       KillVote kv=(KillVote)o;
+       retract(kv);
+     }
+      
+   
+    LogUtil.log("kill die  start over  ================="); 
+ 
+end
+
+
+
+
+
+
+#========================kill group over =========================
+
+#========================die group start =========================
+#要处理Die的消息.发送给全部的玩家.Die的规则是什么..Kill的话不需要发送,因为玩家已经发送了.
+#投票投死的话才会发送一条消息说谁谁谁被投死了.
+
+rule 'water die process count'
+ruleflow-group "game live count"
+when
+ $game:Game($liverCount:liverCount,$waterCount:waterCount);
+ $die:Die($id:id,$type:type); 
+ $role:Role(id==$id,role=="water")
+then  
+     LogUtil.log("water die process start  ================="); 
+     
+     LogUtil.log(" liver count "+$liverCount);
+     LogUtil.log(" water count "+$liverCount);
+     $game.setLiverCount($liverCount-1);
+     $game.setWaterCount($waterCount-1);
+     update($game);     
+     #LogUtil.log(" after die game status "+$game);    
+    
+     
+     Message dieMessage=new Message($id,"die",$type);   
+     insert(dieMessage);
+     
+     retract($die);
+end     
+
+#要处理Die的消息.发送给全部的玩家.Die的规则是什么..Kill的话不需要发送,因为玩家已经发送了.
+#投票投死的话才会发送一条消息说谁谁谁被投死了.
+rule 'killer die process count'
+ruleflow-group "game live count"
+when
+ $game:Game($liverCount:liverCount,$killerCount:killerCount);
+ $die:Die($id:id,$type:type); 
+ $role:Role(id==$id,role=="killer")
+then  
+     LogUtil.log("killer die process start  ================="); 
+       LogUtil.log(" liver count "+$liverCount);
+        LogUtil.log(" water count "+$liverCount);
+     
+    $game.setLiverCount($liverCount-1);
+     $game.setKillerCount($killerCount-1);
+     update($game);
+     #LogUtil.log(" after die game status "+$game);
+     
+     
+     Message dieMessage=new Message($id,"die",$type);   
+     insert(dieMessage);
+     
+     retract($die);  
+     LogUtil.log("killer die process process over  ================="); 
+
+end
+
+
+rule 'killer logout  process count'
+ruleflow-group "game live count"
+no-loop true
+when
+ $game:Game($liverCount:liverCount,$killerCount:killerCount);
+ $message:Message($subject:subject,predict=="logout")
+ $role:Role(id==$subject,role=="killer")
+then  
+     LogUtil.log("killer logout game live count start  ================="); 
+      
+     
+    $game.setLiverCount($liverCount-1);
+    $game.setKillerCount($killerCount-1);
+     update($game);
+     LogUtil.log("killer logout game live count over  ================="); 
+
+end
+
+
+
+rule 'water logout  process count'
+ruleflow-group "game live count"
+no-loop true
+when
+ $game:Game($liverCount:liverCount,$waterCount:waterCount);
+ $message:Message($subject:subject,predict=="logout")
+ $role:Role(id==$subject,role=="water")
+then  
+     LogUtil.log("water logout game live count start  ================="); 
+      
+     
+    $game.setLiverCount($liverCount-1);
+    $game.setWaterCount($waterCount-1);
+     update($game);
+     LogUtil.log("water logout game live count over  ================="); 
+
+end
+
+
+
+#当前票数大于等于活着人数的一半 ,如果有人被票死要公布角色的
+rule 'person die by voted'
+ruleflow-group "player status"
+when
+     $game:Game($liverCount:liverCount);
+     $person:Player($id:id,status=="living");
+     $vote:Vote(id==$id)     
+     eval(($vote.getVoters().size() * 2) > $liverCount )
+     Role(id==$id,$role:role)
+     not Die();
+then 
+     LogUtil.log("voted die game process start  ================="); 
+    $person.setStatus("die");   
+    $vote.setVoters(new HashSet());   
+    update($person);   
+      
+    Die die=new Die($id,"vote");
+    insert(die);    
+    
+    Message roleMessage=new Message($id,"role",$role);   
+    insert(roleMessage);
+    
+    LogUtil.log("voted die game process over,should be run water die or kill die  ================="); 
+end
+
+
+#因为分组的原因?
+#insert Message 的时候应该是从头再开始的啊.这个需要再测试一下.
+#这个权限和票数的控制还需要再考虑一下
+rule 'game over status '
+
+ruleflow-group "clear player status"
+when
+     $message:Message(predict=="over")	 
+     $person:Player(status!="unready");
+     
+then 
+     LogUtil.log("game over status start  ================="); 
+    $person.setStatus("unready");   
+    update($person);   
+    
+  
+    LogUtil.log("game over status over  ================="); 
+end
+
+ 
+
+
+
+
+rule 'no user lastword, player die '
+ruleflow-group "player status"
+#这时候被杀的人没有死吧.
+when
+	
+   
+    #kill
+    $message:Message(predict=="time",subject=="day")   
+    $game:Game(status=="lastword")   
+    $room:Room(status=="run")
+    $lastworder:Player($id:id,status=="lastword");
+then     
+     LogUtil.log("no user lastword, player die  start  =============");        
+     $lastworder.setStatus("die");
+     update($lastworder);
+     
+    Die die=new Die($lastworder.getId(),"kill");
+    insert(die);
+     LogUtil.log("no user lastword, player die over =============");    
+end
+
+
+
+
+rule 'user lastword, player die '
+ruleflow-group "player status"
+#这时候被杀的人没有死吧.
+when
+	
+	$message:Message(predict=="lastword")   
+    $game:Game(status=="lastword")     
+    $room:Room(status=="run")
+    $lastworder:Player($id:id,status=="lastword");
+then     
+     LogUtil.log("user lastword, start  =============");        
+     $lastworder.setStatus("die");
+     update($lastworder);
+     
+    Die die=new Die($lastworder.getId(),"kill");
+    insert(die);
+     LogUtil.log("user lastword, over =============");    
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#退出游戏的时候怎么更新Game的Count
+
+
+#当前票数大于等于活着人数的一半
+rule 'game over kill win'
+ruleflow-group "game status"
+when
+    #$operater:Operater()  
+     $game:Game($killerCount:killerCount,$waterCount:waterCount,$recordName:recordName);
+     eval($killerCount >= $waterCount)  
+     $room:Room(status=="run")
+     
+      
+then 
+     LogUtil.log("game over kill win start  ================="); 
+
+    
+    Message gameOver=new Message($recordName,"over","killer win");   
+    insert(gameOver);
+  
+    
+  
+    
+      
+      
+      LogUtil.log("game over kill win over  ================="); 
+end
+
+rule 'game over water win'
+#当前票数大于等于活着人数的一半
+ruleflow-group "game status"
+when
+     #$operater:Operater()  
+     $game:Game($killerCount:killerCount,$waterCount:waterCount);
+     eval($killerCount == 0 )  
+     $room:Room(status=="run")
+      
+then 
+     LogUtil.log("game over water start  ================="); 
+  
+    Message gameOver=new Message("-500","over","water win");   
+    insert(gameOver);    
+  
+      LogUtil.log("game over water over  ================="); 
+end
+
+
+
+
+
+rule 'game over process'
+#当前票数大于等于活着人数的一半
+ruleflow-group "game status"
+no-loop true
+when
+     $operater:Operater()  
+     $message:Message(predict=="over")	
+     $room:Room(status=="run")
+     $game:Game()
+     $roles:ArrayList()
+	      from accumulate(
+	      $role:Role()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($role);),
+	      result(ls)
+	      );
+      
+then 
+     LogUtil.log("game over process  ================="); 
+      Message clear=new Message("-500","retract vote","");  
+      insert(clear);
+    
+    
+      Message dec=new Message("-500","ready decryption","");
+      insert(dec);
+    
+    
+  
+     $operater.setGameOver(true);
+     $room.setStatus("unrun");
+     update($room);
+     
+      
+      LogUtil.log("game over process  ================="); 
+end
+
+
+rule 'decryption process'
+#当前票数大于等于活着人数的一半
+ruleflow-group "decryption"
+no-loop true
+when
+     $operater:Operater()  
+     $message:Message(predict=="ready decryption")	
+    
+     $game:Game()
+     $roles:ArrayList()
+	      from accumulate(
+	      $role:Role()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($role);),
+	      result(ls)
+	      );
+      
+then 
+     LogUtil.log("game decryption process  ================="); 
+    for(Object o:$roles){
+	          Role  r=(Role)o;
+			 Message decryption=new Message(r.getId(),"decryption",r.getRole());  
+             insert(decryption);
+             LogUtil.log("game decryption process  ================= "+decryption); 
+	}
+	retract($message);
+      
+      LogUtil.log("game over process  ================="); 
+end
+
+
+
+
+    
+
+#========================die group over =========================
+
+
+
+
+#拆分.似乎是一条规则对应一个动作是最好的方式,发送Message的东西也需要拆分,这个不对.如果游戏Over了,就不用发送这个消息了.
+
+rule 'person die by voted,send night come '
+ruleflow-group "game phase status"
+#需要先判断游戏是否会结束
+when
+	#conditions	
+    $message:Message(predict=="die",object=="vote")   
+    $game:Game(status=="day") 
+    $room:Room(status=="run")
+then     
+    LogUtil.log("person die by voted,send night come  start=============");  
+     
+
+     String  timeSetting=getRoomSetting($room,"晚上时间","15000");#1*60*1000  
+     Message night=new Message("night","time",timeSetting);   
+     insert(night);   
+     LogUtil.log(" person die by voted,send night come   oveer =============");   
+ 
+end
+
+
+
+
+
+
+#========================game status group start =========================
+rule 'night come '
+ruleflow-group "game phase status"
+#需要先判断游戏是否会结束
+when
+	#conditions	
+    $message:Message(predict=="time",subject=="night")   
+    $game:Game(status=="day") 
+    $room:Room(status=="run")
+then     
+    LogUtil.log("night come start=============");   
+
+    Message clear=new Message("-500","clear vote","");  
+    insert(clear);      
+
+     $game.setStatus("night");     
+     $game.setLastTime(System.currentTimeMillis());     
+   
+     update($game);
+
+
+      String  timeSetting=getRoomSetting($room,"白天时间","30000");#1*60*1000   
+    Message day=new Message("day","send time",timeSetting);
+    String  time=getRoomSetting($room,"晚上时间","15000");#1*60*1000
+    day.setScheduledTime(Long.valueOf(time));   
+     insert(day);    
+    
+   
+     LogUtil.log(" night come  over ============= ,will sent day come time after "+time);   
+ 
+end
+
+
+
+rule 'kill person lastword come'
+ruleflow-group "game phase status"
+when
+    Game(status=="night")
+    $message:Message($subject:subject,$object:object,predict=="kill")  
+    not Message(subject=="lastword",predict=="time")
+    $room:Room(status=="run")
+    Player(id==$object,status=="lastword")
+ 
+then  
+ 
+     LogUtil.log("kill game process start  =================");   
+    String  timeSetting=getRoomSetting($room,"遗言时间","15000");#1*60*1000    
+    Message lastWord=new Message("lastword","time",timeSetting);       
+    insert(lastWord);  
+     Message lastWorder=new Message($object,"status","lastword");       
+    insert(lastWorder);  
+    
+    LogUtil.log("kill game process over  ================="); 
+ 
+end
+
+
+
+
+
+rule 'kill,lastword come '
+ruleflow-group "game phase status"
+#杀了人,进入遗言时间,这个时候把游戏的状态更改为遗言状态,同时,怎么触发权限呢.
+when
+	#conditions	
+    $message:Message(predict=="time",subject=="lastword")   
+    $game:Game(status=="night")   
+    $room:Room(status=="run")
+then     
+        
+     LogUtil.log(" lastword come start =============");   
+ 
+     $game.setStatus("lastword");
+     $game.setLastTime(System.currentTimeMillis());
+      LogUtil.log("lastword come start = time ============= "+$game.getLastTime());   
+     
+     update($game);
+
+    
+    String  timeSetting=getRoomSetting($room,"白天时间","30000");#1*60*1000   
+    Message day=new Message("day","send time",timeSetting);
+    String  time=getRoomSetting($room,"遗言时间","15000");#1*60*1000
+    day.setScheduledTime(Long.valueOf(time));   
+     insert(day);    
+     LogUtil.log(" lastword come over =============");   
+end
+
+
+
+
+
+
+
+
+
+
+rule 'not kill, day come'
+ruleflow-group "game phase status"
+#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+when
+	#no kill	
+    $message:Message(predict=="time",subject=="day")   
+    $game:Game(status=="night")  
+    not Die(type=="kill") 
+    $room:Room(status=="run")
+    
+then     
+        
+       LogUtil.log("no kill day come start =============");   
+
+     $game.setStatus("day");
+      $game.setLastTime(System.currentTimeMillis());
+       LogUtil.log("no kill day come start last time ============= "+$game.getLastTime());   
+     update($game);
+
+       String  timeSetting=getRoomSetting($room,"晚上时间","30000");#1*60*1000   
+    Message night=new Message("night","send time",timeSetting); 
+    String  time=getRoomSetting($room,"白天时间","15000");#1*60*1000
+    night.setScheduledTime(Long.valueOf(time));    
+    insert(night); 
+     LogUtil.log("no kill day come start =============");   
+end
+
+
+
+
+
+
+
+
+rule ' no user lastword, time end ,day come '
+ruleflow-group "game phase status"
+#这时候被杀的人没有死吧.
+when
+	
+   
+    #kill
+    $message:Message(predict=="time",subject=="day")   
+    $game:Game(status=="lastword")   
+    $room:Room(status=="run")
+       
+then     
+     LogUtil.log("kill, day come start  =============");   
+     $game.setStatus("day");
+     $game.setLastTime(System.currentTimeMillis());
+     LogUtil.log("kill, day come start============= "+$game.getLastTime());  
+     update($game);   
+     
+    String  timeSetting=getRoomSetting($room,"晚上时间","30000");#1*60*1000   
+    Message night=new Message(timeSetting,"send time",timeSetting);
+    String  time=getRoomSetting($room,"白天时间","15000");#1*60*1000
+    night.setScheduledTime(Long.valueOf(time));
+  
+    insert(night);
+     LogUtil.log("kill, day come over =============");    
+end
+
+rule '  user lastword over, ,day come '
+ruleflow-group "game phase status"
+#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+when
+	
+   
+    #kill
+    $message:Message(predict=="lastword")   
+    $game:Game(status=="lastword")     
+   $room:Room(status=="run")
+then     
+     LogUtil.log("user send lastword, day come start  =============");   
+       $game.setStatus("day");
+      $game.setLastTime(System.currentTimeMillis());
+      LogUtil.log("user send lastword, day come start  "+$game.getLastTime());
+     update($game);
+
+    String  timeSetting=getRoomSetting($room,"晚上时间","30000");#1*60*1000   
+   Message night=new Message("night","send time",timeSetting);
+    String  time=getRoomSetting($room,"白天时间","15000");
+    night.setScheduledTime(Long.valueOf(time));  
+    insert(night);
+    
+    
+    
+    String  dayTime=getRoomSetting($room,"白天时间","30000");#1*60*1000
+    Message day=new Message("day","time",dayTime); 
+    insert(day); 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     LogUtil.log("user send lastword, day come over =============");    
+end
+
+
+rule ' start, day come'
+ruleflow-group "game phase status"
+#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+when
+	
+     $message:Message(predict=="start")  
+     $game:Game(status=="ready") 
+     $room:Room(status=="run")
+then     
+
+ LogUtil.log("start, day come start =============");
+        
+
+     $game.setStatus("day");
+      $game.setLastTime(System.currentTimeMillis());
+     LogUtil.log("start, day come start "+$game.getLastTime());
+      
+     update($game);
+
+    String  timeSetting=getRoomSetting($room,"晚上时间","30000");#1*60*1000   
+   Message night=new Message("night","send time",timeSetting);
+    String  time=getRoomSetting($room,"白天时间","15000");#1*60*1000
+    night.setScheduledTime(Long.valueOf(time));
+   
+    insert(night); 
+    
+    String  dayTime=getRoomSetting($room,"白天时间","30000");#1*60*1000
+    Message day=new Message("day","time",dayTime);
+    LogUtil.log(day);
+    insert(day); 
+     LogUtil.log("start, day come over ============= will send night message "+night);
+end
+
+
+
+
+
+
+	
+
+
+
+
+
+#========================game status group over =========================
+
+
+
+
+
+#========================right group start =========================
+#用不等于Living来找出所有未准备的玩家.发送权限消息.注意这个时候,用户可能收不到消息.所以必须在游戏开始的时候再判断一下.我得明确的知道,用户是不是都会置成Unready的状态了.
+rule 'game start unready right'
+ruleflow-group "game right"
+no-loop true
+
+when
+
+    $message:Message(predict=="start");   
+    $person:Player($id:id,status!="living")
+    $right:Right(id==$id)
+
+	
+then      
+    LogUtil.log("game start unready right   start ============= ");    
+	$right.setRight(convertString2Set(""));	
+	$right.setIsNotify(false);
+    update($right);      
+    LogUtil.log("game start unready right  over =============");
+end
+
+
+
+
+rule 'day role right'
+ruleflow-group "game right"
+no-loop true
+
+when
+
+    $message:Message(predict=="time");
+   	$game:Game(status=="day")
+    $person:Player($id:id,status=="living")
+    $right:Right(id==$id)
+
+	
+then      
+    LogUtil.log("day role right   start ============= "+$message);
+    
+	$right.setRight(convertString2Set("say,vote"));
+	LogUtil.log(" =============");
+	$right.setIsNotify(false);
+    LogUtil.log(" ============="+$right);
+    update($right);
+    LogUtil.log(" =============");    
+    LogUtil.log("day role right  over =============");
+end
+
+rule 'night killer right'
+ruleflow-group "game right"
+no-loop true
+when
+	$message:Message(predict=="time")
+	$game:Game(status=="night")
+    $person:Player($id:id,status=="living")
+    $role:Role(id==$id,role=="killer")
+    $right:Right(id==$id)
+
+	
+then      
+    LogUtil.log("night killer right start   =============");    
+
+	$right.setRight(convertString2Set("say,kill"));
+	$right.setIsNotify(false);
+	#LogUtil.log($right); 
+    update($right); 
+    LogUtil.log("night killer right  over =============");
+end
+
+
+
+rule 'night water right'
+ruleflow-group "game right"
+no-loop true
+when
+	$message:Message(predict=="time")
+	$game:Game(status=="night")
+    $person:Player($id:id,status=="living")
+    $role:Role(id==$id,role=="water")
+    $right:Right(id==$id)
+
+	
+then      
+    LogUtil.log("night water right start   =============");
+	$right.setRight(new HashSet());
+	$right.setIsNotify(false);
+    update($right); 
+    LogUtil.log("night water right  over =============");
+end
+
+
+#这条规则不对,只对被杀的人是有遗言的,其他 的人都不能说话的
+rule 'die lastword  right'
+ruleflow-group "game right"
+no-loop true
+when
+	$message:Message(subject=="lastword",predict=="time")	
+	$game:Game()
+    $person:Player($id:id,status=="lastword")
+    $right:Right(id==$id)
+then      
+    LogUtil.log("lastworder  right start   =============");     
+     $right.setRight(convertString2Set("lastword"));
+     $right.setIsNotify(false);   
+    update($right);
+    
+    LogUtil.log("lastworder  right  over =============");
+end
+
+
+
+rule 'living lastword  right'
+ruleflow-group "game right"
+no-loop true
+when
+	$message:Message(subject=="lastword",predict=="time")	
+	$game:Game()	
+    $person:Player($id:id,status=="living")
+    $right:Right(id==$id)
+    
+
+then      
+    LogUtil.log("lastword other right start   =============");
+	$right.setRight(new HashSet());
+	$right.setIsNotify(false);
+    update($right); 
+    LogUtil.log("lastword other right  over =============");
+end
+
+
+
+
+
+
+
+rule 'die  right'
+ruleflow-group "game right"
+no-loop true
+when
+	$message:Message($id:subject,predict=="die")	
+	$game:Game()
+	$room:Room(status=="run") 
+    $right:Right(id==$id)
+then      
+    LogUtil.log("die  right  start =============");     
+     $right.setRight(convertString2Set("say"));
+     $right.setIsNotify(false);   
+     update($right);
+ 
+    LogUtil.log("die  right  over =============");
+end
+
+
+
+#分解Action
+rule 'game over right'
+ruleflow-group "game right"
+no-loop true
+when
+	
+	$message:Message(predict=="over")	
+	$room:Room($creater:creater,status=="unrun")
+    $person:Player($id:id)
+    $right:Right(id==$id)
+
+then      
+    LogUtil.log("game over  right start   =============");
+    $right.setRight(convertString2Set("say,ready"));
+    $right.setIsNotify(false); 		
+    update($right);
+   
+    LogUtil.log("game over  right  over =============");
+end
+
+
+
+
+
+
+
+
+
+#========================right group over =========================
+
+
+
+
+
+
+
+
+
+
+#========================message group start =========================
+rule 'say to all person message when night message'
+ruleflow-group "part accepts message"
+#这个比较麻烦了,这个时候的所有人,默认是只有杀手身份的人才有.所以这时候新进来的人是看不到天上的人说话的.
+when
+	#conditions	
+    $message:Message($subject:subject,predict=="say",object=="-500")   
+	 Game(status=="night")
+	 Role(id==$subject,$role:role)
+	 eval($message.getAccepts().size()==0)
+	 
+	  $all_group_ids:HashSet()
+	      from accumulate(
+	      Role($id:id,role==$role)	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+	 
+    $operater:Operater()
+then      
+    LogUtil.log(" say to all person message when night message start  =============");   
+    $message.getAccepts().addAll($all_group_ids);
+    update($message);
+    LogUtil.log("say to all person   message when night message over =============");
+  
+end
+
+
+
+
+
+rule 'killer message'
+ruleflow-group "part accepts message"
+#这个比较麻烦了,这个时候的所有人,默认是只有杀手身份的人才有.
+when
+	#conditions	
+    $message:Message($subject:subject,predict=="kill")   
+	 Game(status=="night"||status=="lastword")
+	 Role(id==$subject,$role:role)
+	 eval($message.getAccepts().size()==0)
+	 
+	  $all_group_ids:HashSet()
+	      from accumulate(
+	      Role($id:id,role==$role)	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+	 
+    $operater:Operater()
+then      
+    LogUtil.log(" killer message  start  =============");   
+    $message.getAccepts().addAll($all_group_ids);
+    update($message);
+    LogUtil.log("killer message over =============");
+  
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rule 'say to on person message when night message'
+ruleflow-group "part accepts message"
+#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+when
+	#conditions	
+    $message:Message($subject:subject,predict=="say",object!="-500")   
+	 Game(status=="night")
+	 eval($message.getAccepts().size()==0)
+    $operater:Operater()
+then      
+    LogUtil.log(" say to one person message when night message start  =============");   
+    $message.getAccepts().add($message.getObject());
+    $message.getAccepts().add($subject);
+    update($message);
+    LogUtil.log("say to one person message when night message over =============");
+  
+end
+
+
+
+rule 'assign water role message'
+ruleflow-group "part accepts message"
+when
+	#conditions
+	$game:Game()	
+    $message:Message(subject=="water",predict=="assign")
+    eval($message.getAccepts().size()==0)
+    $operater:Operater()
+then      
+    LogUtil.log(" assign water role message start  =============");   
+      LogUtil.log($message); 
+    $message.getAccepts().add($message.getObject());
+    update($message);
+    LogUtil.log("assign water role message over =============");
+  
+end
+
+
+rule 'assign killer role message'
+ruleflow-group "part accepts message"
+when
+	#conditions
+	$game:Game()	
+    $message:Message(subject=="killer",predict=="assign")
+    eval($message.getAccepts().size()==0)
+    $operater:Operater()
+    
+     $all_group_ids:HashSet()
+	      from accumulate(
+	      Role($id:id,role=="killer")	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+then      
+    LogUtil.log(" assign killer role message start  =============");   
+      LogUtil.log($message); 
+    $message.getAccepts().addAll($all_group_ids);
+    update($message);
+    LogUtil.log("assign killer role message over =============");
+  
+end
+
+
+
+
+
+rule 'time operater '
+ruleflow-group "time of operater"
+when
+	#conditions	
+    $message:Message($subject:subject,predict=="send time")
+    $room:Room($rid:id,status=="run")
+    $operater:Operater()
+then      
+    LogUtil.log("time operater  start  =============");   
+    
+    $message.setPredict("time");
+    $message.setWhere($rid);
+
+
+	$operater.getTimerMessages().add($message);	
+	
+
+    retract($message);
+    LogUtil.log("time operater over =============,will sent message after "+$message.getTime());
+  
+end
+
+
+
+
+
+
+
+rule 'game player query'
+ruleflow-group "query"
+when
+	#conditions
+    $message:Message($subject:subject,predict=="query")
+    $room:Room(status=="run")
+    $allLogins:ArrayList()
+	      from accumulate(
+	      $person:Player()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($person);),
+	      result(ls)
+	      );
+	      
+	 $votes:ArrayList()
+	      from accumulate(
+	      $vote:Vote()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($vote);),
+	      result(ls)
+	      );
+	$game:Game($status:status);  
+    $operater:Operater()
+    $right:Right(id==$subject)
+    $role:Role(id==$subject)
+    
+    
+then      
+
+	 LogUtil.log("get player query info =================");	 
+      Map m=new HashMap();
+      m.put("room",$room);
+      m.put("person",$allLogins);
+      m.put("right",$right);
+      setRemainTime($status,$game,$room) ; 
+      m.put("game",$game);      
+      m.put("role",$role); 
+       m.put("votes",$votes);  
+      JSONObject json4=JSONObject.fromObject(m);        
+      $operater.setSnapshots(json4.toString());     
+      retract($message);   
+	  LogUtil.log("get player query info over =================");
+end
+
+
+
+
+
+
+
+rule 'game unplayer query'
+ruleflow-group "query"
+when
+	#conditions
+    $message:Message($subject:subject,predict=="query")
+   $room:Room(status=="run")
+    $allLogins:ArrayList()
+	      from accumulate(
+	      $person:Player()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($person);),
+	      result(ls)
+	      );
+	      
+	 $votes:ArrayList()
+	      from accumulate(
+	      $vote:Vote()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($vote);),
+	      result(ls)
+	      );
+	$right:Right(id==$subject)
+	$game:Game($status:status);  
+    $operater:Operater() 
+    not Role(id==$subject)
+    
+    
+then      
+	 LogUtil.log("get unplayer query info =================");  
+      Map m=new HashMap();
+      m.put("room",$room);
+      m.put("person",$allLogins);   
+      
+     setRemainTime($status,$game,$room) ;
+      m.put("game",$game);   
+       m.put("votes",$votes);  
+        m.put("right",$right);    
+      JSONObject json4=JSONObject.fromObject(m);
+        
+      $operater.setSnapshots(json4.toString());     
+      retract($message);
+    	#actions
+	LogUtil.log("get unplayer query info over =================");
+end
+
+
+
+
+
+
+
+
+#========================message group over =========================
+
+
+
+
+
+
+
+  

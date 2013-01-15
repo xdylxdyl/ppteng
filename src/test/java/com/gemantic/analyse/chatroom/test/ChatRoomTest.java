@@ -2,15 +2,12 @@ package com.gemantic.analyse.chatroom.test;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.json.JSONException;
-import org.json.JSONTokener;
 import org.junit.Test;
 
 import com.gemantic.killer.common.model.Message;
@@ -43,25 +40,7 @@ public class ChatRoomTest {
 		System.out.println(url);
 	}
 	
-	@Test
-	public void testUDecode() throws ParseException, JSONException {   
-	    String str = "make in \u4e2d\u56fd";   
-	    for(char ch : "make in 长".toCharArray()) {   
-	        if(ch > 128) {   
-	            System.out.print("\\u"+Integer.toHexString(ch));   
-	        } else {   
-	            System.out.print(ch);   
-	        }   
-	    }   
-	    System.out.println();   
-	    System.out.println(str);   
-	    str = "make in \\u4e2d\\u56fd";   
-	  
-	    String v = "'"+str+"'";   
-	    System.out.println(v);   
-	  
-	    System.out.println(new JSONTokener(v).nextValue().toString());   
-	}  
+	
 	
 	@Test
 	public void testCopy() throws CloneNotSupportedException{
