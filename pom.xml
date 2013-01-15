@@ -324,6 +324,12 @@
 			<version>2.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.gemantic</groupId>
+			<artifactId>dal-dao</artifactId>
+			<version>0.0.14</version>
+		</dependency>
+
 	</dependencies>
 
 
