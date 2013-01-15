@@ -8,12 +8,12 @@
 	<name>analyse-chatroom-home</name>
 	<description>analyse-chatroom-home</description>
 
-	
+
 	<properties>
 		<spring.version>2.5.6</spring.version>
 		<tuscany.version>1.4</tuscany.version>
 		<scallop.version>1.4.3</scallop.version>
-		<hibernate.annotations.version>3.4.0.GA</hibernate.annotations.version>		
+		<hibernate.annotations.version>3.4.0.GA</hibernate.annotations.version>
 		<gemantic.workflow.lib.version>0.2</gemantic.workflow.lib.version>
 		<gemantic.dashboard_client.lib.version>0.1</gemantic.dashboard_client.lib.version>
 		<gemantic.commons.core.lib.version>1.1</gemantic.commons.core.lib.version>
@@ -29,7 +29,7 @@
 
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -318,6 +318,12 @@
 			<version>3.1.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+
 	</dependencies>
 
 
@@ -379,21 +385,21 @@
 	<scm>
 		<developerConnection>scm:svn:https://svn.gemantic.com/gemantic/tags/analyse-chatroom-home/analyse-chatroom-home.0.1.1</developerConnection>
 	</scm>
-	
-	
-	
-    <distributionManagement>
-        <repository>
-            <id>nexus</id>
-            <name>releases</name>
-            <url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
-        </repository>
 
-        <snapshotRepository>
-            <id>nexus</id>
-            <name>snapshots</name>
-            <url>http://42.121.113.70:8081/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
+
+
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>releases</name>
+			<url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>nexus</id>
+			<name>snapshots</name>
+			<url>http://42.121.113.70:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
