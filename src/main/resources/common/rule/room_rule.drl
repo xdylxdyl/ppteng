@@ -11,13 +11,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 import com.gemantic.common.drools.util.LogUtil;
-
+import  com.gemantic.common.util.json.GsonUtil;
 
 
 
@@ -590,6 +589,9 @@ end
 
 
 
+
+
+
 rule 'query'
 ruleflow-group "snapshot"
 #什么时候去判断要执行Snapshot呢?
@@ -614,8 +616,8 @@ then
       m.put("room",$room);
       m.put("person",$allLogins);  
       m.put("right",$right); 
-      JSONObject json4=JSONObject.fromObject(m);
-      $operater.setSnapshots(json4.toString());
+
+      $operater.setSnapshots(GsonUtil.toJson(m));
     	#actions
 	LogUtil.log("room get query info over =================");
 end

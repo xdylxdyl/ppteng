@@ -8,8 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
+import  com.gemantic.common.util.json.GsonUtil;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang.math.RandomUtils;
@@ -122,7 +121,7 @@ then
        m.put("roles",$roles);   
        m.put("votes",$votes);  
        m.put("time",System.currentTimeMillis());      
-      JSONObject json4=JSONObject.fromObject(m); 
+     
       JobLogger.logMessages($game.getRecordName(), $operater.getNextMessages());
       //JobLogger.log($game.getRecordName(),json4.toString());
      retract($snapshot);
@@ -1665,8 +1664,8 @@ then
       m.put("game",$game);      
       m.put("role",$role); 
        m.put("votes",$votes);  
-      JSONObject json4=JSONObject.fromObject(m);        
-      $operater.setSnapshots(json4.toString());     
+          
+      $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);   
 	  LogUtil.log("get player query info over =================");
 end
@@ -1714,9 +1713,9 @@ then
       m.put("game",$game);   
        m.put("votes",$votes);  
         m.put("right",$right);    
-      JSONObject json4=JSONObject.fromObject(m);
         
-      $operater.setSnapshots(json4.toString());     
+
+      $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);
     	#actions
 	LogUtil.log("get unplayer query info over =================");

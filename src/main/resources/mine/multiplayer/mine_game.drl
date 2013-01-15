@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
+import com.gemantic.common.util.json.GsonUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang.math.RandomUtils;
@@ -643,10 +643,8 @@ then
       } 
       $bombPic.setUser(bomb);
       m.put("bomb",$bombPic); 
-      
        
-      JSONObject json4=JSONObject.fromObject(m);        
-      $operater.setSnapshots(json4.toString());     
+      $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);   
 	  LogUtil.log("get player query info over =================");
 end
