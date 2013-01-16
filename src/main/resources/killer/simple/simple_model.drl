@@ -17,8 +17,7 @@ declare Game
 	startAt:Long
 	recordName:String	
 end
-#voters,投我的人
-#vote,我投的人
+
 declare Vote
 	id: String	
 	voters: Set
@@ -26,7 +25,7 @@ declare Vote
 end
 
 
-#KillVote 杀手投票
+
 declare KillVote
 	id: String	
 	kill:String

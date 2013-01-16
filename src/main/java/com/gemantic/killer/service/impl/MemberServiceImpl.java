@@ -64,6 +64,9 @@ public class MemberServiceImpl implements MemberService {
 		for (QueryResultsRow row : results) {
 			Set persons = (Set) row.get("ids");
 			for (Object person : persons) {
+				if(person==null){
+					continue;
+				}
 				ids.add(Long.valueOf((String) person));
 			}
 			log.info(persons);

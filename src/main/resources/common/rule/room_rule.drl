@@ -23,7 +23,7 @@ import  com.gemantic.common.util.json.GsonUtil;
 
 #========================action group start =========================
 
-#有新消息,产生对应的Model
+
 rule 'create room'
 ruleflow-group "action"
 when
@@ -168,10 +168,7 @@ end
 
 
 
-#有新消息,产生对应的Model
-/*
-*必须是不能重复登录的. 如果已经存在的话,就只需要新增加一个查询返回就可以了
-*/
+
 rule 'login'
 ruleflow-group "action"
 when
@@ -244,9 +241,7 @@ end
 
 
 
-/*
-*退出房间
-*/
+
 rule 'logout clear person'
 ruleflow-group "logout action"
 when
@@ -263,9 +258,7 @@ then
 end
 
 
-/*
-* 全不在清空房间
-*/
+
 rule 'logout clear room'
 ruleflow-group "logout action"
 when
@@ -286,9 +279,7 @@ end
 
 
 
-/*
-*人不在的话,清除数据
-*/
+
 rule 'logout clear right'
 ruleflow-group "logout action"
 when
@@ -313,9 +304,7 @@ end
 
 
 
-/*
-*准备
-*/
+
 rule 'ready'
 ruleflow-group "action"
 no-loop true
@@ -342,9 +331,7 @@ then
      LogUtil.log("ready over =================");
 end
 
-/*
-*踢人
-*/
+
 rule 'kick'
 ruleflow-group "action"
 when
@@ -410,7 +397,7 @@ end
 
 rule 'game over '
 ruleflow-group "generate message"
-#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+
 when
 	#conditions	
     $message:Message(predict=="over")
@@ -441,7 +428,7 @@ end
 
 rule 'right message'
 ruleflow-group "generate message"
-#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+
 when
 
    $right:Right($id:id,isNotify==false)
@@ -462,7 +449,7 @@ end
 
 rule 'say to one person message'
 ruleflow-group "part accepts message"
-#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+
 when
 	#conditions	
     $message:Message($subject:subject,predict=="say",object!="-500")   
@@ -479,7 +466,7 @@ end
 
 rule 'admin kick message'
 ruleflow-group "part accepts message"
-#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+
 when
 	#conditions	
     $message:Message($subject:subject,predict=="kick",$object:object)   
@@ -497,7 +484,7 @@ end
 
 rule 'right  message'
 ruleflow-group "part accepts message"
-#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+
 when
 	#conditions	
     $message:Message($subject:subject,predict=="right",$object:object)   
@@ -533,8 +520,7 @@ end
 
 rule 'all accepts message'
 ruleflow-group "all accepts message"
-#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
-#为什么投票的时候 走这里会报错.
+
 when
 	#conditions	
     $message:Message($subject:subject,$object:object,$accepts:accepts)    
@@ -557,13 +543,12 @@ then
 end
 
 
-#原来只要是一个组.不管是在哪一个Drools文件里.只要在Session里.都可以执行的.
+
 
 
 rule 'next operater '
 ruleflow-group "next of operater"
-#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
-#这个时候会把定时的时间给修改掉,怎么样才能避免这个问题呢.Message加一个定时的属性?这个时候把定期发送的Message也放到Operater了.怎么能让这个Message里不包括呢.
+
 when
 	#conditions	
     $message:Message()
@@ -582,8 +567,6 @@ then
   
 end
 
-#query分成两种.一种是旁观的人,旁观的人什么权限都不知道.一种是游戏中的人.游戏中的人需要知道自己的权限.还有一种就是需要知道所有人的权限,这个才是真正的快照.
-#query还是需要单独的写,Room里不用这么做.因为游戏还没有开.不需要知道以前的东西.
 
 
 
@@ -594,7 +577,7 @@ end
 
 rule 'query rule'
 ruleflow-group "snapshot"
-#什么时候去判断要执行Snapshot呢?
+
 when
 	#conditions
      Message($subject:subject,predict=="query")

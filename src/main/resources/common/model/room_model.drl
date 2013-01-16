@@ -6,8 +6,6 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 
-#必须有状态吧.没有状态就必须引入Game.每一个Game的状态又很难处理.每一个房间里有多少人.这些都应该是Query来处理的吧.
-#看来又要做不少重构的东西
 declare Room
     creater:String
 	name: String
