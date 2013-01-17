@@ -855,7 +855,7 @@ $register(
 					// 所在行业控件排序
 					idst_childs.get(0).attr('name','workInfos[' + i + '].businessCode');
 					idst_childs.get(1).attr('name','workInfos[' + i + '].subBusinessCode');
-					//idst_childs.get(2).attr('name','workInfos[' + i + '].position');
+					//idst_childs.get(2).attr('name','workInfos[' + img + '].position');
 					// 工作类别控件排序
 					job_childs.get(0).attr('name','workInfos[' + i + '].position');
 					job_childs.get(1).attr('name','workInfos[' + i + '].subPosition');

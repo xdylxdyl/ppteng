@@ -136,7 +136,7 @@ function doit() {
 	$.comet.init("http://10.0.0.40:8000");
 	$.comet.subscribe("/test/1", appendChatMsg);
 	//var count = (usecount+1);
-	//for (var i=0; i<count; i++) {
+	//for (var img=0; img<count; img++) {
 		//var requestbody = "My name is jQuery-Test (#"+(++usecount)+")";
 		//jQuery.ajaxSetup({error:handleError});
 		//jQuery.post(

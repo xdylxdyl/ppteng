@@ -104,8 +104,8 @@ $register('sohu.album.Divert', function(){
 		},
 		
 		//check: function(){
-			//this._selected.each(function(i){
-				//var el = this.element.down(i).elements()[0];
+			//this._selected.each(function(img){
+				//var el = this.element.down(img).elements()[0];
 				//el.checked = 'checked';
 			//}.bind(this));
 		//},

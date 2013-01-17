@@ -85,7 +85,7 @@
 			var _len = this.currentData.length;
 			var _html = [];
 			for (var i = index; i < index + 32; i++) { // var
-														// i=1;i<=this.currentData.length;i++
+														// img=1;img<=this.currentData.length;img++
 				if (i > _len) {
 					_html.push("</div>")
 					return _html;
@@ -178,7 +178,7 @@
 			var tag = '', imgInfo = this._Ubbs[ubb], name = imgInfo[0], title = imgInfo[1], index = name
 					.substring(0, name.indexOf('.'));
 
-			tag = '<img src="http://sns.sohu.com/r/i/emots/base/' + index
+			tag = '<img src="http://sns.sohu.com/r/img/emots/base/' + index
 					+ '.gif" title="' + title + '"/>';
 			return tag;
 		},

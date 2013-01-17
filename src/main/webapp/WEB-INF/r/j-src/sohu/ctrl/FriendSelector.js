@@ -20,7 +20,7 @@ $register(
 					isButton:true, ///是否显示好友选择器按钮
 					isGroup:true,///是否显示好友分组，isButton=true有效
 					except:null,///启动屏蔽好友,此功能暂时没法做，需要讨论
-					autoSubmit:null,///选择好友后，执行函数,为函数格式，如function(i){}
+					autoSubmit:null,///选择好友后，执行函数,为函数格式，如function(img){}
 					maxNum:0,///复选器选择用户人数上限，0为无上限
 					tipWidth: 320, ///tip提示框的默认宽度
 					defaultValue:null///预选的好友,数组格式[123,432,45]

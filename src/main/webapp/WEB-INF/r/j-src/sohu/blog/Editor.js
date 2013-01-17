@@ -1811,7 +1811,7 @@ var Config = {};
 Config.tool = {};
 
 // 资源路径
-Config.tool.rPath = '/r/pages/blog/c/i/editor/';
+Config.tool.rPath = '/r/pages/blog/css/img/editor/';
 
 //工具栏中的工具配置信息
 Config.tool.data = 

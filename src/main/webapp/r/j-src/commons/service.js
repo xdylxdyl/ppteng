@@ -311,8 +311,8 @@ roomService.info = function() {
 
         var uids = "";
         for (var i = 0; i < data.length; i++) {
-            /* person += "<li id=" + data[i].id
-             + "><a class='" + data[i].status
+            /* person += "<li id=" + data[img].id
+             + "><a class='" + data[img].status
              + "'></a><span></span></li>";*/
             uids += "&uids=" + data[i].id;
         }

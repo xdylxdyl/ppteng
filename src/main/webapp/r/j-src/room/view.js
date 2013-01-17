@@ -61,7 +61,7 @@ var killGameAreaView = {
             obj = "";
         }
         //say出现的位置 这个.话说.原来死人说的话是JS控制的么
-        //1、死人（dead_area）——a、游戏结束后；b、游戏未结束时。 2、活人——a、白天； b、遗言时； c、晚上（killer_area）。
+        //1、死人（dead_area）——a、游戏结束后；b、游戏未结束时。 2、活人——a、白天； b、遗言时； css、晚上（killer_area）。
         var player = playerService.getPlayer(id);
         var place = "normal";
         if (playerStatus.die == player.status) {

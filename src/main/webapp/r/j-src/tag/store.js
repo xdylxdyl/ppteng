@@ -67,7 +67,7 @@ function getStockDetailAgent(symbols) {
 function storeStockDetailToLcoal(details) {
     console.log("accept details of stock ");
     var stockDetailName = "stockDetail";
-    /*  jQuery.each(details, function(i, value) {
+    /*  jQuery.each(details, function(img, value) {
      //事先对Match中需要匹配的内容做转换?
      value.name=RegExp.escape(value.name);
      }

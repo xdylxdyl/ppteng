@@ -540,7 +540,7 @@ $register('sohu.core.*', function() {
 			IE's special iframe-based method of handling history changes.*/
 			ignoreLocationChange: null,
 		
-			/*Private: A flag that indicates that we should fire a history change event when we are ready, i.e. after we are initialized and
+			/*Private: A flag that indicates that we should fire a history change event when we are ready, img.e. after we are initialized and
 			we have a history change listener. This is needed due to an edge case in browsers other than IE; if you leave a page entirely
 			then return, we must fire this as a history change event. Unfortunately, we have lost all references to listeners from earlier,
 			because JavaScript clears out.*/

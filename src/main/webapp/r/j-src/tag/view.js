@@ -293,7 +293,7 @@ $("#test").click(function(e) {
     var content = JSON.stringify(tree);
     console.log(content);
     var object = deserialize( jQuery.parseJSON(content));
-    var ls = object.search("i");
+    var ls = object.search("img");
     console.log("success " + JSON.stringify(tree));
     console.log("search result " + ls);
 

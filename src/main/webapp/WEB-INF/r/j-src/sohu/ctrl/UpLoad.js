@@ -17,7 +17,7 @@ $register(
 		this.form.attr('action',options.action);
 		this.form.attr('method','POST');
 		this.form.attr('enctype','multipart/form-data');
-		this.fileFilter=new RegExp("."+options.fileFilter.join("|."),'i');
+		this.fileFilter=new RegExp("."+options.fileFilter.join("|."),'img');
 		this.callback=options.callback||"";
 		//this.callback=options.callback||function(){}
 		this.instName=options.name||"";

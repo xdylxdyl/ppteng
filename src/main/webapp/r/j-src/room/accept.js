@@ -172,7 +172,7 @@ killController.setVote = function(message) {
 
 };
 killController.clearVote = function() {
-    $("nav li i").text("");
+    $("nav li img").text("");
 };
 
 killController.assign = function(message) {

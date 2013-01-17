@@ -57,39 +57,39 @@ roomInfo.success = function(info) {
 	}
 	
 	//载入玩家列表
-	for (var i = 0; i < list.length; i++) {
-		var uid = list[i].id;
-		$(".listitem ul").append("<li id='"+ list[i].id +"'>"+ list[i].name +"</li>");
+	for (var img = 0; img < list.length; img++) {
+		var uid = list[img].id;
+		$(".listitem ul").append("<li id='"+ list[img].id +"'>"+ list[img].name +"</li>");
 		//载入玩家状态和身份
 		var state = "";
 		var identity = "";
-		if (list[i].ready) {
+		if (list[img].ready) {
 			state = "ready";
 			writeState(uid, state, identity);
 			//玩家名字加入select列表
-			$("#vote, #kill").append("<option value='"+ list[i].id +"'>"+list[i].name+"</option>");
-			if (list[i].id == $("#uid").val()) {
+			$("#vote, #kill").append("<option value='"+ list[img].id +"'>"+list[img].name+"</option>");
+			if (list[img].id == $("#uid").val()) {
 				$("#ready").hide();
 				$("#ready").next().text("已准备就绪");	
 			}
-		} else if (list[i].dead) {
+		} else if (list[img].dead) {
 			state = "dead";
 			writeState(uid, state, identity);
-		} else if (list[i].waiting) {
+		} else if (list[img].waiting) {
 			state = "waiting";
 			writeState(uid, state, identity);
-		} else if (list[i].killer) {
+		} else if (list[img].killer) {
 			identity = "killer";
 			writeState(uid, state, identity);
-		} else if (list[i].killed) {
+		} else if (list[img].killed) {
 			identity = "killed";
 			writeState(uid, state, identity);
 		} else {
 			writeState(uid, state, identity);
 		}
 		//本玩家资源
-		if (list[i].id == $("#uid").val()) {
-			var rights = list[i].right;
+		if (list[img].id == $("#uid").val()) {
+			var rights = list[img].right;
 			var strLength = rights.length;
 			for (var j = 0; j < strLength; j++) {
 				decideRights.toSwitch(rights[j]);

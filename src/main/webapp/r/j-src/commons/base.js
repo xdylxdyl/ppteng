@@ -206,7 +206,7 @@ resolvePredict.right = function(message) {
         rightView.noRight();//先禁用所有的权限,再打开.
 
         $.each(arr, function (i, val) {
-            //console.log(("process data " + arr[i]));
+            //console.log(("process data " + arr[img]));
             rightView.branch(jQuery.trim(arr[i]));
         });
 

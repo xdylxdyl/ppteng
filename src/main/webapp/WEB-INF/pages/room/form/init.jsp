@@ -31,7 +31,7 @@
 				<option value="simple_1.0"
 					<c:if test="${room.version=='simple_1.0'}">selected="selected"</c:if>>简化</option>
 				<%-- <option value="color_game_1.0"
-					<c:if test="${room.version=='color_game_1.0'}">selected="selected"</c:if>>猜颜色</option>--%>
+					<css:if test="${room.version=='color_game_1.0'}">selected="selected"</css:if>>猜颜色</option>--%>
 				<option value="mine_1.0"
 					<c:if test="${room.version=='mine_1.0'}">selected="selected"</c:if>>扫雷</option> 
 			</select>
@@ -39,9 +39,9 @@
 		<br />
 
 		<%--设置:--%>
-		<%--<c:forEach items="${room.setting}" var="entry"> --%>
+		<%--<css:forEach items="${room.setting}" var="entry"> --%>
 		<%--<spring:bind path="${entry.key}"> </spring:bind>: <spring:bind path="${entry.value}"></spring:bind>--%>
-		<%--</c:forEach>--%>
+		<%--</css:forEach>--%>
 
 		<br />
 		<input class="submit" type="submit" />

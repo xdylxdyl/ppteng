@@ -254,8 +254,8 @@ $register("sohu.album.PhotoSelector", function(){
 		
 		_loadtext: '<div class="load-page"></div>',
 		
-		_tempBox: new kola.Template('<div class="photoSizeSwitch"><a class="sizeSwitch-small on" title="小图" href="javascript:void(0)"><img src="/r/apps/blog/c/i/switch75.gif"></a><a class="sizeSwitch-large" href="javascript:void(0)" title="大图"><img src="/r/apps/blog/c/i/switch130.gif"></a></div><p>选择 <select class="select">#{album}</select> 专辑内的照片</p><ul class="fix smallBox">#{photo}</ul>'),
+		_tempBox: new kola.Template('<div class="photoSizeSwitch"><a class="sizeSwitch-small on" title="小图" href="javascript:void(0)"><img src="/r/apps/blog/css/img/switch75.gif"></a><a class="sizeSwitch-large" href="javascript:void(0)" title="大图"><img src="/r/apps/blog/css/img/switch130.gif"></a></div><p>选择 <select class="select">#{album}</select> 专辑内的照片</p><ul class="fix smallBox">#{photo}</ul>'),
 			 
-		_tempLi: new kola.Template('<li id="PS_pid_#{id}"><i></i><a href="javascript:void(0)"><img src="http://sns.sohu.com/r/i/space.gif" style="background-image:url(#{url})" title="#{desc}" alt="#{desc}"/></a></li>')
+		_tempLi: new kola.Template('<li id="PS_pid_#{id}"><img></img><a href="javascript:void(0)"><img src="http://sns.sohu.com/r/img/space.gif" style="background-image:url(#{url})" title="#{desc}" alt="#{desc}"/></a></li>')
 	}); 
 },'sohu.core.*');

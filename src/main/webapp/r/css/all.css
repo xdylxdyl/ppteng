@@ -168,7 +168,7 @@ body {
     top: 0;
     width: 350px;
     height: 250px;
-    background: url("../i/loading.gif") 50% 50% no-repeat rgba(200, 200, 200, 0.5);
+    background: url("../img/loading.gif") 50% 50% no-repeat rgba(200, 200, 200, 0.5);
 }
 
 

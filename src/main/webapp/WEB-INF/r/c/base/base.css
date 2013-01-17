@@ -538,7 +538,7 @@ iframe.maskIframe{display:none;_display:block;position:absolute;width:100%;heigh
 
 	/*.mod-rounded{-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;}
 	.mod-rounded>.mDc{display:block;}
-		.mod-rounded>.mDc *{display:block;position:absolute;z-index:1;height:5px;width:5px;background:url(i/rc-r5-9c9c9c.gif) no-repeat;font:1px/1px Arial;}
+		.mod-rounded>.mDc *{display:block;position:absolute;z-index:1;height:5px;width:5px;background:url(img/rc-r5-9c9c9c.gif) no-repeat;font:1px/1px Arial;}
 		.mod-rounded>.mDc .tl{top:-1px;left:-1px;background-position:0 0;}
 		.mod-rounded>.mDc .tr{top:-1px;right:-1px;background-position:100% 0;}
 		.mod-rounded>.mDc .br{right:-1px;bottom:-1px;background-position:100% 100%;}
