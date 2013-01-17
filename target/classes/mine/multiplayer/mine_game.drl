@@ -8,8 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
+import com.gemantic.common.util.json.GsonUtil;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang.math.RandomUtils;
@@ -41,14 +40,13 @@ import com.gemantic.common.drools.util.LogUtil;
 
 
 
-#这个是按动作来分的.其实也应该按结果来分.分成角色初始化的规则.权限规则,
 rule 'bomb assign'
 ruleflow-group "game init"
 when
 	
     $message:Message(predict=="start",$time:time)
     
-    #找出所有的准备的玩家,update person 会导致...规则重新执行啊
+    
     $allReadys:ArrayList()
 	      from accumulate(
 	      $person:Player(status=="ready")	     
@@ -60,7 +58,6 @@ when
     $room:Room(status=="unrun")    
      $operater:Operater()
 then      
-	#和分配角色类似.但是却是要分配雷的数目
 	LogUtil.log("bomb assign  =================");
 	LogUtil.log($allReadys);
 	 int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));#1*60*1000  
@@ -70,7 +67,7 @@ then
      String systemBombPic=BombUtil.assign(rowCount,columnCount,bombCount);
      LogUtil.log(" systemBombPic ================= "+systemBombPic);
      BombPic bombPic=new BombPic(systemBombPic,"");
-     insert(bombPic);//这个是固定不变的
+     insert(bombPic);
      
 	
 	String	rname=String.valueOf(RandomUtils.nextLong());	
@@ -94,7 +91,7 @@ then
 end
 
 
-#这个是按动作来分的.其实也应该按结果来分.分成角色初始化的规则.权限规则,
+
 rule 'clear tag'
 ruleflow-group "game init"
 when
@@ -104,7 +101,7 @@ when
     $operater:Operater()
     $tag:Tag()   
 then      
-	#和分配角色类似.但是却是要分配雷的数目
+
 	LogUtil.log("clear tag start  =================");	
     retract($tag);
 
@@ -133,13 +130,13 @@ then
 	LogUtil.log(" =============");
 	$right.setIsNotify(false);
     LogUtil.log(" ============="+$right);
-    update($right);#最烦的就是这个啊.Update之后又要重新执行.
+    update($right);
     LogUtil.log(" =============");    
     LogUtil.log("start game right  over =============");
 end
 
 
-#分解Action
+
 rule 'game over right'
 ruleflow-group "game right"
 no-loop true
@@ -155,7 +152,7 @@ then
     LogUtil.log("game over  right start   =============");
     $right.setRight(convertString2Set("say,ready"));
     $right.setIsNotify(false); 		
-    update($right);#最烦的就是这个啊.Update之后又要重新执行.
+    update($right);
    
     LogUtil.log("game over  right  over =============");
 end
@@ -169,13 +166,7 @@ end
 
 
 #========================action group start =========================
-/*支持以下几种动作.
-1.单击.如果是雷就爆炸.如果不是雷,就显示出Pane的数字.如果数字为0.就自动展示周围的Pane
 
-
-*/
-
-#单击Pane,单击完之后才能判断是否可以双击 ,应该是用户每占击一次.我都要存一个Tag的对象.最初想的是用一个字符串来处理.是否考虑加入到字符串呢?是字符串快一些.还是规则快一些?
 rule 'click pane'
 ruleflow-group "user action"
 no-loop true
@@ -209,7 +200,7 @@ then
 end
 
 
-#tag Pane 未标记过
+#tag Pane 
 rule 'tag pane'
 ruleflow-group "user action"
 no-loop true
@@ -270,7 +261,7 @@ end
 
 
 
-#double Pane.周围必须全部是空或标为雷,才可以点击.否则不能点
+
 rule 'double click pane'
 ruleflow-group "user action"
 
@@ -294,7 +285,7 @@ then
     for(Pair p:roundPanes){
        LogUtil.log(p);
        String tag=BombUtil.clickOpen(p,$system,rowCount,columnCount);     
-       Pane pane=new Pane(BombUtil.convertPair2String(p),p,tag,"" ); //怎么才能知道有没有用户的标记呢.
+       Pane pane=new Pane(BombUtil.convertPair2String(p),p,tag,"" ); 
     
        Click click=new Click($subject,tag,BombUtil.convertPair2String(pane.getCoordinate()));
        insert(click);  
@@ -311,7 +302,7 @@ end
 
 
 
-#点到非空数字了,周围有雷的.必须是用户没有标记为Tag的?
+
 rule 'click number'
 ruleflow-group "click action"
 
@@ -338,7 +329,7 @@ then
 end
 
 
-#点到空数字了,周围没有雷的
+
 rule 'click zero number'
 ruleflow-group "click action"
 when
@@ -380,7 +371,7 @@ end
 
 
 
-#点到雷了
+
 rule 'click mine'
 ruleflow-group "game status"
 
@@ -395,7 +386,7 @@ when
     
 then
     LogUtil.log("click mine start  ================="); 
-    //游戏结束了   
+  
      retract($click);
                
      Message tagMessage=new Message($pid,"mine","bomb"); 
@@ -417,7 +408,7 @@ end
 
 
 
-#用户已经点开过的,直接销毁Click
+
 rule 'taged click zero number'
 ruleflow-group "clear click"
 when
@@ -432,7 +423,7 @@ then
 end
 
 
-#游戏结束.赢了
+
 rule 'complete'
 ruleflow-group "game status"
 
@@ -445,8 +436,7 @@ when
     
 then
     LogUtil.log("click mine start  ================="); 
-    //游戏结束了  
-   
+
      Message gameOverMessage=new Message($recordName,"over","win"); 
      insert(gameOverMessage); 
    
@@ -503,7 +493,7 @@ end
 
 
 
-#游戏结束.赢了
+
 rule 'game over process'
 ruleflow-group "game status"
 
@@ -518,7 +508,7 @@ when
     
 then
     LogUtil.log("game over processstart  ================="); 
-    //游戏结束了  
+    
      retract($game);
      retract($count);
      retract($bombPic);   
@@ -572,18 +562,18 @@ end
 
 rule 'time operater '
 ruleflow-group "time of operater"
-#基本上所有的命令都是发给全部人的,除了几个特别的需要处理的(Say:单个人,杀人) 这个可以考虑要不要是用流程呢.这个跟业务逻辑相关.不能统一写到这里的.
+
 when
 	#conditions	
     $message:Message($subject:subject,predict=="send time")
-    $room:Room($rid:id,status=="run")//如果是不运行了.就没有必要发送Timer信息了
+    $room:Room($rid:id,status=="run")
     $operater:Operater()
 then      
     LogUtil.log("time operater  start  =============");   
     
     $message.setPredict("time");
     $message.setWhere($rid);
-    #$message.setTime(System.currentTimeMillis());#记录消息的发送时间,靠这个来完成消息的记录    
+
 	$operater.getTimerMessages().add($message);		
 
     LogUtil.log("time operater over =============");
@@ -643,10 +633,8 @@ then
       } 
       $bombPic.setUser(bomb);
       m.put("bomb",$bombPic); 
-      
        
-      JSONObject json4=JSONObject.fromObject(m);        
-      $operater.setSnapshots(json4.toString());     
+      $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);   
 	  LogUtil.log("get player query info over =================");
 end

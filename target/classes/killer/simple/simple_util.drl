@@ -10,7 +10,6 @@ import java.util.Collections;
 
 
 import org.apache.commons.lang.StringUtils;
-#需要重置的资源最好和不需要重置的资源分开,这样清除的时候容易很多,可以考虑把所有的资源都加上GameID.统一清空
 
 
 
