@@ -14,7 +14,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>LogIn</title>
-<link href="r/c/index.css" rel="stylesheet" />
+<link href="r/css/index.css" rel="stylesheet" />
 <script src="r/j-src/jquery/jquery-1.6.1.js"></script>
 <script type="text/javascript">
 

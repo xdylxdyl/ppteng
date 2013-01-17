@@ -6,7 +6,7 @@
 <title>${room.name}</title>
 <meta charset="utf-8">
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/r/c/kill/room.css?v=${frontVersion}">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/r/css/kill/room.css?v=${frontVersion}">
 <script src="<%=request.getContextPath() %>/r/j-src/jquery/jquery-1.6.1.js"></script>
 <script src="<%=request.getContextPath() %>/r/j-src/commons/model.js?v=${frontVersion}"></script>
 <script src="<%=request.getContextPath() %>/r/j-src/commons/service.js?v=${frontVersion}"></script>

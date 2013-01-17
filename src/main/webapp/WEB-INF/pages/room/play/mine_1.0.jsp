@@ -11,9 +11,9 @@
 
 
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/r/c/common/room.css?v=${frontVersion}">
+	href="<%=request.getContextPath()%>/r/css/common/room.css?v=${frontVersion}">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/r/c/mine/mine.css?v=${frontVersion}">
+	href="<%=request.getContextPath()%>/r/css/mine/mine.css?v=${frontVersion}">
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
 <script src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 

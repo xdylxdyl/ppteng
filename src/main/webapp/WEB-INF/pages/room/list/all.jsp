@@ -4,12 +4,12 @@
 <head>
 <meta charset=utf-8">
 <title>LogIn</title>
-<link href="/r/c/all.css" rel="stylesheet" />
-<link href="/r/c/button.css" rel="stylesheet" />
+<link href="/r/css/all.css?v=${frontVersion}" rel="stylesheet" />
+<link href="/r/css/button.css?v=${frontVersion}" rel="stylesheet" />
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script src="/r/j-src/listall/all.js?v=1.0"></script>
+<script src="/r/j-src/listall/all.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath()%>/r/j-src/commons/service.js?v=1.0"></script>
+	src="<%=request.getContextPath()%>/r/j-src/commons/service.js?v=${frontVersion}"></script>
 <script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js"></script>
 
 <input type="hidden" value="${oldRoom}" id="oldRoom">

@@ -10,6 +10,7 @@ information.info = function (active, object) {
     var content =$("#say").val();
     console.log( $("#say").val());
     content=$("#escape").text(content).html();
+       $("#escape").empty();
     console.log( $("#say").val()+" after escape "+content);
 
     var action = $("#uid").val() + "," + active + "," + object + "," + $("#color").val() + "," + $("#expression").val() + "," + $("#rid").val();

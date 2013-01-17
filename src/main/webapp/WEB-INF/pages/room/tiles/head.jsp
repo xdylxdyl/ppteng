@@ -8,9 +8,9 @@
 <title>${room.name}</title>
 <meta charset="utf-8">
 
-<link href="/r/c/head.css" rel="stylesheet" />
+<link href="/r/css/head.css?v=${frontVersion}" rel="stylesheet" />
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script src="/r/j-src/room/head_view.js?v=0.1"></script>
+<script src="/r/j-src/room/head_view.js?v=${frontVersion}"></script>
 </head>
 
 <body>

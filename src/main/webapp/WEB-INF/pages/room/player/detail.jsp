@@ -2,8 +2,8 @@
 <%@ include file="../../includes/includes.jsp"%>
 <!DOCTYPE HTML>
 <head>
- <link href="/r/c/user_detail.css" rel="stylesheet"/>
- <link href="/r/c/button.css" rel="stylesheet"/>
+ <link href="/r/css/user_detail.css" rel="stylesheet"/>
+ <link href="/r/css/button.css" rel="stylesheet"/>
  
  
  
