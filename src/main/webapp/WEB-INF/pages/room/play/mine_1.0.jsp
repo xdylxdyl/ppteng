@@ -8,18 +8,20 @@
 <meta charset="utf-8">
 
 
+
+
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/r/c/common/room.css?v=0.5">
+	href="<%=request.getContextPath()%>/r/c/common/room.css?v=${frontVersion}">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/r/c/mine/mine.css?v=0.5">
+	href="<%=request.getContextPath()%>/r/c/mine/mine.css?v=${frontVersion}">
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=0.6"></script>
+<script src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 
 <script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil.js"></script>
 <script
-	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=1.0"></script>
+	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath()%>/r/j-src/util/timeUtil.js?v=1.0"></script>
+	src="<%=request.getContextPath()%>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
 
 <script src="/r/j-src/mine/mine.js"></script>
 <script src="/r/j-src/commons/model.js"></script>

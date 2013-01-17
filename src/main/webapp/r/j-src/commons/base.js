@@ -29,8 +29,6 @@ function parseMessage(message) {
 var resolvePredict = {};
 resolvePredict.branch = function(message) {
     console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
-
-  // message.content=unescape(message.content);
     var rid = globalView.getRoomID();
     var type = globalView.getRoomType();
     if (rid != message.where && "game" == type) {
@@ -208,7 +206,7 @@ resolvePredict.right = function(message) {
         rightView.noRight();//先禁用所有的权限,再打开.
 
         $.each(arr, function (i, val) {
-            //console.log(("process data " + arr[i]));
+            //console.log(("process data " + arr[img]));
             rightView.branch(jQuery.trim(arr[i]));
         });
 

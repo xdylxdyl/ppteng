@@ -5,7 +5,7 @@
 <head>
 <title>${room.name}</title>
 <meta charset="utf-8">
-<c:set var="frontVersion" value="0.5"></c:set>
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/r/c/kill/room.css?v=${frontVersion}">
 <script src="<%=request.getContextPath() %>/r/j-src/jquery/jquery-1.6.1.js"></script>
 <script src="<%=request.getContextPath() %>/r/j-src/commons/model.js?v=${frontVersion}"></script>
