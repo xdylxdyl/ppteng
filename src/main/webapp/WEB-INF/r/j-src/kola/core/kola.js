@@ -190,8 +190,8 @@ Object.extend(String.prototype, {
 	    div.innerHTML = this;
 	    if (div.childNodes.length > 0) {
     		var str = [];
-    		for (var i=0, il=div.childNodes.length, il; i<il; i++) {
-    			str.push(div.childNodes[i].nodeValue);
+    		for (var img=0, il=div.childNodes.length, il; img<il; img++) {
+    			str.push(div.childNodes[img].nodeValue);
     		}
     		return str.join('');
 	    }
@@ -508,8 +508,8 @@ kola.Element = Class.create({
 						if (el.form) {
 							var els = el.form.elements.namedItem(name);
 							if (els.tagName) return els.checked ? els.value : null;
-							for (var i=0, il=els.length; i<il; i++) {
-								var it = els[i];
+							for (var img=0, il=els.length; img<il; img++) {
+								var it = els[img];
 								if (it.checked) return it.value;
 							}
 							return null;

@@ -515,7 +515,7 @@ $register('sohu.vote.*',function(){
 			for (var j=0; j<addCount; j++) {
 				var i = ++this._index;
 				arr.push('<dt><label for="optionEl' + i + '">候选项' + (++this._optionCount) + '：</label></dt>' +
-					'<dd><input id="optionEl' + i + '" name="option" type="text" class="text" />&nbsp;<a href="javascript:void(0);" class="icon i-del">删除</a></dd>');
+					'<dd><input id="optionEl' + i + '" name="option" type="text" class="text" />&nbsp;<a href="javascript:void(0);" class="icon img-del">删除</a></dd>');
 			}
 			this._el('optionCtrEl').append(arr.join(''));
 			this._refreshMax();

@@ -791,7 +791,7 @@ $register(
 					this.fileOp = kola.Element.create('span',{'class':'del'});
 					this.fileOp.html('');
 					
-					this.deletBtn = kola.Element.create('a',{'class':'j-delet icon i-del','href':'javascript:void(0);'});
+					this.deletBtn = kola.Element.create('a',{'class':'j-delet icon img-del','href':'javascript:void(0);'});
 					this.deletBtn.html('x');
 					this.fileOp.append(this.deletBtn);
 					

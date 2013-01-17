@@ -3971,9 +3971,9 @@ var ProgressEvent = (function() {
         var event = document.createEvent('Events');
         event.initEvent('ProgressEvent', false, false);
         if (data) {
-            for (var i in data) {
-                if (data.hasOwnProperty(i)) {
-                    event[i] = data[i];
+            for (var img in data) {
+                if (data.hasOwnProperty(img)) {
+                    event[img] = data[img];
                 }
             }
             if (data.target) {

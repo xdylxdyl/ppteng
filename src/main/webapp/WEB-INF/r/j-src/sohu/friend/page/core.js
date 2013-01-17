@@ -515,7 +515,7 @@ $register('sohu.friend.page.*', function() {
 		
 		//	获得一个好友分组描述项的html片段
 		_getItemHtml: function(data) {
-			var str = '<li data-tabkey="' + data.id + '" id="group_' + data.id + '"><span class="fgOption"><a href="javascript:void(0)" onclick="sohu.friend.GroupListWgt.edit(' + data.id + ')" class="icon i-edit" title="编辑">编辑</a><a href="javascript:void(0)" onclick="sohu.friend.GroupListWgt.del(' + data.id + ')" class="icon i-del" title="删除">删除</a></span>' +
+			var str = '<li data-tabkey="' + data.id + '" id="group_' + data.id + '"><span class="fgOption"><a href="javascript:void(0)" onclick="sohu.friend.GroupListWgt.edit(' + data.id + ')" class="icon img-edit" title="编辑">编辑</a><a href="javascript:void(0)" onclick="sohu.friend.GroupListWgt.del(' + data.id + ')" class="icon img-del" title="删除">删除</a></span>' +
 			'<a class="fgName" href="javascript:void(0)"><span>' + data.name + '</span></a></li>';
 			return str;
 		},

@@ -64,7 +64,7 @@ $register('sohu.album.Mark', function(){
 			}
 			t.push('(<a href="/profile.do?u='+ options.markUserId +'" target="_blank" title="'+ options.markUserName +'">'+ options.markUserName +'</a>标记');
 			if(options.canDel)
-				t.push('<a class="icon i-del" href="javascript:void(0)" onclick="Album.photo.Mark.del('+ options.id +')" title="删除此条标记">删除</a>')
+				t.push('<a class="icon img-del" href="javascript:void(0)" onclick="Album.photo.Mark.del('+ options.id +')" title="删除此条标记">删除</a>')
 			t.push(')</span>');
 			this.markBox.append(r.join(''));
 			this.markDesc.append(t.join(''));

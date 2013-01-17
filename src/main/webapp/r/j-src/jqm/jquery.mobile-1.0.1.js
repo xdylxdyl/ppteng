@@ -1338,7 +1338,7 @@ $.each({
 // 
 // About: License
 // 
-// Copyright (c) 2010 "Cowboy" Ben Alman,
+// Copyright (css) 2010 "Cowboy" Ben Alman,
 // Dual licensed under the MIT and GPL licenses.
 // http://benalman.com/about/license/
 // 
@@ -1714,7 +1714,7 @@ $.each({
 
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
-		theme: "c",
+		theme: "css",
 		domCache: false,
 		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')"
 	},
@@ -4145,7 +4145,7 @@ $.fn.grid = function( options ) {
 			$kids.filter( ":nth-child(" + iterator + "n+2)" ).addClass( "ui-block-b" );
 		}
 		if ( iterator > 2 ) {
-			$kids.filter( ":nth-child(3n+3)" ).addClass( "ui-block-c" );
+			$kids.filter( ":nth-child(3n+3)" ).addClass( "ui-block-css" );
 		}
 		if ( iterator > 3 ) {
 			$kids.filter( ":nth-child(4n+4)" ).addClass( "ui-block-d" );
@@ -4219,7 +4219,7 @@ var listCountPerPage = {};
 $.widget( "mobile.listview", $.mobile.widget, {
 	options: {
 		theme: null,
-		countTheme: "c",
+		countTheme: "css",
 		headerTheme: "b",
 		dividerTheme: "b",
 		splitIcon: "arrow-r",
@@ -4370,7 +4370,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 		
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
+			o.theme = $.mobile.getInheritedTheme( this.element, "css" );
 		}
 
 		for ( var pos = 0, numli = li.length; pos < numli; pos++ ) {
@@ -4612,7 +4612,7 @@ $( document ).bind( "pagecreate create", function( e ){
 
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
-$.mobile.listview.prototype.options.filterTheme = "c";
+$.mobile.listview.prototype.options.filterTheme = "css";
 $.mobile.listview.prototype.options.filterCallback = function( text, searchValue ){
 	return text.toLowerCase().indexOf( searchValue ) === -1;
 };
@@ -5049,7 +5049,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			control = this.element,
 
-			parentTheme = $.mobile.getInheritedTheme( control, "c" ),
+			parentTheme = $.mobile.getInheritedTheme( control, "css" ),
 
 			theme = this.options.theme || parentTheme,
 
@@ -5408,7 +5408,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 		var input = this.element,
 			o = this.options,
-			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
+			theme = o.theme || $.mobile.getInheritedTheme( this.element, "css" ),
 			themeclass  = " ui-body-" + theme,
 			focusedEl, clearbtn;
 
@@ -6066,7 +6066,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
 		if ( !this.options.theme ) {
-			this.options.theme = $.mobile.getInheritedTheme( this.select, "c" );
+			this.options.theme = $.mobile.getInheritedTheme( this.select, "css" );
 		}
 	},
 
@@ -6114,7 +6114,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		// Add counter for multi selects
 		if ( this.isMultiple ) {
 			this.buttonCount = $( "<span>" )
-				.addClass( "ui-li-count ui-btn-up-c ui-btn-corner-all" )
+				.addClass( "ui-li-count ui-btn-up-css ui-btn-corner-all" )
 				.hide()
 				.appendTo( button.addClass('ui-li-has-count') );
 		}
@@ -6264,7 +6264,7 @@ $.fn.buttonMarkup = function( options ) {
 
 		// if not, try to find closest theme container
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( el, "c" );
+			o.theme = $.mobile.getInheritedTheme( el, "css" );
 		}
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;

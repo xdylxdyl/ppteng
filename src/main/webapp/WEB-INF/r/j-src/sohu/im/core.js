@@ -87,14 +87,14 @@ $register('sohu.im.*',function(){
 				D._user = {};
 				D.user.each(function(user, i) {
 					user.online = 'offline';
-					D._user['i' + user.id] = user;
+					D._user['img' + user.id] = user;
 					D._user[user.pp] = user;
 				});
 			}
 			if (D.group) {
 				D._group = {};
 				D.group.each(function(group, i) {
-					D._group['i' + group.id] = group;
+					D._group['img' + group.id] = group;
 				});
 			}
 			this._friendData = D;
@@ -176,7 +176,7 @@ $register('sohu.im.*',function(){
 			} else {
 				var groupStr = null;
 				if (groupId != null) {
-					groupStr = ',' + this._data._group['i' + groupId].users.join(',') + ',';
+					groupStr = ',' + this._data._group['img' + groupId].users.join(',') + ',';
 				}
 				['online', 'busy', 'away', 'offline'].each(function(type) {
 					if (size != null && users.length == size) throw $break;
@@ -459,7 +459,7 @@ $register('sohu.im.*',function(){
 		_e_sync: function(obj, name, data) {
 			var arr = [];
 			Object.each(data.w, function(user) {
-				if (user && user.s && user.s != 'c') {
+				if (user && user.s && user.s != 'css') {
 					arr.push({
 						pp: user.u,
 						name: user.n
@@ -603,7 +603,7 @@ $register('sohu.im.*',function(){
 		_onSession: function(session) {
 			if (!this._items[session.pp]) {
 				var el = kola.Element.create('li')
-						.html('<strong>' + session.name + '</strong><a href="javascript:void(0);" onclick="sohu.im.SessionWgt.close(\'' + session.pp + '\');kola.Event.stop(event);" class="icon i-close" title="关闭和' + session.name + '的聊天">关闭</a>')
+						.html('<strong>' + session.name + '</strong><a href="javascript:void(0);" onclick="sohu.im.SessionWgt.close(\'' + session.pp + '\');kola.Event.stop(event);" class="icon img-close" title="关闭和' + session.name + '的聊天">关闭</a>')
 						.on('click', this.talk.bind(this, session.pp));
 				this._ctr.append(el);
 				this._items[session.pp] = el;
@@ -1340,7 +1340,7 @@ $register('sohu.im.*',function(){
 									'<a href="/profile.do?u='+ f.id +'" title="'+ f.name +'的主页">'+ f.name +'</a>'+
 								'</strong>'+
 								'<span class="actions">'+
-									'<a href="javascript:void(0)" onclick="sohu.im.Friend.talk(event,this,\''+f.pp+'\')" class="icon i-chat" title="与他聊天">与他聊天</a>'+
+									'<a href="javascript:void(0)" onclick="sohu.im.Friend.talk(event,this,\''+f.pp+'\')" class="icon img-chat" title="与他聊天">与他聊天</a>'+
 								'</span>'+
 								'<span class="status">'+ status +'</span>'+
 							'</div>'+
@@ -1420,7 +1420,7 @@ $register('sohu.im.*',function(){
 		 */
 		_build: function(friend){
 			var f = friend,
-				alert = '<div class="close"><a href="javascript:void(0)" onclick="sohu.im.OnlineAlert.remove($(this).up(\'li\'))" class="icon i-close">关闭</a></div>'+
+				alert = '<div class="close"><a href="javascript:void(0)" onclick="sohu.im.OnlineAlert.remove($(this).up(\'li\'))" class="icon img-close">关闭</a></div>'+
 						'<div class="buddyAvatar">'+
 							'<a href="/profile.do?u='+ f.id +'" title="'+ f.name +'的主页">' +
 								'<img class="avatar-32" src="' + f.icon + '" alt="'+ f.name +'" />'+
@@ -1429,7 +1429,7 @@ $register('sohu.im.*',function(){
 						'<div class="buddyInfo">'+
 							'<strong><a href="/profile.do?u='+ f.id +'" title="'+ f.name +'的主页">'+ f.name +'</a></strong>'+
 							'<span class="status">上线了' +
-								'<a href="javascript:void(0)" onclick="sohu.im.Friend.talk(event,this,\''+f.pp+'\')" class="icon i-chat" title="与他聊天">与他聊天</a>' +
+								'<a href="javascript:void(0)" onclick="sohu.im.Friend.talk(event,this,\''+f.pp+'\')" class="icon img-chat" title="与他聊天">与他聊天</a>' +
 							'</span>'+
 						'</div>';
 			return kola.Element.create('li').html(alert);

@@ -456,7 +456,7 @@ $register(
 					fStr = 	'<img src="' + f.icon + '" class="avatar-48" />'+
 							'<div class="sbInfo">' +
 								'<a href="/profile.do?u=' + f.id + '">' + f.name + '</a><br />'+
-								'<a onclick="sohu.blog.FriendSelector.removeFriend(this,'+f.id+')" href="javascript:void(0)" class="j-remove"><img class="icon i-ignore" src="http://sns.sohu.com/r/i/space.gif" />移除</a>' +
+								'<a onclick="sohu.blog.FriendSelector.removeFriend(this,'+f.id+')" href="javascript:void(0)" class="j-remove"><img class="icon img-ignore" src="http://sns.sohu.com/r/img/space.gif" />移除</a>' +
 							'</div>';
 				var fTag = kola.Element.create('li',{'class': 'fix'}).html(fStr);
 				this._showEl.append(fTag);

@@ -88,7 +88,7 @@
 	#commonFriendList .mCt{border:0;}
 	#commonFriendList .mHd{border-bottom:1px solid #999;}
 	#commonFriendList .mBd{padding:20px;}
-		#commonFriendList ul{/*background:url(i/commonFriendList.gif);*/}
+		#commonFriendList ul{/*background:url(img/commonFriendList.gif);*/}
 			#commonFriendList li.friendItem{_display:inline;overflow:hidden;float:left;width:125px;height:50px;margin:0 10px;padding:12px 30px 18px 72px;}
 				#commonFriendList .firendOption{width:20px;margin:0 -20px 0 0;}
 				#commonFriendList .friendInfo{}

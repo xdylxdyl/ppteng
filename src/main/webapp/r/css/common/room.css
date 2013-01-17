@@ -106,23 +106,23 @@ nav ul li span, nav ul li i {
 }
 
 nav li a.unready {
-    background: url(../../i/icon_status.gif) 0 0 no-repeat;
+    background: url(../../img/icon_status.gif) 0 0 no-repeat;
 }
 
 nav li a.ready {
-    background: url(../../i/icon_status.gif) 0 -16px no-repeat;
+    background: url(../../img/icon_status.gif) 0 -16px no-repeat;
 }
 
 nav li a.living {
-    background: url(../../i/icon_status.gif) 0 -32px no-repeat;
+    background: url(../../img/icon_status.gif) 0 -32px no-repeat;
 }
 
 nav li a.die {
-    background: url(../../i/icon_status.gif) 0 -48px no-repeat;
+    background: url(../../img/icon_status.gif) 0 -48px no-repeat;
 }
 
 nav li a.lastword {
-    background: url(../../i/icon_half_life.gif) 0 0 no-repeat;
+    background: url(../../img/icon_half_life.gif) 0 0 no-repeat;
 }
 
 nav li i {

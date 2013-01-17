@@ -594,9 +594,9 @@ $register('sohu.friend.*', function() {
             var str=this.valueEl.val();
             var r=[];
             str.
-            str.split(',').each(function(i){
-                if(i!='')
-                    r.push(i);
+            str.split(',').each(function(img){
+                if(img!='')
+                    r.push(img);
             });
             return r.join(',');
             */
@@ -667,7 +667,7 @@ $register('sohu.friend.*', function() {
                     type:this.settings.type,
                     submit:function(a){
                         a.each(function(i){
-                            //	_this._selectOn.bindEvent(_this,_this._getFriendById(i))();
+                            //	_this._selectOn.bindEvent(_this,_this._getFriendById(img))();
                         	_this._selectOn.call(_this,_this._getFriendById(i));
                         });
                         

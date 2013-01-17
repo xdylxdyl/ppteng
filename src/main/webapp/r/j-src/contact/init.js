@@ -1,4 +1,4 @@
-var list_class = "ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c";
+var list_class = "ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-css";
 //var title_class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-corner-bottom";
 $(document).ready(function() {
     checkhHtml5();

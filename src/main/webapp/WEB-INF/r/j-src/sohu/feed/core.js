@@ -232,13 +232,13 @@ $register('sohu.feed.*', function() {
          */
         star: function(fid){
             var icoEl=$("#feed_"+fid).down('.feedOption img');
-            if(icoEl.attr('class').indexOf('i-clearStar')>-1){
+            if(icoEl.attr('class').indexOf('img-clearStar')>-1){
                 //add
                 starMdl.add({
                     id : fid
                 },{
                     success: function(data){
-                        icoEl.removeClass('i-clearStar').addClass('i-starred');
+                        icoEl.removeClass('img-clearStar').addClass('img-starred');
                     }.bind(this),
                     failure: function() {}
                 });
@@ -249,7 +249,7 @@ $register('sohu.feed.*', function() {
                     id : fid
                 },{
                     success: function(data){
-                        icoEl.removeClass('i-starred').addClass('i-clearStar');
+                        icoEl.removeClass('img-starred').addClass('img-clearStar');
                     }.bind(this),
                     failure: function() {}
                 });	
@@ -268,7 +268,7 @@ $register('sohu.feed.*', function() {
                     }.bind(this));
                     feedli.on('mouseout',function(e){
                         var li = kola.Event.element(e).upWithMe('.feedItem');
-                        if(li.down(star).attr('class') =='icon i-clearStar'){
+                        if(li.down(star).attr('class') =='icon img-clearStar'){
                             li.down(star).hide();
                         }
                     }.bind(this));

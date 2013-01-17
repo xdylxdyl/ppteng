@@ -159,7 +159,7 @@ $register(
 							if(this._options.aFilter == 3) // 有区县过滤条件时
 							str += '<select class="select county" id="selectCounty" name="selectCounty"></select>';
 						str+= '</h4>'+
-								'<div class="option"><a class="icon i-close" href="javascript:void(0);">关闭</a></div>'+
+								'<div class="option"><a class="icon img-close" href="javascript:void(0);">关闭</a></div>'+
 							'</div>'+
 							'<div class="body schoolList"></div>'+
 							'<div class="foot">'+

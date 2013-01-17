@@ -57,7 +57,7 @@ $register('sohu.recommend.*', function() {
 		addList  : function(element,type){
 			var _listHTML ='<div class="friendAvatar"><a title="#{name}" href="/profile.do?u=#{id}"><img class="avatar-48" src="#{icon}" /></a></div>'+
 					'<div class="firendOption">'+
-						'<a title="#{name}" onclick="delList(this,#{id})" class="icon i-ignore" href="javascript:void(0)">不认识</a>'+
+						'<a title="#{name}" onclick="delList(this,#{id})" class="icon img-ignore" href="javascript:void(0)">不认识</a>'+
 					'</div>'+
 					'<div class="friendInfo">'+
 						'<h4><a title="#{name}" href="/profile.do?u=#{id}">#{name}</a></h4>'+

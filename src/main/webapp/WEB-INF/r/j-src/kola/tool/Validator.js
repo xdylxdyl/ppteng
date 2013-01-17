@@ -300,10 +300,10 @@ $register('kola.tool.Validator', function(){
 				switch(mode){
 				case 2 :
 					/*
-					for(var i=1;i<errCount;i++)
-						this.ErrorItem[i].style.color = "red";
+					for(var img=1;img<errCount;img++)
+						this.ErrorItem[img].style.color = "red";
 					*/
-						//this.ErrorItem[i].className = "text-error";
+						//this.ErrorItem[img].className = "text-error";
 				case 1 :
 					alert(this.ErrorMessage.join("\n"));
 					this.ErrorItem[1].focus();
@@ -346,8 +346,8 @@ $register('kola.tool.Validator', function(){
 				switch(mode){
 				case 2 :
 				/*
-					for(var i=1;i<okCount;i++)
-						this.OkItem[i].style.color = "green";
+					for(var img=1;img<okCount;img++)
+						this.OkItem[img].style.color = "green";
 				*/
 				case 1 :
 					//alert(this.OkMessage.join("\n"));

@@ -56,7 +56,7 @@ $register(
 					'<div class="content #{loadding}">'+
 						'<div class="head">'+
 							'<h4 class="title"> #{title} \</h4>'+
-							'<div class="option"><a tag="close" href="javascript:void(0)" class="icon i-close">关闭</a></div>'+
+							'<div class="option"><a tag="close" href="javascript:void(0)" class="icon img-close">关闭</a></div>'+
 						'</div>'+
 						'<div class="body" style="height:#{height}px;">'+
 							' #{content}'+
@@ -74,7 +74,7 @@ $register(
 			},	
 			//注册 dialog 内元素的事件
 	  		_regEvent : function(){
-	  			var closeBtn=$(" .option .i-close",this.pannel );
+	  			var closeBtn=$(" .option .img-close",this.pannel );
 	  			if(closeBtn){
 					closeBtn.on("click",this.close.bind(this));
 	  			}
