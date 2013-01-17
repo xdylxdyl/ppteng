@@ -90,12 +90,7 @@
 			<groupId>com.gemantic.commons</groupId>
 			<artifactId>commons-core</artifactId>
 			<version>1.88</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>dal-dao</artifactId>
-					<groupId>com.gemantic</groupId>
-				</exclusion>
-			</exclusions>
+			
 		</dependency>
 
 		<dependency>
@@ -104,12 +99,9 @@
 			<version>1.4</version>
 		</dependency>
 
-		<!-- stat -->
-		<dependency>
-			<groupId>com.gemantic.common.stat</groupId>
-			<artifactId>stat-aop</artifactId>
-			<version>1.1</version>
-		</dependency>
+
+
+		
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
