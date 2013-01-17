@@ -29,6 +29,8 @@ function parseMessage(message) {
 var resolvePredict = {};
 resolvePredict.branch = function(message) {
     console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
+
+  // message.content=unescape(message.content);
     var rid = globalView.getRoomID();
     var type = globalView.getRoomType();
     if (rid != message.where && "game" == type) {

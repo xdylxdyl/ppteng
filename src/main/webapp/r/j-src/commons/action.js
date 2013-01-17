@@ -5,30 +5,38 @@
 var num = 100;
 var timeTest = null;
 var information = {};
-information.info = function(active, object) {
+information.info = function (active, object) {
     object == null || object == "" ? object = -500 : object;
-    var content = $("#say").val();
-    content == "" ? content = -1 : content;
+    var content =$("#say").val();
+    console.log( $("#say").val());
+    content=$("#escape").text(content).html();
+    console.log( $("#say").val()+" after escape "+content);
+
     var action = $("#uid").val() + "," + active + "," + object + "," + $("#color").val() + "," + $("#expression").val() + "," + $("#rid").val();
     var infos = {
-        "action" : action,
-        "content" : content,
-        "isDrools" : "true",
-        "version" : $("#version").val()
+        subject:$("#uid").val(),
+        predict:active,
+        object:object,
+        where:$("#rid").val(),
+        color:$("#color").val(),
+        expression:$("#expression").val(),
+        "content":content,
+        "isDrools":"true",
+        "version":$("#version").val()
     };
     return infos;
 };
-information.sendInfo = function(active, object, info, success, isAsync) {
+information.sendInfo = function (active, object, info, success, isAsync) {
     if (isAsync == null) {
         isAsync = true;
     }
     var startTime = jQuery.now();
     $.ajax({
-        type : "POST",
-        url : "/message/accept.do",
+        type:"POST",
+        url:"/message/accept2.do",
         async:isAsync,
-        data : info(active, object),
-        success: function(data) {
+        data:info(active, object),
+        success:function (data) {
             if (success == null) {
 
             } else {
@@ -40,7 +48,7 @@ information.sendInfo = function(active, object, info, success, isAsync) {
     });
     return false;
 };
-var sendmessage = function(count) {
+var sendmessage = function (count) {
 
     console.log("send num " + count);
     $("#say").val(count);
@@ -53,7 +61,7 @@ var sendmessage = function(count) {
 }
 
 var playerList = {};
-playerList.order = function(command) {
+playerList.order = function (command) {
     switch (command) {
         case "kick" :
             this.filter();
@@ -71,7 +79,7 @@ playerList.order = function(command) {
             console.log("亲，这个指令你还没写嘛.");
     }
 };
-playerList.filter = function(keyword) {
+playerList.filter = function (keyword) {
 
     $("#object option:gt(0)").remove();
 
@@ -101,25 +109,25 @@ playerList.filter = function(keyword) {
 };
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
 
-    $("#command").change(function() {
+    $("#command").change(function () {
         var command = $(this).val();
         playerList.order(command);
     });
-    $("#object").change(function() {
+    $("#object").change(function () {
         if (controlView.checkSayNotEmpty()) {
 
         } else {
 
-            var content=  versionFunction["commandHint"]($("#command").val());
+            var content = versionFunction["commandHint"]($("#command").val());
             controlView.hintSay(content);
         }
     });
 
     //玩家动作：say, ready, start, kick, vote, kill
-    $("#say").bind("keydown", function(event) {
+    $("#say").bind("keydown", function (event) {
 
         //发送内容违禁词过滤检查函数
         //TODO
@@ -169,7 +177,7 @@ $(document).ready(function() {
 
     }
 
-    $("#sendSay").bind("click", function() {
+    $("#sendSay").bind("click", function () {
         say();
 
 
@@ -184,17 +192,17 @@ $(document).ready(function() {
     ;
 
 
-    $("#start").click(function() {
+    $("#start").click(function () {
         //检查准备人数是否合规则，否则return
         //TODO
         information.sendInfo("start", null, information.info);
     });
-    $("#ready").click(function() {
+    $("#ready").click(function () {
         //检查准备人数是否合规则，否则return
         //TODO
         information.sendInfo("ready", null, information.info);
     });
-    $("#logout").click(function() {
+    $("#logout").click(function () {
         var type = globalView.getRoomType();
         var url;
         var r = confirm("确定退出？");
@@ -214,7 +222,7 @@ $(document).ready(function() {
 
     });
 
-    $("#replay").click(function() {
+    $("#replay").click(function () {
         recordFirstTime = null;
         recordSecondTime = null;
         msg_interval = null;
@@ -242,19 +250,19 @@ $(document).ready(function() {
      $("#send b").val("-500").text("");
      });
      */
-    $("nav li a").click(function() {
+    $("nav li a").click(function () {
 
 
     });
 
 
     if ($("#time").val() == "over") {
-        $("#battle").css("display", "inline").click(function() {
-            var mask = $("<div>", {"id" : "mask"});
+        $("#battle").css("display", "inline").click(function () {
+            var mask = $("<div>", {"id":"mask"});
             mask
-                .css({position:"absolute", left: "10px", top: "10px", marginTop: "5px", width: "915px", height: "1px", backgroundColor: "#FFFFEE", zindex: 2})
+                .css({position:"absolute", left:"10px", top:"10px", marginTop:"5px", width:"915px", height:"1px", backgroundColor:"#FFFFEE", zindex:2})
 
-                .animate({height: "96px"}, 1000)
+                .animate({height:"96px"}, 1000)
                 .appendTo("footer");
             $("#battle").appendTo($("#mask"));
         });
@@ -262,4 +270,4 @@ $(document).ready(function() {
 
 
 })
-    ;
+;

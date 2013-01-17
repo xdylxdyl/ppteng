@@ -42,6 +42,8 @@
 		<div class="quiet" id="logout"></div>
 	</form>
 
+
+<div id="escape"></div>
 	<!-- 
 		JiaThis Button BEGIN
 		<div class="jiathis_style">
