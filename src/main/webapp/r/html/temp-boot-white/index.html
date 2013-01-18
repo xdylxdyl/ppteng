@@ -8,61 +8,118 @@
     <!-- Le styles -->
     <link href="../../css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
-        .header h1 {
-            float: left;
-            height: 62px;
-            margin: 20px 0 0 0;
+        .header {
+            background: #369;
+            color: #fff;
+            height: 80px;
+            padding-top: 15px;
         }
-        .header .nav-collapse {
-            margin: 20px 0 0 0;
+        .sign {
+            border-top: 1px solid #bfbfbf;
+            border-bottom: 1px solid #dadada;
+            background-color: #fafafa;
+            background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+            background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+            background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+            background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
         }
+        .pdtb10 {
+            padding: 10px 0 10px 0;
+            margin: 0;
+        }
+        .banner-unit {
+            padding: 30px 0 20px 0;
+        }
+        .marketing {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .footer {
+            padding: 30px 0 10px 0;
+            background: #d9e6f2;
+        }
+
+
     </style>
+
     <link href="../../css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <div class="navbar">
-                <div class="container">
-                    <h1>葡萄藤 <small>轻游戏</small></h1>
-                    <div class="nav-collapse">
-                        <ul class="nav pull-right">
-                            <li><a href="">首页</a></li>
-                            <li><a href="">游戏</a></li>
-                            <li><a href="">战列</a></li>
-                            <li><a href="">官博</a></li>
-                            <li><a href="">论坛</a></li>
-                            <li><a href="">其他</a></li>
-                        </ul>
-                    </div>
-                </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="span6">
-            <div class="hero-unit">
-                <h2 class="form-signin-heading">Login Here</h2>
-                <input type="text" class="input-block-level" placeholder="Email address">
-                <input type="password" class="input-block-level" placeholder="Password">
-                <label class="checkbox">
-                    <input type="checkbox" value="remember-me"> Remenber Me
-                </label>
-                <button class="btn btn-large btn-primary" type="submit">Login</button>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="span5">
+                <a class="pull-left" href="#"><img src="../../img/logo1.jpg" alt=""></a>
+                <h1 class="pull-left">葡萄藤</h1>
+            </div>
+            <div class="span7">
+                <ul class="nav nav-pills pull-right">
+                    <li class="active"><a href="">首页</a></li>
+                    <li><a href="">游戏</a></li>
+                    <li><a href="">战列</a></li>
+                    <li><a href="">官博</a></li>
+                    <li><a href="">论坛</a></li>
+                    <li class="disabled"><a href="">其他</a></li>
+                </ul>
             </div>
         </div>
-        <div class="span6">
-
-            <h3>杀人游戏是一类智力和心力游戏。</h3>
-            <p class="lead">概括地说，是一个多人参与的较量口才和分析判断能力（推理）的游戏，当然，心理素质在中间也起着很关键的作用。</p>
-            <p class="lead">游戏通常分为两大阵营，好人方和杀手方；好人方以投票为手段投死杀手获取最后胜利，杀手方隐匿于好人中间，靠夜晚杀人及投票消灭好人方成员为获胜手段。</p>
-
-        </div>
     </div>
+</div>
+
+<div class="sign">
+    <div class="container">
+        <form action="" class="form-inline pull-right pdtb10">
+            <input type="text" class="input" placeholder="Email">
+            <input type="password" class="input" placeholder="Password">
+            <label class="checkbox"><input type="checkbox"> Remember me</label>
+            <button type="submit" class="btn">Sign in</button>
+        </form>
+    </div>
+</div>
+
+<div class="main">
+    <div class="container">
+
+        <div id="indexCarousel" class="carousel slide banner-unit">
+            <div class="carousel-inner">
+                <div class="active item">
+                    <img src="../../img/img_banner_1.jpg" alt="">
+                    <div class="carousel-caption">
+                        <h4>武功再高也怕菜刀</h4>
+                        <p>杀人游戏是一类智力和心力游戏。是一个多人参与的较量口才和分析判断能力（推理）的游戏，</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="../../img/img_banner_2.jpg" alt="">
+                    <div class="carousel-caption">
+                        <h4>自古太监功夫高</h4>
+                        <p>游戏通常分为两大阵营，好人方和杀手方；好人方以投票为手段投死杀手获取最后胜利，杀手方隐匿于好人中间，靠夜晚杀人及投票消灭好人方成员为</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="../../img/img_banner_3.jpg" alt="">
+                    <div class="carousel-caption">
+                        <h4>双拳难敌四手</h4>
+                        <p>交识朋友，可以和各种职业、各种类型的人结交朋友，通过游戏了解对方的性格特点并借助游戏中的交流加深彼此间的了解。</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control left" href="#indexCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#indexCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container marketing">
+
 
     <div class="row">
         <div class="span4">
-            <img src="" alt="" class="img-polaroid">
+            <img src="../../img/img_weapon1.jpg" width="150" height="150" alt="" class="img-circle">
             <h3>Heading</h3>
             <p>
                 能锻炼人的观察能力、逻辑能力、想象力、判断力、口才、表述能力、心理素质及表演能力；
@@ -73,7 +130,7 @@
             <p><a href="" class="btn">view details >></a></p>
         </div>
          <div class="span4">
-            <img src="" alt="" class="img-polaroid">
+            <img src="../../img/img_weapon1.jpg" width="150" height="150" alt="" class="img-circle">
             <h3>Heading</h3>
             <p>
                 能锻炼人的观察能力、逻辑能力、想象力、判断力、口才、表述能力、心理素质及表演能力；
@@ -84,7 +141,7 @@
             <p><a href="" class="btn">view details >></a></p>
         </div>
          <div class="span4">
-            <img src="" alt="" class="img-polaroid">
+            <img src="../../img/img_weapon1.jpg" width="150" height="150" alt="" class="img-circle">
             <h3>Heading</h3>
             <p>
                 能锻炼人的观察能力、逻辑能力、想象力、判断力、口才、表述能力、心理素质及表演能力；
@@ -96,11 +153,23 @@
         </div>
     </div>
 
-    <div class="footer">
+</div>
+
+<div class="footer">
+    <div class="container">
         <p>
             © 2012 Company, Inc.
+            <a href="#">Contact us</a>
         </p>
     </div>
 </div>
 </body>
 </html>
+
+<script type="text/javascript" src="../../j-src/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../j-src/bootstrap/carousel.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.carousel').carousel();
+    })
+</script>
