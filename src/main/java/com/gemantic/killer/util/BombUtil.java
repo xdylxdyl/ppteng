@@ -81,6 +81,7 @@ public class BombUtil {
 	}
 
 	public static List<Pair> getRoundPanes(Pair pair, int rowCount, int columnCount) {
+		log.info(pair+"get round panes in row "+rowCount+" columnCount "+columnCount);
 		List<Pair> pairs=new ArrayList();
 		int row=(Integer) pair.fst;
 		int column=(Integer) pair.snd;
@@ -125,7 +126,7 @@ public class BombUtil {
 		
 		int r=(Integer) pair.fst-1;
 		int c=(Integer) pair.snd-1;
-        int index=r*row+c;
+        int index=r*column+row;
         log.info("index is "+index);
 		String result=String.valueOf(systemBombPic.charAt(index));
 		log.info(result);
@@ -145,6 +146,10 @@ public class BombUtil {
 		int index=BombUtil.convertIndex(3, 3, 9);
 		String s=BombUtil.replaceBomb(index, bomb, "c");
 		log.info(s);
+		
+		List<Pair> ls=BombUtil.getRoundPanes(BombUtil.convertString2Pair("1-1"), 9, 100);
+		log.info(ls);
+		
 		
 	}
 

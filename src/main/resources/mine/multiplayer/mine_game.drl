@@ -135,6 +135,7 @@ when
     $message:Message(predict=="start");
     $person:Player($id:id)
     $right:Right(id==$id)
+    Game()
     
 
 	
@@ -373,7 +374,6 @@ ruleflow-group "click action"
 when
     $click:Click($pid:pid,value == "0")  
     $bombPic:BombPic($system:system,$user:user)
-    not Tag(pid==$pid)    
     not Message(subject==$pid,predict=="mine")
     $game:Game()    
     $room:Room()
@@ -384,10 +384,11 @@ then
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  
 	 Pair pair=BombUtil.convertString2Pair($pid);
     List<Pair> roundPanes=BombUtil.getRoundPanes(pair,rowCount,columnCount);
-      LogUtil.log("list pair is   ================= "+roundPanes);  
+      LogUtil.log(pair+" list pair is   ================= "+roundPanes);  
     for(Pair p:roundPanes){
     
        String value=BombUtil.clickOpen(p,$system,rowCount,columnCount); 
+       
        Click click=new Click($click.getUid(),value,BombUtil.convertPair2String(p));
        insert(click);
     }    
