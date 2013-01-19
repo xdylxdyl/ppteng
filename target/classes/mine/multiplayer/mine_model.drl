@@ -52,3 +52,8 @@ declare Count
         init:Integer
 end
 
+declare UserCount
+         uid:String
+         count:Integer
+end
+

@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
     //左键
-    $("#inner div").live("click", function() {
+    $("#inner div").live("click", function () {
         var mo = mineView.getMineOperater(this, mouseAction.click);
         var rid = globalView.getRoomID();
         var version = globalView.getVersion();
@@ -10,7 +10,7 @@ $(document).ready(function() {
     });
 
 
-    $("#restart").live("click", function() {
+    $("#restart").live("click", function () {
         mineView.initMine();
         return false;
     });
@@ -26,7 +26,7 @@ $(document).ready(function() {
         rightClick:"tag"
     };
 
-    var mineOperater = function(action, x, y, value) {
+    var mineOperater = function (action, x, y, value) {
         return {
             id:x + "-" + y,
             action:action,
@@ -36,7 +36,7 @@ $(document).ready(function() {
         }
     };
 
-    var settingPostParameter = function(rid, version, row, column, count) {
+    var settingPostParameter = function (rid, version, row, column, count) {
         return{
             rid:rid,
             version:version,
@@ -52,13 +52,13 @@ $(document).ready(function() {
     var wrongMine;
 
     var mineUtil = {
-        convertMessage2Mine:function(message) {
+        convertMessage2Mine:function (message) {
             var subject = message.subject;
             var ids = subject.split("-");
             return new mineOperater(message.predict, ids[0], ids[1], message.object);
 
         },
-        convertStr2Mine:function(str) {
+        convertStr2Mine:function (str) {
             var row = mineView.getSettingRow();
             var column = mineView.getSettingColumn();
             var result = [];
@@ -79,10 +79,10 @@ $(document).ready(function() {
     };
 
     var mineSettingView = {
-        initSetting:function() {
+        initSetting:function () {
 
         },
-        getSettingParameter:function() {
+        getSettingParameter:function () {
             var params = jQuery("#setting").serialize();
             return params;
         }
@@ -91,7 +91,7 @@ $(document).ready(function() {
 
     var mineView = {
 
-        getMineOperater:function(div, action) {
+        getMineOperater:function (div, action) {
 
             var act;
             var x = $(div).attr("x");
@@ -109,7 +109,7 @@ $(document).ready(function() {
             return mo;
 
         },
-        showMineOperater:function(mo) {
+        showMineOperater:function (mo) {
             var x = mo.x;
             var y = mo.y;
             var id = "#" + mo.id;
@@ -151,31 +151,31 @@ $(document).ready(function() {
 
 
         },
-        getSettingRow:function() {
+        getSettingRow:function () {
             return $("#行数").val();
         },
-        getSettingColumn:function() {
+        getSettingColumn:function () {
             return $("#列数").val();
         },
-        getSettingMineCount:function() {
+        getSettingMineCount:function () {
             return $("#雷数").val();
         },
 
-        tagMine:function() {
+        tagMine:function () {
             var count = parseInt($("#count").text());
             count++;
             $("#count").text(count);
 
         },
-        clearMine:function() {
+        clearMine:function () {
             var count = parseInt($("#count").text());
             count--;
             $("#count").text(count);
         },
-        initMineCount:function(count) {
+        initMineCount:function (count) {
             $("#count").text(count);
         },
-        start:function() {
+        start:function () {
 
 
             $("#start").hide();
@@ -194,7 +194,14 @@ $(document).ready(function() {
             mineView.initMine();
 
         },
-        over:function(message) {
+        showWrong:function (message) {
+            var uid = message.subject;
+            var place = message.object;
+            var player = playerService.getPlayer(uid);
+
+            $("section article").append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 同学我早知道你不靠谱了,你在 [" + place + "] 点到雷了 </p>");
+        },
+        over:function (message) {
             var obj = message.object;
             var recordID = message.subject;
             //标明游戏结束
@@ -218,7 +225,7 @@ $(document).ready(function() {
             //展示错误的地方,以及谁点错的
 
         },
-        initMine:function() {
+        initMine:function () {
             $("#inner").empty();
             $("#inner2").empty();
             var row = mineView.getSettingRow();
@@ -236,7 +243,7 @@ $(document).ready(function() {
             ;
 
             //右键
-            $("#inner div").rightClick(function(e) {
+            $("#inner div").rightClick(function (e) {
                 var mo = mineView.getMineOperater(this, mouseAction.rightClick);
                 var rid = globalView.getRoomID();
                 var version = globalView.getVersion();
@@ -253,18 +260,26 @@ $(document).ready(function() {
     }
 
     var mineService = {
-        sendMineOperater:function(mo, rid, version) {
+
+        parseCount:function (counts) {
+            for (var key in counts) {
+                var c = counts[key];
+                playerListView.setVote(c.uid, c.count);
+            }
+
+        },
+        sendMineOperater:function (mo, rid, version) {
             var message = {
                 predict:mo.action,
                 object:mo.id,
-                where : rid,
-                version : version
+                where:rid,
+                version:version
             }
 
             return ajaxJson("/message/accept2.do?", "post", message, null, 5000, "html")
 
         },
-        parseMessage:function(message) {
+        parseMessage:function (message) {
             switch (message.predict) {
 
                 case "start" :
@@ -289,6 +304,13 @@ $(document).ready(function() {
                     bombStr.system = message.object;
                     console.log("init is " + bombStr.system);
                     break;
+                case "count":
+                    playerListView.setVote(message.subject, message.object);
+                    break;
+
+                case "wrong":
+                    mineView.showWrong(message);
+                    break;
 
 
                 default:
@@ -298,11 +320,12 @@ $(document).ready(function() {
 
 
         },
-        parseDetail:function(data) {
+        parseDetail:function (data) {
             roomService.parsePerson(data.person);
             roomService.parseGame(data.game);
             roomService.parseRoom(data.room);
             roomService.parseRight(data.right);
+            mineService.parseCount(data.votes);
             //  var start=new Date().getTime();
             if ("run" == globalView.getGameStatus()) {
                 mineView.initMine();
@@ -314,14 +337,14 @@ $(document).ready(function() {
             //  console.log("parse use time "+(new Date().getTime()-start));
         },
 
-        parseBomb:function(str) {
+        parseBomb:function (str) {
             var mines = mineUtil.convertStr2Mine(str);
             for (var key in mines) {
                 mineView.showMineOperater(mines[key]);
             }
 
         },
-        updateBomb:function(bomb) {
+        updateBomb:function (bomb) {
             bombStr = bomb;
         }
 
@@ -342,13 +365,13 @@ $(document).ready(function() {
 });
 
 
-(function($) {
+(function ($) {
     $.fn.extend({
-        "rightClick" : function(fn) {
-            $(this).bind('contextmenu', function(e) {
+        "rightClick":function (fn) {
+            $(this).bind('contextmenu', function (e) {
                 return false;
             });
-            $(this).mousedown(function(e) {
+            $(this).mousedown(function (e) {
                 if (3 == e.which) {
                     fn.call($(this), e);
                 }
@@ -356,14 +379,14 @@ $(document).ready(function() {
         }
     });
 
-    $.bindLR = function(elem, type, data, fn, intv) {
+    $.bindLR = function (elem, type, data, fn, intv) {
         var L_BUTTON = $.browser.msie ? 1 : 0;
         var R_BUTTON = $.browser.msie ? 0 : 2;
         var LR_BUTTON = 3; // ie
         var orgType = type.substr(2);
         var L_flag = false;
         var R_flag = false;
-        var getTime = function() {
+        var getTime = function () {
             return +new Date;
         };
         var lrId = getTime();
@@ -388,18 +411,18 @@ $(document).ready(function() {
         elem.data('lrTempEvents', orgFns);
         var timer = getTime();
         var timeOut;
-        var reset = function() {
+        var reset = function () {
             L_flag = false;
             R_flag = false;
             clearTimeout(timeOut);
         };
-        var orgFnHandle = function(e, data) {
+        var orgFnHandle = function (e, data) {
             reset();
             for (var i = 0; i < orgFns.length; i++) {
                 orgFns[i].call(elem, e, data);
             }
         };
-        var L_event = function(e, data) {
+        var L_event = function (e, data) {
             if (!R_flag) { //等待
                 // 如果是LR_BUTTON，就不等了
                 // 在IE下LR_BUTTON调用L_BUTTON事件
@@ -407,7 +430,7 @@ $(document).ready(function() {
                     L_flag = true;
                     timer = getTime();
                     timeOut = setTimeout(
-                        function() {
+                        function () {
                             orgFnHandle(e, data);
                         },
                         intv + 1
@@ -423,13 +446,13 @@ $(document).ready(function() {
                 }
             }
         };
-        var R_event = function(e, data) {
+        var R_event = function (e, data) {
             if (!L_flag) {
                 if (getTime() - timer > intv) {
                     R_flag = true;
                     timer = getTime();
                     timeOut = setTimeout(
-                        function() {
+                        function () {
                             orgFnHandle(e, data);
                         },
                         intv + 1
@@ -445,7 +468,7 @@ $(document).ready(function() {
                 }
             }
         };
-        var eventHandle = function(e, data) {
+        var eventHandle = function (e, data) {
             if (L_BUTTON === e.button)
                 L_event(e, data);
             else if (R_BUTTON === e.button)
@@ -456,13 +479,13 @@ $(document).ready(function() {
             }
         };
         //禁止右键菜单功能;
-        elem.bind('contextmenu', function() {
+        elem.bind('contextmenu', function () {
             return false;
         });
         //绑定新的
         elem.bind(orgType, data, eventHandle);
     };
-    $.unbindLR = function(elem, type) {
+    $.unbindLR = function (elem, type) {
         elem.unbind('contextmenu');
         elem.unbind(type);
         var orgType = type.substr(2);
@@ -473,7 +496,7 @@ $(document).ready(function() {
             if ($.cache[i]['lrId'] == lrId) {
                 var fns = $.cache[i]['lrTempEvents'];
                 for (var j in fns) {
-                    elem.bind(orgType, function() {
+                    elem.bind(orgType, function () {
                         fns[j].apply(elem, arguments)
                     });
                 }
@@ -484,7 +507,7 @@ $(document).ready(function() {
             }
         }
     };
-    $.fn.bindLR = function(type, data, fn, intv) {
+    $.fn.bindLR = function (type, data, fn, intv) {
         if ($.isFunction(data)) {
             intv = fn || 500;
             fn = data;
@@ -501,7 +524,7 @@ $(document).ready(function() {
         }
         return this;
     };
-    $.fn.unbindLR = function(type) {
+    $.fn.unbindLR = function (type) {
         $.unbindLR(this, type);
         return this;
     }
@@ -511,44 +534,44 @@ $(document).ready(function() {
 /*======================================*/
 
 var s = {
-    width : 30,
-    height : 16,
-    squares : [],
-    wrapper : '#inner',
-    sqrClass : 'square',
-    mineNum : 99,
-    numClasses : ['q1','q2','q3','q4','q5','q6','q7','q8'],
-    maskClass : 'mask',
-    errorClass : 'error',
-    wrongClass : 'wrong',
-    uMineClass : 'umine',
-    unsureClass : 'unsure',
-    L_BUTTON : $.browser.msie ? 1 : 0 ,
-    R_BUTTON : $.browser.msie ? 0 : 2 ,
-    firstClick : true,
-    totalButton : '#total',
-    resetButton : '#reset',
-    timerButton : '#timer',
-    timing : function() {
+    width:30,
+    height:16,
+    squares:[],
+    wrapper:'#inner',
+    sqrClass:'square',
+    mineNum:99,
+    numClasses:['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8'],
+    maskClass:'mask',
+    errorClass:'error',
+    wrongClass:'wrong',
+    uMineClass:'umine',
+    unsureClass:'unsure',
+    L_BUTTON:$.browser.msie ? 1 : 0,
+    R_BUTTON:$.browser.msie ? 0 : 2,
+    firstClick:true,
+    totalButton:'#total',
+    resetButton:'#reset',
+    timerButton:'#timer',
+    timing:function () {
     },
-    gameOver : function() {
+    gameOver:function () {
     },
-    knownNum : 0
+    knownNum:0
 };
-var Msweeping = function(level) {
+var Msweeping = function (level) {
     this.mask$ = $('<div>')
         .css({
-            'opacity' : 0.6,
-            'background-color' : '#fff',
-            'display' : 'block',
-            'position' : 'absolute',
-            'top' : ($(s.wrapper).offset().top + parseInt($(s.wrapper).css('border-top-width'))) + 'px',
-            'left' : ($(s.wrapper).offset().left + parseInt($(s.wrapper).css('border-left-width'))) + 'px',
-            'width' : $(s.wrapper).width() + 'px',
-            'height' : $(s.wrapper).height() + 'px',
-            'z-index' : '999',
-            'text-align' : 'center',
-            'vertical-align' : 'middle'
+            'opacity':0.6,
+            'background-color':'#fff',
+            'display':'block',
+            'position':'absolute',
+            'top':($(s.wrapper).offset().top + parseInt($(s.wrapper).css('border-top-width'))) + 'px',
+            'left':($(s.wrapper).offset().left + parseInt($(s.wrapper).css('border-left-width'))) + 'px',
+            'width':$(s.wrapper).width() + 'px',
+            'height':$(s.wrapper).height() + 'px',
+            'z-index':'999',
+            'text-align':'center',
+            'vertical-align':'middle'
         });
     this.timeout = null;
     var tmpSqr = [];
@@ -564,13 +587,13 @@ var Msweeping = function(level) {
         }
     }
     var t = this;
-    var resetMask = function() {
+    var resetMask = function () {
         t.mask$.css({
-            'top' : (
+            'top':(
                 $(s.wrapper).offset().top +
                     parseInt($(s.wrapper).css('border-top-width'))
                 ) + 'px',
-            'left' : (
+            'left':(
                 $(s.wrapper).offset().left +
                     parseInt($(s.wrapper).css('border-left-width'))
                 ) + 'px'
@@ -580,20 +603,20 @@ var Msweeping = function(level) {
         .resize(resetMask)
         .load(resetMask);
     $(document)
-        .bind("selectstart", function() {
+        .bind("selectstart", function () {
             return false;
         })
-        .bind("contextmenu", function() {
+        .bind("contextmenu", function () {
             return false;
         });
-    $(s.resetButton).click(function() {
+    $(s.resetButton).click(function () {
         t.reset();
     });
-    s.timing = function() {
+    s.timing = function () {
         $(s.timerButton).val(parseInt($(s.timerButton).val()) + 1);
         t.timeout = setTimeout(s.timing, 1000);
     };
-    var showAllMines = function() {
+    var showAllMines = function () {
         for (var i = 0; i < s.height; i++) {
             for (var j = 0; j < s.width; j++) {
                 var sqr = s.squares[i][j];
@@ -603,7 +626,7 @@ var Msweeping = function(level) {
             }
         }
     };
-    s.gameOver = function(f) {
+    s.gameOver = function (f) {
         showAllMines();
         clearTimeout(t.timeout);
         s.knownNum = 0;
@@ -623,7 +646,7 @@ Msweeping.prototype = {
      * @return: ret, an array of integers
      *
      **/
-    getRandom: function(t) {
+    getRandom:function (t) {
         t = t || [];
         var ret = t;
         for (var i = 0; i < s.width * s.height; i++) {
@@ -643,7 +666,7 @@ Msweeping.prototype = {
      * @param:
      *
      **/
-    reset: function() {
+    reset:function () {
         var nums = this.getRandom();
         $(s.totalButton).val(nums.length);
         $(s.timerButton).val(0);
@@ -674,7 +697,7 @@ Msweeping.prototype = {
      * @param: str, string to show
      *
      **/
-    msg: function(str) {
+    msg:function (str) {
         this.mask$.html('<div style="padding-top:80px;">' + str + '</div>').appendTo('body');
     },
     /**
@@ -683,7 +706,7 @@ Msweeping.prototype = {
      * @param:
      *
      **/
-    removeMsg: function() {
+    removeMsg:function () {
         this.mask$.remove();
     }
 };
@@ -694,7 +717,7 @@ Msweeping.prototype = {
  * jq is its jQuery Object.
  *
  **/
-var Square = function(i, j, jq) {
+var Square = function (i, j, jq) {
     this.x = i;
     this.y = j;
     this.jq = jq;
@@ -705,7 +728,7 @@ var Square = function(i, j, jq) {
     this.cover = true;
 };
 Square.prototype = {
-    init: function() {
+    init:function () {
 //get neighbors
         if (this.x - 1 >= 0) {
             this.neighbors.push(s.squares[ this.x - 1 ][ this.y ]);
@@ -735,7 +758,7 @@ Square.prototype = {
         if (this.num < 9) {
             for (var i = 0; i < this.neighbors.length; i++) {
                 if (this.neighbors[i].num == 9)
-                    this.num ++;
+                    this.num++;
             }
         }
 //get type
@@ -749,29 +772,29 @@ Square.prototype = {
         this.jq.text('');
         this.setMasked();
     },
-    bindMousedown: function() {
+    bindMousedown:function () {
         var t = this;
-        this.jq.mousedown(function(e) {
+        this.jq.mousedown(function (e) {
             if (e.button == s.R_BUTTON) {
                 if (t.ustat == '') {
                     t.setStat(2);
                     $(s.totalButton).val(parseInt($(s.totalButton).val()) - 1);
-                    s.knownNum ++;
+                    s.knownNum++;
                     if (s.knownNum == s.width * s.height)
                         s.gameOver(true);
                 } else if (t.ustat == '!') {
                     t.setStat(3);
                     $(s.totalButton).val(parseInt($(s.totalButton).val()) + 1);
-                    s.knownNum --;
+                    s.knownNum--;
                 } else if (t.ustat == '?') {
                     t.setStat(1);
                 }
             }
         });
     },
-    bindClick: function() {
+    bindClick:function () {
         var t = this;
-        this.jq.click(function() {
+        this.jq.click(function () {
             if (s.firstClick) {
                 s.timing();
                 s.firstClick = false;
@@ -785,23 +808,23 @@ Square.prototype = {
             }
         });
     },
-    bindLRDown: function() {
+    bindLRDown:function () {
         var t = this;
-        this.jq.bindLR('lrmousedown', function() {
+        this.jq.bindLR('lrmousedown', function () {
             for (var i = 0; i < t.neighbors.length; i++) {
                 if (t.neighbors[i].ustat != '!')
                     t.neighbors[i].setUnMasked();
             }
         });
     },
-    bindLRUp: function() {
+    bindLRUp:function () {
         var t = this;
-        this.jq.bindLR('lrmouseup', function() {
+        this.jq.bindLR('lrmouseup', function () {
             t.jq.trigger('mouseleave');
             if (t.cover) return;
             var count = 0;
             for (var i = 0; i < t.neighbors.length; i++) {
-                if (t.neighbors[i].ustat == '!') count ++;
+                if (t.neighbors[i].ustat == '!') count++;
             }
             if (count > t.num) {
                 for (var i = 0; i < t.neighbors.length; i++) {
@@ -835,22 +858,22 @@ Square.prototype = {
             }
         });
     },
-    bindMouseleave: function() {
+    bindMouseleave:function () {
         var t = this;
-        this.jq.bind('mouseleave', function() {
+        this.jq.bind('mouseleave', function () {
             for (var i = 0; i < t.neighbors.length; i++) {
                 if (t.neighbors[i].cover)
                     t.neighbors[i].setMasked();
             }
         });
     },
-    bindMouseup: function() {
+    bindMouseup:function () {
         var t = this;
-        this.jq.bind('mouseup', function() {
+        this.jq.bind('mouseup', function () {
             t.jq.trigger('lrmouseup');
         });
     },
-    open: function(f) {
+    open:function (f) {
         if (this.cover) {
             this.unCover(f);
             if (this.type == 0) {
@@ -868,13 +891,13 @@ Square.prototype = {
             }
         }
     },
-    setMasked: function() {
+    setMasked:function () {
         this.jq.addClass(s.maskClass);
     },
-    setUnMasked: function() {
+    setUnMasked:function () {
         this.jq.removeClass(s.maskClass);
     },
-    setStat: function(stat) {
+    setStat:function (stat) {
         switch (stat) {
             case 0:
                 this.type = 0; //0:null, 1:num, 2:mine
@@ -912,10 +935,10 @@ Square.prototype = {
                 break;
         }
     },
-    isRightMarked: function() {
+    isRightMarked:function () {
         return this.ustat == '!' && this.type == 2;
     },
-    isWrongMarked: function() {
+    isWrongMarked:function () {
         return this.ustat == '!' && this.type < 2;
     },
     /**
@@ -924,7 +947,7 @@ Square.prototype = {
      * @param:
      *
      **/
-    unCover: function(f) {
+    unCover:function (f) {
         if (this.isRightMarked()) return;
         this.setStat(4);
         this.jq.removeClass(s.maskClass);
@@ -949,7 +972,7 @@ Square.prototype = {
         } else if (this.isWrongMarked()) {
             this.jq.addClass(s.wrongClass);
         }
-        s.knownNum ++;
+        s.knownNum++;
         if (s.knownNum == s.width * s.height)
             s.gameOver(true);
     }
