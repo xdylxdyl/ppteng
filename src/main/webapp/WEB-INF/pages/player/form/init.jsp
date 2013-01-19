@@ -41,7 +41,7 @@
 					type="password" />
 			</spring:bind>
 
-			<input class="action_silver" type="submit" id="submit" /> <a href="\" class="return">返回登录</a>
+			<input class="action_silver" type="submit" id="submit" /> <a href="/" class="return">返回登录</a>
 
 
 		</div>

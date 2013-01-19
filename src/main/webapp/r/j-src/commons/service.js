@@ -158,6 +158,14 @@ var roomService = {
         return  ajaxJson("/record/detail.do?", "get", param, null, 5000, "json");
     },
 
+    parseCount:function (counts) {
+        for (var key in counts) {
+            var c = counts[key];
+            playerListView.setVote(c.id, c.voters.length);
+        }
+
+    },
+
 
 
     parsePerson:function(data) {
