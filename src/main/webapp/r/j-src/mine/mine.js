@@ -19,6 +19,11 @@ $(document).ready(function () {
     //左右开弓
     //$("#inner div").bind("")
 
+    var mineSize={
+        width:12,
+        height:12,
+        border:2
+    }
 
     var mouseAction = {
         click:"click",
@@ -232,10 +237,22 @@ $(document).ready(function () {
             var column = mineView.getSettingColumn();
             var maxCount = mineView.getSettingMineCount();
             mineView.initMineCount(maxCount);
+
+            var containerWidth=(mineSize.width+2*mineSize.border)*parseInt(column);
+            console.log("mine width is "+mineSize.width+" border is "+mineSize.border+" column is "+column+" ,so Total" +
+                "weith is "+containerWidth);
+
+            var containerHeight=(mineSize.width+mineSize.border)*parseInt(column);
+            console.log("mine height is "+mineSize.height+" border is "+mineSize.border+" row is "+row+" ,so Total" +
+                "height is "+containerHeight);
+
+            $("#inner").width(containerWidth);
+
+
             for (var i = 0; i < row * column; i++) {
 
-                var r = Math.floor(i / row) + 1;
-                var c = Math.floor(i % column) + 1;
+                var r = Math.floor(i /column ) + 1;
+                var c = Math.floor(i % column ) + 1;
                 var mineHtml = "<div x='" + r + "' y='" + c + "' id='" + r + "-" + c + "'></div>"
                 $("#inner").append(mineHtml);
                 $("#inner2").append(mineHtml);

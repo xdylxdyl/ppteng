@@ -75,7 +75,7 @@ then
        
        
 	  $room.setSetting($setting.getSetting());
-	 //LogUtil.log(room.toString());
+	 LogUtil.log($setting.getSetting());
      update($room);  
      
     LogUtil.log("update room setting over =================");
@@ -534,12 +534,12 @@ when
 	      );
     
 then      
-    LogUtil.log("all message   start ?=============");
+   # LogUtil.log("all message   start ?=============");
    # LogUtil.log($message);
     
      #LogUtil.log($accepts.size());
    $accepts.addAll(new ArrayList($all_login_ids));	
-   LogUtil.log("all message over =============");
+  # LogUtil.log("all message over =============");
 end
 
 
@@ -555,7 +555,7 @@ when
     $room:Room($rid:id)
     $operater:Operater()
 then      
-    LogUtil.log("next operater  start  =============222");   
+    #LogUtil.log("next operater  start  =============222");   
      $message.setWhere($rid);
      $message.setTime(System.currentTimeMillis());
   
@@ -563,7 +563,7 @@ then
    
 	 retract($message);
 	
-    LogUtil.log("next operater over =============");
+    #LogUtil.log("next operater over =============");
   
 end
 
