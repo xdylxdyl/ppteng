@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <head>
 <title>Room</title>
-<link href="/r/c/index.css" rel="stylesheet" />
+<link href="/r/css/index.css" rel="stylesheet" />
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
 <script src="/r/j-src/listall/init.js"></script>
 <script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js"></script>
@@ -41,7 +41,7 @@
 					type="password" />
 			</spring:bind>
 
-			<input class="action_silver" type="submit" id="submit" /> <a href="\" class="return">返回登录</a>
+			<input class="action_silver" type="submit" id="submit" /> <a href="/" class="return">返回登录</a>
 
 
 		</div>

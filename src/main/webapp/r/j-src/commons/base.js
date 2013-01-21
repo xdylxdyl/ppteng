@@ -180,12 +180,14 @@ resolvePredict.log = function(message) {
 
 };
 resolvePredict.kick = function(message) {
-    if ($("#uid").val() == message.object) {
+    var kickID=message.object;
+    if (globalView.getCreaterId() == kickID) {
         document.location.href = "/m/list.do";
     } else {
 
 
-        var p = playerService.getPlayer(id);
+
+        var p = playerService.getPlayer(kickID);
         gameAreaView.kick(p);
         playerListView.logout(p.id);
         playerService.deletePlayer(p.id);

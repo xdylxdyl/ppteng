@@ -187,15 +187,15 @@ var playerListView = {
     },
     setVote:function(id, count) {
         if (count == 0) {
-            $("#" + id).children("img").text("");
+            $("#" + id).children("i").text("");
         } else {
-            $("#" + id).children("img").text(" +" + count);
+            $("#" + id).children("i").text(" +" + count);
         }
     },
     displayCreater:function(id) {
 
         var tip = $("<em>(房主)</em>");
-        tip.insertAfter("#" + id + " img");
+        tip.insertAfter("#" + id + " i");
 
     },
     sortPlayer:function() {
@@ -214,9 +214,9 @@ var playerListView = {
     },
     appendPlayerItem:function(player) {
         if (player.count == 0) {
-            $("nav ul").append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' class='" + player.status + "' target='_blank'></a><span>" + player.name + "</span><img></img></li>");
+            $("nav ul").append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' class='" + player.status + "' target='_blank'></a><span>" + player.name + "</span><i></i></li>");
         } else {
-            $("nav ul").append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' class='" + player.status + "' target='_blank'></a><span>" + player.name + "</span><img>" + player.count + "</img></li>");
+            $("nav ul").append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' class='" + player.status + "' target='_blank'></a><span>" + player.name + "</span><i>" + player.count + "</img></li>");
         }
 
 

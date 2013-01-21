@@ -293,6 +293,7 @@ var simpleService = {
         roomService.parseGame(data.game);
         roomService.parseRoom(data.room);
         roomService.parseRight(data.right);
+        roomService.parseCount(data.votes)
     }
 }
 

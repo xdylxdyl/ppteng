@@ -69,6 +69,21 @@ then
      BombPic bombPic=new BombPic(systemBombPic,"");
      insert(bombPic);
      
+     //init user bomb count
+     
+     for(Object o: $allReadys){
+     
+        Player p=(Player)o;
+          String uid=p.getId();
+			
+				  
+				  UserCount uc=new UserCount(uid,0);
+				  insert(uc);	  
+				  Message assignMessage=new Message(uid,"count","0");
+				  insert(assignMessage);	  
+     
+     }
+     
 	
 	String	rname=String.valueOf(RandomUtils.nextLong());	
 	
@@ -120,6 +135,7 @@ when
     $message:Message(predict=="start");
     $person:Player($id:id)
     $right:Right(id==$id)
+    Game()
     
 
 	
@@ -210,6 +226,7 @@ when
     $bombPic:BombPic($system:system,$user:user)    
     not Tag(pid==$object)
     $count:Count($bomb:bomb)
+    $userCount:UserCount($uc:count,uid==$subject)
 then
     LogUtil.log("tag pane start  ================="); 
      Pair p=BombUtil.convertString2Pair($object);
@@ -225,6 +242,16 @@ then
     $count.setBomb($bomb);
     update($count);
     LogUtil.log("count is   ================="+$count);
+    
+    $uc=$uc+1; 
+      Message ucMessage=new Message($subject,"count",String.valueOf($uc));
+    insert(ucMessage);     
+       
+    $userCount.setCount($uc);
+    update($userCount);
+    LogUtil.log("user count is   ================="+$uc);
+    
+    
     Tag tag=new Tag($subject,"#",$object);
     insert(tag);
     retract($message);
@@ -241,6 +268,7 @@ when
     $message:Message($subject:subject,predict=="tag",$object:object)  
     $count:Count($bomb:bomb)
     $tag:Tag(pid==$object,value=="#")
+     $userCount:UserCount($uc:count,uid==$subject)
        
 then
     LogUtil.log("clear tag pane start  ================="); 
@@ -248,6 +276,17 @@ then
     $bomb=$bomb-1;
     $count.setBomb($bomb);
     update($count);
+    
+      $uc=$uc-1; 
+      Message ucMessage=new Message($subject,"count",String.valueOf($uc));
+    insert(ucMessage);     
+       
+    $userCount.setCount($uc);
+    update($userCount);
+    LogUtil.log("user count is   ================="+$uc);
+    
+    
+    
     retract($tag);
     retract($message);
     Message m=new Message($object,"mine","clear");
@@ -335,7 +374,6 @@ ruleflow-group "click action"
 when
     $click:Click($pid:pid,value == "0")  
     $bombPic:BombPic($system:system,$user:user)
-    not Tag(pid==$pid)    
     not Message(subject==$pid,predict=="mine")
     $game:Game()    
     $room:Room()
@@ -346,10 +384,11 @@ then
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  
 	 Pair pair=BombUtil.convertString2Pair($pid);
     List<Pair> roundPanes=BombUtil.getRoundPanes(pair,rowCount,columnCount);
-      LogUtil.log("list pair is   ================= "+roundPanes);  
+      LogUtil.log(pair+" list pair is   ================= "+roundPanes);  
     for(Pair p:roundPanes){
     
        String value=BombUtil.clickOpen(p,$system,rowCount,columnCount); 
+       
        Click click=new Click($click.getUid(),value,BombUtil.convertPair2String(p));
        insert(click);
     }    
@@ -376,7 +415,7 @@ rule 'click mine'
 ruleflow-group "game status"
 
 when
-    $click:Click(value=="*",$pid:pid)
+    $click:Click(value=="*",$pid:pid,$uid:uid)
    
      
     $bombPic:BombPic($system:system,$user:user)    
@@ -391,6 +430,9 @@ then
                
      Message tagMessage=new Message($pid,"mine","bomb"); 
      insert(tagMessage); 
+     
+      Message wrongMessage=new Message($uid,"wrong",$pid); 
+     insert(wrongMessage); 
      
      Message gameOverMessage=new Message($recordName,"over","you lose"); 
      insert(gameOverMessage); 
@@ -504,6 +546,17 @@ when
     $count:Count()   
     $bombPic:BombPic($system:system,$user:user)
     $room:Room() 
+    
+       
+    $allUserCount:ArrayList()
+	      from accumulate(
+	      $userCount:UserCount()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($userCount);),
+	      result(ls)
+	      );
+    
+    
    
     
 then
@@ -512,12 +565,18 @@ then
      retract($game);
      retract($count);
      retract($bombPic);   
+     
+     for(Object o:$allUserCount){
+        retract(o);
+     }
     
      $room.setStatus("unrun"); 
      update($room);
      
      $operater.setGameOver(true);
      $operater.setRecordID(Long.valueOf($recordName));  
+     
+     
    
     LogUtil.log("game over process over  ================="); 
 end
@@ -611,6 +670,14 @@ when
 	      result(ls)
 	      );
   
+  
+    $allUserCount:ArrayList()
+	      from accumulate(
+	      $userCount:UserCount()	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($userCount);),
+	      result(ls)
+	      );
    
     
     
@@ -633,6 +700,7 @@ then
       } 
       $bombPic.setUser(bomb);
       m.put("bomb",$bombPic); 
+       m.put("votes",$allUserCount);  
        
       $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);   
