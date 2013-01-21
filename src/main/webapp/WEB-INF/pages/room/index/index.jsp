@@ -12,120 +12,182 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>LogIn</title>
-<link href="r/css/index.css" rel="stylesheet" />
-<script src="r/j-src/jquery/jquery-1.6.1.js"></script>
-<script type="text/javascript">
 
-//显示灰色遮罩层
-function showBg() {
-    var bh = $(window).height();
-    var bw = $(window).width();
-    $("#mask").css({
-        height:bh,
-        width:bw,
-        display:"block"
-    });
-    $("#mask").show();
-}
-//关闭灰色遮罩
-function closeBg() {
-    $("#mask").hide();
-}
-$(document).ready(function() {
-    function checkhHtml5() {
-        if (typeof(Worker) !== "undefined") {
-            //什么都不用做
-           // alert("支持~")
-        }
-        else {
-            showBg();
-        }
-    }
-    checkhHtml5();
-    $(window).resize(function() {
-        checkhHtml5();
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.carousel').carousel();
     })
-})
+     headView.highLight("index");
 </script>
 </head>
 <body>
-	<%--<form>--%>
-	<%--<h1>Log In</h1>--%>
-	<%--<fieldset class="radios">	--%>
-	<%--<input type="radio" value="google" name="lei"  checked="checked">Google--%>
-	<%--<input type="radio" value="yahoo" name="lei">Yahoo--%>
-	<%--<input type="radio" value="cms" name="lei">cms--%>
-	<%--</fieldset>--%>
-	<%--<fieldset class="username">--%>
-	<%--<label>USERNAME</label><input type="text"><br />--%>
-	<%--<label>PASSWORD</label><input type="password">--%>
-	<%--</fieldset>--%>
-	<%--<fieldset class="action">--%>
-	<%--<input type="submit" value="Log in">--%>
-	<%--</fieldset>--%>
-	<%--</form>--%>
 
 
 
-	<form action="/player/login.do" method="post">
-		<h1>Log In</h1>
-
-		<fieldset class="email">
-			<label>email</label><input type="text" name="email"><br />
-		</fieldset>
-		<fieldset class="password">
-			<label>password</label><input type="password" name="password"><br />
-		</fieldset>
-
-		<div class="login_hint">
-			<c:if test="${code!=0}">
-				<label><spring:message code="${code}" /></label>
-			</c:if>
-
+	<div class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="span4">
+					<form action="/player/login.do" method="post" class="login-box">
+						<h2>Login</h2>
+							
+						
+						<p>使用您的注册邮箱登录:</p>
+						<label for="email">email</label> <input type="text" id="email"
+							name="email" placeholder="Please enter your e-mail here"
+							class="login email-input">
+					    
+						 <label for="password">password</label>
+						<input type="password" id="password" name="password"
+							placeholder="Please enter your password here"
+							class="login password-input">
+							  <c:if test="${code!=0}">
+								<p class="hint"><spring:message code="${code}" /></p>
+						</c:if>	
+						<div class="login-action">
+							<span class="login-checkbox"> <input type="checkbox"
+								id="keep" name="keep" class="login-checkbox"> <label
+								for="keep" class="choice">两周内保持登录</label>
+							</span>
+							<button class="btn btn-primary btn-large pull-right">登录</button>
+							
+						</div>
+											
+						<div class="login-social">
+							<p>
+								使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
+							</p>
+							<a href="#"><img src="/r/img/weibo_login.png" alt=""></a> <a
+								href="#"><img src="/r/img/qq_login.png" alt=""></a>
+						</div>
+					</form>
+				</div>
+				<div class="span8 banner-screen">
+					<div id="indexCarousel" class="carousel">
+						<div class="carousel-inner">
+							<div class="active item">
+								<img src="/r/img/img_banner_1.jpg" alt="杀人游戏">
+								<div class="carousel-caption">
+									<h4>武功再高也怕菜刀</h4>
+									<p>杀人游戏是一类注重分析和推理的游戏,而简化是诸多版本中最能将分析/推理/说服/计谋等多种能力展现淋漓尽致的版本</p>
+								</div>
+							</div>
+							<div class="item">
+								<img src="/r/img/img_banner_2.jpg" alt="简化">
+								<div class="carousel-caption">
+									<h4>自古太监功夫高</h4>
+									<p>游戏通常分为两大阵营，水民和杀手；水民以投票为手段投死杀手获取最后胜利，杀手方隐匿于水民中间，靠夜晚杀人和白天伪装成水民,坚持活到最后为胜利</p>
+								</div>
+							</div>
+							<div class="item">
+								<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
+								<div class="carousel-caption">
+									<h4>双拳难敌四手</h4>
+									<p>交识朋友，可以和各种职业、各种类型的人结交朋友，通过游戏了解对方的性格特点并借助游戏中的交流加深彼此间的了解。</p>
+								</div>
+							</div>
+						</div>
+						<a class="carousel-control left" href="#indexCarousel"
+							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
+							href="#indexCarousel" data-slide="next">&rsaquo;</a>
+					</div>
+				</div>
+			</div>
 		</div>
+	</div>
+	<!-- /banner -->
 
-		<fieldset class="action">
-			<input type="submit" value="Log in">
-		</fieldset>
-
-	</form>
-	
-
-
-	<div class="regedit">
-		<a href="/player/regedit.do">一分钟注册</a>
-
+	<div class="content">
+		<div class="container">
+			<div class="row">
+				<div class="span8">
+					<h3>葡萄藤轻游戏</h3>
+					<div class="row-fluid">
+						<div class="span6">
+							<div class="chapter">
+								<div class="chapter-body">
+									<h4>
+										<a href="#">静静的</a>
+									</h4>
+									<p>你可以和朋友一起玩[杀人游戏],[多人扫雷],或者你什么都不做,就只是静静待着,和我一样.</p>
+								</div>
+							</div>
+							<div class="chapter">
+								<a href="#" class="pull-left"><img
+									src="/r/img/icon_alpaca.png" alt="" width="64" height="64"></a>
+								<div class="chapter-body">
+									<h4>
+										<a href="#">杀人游戏[简化版]</a>
+									</h4>
+									<p>
+										杀人游戏,尤其是简化版,用高雅和艺术形容,一点都不过份.游戏中经常可以看到妙趣横生的对话,风格迥异的人物,和各种知性漂亮的姑娘...
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="span6">
+							<div class="chapter">
+								<a href="#" class="pull-left"><img
+									src="/r//img/icon_alpaca.png" alt="" width="64" height="64"></a>
+								<div class="chapter-body">
+									<h4>
+										<a href="#">扫雷[多人版]</a>
+									</h4>
+									<p>可以和你的朋友一起 玩这个简单有趣的小游戏了~体验一下三五个人去扫一个[100*100]超大雷区的冒险历程?</p>
+								</div>
+							</div>
+							<div class="chapter">
+								<a href="#" class="pull-left"><img
+									src="/r//img/icon_alpaca.png" alt="" width="64" height="64"></a>
+								<div class="chapter-body">
+									<h4>
+										<a href="#">这些游戏都不喜欢?</a>
+									</h4>
+									<p>想过设计一个自己喜欢的游戏呢?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以!来联系我吧~</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span4">
+					<h3>本周英雄榜</h3>
+					<table class="table ranking">
+						<tbody>
+							<tr>
+								<td class="score">54903</td>
+								<td class="name">小午</td>
+							</tr>
+							<tr>
+								<td class="score">54100</td>
+								<td class="name">子氏</td>
+							</tr>
+							<tr>
+								<td class="score">44903</td>
+								<td class="name">白菜</td>
+							</tr>
+							<tr>
+								<td class="score">41902</td>
+								<td class="name">七八</td>
+							</tr>
+							<tr>
+								<td class="score">33902</td>
+								<td class="name">月落</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 
-    <div class="past">
-			<p>若你肯拥抱我.手臂枯干又如何 若你肯亲吻我.双唇冰冷又如何 我不需要更多,给我更多又如何 我不想要更多,给了更多又如何</p>
-
-			<p>若你能看着我,目光冷漠又如何 若你能陪着我,心不在焉又如何 你不用给更多,给我更多又如何 你不必给更多,给了更多又如何</p>
-
-			<p>我全都不舍得,你全都不记得. 谁曾经不舍得,谁全都不记得. 不记得我又如何,不记得你又如何 我记得你又如何,被迫忘记又如何</p>
-
-			<p>若你能想起我,身形模糊又如何 若你能提到我,神色轻蔑又如何 从不曾有更多,有过更多又如何 从不会有更多,会有更多又如何</p>
-		</div>
-    
 
 
 
-
-
-
-
-	<div id="mask">
-		<p>您的浏览器版本太低，别再使用360安全浏览器/IE 这些Toooooooooooooooold的浏览器了,他们不支持HTML5的功能,会导致样式错乱以及JS无法使用</p>
-		<p>赶紧的使用最新版本的<a href="http://www.firefox.com.cn/download/">FireFox</a>/
-		<a href="http://dl.pconline.com.cn/download/51614.html">Chrome</a>/
-		<a href="http://ie.sogou.com/">Sogou</a>(高速模式)/
-		<a href="http://chrome.360.cn/">360极速浏览器</a>(注意不是360安全浏览器,注意如果仍然出现提示框,点击地址栏之后的图标切换成极速模式,同搜狗)
-		</p>
-		
-		
-	</div>
 </body>
 </html>
 

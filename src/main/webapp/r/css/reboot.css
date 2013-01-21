@@ -22,7 +22,7 @@
     overflow: hidden;
     line-height: 70px;
     color: #fff;
-    background: url(../img/logo1.jpg) no-repeat 0 0;
+    background: url(/r/img/logo1.jpg) no-repeat 0 0;
     font: 38px/70px "微软雅黑";
     text-shadow: none;
 }
@@ -52,11 +52,16 @@
 .login-box label {
     display: none;
 }
+
 .login-box .email-input {
-    background: url("../img/user.png") no-repeat;
+    background: url("/r/img/user.png") no-repeat;
 }
 .login-box .password-input {
-    background: url("../img/password.png") no-repeat;
+    background: url("/r/img/password.png") no-repeat;
+}
+.hint{
+    color:red;
+    float: left;
 }
 .login-box .login {
     font-size: 13px;
@@ -88,7 +93,7 @@ span.login-checkbox > input[type="checkbox"] + label {
     margin: 0;
     font-size: 12px;
     line-height: 1.5em;
-    background: url("../img/check.png") no-repeat 0 0;
+    background: url("/r/img/check.png") no-repeat 0 0;
     cursor: pointer;
 }
 .login-social {

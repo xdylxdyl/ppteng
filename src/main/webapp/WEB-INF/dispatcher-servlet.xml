@@ -58,7 +58,8 @@
 				<value>*/room/play/*</value>
 				<value>*/room/list/*</value>
 				<value>*/record/list/*</value>
-				<value>*/player/detail</value>
+				<value>*/player/*</value>
+				<value>*/room/index/*</value>
 			</list>
 		</property>
 	</bean>

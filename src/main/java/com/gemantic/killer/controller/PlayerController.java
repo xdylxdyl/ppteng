@@ -372,6 +372,10 @@ public class PlayerController {
 
 		Long selfID = cookieUtil.getID(request, response);
 
+		if(selfID==null){
+			return "redirect:/?";
+		}
+		
 		if (uid == null) {
 			uid = selfID;
 		}

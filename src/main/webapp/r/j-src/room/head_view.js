@@ -7,17 +7,23 @@
  */
 
 var headView = {
-    highLight:function(v) {
+    highLight:function (v) {
 
         switch (v) {
+            case 'index':
+                $("#nav li").eq(0).addClass("active");
+                break;
             case 'game':
-                $("#nav li").eq(1).addClass("on");
+                $("#nav li").eq(1).addClass("active");
                 break;
             case 'case':
-                $("#nav li").eq(2).addClass("on");
+                $("#nav li").eq(2).addClass("active");
                 break;
-             case 'person':
-                $("#nav li").eq(3).addClass("on");
+            case 'person':
+                $("#nav li").eq(3).addClass("active");
+                break;
+            case 'about':
+                $("#nav li").eq(6).addClass("active");
                 break;
             default:
                 ;
@@ -25,5 +31,3 @@ var headView = {
     }
 
 }
-
-

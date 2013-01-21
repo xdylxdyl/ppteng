@@ -5,11 +5,10 @@
 <tiles-definitions>
 
 
-	
-	
+
+
 	<definition name="ppt" template="/WEB-INF/pages/tiles/all/layout.jsp">
-		<put-attribute name="header"
-			value="/WEB-INF/pages/room/tiles/head.jsp" />
+		<put-attribute name="header" value="/WEB-INF/pages/room/tiles/head.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/pages/tiles/layout/body.jsp" />
 		<put-attribute name="footer"
@@ -32,18 +31,34 @@
 	<definition name="/room/play/*" extends="game.room">
 		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
 	</definition>
-	
-		<definition name="/room/list/*" extends="ppt">
+
+
+
+
+	<definition name="/room/list/*" extends="ppt">
 		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
+		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-房间列表" type="string" />
+	</definition>
+
+	<definition name="/room/index/*" extends="ppt">
+		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
+		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-首页" type="string" />
 	</definition>
 
 
 	<definition name="/record/list/*" extends="ppt">
 		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
+		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-战例" type="string" />
 	</definition>
 
 	<definition name="/room/player/detail" extends="ppt">
-		<put-attribute name="body" value="/WEB-INF/pages/room/player/detail.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/room/player/detail.jsp" />
+	</definition>
+	
+	<definition name="/player/form/*" extends="ppt">
+		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
+		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-注册" type="string" />
 	</definition>
 
 </tiles-definitions>
