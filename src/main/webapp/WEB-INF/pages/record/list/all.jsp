@@ -4,7 +4,7 @@
 <head>
 <meta charset=utf-8">
 <title>LogIn</title>
-<link href="/r/c/all.css" rel="stylesheet" />
+<link href="/r/css/all.css" rel="stylesheet" />
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
 <script src="/r/j-src/listall/record_list.js"></script>
 

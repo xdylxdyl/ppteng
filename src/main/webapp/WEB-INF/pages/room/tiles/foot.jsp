@@ -7,7 +7,7 @@
 <title>${room.name}</title>
 <meta charset="utf-8">
 
- <link href="/r/c/foot.css" rel="stylesheet"/>
+ <link href="/r/css/foot.css" rel="stylesheet"/>
 
 
 </head>
