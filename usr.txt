@@ -1,5 +1,5 @@
 {"id":1845201926088418304,"name":"段宝7","status":3,"profession":3,"votes":[]}
-{"id":4000480560028460032,"name":"段宝4","status":3,"profession":3,"votes":[]}
+{"id":4000480560028460032,"name":"forget 段宝4","status":3,"prgfession":3,"votes":[]}
 {"id":19971211714900992,"name":"藏宝","status":3,"profession":3,"votes":[]}
 {"id":7666077824212299776,"name":"英文","status":3,"profession":3,"votes":[]}
 {"id":4848195274628878336,"name":"段宝","status":3,"profession":3,"votes":[]}
