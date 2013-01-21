@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>diary</title>
+<link type="text/css" rel="stylesheet" href="../../../c/base/base.css" />
+<link href="../../../c/themes/night/style.css" rel="stylesheet" type="text/css"/>
+<link type="text/css" rel="stylesheet" href="../c/style.css" />
+</head>
+<body>
+<!--[if lte IE 6]>
+<div id="scrollWrap">
+<![endif]-->
+<div id="page">
+	<div id="pageMid">
+		<div id="pageInt">
+			<div id="pageBd">
+				<div id="pageBdInt">
+					<!-- Page Body Start -->
+					<div id="canvas-app" class="canvas">
+						<div id="canvas-appInt">
+							<!-- Canvas Start -->
+							<div id="app-blog" class="app-blog">
+								<div class="appHead">
+									<h2><img class="icon i-diary" title="写新日志" alt="写新日志" src="http://10.11.85.21/r/i/space.gif" />写新日志</h2>
+								</div>
+								<div class="appBody">
+									<hr class="line-solid"/>
+									<div class="appContent" id="">
+										<div class="lay lay-mAuto-s200">
+											<div class="layInt">
+												<div class="colMain">
+													<div class="editBox">
+														<dl class="fieldset">
+															<dd>
+																<div class="msgs">该日志于8：58 自动保存到草稿箱</div>
+															</dd>
+															<dt>标题：</dt>
+															<dd>
+																<input class="text" type="text" />
+															</dd>
+															<dt>内容：</dt>
+															<dd>
+																<div class="txtContent">
+																	<div class="toolContainer"> <span class="fontBox">
+																		<div class="toolBtn"><img src="../c/i/editor/t01Cur.gif" /></div>
+																		<div class="toolBtn" onclick="toggle('pop02')"><img src="../c/i/editor/t02.gif" /></div>
+																		<div class="toolBtn" onclick="toggle('pop03')"><img src="../c/i/editor/t03.gif" /></div>
+																		<div class="toolBtn"><img src="../c/i/editor/t04.gif" /></div>
+																		</span> <span class="imgBox">
+																		<div class="toolBtn" onclick="toggle('pop05')"><img src="../c/i/editor/t05.gif" /></div>
+																		<div class="toolBtn"><img src="../c/i/editor/t06.gif" /></div>
+																		<div class="toolBtn"><img src="../c/i/editor/t07.gif" /></div>
+																		<div class="toolBtn"><img src="../c/i/editor/t08.gif" /></div>
+																		</span>
+																		<div style="top:25px; left:30px; display:none" class="popLayer" id="pop02">
+																			<div class="decor"> <span class="tl"/> <span class="tr"/> <span class="br"/> <span class="bl"/> </div>
+																			<div class="content">
+																				<div class="fontPop" id="fontPop">
+																					<h3>字体</h3>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:宋体">宋体</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:黑体">黑体</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:楷体_GB2312">楷体_GB2312</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:隶书">隶书</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:幼圆">幼圆</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:Arial">Arial</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:Tahoma">Tahoma</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:Times New Roman">Times New Roman</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:Courier New">Courier New</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:Sans-serif">Sans-serif</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-family:Verdana">Verdana</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div style="top:25px; left:55px; display:none" class="popLayer" id="pop03">
+																			<div class="decor"> <span class="tl"/> <span class="tr"/> <span class="br"/> <span class="bl"/> </div>
+																			<div class="content">
+																				<div class="fontPop" id="fontPop">
+																					<h3>文字大小</h3>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-size:12px">12px</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-size:14px">14px</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-size:18px">18px</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-size:24px">24px</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-size:32px">32px</div>
+																					<div onmouseover="cBg(this)" onmouseout="clBg(this)" style="font-size:48px">48px</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div style="top:25px; left:120px; display:none" class="popLayer" id="pop05">
+																			<div class="decor"> <span class="tl"/> <span class="tr"/> <span class="br"/> <span class="bl"/> </div>
+																			<div class="content">
+																				<div class="updatePhoto">
+																					<ul class="fix" id="selectUpdate">
+																						<li class="on" onclick="ftag(this,1)" onmouseover="tagBg(this)" onmouseout="clTagBg(this)">上传照片</li>
+																						<li onclick="ftag(this,2)" onmouseover="tagBg(this)" onmouseout="clTagBg(this)">网络照片</li>
+																						<li onclick="ftag(this,3)" onmouseover="tagBg(this)" onmouseout="clTagBg(this)">我的相册</li>
+																					</ul>
+																					<div id="tC_1">
+																						<dl class="fieldset">
+																							<dt>选择照片：</dt>
+																							<dd>
+																								<input type="file" class="file" />
+																								<div class="meta">照片大小不超过5M</div>
+																							</dd>
+																							<dd> <span class="button button-main"><span>
+																								<button type="button">发布日志</button>
+																								</span></span> </dd>
+																						</dl>
+																					</div>
+																					<div id="tC_2" style="display:none">
+																						<dl class="fieldset">
+																							<dt>文字：</dt>
+																							<dd>
+																								<input type="text" class="text" />
+																							</dd>
+																							<dt>链接地址：</dt>
+																							<dd>
+																								<input type="text" class="text" />
+																							</dd>
+																							<dd><span class="button button-main"><span>
+																								<button type="button">立即插入</button>
+																								</span></span> <a href="#">取消</a></dd>
+																						</dl>
+																					</div>
+																					<div id="tC_3" style="display:none">
+																						<div class="myAlbum">
+																							<p>选择
+																								<select class="select">
+																									<option>专辑1</option>
+																									<option>专辑2</option>
+																								</select>
+																								专辑内的照片</p>
+																							<ul class="fix">
+																								<li class="cur"><i></i><a href="#"><img src="http://sns.sohu.com/images/icon/20090205/small_1233808201069.jpg" width="130px"  /></a></li>
+																								<li class="cur"><i></i><a href="#"><img src="http://sns.sohu.com/images/icon/20090205/small_1233808201069.jpg" width="130px"  /></a></li>
+																								<li class="cur"><i></i><a href="#"><img src="http://sns.sohu.com/images/icon/20090205/small_1233808201069.jpg" width="130px"  /></a></li>
+																								<li><i></i><a href="#"><img src="http://sns.sohu.com/images/icon/20090205/small_1233808201069.jpg" width="130px"  /></a></li>
+																							</ul>
+																						</div>
+																						<div class="myAlbumBtn"> <span class="button button-main"><span>
+																							<button type="button">立即插入</button>
+																							</span></span> <a href="#">取消</a> </div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="editorContainer">
+																		<textarea></textarea>
+																	</div>
+																</div>
+															</dd>
+															<dt>谁可以浏览：</dt>
+															<dd>
+																<select name="" class="select">
+																	<option>所有人</option>
+																</select>
+																<p>
+																	<input class="checkbox" type="checkbox" id="allow" />
+																	<label for="allow">允许评论</label>
+																</p>
+															</dd>
+															<dd class="editBtn"><span class="button button-main"><span>
+																<button type="button">发布日志</button>
+																</span></span><a href="temp.html" target="_blank">预览</a><a href="#">暂存草稿</a></dd>
+														</dl>
+													</div>
+												</div>
+												<div class="colSub">
+													<div class="addAbout">
+														<h4>添加与日志相关的好友</h4>
+														<input type="text" class="text" />
+														<h4 class="have">与该日志相关的好友</h4>
+														<ul class="selectedFriend">
+															<li class="fix"> <img src="http://sns.sohu.com/images/icon/20090119/avatar-48.gif" class="avatar-48" />
+																<div class="sbInfo"> <a href="#">黑盒子</a><br />
+																	<a title="移除" class="icon i-ignore" href="#"></a><a href="#" class="del">移除</a> </div>
+															</li>
+															<li class="fix"> <img src="http://sns.sohu.com/images/icon/20090119/avatar-48.gif" class="avatar-48" />
+																<div class="sbInfo"> <a href="#">黑盒子</a><br />
+																	<a title="移除" class="icon i-ignore" href="#"></a><a href="#" class="del">移除</a> </div>
+															</li>
+															<li class="fix"> <img src="http://sns.sohu.com/images/icon/20090119/avatar-48.gif" class="avatar-48" />
+																<div class="sbInfo"> <a href="#">黑盒子</a><br />
+																	<a title="移除" class="icon i-ignore" href="#"></a><a href="#" class="del">移除</a> </div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Canvas End -->
+						</div>
+					</div>
+					<!-- Page Body End -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--[if IE 6]>
+</div>
+<![endif]-->
+</body>
+</html>
+<!--临时JS-->
+<script>
+function toggle(ele) {
+	ele = $(ele);
+	//ele.style.display = ele.style.display=='none'?'block':'none';
+	ele.style.display = ele.style.display!='none'?'none':'';
+}
+function $(id) {
+	return document.getElementById(id);
+}
+
+function cBg(e){
+	e.className = 'cur';
+	}
+function clBg(e){
+	e.className = '';
+	}	
+
+function ftag(obj,id){
+	selectMenu(obj);
+	for (i=1;i<4;i++){
+		j = $("tC_"+i);
+		j.style.display = 'none';
+	}
+	$("tC_"+id).style.display = '';
+}
+function selectMenu(obj){
+	var lia = $("selectUpdate").getElementsByTagName("li");
+	var lialen = lia.length;
+	for(i=0; i<lialen; i++){
+		if(lia[i].className=="on")
+		lia[i].className = "";
+	}
+	obj.className = "on";
+}
+
+function tagBg(e){
+	if(e.className!='on'){
+		e.className='mOver';
+		}
+	}
+function clTagBg(e){
+	if(e.className!='on'){
+		e.className='';
+		}
+	}
+</script>

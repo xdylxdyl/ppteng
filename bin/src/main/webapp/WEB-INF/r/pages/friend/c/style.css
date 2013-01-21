@@ -1,0 +1,113 @@
+@charset "utf-8";
+/* Sohu SNS Friend Style
+ * Version: 1.0
+ * Created: 2009-01-06
+ * Author: Matt Wang (www.uiland.com)
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+
+.appHead .icon{background:url(i/appIcon-24.gif);}
+
+.opt{padding:0 0 0 16px;background:url(i/icon.gif) no-repeat;}
+	.opt-changeGroup{background-position:0 0;}
+	.opt-break{background-position:0 -20px;}
+
+/* lay */
+.lay-m160-sAuto{}
+	.lay-m160-sAuto .layInt,
+	.layInt .lay-m160-sAuto .layInt{padding-left:160px;}
+		.lay-m160-sAuto .colMain,
+		.colInt .lay-m160-sAuto .colMain{float:left;width:160px;margin:0 0 0 -160px;}
+		.lay-m160-sAuto .colSub,
+		.colInt .lay-m160-sAuto .colSub{float:right;width:100%;}
+
+/* mod */
+#page-friend .mod{background:none;}
+	#page-friend .mod .mCt{background:none;}
+
+/* 好友管理页 */
+#friendManageLay{/*margin:15px 6px;*/}
+
+#friendGroups{border:1px solid #ccc;}
+	#friendGroups h3{margin:0;padding:5px 10px;background:#600;color:#fff;}
+	ul.friendGroupList{margin:0;list-style:none;}
+		ul.friendGroupList li{*margin-bottom:-3px;padding:5px 5px 5px 10px;border-bottom:1px dashed #999;zoom:1;}
+			ul.friendGroupList a.fgName{padding:0 0 0 10px;}
+			ul.friendGroupList a.all{padding:0;}
+			ul.friendGroupList .fgOption{display:none;}
+		ul.friendGroupList li.on{}
+			ul.friendGroupList li.on a.fgName{font-weight:700;}
+			ul.friendGroupList li.on .fgOption{display:block;float:right;margin:2px 0 0;}
+				ul.friendGroupList li.on .fgOption a{cursor:pointer;}
+		ul.friendGroupList li.edit{position:relative;padding:0;zoom:1;}
+			ul.friendGroupList li.edit a{color:#fff;}
+			ul.friendGroupList li.edit .fgName{position:relative;padding:10px 0 10px 10px;background:#600;zoom:1;}
+				ul.friendGroupList li.edit .fgName input{width:120px;margin:0 0 5px;border:0;}
+			ul.friendGroupList li.edit .fgTip{position:absolute;top:100%;width:200px;margin:-5px 0 0 5px;zoom:1;}
+				ul.friendGroupList li.edit .fgTip .content{padding:2px 8px;}
+	.friendCreateGroup{padding:10px;}
+
+#friendList{border:0;}
+	#friendList .mCt{border:0;}
+	#friendList .mHd{border-bottom:1px solid #999;}
+		#friendList h3{color:#999;font-weight:normal;}
+	#friendList .mBd{padding:0;}
+	
+		#friendList .addFriend{position:relative;padding:10px;border-bottom:1px solid #999;background:#ffffdc;zoom:1;}
+			#friendList .addFriend dl.fieldset{padding:0 0 0 130px;}
+				#friendList .addFriend dl.fieldset dt{width:120px;margin-left:-130px;}
+				#friendList .addFriend dl.fieldset dd{padding:0;}
+			#friendList .afTip{position:absolute;top:100%;left:150px;width:300px;margin:-10px 0 0 5px;zoom:1;}
+				#friendList .afTip .content{padding:2px 8px;}
+		
+		#friendList ul.friendList{margin:0;}
+			#friendList ul.friendList li.friendItem{margin:0;padding:10px 100px 10px 70px;}
+				#friendList ul.friendList li .basic{display:block;}
+				#friendList ul.friendList li .extra{display:none;}
+				#friendList ul.friendList li .firendOption{width:100px;margin:0 -100px 0 0;text-align:left;font-family:"宋体",Arial,Helvetica,sans-serif;}
+					#friendList ul.friendList li .firendOption ul{margin:0;list-style:none;}
+					#friendList ul.friendList li .firendOption a{padding:0 0 0 16px;}
+			#friendList ul.friendList li.hover,
+			#friendList ul.friendList li:hover{background:#fffef5;}
+			#friendList ul.friendList li.click{padding:10px 100px 10px 188px;background:#fffef5;}
+				#friendList ul.friendList li.click .basic{display:none;}
+				#friendList ul.friendList li.click .extra{display:block;}
+				#friendList ul.friendList li.click .friendAvatar{width:170px;margin:0 0 0 -180px;text-align:left;}
+				#friendList ul.friendList li.click .friendInfo{margin-top:0;}
+		
+		#friendList .pager{margin:10px;}
+
+
+/* 其他人的好友 */
+#commonFriendHead{}
+	#commonFriendHead img{float:left;width:48px;height:48px;}
+	#commonFriendHead span{display:block;font:normal 12px/20px Verdana,Geneva,sans-serif;white-space:nowrap;}
+
+#commonFriendList{padding:0 10px;border:0;}
+	#commonFriendList .mCt{border:0;}
+	#commonFriendList .mHd{border-bottom:1px solid #999;}
+	#commonFriendList .mBd{padding:20px;}
+		#commonFriendList ul{/*background:url(i/commonFriendList.gif);*/}
+			#commonFriendList li.friendItem{_display:inline;overflow:hidden;float:left;width:125px;height:50px;margin:0 10px;padding:12px 30px 18px 72px;}
+				#commonFriendList .firendOption{width:20px;margin:0 -20px 0 0;}
+				#commonFriendList .friendInfo{}
+					#commonFriendList .friendInfo p{overflow:hidden;width:100%;*text-overflow:ellipsis;-o-text-overflow:ellipsis;white-space:nowrap;}
+					#commonFriendList .friendInfo .friendAdd{background:url(i/add.gif) no-repeat;padding:0 0 0 18px;}
+		#commonFriendList .pager{padding:10px;}
+
+
+/* dialogs */
+.dialog p{margin:0 0 10px;}
+
+.friendDialog-addFriend{}
+	.friendDialog-addFriend dt{padding-top:10px !important;text-align:center !important;}
+
+.friendDialog-changeGroup{}
+	.changeGroup{overflow:auto;height:100px;margin:5px;padding:5px 10px;border:1px solid #ccc;}
+		.changeGroup .checkboxes li{width:49%;}
+		.changeGroup .addNewGroup{height:24px;padding:5px 0;}
+
+.friendDialog-recommend{}
+	.friendDialog-recommend dt{text-align:center !important;}
+	.friendDialog-recommend dd{padding-top:10px !important;}

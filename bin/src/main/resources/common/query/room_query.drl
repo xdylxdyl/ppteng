@@ -1,0 +1,28 @@
+package drools.common
+
+import drools.common.*
+
+
+import simple.killer.*
+import com.gemantic.killer.common.model.Message
+import com.gemantic.killer.common.model.Operater;
+import com.gemantic.killer.common.model.Setting;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Iterator;
+
+
+query "member of room"  ()
+    ids:HashSet()
+	      from accumulate(
+	      Player($id:id)	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+end

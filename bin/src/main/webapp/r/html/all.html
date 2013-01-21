@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset=utf-8">
+<title>LogIn</title>
+<link href="../c/all.css" rel="stylesheet"/>
+<script src="../j-src/jquery/jquery-1.6.1.js"></script>
+
+</head>
+	<body>
+		<div id="wrap">
+			<div id="content">
+				<header></header>
+				<nav></nav>
+				<div id="index">
+					<div id="create">
+						<p>您是要创建一个房间呢还是创建一个房间呢还是创建一个房间？</p>
+						<p class="right"><a href="" class="button"> Create Room </a></p>
+					</div>
+					<article class="sample">
+						<h2><a href="">Room name is here</a></h2>
+						<p class="data">纪元：2011-10-26 7:00AM 房主：<a href="">name</a></p>
+						<p class="describe">房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述</p>
+					</article>
+					<article class="sample">
+                        <h2><a href="">Room name is here</a></h2>
+                        <p class="data">纪元：2011-10-26 7:00AM 房主：<a href="">name</a></p>
+                        <p class="describe">房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述</p>
+                    </article>
+					<article class="sample">
+                        <h2><a href="">Room name is here</a></h2>
+                        <p class="data">纪元：2011-10-26 7:00AM 房主：<a href="">name</a></p>
+                        <p class="describe">房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述</p>
+                    </article>
+				</div>
+			</div>
+			<div id="uplayer">
+	            <form>
+	                <label>房间名称：</label>
+	                <input type="text" class="text"/><br />
+	                <label>游戏版本：</label>
+	                <select>
+	                    <option>简化</option>
+	                    <option>猜数字</option>
+	                </select><br />
+	                <input class="submit" type="submit" />
+	                <a href="" class="cancel">取消并返回房间列表</a>
+	            </form>
+	        </div>
+		</div>
+		
+<script>
+    $(document).ready(function() {
+        $(".sample").hover(function() {
+            $(this).addClass("samplehover");
+        }, function() {
+            $(this).removeClass("samplehover");
+        })
+		
+		$("#create .button").bind('click', function() {
+			var width = $("#wrap").width();
+			var layerWidth = $("#uplayer").width();
+			$("#uplayer").css({
+				display : 'block',
+				top : 100,
+				left : (width-layerWidth)/2,
+			});
+			$(window).resize(function() {
+				var width = $("#wrap").width();
+                var layerWidth = $("#uplayer").width();
+	            $("#uplayer").css({
+	                display : 'block',
+	                top : 100,
+	                left : (width-layerWidth)/2,
+	            });
+	        })
+			return false;
+		})
+		$(".cancel").click(function() {
+			$("#uplayer").hide();
+		})
+		
+    })
+</script>
+	</body>
+</html>

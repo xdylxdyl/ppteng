@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="EN" manifest="offline-contact.manifest">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+
+    <!--使宽度被设定为设备的屏幕宽度-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Jquery Mobile-->
+    <link rel="stylesheet" href="r/c/jqm/jquery.mobile-1.0.1.min.css">
+    <link rel="stylesheet" href="r/c/jqm/assets.css">
+    <script src="r/j-src/jquery/jquery-1.7.1.min.js"></script>
+    <script src="r/j-src/jqm/jquery.mobile-1.0.1.min.js"></script>
+    <!--self-->  
+    <script src="r/j-src/contact/contact.js"></script>
+    <script src="r/j-src/contact/init.js"></script>
+
+
+    <!--<script type="text/javascript" charset="utf-8" src="r/j-src/cordova/cordova-1.5.0.js"></script>-->
+</head>
+<body>
+
+<div data-role="page" id="group">
+    <div data-role="header">
+    	<div data-role="navbar">
+    		<ul>
+    			<li><a href="#" class="ui-btn-active">按组查找</a></li>
+    			<li><a href="#">按名字搜索</a></li>
+    		</ul>
+    	</div>
+    </div>
+    <div data-role="content">
+
+
+        <ul data-role="listview" data-inset="true"  id="groupList" >
+            <!--分组内容-->
+        </ul>
+    </div>
+</div>
+
+<div data-role="page" id="contact">
+    <div data-role="content">
+
+        <ul data-role="listview" data-split-icon="email" data-split-theme="d" data-filter="true" data-inset="true" data-filter-placeholder="这里可以过滤联系人亲.." id="contactList">
+
+        </ul>
+
+    </div>
+</div>
+
+</body>
+</html>

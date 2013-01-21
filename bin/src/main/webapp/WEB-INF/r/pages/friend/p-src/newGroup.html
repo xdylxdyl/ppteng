@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>好友管理 > 新建分组</title>
+<link type="text/css" rel="stylesheet" href="../../../c/base/base.css" />
+<link type="text/css" rel="stylesheet" href="../../../c/cells/selector/style.css" />
+<link type="text/css" rel="stylesheet" href="../c/style.css" />
+</head>
+
+<body>
+<!--[if IE 6]>
+<div id="scrollWrap">
+<![endif]-->
+<div id="page">
+<div id="pageMid">
+<div id="pageInt">
+<div id="pageBd">
+<div id="pageBdInt">
+<div id="pageLay" class="pageLay-la-c">
+<div id="appCanvas" class="canvas">
+<div id="appCanvasInt">
+<!-- Canvas Start -->
+
+	<div class="appHead">
+		<h2><img class="icon i-friend" alt="好友" src="http://10.11.85.21/r/i/space.gif" />好友</h2>
+		<div class="option"><a href="#">选项</a></div>
+	</div>
+	
+	<div class="tabs">
+		<ul>
+			<li class="on"><a href="#"><span>好友管理</span></a></li>
+			<li><a href="#"><span>寻找好友</span></a></li>
+			<li><a href="#"><span>你可能认识的人</span></a></li>
+		</ul>
+	</div>
+
+	<div class="lay lay-m200-sAuto">
+		<div class="layInt">
+			<div class="colMain">
+				<div class="colInt">
+					
+					<!-- 好友分组: start -->
+					<div id="friendGroups">
+						<h3>好友分组</h3>
+						<ul class="friendGroupList">
+							<li><a class="fgName all" href="#">全部好友</a></li>
+							<li>
+								<span class="fgOption"><a href="#" class="icon i-edit" title="编辑">编辑</a><a href="#" class="icon i-del" title="删除">删除</a></span>
+								<a class="fgName" href="#"><span>现在同事</span></a>
+							</li>
+							<li>
+								<span class="fgOption"><a href="#" class="icon i-edit" title="编辑">编辑</a><a href="#" class="icon i-del" title="删除">删除</a></span>
+								<a class="fgName" href="#"><span>大学同学</span></a>
+							</li>
+							<li>
+								<span class="fgOption"><a href="#" class="icon i-edit" title="编辑">编辑</a><a href="#" class="icon i-del" title="删除">删除</a></span>
+								<a class="fgName" href="#"><span>高中同学</span></a>
+							</li>
+							<li class="on">
+								<span class="fgOption"><a href="#" class="icon i-edit" title="编辑">编辑</a><a href="#" class="icon i-del" title="删除">删除</a></span>
+								<a class="fgName" href="#"><span>新分组</span></a>
+							</li>
+							<li class="edit" style="display:none;display:block;">
+								<div class="fgName">
+									<input type="text" class="text" />
+									<span class="button button-main"><span><button type="button">确认</button></span></span>
+								</div>
+								<div class="fgTip">
+									<div class="balloon balloon-top">
+										<div class="decor">
+											<span class="tl"></span>
+											<span class="tr"></span>
+											<span class="br"></span>
+											<span class="bl"></span>
+										</div>
+										<div class="content">
+											<h4>第一步：输入名称</h4>
+											<p>输入一个容易记忆的名称，按回车确定</p>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="friendCreateGroup">
+							<span class="button button-main"><span><button type="button">创建新分组</button></span></span>
+						</div>
+					</div>
+					<!-- 好友分组: end -->
+				
+				</div>
+			</div>
+			<div class="colSub">
+				<div class="colInt">
+
+					<div id="friendList" class="mod">
+						<div class="mDc">
+							<span class="tl"></span>
+							<span class="tr"></span>
+							<span class="br"></span>
+							<span class="bl"></span>
+						</div>
+						<div class="mCt">
+							<div class="mHd">
+								<h3>共有 32 位好友</h3>
+								<div class="option">
+									<input type="text" class="text" />
+									<span class="button button-main"><span><button type="button">搜索</button></span></span>
+								</div>
+							</div>
+							<div class="mBd">
+								<div class="addFriend">
+									<dl class="fieldset">
+										<dt>添加好友到本分组：</dt>
+										<dd>
+											<div id="addMemberSelEl" class="selector selector-toggle"><a href="javascript:void(0);" class="toggle"></a>
+												<ol class="tokenList"><li><input type="text" style="display: none;" /></li></ol>
+											</div>
+											<span class="button button-main"><span><button type="button">添加</button></span></span>
+										</dd>
+									</dl>
+									
+									<div class="afTip">
+										<div class="balloon balloon-top">
+											<div class="decor">
+												<span class="tl"></span>
+												<span class="tr"></span>
+												<span class="br"></span>
+												<span class="bl"></span>
+											</div>
+											<div class="content">
+												<h4>添加好友完成新分组</h4>
+												<p>输入好友姓名，或者批量添加好友到此分组，您可以在使用其他服务时，更方便找到好友</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<ul class="friendList">
+									<li class="friendItem click" onclick="toggle(this);">
+										<div class="friendAvatar"><a href="#" title="iceshow"><img src="http://photo.zhenxi.com/photo/images/personal/61/240034/1225430226764_100X140.jpg" class="avatar-48 basic" /><img src="http://photo.zhenxi.com/photo/images/personal/61/240034/1225430226764_100X140.jpg" class="avatar-full extra" /></a></div>
+										<div class="firendOption">
+											<ul>
+												<li><a href="#">修改所属分组</a></li>
+												<li class="extra"><a href="#">从本组中移除</a></li>
+												<li class="extra"><a href="#">解除好友关系</a></li>
+												<li class="extra"><a href="#">隐藏</a></li>
+												<li class="basic"><a href="#">更多</a></li>
+											</ul>
+										</div>
+										<div class="friendInfo">
+											<h4>姓名：<a href="#" title="iceshow">iceshow</a></h4>
+											<p>如果生命给我再来一次的机会...<span class="extra">我还是什么都不说 :(</span></p>
+										</div>
+									</li>
+									<li class="friendItem" onclick="toggle(this);">
+										<div class="friendAvatar"><a href="#" title="iceshow"><img src="http://photo.zhenxi.com/photo/images/personal/61/240034/1225430226764_100X140.jpg" class="avatar-48 basic" /><img src="http://photo.zhenxi.com/photo/images/personal/61/240034/1225430226764_100X140.jpg" class="avatar-full extra" /></a></div>
+										<div class="firendOption">
+											<ul>
+												<li><a href="#">修改所属分组</a></li>
+												<li class="extra"><a href="#">从本组中移除</a></li>
+												<li class="extra"><a href="#">解除好友关系</a></li>
+												<li class="extra"><a href="#">隐藏</a></li>
+												<li class="basic"><a href="#">更多</a></li>
+											</ul>
+										</div>
+										<div class="friendInfo">
+											<h4>姓名：<a href="#" title="iceshow">iceshow</a></h4>
+											<p>如果生命给我再来一次的机会...<span class="extra">我还是什么都不说 :(</span></p>
+										</div>
+									</li>
+									<li class="friendItem" onclick="toggle(this);">
+										<div class="friendAvatar"><a href="#" title="iceshow"><img src="http://photo.zhenxi.com/photo/images/personal/61/240034/1225430226764_100X140.jpg" class="avatar-48 basic" /><img src="http://photo.zhenxi.com/photo/images/personal/61/240034/1225430226764_100X140.jpg" class="avatar-full extra" /></a></div>
+										<div class="firendOption">
+											<ul>
+												<li><a href="#">修改所属分组</a></li>
+												<li class="extra"><a href="#">从本组中移除</a></li>
+												<li class="extra"><a href="#">解除好友关系</a></li>
+												<li class="extra"><a href="#">隐藏</a></li>
+												<li class="basic"><a href="#">更多</a></li>
+											</ul>
+										</div>
+										<div class="friendInfo">
+											<h4>姓名：<a href="#" title="iceshow">iceshow</a></h4>
+											<p>如果生命给我再来一次的机会...<span class="extra">我还是什么都不说 :(</span></p>
+										</div>
+									</li>
+									<li class="friendItem" onclick="toggle(this);">
+										<div class="friendAvatar"><a href="#" title="iceshow"><img src="http://photo.zhenxi.com/photo/images/personal/61/240034/1225430226764_100X140.jpg" class="avatar-48 basic" /><img src="http://photo.zhenxi.com/photo/images/personal/61/240034/1225430226764_100X140.jpg" class="avatar-full extra" /></a></div>
+										<div class="firendOption">
+											<ul>
+												<li><a href="#">修改所属分组</a></li>
+												<li class="extra"><a href="#">从本组中移除</a></li>
+												<li class="extra"><a href="#">解除好友关系</a></li>
+												<li class="extra"><a href="#">隐藏</a></li>
+												<li class="basic"><a href="#">更多</a></li>
+											</ul>
+										</div>
+										<div class="friendInfo">
+											<h4>姓名：<a href="#" title="leeking">leeking</a></h4>
+											<p>如果生命给我再来一次的机会...<span class="extra">我还是什么都不说 :(</span></p>
+										</div>
+									</li>
+								</ul>
+
+								<div class="pager">
+									共10页<span class="pipe">|</span><strong>1</strong><a href="#">[2]</a><a href="#">[3]</a><a href="#">[4]</a><a href="#">[5]</a><a href="#">[6]</a><a href="#">下一页</a><a href="#">最末页</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- Canvas End -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--[if IE 6]>
+</div>
+<![endif]-->
+
+<script type="text/javascript">
+<!--
+function toggle(ele) {
+	ele.className = ele.className=='friendItem'?'friendItem click':'friendItem';
+}
+function $(id) {
+	return document.getElementById(id);
+}
+-->
+</script>
+</body>
+</html>

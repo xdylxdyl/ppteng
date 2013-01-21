@@ -1,0 +1,110 @@
+@charset "utf-8";/* Sohu SNS inbox.css
+ * Version: 1.0
+ * Author: QianCheng
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+.appHead .icon{background:url(i/appIcon-24.gif);}
+
+.i-inbox{background:url(i/inbox.gif) no-repeat;}
+/* tabs */
+/*
+.tabs{ margin-bottom:0;}
+.tabs li.noStyle a{ border:none; background:#fff; text-decoration:underline;}
+.tabs li.noStyle a:hover{ background:#fff;text-decoration:none;}
+*/
+/* inbox */
+.inboxTopBar{/*width:94%;margin:0 auto;text-align:right;*/height:22px;padding:5px;border-bottom:1px solid #baaa9a;}
+.inboxTopBar input{ margin:0 20px;*margin:0 10px;}
+.inboxContent{border-width:0; padding:0 0 10px 0;}
+.canvas .inboxContent td{vertical-align:top;}
+#listEl{ margin-top:-15px;}
+.canvas table.inboxList{width:100%;margin:0 auto;}
+.canvas .inboxList td{border-bottom:1px dotted #baaa9a;border-width:0 0 1px 0;*border:none;*border-width:0;line-height:30px; padding:12px 5px}
+.canvas .inboxList td div.iOutImg{ display:block;width:30px; height:30px; background:url(i/inboxto.gif) no-repeat top center; margin-top:0;*margin-top:-3px;}
+td.i1{width:30px;text-align:center;}
+.canvas .inboxContent td.i1{ padding-left:7px;vertical-align:middle}
+.canvas .inboxContent td.i2{width:60px;}
+.canvas .inboxContent td.i2 img{}
+.canvas .inboxContent td.i3{width:100px; line-height:18px!important;}
+.canvas .inboxContent td.iOut{width:160px; line-height:18px!important; color:#666;}
+.canvas .inboxContent td.i4{width:auto; line-height:18px!important; padding-left:20px;}
+.canvas .inboxContent td.i4 span{ width:480px; overflow:hidden; display:block}
+.canvas .inboxContent td.i5{width:20px;text-align:right;padding-right:10px;}
+tr.newMsg td{font-weight:bold;}
+td.i3 div{ font-weight:normal; color:#999;}
+td.i3 p{ margin-bottom:0!important; color:#aaa}
+tr.newMsg td.i3 div{ font-weight:normal; color:#999;}
+td.i4 span{color:#999;font-weight:normal;}
+.cur td{background:#fafafa;}
+tr .newMsgIcon{width:30px; height:30px; background:url(i/read.gif) no-repeat center;}
+tr.newMsg .newMsgIcon{width:30px; height:30px; background:url(i/unread.gif) no-repeat center;cursor:pointer}
+
+td.i4 .newMessage{ display:none;}
+tr.newMsg td.i4 .newMessage{display:block;}
+tr.newMsg td.i4 .newMessage a{color:#F00;}
+.noMailBox{margin:10px 22px;}
+.groupIcon{ width:28px; height:17px; background:url(i/groupIcon.gif) no-repeat center;}
+.initiatorIcon{ width:40px; height:17px; background:url(i/initiatorIcon.gif) no-repeat center;}
+/* write */
+.writeBox{width:70%; margin:5px 0;padding:10px;}
+	.writeBox table{width:100%;}
+	.writeBox td{border:none!important;padding:5px!important;}
+	.writeBox input,.writeBox textarea{width:350px;clear:both;}
+	.writeBox button{width:80px;margin-right:5px;}
+	.writeBox h3{ margin:0; padding:0 0 20px 12px;}
+	.writeBox dl.fieldset{ padding:0 0 0 60px;}
+	.writeBox dl.fieldset dt{ margin:0 0 0 -60px; width:50px;}
+	.writeBox dl.fieldset dd{padding-bottom:15px;}	
+	td.w1{width:10%;text-align:right;padding-right:20px;}
+	td.w2{width:80%;}
+.emotion{padding:0 0 5px 0;}
+	.emotion01,.emotion02,.emotion03,.emotion04,.emotion05,.emotion06{display:block;float:left;width:20px;height:20px;background:url(/r/c/base/i/emotion-default.gif) no-repeat;margin-right:5px;}
+	.emotion01{background-position:0 0;}
+	.emotion02{background-position:-30px 0;}
+	.emotion03{background-position:-60px 0;}
+	.emotion04{background-position:-90px 0;}
+	.emotion05{background-position:-120px 0;}
+	.emotion06{background-position:-150px 0;}
+	.moreEmotion{display:block;float:left;width:20px;height:20px;background:url(../../../c/base/i/icon-16.png) no-repeat -58px -18px;}
+.selector{width:358px;}
+.unRead{ background-color:#fffef5}
+.unRead .i4{ font-weight:bold;}
+.unRead .i3 a{ font-weight:bold;}
+/* done */
+.sendDone{ width:60%; margin:20px auto;padding:5px 20px 20px 150px;background:url(i/sendDone.png) no-repeat 35px 25px;}
+	.sendDone h2{}
+	.sendDone div{height:30px;}
+	.sendDone button{margin-right:10px;}
+/* view */
+.inboxView{width:auto;height:auto;padding:0;margin:10px 5px;}
+	.inboxView .date{position:absolute;bottom:0;right:10px;display:inline;font-size:12px;font-weight:normal;}
+	.inboxView .viewBox{width:auto;margin:10px;padding:0 10px;border:1px solid #baaa9a}
+	.inboxView h3{ margin:0; padding:0; font-size:14px; margin-bottom:10px;}
+.letterTitle{ margin:10px 0 0; padding:5px; border-bottom:1px solid #baaa9a;}
+.letterTitle .del{ width:100%; text-align:right; margin-bottom:5px;}
+.letterRow{margin:0 20px; padding:10px; border-bottom:1px dotted #baaa9a;_border-bottom-style:none;_background:url(i/dotLine.gif) repeat-x bottom;overflow:hidden}
+.canvas .inboxList tr.original td{border-bottom:1px solid #baaa9a; background:none}
+.letterRow .letterName{ width:150px; float:left; text-align:left; line-height:140%;}
+.letterRow .letterName img{ float:left; margin-right:20px;}
+.letterRow .letterName span{ color:#999;}
+.canvas .letterRow .letterName p{ margin:0; }
+.letterRow .letterTxt{ width:75%; float:right; line-height:17px;}
+dl.replyBox{ width:auto; margin:10px auto 10px 100px;clear:both}
+.replyBox h4{margin:10px 0 0;}
+.replyBox textarea{width:380px;}
+.replyBox button{margin:5px 10px 0 0;}
+#replyDone{margin:10px;padding:10px 30px;border:1px solid #fd9;background:url(i/standard_msg_ok.gif) no-repeat 10px 12px;background-color:#fff9ed;}
+.canvas .inboxList td.delRow{ color:#999; padding:5px 10px;}
+/* page */
+
+#pageEL{ width:92%; margin:10px auto; text-align:right;}
+
+/* msg */
+.msg{ margin:10px auto!important;}
+.canvas .inboxList tr{*background-image:url(i/dotLine.gif);*background-repeat:repeat-x;*background-position:bottom;}
+
+/* icon */
+.tabs li.orphan a.icon-write span{padding-left:15px; background:url(i/inboxIcon.gif) 2px 7px no-repeat;}
+.icon-clear{ padding-left:15px; background:url(i/inboxIcon.gif) 0 -28px no-repeat;*background-position:0 -30px;}
+.icon-read{ padding-left:15px; background:url(i/inboxIcon.gif) 0 -58px no-repeat;*background-position:0 -60px;}

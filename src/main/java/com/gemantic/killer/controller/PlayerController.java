@@ -352,7 +352,7 @@ public class PlayerController {
 		model.addAttribute("uid_rid", uid_rid);
 		model.addAttribute("rid_room", rid_room);
 		model.addAttribute("status", userID_Status);
-		return "/room/player/info";
+		return "/room/person/info";
 
 	}
 
@@ -414,7 +414,7 @@ public class PlayerController {
 		boolean isPunch = PunchUtil.isPunched(user);
 		if (isPunch) {
 			model.addAttribute("code", "-1");
-			return "/room/player/punch";
+			return "/room/person/punch";
 		}
 		String str = PunchUtil.punchTheClock(System.currentTimeMillis(), PunchUtil.Punch_Time_Start, user.getPunch());
 

@@ -1,0 +1,8 @@
+resources/killer/simple/simple_room.drl 时间控制
+
+System.out.println("create rooom =================");
+	 Map setting=new HashMap();
+	 setting.put("nightTime","30000");
+	 setting.put("dayTime","120000");
+	 setting.put("lastwordTime","30000");
+	 Room room=new Room($message.getSubject(),$message.getContent(),$message.getWhere().toString(),setting,$message.getVersion()) ;

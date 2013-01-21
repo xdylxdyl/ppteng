@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* Sohu SNS feed style
+ * Version: 1.0
+ * Created: 2008-11-20
+ * Update: 2008-12-10
+ * Author: Matt Wang (www.uiland.com)
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+
+/* feedTitle */
+.feedTitle{font-weight:normal;}
+
+/* feedList */
+ul.feedList{/*margin:0 0 0 26px;*/margin:0 0 0 8px;list-style:none;}
+
+	/* feedItem */
+	.feedItem{*margin:0 0 -3px;padding:5px 30px;zoom:1;}
+		.feedItem:after{content:"\0020";display:block;visibility:hidden;clear:both;height:0;}
+		.feedItem .feedIcon{_display:inline;float:left;width:20px;margin:3px 5px 3px -25px;}
+		.feedItem .feedOption{_display:inline;float:right;width:20px;margin:3px -25px 3px 5px;}
+			.feedItem .feedOption .i-clearStar{display:none;}
+		.feedItem .feedContent{float:left;overflow-x:hidden;width:100%;*padding:2px 0 0;_padding:4px 0 0;}
+			.feedItem .feedHead{margin:0 0 5px;color:#333;}
+				.feedItem .feedHead a{/*color:#640000;*/}
+				.feedItem .feedHead .meta{margin:0 0 0 5px;}
+			.feedItem .feedBody{color:#666;}
+				.feedItem .feedBody p{margin:0;}
+			.feedItem .feedFoot{margin:5px 0 0;color:#999;}
+
+/* feedMore */
+.moreFeed{padding:5px 30px;font-weight:bold;}
+.feedMore{margin:10px 0;padding:15px 0 0;border-top:1px solid #999;text-align:center;}
+	.feedMore a{display:-moz-inline-stack;display:inline-block;_display:inline;height:16px;margin:5px;padding:0 20px;background:url(i/feed-more.gif) no-repeat 0 0;line-height:16px;font-weight:bold;zoom:1;}
+
+
+/*** Feed Contents ***/
+/**
+ * Feed Content: feedHead, feedBody, feedFoot
+ * Profile Feed Styles: oneline, short, full
+ * 						small, medium, large
+ */
+
+/* status */
+#profileFeed .feed-status{}
+	#profileFeed .feed-status .feedSize-medium .feedHead{font-size:14px;font-weight:bold;}
+	#profileFeed .feed-status .feedSize-large .feedHead{font-size:16px;font-weight:bold;}
+		#profileFeed .feed-status .feedHead .meta{font-size:12px !important;}
+
+/* friendMsg */
+#homeFeed .feed-friendMsg{}
+	#homeFeed .feed-friendMsg .friendItem{height:50px;padding:5px 5px 5px 68px;}
+		#homeFeed .feed-friendMsg .friendAvatar{width:52px;margin:0 0 0 -62px;}
+		#homeFeed .feed-friendMsg .friendInfo{width:100%;}
+
+#profileFeed .feed-friendMsg{padding:5px 30px 5px 56px;}
+	#profileFeed .feed-friendMsg .feedIcon{width:52px;margin:3px 0 3px -56px;}
+	#profileFeed .feed-friendMsg .feedContent{overflow:hidden;width:90%;padding:0 0 0 5px;background:url(i/friendMsg.gif) no-repeat;}
+		#profileFeed .feed-friendMsg .feedHead,
+		#profileFeed .feed-friendMsg .feedBody,
+		#profileFeed .feed-friendMsg .feedFoot{margin:0;border:1px solid #d9d5be;background:#fffef5;}
+		#profileFeed .feed-friendMsg .feedHead{margin:0 0 0 1px;padding:3px 8px;border-width:1px 1px 0 0;}
+		#profileFeed .feed-friendMsg .feedBody{padding:0 8px;border-width:0 1px;}
+		#profileFeed .feed-friendMsg .feedFoot{padding:3px 8px;border-width:0 1px 1px 1px;}
+
+/* Photo */
+.feed-album{}
+	.feedContent .photo-full{max-width:400px;_width:400px;padding:1px;border:1px solid #ccc;}
+	.feedContent .photo-130{max-width:130px;max-height:130px;padding:1px;border:1px solid #ccc;}
+	.feedContent .photo-75{width:75px;height:75px;padding:1px;border:1px solid #ccc;}
+	.feedContent .photo-50{width:50px;height:50px;padding:1px;border:1px solid #ccc;}
+	.feedContent a:hover .photo-130,
+	.feedContent a:hover .photo-75,
+	.feedContent a:hover .photo-50{border-color:#9b0020;}
+
+	ul.albumSample{float:left;width:100%;margin:7px 0 0 -4px;list-style:none;zoom:1;}
+		ul.albumSample:after{content:'\0020';display:block;clear:both;height:0;}
+		ul.albumSample li{_display:inline;float:left;width:auto;margin:0 4px;padding:0;}
+			ul.albumSample img{}
+
+	.photoItem{zoom:1;}
+		.photoItem:after{content:'\0020';display:block;clear:both;height:0;}
+		.photoCover{_display:inline;float:left;margin:0 10px 0 0;}
+		.photoInfo{}
+
+/* Video */
+

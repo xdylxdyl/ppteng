@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+    <!-- The version number of this tag library -->
+    <tlibversion>1.0</tlibversion>
+
+    <!-- The JSP specification version required to function -->
+    <jspversion>2.1</jspversion>
+
+    <!-- The short name of this tag library -->
+    <shortname>pinyin</shortname>
+
+    <!-- Public URI that uniquely identifies this version of the tag library -->
+    <uri>http://www.gemantic.com/taglibs/date</uri>
+
+    <!-- General information about this tag library -->
+    <info>
+          convert chinese to pinyin
+          pattern : full,acronym 
+    </info>
+    
+    <tag>
+        <name>pinyin</name>
+        <tag-class>com.gemantic.commons.tags.PinYin</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>pattern</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

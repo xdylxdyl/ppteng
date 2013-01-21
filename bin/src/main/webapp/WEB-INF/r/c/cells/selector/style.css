@@ -1,0 +1,84 @@
+@charset "utf-8";
+/* Sohu SNS Selector Style
+ * Version: 1.0
+ * Created: 2008-12-12
+ * Author: Matt Wang (www.uiland.com)
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+
+/*** tokenList ***/
+ol.tokenList{min-height:20px;_height:20px;margin:0 !important;padding:2px 3px 0;border:1px solid #999;background:#fff;line-height:18px;list-style:none !important;cursor:text;zoom:1;}
+ol.tokenList:after{content:'\0020';display:block;clear:both;height:0;}
+	ol.tokenList li{float:left;padding:0 4px 2px 0;}
+		ol.tokenList li a{display:block;float:left;border:1px solid #c3b2a5;border-width:1px 0;background:#f6f7ea;color:#a54f3f;text-decoration:none;}
+			ol.tokenList li a span{display:block;float:left;height:15px;margin:0 -1px;padding:0 5px 1px 5px;*padding:1px 5px 0 5px;border:1px solid #c3b2a5;border-width:0 1px;line-height:15px;white-space:nowrap;cursor:pointer;}
+			ol.tokenList li a .x{display:-moz-inline-stack;display:inline-block;_display:inline;width:7px;height:7px;margin:0 0 0 3px;font:0/0 Arial;background:url(i/close.gif) no-repeat 0 0;vertical-align:middle;cursor:pointer;zoom:1;}
+			ol.tokenList li input{width:50px;height:16px;margin:0;padding:0;border:0;outline:0;}
+		ol.tokenList li a:hover,
+			ol.tokenList li a:hover span{border-color:#900222;background-color:#f6f7ea;color:#900222;text-decoration:none;}
+			ol.tokenList li a:hover .x{background-position:0 -7px;}
+			ol.tokenList li a:hover .x:hover{background-position:0 -14px;}
+	ol.tokenList li.on{}
+		ol.tokenList li.on a,
+		ol.tokenList li.on a:hover,
+			ol.tokenList li.on a span,
+			ol.tokenList li.on a:hover span{border-color:#900222;background-color:#900222 !important;color:#fff;}
+			ol.tokenList li.on a .x,
+			ol.tokenList li.on a:hover .x{background-position:0 -21px;}
+			ol.tokenList li.on a:hover .x:hover{background-position:0 -28px;}
+
+/* hack for IE6 */
+* html ol.tokenList{padding:2px 2px 0;}
+	* html ol.tokenList li{padding:0 2px 2px 0;}
+		* html ol.tokenList li a{padding:0 0 0 1px;border:0;background:#f6f7ea url(i/token.gif) 0 0;}
+			* html ol.tokenList li a span{margin:0;padding:3px 6px 0 5px;border:0;background:#f6f7ea url(i/token.gif) 100% 0;}
+		* html ol.tokenList li a:hover{background-position:0 -20px;}
+			* html ol.tokenList li a:hover span{background-position:100% -20px;}
+	* html ol.tokenList li.on{}
+		* html ol.tokenList li.on a{background-position:0 -40px;}
+			* html ol.tokenList li.on a span{background-position:100% -40px;}
+
+
+/*** selector ***/
+.selector{display:inline-block;*display:inline;position:relative;z-index:100;width:240px;vertical-align:middle;zoom:1;}
+.selector,.selector:-moz-any-link{display:block;}
+.selector,.selector:default{display:inline-block;}
+/*
+	.selector .dropWrap{display:none;position:absolute;top:100%;left:0;width:100%;margin:-1px 0 0;}
+		.selector .decor{_display:none;position:absolute;z-index:-1;width:100%;height:100%;margin:2px;padding:0 1px;background:#000;-moz-opacity:0.1;opacity:.10;filter:alpha(opacity=10);}
+		.selector .content{overflow:hidden;position:relative;z-index:0;width:100%;border:1px solid #ccc;background:#fff;}
+*/
+	.selector .toggle{display:none;}
+
+/* selector-toggle */
+.selector-toggle{}
+	.selector-toggle ol.tokenList{padding-right:22px;}
+	.selector-toggle a.toggle{display:block;overflow:hidden;position:absolute;right:1px;bottom:1px;z-index:2;width:22px;height:22px;background:#fff url(i/toggle.gif) no-repeat 50% -48px;text-indent:-9999px;cursor:pointer;}
+		.selector-toggle a:hover.toggle{border:1px solid #999;border-width:1px 0 0 1px;background-position:50% -72px;background-color:#c0c0c0;}
+	.selector-toggle a.toggle-on{border:1px solid #999;border-width:1px 0 0 1px;background-position:50% -24px;background-color:#c0c0c0;}
+	.selector-toggle a:hover.toggle-on{background-position:50% 0;}
+.toggleWrap{bottom:0;right:0;left:auto;width:360px;}
+	.toggleWrap .decor{display:none;}
+	.toggleWrap .head .option select{width:80px;}
+	.toggleWrap .body{overflow:auto;overflow-x:hidden;height:116px;}
+		.toggleWrap .radios li,
+		.toggleWrap .checkboxes li{width:33%;}
+
+/* Hack: selector with other element in one line */
+dl.fieldset dd .selector{display:block;_display:inline;float:left;margin:0 5px 0 0;}
+/*
+dl.fieldset dd .selector,
+dl.fieldset dd .selector:-moz-any-link{float:left;margin:0 5px 0 0;}
+dl.fieldset dd .selector,
+dl.fieldset dd .selector:default{float:none;margin:0;}
+*/
+
+
+/*** selector content ***/
+
+/* schoolSelector */
+.schoolSelector-pop{}
+	.schoolSelector-pop .schoolList{min-height:300px;_height:300px;}
+	.schoolSelector-pop .schoolList table{table-layout:fixed;margin:0 1em 0 -1em;}
+	.schoolSelector-pop .schoolList td{overflow:hidden;width:33%;text-indent:1em;*text-overflow:ellipsis;-o-text-overflow:ellipsis;white-space:nowrap;}

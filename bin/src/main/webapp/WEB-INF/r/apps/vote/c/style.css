@@ -1,0 +1,121 @@
+@charset "utf-8";
+/* Sohu SNS App: Vote
+ * Created: 2009-02-16
+ * Author: Matt Wang (www.uiland.com)
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+
+/*** Classes ***/
+.appHead .icon{background:url(i/appIcon-24.gif);}
+
+.opt{margin:0 0 0 5px;padding:0 0 0 16px;*padding:2px 0 0 16px;background:url(i/icon.gif) no-repeat;}
+	.opt-addOption{background-position:0 0;}
+	.opt-editOptionDesc{background-position:0 -20px;}
+	.opt-editTime{background-position:0 -40px;}
+	.opt-stop{background-position:0 -60px;}
+	.opt-del{background-position:0 -80px;}
+
+.voteWord{padding:0 90px 0 0;zoom:1;}
+	.voteWord:after{content:'\0020';display:block;clear:both;height:0;}
+	.voteBallots{_display:inline;overflow:hidden;float:right;width:68px;height:75px;margin:0 -80px 0 10px;border:1px solid #e9e5d9;background:#fefef4 url(i/ballots.gif) 50% 100% no-repeat;color:#a83f08;font:14px/20px Arial;text-align:center;}
+		.voteBallots span{display:block;font:900 18px/2em Tahoma,Airal,Geneva,sans-serif;}
+	.voteTitle{overflow-x:hidden;float:left;width:100%;margin:0 0 5px;}
+		.voteTitle a,
+		.voteTitle strong{font:bold 16px/24px '宋体';}
+	.voteContent{overflow-x:hidden;float:left;width:100%;}
+		.voteContent .voteDesc{color:#999;font-size:14px;}
+		.voteContent .stopped{margin:5px 0;color:#f00;font:normal 14px/20px Arial;}
+		.voteContent .deleted{color:#999;}
+
+.voteList{margin:0 0 10px !important;list-style:none !important;}
+	.voteList li{padding:10px 0 10px 10px;border-bottom:1px dotted #ccc;}
+	.voteList li.voteItem{padding:10px 0 10px 75px;zoom:1;}
+		.voteList li.voteItem:after{content:'\0020';display:block;clear:both;height:0;}
+		.voteAvatar{_display:inline;overflow:hidden;float:left;width:52px;height:75px;margin:0 0 0 -65px;text-align:center;}
+			.voteAvatar img{display:block;zoom:1;}
+			.voteAvatar span{display:block;margin:3px 0 0;}
+		.voteBody{float:left;width:100%;}
+			.voteList .voteTitle a,
+			.voteList .voteTitle strong{font:bold 14px/24px '宋体';}
+			.voteList .voteTitle strong{color:#999;}
+			.voteList .voteContent .voteDesc{font-size:12px;}
+				.voteSample{margin:0 !important;list-style:none !important;}
+					.voteSample li{margin:3px 0;padding:0;border:0;}
+
+.voteOptions{padding:10px 150px 10px 0;zoom:1;}
+	.voteOptions:after{content:'\0020';display:block;clear:both;height:0;}
+	.optionList{float:left;width:100%;margin:0 !important;list-style:none !important;}
+		.optionItem{padding:5px;zoom:1;}
+			.optionItem:after{content:'\0020';display:block;clear:both;height:0;}
+			.optionItem .subject{float:left;width:45%;text-align:right;}
+			.optionItem .bar{_display:inline;float:left;width:35%;margin:1px 5px;*margin:0 5px;height:16px;background:#e8e6d9;}
+				.optionItem .bar em{display:block;overflow:hidden;float:left;zoom:1;}
+					.optionItem .bar em span{display:block;overflow:hidden;height:16px;padding:0 2px 0 0;background:url(i/bar.png) 100% 0 no-repeat;}
+						.optionItem .bar em span span{padding:0;background:url(i/bar.png) 0 0 no-repeat;}
+					/* bar colors */
+					.optionItem .bar-1 em span{background-position:100% 0;}
+						.optionItem .bar-1 em span span{background-position:0 0;}
+					.optionItem .bar-2 em span{background-position:100% -20px;}
+						.optionItem .bar-2 em span span{background-position:0 -20px;}
+					.optionItem .bar-3 em span{background-position:100% -40px;}
+						.optionItem .bar-3 em span span{background-position:0 -40px;}
+					.optionItem .bar-4 em span{background-position:100% -60px;}
+						.optionItem .bar-4 em span span{background-position:0 -60px;}
+					.optionItem .bar-5 em span{background-position:100% -80px;}
+						.optionItem .bar-5 em span span{background-position:0 -80px;}
+					.optionItem .bar-6 em span{background-position:100% -100px;}
+						.optionItem .bar-6 em span span{background-position:0 -100px;}
+					.optionItem .bar-7 em span{background-position:100% -120px;}
+						.optionItem .bar-7 em span span{background-position:0 -120px;}
+					.optionItem .bar-8 em span{background-position:100% -140px;}
+						.optionItem .bar-8 em span span{background-position:0 -140px;}
+					.optionItem .bar-9 em span{background-position:100% -160px;}
+						.optionItem .bar-9 em span span{background-position:0 -160px;}
+					.optionItem .bar-10 em span{background-position:100% -180px;}
+						.optionItem .bar-10 em span span{background-position:0 -180px;}
+		.optionItem .record{float:left;width:13%;}
+			.optionItem .input{float:right;width:4%;height:20px;}
+				.optionItem .input input{margin:4px 0 0;*margin:0;line-height:20px;vertical-align:middle;}
+	.voteOptions .voteAction{_display:inline;float:right;width:140px;margin:0 -150px 0 10px;}
+		.voteOptions .voteAction .buttons{margin:5px 0;}
+
+/*** Content Layouts ***/
+#voteList{margin:-10px 0 0;}
+	h3.voteTotal{margin:0;padding:0 7px 2px;border-bottom:1px solid #ccc;color:#999;font-weight:400;}
+
+#voteView{}
+	#voteView .voteTitle,
+	#voteView .voteDesc{text-align:center;}
+		#voteView .voteTitle strong{color:#666;}
+	.optionDesc{margin:10px 0 0;padding:5px;border-top:1px dotted #bebebe;}
+		.optionDesc h3{margin:0;font:normal 12px/20px Arial;}
+		.optionDesc p{margin:0;padding:5px;color:#999;font-family:Verdana,Geneva,sans-serif;}
+		.optionDesc .msg{margin:10px 10px 0;}
+	.votedList{margin:10px 0 0;padding:5px;border-top:1px dotted #bebebe;}
+		.votedList h3{margin:0;font:normal 12px/20px Arial;}
+		.votedList ul{margin:0 !important;list-style:none !important;}
+			.votedList li{margin:2px 0;padding:0 0 0 20px;}
+			.votedList li.me{background:url(i/me.gif) 0 2px no-repeat;}
+			.votedList li.friend{background:url(i/friend.gif) 0 2px no-repeat;}
+			.votedList li .meta{margin:0 0 0 5px;}
+	.voteComment{margin:10px 0 0;padding:5px;border-top:1px dotted #bebebe;}
+		.voteComment h3{margin:0 0 10px;font-weight:normal;}
+
+#voteLaunch{padding:5px 15px;}
+	#voteLaunch h3{}
+	.launchWrap{padding:15px 20px;background:#fefff5;}
+		.launchWrap h4{margin:0 0 10px;font:normal 12px/20px Verdana,Geneva,sans-serif;}
+		.launchWrap dl.fieldset{padding-top:10px;}
+		.launchWrap input.text{width:300px;}
+		.launchWrap textarea.text{overflow:auto;width:302px;height:50px;}
+		.launchWrap .buttons{margin:10px 0;}
+
+
+/*** dialogs ***/
+.voteDialog{padding:10px 15px;line-height:24px;}
+	.voteDialog h4{}
+	.voteDialog p{padding:5px 10px;}
+	.voteDialog input.text{width:95%;}
+	.voteDialog textarea.text{width:95%;height:60px;}
+	.voteDialog select.select{margin:0 0 5px;}

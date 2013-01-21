@@ -1,0 +1,152 @@
+/**
+ * @ directions
+ */
+
+.heighlight {
+    outline: 1px solid #0066ff;
+}
+
+.board {
+    width: 800px;
+    height: 800px;
+    border: 1px solid #000;
+    position: relative;
+
+}
+
+.menu {
+}
+
+.menuItem {
+    display: inline-block;
+
+}
+
+.menuList {
+    display: inline-block;
+}
+
+.menuInputContainer {
+    text-align: right;
+    position: relative;
+}
+
+.menuInput {
+    width: 360px;
+    text-align: right;
+}
+
+.short_string {
+
+    border-bottom: 1px solid #FD8203;
+
+    margin: 10px 0;
+
+}
+
+.left {
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+
+}
+
+.leftBody {
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+
+}
+
+.rightBody {
+    display: inline-block;
+    vertical-align: top;
+    width:450px;
+
+}
+
+.splitLine {
+    border-left: 1px solid #FD8203;
+    width: 0;
+    height: 500px;
+    display: inline-block;
+}
+
+.columnUL {
+    list-style: none;
+
+}
+
+.columnLI {
+    display: inline-block;
+    cursor: pointer;
+}
+.columnLI span {
+    display: none;
+}
+.columnLI span.inline {
+    display: inline-block;
+}
+
+.columnLISelect {
+
+    display: inline-block;
+}
+
+.columnLI a {
+    display: block;
+}
+
+.columnLI a:hover {
+    border: 1px solid #000;
+}
+
+.columnLI a strong {
+    opacity: 0;
+}
+
+.columnLI a strong:hover {
+    opacity: 1;
+}
+
+.bottom {
+    position: absolute;
+    width: 100%;
+    line-height: 1.4;
+    left: 0;
+    bottom: 0;
+}
+
+body {
+    background: #ddd;
+    font: 14px "微软雅黑", Arial;
+}
+
+#dropdown {
+    position: absolute;
+    display: none;
+    border:  1px solid #999999;
+    border-bottom: none;
+    z-index: 10;
+    right: 80px;
+    top: 21px;
+}
+#dropdown li {
+    font: normal 12px/24px airal;
+    padding: 0 5px;
+    background: white;
+    border-bottom: 1px solid #999999;
+    list-style: none;
+}
+#dropdown li:hover {
+    background: #eee;
+    cursor: pointer;
+}
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+

@@ -1,0 +1,375 @@
+package com.gemantic.killer.common.model
+
+import com.gemantic.killer.common.model.Message;
+import com.gemantic.killer.common.model.Status;
+import com.gemantic.killer.common.model.Role;
+import com.gemantic.killer.common.model.Rights;
+import com.gemantic.killer.common.model.Resource;
+import com.gemantic.killer.common.model.Operater;
+import com.gemantic.killer.common.model.World;
+import com.gemantic.killer.model.Room;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Integer;
+import com.gemantic.killer.util.MessageUtil;
+#create 
+#2.第一次进房间,更改房间的资源(hasPlayer)
+#3.生成Login Message
+rule "create room"
+	#no-loop true
+	lock-on-active
+	when	
+	   
+	    #eval (start())
+	    $room:Room()
+	    $operate:Operater()
+	    $message:Message(predict=="create") 
+	            from $operate.getMessage()
+	  
+	then 
+	
+	  #room
+	  $room.setCreaterID($message.getSubject());
+	  $room.setVersion($message.getVersion());
+	  
+	  
+	  #mock login	 
+	  List<Message> logins=createMessage($message.getSubject(),"login","login");	
+	  $room.getMessages().addAll(logins);
+	  
+	 
+	  #create rights
+	  List<Message> msgs=createMessage($message.getSubject(),"right","kick,say,ready");	 
+	  $room.getMessages().addAll(msgs);
+	  
+	  
+	  
+	  update($room); 
+	  
+	  #权限信息也要发出去
+	  #不需要.发了也收不到.
+	  #$operate.getNextMessages().add(right_message_kick);
+	  #$operate.getNextMessages().add(right_message_say);
+	  #$operate.getNextMessages().add(right_message_ready);
+	  
+	  #update($operate);
+	  
+	
+	  
+end
+
+
+
+
+#login
+#2.第一次进房间,更改房间的资源(hasPlayer)
+#3.生成Login Message
+rule "login room"
+	lock-on-active
+	when	
+	
+	  
+	    $room:Room()
+	    $operate:Operater()
+	    
+	   
+	
+	    $message:Message(predict=="login",$subject:subject) 
+	            from $operate.getMessage()
+	            
+	            
+	    
+	    
+	    $user_login : ArrayList( size < 1 )	    
+	    from collect  (
+	      Message(subject==$subject,predict=="login")
+	      from $room.getMessages()
+	     )
+	     
+	     
+	     
+	     
+	     #能否写成函数呢,这段代码纯粹是为了获取到all_logint_ids
+	     $all_login_ids:ArrayList()
+	      from accumulate(
+	      $login_message:Message(predict=="login",$id:subject)
+	      from $room.getMessages(),
+	      init(List ls=new ArrayList();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+	      
+	      
+	   
+	
+        # from collect( Status( id==$uid ) )	
+	then 
+	
+	
+	  List<Message> logins=createMessage($message.getSubject(),"login","login");	
+	  $room.getMessages().addAll(logins);
+	 
+	    
+	  List<Message> msgs=createMessage($message.getSubject(),"right","say,ready");	 
+	  $room.getMessages().addAll(msgs);	   
+	   
+	   update($room);
+	   
+	  
+	  #send Message to every one
+	   
+	  Message send_login_message=(Message)$message.clone();
+	  send_login_message.setAccepts($all_login_ids);
+	  $operate.getNextMessages().add(send_login_message); 
+	  update($operate);
+	   
+	  
+end
+
+
+
+#ready
+
+#3.生ready Message
+rule "ready room"
+	lock-on-active
+	when	
+	    $room:Room()
+	    $operate:Operater()
+	    
+	    $message:Message(predict=="ready",$subject:subject) 
+	            from $operate.getMessage()
+	    
+	          
+	    #已经准备过了
+	    $user_ready : ArrayList( size < 1 )	    
+	    from collect  (
+	      Message(subject==$subject,predict=="ready")
+	      from $room.getMessages()
+	     )
+	     
+	then 
+	
+	   #没有发送他自己的权限
+	     List<Long> all_login_ids=MessageUtil.getSubjectByPredict($room.getMessages(),"login");
+	
+	   
+	   #要把Ready权限删了.
+	   #怎么删..
+	   List<Message> newRights=new ArrayList();
+	   List<Message> newMessages=new ArrayList();
+	   for(Message m:$room.getMessages()){	       
+	    
+	        //把这个人的准备权限取消 这种List<Message>的方式,最烦人的就是删除了.没考虑到这一点.
+	        
+	        if($subject.equals(m.getSubject())&&"right".equals(m.getPredict())){
+	           if(  "ready".equals(m.getContent())){
+	               System.out.println("right - ready is delete ");
+	           
+	              }else{ 
+	          
+	              System.out.println("right - other rights,save it  ");
+	              newMessages.add(m);
+	              m.setAccepts(all_login_ids);
+	              newRights.add(m);
+	        
+	           }
+	          
+	        }	        
+	        else{
+	              System.out.println($subject+" message - other message,save it  "+m);
+	               newMessages.add(m);
+	        
+	        }
+	        
+	        
+	        
+	   }   
+     
+       #如果是管理员
+       if($room.getCreaterID().equals($subject)){
+        Message start=new Message($room.getCreaterID(),"right","start"); 
+        	 start.getAccepts().add($room.getCreaterID());
+              newMessages.add(start);
+              $operate.getNextMessages().add(start);
+       
+       }else{
+       
+       }
+         
+
+	   $room.setMessages(newMessages);	
+	   Message login_message=(Message)$message.clone();
+	   $room.getMessages().add(login_message);
+	   
+	   update($room);
+	   
+	  
+	   #send Message to every one	   
+	   Message send_login_message=(Message)$message.clone();
+	   send_login_message.setAccepts(all_login_ids);
+	   $operate.getNextMessages().add(send_login_message);	  
+	   
+	   $operate.getNextMessages().addAll(newRights);
+	   update($operate);
+	   
+       
+end
+
+
+
+
+
+#3.生say Message
+rule "say room to all "
+	lock-on-active
+	when	
+	    $room:Room()
+	    $operate:Operater()
+	    
+	   
+	
+	    $message:Message(predict=="say",$subejct:subject) 
+	            from $operate.getMessage()
+	     
+	     
+	     #能否写成函数呢,这段代码纯粹是为了获取到all_logint_ids
+	     $all_login_ids:ArrayList()
+	      from accumulate(
+	      $login_message:Message(predict=="login",$id:subject)
+	      from $room.getMessages(),
+	      init(List ls=new ArrayList();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+	
+        # from collect( Status( id==$uid ) )	
+	then 
+	   
+	   #send Message to every one
+	   Message send_login_message=(Message)$message.clone();
+	   send_login_message.setAccepts($all_login_ids);
+	   $operate.getNextMessages().add(send_login_message);
+	   update($operate);
+	   
+end
+
+
+
+
+
+
+#logout
+
+#4.logout
+rule "logout"
+	lock-on-active
+	when	
+	    $room:Room()
+	    $operate:Operater()
+	    
+	   #这个逻辑不对.我只是想把这个东西查出来.不是条件.
+	
+	    $message:Message(predict=="logout"||predict=="kick",$subejct:subject) 
+	            from $operate.getMessage()
+	            
+	            
+	     $remove_messages : ArrayList( )	    
+	    from collect  (
+	      Message(subject==$subejct)
+	      from $room.getMessages()
+	     )     
+	       
+	            
+	     
+	            
+	      #能否写成函数呢,这段代码纯粹是为了获取到all_logint_ids
+	     $all_login_ids:ArrayList()
+	      from accumulate(
+	      Message(predict=="login",$id:subject)
+	      from $room.getMessages(),
+	      init(List ls=new ArrayList();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );       
+	            
+	            
+	
+	then 
+	  
+	  #ready and login clear
+	    
+	  System.out.println(" login message is "+$remove_messages);	 
+	  List<Message> msgs=$room.getMessages();	   
+	  msgs.removeAll($remove_messages);
+	  update($room);
+	   #send Message to every one
+	   
+	   Message send_login_message=(Message)$message.clone();
+	   send_login_message.getAccepts().addAll($all_login_ids);
+	   $operate.getNextMessages().add(send_login_message);
+	   update($operate);
+	   
+	   
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function  Boolean start() {
+
+     
+return false;
+
+
+}
+
+
+
+function  List createMessage(Long subject,String predict,String contents) {
+
+      List<Message> msgs=new ArrayList();      
+	  String[] right=contents.split(",");
+	  for(String r:right){
+	    Message msg=new Message(subject,predict,r);
+	    msgs.add(msg);
+	  }
+	
+	 
+return msgs;
+
+
+}
+ 
+
+

@@ -1,0 +1,466 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.gemantic.analyse</groupId>
+	<artifactId>analyse-chatroom-home</artifactId>
+	<version>1.2-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>analyse-chatroom-home</name>
+	<description>analyse-chatroom-home</description>
+
+
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<id>nexus</id>
+			<name>releases</name>
+			<url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>releases</name>
+			<url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories> 
+
+
+
+	<properties>
+		<spring.version>2.5.6</spring.version>
+		<tuscany.version>1.4</tuscany.version>
+		<scallop.version>1.4.3</scallop.version>
+		<hibernate.annotations.version>3.4.0.GA</hibernate.annotations.version>
+		<gemantic.workflow.lib.version>0.2</gemantic.workflow.lib.version>
+		<gemantic.dashboard_client.lib.version>0.1</gemantic.dashboard_client.lib.version>
+		<gemantic.commons.core.lib.version>1.1</gemantic.commons.core.lib.version>
+		<gemantic.commons.sca.client.version>1.2</gemantic.commons.sca.client.version>
+		<gemantic.nlp.hot.core.version>1.3</gemantic.nlp.hot.core.version>
+		<gemantic.nlp.all.core.version>1.0</gemantic.nlp.all.core.version>
+		<gemantic.app.dict.core.version>1.2</gemantic.app.dict.core.version>
+		<gemantic.app.document.core.version>1.1</gemantic.app.document.core.version>
+	</properties>
+
+
+
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>oscache</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.expressme</groupId>
+			<artifactId>JOpenId</artifactId>
+			<version>1.08</version>
+		</dependency>
+
+		<!-- project dependency -->
+		<dependency>
+			<groupId>com.gemantic.commons</groupId>
+			<artifactId>commons-core</artifactId>
+			<version>1.88</version>
+			
+		</dependency>
+
+		<dependency>
+			<groupId>com.gemantic.commons</groupId>
+			<artifactId>commons-push-client</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
+
+		
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.8</version>
+		</dependency>
+
+		<!-- Tuscany -->
+		<dependency>
+			<groupId>org.apache.tuscany.sca</groupId>
+			<artifactId>tuscany-sca-api</artifactId>
+			<version>${tuscany.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tuscany.sca</groupId>
+			<artifactId>tuscany-host-embedded</artifactId>
+			<version>${tuscany.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tuscany.sca</groupId>
+			<artifactId>tuscany-node-impl</artifactId>
+			<version>${tuscany.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tuscany.sca</groupId>
+			<artifactId>tuscany-implementation-node</artifactId>
+			<version>${tuscany.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tuscany.sca</groupId>
+			<artifactId>tuscany-implementation-java-runtime
+            </artifactId>
+			<version>${tuscany.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tuscany.sca</groupId>
+			<artifactId>tuscany-binding-jms-runtime</artifactId>
+			<version>${tuscany.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>el-api</groupId>
+			<artifactId>el-api</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>3rdparty</groupId>
+			<artifactId>json-taglib</artifactId>
+			<version>0.4.1</version>
+		</dependency>
+
+
+
+
+		<dependency>
+			<groupId>quartz</groupId>
+			<artifactId>quartz</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>5.3.0.Final</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>5.3.0.Final</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm</artifactId>
+			<version>5.1.0.Final</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-human-task</artifactId>
+			<version>5.1.0.M1</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-bpmn2</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-workitems</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-flow</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-websocket</artifactId>
+			<version>8.0.0.RC0</version>
+		</dependency>
+
+
+
+
+
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-api</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>2.1.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-servlet</artifactId>
+			<version>2.1.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>com.gemantic.commons</groupId>
+			<artifactId>commons-tags-lib</artifactId>
+			<version>1.11</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gemantic.analyse</groupId>
+			<artifactId>commons-drools-lib</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
+
+
+		<dependency>
+			<groupId>JDBM</groupId>
+			<artifactId>JDBM</artifactId>
+			<version>3.0-alpha-1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.tuckey</groupId>
+			<artifactId>urlrewritefilter</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+	
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+
+		</dependency>
+		
+		
+		
+
+
+
+
+
+
+
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.1.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.1.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.1.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>jms</artifactId>
+			<version>1.1</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.apache.tuscany.sca</groupId>
+			<artifactId>tuscany-databinding-jaxb</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
+
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.1_3</version>
+		</dependency>
+	</dependencies>
+
+
+
+
+
+
+	<build>
+		<finalName>analyse-chatroom-home</finalName>
+		<plugins>
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>utf-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+
+
+
+				<configuration>
+					<contextPath>/</contextPath>
+					<scanIntervalSeconds>3</scanIntervalSeconds>
+					<scanTargetPatterns>
+						<scanTargetPattern>
+							<directory>src/main/webapp</directory>
+							<includes>
+								<include>**/*.xml</include>
+								<include>**/*.properties</include>
+							</includes>
+						</scanTargetPattern>
+					</scanTargetPatterns>
+					<defaultsDescriptor>webdefault.xml</defaultsDescriptor>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>9090</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<tagBase>https://svn.gemantic.com/gemantic/tags/analyse-chatroom-home</tagBase>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<scm>
+		<developerConnection>scm:svn:https://svn.gemantic.com/gemantic/tags/analyse-chatroom-home/analyse-chatroom-home.0.1.1</developerConnection>
+	</scm>
+
+
+
+
+
+</project>

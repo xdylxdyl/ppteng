@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.outer {
+    padding: 10px;
+    height: auto;
+    background: #C0C0C0;
+    width: 154px;
+    float: left;
+    margin: 2em;
+}
+
+.outer .right {
+    float: right;
+}
+
+.remainMine {
+    float: left;
+    margin: 2em;
+
+    
+}
+
+.inner {
+    height: auto;
+    border-top: #808080 4px solid;
+    border-left: #808080 4px solid;
+    border-right: #FFFFFF 4px solid;
+    border-bottom: #FFFFFF 4px solid;
+    overflow: auto;
+    width: 144px;
+}
+
+.inner div {
+    float: left;
+    width: 12px;
+    height: 12px;
+    border-top: #FFFFFF 2px solid;
+    border-left: #FFFFFF 2px solid;
+    border-right: #808080 2px solid;
+    border-bottom: #808080 2px solid;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 12px;
+}
+
+.inner .square {
+    border: 2px solid #808080;
+    width: 12px;
+    height: 12px;
+    font-weight: bold;
+}
+
+.inner .flag {
+    background: url("../../i/tag.png") no-repeat;
+}
+
+.inner .q1 {
+    color: #0000FF;
+}
+
+.inner .q2 {
+    color: #008000;
+}
+
+.inner .q3 {
+    color: #ff00ff;
+}
+
+.inner .q4 {
+    color: #000080;
+}
+
+.inner .q5 {
+    color: #800000;
+}
+
+.inner .q6 {
+    color: #008080;
+}
+
+.inner .q7 {
+    color: #000000
+}
+
+.inner .q8 {
+    color: #808080;
+}
+
+.inner .wrong {
+    background-color: red;
+
+}
+
+section {
+    width: 660px;
+    height: 95%;
+    float: right;
+    margin-bottom: 20px;
+}
+
+section header {
+    height: 80%;
+    overflow: auto;
+}
+
+section header .mine_area {
+
+    overflow-y: auto;
+    height: 85%;
+}
+
+section article {
+    height: 20%;
+    overflow: auto;
+    padding: 10px 0 0 0;
+}
+
+.line {
+    height: 0;
+    margin: 10px 0;
+    border-bottom: 1px solid #FD8203;
+}
+
+
+

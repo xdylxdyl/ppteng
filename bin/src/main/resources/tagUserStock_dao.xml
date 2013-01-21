@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dal>
+	<route>
+		<object name="com.gemantic.analyse.tag.model.TagUserStock"
+			listenerClass="" strategyProperty="">
+
+
+
+			<list name="getTagUserStockIdsBySymbol" sqlitem="select id from tag_user_stock where symbol = ? "
+				keyProperty="symbol" valueProperty="id" keyColumn="symbol" />
+			<list name="getTagUserStockIdsByUserId" sqlitem="select id from tag_user_stock where user_id = ? "
+				keyProperty="userId" valueProperty="id" keyColumn="user_id" />
+			<list name="getTagUserStockIdsByTagId" sqlitem="select id from tag_user_stock where tag_id = ? "
+				keyProperty="tagId" valueProperty="id" keyColumn="tag_id" />
+            <list name="getTagUserStockIdsByTagId" sqlitem="select id from tag_user_stock where tag_id = ? "
+				keyProperty="tagId" valueProperty="id" keyColumn="tag_id" />
+				
+				
+
+			<list name="getTagUserStockIdsBySymbolAndUserId"
+				sqlitem="select id from tag_user_stock where symbol = ?  and user_id = ?"
+				keyProperty="symbol,userId" valueProperty="id" keyColumn="symbol,user_id" />
+				
+			<list name="getTagUserStockIdsByTagIdAndUserId"
+				sqlitem="select id from tag_user_stock where tag_id = ? and user_id = ?"
+				keyProperty="tagId,userId" valueProperty="id" keyColumn="tag_id,user_id" />
+			
+				
+			
+
+			<map name="getTagUserStockIdBySymbol"
+				sqlitem="select id from tag_user_stock where symbol = ? And tag_id = ? And user_id = ?"
+				keyProperty="symbol" valueProperty="id" keyColumn="symbol" />
+
+			<dbStrategy name="mutiDS"
+				clasz="com.gemantic.dal.route.strategy.DefaultStrategy">
+				<pattern value="[0-9]$" group="analyseTag" />
+			</dbStrategy>
+
+		</object>
+	</route>
+</dal>

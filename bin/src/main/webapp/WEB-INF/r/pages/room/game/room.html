@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>room</title>
+<link rel="stylesheet" href="../../../r/c/base/style.css" type="text/css">
+<script type="text/javascript">
+function click_a(divDisplay)
+        {
+            if(document.getElementById(divDisplay).style.display != "block")
+            {
+                document.getElementById(divDisplay).style.display = "block";
+            }
+            else
+            {
+                document.getElementById(divDisplay).style.display = "none";
+            }
+        }
+</script>
+</head>
+
+<body>
+<div id="room">
+	<div class="list"><!--左边列表-->
+		<div class="listitem">
+		<h3>客官，欢迎光临</h3>
+		<p>游戏进程：等待开始</p>
+		<p>白天时间：4分钟</p>
+		<p>夜晚时间：1分钟</p>
+		<p>遗言时间：1分钟</p>
+		<p>杀手人数：缺省</p>
+		<p>警察人数：缺省</p>
+		<p class="detail"><a onClick="return click_a('details')">详细设定：</a></p>
+		<h4>玩家列表</h4>
+		<p>玩家一</p>
+		<p>玩家二</p>
+		<p>玩家三</p>
+		</div>
+	</div>
+	<div id="details" style="display:none;"><!--右边详细设定，隐藏模块-->
+		<div class="listitem">1234</div>
+	</div>
+	<div class="content"><!--主体-->
+		<div class="comment"><!--主体上部-->
+			<div class=""></div>
+		</div>
+		<div class="container"><!--主体聊天框-->
+			222
+		</div>
+		<div class="operate"><!--主体操作栏-->
+			<p>
+			<input type="text" name="gTimer">
+			<input type="button" align="right" onclick="" value="准备就绪">
+			
+			<select size="1" name="act">
+			<option value="0">语态&gt;&gt;</option>
+			<option value="1">温柔</option>
+			<option value="2">笑</option>
+			</select>
+
+			<select size="1" name="color">
+			<option selected="" style="background-color:#000000;color:white" value="0">黑色&gt;&gt;</option>
+			<option style="background-color:#0088FF;color:white" value="1">海蓝 </option>
+			<option style="background-color:#0000FF;color:white" value="2">亮蓝 </option>
+			<option style="background-color:#000088;color:white" value="3">深蓝 </option>
+			</select>
+			
+			<input type="button" onclick="" value="退出游戏" name="xx">
+			</p>
+			<p>
+			我要发言
+			<input type="text" maxlength="128" size="65" name="con">
+			<input type="button" onclick="" name="sendmsg" value=" 发 送 ">
+			</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>

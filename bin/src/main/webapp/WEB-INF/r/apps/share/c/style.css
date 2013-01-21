@@ -1,0 +1,109 @@
+@charset "utf-8";/* Sohu SNS share
+ * Version: 1.0
+ * Author: QianCheng
+ * Copyright: Sohu.com (www.sohu.com)
+ */
+
+.appHead .icon{background:url(i/appIcon-24.gif);}
+
+/* myShare */
+.shareBox{ padding:0 30px 0 7px;}
+.shareBox h3{ font-size:12px; font-weight:normal; margin:0 10px; margin-bottom:5px; color:#999;}
+.shareBox ul.shareList{ margin:0; padding:0;}
+.shareList li{ margin:0; padding:0; list-style-type:none}
+.shareList li .shareTitle{border-top:1px solid #BAAA9A; background-color:#FBFAE8; border-bottom:1px dotted #ccc; padding:8px 10px;}
+.shareList li .shareTitle .title{ width:80%; float:left; overflow:hidden;}
+.shareList li .shareTitle .title img{ width:16px; height:16px; margin-right:7px;}
+.shareList li .shareTitle .tool{ float:right; width:20%; text-align:right}
+.shareList li .shareTitle .meta{ margin-left:10px; clear:both}
+.shareList li .shareContent{ padding:10px 20px 10px 33px;}
+.quote{ color:#999; background:url(i/quote.gif) no-repeat left 1px; padding:0 0 0 15px; margin:10px 0 15px 0; clear:both;}
+.quote span{ padding:0 10px 0 0 ;width:5px; height:14px; overflow:hidden; background:url(i/quote.gif) no-repeat right -40px; display:inline-block}
+
+.avatarView img{float:left;margin:0 10px;}
+.avatarView h2{margin-top:10px;}
+.avatarView a{display:block;font-size:12px;font-weight:normal;}
+
+/* album */
+.shareAlbum .albumItem{overflow:hidden;width:186px;height:145px;margin:5px 0;padding:15px 15px 15px 175px;background:url(i/album.gif) no-repeat;text-align:left;}
+.shareAlbum .albumItem .albumCover{_display:inline;float:left;width:130px;height:130px;margin:0 0 0 -155px;padding:6px;*padding:5px 6px 7px;zoom:1;}
+.shareAlbum .albumItem .albumCover a{display:table-cell;width:130px;height:130px;text-align:center;vertical-align:middle;zoom:1;}
+.shareAlbum .albumItem .albumCover em{display:inline-block;width:0;height:100%;vertical-align:middle;}
+.shareAlbum .albumItem .albumCover img{display:inline-block;*margin:-2px 0 0;padding:0;border:0;vertical-align:middle;}
+.shareAlbum .albumItem .albumInfo{overflow:hidden;float:left;width:100%;height:80px;}
+.shareAlbum .albumItem .albumInfo h5{font-weight:normal;}
+.shareAlbum .albumItem .albumInfo h5 a{font-weight:bold;}
+.shareAlbum .albumItem .albumInfo p{margin:0;}
+.shareAlbum .albumItem .albumDesc{color:#333;}
+.shareAlbum .albumItem .albumTime{color:#999;}
+.shareAlbum .albumItem ul.albumSample{float:left;width:100%;margin:7px 0 0 -4px;list-style:none;}
+.shareAlbum .albumItem ul.albumSample li{_display:inline;float:left;width:auto;margin:0 4px;padding:0;}
+.shareAlbum .albumItem ul.albumSample li a{border:1px solid #ccc; padding:1px; width:50px; height:50px; display:block}
+.shareAlbum .albumItem ul.albumSample li a:hover{ border-color:#9b0020;}
+.shareAlbum .albumItem ul.albumSample img{width:50px;height:50px; }
+
+/* music */
+.musicBar{ width:363px; height:25px; background:url(i/musicBar.png) no-repeat; margin:10px 0;}
+
+/* photo */
+.sharePhoto img{ float:left; margin-right:10px; padding:2px; border:1px solid #ccc; background-color:#fff;}
+.sharePhoto{zoom:1;}
+.sharePhoto:after{content:'\0020';display:block;clear:both;height:0;}
+
+/* video */
+.shareVideo img{ float:left; margin-right:10px;}
+.shareVideo{zoom:1;}
+.shareVideo:after{content:'\0020';display:block;clear:both;height:0;}
+
+.shareVideo .playLink{ display:block; width:130px; height:100px; cursor:pointer; float:left; margin-right:10px;}
+.shareVideo span.play{ display:block; width:100%; height:100%;background:url(i/playBtn.gif) center no-repeat;}
+.shareVideo embed{ display:block; clear:both; margin:10px 0;}
+/* app */
+
+.shareApp img{ float:left; margin-right:10px;}
+
+/* shareMod */
+.canvas .shareMod{ margin-right:20px;}
+.canvas .shareMod h3{ margin:0 0 5px 0;}
+.canvas .shareMod input{ margin-bottom:10px; width:93%;}
+.canvas .shareMod .button{ margin-bottom:5px;}
+
+a.priBtn{ display:block; width:42px; height:21px; background:url(i/priBtn.gif) no-repeat; float:right; padding-right:6px}
+a.priBtn:hover{ text-decoration:none}
+
+
+/* dialog */
+.shareDialogBox dl.fieldset{ padding-left:60px;}
+.shareDialogBox dl.fieldset dt{ width:50px; margin-left:-60px}
+.shareDialogBox dl.fieldset dd textarea{ width:95%; overflow-y:auto;}
+.shareDialogDiv{ width:94%; margin:0; padding:5px;background-color:#F9F7E8; border-bottom:1px dotted #ccc; border-top:1px dotted #ccc}
+.shareDialogDiv input{ width:97%;}
+.shareDialogDiv .meta{ margin:5px 0 0 0;}
+
+.playBtnS{ width:96px; height:25px; background:url(i/playBtnS.gif) no-repeat; margin:10px 0 0;}
+.playBtnS a{ display:block; width:100%; height:100%;}
+
+/* logon */
+.logon .body{ background:#F6F7E9; padding-bottom:15px;}
+.logon .body h4{ font-weight:normal; margin:5px 0 10px 0}
+.logon .logonBox{ border:1px solid #ddddc1; background-color:#fff;padding:10px 20px;}
+.logon .logonBox h5{ border-bottom:1px solid #CFD2BD; margin-bottom:20px; padding-bottom:10px;}
+.logon .logonBox .text{ width:175px}
+.logon .logonBox label{ margin-right:60px}
+.logon .logonBox .button{}
+.logon .logonBox a{ margin-right:10px;}
+
+.logon #indexLogin .pptitle2{ border-bottom:1px solid #CFD2BD; margin-bottom:10px; padding-bottom:5px;}
+.logon #indexLogin{border:1px solid #ddddc1; background-color:#fff;padding:10px 20px; margin:0; width:90%;}
+.logon #indexLogin .passportc{ width:100%}
+.passportc ul.card { padding:0 62px;}
+.passportc input.ppinput{border:1px solid #999999;height:16px;line-height:16px;padding:3px; background:#fff; color:#666;}
+.passportc .pptitle2,.passportc .ppcontent{ color:#333;}
+.passportc dt{ margin-right:45px;}
+
+/* feedShare */
+.feedShare{ clear:both; margin:10px 10px 20px 0; position:relative}
+.feedShare h4{ margin:5px 0; padding:0; font-weight:normal;}
+.feedShare .quote{ margin:5px 0}
+.feedShare .musicBar{ margin:5px 0;}
+.feedOption .tool{ text-align:right}

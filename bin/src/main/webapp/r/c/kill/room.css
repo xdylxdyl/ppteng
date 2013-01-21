@@ -1,0 +1,361 @@
+/**
+ * @ directions
+ */
+/* Clearfix */
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+p {
+    margin: 4px;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-size: 16px;
+    font-family: "微软雅黑", "宋体";
+    margin: 0;
+    height: 100%;
+    background: #ddd;
+    background: -moz-linear-gradient(top, #999, #fff);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(#999), to(#fff));
+    background: -o-linear-gradient(top, #999, #fff);
+}
+
+.clearfix {
+    height: 80%;
+    margin-bottom: 1em;
+}
+
+#container {
+    position: relative;
+    width: 940px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+    /* background: #fff;
+-webkit-box-shadow: rgba(100, 100, 100, 0.8) 0 10px 10px;
+-moz-box-shadow: rgba(100, 100, 100, 0.8) 0 10px 10px;
+box-shadow: rgba(100, 100, 100, 0.8) 0 10px 10px; */
+}
+
+nav, section, footer {
+    background: #FFFFEE;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #999;
+    padding: 10px 15px;
+}
+
+nav {
+    width: 200px;
+    height: 95%;
+    float: left;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+nav article {
+    background: #fff;
+    border-radius: 5px 5px 0 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+}
+
+nav ul b {
+    cursor: pointer;
+}
+
+nav ul li {
+    margin-bottom: 5px;
+    height: 16px;
+    overflow: hidden;
+}
+
+nav ul li img {
+    cursor: pointer;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding-left: 18px;
+    height: 16px;
+    line-height: 16px;
+    vertical-align: top;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+nav ul li span, nav ul li i {
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    vertical-align: top;
+}
+
+nav li a.unready {
+    background: url(../../i/icon_status.gif) 0 0 no-repeat;
+}
+
+nav li a.ready {
+    background: url(../../i/icon_status.gif) 0 -16px no-repeat;
+}
+
+nav li a.living {
+    background: url(../../i/icon_status.gif) 0 -32px no-repeat;
+}
+
+nav li a.die {
+    background: url(../../i/icon_status.gif) 0 -48px no-repeat;
+}
+
+nav li a.lastword {
+    background: url(../../i/icon_half_life.gif) 0 0 no-repeat;
+}
+
+nav li i {
+    color: #FF0100;
+}
+
+nav span.victim {
+    background-color: #000000;
+    border-radius: 1px 1px 1px 1px;
+    height: 4px;
+    position: absolute;
+    right: 1px;
+    top: 6px;
+    width: 12px;
+}
+
+section {
+    width: 660px;
+    height: 95%;
+    float: right;
+    margin-bottom: 20px;
+}
+
+section header {
+    height: 25%;
+    overflow: auto;
+}
+
+section header .dead_area {
+
+    overflow-y: auto;
+    display: none;
+    height: 85%;
+}
+
+section header .killer_area {
+
+    overflow-y: auto;
+    display: none;
+    height: 85%;
+}
+
+section article {
+    height: 70%;
+    overflow: auto;
+    padding: 10px 0 0 0;
+}
+
+.line {
+    height: 0;
+    margin: 10px 0;
+    border-bottom: 1px solid #FD8203;
+}
+
+footer {
+    width: 910px;
+    height: 15%;
+    position: relative;
+}
+
+footer fieldset {
+    border: 0 none;
+    margin: 0;
+    padding: 5px 0;
+}
+
+footer select {
+    width: 100px;
+    margin-right: 15px;
+}
+
+footer .text {
+    width: 500px;
+    border: 1px solid #FD8203;
+    margin-right: 10px;
+    -moz-box-shadow: inset 0 0 3px 1px #FD8203;
+    -webkit-box-shadow: inset 0 0 3px 1px #FD8203;
+    box-shadow: inset 0 0 3px 1px #FD8203;
+}
+
+footer .hid {
+    display: none;
+}
+
+footer .text:focus {
+    -moz-box-shadow: 0 0 5px 1px #FD8203;
+    -webkit-box-shadow: 0 0 5px 1px #FD8203;
+    box-shadow: 0 0 5px 1px #FD8203;
+}
+
+footer .nobg {
+    border: 0;
+    background: inherit;
+    width: 60px;
+    color: #000;
+}
+
+footer .button {
+    float: right;
+    margin-right: 25px;
+    display: none;
+}
+
+footer .button, footer .submit {
+    width: 100px;
+    height: 23px;
+    background: -moz-linear-gradient(top, #00779E, #005C7A);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(#00779E), to(#005C7A));
+    background: -o-linear-gradient(top, #00779E, #005C7A);
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    font-family: "微软雅黑", "宋体";
+    cursor: pointer;
+    text-shadow: 1px 1px #000;
+}
+
+footer .button:hover, footer .submit:hover {
+    background: -moz-linear-gradient(top, #005C7A, #00779E);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(#005C7A), to(#00779E));
+    background: -o-linear-gradient(top, #005C7A, #00779E);
+}
+
+footer .quiet {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-width: 20px;
+    border-color: #EBE8D9 #999 #999 #EBE8D9;
+    border-style: solid;
+    border-radius: 0 0 10px 0;
+    box-shadow: -1px -1px 5px #aaa;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+footer .quiet:hover {
+    border-width: 25px;
+}
+
+footer .quiet:before {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: -10px;
+    bottom: -15px;
+    content: "×";
+    text-shadow: 1px 1px #000;
+    color: #fff;
+    font-weight: 900;
+    font-size: 22px;
+}
+
+iframe {
+    display: none;
+}
+
+.netspeed {
+    margin: 0.5em;
+    margin-right: 3em;
+    right: 10%;
+    float: right;
+    color: #006699;
+    font-size: 12px;
+    font-family: "微软雅黑", "宋体";
+
+}
+
+.expCenter {
+    position: absolute;
+    top: 30%;
+    right: 50%;
+    height: 30%;
+    width: 60%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 6px solid rgba(0, 0, 0, 0.3);
+    position: absolute;
+    -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    padding: 1em;
+}
+
+.expCenter span {
+    color: #009999;
+    text-decoration: none;
+    float: left;
+    left:20%;
+    margin:1.5em;
+
+}
+.expCenter input {
+
+    width: 80%;
+    float: left;
+
+}
+
+.expCenter a {
+
+    float: left;
+    margin-top: 1.5em;
+    margin-left: 3em;
+    width: 30%;
+
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

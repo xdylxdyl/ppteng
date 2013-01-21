@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>对话框</title>
+<link type="text/css" rel="stylesheet" href="../../../c/base/base.css" />
+<link type="text/css" rel="stylesheet" href="../../../c/themes/night/style.css" />
+<link type="text/css" rel="stylesheet" href="../c/style.css" />
+</head>
+
+<body>
+<div class="dialog" style="top:50px;left:50px;width:400px;">
+	<div class="decor">
+		<span class="tl"></span>
+		<span class="tr"></span>
+		<span class="br"></span>
+		<span class="bl"></span>
+	</div>
+	<div class="content">
+		<div class="head">
+			<h4>添加选项</h4>
+			<div class="option"><a href="#" class="icon i-close" onclick="dialog.hide();return false;">关闭</a></div>
+		</div>
+		<div class="body">
+			<div class="voteDialog voteDialog-addOption">
+				请输入候选项：<br />
+				<input type="text" class="text" />
+			</div>
+		</div>
+		<div class="foot">
+			<span class="button button-main"><span><button type="button" title="确定">确定</button></span></span>
+			<span class="button"><span><button type="button" title="取消">取消</button></span></span>
+		</div>
+	</div>
+</div>
+
+<div class="dialog" style="top:50px;left:500px;width:400px;">
+	<div class="decor">
+		<span class="tl"></span>
+		<span class="tr"></span>
+		<span class="br"></span>
+		<span class="bl"></span>
+	</div>
+	<div class="content">
+		<div class="head">
+			<h4>修改选项说明</h4>
+			<div class="option"><a href="#" class="icon i-close" onclick="dialog.hide();return false;">关闭</a></div>
+		</div>
+		<div class="body">
+			<div class="voteDialog voteDialog-editOptionDesc">
+				<label for="optionDesc">选项说明：</label><br />
+				<textarea id="optionDesc" class="text" cols="10" rows="3"></textarea>
+			</div>
+		</div>
+		<div class="foot">
+			<span class="button button-main"><span><button type="button" title="确定">确定</button></span></span>
+			<span class="button"><span><button type="button" title="取消">取消</button></span></span>
+		</div>
+	</div>
+</div>
+
+<div class="dialog" style="top:350px;left:50px;width:400px;">
+	<div class="decor">
+		<span class="tl"></span>
+		<span class="tr"></span>
+		<span class="br"></span>
+		<span class="bl"></span>
+	</div>
+	<div class="content">
+		<div class="head">
+			<h4>修改截止时间</h4>
+			<div class="option"><a href="#" class="icon i-close" onclick="dialog.hide();return false;">关闭</a></div>
+		</div>
+		<div class="body">
+			<div class="voteDialog voteDialog-editTime">
+				截止时间：<br />
+				<select class="select year">
+					<option selected="selected">请选择年</option>
+				</select>
+				年
+				<select class="select month">
+					<option selected="selected">请选择月</option>
+				</select>
+				月
+				<select class="select day">
+					<option selected="selected">请选择日</option>
+				</select>
+				日<br />
+				<select class="select hour">
+					<option selected="selected">14</option>
+				</select>
+				时
+				<select class="select minute">
+					<option selected="selected">25</option>
+				</select>
+				分
+			</div>
+		</div>
+		<div class="foot">
+			<span class="button button-main"><span><button type="button" title="确定">确定</button></span></span>
+			<span class="button"><span><button type="button" title="取消">取消</button></span></span>
+		</div>
+	</div>
+</div>
+
+<div class="dialog" style="top:350px;left:500px;width:400px;">
+	<div class="decor">
+		<span class="tl"></span>
+		<span class="tr"></span>
+		<span class="br"></span>
+		<span class="bl"></span>
+	</div>
+	<div class="content">
+		<div class="head">
+			<h4>终止投票</h4>
+			<div class="option"><a href="#" class="icon i-close" onclick="dialog.hide();return false;">关闭</a></div>
+		</div>
+		<div class="body">
+			<div class="voteDialog voteDialog-stop">
+				<h4>你确定要结束此投票么？</h4>
+				<p>结束投票后，您和其他人都将不能再投票</p>
+			</div>
+		</div>
+		<div class="foot">
+			<span class="button button-main"><span><button type="button" title="确定">确定</button></span></span>
+			<span class="button"><span><button type="button" title="取消">取消</button></span></span>
+		</div>
+	</div>
+</div>
+</body>
+</html>

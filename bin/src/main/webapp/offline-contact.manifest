@@ -1,0 +1,14 @@
+CACHE MANIFEST
+contact.html
+r/j-src/cordova/cordova-1.5.0.js
+r/c/jqm/jquery.mobile-1.0.1.min.cssr/j-src/jquery/jquery-1.7.1.min.js
+r/j-src/jqm/jquery.mobile-1.0.1.min.js
+r/j-src/contact/contact.js
+r/j-src/contact/init.js
+
+html5-offline-cache/index.html
+html5-offline-cache/style.css
+html5-offline-cache/image.jpg
+html5-offline-cache/image-med.jpg
+html5-offline-cache/image-small.jpg
+html5-offline-cache/notre-dame.jpg
