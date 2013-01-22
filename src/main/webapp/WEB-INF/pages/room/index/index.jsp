@@ -112,17 +112,17 @@
 							<div class="chapter">
 								<div class="chapter-body">
 									<h4>
-										<a href="#">静静的</a>
+										<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=5">静静的</a>
 									</h4>
 									<p>你可以和朋友一起玩[杀人游戏],[多人扫雷],或者你什么都不做,就只是静静待着,和我一样.</p>
 								</div>
 							</div>
 							<div class="chapter">
-								<a href="#" class="pull-left"><img
+								<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=7" class="pull-left"><img
 									src="/r/img/icon_alpaca.png" alt="" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
-										<a href="#">杀人游戏[简化版]</a>
+										<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=7">杀人游戏[简化版]</a>
 									</h4>
 									<p>
 										杀人游戏,尤其是简化版,用高雅和艺术形容,一点都不过份.游戏中经常可以看到妙趣横生的对话,风格迥异的人物,和各种知性漂亮的姑娘...
@@ -132,21 +132,21 @@
 						</div>
 						<div class="span6">
 							<div class="chapter">
-								<a href="#" class="pull-left"><img
+								<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=6" class="pull-left"><img
 									src="/r//img/icon_alpaca.png" alt="" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
-										<a href="#">扫雷[多人版]</a>
+										<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=6">扫雷[多人版]</a>
 									</h4>
 									<p>可以和你的朋友一起 玩这个简单有趣的小游戏了~体验一下三五个人去扫一个[100*100]超大雷区的冒险历程?</p>
 								</div>
 							</div>
 							<div class="chapter">
-								<a href="#" class="pull-left"><img
+								<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=5" class="pull-left"><img
 									src="/r//img/icon_alpaca.png" alt="" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
-										<a href="#">这些游戏都不喜欢?</a>
+										<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=5">这些游戏都不喜欢?</a>
 									</h4>
 									<p>想过设计一个自己喜欢的游戏呢?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以!来联系我吧~</p>
 								</div>
