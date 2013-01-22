@@ -239,6 +239,14 @@ $(document).ready(function () {
 
     });
 
+    $("#music_controller").bind("click",function () {
+
+           var isHide=$("#music_controller").attr("isHide");
+           musicUtil.hideMusic(isHide);
+           return false;
+
+       });
+
     function showMessage(index, messages, delay) {
 
         setTimeout(showMessage(index), delay);

@@ -58,6 +58,7 @@
 <body>
 	<div id="music" class="hidden">${music}</div>
 	<div id="music_play" class="music_play"></div>
+	<div id="music_container" class="music_container"><img id="music_controller" src="/r/img/music/music.jpg"></div>
 
 	<header>
 		<div class="role_area" id="role_area">

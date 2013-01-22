@@ -3,4 +3,34 @@
     left: 2em;
     bottom: 10%;
     z-index: 151;
+
+}
+.music_container{
+    position: fixed;
+    right: 2em;
+    bottom: 10%;
+    z-index: 151;
+    border: 1px solid #666600;
+
+}
+
+
+#music_controller{
+
+}
+
+
+
+
+.music_play span{
+  font-size: 40px;
+   color:red;
+
+
+}
+
+.music_player{
+    width:235px;
+    height:346px;
+
 }
