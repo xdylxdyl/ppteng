@@ -78,6 +78,10 @@ public class User implements Serializable {
 	 */
 	private String sign="";
 	
+	/**
+	 * musice
+	 */
+	private String music="";
 
 	
 
@@ -220,6 +224,17 @@ public class User implements Serializable {
 
 	public void setLoginAt(Long loginAt) {
 		this.loginAt = loginAt;
+	}
+	
+	
+	
+
+	public String getMusic() {
+		return music;
+	}
+
+	public void setMusic(String music) {
+		this.music = music;
 	}
 
 	public String toString() {

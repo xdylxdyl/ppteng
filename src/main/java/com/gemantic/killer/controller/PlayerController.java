@@ -464,6 +464,7 @@ public class PlayerController {
 		oldUser.setIcon("/r/user_info/" + uid);
 		oldUser.setName(user.getName());
 		oldUser.setSign(user.getSign());
+		oldUser.setMusic(user.getMusic());
 		this.userSevice.update(oldUser);
 
 		return "redirect:/player/detail.do?uid=" + uid;

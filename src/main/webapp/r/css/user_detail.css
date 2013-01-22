@@ -66,6 +66,25 @@ h1 {
 
 }
 
+
+
+.music_container span{
+
+    float: left;
+    margin: 0.5em;
+
+}
+
+.music{
+
+    float: left;
+    margin: 0.5em;
+    width: 80%;
+
+}
+
+
+
 .user_description{
     float: right;
     color: #bbb;
@@ -261,3 +280,4 @@ h1 {
 .hidden {
     display: none;
 }
+

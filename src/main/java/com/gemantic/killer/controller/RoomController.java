@@ -167,6 +167,8 @@ public class RoomController {
 
 		// 更新用户的当前房间信息,MemberService的功能是否需要?
 
+		User creater=this.userService.getUserByID(room.getCreaterID());
+		model.addAttribute("music", creater.getMusic());
 		model.addAttribute("room", room);
 		model.addAttribute("users", users);
 		model.addAttribute("type", "game");

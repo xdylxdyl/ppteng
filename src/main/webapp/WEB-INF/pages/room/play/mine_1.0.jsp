@@ -15,7 +15,8 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/r/css/mine/mine.css?v=${frontVersion}">
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 
 <script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil.js"></script>
 <script
@@ -51,6 +52,10 @@
 </head>
 
 <body>
+	
+	<div id="music" class="hidden">${music}</div>
+	
+	<div id="music_play" class="music_play"></div>
 
 
 	<header>
@@ -62,7 +67,9 @@
 
 
 
-		<div class="remainMine" id="remainMine">剩余雷数<span id="count"></span></div>
+		<div class="remainMine" id="remainMine">
+			剩余雷数<span id="count"></span>
+		</div>
 
 
 		<div id="outer2" class="outer right">

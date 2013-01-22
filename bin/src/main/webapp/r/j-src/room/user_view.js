@@ -18,6 +18,9 @@ var userEditView = {
         var sign = $("#sign").text();
         return new userInfo(id, name, icon, sign);
 
+    },
+    userEditView:function(){
+        if()
     }
 
 

@@ -1,0 +1,6 @@
+.music_play{
+    position: fixed;
+    left: 2em;
+    bottom: 10%;
+    z-index: 151;
+}

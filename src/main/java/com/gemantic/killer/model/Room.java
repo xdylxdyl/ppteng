@@ -52,7 +52,7 @@ public class Room implements Serializable {
 	
 	private List<Long> players=new ArrayList();
 	
-	
+		
 	
 	public Setting getSetting() {
 		return setting;

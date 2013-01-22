@@ -364,6 +364,9 @@ var initRoom = function() {
         //initControllview
         controlView.initButtonOfGame();
 
+         //判断是否有音乐盒
+        musicUtil.displayMusic();
+
     } else {
 
         //Record

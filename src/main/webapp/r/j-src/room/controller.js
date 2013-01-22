@@ -3,11 +3,13 @@
  * @author Jqhan <jqhan@gemantic.cn>
  */
 
-$(document).ready(function() {
+$(document).ready(function () {
+
 
         headView.highLight("person");
 
-        $("#user_edit").click(function() {
+
+        $("#user_edit").click(function () {
 
 
             var command = $("#user_edit").attr("command");
@@ -18,16 +20,14 @@ $(document).ready(function() {
                 //edit pattern
 
 
-
             } else {
                 //
-             
 
-                var user=userEditView.getUser();
+
+                var user = userEditView.getUser();
 
                 playerService.updateUserInfo(user);
                 window.location.replace(window.location.href);
-
 
 
             }
@@ -37,12 +37,16 @@ $(document).ready(function() {
         });
 
 
-        $("#portrait_view").click(function() {
+        $("#portrait_view").click(function () {
             var s = $("#portrait_edit").text();
             $("#portrait_img").attr("src", s)
             return false;
 
         });
+
+        //判断是否有音乐盒
+        musicUtil.displayMusic();
+
     }
 )
 
