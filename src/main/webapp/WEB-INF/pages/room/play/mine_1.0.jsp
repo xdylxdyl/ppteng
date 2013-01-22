@@ -14,7 +14,12 @@
 	href="<%=request.getContextPath()%>/r/css/common/room.css?v=${frontVersion}">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/r/css/mine/mine.css?v=${frontVersion}">
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/r/css/music.css?v=${frontVersion}">
+
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
+
+
 <script
 	src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 
@@ -23,13 +28,15 @@
 	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath()%>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/musicUtil.js?v=${frontVersion}"></script>
 
-<script src="/r/j-src/mine/mine.js"></script>
-<script src="/r/j-src/commons/model.js"></script>
-<script src="/r/j-src/commons/view.js"></script>
-<script src="/r/j-src/commons/service.js"></script>
-<script src="/r/j-src/commons/base.js"></script>
-<script src="/r/j-src/commons/action.js"></script>
+<script src="/r/j-src/mine/mine.js?v=${frontVersion}"></script>
+<script src="/r/j-src/commons/model.js?v=${frontVersion}"></script>
+<script src="/r/j-src/commons/view.js?v=${frontVersion}"></script>
+<script src="/r/j-src/commons/service.js?v=${frontVersion}"></script>
+<script src="/r/j-src/commons/base.js?v=${frontVersion}"></script>
+<script src="/r/j-src/commons/action.js?v=${frontVersion}"></script>
 
 
 
@@ -52,9 +59,9 @@
 </head>
 
 <body>
-	
+
 	<div id="music" class="hidden">${music}</div>
-	
+
 	<div id="music_play" class="music_play"></div>
 
 
