@@ -16,23 +16,20 @@
             Ry = event.pageY - (parseInt(t.css("top")) || 0);
             t.css("position", "absolute").css("cursor", "move").fadeTo(20, 0.5);
             M = true;
-        }).mouseup(function (event) {
-                M = false;
-                t.fadeTo(20, 1);
-            });
+        })
         $(document).mousemove(function (event) {
             if (M) {
                 t.css({ top:event.pageY - Ry, left:event.pageX - Rx });
             }
-        });
+        }).mouseup(function (event) {
+                M = false;
+                t.fadeTo(20, 1);
+            });
+        ;
     }
 
 
-
-
-
 })(document);
-
 
 
 var musicUtil = {
@@ -50,13 +47,13 @@ var musicUtil = {
         $("#music_play").Drag();
     },
     hideMusic:function (isHide) {
-        if (isHide=="false") {
+        if (isHide == "false") {
             $("#music_play").hide();
-            $("#music_controller").attr("isHide",true);
+            $("#music_controller").attr("isHide", true);
             $("#music_controller").text("显示音乐盒");
         } else {
 
-            $("#music_controller").attr("isHide",false);
+            $("#music_controller").attr("isHide", false);
             $("#music_controller").text("隐藏音乐盒");
             $("#music_play").show();
         }
