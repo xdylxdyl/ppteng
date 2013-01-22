@@ -29,7 +29,7 @@
 						<li><a href="/record/list.do">战例</a></li>
 						<li><a href="/player/detail.do">个人</a></li>
 						<li><a href="http://xdylxdyl.diandian.com/" target="_blank">官博</a></li>
-						<li><a href="http://xdylxdyl.diandian.com/" target="_blank">论坛</a></li>						
+						<li><a href="http://42.121.113.70:800/forum.php" target="_blank">论坛</a></li>						
 						<li><a href="/player/offline.do">退出</a></li>
 						<li><a href="#">关于</a></li>
 					</ul>
