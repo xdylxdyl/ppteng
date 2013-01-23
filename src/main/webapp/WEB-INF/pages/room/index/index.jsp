@@ -188,7 +188,15 @@
 	</div>
 
 
-
+    <div id="friendLink" class="friendLink">
+    <p>友情链接</p>
+    <div class="container">
+    <div class="row">
+    <div class="span1">
+    <div class="p"><a href="" target="_blank">皮卡工作室</a></div>
+    </div>
+    </div>
+    </div>
 
 </body>
 </html>

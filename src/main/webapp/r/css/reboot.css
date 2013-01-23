@@ -54,7 +54,9 @@
 
 }
 
-
+.inmiddle{
+    text-align : center
+}
 
 .stastic  a {
 
@@ -200,5 +202,8 @@ span.login-checkbox > input[type="checkbox"] + label {
     padding: 11px 15px 10px 10px;
     background: #fdfdfd;
     box-shadow: inset 2px 2px 4px #f1f1f1;
+}
+.friendLink{
+    border-top: 2px solid #e9eefa;
 }
 

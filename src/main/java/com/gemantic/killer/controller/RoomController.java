@@ -81,6 +81,9 @@ public class RoomController {
 			return "redirect:/";
 		}
 		User user = this.userService.getUserByID(uid);
+		if(user==null){
+			return "redirect:/";
+		}
 		if (PunchUtil.isPunched(user)) {
 			model.addAttribute("punch", false);
 		} else {
