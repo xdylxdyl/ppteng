@@ -60,7 +60,7 @@
 
 
 
-			<div id="music_container" class="music_container hidden">
+			<div id="music_container" class="music_set_container hidden">
 			
 				<span>在<a href="http://www.xiami.com/widget/imulti" target="_blank">虾米</a>制作自己的音乐盒,粘贴Flash地址到下面
 				</span>

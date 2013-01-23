@@ -24,15 +24,17 @@
 				<a class="brand" href="#">葡萄藤</a>
 				<div class="nav-collapse" id="nav">
 					<ul class="nav pull-right">
-						<li><a href="/">首页</a></li>				
+						<li><a href="/">首页</a></li>
 						<li><a href="/m/list.do">游戏</a></li>
 						<li><a href="/record/list.do">战例</a></li>
 						<li><a href="/player/detail.do">个人</a></li>
 						<li><a href="http://xdylxdyl.diandian.com/" target="_blank">官博</a></li>
-						<li><a href="http://42.121.113.70:800/forum.php" target="_blank">论坛</a></li>						
+						<li><a href="http://42.121.113.70:800/forum.php"
+							target="_blank">论坛</a></li>
 						<li><a href="/player/offline.do">退出</a></li>
 						<li><a href="#">关于</a></li>
 					</ul>
+					
 				</div>
 			</div>
 		</div>

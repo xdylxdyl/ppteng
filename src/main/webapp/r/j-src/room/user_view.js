@@ -12,7 +12,7 @@ var userEditView = {
         $("#user_cancel").show();
         $("#portrait_container").removeClass().addClass("portrait_container");
         $("#portrait_edit").removeClass().addClass("portrait_edit border_show");
-        $("#music_container").removeClass().addClass("music_container");
+        $("#music_container").removeClass().addClass("music_set_container");
 
 
     },
