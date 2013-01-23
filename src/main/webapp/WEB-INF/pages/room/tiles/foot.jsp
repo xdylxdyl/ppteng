@@ -38,15 +38,22 @@
 
         </div>
         <div class="span4">
-        <p>关于我们</p>
+        <p>联系我们</p>
         <p>邮箱 xdylxdyl@163.com</p>
 
 
         </div>
-        </div>
+
         </div>
 
+        </div>
 
+        <div class="stastic"> <p>
+        © 2012 Company, Inc. 京ICP备09034013号 <script
+        src="http://s96.cnzz.com/stat.php?id=4923206&web_id=4923206&online=2"
+        language="JavaScript"></script>
+        </p>
+        </div>
 
         </div>
         </body>

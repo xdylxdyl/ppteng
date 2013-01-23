@@ -50,7 +50,7 @@
 }
 .stastic{
     padding: 0.5em;
-    float:left
+    text-align: center;
 
 }
 
@@ -58,10 +58,7 @@
     text-align : center
 }
 
-.stastic  a {
 
-
-}
 
 
 
@@ -206,4 +203,5 @@ span.login-checkbox > input[type="checkbox"] + label {
 .friendLink{
     border-top: 2px solid #e9eefa;
 }
+
 
