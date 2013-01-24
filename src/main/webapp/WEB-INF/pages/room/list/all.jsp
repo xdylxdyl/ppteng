@@ -46,6 +46,8 @@
 						您是要进入一个房间呢呢还是创建一个房间呢还是什么都不想干呢 ,或者直接 ~~~ <a
 							href="/player/offline.do">走你~~~ </a>
 					</p>
+					                                        </p>
+<p>本站还在测试期,期间如果出现各种Bug,给您带来不便,无花表示代替站长XD对你们万般的歉意.有什么不喜欢的不爽的都可以直接拿砖头砸它扔它.如果对本站有任何的建议,欢迎稳步论坛(由于技术原因.论坛的帐号需要独立注册......BS我吧),或者是直接QQ我.</p>
 					<p class="right">
 						<a href="" class="button blue serif glossy skew" data-icon="♛">Create
 							Room </a>
