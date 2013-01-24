@@ -193,7 +193,7 @@
     <div class="container">
     <div class="row">
     <div class="span1">
-    <div class="p"><a href="" target="_blank">皮卡工作室</a></div>
+    <div class="p"><a href="http://www.pickupstudio.org/" target="_blank">皮卡工作室</a></div>
     </div>
     </div>
     </div>

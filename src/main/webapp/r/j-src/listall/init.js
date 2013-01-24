@@ -1,5 +1,5 @@
 $(document).ready(function() {
-      $("#name").focus();
+    $("#name").focus();
 
 
     $("#room .text").blur(function() {
@@ -18,9 +18,21 @@ $(document).ready(function() {
             $("#room .text").nextAll("span").html("　　　　　&nbsp;房间名不能为空");
             e.preventDefault();
         } else {
+
+
             $("#mask").show();
             e.submit();
         }
+    })
+
+
+    $("#regedit #submit").click(function(e) {
+        var content = $("#name").val();
+        content = $("#escape").text(content).html();
+        $("#name").val(content);
+        $("#escape").empty();
+        e.submit();
+
     })
 
 
@@ -32,11 +44,17 @@ $(document).ready(function() {
         } else {
             regeditView.wrongNameFormat();
             return;
-        };
-        
-
+        }
+        ;
+        if (verifyUtil.lengthLimit(r, 20)) {
+            regeditView.rightNameFormat();
+        } else {
+            regeditView.wrongLengthLimit();
+            return;
+        }
 
     });
+
 
     $("#email").bind("keyup", function() {
         var r = $("#email").val();
@@ -50,10 +68,19 @@ $(document).ready(function() {
         ;
 
         var id = regeditService.getIdByEmail(r);
-        if (id == "") {
+        if (id == "" || id == undefined) {
             regeditView.noDedupEmailFormat();
+
         } else {
             regeditView.dedupEmailFormat();
+            return;
+        }
+
+        if (verifyUtil.lengthLimit(r, 20)) {
+            regeditView.rightNameFormat();
+        } else {
+            regeditView.wrongLengthLimit();
+            return;
         }
 
     });
@@ -77,43 +104,54 @@ $(document).ready(function() {
             } else {
                 return false;
             }
+        },
+        lengthLimit:function(content, length) {
+            if (content.length < length) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
     }
 
     var regeditView = {
 
         wrongEmailFormat:function() {
-            $("#reg_email_hint").html("邮箱格式不正确");
+            $("#reg_hint").html("邮箱格式不正确");
             $("#submit").attr("disabled", true);
-
-
         },
         rightEmailFormat:function() {
-            $("#reg_email_hint").html("");
+            $("#reg_hint").html("");
             $("#submit").attr("disabled", false);
         },
 
         dedupEmailFormat:function() {
-            $("#reg_email_hint").html("晚了已经被人用了");
+            $("#reg_hint").html("晚了已经被人用了");
             $("#submit").attr("disabled", true);
 
 
         },
         noDedupEmailFormat:function() {
-            $("#reg_email_hint").html("");
+            $("#reg_hint").html("");
             $("#submit").attr("disabled", false);
         },
 
         wrongNameFormat:function() {
-            $("#reg_name_hint").html("靠谱点敢不用空用户名么");
+            $("#reg_hint").html("靠谱点敢不用空用户名么");
             $("#submit").attr("disabled", true);
 
 
         },
         rightNameFormat:function() {
-            $("#reg_name_hint").html("");
+            $("#reg_hint").html("");
             $("#submit").attr("disabled", false);
+        },
+        wrongLengthLimit:function() {
+            $("#reg_hint").html("起那么长的名字是要逆天么?");
+            $("#submit").attr("disabled", true);
         }
+
 
 
 

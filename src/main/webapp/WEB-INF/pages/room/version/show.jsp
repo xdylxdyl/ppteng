@@ -4,7 +4,7 @@
 简化
 </c:when>
 <c:when test="${'mine_1.0'==version}">
-扫雷
+多人扫雷[测试版]
 </c:when>
 <c:otherwise>
 </c:otherwise>

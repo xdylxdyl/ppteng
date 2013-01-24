@@ -14,7 +14,7 @@
 
 <body>
 
-	<div class="signin">
+	<div class="signin" id="regedit">
 		<div class="content clearfix">
 			<form:form modelAttribute="user" action="/player/regedit.do" method="post">
 
@@ -50,40 +50,13 @@
 				<div class="signin-action">
 					<input class="btn btn-primary btn-large pull-right" type="submit" id="submit" />
 				</div>
+				<div id="escape"></div>
+				
 
-<%-- 
-				<label>用户名称：</label>
-
-				<spring:bind path="user.name">
-					<input name="name" id="name" value="${user.name}" type="input"
-						placeholder="Name" class="sign" />
-				</spring:bind>
-				<p id="reg_name_hint" class="email_hint"></p>
-
-
-				<label>用户邮箱：</label>
-				<spring:bind path="user.email">
-					<input value="${user.email}" id="email" name="email" type="input"
-						placeholder="Name" class="sign" />
-				</spring:bind>
-
-				<p id="reg_email_hint" class="email_hint"></p>
-
-				<label>用户密码：</label>
-				<spring:bind path="user.password">
-					<input value="${user.password}" id="password" name="password"
-						type="password" placeholder="Password" class="sign" />
-				</spring:bind>
-
-				<div class="signin-action">
-					<input class="btn btn-primary btn-large pull-right" type="submit"
-						id="submit" />
-
-				</div> --%>
 				<a href="/" class="return">返回登录</a>
 		</div>
 		<div class="regedit_hint">
-			<label class="red_hint"><spring:message code="${code}" /></label>
+			<label class="hint" id="reg_hint"><spring:message code="${code}" /></label>
 		</div>
 		</form:form>
 	</div>

@@ -490,7 +490,7 @@ public class PlayerController {
 
 		model.addAttribute("userID", userID);
 
-		return "/room/player/email";
+		return "/room/person/email";
 
 	}
 
