@@ -33,7 +33,7 @@
 				<%-- <option value="color_game_1.0"
 					<css:if test="${room.version=='color_game_1.0'}">selected="selected"</css:if>>猜颜色</option>--%>
 				<option value="mine_1.0"
-					<c:if test="${room.version=='mine_1.0'}">selected="selected"</c:if>>扫雷</option> 
+					<c:if test="${room.version=='mine_1.0'}">selected="selected"</c:if>>多人扫雷[测试版]</option> 
 			</select>
 		</spring:bind>
 		<br />
@@ -48,7 +48,7 @@
 		<a href="" class="cancel">取消并返回房间列表</a>
 
 
-		<P class="hint">测试期间每局游戏获取2000葡萄币~~~~</P>
+		<P class="hint">测试期间每局游戏获取2000葡萄币~~~~测试版不保证游戏可以正常使用,遇到错误,退出重新登录即可</P>
 	</form:form>
 	<div id="mask"></div>
 </body>
