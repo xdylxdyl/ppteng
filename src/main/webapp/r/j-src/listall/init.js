@@ -18,9 +18,21 @@ $(document).ready(function() {
             $("#room .text").nextAll("span").html("　　　　　&nbsp;房间名不能为空");
             e.preventDefault();
         } else {
+
+
             $("#mask").show();
             e.submit();
         }
+    })
+
+
+    $("#regedit #submit").click(function(e) {
+        var content = $("#name").val();
+        content = $("#escape").text(content).html();
+        $("#name").val(content);
+        $("#escape").empty();
+        e.submit();
+
     })
 
 
@@ -42,11 +54,6 @@ $(document).ready(function() {
         }
 
     });
-
-
-
-
-
 
 
     $("#email").bind("keyup", function() {
