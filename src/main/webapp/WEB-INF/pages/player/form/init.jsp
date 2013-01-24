@@ -50,6 +50,8 @@
 				<div class="signin-action">
 					<input class="btn btn-primary btn-large pull-right" type="submit" id="submit" />
 				</div>
+				<div id="escape"></div>
+				
 
 <%-- 
 				<label>用户名称：</label>
@@ -83,7 +85,7 @@
 				<a href="/" class="return">返回登录</a>
 		</div>
 		<div class="regedit_hint">
-			<label class="red_hint"><spring:message code="${code}" /></label>
+			<label class="hint" id="reg_hint"><spring:message code="${code}" /></label>
 		</div>
 		</form:form>
 	</div>
