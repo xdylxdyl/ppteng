@@ -64,8 +64,8 @@
 							<p>
 								使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
 							</p>
-							<a href="#"><img src="/r/img/weibo_login.png" alt=""></a> <a
-								href="#"><img src="/r/img/qq_login.png" alt=""></a>
+							<a href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a> <a
+								href="#"><img src="/r/img/qq_login.png" alt="QQ登录"></a>
 						</div>
 					</form>
 				</div>
@@ -121,7 +121,7 @@
 							</div>
 							<div class="chapter">
 								<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=7" class="pull-left"><img
-									src="/r/img/icon_alpaca.png" alt="" width="64" height="64"></a>
+									src="/r/img/icon_alpaca.png" alt="杀人游戏简化版" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
 										<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=7">杀人游戏[简化版]</a>
@@ -135,7 +135,7 @@
 						<div class="span6">
 							<div class="chapter">
 								<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=6" class="pull-left"><img
-									src="/r//img/icon_alpaca.png" alt="" width="64" height="64"></a>
+									src="/r//img/icon_alpaca.png" alt="多人扫雷" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
 										<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=6">扫雷[多人版]</a>
@@ -145,7 +145,7 @@
 							</div>
 							<div class="chapter">
 								<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=5" class="pull-left"><img
-									src="/r//img/icon_alpaca.png" alt="" width="64" height="64"></a>
+									src="/r//img/icon_alpaca.png" alt="设计游戏" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
 										<a href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=5">这些游戏都不喜欢?</a>
@@ -194,7 +194,7 @@
     <div class="row">
     <div class="span1">
     <p><a href="http://www.pickupstudio.org/" target="_blank">皮卡工作室</a><p>
-    <p><a href="http://www.15tiance.com/" target="_blank">天策电子商务</a><p>
+    <p><a href="http://www.15tiance.com/" target="_blank">天策策划</a><p>
     </div>
     </div>
     </div>
