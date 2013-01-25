@@ -64,9 +64,15 @@
 
 	<div id="music_play" class="music_play"></div>
 
+	<div id="music_container" class="music_container">
+		<img id="music_controller" src="/r/img/music/music.jpg">
+	</div>
 
 	<header>
 
+		<div class="remainMine" id="remainMine">
+			剩余雷数<span id="count"></span>
+		</div>
 
 		<div id="outer" class="outer">
 			<div id="inner" class="inner"></div>
@@ -74,14 +80,8 @@
 
 
 
-		<div class="remainMine" id="remainMine">
-			剩余雷数<span id="count"></span>
-		</div>
 
 
-		<div id="outer2" class="outer right">
-			<div id="inner2" class="inner"></div>
-		</div>
 
 
 

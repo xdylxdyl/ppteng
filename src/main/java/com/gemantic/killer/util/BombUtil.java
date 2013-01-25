@@ -26,7 +26,7 @@ public class BombUtil {
 	 */
 	
 	public static String assign(int row, int column, int count) {
-		
+		log.info("init row,column,count is "+row+","+column+","+count);
 		List<Pair> pairs=new ArrayList();
 		List<Pair> inits=new ArrayList();
 		Map<Pair,String> pair_tags=new HashMap();
@@ -126,7 +126,7 @@ public class BombUtil {
 		
 		int r=(Integer) pair.fst-1;
 		int c=(Integer) pair.snd-1;
-        int index=r*column+row;
+        int index=r*column+c;
         log.info("index is "+index);
 		String result=String.valueOf(systemBombPic.charAt(index));
 		log.info(result);

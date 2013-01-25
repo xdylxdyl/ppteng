@@ -112,8 +112,9 @@ public class BombTest {
 		// 1.生成一个系统的雷图
 		String systemBombPic = BombUtil.assign(9, 9, 10);
 		log.info(systemBombPic);
+		systemBombPic="13*2*5*2**212210011112*1*322*22*112*";		               
 		log.info(BombUtil.clickOpen(new Pair(1, 1), systemBombPic, 9, 9));
-		List<String> pic = BombUtil.printPic(systemBombPic, 9, 9);
+		List<String> pic = BombUtil.printPic(systemBombPic, 9, 4);
 		for (String line : pic) {
 			log.info(line);
 		}

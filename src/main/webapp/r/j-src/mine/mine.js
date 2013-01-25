@@ -69,7 +69,7 @@ $(document).ready(function () {
             var result = [];
             for (var i = 0; i < str.length; i++) {
                 var v = str.substr(i, 1);
-                var r = Math.floor(i / row);
+                var r = Math.floor(i / column);
                 var c = Math.floor(i % column);
                 result.push(new mineOperater("", r + 1, c + 1, v))
             }
