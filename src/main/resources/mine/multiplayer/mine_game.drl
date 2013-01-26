@@ -189,7 +189,8 @@ no-loop true
 when
     $message:Message($subject:subject,$object:object,predict=="click")   
     $bombPic:BombPic($system:system,$user:user)    
-    $room:Room() 
+    $room:Room()
+    not Tag(pid==$object) 
 then
     LogUtil.log("click pane start  ================="); 
     
@@ -375,6 +376,7 @@ when
     $click:Click($pid:pid,value == "0")  
     $bombPic:BombPic($system:system,$user:user)
     not Message(subject==$pid,predict=="mine")
+    not Tag(pid==$pid)
     $game:Game()    
     $room:Room()
 then

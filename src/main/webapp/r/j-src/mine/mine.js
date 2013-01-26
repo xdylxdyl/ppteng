@@ -19,7 +19,7 @@ $(document).ready(function () {
     //左右开弓
     //$("#inner div").bind("")
 
-    var mineSize={
+    var mineSize = {
         width:12,
         height:12,
         border:2
@@ -88,6 +88,16 @@ $(document).ready(function () {
 
         },
         getSettingParameter:function () {
+            var r = parseInt($("#行数").val());
+            if (r > 20) {
+                $("#行数").val(20);
+            }
+            var c = parseInt($("#列数").val());
+            if (c > 20) {
+                $("#列数").val(20);
+            }
+
+
             var params = jQuery("#setting").serialize();
             return params;
         }
@@ -238,21 +248,21 @@ $(document).ready(function () {
             var maxCount = mineView.getSettingMineCount();
             mineView.initMineCount(maxCount);
 
-            var containerWidth=(mineSize.width+2*mineSize.border)*parseInt(column);
-            console.log("mine width is "+mineSize.width+" border is "+mineSize.border+" column is "+column+" ,so Total" +
-                "weith is "+containerWidth);
+            var containerWidth = (mineSize.width + 2 * mineSize.border) * parseInt(column);
+            console.log("mine width is " + mineSize.width + " border is " + mineSize.border + " column is " + column + " ,so Total" +
+                "weith is " + containerWidth);
 
-            var containerHeight=(mineSize.width+mineSize.border)*parseInt(column);
-            console.log("mine height is "+mineSize.height+" border is "+mineSize.border+" row is "+row+" ,so Total" +
-                "height is "+containerHeight);
+            var containerHeight = (mineSize.width + mineSize.border) * parseInt(column);
+            console.log("mine height is " + mineSize.height + " border is " + mineSize.border + " row is " + row + " ,so Total" +
+                "height is " + containerHeight);
 
             $("#inner").width(containerWidth);
 
 
             for (var i = 0; i < row * column; i++) {
 
-                var r = Math.floor(i /column ) + 1;
-                var c = Math.floor(i % column ) + 1;
+                var r = Math.floor(i / column) + 1;
+                var c = Math.floor(i % column) + 1;
                 var mineHtml = "<div x='" + r + "' y='" + c + "' id='" + r + "-" + c + "'></div>"
                 $("#inner").append(mineHtml);
                 $("#inner2").append(mineHtml);
