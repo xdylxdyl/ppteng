@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
+
+
 (function (document) {
     $.fn.Drag = function () {
         var M = false;
@@ -18,47 +20,59 @@
             M = true;
         })
         $(document).mousemove(function (event) {
+            if (musicUtil.isHide()) {
+                return;
+            }
             if (M) {
                 t.css({ top:event.pageY - Ry, left:event.pageX - Rx });
             }
         }).mouseup(function (event) {
+                if (musicUtil.isHide()) {
+                    return;
+                }
                 M = false;
                 t.fadeTo(20, 1);
             });
         ;
     }
 
+     musicUtil = {
+        displayMusic:function () {
+            var music = $("#music").text();
+            if (music == "") {
 
-})(document);
+            } else {
+                var html = "<embed src='" + music + "' type='application/x-shockwave-flash' class='music_player' wmode='opaque'></embed>";
+                $("#music_play").empty().html(html);
 
+            }
+            $("#music_play").Drag();
+        },
+        hideMusic:function (isHide) {
+            if (isHide == "false") {
+                $("#music_play").hide();
+                $("#music_controller").attr("isHide", true);
+                $("#music_controller").text("显示音乐盒");
+            } else {
 
-var musicUtil = {
-    displayMusic:function () {
+                $("#music_controller").attr("isHide", false);
+                $("#music_controller").text("隐藏音乐盒");
+                $("#music_play").show();
+            }
 
-
-        var music = $("#music").text();
-        if (music == "") {
-
-        } else {
-            var html = "<embed src='" + music + "' type='application/x-shockwave-flash' class='music_player' wmode='opaque'></embed>";
-            $("#music_play").empty().html(html);
-
+        },
+        isHide:function () {
+            if ("true" == $("#music_controller").attr("isHide")) {
+                return true;
+            } else {
+                return false;
+            }
+            ;
         }
-        $("#music_play").Drag();
-    },
-    hideMusic:function (isHide) {
-        if (isHide == "false") {
-            $("#music_play").hide();
-            $("#music_controller").attr("isHide", true);
-            $("#music_controller").text("显示音乐盒");
-        } else {
 
-            $("#music_controller").attr("isHide", false);
-            $("#music_controller").text("隐藏音乐盒");
-            $("#music_play").show();
-        }
 
     }
 
 
-}
+})(document);
+
