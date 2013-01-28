@@ -219,14 +219,16 @@ $(document).ready(function () {
         over:function (message) {
             var obj = message.object;
             var recordID = message.subject;
+            var userTime = parseInt(message.content) / 1000;
             //标明游戏结束
             globalView.setGameStatus("over");
             playerService.setUnreadyStatus();
             //只重新显示.不用重新计算
             settingView.displaySetting();
 
+
             if ("win" == obj) {
-                $("section article").append("<p style='color:#F00'>【系统消息】 你居然赢了.~~赶紧的开始下一局</p>");
+                $("section article").append("<p style='color:#F00'>【系统消息】 你居然赢了.~~赶紧的开始下一局,用时 [" + userTime + "]秒</p>");
             } else {
                 $("section article").append("<p style='color:#F00'>【系统消息】 你果然输了,~~赶紧的开始下一局</p>");
             }
@@ -385,7 +387,10 @@ $(document).ready(function () {
         "getSettingParameter":mineSettingView.getSettingParameter,
         "parseMessage":mineService.parseMessage,
         "parseDetail":mineService.parseDetail
-        //   "settingPostParameter":settingPostParameter
+        //   "settingPostParameter":settingPostParameter89,,
+
+
+
     }
 
 

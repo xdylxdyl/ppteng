@@ -16,6 +16,7 @@ declare Game
 	startAt:Long
 	recordName:String	
 	playerCount:Integer	
+	overAt:Long
 end
 
 declare BombPic

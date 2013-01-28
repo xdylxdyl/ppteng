@@ -88,7 +88,7 @@ then
 	String	rname=String.valueOf(RandomUtils.nextLong());	
 	
 	
-	Game game=new Game("run",System.currentTimeMillis(),0L,$time,rname, $allReadys.size());
+	Game game=new Game("run",System.currentTimeMillis(),0L,$time,rname, $allReadys.size(),$time);
 	insert(game);
 	
 	LogUtil.log(" game status  ================="+game);
@@ -496,6 +496,7 @@ then
     LogUtil.log("click mine start  ================="); 
 
      Message gameOverMessage=new Message($recordName,"over","win"); 
+     gameOverMessage.setContent(String.valueOf(System.currentTimeMillis()-$game.getStartAt()));
      insert(gameOverMessage); 
    
      
@@ -545,6 +546,7 @@ then
      insert(gameOverMessage); 
            
      $game.setStatus("over");
+     $game.setOverAt(System.currentTimeMillis());
      update($game);   
      LogUtil.log("no player game over over  ================="); 
 end

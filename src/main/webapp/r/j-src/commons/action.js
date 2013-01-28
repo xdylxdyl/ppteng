@@ -7,11 +7,11 @@ var timeTest = null;
 var information = {};
 information.info = function (active, object) {
     object == null || object == "" ? object = -500 : object;
-    var content =$("#say").val();
-    console.log( $("#say").val());
-    content=$("#escape").text(content).html();
-       $("#escape").empty();
-    console.log( $("#say").val()+" after escape "+content);
+    var content = $("#say").val();
+    console.log($("#say").val());
+    content = $("#escape").text(content).html();
+    $("#escape").empty();
+    console.log($("#say").val() + " after escape " + content);
 
     var action = $("#uid").val() + "," + active + "," + object + "," + $("#color").val() + "," + $("#expression").val() + "," + $("#rid").val();
     var infos = {
@@ -122,7 +122,12 @@ $(document).ready(function () {
 
         } else {
 
-            var content = versionFunction["commandHint"]($("#command").val());
+            var command = $("#command").val();
+            var content = hint[command];
+            if (content == null) {
+                content = versionFunction["commandHint"]();
+            }
+
             controlView.hintSay(content);
         }
     });
@@ -239,13 +244,13 @@ $(document).ready(function () {
 
     });
 
-    $("#music_controller").bind("click",function () {
+    $("#music_controller").bind("click", function () {
 
-           var isHide=$("#music_controller").attr("isHide");
-           musicUtil.hideMusic(isHide);
-           return false;
+        var isHide = $("#music_controller").attr("isHide");
+        musicUtil.hideMusic(isHide);
+        return false;
 
-       });
+    });
 
     function showMessage(index, messages, delay) {
 

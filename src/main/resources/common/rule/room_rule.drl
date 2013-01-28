@@ -276,7 +276,22 @@ then
      
 end
 
-
+rule 'kick clear room'
+ruleflow-group "logout action"
+when
+	#conditions
+    
+    $message:Message($subject:subject,predict=="kick")     
+    $operater:Operater(roomEmpty==false) 
+    not Player()
+then      
+	#actions
+     LogUtil.log("logout clear person ================= "); 
+     $operater.setRoomEmpty(true);
+     update($operater);     
+     LogUtil.log("logout  clear person over ================="); 
+     
+end
 
 
 
