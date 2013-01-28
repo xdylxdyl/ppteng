@@ -156,11 +156,14 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 				}
 
 			}
+			if(r.getVersion().equals("simple_1.0")){
+				// 更新战例记录
+				Record record = new Record(operater.getRecordID(), "record/" + operater.getRecordID(), r,time);
+				this.recordService.addRecord(record);
+				log.info(" insert record " + record);
+			}
 
-			// 更新战例记录
-			Record record = new Record(operater.getRecordID(), "record/" + operater.getRecordID(), r,time);
-			this.recordService.addRecord(record);
-			log.info(" insert record " + record);
+			
 
 		}
 
