@@ -196,6 +196,10 @@
     <p><a href="http://www.pickupstudio.org/" target="_blank">皮卡工作室</a><p>
     <p><a href="http://www.15tiance.com/" target="_blank">天策策划</a><p>
     </div>
+    <div class="span2">
+    <p><a href="http://www.qqwaiyu.com/" target="_blank">青青外语</a><p>
+    <p><a href="http://womenaikan.com/" target="_blank">我们爱看</a><p>
+    </div>
     </div>
     </div>
 
