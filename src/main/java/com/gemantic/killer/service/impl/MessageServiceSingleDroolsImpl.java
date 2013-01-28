@@ -62,7 +62,16 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		// 根据不同的房间ID创建不同的Session.这样怎么能支持扩展性呢.Session能否序列化.除非支持按房间分布Service的Session.
 
 		Operater operater = new Operater(message);
+		try{
 		process(operater, room);
+		}catch(Throwable t){
+			t.printStackTrace();
+			log.error(t);
+			log.error("error room is "+room +" message is "+message);
+			log.info("because room error so retract room ");
+			roomService.removeRoom(room.getId());
+			
+		}
 		// 应该是开始游戏之后才记录.
 
 		if (CollectionUtils.isEmpty(operater.getTimerMessages())) {

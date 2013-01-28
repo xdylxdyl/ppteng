@@ -16,7 +16,6 @@ declare Game
 	remainTime:Long
 	startAt:Long
 	recordName:String	
-	overAt:Long
 end
 
 declare Vote
