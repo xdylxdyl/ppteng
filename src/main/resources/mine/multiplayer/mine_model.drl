@@ -50,6 +50,7 @@ declare Count
         bomb:Integer
         all:Integer
         init:Integer
+        right:Integer
 end
 
 declare UserCount

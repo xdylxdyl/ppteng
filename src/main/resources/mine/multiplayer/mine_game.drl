@@ -93,7 +93,7 @@ then
 	
 	LogUtil.log(" game status  ================="+game);
 	
-	Count count=new Count(0,bombCount,rowCount*columnCount);
+	Count count=new Count(0,bombCount,rowCount*columnCount,0);
 	insert(count);
 	
 	$room.setStatus("run");	
@@ -226,21 +226,25 @@ when
     $message:Message($subject:subject,$object:object,predict=="tag")
     $bombPic:BombPic($system:system,$user:user)    
     not Tag(pid==$object)
-    $count:Count($bomb:bomb)
+    $count:Count($bomb:bomb,$right:right)
     $userCount:UserCount($uc:count,uid==$subject)
 then
     LogUtil.log("tag pane start  ================="); 
      Pair p=BombUtil.convertString2Pair($object);
-     insert(p);
+     
       int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));#1*60*1000  
       LogUtil.log("=========");
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  
     String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);    
-        
+    
+    if("*".equals(userTag)){
+    $right=$right+1;    
+    }
     Message tagMessage=new Message($object,"mine","#");
     insert(tagMessage);     
     $bomb=$bomb+1;    
     $count.setBomb($bomb);
+    $count.setRight($right);
     update($count);
     LogUtil.log("count is   ================="+$count);
     
@@ -266,15 +270,25 @@ ruleflow-group "clear tag action"
 no-loop true
 when
      $room:Room()
+    $bombPic:BombPic($system:system,$user:user)    
     $message:Message($subject:subject,predict=="tag",$object:object)  
-    $count:Count($bomb:bomb)
+    $count:Count($bomb:bomb,$right:right)
     $tag:Tag(pid==$object,value=="#")
      $userCount:UserCount($uc:count,uid==$subject)
        
 then
     LogUtil.log("clear tag pane start  ================="); 
-   
+    Pair p=BombUtil.convertString2Pair($object);
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));#1*60*1000      
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  
+    String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);   
+    if("*".equals(userTag)){
+      $right=$right-1;
+    } 
+    
+    $count.setRight($right);
     $bomb=$bomb-1;
+    
     $count.setBomb($bomb);
     update($count);
     
@@ -474,8 +488,8 @@ ruleflow-group "game status"
 when
     $bombPic:BombPic()
     $game:Game($recordName:recordName)    
-    $count:Count($all:all,$bomb:bomb)    
-    eval($bomb==$all)
+    $count:Count($all:all,$right:right)    
+    eval($right==$all)
     
     
 then
