@@ -86,6 +86,8 @@
 					<c:when test="${user.id==selfID}">
 						<a href="" class="button green glass" id="user_edit"
 							command="edit">编辑</a>
+						<a href="/player/regedit.do?type=edit" class="button green glass">修改密码</a>	
+							
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>

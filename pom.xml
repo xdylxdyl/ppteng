@@ -40,7 +40,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories> 
+	</pluginRepositories>
 
 
 
@@ -90,7 +90,14 @@
 			<groupId>com.gemantic.commons</groupId>
 			<artifactId>commons-core</artifactId>
 			<version>1.88</version>
-			
+
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-core</artifactId>
+					<groupId>com.gemantic.commons</groupId>
+				</exclusion>
+			</exclusions>
+
 		</dependency>
 
 		<dependency>
@@ -101,7 +108,7 @@
 
 
 
-		
+
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -167,8 +174,8 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
-			<dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring</artifactId>
 			<version>2.5.6</version>
@@ -313,6 +320,12 @@
 			<groupId>com.gemantic.analyse</groupId>
 			<artifactId>commons-drools-lib</artifactId>
 			<version>1.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-core</artifactId>
+					<groupId>com.gemantic.commons</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 
@@ -337,7 +350,7 @@
 			<version>2.4</version>
 		</dependency>
 
-	
+
 
 		<dependency>
 			<groupId>commons-collections</groupId>
@@ -352,9 +365,9 @@
 			<version>3.1</version>
 
 		</dependency>
-		
-		
-		
+
+
+
 
 
 
@@ -382,7 +395,7 @@
 			<groupId>javax.jms</groupId>
 			<artifactId>jms</artifactId>
 			<version>1.1</version>
-		</dependency>	
+		</dependency>
 		<dependency>
 			<groupId>org.apache.tuscany.sca</groupId>
 			<artifactId>tuscany-databinding-jaxb</artifactId>
@@ -396,6 +409,12 @@
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>2.1_3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
 		</dependency>
 	</dependencies>
 
