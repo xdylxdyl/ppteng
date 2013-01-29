@@ -140,6 +140,23 @@
     
 
 
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host">
+			<value>smtp.163.com</value>
+		</property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.timeout">25000</prop>
+			</props>
+		</property>
+		<property name="username">
+			<value>pttgame@163.com</value>
+		</property>
+		<property name="password">
+			<value>xdylxdyl</value>
+		</property>
+	</bean>
     
     
     
