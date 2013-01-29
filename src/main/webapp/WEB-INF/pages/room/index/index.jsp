@@ -48,14 +48,17 @@
 						<input type="password" id="password" name="password"
 							placeholder="Please enter your password here"
 							class="login password-input">
-							  <c:if test="${code!=0}">
+						<c:if test="${code!=0}">
 								<p class="hint"><spring:message code="${code}" /></p>
 						</c:if>	
+						<p><a href="/player/regedit.do?type=email">忘记密码</a></p>
 						<div class="login-action">
+							
 							<span class="login-checkbox"> <input type="checkbox"
 								id="keep" name="keep" class="login-checkbox"> <label
 								for="keep" class="choice">两周内保持登录</label>
 							</span>
+						
 							<button class="btn btn-primary btn-large pull-right">登录</button>
 							
 						</div>
@@ -64,8 +67,9 @@
 							<p>
 								使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
 							</p>
-							<a href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a> <a
-								href="#"><img src="/r/img/qq_login.png" alt="QQ登录"></a>
+							
+						<!-- 	<a href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a> <a
+								href="#"><img src="/r/img/qq_login.png" alt="QQ登录"></a> -->
 						</div>
 					</form>
 				</div>

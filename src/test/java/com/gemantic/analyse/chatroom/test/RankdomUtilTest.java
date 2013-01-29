@@ -1,9 +1,15 @@
 package com.gemantic.analyse.chatroom.test;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import junit.framework.Assert;
 
@@ -12,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
+import com.gemantic.common.util.DESUtil;
 import com.gemantic.common.util.RandomGroupUtils;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.util.MessageUtil;
@@ -129,6 +136,15 @@ public class RankdomUtilTest {
 		Gson gson=new Gson();
 		String json=gson.toJson(ls, List.class);
 		log.info(json);
+	}
+	
+	
+	@Test
+	public void testUri() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+		String token=DESUtil.encrypt((String.valueOf(3L)+","+String.valueOf(System.currentTimeMillis())).getBytes());;
+		log.info(token);
+		String result=DESUtil.decrypt(token.getBytes());
+		log.info(result);
 	}
 	
 	

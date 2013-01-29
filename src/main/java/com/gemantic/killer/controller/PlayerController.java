@@ -1,5 +1,6 @@
 package com.gemantic.killer.controller;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,9 +10,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.URI;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gemantic.common.exception.ServiceException;
+import com.gemantic.common.util.DESUtil;
 import com.gemantic.common.util.FileUtil;
 import com.gemantic.common.util.MyTimeUtil;
 import com.gemantic.common.util.http.cookie.CookieUtil;
@@ -30,6 +35,7 @@ import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MemberService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.service.UserService;
+import com.gemantic.killer.util.MailUtil;
 import com.gemantic.killer.util.PunchUtil;
 
 /**
@@ -46,11 +52,13 @@ public class PlayerController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
-	private UserService userSevice;
+	private UserService userService;
 
 	@Autowired
 	private CookieUtil cookieUtil;
 
+	@Autowired
+	private 	JavaMailSender sender; 
 	/**
 	 * 玩家登入
 	 * 
@@ -81,18 +89,18 @@ public class PlayerController {
 			}
 
 		} else {
-			uid = this.userSevice.getIdByEmail(email);
+			uid = this.userService.getIdByEmail(email);
 			if (uid == null) {
 				model.addAttribute("code", "-6003");
 				return "redirect:/";
 			}
-			success = this.userSevice.verify(uid, password);
+			success = this.userService.verify(uid, password);
 
 		}
 
 		log.info(uid + " loging in " + success);
 		if (success) {
-			User user = this.userSevice.getUserByID(uid);
+			User user = this.userService.getUserByID(uid);
 			if (user == null) {
 				// clear cookie
 				// 怎么清除还不知道
@@ -106,7 +114,7 @@ public class PlayerController {
 				// 什么时候把Cookie种下呢.这里的Cookie怎么那么快就失效了.为什么程序一重新启动就么有了.
 				cookieUtil.setIdentity(request, response, uname, uid);
 				user.setLoginAt(System.currentTimeMillis());
-				this.userSevice.update(user);
+				this.userService.update(user);
 				String url = "/m/list.do";
 				log.info(url);
 				return "redirect:" + url;
@@ -138,7 +146,7 @@ public class PlayerController {
 
 		int code = 0;
 
-		Long id = this.userSevice.getIdByEmail(email);
+		Long id = this.userService.getIdByEmail(email);
 		if (id == null) {
 			code = ServiceErrorCode.Email_Already_Exist;
 		}
@@ -284,6 +292,27 @@ public class PlayerController {
 	}
 
 	/**
+	 * 找回密码
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/forget", method = RequestMethod.POST)
+	public String forget(HttpServletRequest request, HttpServletResponse response, ModelMap model, String mail) throws Exception {
+		log.info(mail+" forget password ");
+		Long uid=userService.getIdByEmail(mail);
+		String token=DESUtil.encrypt((String.valueOf(uid)+","+String.valueOf(System.currentTimeMillis())).getBytes());
+		String link = "http://42.121.113.70//player/regedit.do?type=forget&token=" + URLEncoder.encode(token,"utf8");	
+		// 邮件内容，注意加参数true，表示启用html格式
+		String content="此邮件为葡萄藤轻游戏系统自动发送,无须回复.点此链接找回密码,此链接在五分钟之内有效,如果不是您发起的,请直接忽视"+link;	
+		MailUtil.send(sender, mail, content);
+		return "/room/player/forget";
+	}
+
+	/**
 	 * 获取玩家的状态信息
 	 * 
 	 * @param request
@@ -314,7 +343,7 @@ public class PlayerController {
 		log.info(uids);
 		List<Long> userIDS = Arrays.asList(uids);
 
-		List<User> users = userSevice.getUsers(userIDS);
+		List<User> users = userService.getUsers(userIDS);
 		log.info(" get user info " + users);
 
 		// get status
@@ -372,14 +401,14 @@ public class PlayerController {
 
 		Long selfID = cookieUtil.getID(request, response);
 
-		if(selfID==null){
+		if (selfID == null) {
 			return "redirect:/?";
 		}
-		
+
 		if (uid == null) {
 			uid = selfID;
 		}
-		User u = this.userSevice.getUserByID(uid);
+		User u = this.userService.getUserByID(uid);
 		log.info(" get user info " + u);
 
 		int punchCount = PunchUtil.getContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, u.getPunch());
@@ -406,7 +435,7 @@ public class PlayerController {
 
 		Long uid = cookieUtil.getID(request, response);
 		log.info(uid + " punch ");
-		User user = this.userSevice.getUserByID(uid);
+		User user = this.userService.getUserByID(uid);
 		if (user == null) {
 
 			return "redirect:/";
@@ -422,7 +451,7 @@ public class PlayerController {
 		user.setPunchAt(MyTimeUtil.getPreZeroTimeMillions(0));
 		int m = 2000;
 		user.setMoney(user.getMoney() + m);
-		this.userSevice.update(user);
+		this.userService.update(user);
 		model.addAttribute("money", m);
 		model.addAttribute("code", "0");
 		return "/room/player/punch";
@@ -451,7 +480,7 @@ public class PlayerController {
 		if (uid.longValue() != user.getId()) {
 			return "redirect:/player/detail.do?uid=" + uid;
 		}
-		User oldUser = this.userSevice.getUserByID(uid);
+		User oldUser = this.userService.getUserByID(uid);
 
 		String path = request.getRealPath(request.getContextPath());
 		String fullName = "/data/user_info/" + uid;
@@ -465,7 +494,7 @@ public class PlayerController {
 		oldUser.setName(user.getName());
 		oldUser.setSign(user.getSign());
 		oldUser.setMusic(user.getMusic());
-		this.userSevice.update(oldUser);
+		this.userService.update(oldUser);
 
 		return "redirect:/player/detail.do?uid=" + uid;
 
@@ -485,7 +514,7 @@ public class PlayerController {
 
 		log.info(email + " want get id ");
 
-		Long userID = this.userSevice.getIdByEmail(email);
+		Long userID = this.userService.getIdByEmail(email);
 		log.info(email + " get user id by email " + userID);
 
 		model.addAttribute("userID", userID);
