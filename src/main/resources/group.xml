@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
 	<datasources>
-		<ds name="analyseTag"
+		<ds name="labsKiller"
 			driverClassName="com.mysql.jdbc.Driver"
-			url="jdbc:mysql://db.analyse.tag:3306/tags?defaultBatchValue=1000"
-			username="analyse"
-			password="GemanticYes!"
+			url="jdbc:mysql://42.121.113.702:3306/game?defaultBatchValue=1000"
+			username="game"
+			password="xdylxdyl"
 			maxActive="50"
 			maxIdle="50"
 			maxWait="10"
+            check="true"
 		/>
+		
+		<ds name="wealthApplication"
+			driverClassName="com.mysql.jdbc.Driver"
+			url="jdbc:mysql://db.wealth.application:3307/wealth-Application?defaultBatchValue=1000"
+			username="wealth_appuser"
+			password="Ymk2rula"
+			maxActive="50"
+			maxIdle="50"
+			maxWait="10"
+            check="true"
+		/>
+		
 		<ds name="idCenterDS"
 			driverClassName="com.mysql.jdbc.Driver"
 			url="jdbc:mysql://db.gemantic.idGenerator:3306/id_generator?defaultBatchValue=1000"
-			username="report"
-			password="report"
+			username="analyse"
+			password="GemanticYes!"
 			maxActive=""
 			maxIdle=""
 			maxWait=""
+            check="true"
 		/>
 	</datasources>
 	<groups>
-		<group name="analyseTag" master="analyseTag"  />			
+		<group name="labsKiller" master="wealthApplication"  />			
 	</groups>
 </root>
 

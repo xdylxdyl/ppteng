@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-
+@Deprecated
 public class Record implements Serializable {
 
 	/**
@@ -13,11 +13,18 @@ public class Record implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;	
+	
 	private String path;
+	
+	private String version;	
+
 	
 	private Room room;
 
+	
 	private Long createAt;
+	
+	private Long updateAt;
 	
 
 	private Long time=0L;
@@ -54,11 +61,22 @@ public class Record implements Serializable {
 	
 	
 	
-	
 
-	
-	
-	
+	public Long getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(Long updateAt) {
+		this.updateAt = updateAt;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
 
 	public Long getTime() {
 		return time;

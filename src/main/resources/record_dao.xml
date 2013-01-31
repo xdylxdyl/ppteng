@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dal>
+	<route>
+		<object name="com.gemantic.labs.killer.model.Records"
+			listenerClass="" strategyProperty="">
+
+
+
+			<list name="getRecordIdsByVersion" sqlitem="select id from records where version = ?"
+				keyProperty="version" valueProperty="id" keyColumn="version" />
+
+			<list name="getAll" sqlitem="select id from records where 1 = 1 "
+				keyProperty="version" valueProperty="id" keyColumn="version" />
+
+			<dbStrategy name="mutiDS"
+				clasz="com.gemantic.dal.route.strategy.DefaultStrategy">
+				<pattern value="[0-9]$" group="labsKiller" />
+			</dbStrategy>
+
+		</object>
+	</route>
+</dal>

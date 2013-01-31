@@ -155,4 +155,15 @@
 
 
 
+
+	<bean id="dao" class="com.gemantic.dal.dao.impl.CompositeDaoImpl" />
+
+
+
+
+
+
+
+
+
 </beans>

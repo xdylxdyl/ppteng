@@ -67,7 +67,7 @@ public class One23Test {
 
 	}
 
-	@Test
+	//@Test
 	public void testSort() {
 		List ls = new ArrayList();
 

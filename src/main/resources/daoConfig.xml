@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dal>
 	<list>
-		
-				
-		
+
 		<config>
-			<path>tagUserStock_dao.xml</path>
+			<path>record_dao.xml</path>
+
 		</config>
-					
+
+
+		<config>
+
+			<path>names_dao.xml</path>
+		</config>
+
 	</list>
 
 	<default>

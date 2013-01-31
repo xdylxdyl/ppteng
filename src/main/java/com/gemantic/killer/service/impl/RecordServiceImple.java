@@ -31,7 +31,7 @@ import com.gemantic.killer.service.compare.RecordCompare;
 import com.gemantic.killer.util.MessageUtil;
 import com.gemantic.killer.util.RecordUtil;
 
-@Component
+//@Component
 public class RecordServiceImple implements RecordService {
 
 	private static final Log log = LogFactory.getLog(RecordServiceImple.class);
@@ -58,7 +58,7 @@ public class RecordServiceImple implements RecordService {
 	
 	private DB db;
 	
-	@PostConstruct
+	//@PostConstruct
 	public void init(){
 
 		

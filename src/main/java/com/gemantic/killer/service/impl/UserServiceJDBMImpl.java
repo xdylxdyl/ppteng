@@ -186,10 +186,6 @@ public class UserServiceJDBMImpl implements UserService {
 	private void destory(){
 		
 		
-		log.info("close db start");
-		db.close();
-		log.info("close db over");
-		
 		
 		
 	}

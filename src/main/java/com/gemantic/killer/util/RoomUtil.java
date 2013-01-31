@@ -5,14 +5,14 @@ package com.gemantic.killer.util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gemantic.killer.model.Record;
+import com.gemantic.killer.model.Room;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
-public class RecordUtil {
+public class RoomUtil {
 	
-	private static final Log log = LogFactory.getLog(RecordUtil.class);
+	private static final Log log = LogFactory.getLog(RoomUtil.class);
 	private static final String Split = "=";
 	
 	
@@ -20,19 +20,18 @@ public class RecordUtil {
 	
 	
 	
-	
-	
-	public static String record2Json(Record record) {
+	public static String room2Json(Room record) {
 		Gson gson = new GsonBuilder().create();
 		return gson.toJson(record);
 	}
 
-	public static Record json2Record(String json) {
+	public static Room json2Room(String json) {
 		Gson gson = new GsonBuilder().create();
-		Record obj = gson.fromJson(json, Record.class);
+		Room obj = gson.fromJson(json, Room.class);
 		return obj;
 
 	}
+
 	
 	
 

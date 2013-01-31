@@ -19,17 +19,19 @@ import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.common.model.Operater;
-import com.gemantic.killer.model.Record;
+
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MessageService;
-import com.gemantic.killer.service.RecordService;
+
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.service.RoomTimerService;
 import com.gemantic.killer.service.SessionService;
 import com.gemantic.killer.service.UserService;
 import com.gemantic.killer.util.JobLogger;
 import com.gemantic.killer.util.MessageUtil;
+import com.gemantic.labs.killer.model.Records;
+import com.gemantic.labs.killer.service.RecordService;
 
 //这段代码有点乱.有时间整理一下.
 //太多需要重构的地方了.判断是哪一个Process启动.不应该通过配置文件.而是应该通过游戏房间的状态.
@@ -158,8 +160,11 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			}
 			if(r.getVersion().equals("simple_1.0")){
 				// 更新战例记录
-				Record record = new Record(operater.getRecordID(), "record/" + operater.getRecordID(), r,time);
-				this.recordService.addRecord(record);
+				Records record = new Records();
+				record.setPath("record/" + operater.getRecordID());
+				record.setTime(time);
+				record.setRoom(r);
+				this.recordService.insert(record);
 				log.info(" insert record " + record);
 			}
 

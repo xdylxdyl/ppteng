@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<cache>
+		<datasource
+			name="default"
+			timeout="300"
+			port="11211"
+			server="cache.labs.killer"
+			maxActive="18" 
+			maxIdle="18" 
+			maxWait="-1" 
+		/>
+	</cache>
+	<regions>
+		
+
+                            
+                		
+		
+					
+			
+			
+			
+		
+		
+	
+
+
+	</regions>
+</root>
+

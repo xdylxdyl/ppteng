@@ -6,7 +6,7 @@ import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.model.Record;
-
+@Deprecated
 public interface RecordService {
 	
 	
