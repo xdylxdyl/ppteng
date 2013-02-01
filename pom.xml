@@ -421,7 +421,27 @@
 			<groupId>com.gemantic</groupId>
 			<artifactId>dal-dao</artifactId>
 			<version>0.0.14</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>hibernate-c3p0</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		
+		
+		
+		 <dependency>
+            <groupId>com.gemantic</groupId>
+            <artifactId>dal-memcached</artifactId>
+            <version>0.0.4</version>
+            <exclusions>
+				<exclusion>
+					<artifactId>hibernate-c3p0</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
+        </dependency>
 
 
 		<dependency>
@@ -495,16 +515,13 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>3.3.2.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-c3p0</artifactId>
-			<version>3.3.2.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.4.0.GA</version>
+
+			<exclusions>
+				<exclusion>
+					<artifactId>hibernate-c3p0</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -520,11 +537,6 @@
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gemantic</groupId>
-			<artifactId>dal-memcached</artifactId>
-			<version>0.0.4</version>
 		</dependency>
 
 

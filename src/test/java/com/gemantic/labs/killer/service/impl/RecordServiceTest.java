@@ -157,7 +157,7 @@ public class RecordServiceTest {
 		record2.setSnapshot("{}");
 
 		list.add(record2);
-		// List<Records> insertResults = this.recordService.insertList(list);
+		 List<Records> insertResults = this.recordService.insertList(list);
 
 		List<Long> lists = recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
 		log.info("success get datas "+lists);

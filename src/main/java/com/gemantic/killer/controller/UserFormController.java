@@ -132,6 +132,9 @@ public class UserFormController {
 		}else {
 			
 		}
+		
+		
+	   
 
 		model.addAttribute("type", type);
 		model.addAttribute("user", user);

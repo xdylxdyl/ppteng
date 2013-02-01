@@ -82,10 +82,26 @@ public class User implements Serializable {
 	 * musice
 	 */
 	private String music="";
-
+	
+	
+	private String openID;
+	
+	
+	
+	
+	
 	
 
 	
+
+	public String getOpenID() {
+		return openID;
+	}
+
+	public void setOpenID(String openID) {
+		this.openID = openID;
+	}
+
 	public String getName() {
 		return name;
 	}

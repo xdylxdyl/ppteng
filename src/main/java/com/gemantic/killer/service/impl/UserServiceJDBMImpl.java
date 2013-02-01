@@ -12,6 +12,7 @@ import net.kotek.jdbm.DB;
 import net.kotek.jdbm.DBMaker;
 
 import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,15 @@ public class UserServiceJDBMImpl implements UserService {
 	private Map<Long, String> userID_USER = new HashMap<Long, String>();
 
 	private Map<String, Long> email_userID = new HashMap<String, Long>();
+	
+	private Map<String, Long> open_userID = new HashMap<String, Long>();
 
 	private String path = "usr.txt";
 
 	private String emailDB = "email_uid";
+	
+
+	private String openDB = "open_uid";
 
 	private String userDB = "user";
 	
@@ -99,7 +105,7 @@ public class UserServiceJDBMImpl implements UserService {
 
 		} else {
 			userID_USER.put(uid, UserUtil.user2Json(user));			
-			this.email_userID.put(user.getEmail(), user.getId());			
+			this.email_userID.put(user.getEmail(), user.getId());	
 			this.db.commit();
 			/*
 			 * Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -121,6 +127,12 @@ public class UserServiceJDBMImpl implements UserService {
 		user.setUpdateAt(System.currentTimeMillis());
 		this.userID_USER.put(user.getId(), UserUtil.user2Json(user));
 		this.email_userID.put(user.getEmail(), user.getId());
+		if(StringUtils.isBlank(user.getOpenID())){
+			
+		}else{
+			this.open_userID.put(user.getOpenID(), user.getId());
+		}
+		
 		this.db.commit();
 
 	}
@@ -178,6 +190,25 @@ public class UserServiceJDBMImpl implements UserService {
 		}
 
 		log.info("===");
+		
+		
+		//** Creates TreeMap which stores data in database. *//*
+				try {
+
+					this.open_userID = db.getHashMap(this.openDB);
+					log.info("open_userID "+open_userID.keySet().size());
+
+				} catch (Throwable t) {
+					t.printStackTrace();
+					log.error(t.getMessage());
+
+					db.createHashMap(this.openDB);
+					db.commit();
+					log.info("create success " + openDB);
+
+				}
+		
+		
 		init=true;
        log.info("init use time "+(System.currentTimeMillis()-start));
 	}
@@ -223,7 +254,7 @@ public class UserServiceJDBMImpl implements UserService {
 	}
 
 	@Override
-	public void insertUser(User user) throws ServiceException, ServiceDaoException {
+	public Long insertUser(User user) throws ServiceException, ServiceDaoException {
 
 		log.info(" insert user " + user);
 		Long uid = user.getId();
@@ -239,8 +270,16 @@ public class UserServiceJDBMImpl implements UserService {
 			userID_USER.put(uid, UserUtil.user2Json(user));
 
 			this.email_userID.put(user.getEmail(), user.getId());
+			
+			if(StringUtils.isBlank(user.getOpenID())){
+				
+			}else{
+				
+				this.open_userID.put(user.getOpenID(), user.getId());
+			}
 			this.db.commit();
 		}
+		return uid;
 
 	}
 
@@ -257,6 +296,15 @@ public class UserServiceJDBMImpl implements UserService {
 	public Integer getTotalCount() throws ServiceException, ServiceDaoException {
 		// TODO Auto-generated method stub
 		return this.userID_USER.keySet().size();
+	}
+
+
+
+
+	@Override
+	public Long getIdByThird(String type, String key) throws ServiceException, ServiceDaoException {
+		// TODO Auto-generated method stub
+		return  this.open_userID.get(key);
 	}
 
 }

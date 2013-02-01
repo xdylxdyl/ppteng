@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,106 @@ public class PlayerController {
 	private CookieUtil cookieUtil;
 
 	@Autowired
-	private 	JavaMailSender sender; 
+	private JavaMailSender sender;
+
+	/**
+	 * 玩家登入
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/openID")
+	public String getLoginThird(HttpServletRequest request, HttpServletResponse response, ModelMap model, String type) throws Exception {
+
+		log.info(type+" login at of user ");
+		cookieUtil.clearCookie(response);
+		// 登录不成功,重新登录
+		model.addAttribute("code", "-0");		
+		model.addAttribute("type", type);
+		
+		return "room/player/third";
+
+	}
+
+	/**
+	 * 玩家登入
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/openID", method = RequestMethod.POST)
+	public String loginThird(HttpServletRequest request, HttpServletResponse response, ModelMap model, String type, String openID,String name) throws Exception {
+		Long uid = null;
+		String uname = null;
+		boolean success = false;
+
+		// 首先判断email
+		if (StringUtils.isBlank(type) || StringUtils.isBlank(openID)) {
+
+			model.addAttribute("code", "-6003");
+			return "redirect:/";
+		} else {
+
+		}
+
+		// 没有Email再判断是否是cookie
+		uid = this.userService.getIdByThird(type, openID);
+		if (uid == null) {			
+			//create user
+			User user=new User();
+			user.setName(name);
+			user.setLoginAt(System.currentTimeMillis());
+			
+			user.setOpenID(openID);
+			uid=this.userService.insertUser(user);
+			
+			
+			
+		}else{
+			
+			
+			
+		}
+		log.info(uid + " loging in " + success);
+		if (success) {
+			User user = this.userService.getUserByID(uid);
+			if (user == null) {
+				// clear cookie
+				// 怎么清除还不知道
+
+				model.addAttribute("code", "-6003");
+				return "redirect:/";
+			} else {
+				uname = user.getName();
+				// loging success we should set cookie;
+				// 这些能否在Filter里处理呢
+				// 什么时候把Cookie种下呢.这里的Cookie怎么那么快就失效了.为什么程序一重新启动就么有了.
+				cookieUtil.setIdentity(request, response, uname, uid);
+				user.setLoginAt(System.currentTimeMillis());
+				this.userService.update(user);
+				String url = "/m/list.do";
+				log.info(url);
+				return "redirect:" + url;
+
+			}
+
+		} else {
+			cookieUtil.clearCookie(response);
+			// 登录不成功,重新登录
+			model.addAttribute("code", "-6002");
+
+			return "redirect:/";
+
+		}
+
+	}
+
 	/**
 	 * 玩家登入
 	 * 
@@ -68,10 +167,11 @@ public class PlayerController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/player/login")
-	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap model, String email, String password) throws Exception {
+	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap model, String email, String password, String third) throws Exception {
 		Long uid = null;
 		String uname = null;
 		boolean success = false;
+
 		// 首先判断email
 		if (email == null) {
 			// 没有Email再判断是否是cookie
@@ -80,7 +180,6 @@ public class PlayerController {
 			if (uid == null) {
 				log.info(uid + " not in cookie,check password ");
 				// 什么都没有,只好返回了
-				
 
 			} else {
 				log.info(uid + " in cookie ");
@@ -302,12 +401,12 @@ public class PlayerController {
 	 */
 	@RequestMapping(value = "/player/forget", method = RequestMethod.POST)
 	public String forget(HttpServletRequest request, HttpServletResponse response, ModelMap model, String mail) throws Exception {
-		log.info(mail+" forget password ");
-		Long uid=userService.getIdByEmail(mail);
-		String token=DESUtil.encrypt((String.valueOf(uid)+","+String.valueOf(System.currentTimeMillis())).getBytes());
-		String link = "http://42.121.113.70//player/regedit.do?type=forget&token=" + URLEncoder.encode(token,"utf8");	
+		log.info(mail + " forget password ");
+		Long uid = userService.getIdByEmail(mail);
+		String token = DESUtil.encrypt((String.valueOf(uid) + "," + String.valueOf(System.currentTimeMillis())).getBytes());
+		String link = "http://42.121.113.70//player/regedit.do?type=forget&token=" + URLEncoder.encode(token, "utf8");
 		// 邮件内容，注意加参数true，表示启用html格式
-		String content="此邮件为葡萄藤轻游戏系统自动发送,无须回复.点此链接找回密码,此链接在五分钟之内有效,如果不是您发起的,请直接忽视"+link;	
+		String content = "此邮件为葡萄藤轻游戏系统自动发送,无须回复.点此链接找回密码,此链接在五分钟之内有效,如果不是您发起的,请直接忽视" + link;
 		MailUtil.send(sender, mail, content);
 		return "/room/player/forget";
 	}

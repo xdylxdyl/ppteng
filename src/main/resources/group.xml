@@ -3,12 +3,12 @@
 	<datasources>
 		<ds name="labsKiller"
 			driverClassName="com.mysql.jdbc.Driver"
-			url="jdbc:mysql://42.121.113.702:3306/game?defaultBatchValue=1000"
+			url="jdbc:mysql://sp50fd0efa1eafe.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
 			username="game"
 			password="xdylxdyl"
 			maxActive="50"
 			maxIdle="50"
-			maxWait="10"
+			maxWait="-1"
             check="true"
 		/>
 		

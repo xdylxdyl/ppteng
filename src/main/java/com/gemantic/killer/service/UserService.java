@@ -59,10 +59,11 @@ public interface UserService {
 	/**
 	 * 创建用户
 	 * @param user
+	 * @return 
 	 * @throws ServiceException
 	 * @throws ServiceDaoException
 	 */
-	public void insertUser(User user)throws ServiceException, ServiceDaoException;
+	public Long insertUser(User user)throws ServiceException, ServiceDaoException;
 
 	/**
 	 * 
@@ -80,7 +81,10 @@ public interface UserService {
 	 * @throws ServiceDaoException
 	 */
 
-	public Integer getTotalCount()throws ServiceException, ServiceDaoException;;
+	public Integer getTotalCount()throws ServiceException, ServiceDaoException;
+	
+
+	public Long getIdByThird(String type, String key)throws ServiceException, ServiceDaoException;
 	
 	
 

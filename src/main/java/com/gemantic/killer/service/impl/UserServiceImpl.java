@@ -116,9 +116,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void insertUser(User user) throws ServiceException, ServiceDaoException {
+	public Long insertUser(User user) throws ServiceException, ServiceDaoException {
 		// TODO Auto-generated method stub
 		
+		return 1L;
 	}
 
 	@Override
@@ -129,6 +130,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Integer getTotalCount() throws ServiceException, ServiceDaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long getIdByThird(String type, String key) throws ServiceException, ServiceDaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
