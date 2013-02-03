@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -14,8 +13,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.dal.dao.Dao;
-import com.gemantic.dal.dao.exception.DaoException;
-import com.gemantic.labs.killer.model.Names;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.service.RecordService;
 
@@ -25,15 +22,15 @@ public class RecordServiceTest {
 
 	private RecordService recordService;
 
-	private Dao dao;
+	
 
-	//@Before
+	// @Before
 	public void setUp() throws Exception {
 
 		// dao
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext*.xml");
 		recordService = (RecordService) context.getBean("recordServiceImpl");
-		dao = (Dao) context.getBean("dao");
+	
 		// local server
 		/**
 		 * recordService = (RecordService)
@@ -49,8 +46,7 @@ public class RecordServiceTest {
 
 	}
 
-
-	//@Test
+	// @Test
 	public void testCRUD() throws ServiceException, ServiceDaoException {
 
 		// 1.增加
@@ -66,7 +62,7 @@ public class RecordServiceTest {
 		record.setSnapshot("");
 
 		Long id = this.recordService.insert(record);
-		log.info("insert success "+id);
+		log.info("insert success " + id);
 
 		record = this.recordService.getObjectById(id);
 
@@ -131,9 +127,9 @@ public class RecordServiceTest {
 
 	}
 
-  // @Test
+	// @Test
 	public void getRecordIdsByVersion() throws ServiceException, ServiceDaoException {
-	
+
 		List<Records> list = new ArrayList<Records>();
 		Records record1 = new Records();
 
@@ -157,10 +153,10 @@ public class RecordServiceTest {
 		record2.setSnapshot("{}");
 
 		list.add(record2);
-		 List<Records> insertResults = this.recordService.insertList(list);
+		List<Records> insertResults = this.recordService.insertList(list);
 
 		List<Long> lists = recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
-		log.info("success get datas "+lists);
+		log.info("success get datas " + lists);
 		// TODO 增加自己的验证逻辑
 		Assert.assertNotNull(lists);
 

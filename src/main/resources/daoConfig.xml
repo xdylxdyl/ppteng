@@ -6,11 +6,9 @@
 			<path>record_dao.xml</path>
 
 		</config>
-
-
+	
 		<config>
-
-			<path>names_dao.xml</path>
+			<path>users_dao.xml</path>
 		</config>
 
 	</list>

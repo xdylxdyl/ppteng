@@ -31,9 +31,9 @@ import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MemberService;
 import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.RoomService;
-import com.gemantic.killer.service.UserService;
 import com.gemantic.killer.util.MessageUtil;
 import com.gemantic.killer.util.PunchUtil;
+import com.gemantic.labs.killer.service.UsersService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -51,7 +51,7 @@ public class RoomController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
-	private UserService userService;
+	private UsersService userService;
 
 	@Autowired
 	private PushClient pushClient;
@@ -80,7 +80,7 @@ public class RoomController {
 			// 登录不成功,重新登录
 			return "redirect:/";
 		}
-		User user = this.userService.getUserByID(uid);
+		User user = this.userService.getObjectById(uid);
 		if(user==null){
 			return "redirect:/";
 		}
@@ -109,7 +109,7 @@ public class RoomController {
 			room_count.put(r.getId(), counts.size());
 
 		}
-		List<User> users = this.userService.getUsers(userIDS);
+		List<User> users = this.userService.getObjectsByIds(userIDS);
 		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);
 
 		Integer count = userService.getTotalCount();
@@ -160,7 +160,7 @@ public class RoomController {
 
 		// 从MemberService中获取成员列表
 		List<Long> userIDS = this.memberService.getMembers(rid);
-		List<User> users = this.userService.getUsers(userIDS);
+		List<User> users = this.userService.getObjectsByIds(userIDS);
 
 		String version = room.getVersion();
 		log.info("version is " + version);
@@ -170,7 +170,7 @@ public class RoomController {
 
 		// 更新用户的当前房间信息,MemberService的功能是否需要?
 
-		User creater=this.userService.getUserByID(room.getCreaterID());
+		User creater=this.userService.getObjectById(room.getCreaterID());
 		model.addAttribute("music", creater.getMusic());
 		model.addAttribute("room", room);
 		model.addAttribute("users", users);
@@ -200,7 +200,7 @@ public class RoomController {
 		Set<Long> readyUserIDS = this.memberService.getMembersStatus(rid);
 		log.info(rid + " get ready users " + readyUserIDS.size());
 		// 从UserService中获取用户信息
-		List<User> users = this.userService.getUsers(userIDS);
+		List<User> users = this.userService.getObjectsByIds(userIDS);
 		// TODO performance
 
 		Map<Long, String> status = new HashMap();
@@ -246,7 +246,7 @@ public class RoomController {
 
 		try {
 
-			User user = userService.getUserByID(uid);
+			User user = userService.getObjectById(uid);
 			memberService.ready(rid, uid);
 		} catch (ServiceException e) {
 
@@ -315,7 +315,7 @@ public class RoomController {
 		log.debug(createID + " want create  " + name + " type " + version);
 
 		// 告诉MembService,有新用户加入了房间
-		User user = this.userService.getUserByID(uid);
+		User user = this.userService.getObjectById(uid);
 		
 		
 		
@@ -436,7 +436,7 @@ public class RoomController {
 		r.getMessages().offer(m);
 		r.setExpressions(ls);
 		this.roomService.updateRoom(r);
-		User u = this.userService.getUserByID(uid);
+		User u = this.userService.getObjectById(uid);
 		u.setExpression(ls);
 		this.userService.update(u);
 
@@ -472,7 +472,7 @@ public class RoomController {
 		if (r.getCreaterID().longValue() == uid) {
 			// 从用户中取
 			if (r.getExpressions().size() == 0) {
-				User u = this.userService.getUserByID(uid);
+				User u = this.userService.getObjectById(uid);
 				r.setExpressions(u.getExpression());
 				this.roomService.updateRoom(r);
 			}

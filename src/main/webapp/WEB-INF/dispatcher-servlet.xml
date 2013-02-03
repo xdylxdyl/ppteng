@@ -4,10 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-	 <context:annotation-config />
-    <context:component-scan base-package="com.gemantic" /> 
-    
-    
+	<context:annotation-config />
+	<context:component-scan base-package="com.gemantic" />
+
+
 	<bean id="exceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
@@ -22,9 +22,9 @@
 
 	<bean id="filenameController"
 		class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
-		
-		
-		
+
+
+
 	<bean id="jstlViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -46,10 +46,17 @@
 
 	</bean>
 
-
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass">
+			<value>
+				org.springframework.web.servlet.view.tiles2.TilesView
+			</value>
+		</property>
+	</bean>
 
 	<bean id="tilesResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 		<property name="order" value="1" />
@@ -63,6 +70,7 @@
 			</list>
 		</property>
 	</bean>
+
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">
@@ -71,9 +79,6 @@
 			</list>
 		</property>
 	</bean>
-
-
-	
 
 
 

@@ -21,11 +21,9 @@ import com.gemantic.common.exception.ServiceException;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.exception.ServiceErrorCode;
 import com.gemantic.killer.model.Room;
-import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MemberService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.service.SessionService;
-import com.gemantic.killer.service.UserService;
 import com.gemantic.killer.util.MapDataUtil;
 
 @Component
@@ -45,8 +43,6 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private RoomService roomService;
 
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private SessionService sessionService;

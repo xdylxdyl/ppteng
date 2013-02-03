@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
@@ -32,7 +33,7 @@ import com.gemantic.killer.util.BombUtil;
 import com.gemantic.killer.util.MessageUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.tools.javac.util.Pair;
+
 
 public class BombTest {
 
@@ -104,16 +105,16 @@ public class BombTest {
 	@Test
 	public void testBombAssign() {
 
-		List<Pair> pairs = BombUtil.getRoundPanes(new Pair(4, 9), 9, 9);
+		List<Pair> pairs = BombUtil.getRoundPanes(Pair.of(4, 9), 9, 9);
 		log.info(pairs);
 
-		log.info(BombUtil.convertPair2String(new Pair(3, 1)));
+		log.info(BombUtil.convertPair2String(Pair.of(3, 1)));
 
 		// 1.生成一个系统的雷图
 		String systemBombPic = BombUtil.assign(9, 9, 10);
 		log.info(systemBombPic);
 		systemBombPic="13*2*5*2**212210011112*1*322*22*112*";		               
-		log.info(BombUtil.clickOpen(new Pair(1, 1), systemBombPic, 9, 9));
+		log.info(BombUtil.clickOpen(Pair.of(1, 1), systemBombPic, 9, 9));
 		List<String> pic = BombUtil.printPic(systemBombPic, 9, 4);
 		for (String line : pic) {
 			log.info(line);

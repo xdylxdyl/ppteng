@@ -33,9 +33,10 @@ import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MemberService;
 import com.gemantic.killer.service.RoomService;
-import com.gemantic.killer.service.UserService;
+
 import com.gemantic.killer.util.MailUtil;
 import com.gemantic.killer.util.PunchUtil;
+import com.gemantic.labs.killer.service.UsersService;
 
 /**
  * 提供游戏房间的创建,删除,玩家列表等功能
@@ -51,7 +52,7 @@ public class PlayerController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
-	private UserService userService;
+	private UsersService userService;
 
 	@Autowired
 	private CookieUtil cookieUtil;
@@ -106,7 +107,7 @@ public class PlayerController {
 		}
 
 		// 没有Email再判断是否是cookie
-		uid = this.userService.getIdByThird(type, openID);
+		uid = this.userService.getUsersIdByOpenID(openID);
 		if (uid == null) {			
 			//create user
 			User user=new User();
@@ -114,7 +115,7 @@ public class PlayerController {
 			user.setLoginAt(System.currentTimeMillis());
 			
 			user.setOpenID(openID);
-			uid=this.userService.insertUser(user);
+			uid=this.userService.insert(user);
 			
 			
 			
@@ -125,7 +126,7 @@ public class PlayerController {
 		}
 		log.info(uid + " loging in " + success);
 		if (success) {
-			User user = this.userService.getUserByID(uid);
+			User user = this.userService.getObjectById(uid);
 			if (user == null) {
 				// clear cookie
 				// 怎么清除还不知道
@@ -188,7 +189,7 @@ public class PlayerController {
 			}
 
 		} else {
-			uid = this.userService.getIdByEmail(email);
+			uid = this.userService.getUsersIdByEmail(email);
 			if (uid == null) {
 				model.addAttribute("code", "-6003");
 				return "redirect:/";
@@ -199,7 +200,7 @@ public class PlayerController {
 
 		log.info(uid + " loging in " + success);
 		if (success) {
-			User user = this.userService.getUserByID(uid);
+			User user = this.userService.getObjectById(uid);
 			if (user == null) {
 				// clear cookie
 				// 怎么清除还不知道
@@ -245,7 +246,7 @@ public class PlayerController {
 
 		int code = 0;
 
-		Long id = this.userService.getIdByEmail(email);
+		Long id = this.userService.getUsersIdByEmail(email);
 		if (id == null) {
 			code = ServiceErrorCode.Email_Already_Exist;
 		}
@@ -402,7 +403,7 @@ public class PlayerController {
 	@RequestMapping(value = "/player/forget", method = RequestMethod.POST)
 	public String forget(HttpServletRequest request, HttpServletResponse response, ModelMap model, String mail) throws Exception {
 		log.info(mail + " forget password ");
-		Long uid = userService.getIdByEmail(mail);
+		Long uid = userService.getUsersIdByEmail(mail);
 		String token = DESUtil.encrypt((String.valueOf(uid) + "," + String.valueOf(System.currentTimeMillis())).getBytes());
 		String link = "http://42.121.113.70//player/regedit.do?type=forget&token=" + URLEncoder.encode(token, "utf8");
 		// 邮件内容，注意加参数true，表示启用html格式
@@ -442,7 +443,7 @@ public class PlayerController {
 		log.info(uids);
 		List<Long> userIDS = Arrays.asList(uids);
 
-		List<User> users = userService.getUsers(userIDS);
+		List<User> users = userService.getObjectsByIds(userIDS);
 		log.info(" get user info " + users);
 
 		// get status
@@ -507,7 +508,7 @@ public class PlayerController {
 		if (uid == null) {
 			uid = selfID;
 		}
-		User u = this.userService.getUserByID(uid);
+		User u = this.userService.getObjectById(uid);
 		log.info(" get user info " + u);
 
 		int punchCount = PunchUtil.getContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, u.getPunch());
@@ -534,7 +535,7 @@ public class PlayerController {
 
 		Long uid = cookieUtil.getID(request, response);
 		log.info(uid + " punch ");
-		User user = this.userService.getUserByID(uid);
+		User user = this.userService.getObjectById(uid);
 		if (user == null) {
 
 			return "redirect:/";
@@ -579,7 +580,7 @@ public class PlayerController {
 		if (uid.longValue() != user.getId()) {
 			return "redirect:/player/detail.do?uid=" + uid;
 		}
-		User oldUser = this.userService.getUserByID(uid);
+		User oldUser = this.userService.getObjectById(uid);
 
 		String path = request.getRealPath(request.getContextPath());
 		String fullName = "/data/user_info/" + uid;
@@ -613,7 +614,7 @@ public class PlayerController {
 
 		log.info(email + " want get id ");
 
-		Long userID = this.userService.getIdByEmail(email);
+		Long userID = this.userService.getUsersIdByEmail(email);
 		log.info(email + " get user id by email " + userID);
 
 		model.addAttribute("userID", userID);

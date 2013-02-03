@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gemantic.common.util.MyListUtil;
 import com.gemantic.commons.push.client.PushClient;
-import com.gemantic.killer.model.Record;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
-import com.gemantic.killer.service.UserService;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.service.RecordService;
+import com.gemantic.labs.killer.service.UsersService;
 
 /**
  * 提供游戏房间的创建,删除,玩家列表等功能
@@ -41,7 +40,7 @@ public class RecordController {
 	private RecordService recordService; 
 	
 	@Autowired
-	private UserService userSevice;
+	private UsersService userSevice;
 
 	/**
 	 * 游戏准备
@@ -72,7 +71,7 @@ public class RecordController {
 			userIDS.add(r.getCreaterID());
 
 		}
-		List<User> users = this.userSevice.getUsers(userIDS);
+		List<User> users = this.userSevice.getObjectsByIds(userIDS);
 		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);
 
 		model.addAttribute("records", records);
@@ -121,7 +120,7 @@ public class RecordController {
 
 		List<String> contents = this.recordService.getContent(recordID);
 
-		String version = record.getRoom().getVersion();
+		String version = record.getVersion();
 		model.addAttribute("contents", contents);
 		model.addAttribute("record", record);
 		model.addAttribute("room", record.getRoom());

@@ -5,7 +5,7 @@
 			driverClassName="com.mysql.jdbc.Driver"
 			url="jdbc:mysql://sp50fd0efa1eafe.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
 			username="game"
-			password="xdylxdyl"
+			password="xdyl1314"
 			maxActive="50"
 			maxIdle="50"
 			maxWait="-1"
@@ -21,7 +21,8 @@
 			maxIdle="50"
 			maxWait="10"
             check="true"
-		/>
+		/>	
+		  
 		
 		<ds name="idCenterDS"
 			driverClassName="com.mysql.jdbc.Driver"
@@ -35,7 +36,7 @@
 		/>
 	</datasources>
 	<groups>
-		<group name="labsKiller" master="wealthApplication"  />			
+		<group name="labsKiller" master="labsKiller"  />			
 	</groups>
 </root>
 

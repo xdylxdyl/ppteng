@@ -1,10 +1,7 @@
-package com.gemantic.killer.model;
+package com.gemantic.labs.killer.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,19 +11,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-import com.gemantic.killer.util.UserUtil;
-
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class Users implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 617547135594699203L;
+	private static final long serialVersionUID = 6945044222622832640L;
 
 	private Long id;
 
@@ -36,71 +33,27 @@ public class User implements Serializable {
 
 	private String email;
 
-	private Long updateAt;
+	private String punch;
 
-	private Long createAt;
+	private Integer score;
+
+	private String icon;
+
+	private String expression;
+
+	private String music;
+
+	private Integer money;
 
 	private Long loginAt;
 
-	/**
-	 * 积分
-	 */
-	private Integer score = 0;
-
-	/**
-	 * 钱
-	 */
-	private Integer money = 0;
-
-	/**
-	 * 打卡
-	 */
-	private String punch = "";
-
-	/**
-	 * 上次打卡时间
-	 */
 	private Long punchAt;
 
-	/**
-	 * 成就
-	 * 
-	 * @return
-	 */
-	private List<String> achievement = new ArrayList();
-
-	/**
-	 * 荣誉
-	 * 
-	 * @return
-	 */
-
-	private Map<String, Integer> honour = new HashMap();
-
-	/**
-	 * 头像
-	 */
-	private String icon = "";
-	/**
-	 * 自定义表情
-	 */
-	private List<String> expression = new ArrayList();
-
-	private String expressionContent;
-
-	/**
-	 * 签名
-	 * 
-	 * @return
-	 */
-	private String sign = "";
-
-	/**
-	 * musice
-	 */
-	private String music = "";
-
 	private String openID;
+
+	private Long updateAt;
+
+	private Long createAt;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -167,18 +120,18 @@ public class User implements Serializable {
 		this.icon = icon;
 	}
 
+	@Column(name = "expression")
+	public String getExpression() {
+		return expression;
+	}
+
+	public void setExpression(String expression) {
+		this.expression = expression;
+	}
+
 	@Column(name = "music")
 	public String getMusic() {
 		return music;
-	}
-
-	@Column(name = "expression")
-	public String getExpressionContent() {
-		return expressionContent;
-	}
-
-	public void setExpressionContent(String expressionContent) {
-		this.expressionContent = expressionContent;
 	}
 
 	public void setMusic(String music) {
@@ -237,50 +190,6 @@ public class User implements Serializable {
 
 	public void setCreateAt(Long createAt) {
 		this.createAt = createAt;
-	}
-
-	@Transient
-	public List<String> getAchievement() {
-		return achievement;
-	}
-
-	public void setAchievement(List<String> achievement) {
-		this.achievement = achievement;
-	}
-
-	@Transient
-	public Map<String, Integer> getHonour() {
-		return honour;
-	}
-
-	public void setHonour(Map<String, Integer> honour) {
-		this.honour = honour;
-	}
-
-	@Transient
-	public List<String> getExpression() {
-
-		if (this.expression == null) {
-			this.expression = UserUtil.json2Expression(this.expressionContent);
-		}
-
-		return expression;
-	}
-
-	public void setExpression(List<String> expression) {
-		this.expression = expression;
-		this.expressionContent = UserUtil.expression2Json(expression);
-	}
-	
-	
-	
-
-	public String getSign() {
-		return sign;
-	}
-
-	public void setSign(String sign) {
-		this.sign = sign;
 	}
 
 	public String toString() {

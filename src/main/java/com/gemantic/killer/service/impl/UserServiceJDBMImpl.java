@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import net.kotek.jdbm.DB;
@@ -17,6 +16,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.gemantic.common.exception.ServiceDaoException;
@@ -25,6 +26,7 @@ import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.UserService;
 import com.gemantic.killer.util.MapDataUtil;
 import com.gemantic.killer.util.UserUtil;
+import com.gemantic.labs.killer.service.UsersService;
 
 
 
@@ -51,6 +53,22 @@ public class UserServiceJDBMImpl implements UserService {
 	private boolean init=false;
 	
 	
+	
+	
+
+	public DBMaker getMaker() {
+		return maker;
+	}
+
+
+
+
+	public void setMaker(DBMaker maker) {
+		this.maker = maker;
+	}
+
+
+
 
 	@Autowired
 	@Qualifier("gameMaker")
@@ -137,7 +155,7 @@ public class UserServiceJDBMImpl implements UserService {
 
 	}
 
-	@PostConstruct
+	//@PostConstruct
 	public void init() {
 		if(init){
 			log.warn("already init ");
@@ -160,6 +178,24 @@ public class UserServiceJDBMImpl implements UserService {
 		try {
 			this.userID_USER = db.getHashMap(userDB);
 			log.info("user "+this.userID_USER.keySet().size());
+			
+			/*// dao
+			ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext*.xml");
+			UsersService usersService = (UsersService) context.getBean("usersServiceImpl");
+			
+			
+			for(Long id:this.userID_USER.keySet()){
+				String u=this.userID_USER.get(id);
+				User user = UserUtil.json2User(u) ;
+				try{
+				usersService.insert(user);
+				}catch(Throwable t){
+					log.info(user);
+				}
+			}
+			*/
+			
+			
 			log.info(this.userID_USER);
 
 		} catch (Throwable t) {
@@ -216,7 +252,10 @@ public class UserServiceJDBMImpl implements UserService {
 	@PreDestroy
 	private void destory(){
 		
-		
+
+		log.info("close db start");
+		db.close();
+		log.info("close db over");
 		
 		
 	}
@@ -226,12 +265,19 @@ public class UserServiceJDBMImpl implements UserService {
 	
 	public static void main(String[] args) throws ServiceException, ServiceDaoException {
 		UserServiceJDBMImpl service = new UserServiceJDBMImpl();
+		DBMaker maker=new DBMaker("C:/Program Files/VanDyke Software/Clients/download/game");
+		service.setMaker(maker);
+		service.init();
 		/*
 		 * for(int i=0;i<100;i++){ Long id=service.create("测试帐户-"+i);
 		 * log.info(id); }
 		 */
-		User user = service.getUserByID(5814083748830298112L);
-		log.info(user);
+		Integer integer=service.getTotalCount();
+		log.info(integer);
+		
+		
+		/*User user = service.getUserByID(5814083748830298112L);
+		log.info(user);*/
 	}
 
 	@Override

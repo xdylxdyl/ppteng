@@ -1,16 +1,12 @@
 package com.gemantic.labs.killer.service;
 
 import java.util.List;
-import java.util.Map;
 
-import org.osoa.sca.annotations.Remotable;
-
-import com.gemantic.killer.model.Record;
-import com.gemantic.labs.killer.model.Records;
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
+import com.gemantic.labs.killer.model.Records;
 
-@Remotable
+
 public interface RecordService {
 
 	

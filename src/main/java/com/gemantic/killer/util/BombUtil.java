@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.sun.tools.javac.util.Pair;
-import com.sun.tools.javac.util.Pair;
+
 
 public class BombUtil {
 	private static final Log log = LogFactory.getLog(BombUtil.class);
@@ -32,7 +32,7 @@ public class BombUtil {
 		Map<Pair,String> pair_tags=new HashMap();
 		for(int i=1;i<=row;i++){
 			for(int j=1;j<=column;j++){
-				Pair p=new Pair(i,j);
+				Pair p=Pair.of(i,j);
 				//log.info(p);
 				pairs.add(p);
 				inits.add(p);
@@ -83,8 +83,8 @@ public class BombUtil {
 	public static List<Pair> getRoundPanes(Pair pair, int rowCount, int columnCount) {
 		log.info(pair+"get round panes in row "+rowCount+" columnCount "+columnCount);
 		List<Pair> pairs=new ArrayList();
-		int row=(Integer) pair.fst;
-		int column=(Integer) pair.snd;
+		int row=(Integer) pair.getLeft();
+		int column=(Integer) pair.getRight();
 		int left=column-1;
 		int right=column+1;
 		int up=row-1;
@@ -106,7 +106,8 @@ public class BombUtil {
 		
 		for(int i=up;i<=down;i++){
 			for(int j=left;j<=right;j++){
-				Pair p=new Pair(i,j);
+				Pair p=Pair.of(i, j);
+				
 				if(pair.equals(p)){
 					continue;
 				}else{
@@ -124,8 +125,8 @@ public class BombUtil {
 	
 	public static String clickOpen(Pair pair, String systemBombPic,int row, int column) {
 		
-		int r=(Integer) pair.fst-1;
-		int c=(Integer) pair.snd-1;
+		int r=(Integer) pair.getLeft()-1;
+		int c=(Integer) pair.getRight()-1;
         int index=r*column+c;
         log.info("index is "+index);
 		String result=String.valueOf(systemBombPic.charAt(index));
@@ -196,12 +197,12 @@ public class BombUtil {
 
 	public static String convertPair2String(Pair pair) {
 		// TODO Auto-generated method stub
-		return String.valueOf(pair.fst+BombUtil.Split_Underline+pair.snd);
+		return String.valueOf(pair.getLeft()+BombUtil.Split_Underline+pair.getRight());
 	}
 	public static Pair convertString2Pair(String str){
 		 String[] indexs=str.split(BombUtil.Split_Underline);
 		 
-		return new Pair(Integer.valueOf(indexs[0]),Integer.valueOf(indexs[1]));
+		return Pair.of(Integer.valueOf(indexs[0]),Integer.valueOf(indexs[1]));
 		
 	}
 

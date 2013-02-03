@@ -23,13 +23,17 @@ import com.gemantic.common.util.DESUtil;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.killer.exception.ServiceErrorCode;
 import com.gemantic.killer.model.User;
-import com.gemantic.killer.service.UserService;
+import com.gemantic.labs.killer.service.UsersService;
+
 
 @Controller
 @RequestMapping(value = "/player/regedit")
 public class UserFormController {
 	@Autowired
-	private UserService userService;
+	private UsersService userService;
+	
+	
+
 
 	@Autowired
 	private CookieUtil cookieUtil;
@@ -73,7 +77,7 @@ public class UserFormController {
 				model.addAttribute("code", -6004);
 				return "redirect:/";
 			} else {
-				user = this.userService.getUserByID(uid);
+				user = this.userService.getObjectById(uid);
 				if (user == null) {
 
 					model.addAttribute("code", -6005);
@@ -109,7 +113,7 @@ public class UserFormController {
 					return "redirect:/";
 					
 				}
-				user = this.userService.getUserByID(uid);
+				user = this.userService.getObjectById(uid);
 				if (user == null) {
 					log.error(content+" invalid user ");
 					model.addAttribute("code", -6005);
@@ -156,21 +160,22 @@ public class UserFormController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String processSubmit(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user") User user, BindingResult result,
 			SessionStatus status, Model model) throws Exception {
+		log.info("new user regedit "+user);
 		Long uid = user.getId();
 		boolean update = false;
 		if (uid == null) {
-			Long id = this.userService.getIdByEmail(user.getEmail());
+			Long id = this.userService.getUsersIdByEmail(user.getEmail());
 			if (id != null) {
 
 				model.addAttribute("code", ServiceErrorCode.Email_Already_Exist);
 				model.addAttribute("user", user);
 				return "/player/form/init";
 			}
-			update = false;
-			this.userService.insertUser(user);
+			update = false;			
+			
 		} else {
 
-			User u = this.userService.getUserByID(uid);
+			User u = this.userService.getObjectById(uid);
 			if (u == null) {
 				update = false;
 			} else {
@@ -181,7 +186,7 @@ public class UserFormController {
 		if (update) {
 			this.userService.update(user);
 		} else {
-			this.userService.insertUser(user);
+			this.userService.insert(user);
 		}
 
 		// 什么时候把Cookie种下呢.

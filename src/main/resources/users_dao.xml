@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dal>
+	<route>
+		<object name="com.gemantic.killer.model.User"
+			listenerClass="" strategyProperty="">
+			
+			
+			
+						
+			
+					<map name="getUsersIdByOpenID"
+				sqlitem="select id from users where open_id = ?"
+				keyProperty="openID" valueProperty="id" keyColumn="open_id" />
+					<map name="getUsersIdByEmail"
+				sqlitem="select id from users where email = ?"
+				keyProperty="email" valueProperty="id" keyColumn="email" />
+				
+				<list name="getAllUsers" sqlitem="select id from users where 1 = 1 "
+				sqlType="hsql" keyProperty="nonSence" valueProperty="id" keyColumn="id" />
+				
+						
+			<dbStrategy name="mutiDS"
+                clasz="com.gemantic.dal.route.strategy.DefaultStrategy">  <pattern value="[0-9]$" group="labsKiller" />
+            </dbStrategy>
+			
+		</object>
+	</route>
+</dal>
