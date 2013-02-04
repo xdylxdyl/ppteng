@@ -110,7 +110,7 @@ public class One23Test {
 		return results;
 	}
 
-	@Ignore
+	
 	@Test
 	public void testRF() throws InterruptedException {
 		StringUtils.isBlank("");
@@ -150,13 +150,13 @@ public class One23Test {
 
 	}
 
-	@Ignore
-	@Test
+	
+	//@Test
 	public void testSimpleRF() throws InterruptedException {
 
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		kbuilder.add(ResourceFactory.newClassPathResource("simple_room.drl"), ResourceType.DRL);
-		kbuilder.add(ResourceFactory.newClassPathResource("simple_room.rf"), ResourceType.DRF);
+		kbuilder.add(ResourceFactory.newClassPathResource("killer/simple/simple_killer.drl"), ResourceType.DRL);
+		kbuilder.add(ResourceFactory.newClassPathResource("killer/simple/simple_room.rf"), ResourceType.DRF);
 
 		Long start = System.currentTimeMillis();
 		log.info("start ");
@@ -340,5 +340,50 @@ public class One23Test {
 		// TODO Auto-generated method stub
 		return ls.get(pnum);
 	}
+	
+	
+	public static void main(String[] args) throws InterruptedException {
+		
+		
+	
+			StringUtils.isBlank("");
+			final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+			kbuilder.add(ResourceFactory.newClassPathResource("test.drl"), ResourceType.DRL);
+
+			Long start = System.currentTimeMillis();
+			log.info("start ");
+			final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+			log.info(" new knowledge " + (System.currentTimeMillis() - start));
+			kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+			log.info(" add knowledge " + (System.currentTimeMillis() - start));
+			final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+			log.info(" session knowledge ========" + (System.currentTimeMillis() - start));
+			// KnowledgeRuntimeLogger logger =
+			// KnowledgeRuntimeLoggerFactory.newFileLogger(ksession,
+			// "log/numberguess");
+
+			Message m = new Message();
+			m.setPredict("go");
+
+			// ksession.insert(r2);
+			ksession.insert(m);
+			ksession.getAgenda().getAgendaGroup("add").setFocus();
+			ksession.fireAllRules();
+
+			/*
+			 * Message m2=new Message(); m2.setPredict("go"); ksession.insert(m2);
+			 * ksession.fireAllRules();
+			 */
+
+			Thread.sleep(5000L);
+			log.info(" session knowledge " + (System.currentTimeMillis() - start));
+			// logger.close();
+
+			ksession.dispose();
+
+		
+		
+	}
+	
 
 }

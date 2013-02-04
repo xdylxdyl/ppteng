@@ -65,6 +65,28 @@
 
 	<dependencies>
 
+
+		<!-- jetty -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>8.0.0.M3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>8.0.0.M3</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>8.0.0.M3</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -184,13 +206,6 @@
 			<version>1.5.2</version>
 		</dependency>
 
-
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
-			<version>5.3.0.Final</version>
-			<type>jar</type>
-		</dependency>
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
@@ -198,38 +213,21 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.jbpm</groupId>
-			<artifactId>jbpm</artifactId>
-			<version>5.1.0.Final</version>
-			<type>pom</type>
-
-			<exclusions>
-				<exclusion>
-					<groupId>antlr</groupId>
-					<artifactId>antlr</artifactId>
-				</exclusion>
-
-			</exclusions>
-		</dependency>
-
-
-
 
 		<dependency>
-			<groupId>org.jbpm</groupId>
-			<artifactId>jbpm-bpmn2</artifactId>
-			<version>5.1.0.Final</version>
-
-			<exclusions>
-				<exclusion>
-					<groupId>antlr</groupId>
-					<artifactId>antlr</artifactId>
-				</exclusion>
-
-			</exclusions>
-
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>5.3.0.Final</version>
+			<type>jar</type>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>5.3.0.Final</version>
+			<type>jar</type>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.jbpm</groupId>
@@ -242,7 +240,34 @@
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-flow</artifactId>
 			<version>5.1.0.Final</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>drools-compiler</artifactId>
+					<groupId>org.drools</groupId>
+				</exclusion>
+			</exclusions>
+
 		</dependency>
+		
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm</artifactId>
+			<version>5.1.0.Final</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-bpmn2</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
+
+		
+
+		
+
+
+
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -650,7 +675,6 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.10</version>
 
 				<configuration>
 					<contextPath>/</contextPath>

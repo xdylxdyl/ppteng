@@ -46,7 +46,6 @@ public class Records implements Serializable {
 	private Room room;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	public Long getId() {
 		return id;

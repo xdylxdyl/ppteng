@@ -47,10 +47,9 @@ public class BombTest {
 	private ConfigurableApplicationContext context;
 	
 	private PushClient pushClient;
-	
-	private RecordService recordService;
 
-	//@Before
+
+	@Before
 	public void init() throws ServiceException, ServiceDaoException {
 		log.info("sprint load");
 		context = new ClassPathXmlApplicationContext(
@@ -59,8 +58,7 @@ public class BombTest {
 				.getBean("messageServiceSingleDroolsImpl");
 		roomService = (RoomService) context.getBean("roomServiceImpl");
 		pushClient=(PushClient)context.getBean("pushClient");
-		
-		recordService=(RecordService) context.getBean("recordServiceImple");
+
 		
 		
 	}
@@ -263,9 +261,7 @@ public class BombTest {
 /*		Record record=this.recordService.getRecord(3L);
 		record.setRoom(new Room());
 		this.recordService.addRecord(record);*/
-		
-		List<Record> ls=this.recordService.getList(null, null);
-		log.info(ls);
+	
 		
 	}
 
