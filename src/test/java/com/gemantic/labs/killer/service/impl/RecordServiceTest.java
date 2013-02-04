@@ -6,13 +6,13 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
-import com.gemantic.dal.dao.Dao;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.service.RecordService;
 
@@ -24,7 +24,7 @@ public class RecordServiceTest {
 
 	
 
-	// @Before
+  //  @Before
 	public void setUp() throws Exception {
 
 		// dao
@@ -46,7 +46,7 @@ public class RecordServiceTest {
 
 	}
 
-	// @Test
+	//@Test
 	public void testCRUD() throws ServiceException, ServiceDaoException {
 
 		// 1.增加
@@ -127,7 +127,7 @@ public class RecordServiceTest {
 
 	}
 
-	// @Test
+	 //@Test
 	public void getRecordIdsByVersion() throws ServiceException, ServiceDaoException {
 
 		List<Records> list = new ArrayList<Records>();

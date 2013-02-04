@@ -66,73 +66,6 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.gemantic</groupId>
-			<artifactId>dal-dao</artifactId>
-			<version>0.0.14</version>
-
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-jdbc</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-dao</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.gemantic</groupId>
-			<artifactId>dal-memcached</artifactId>
-			<version>0.0.4</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-jdbc</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-dao</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-webmvc</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<groupId>antlr</groupId>
-					<artifactId>antlr</artifactId>
-				</exclusion>
-
-				<exclusion>
-					<groupId>org.hibernate</groupId>
-					<artifactId>hibernate-c3p0</artifactId>
-				</exclusion>
-
-
-
-			</exclusions>
-
-		</dependency>
-
-
-
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
@@ -143,8 +76,6 @@
 			<artifactId>oscache</artifactId>
 			<version>2.4.1</version>
 		</dependency>
-
-
 
 		<dependency>
 			<groupId>org.expressme</groupId>
@@ -491,6 +422,33 @@
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>com.gemantic</groupId>
+			<artifactId>dal-dao</artifactId>
+			<version>0.0.18</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>hibernate-c3p0</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.gemantic</groupId>
+			<artifactId>dal-memcached</artifactId>
+			<version>0.0.6</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>hibernate-c3p0</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 
 
 

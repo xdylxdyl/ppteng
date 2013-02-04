@@ -9,7 +9,7 @@
 			<taglib-uri>http://www.gemantic.com/taglibs/date</taglib-uri>
 			<taglib-location>/WEB-INF/tag/date.tld</taglib-location>
 		</taglib>
-		
+
 		<taglib>
 			<taglib-uri>http://www.gemantic.com/taglibs/page</taglib-uri>
 			<taglib-location>/WEB-INF/tag/page.tld</taglib-location>
@@ -108,14 +108,7 @@
 	</error-page>
 
 	<!-- not lock css/js file when jetty run :tomcat will be error -->
-	<!-- -->
-	<servlet>
-		<servlet-name>default</servlet-name>
-		<init-param>
-			<param-name>useFileMappedBuffer</param-name>
-			<param-value>false</param-value>
-		</init-param>
-	</servlet>
+	<!-- <servlet> <servlet-name>default</servlet-name> <init-param> <param-name>useFileMappedBuffer</param-name> 
+		<param-value>false</param-value> </init-param> </servlet> -->
 
-  
 </web-app>
