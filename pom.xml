@@ -650,6 +650,13 @@
 			<version>2.2.2</version>
 		</dependency>
 		<!-- tiles over -->
+		
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>ejb3-persistence</artifactId>
+			<version>1.0.2.GA</version>
+		</dependency>
 
 
 	</dependencies>
