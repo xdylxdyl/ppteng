@@ -3,6 +3,7 @@ package com.gemantic.labs.killer.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -22,15 +23,13 @@ public class RecordServiceTest {
 
 	private RecordService recordService;
 
-	
-
-  //  @Before
+	@Before
 	public void setUp() throws Exception {
 
 		// dao
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext*.xml");
 		recordService = (RecordService) context.getBean("recordServiceImpl");
-	
+
 		// local server
 		/**
 		 * recordService = (RecordService)
@@ -46,7 +45,7 @@ public class RecordServiceTest {
 
 	}
 
-	//@Test
+	// @Test
 	public void testCRUD() throws ServiceException, ServiceDaoException {
 
 		// 1.增加
@@ -127,11 +126,12 @@ public class RecordServiceTest {
 
 	}
 
-	 //@Test
+	@Test
 	public void getRecordIdsByVersion() throws ServiceException, ServiceDaoException {
 
 		List<Records> list = new ArrayList<Records>();
 		Records record1 = new Records();
+		record1.setId(RandomUtils.nextLong());
 
 		record1.setPath("tt.txt");
 
@@ -143,6 +143,7 @@ public class RecordServiceTest {
 
 		list.add(record1);
 		Records record2 = new Records();
+		record2.setId(RandomUtils.nextLong());
 
 		record2.setPath("tt2.txt");
 
@@ -160,10 +161,9 @@ public class RecordServiceTest {
 		// TODO 增加自己的验证逻辑
 		Assert.assertNotNull(lists);
 
-		/*
-		 * for (Records o : insertResults) {
-		 * this.recordService.delete(o.getId()); }
-		 */
+		for (Records o : insertResults) {
+			this.recordService.delete(o.getId());
+		}
 
 	};
 
