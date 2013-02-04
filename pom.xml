@@ -220,7 +220,7 @@
 			<version>5.3.0.Final</version>
 			<type>jar</type>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
@@ -248,7 +248,7 @@
 			</exclusions>
 
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm</artifactId>
@@ -262,9 +262,9 @@
 			<version>5.1.0.Final</version>
 		</dependency>
 
-		
 
-		
+
+
 
 
 
@@ -605,7 +605,12 @@
 		</dependency>
 
 
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>compile</scope>
+		</dependency>
 
 
 
@@ -650,8 +655,8 @@
 			<version>2.2.2</version>
 		</dependency>
 		<!-- tiles over -->
-		
-		
+
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>ejb3-persistence</artifactId>
@@ -659,11 +664,31 @@
 		</dependency>
 
 
-          <dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.3.2.GA</version>
+		</dependency>
+		
+		
+		
+        <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
+            <artifactId>hibernate-c3p0</artifactId>
             <version>3.3.2.GA</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>3.4.0.GA</version>
+        </dependency>        
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>3.4.0.GA</version>
+        </dependency>
+
+
 
 	</dependencies>
 
