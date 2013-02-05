@@ -101,7 +101,7 @@ public class PlayerController {
 		if (StringUtils.isBlank(type) || StringUtils.isBlank(openID)) {
 
 			model.addAttribute("code", "-6003");
-			return "redirect:/";
+			return "common/success";
 		} else {
 
 		}
@@ -135,7 +135,7 @@ public class PlayerController {
 				// 怎么清除还不知道
 
 				model.addAttribute("code", "-6003");
-				return "redirect:/";
+				return "common/success";
 			} else {
 				uname = user.getName();
 				// loging success we should set cookie;
@@ -146,7 +146,8 @@ public class PlayerController {
 				this.userService.update(user);
 				String url = "/m/list.do";
 				log.info(url);
-				return "redirect:" + url;
+				model.addAttribute("code", "0");
+				return "common/success";
 
 			}
 
@@ -155,7 +156,7 @@ public class PlayerController {
 			// 登录不成功,重新登录
 			model.addAttribute("code", "-6002");
 
-			return "redirect:/";
+			return "common/success";
 
 		}
 

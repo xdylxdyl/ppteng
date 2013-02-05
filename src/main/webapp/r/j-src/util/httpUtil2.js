@@ -16,9 +16,12 @@ function ajaxJson(url, type, param, parse,timeout,dataType) {
                 result= data;
 
             } else {
-                result = parse(data);
+                if(parse!=null){
+                    result = parse(data);
                 console.log("In Ajax The Result Is:");
                 console.log(result);
+                }
+
             }
 
 

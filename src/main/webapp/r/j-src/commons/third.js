@@ -10,7 +10,7 @@ QC.Login({btnId:"qqLoginBtn"}, function(oInfo, oOpts){
 
 var login=function(type,openID,name){
     ajaxJson("/player/openID.do?", "post", {type:type,openID:openID,name:name}, null, 5000, "json");
-
+    window.location.href="/m/list.do";
 }
 
 
