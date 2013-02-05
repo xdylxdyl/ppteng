@@ -2,7 +2,7 @@
 QC.Login({btnId:"qqLoginBtn"}, function(oInfo, oOpts){
     console.log("qq login");
     QC.Login.getMe(function(openId, accessToken){
-        login("qq",accessToken,oInfo.nickname);
+        login("qq",openId,oInfo.nickname);
     })
 
 });
