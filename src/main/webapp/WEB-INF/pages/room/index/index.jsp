@@ -29,9 +29,12 @@
 </script> <script type="text/javascript"
 	src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
 	data-appid="100372616"
-	data-redirecturi="http://www.ptteng.com/player/openID.do?type=qq"
+	data-redirecturi="http://www.ptteng.com/qc_callback.html"
 	charset="utf-8"></script>
+	<script type="text/javascript" src="/r/j-src/commons/third.js"></script>
 </head>
+
+
 <body>
 
 
@@ -75,7 +78,7 @@
 								使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
 							</p>
 							<span id="qqLoginBtn"></span>
-							<script type="text/javascript" src="/r/j-src/commons/third.js"></script>
+						
 							<!-- 	<a href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a> <a
 								href="#"><img src="/r/img/qq_login.png" alt="QQ登录"></a> -->
 						</div>
