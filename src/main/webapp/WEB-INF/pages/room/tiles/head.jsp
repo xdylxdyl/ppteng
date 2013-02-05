@@ -20,6 +20,7 @@
 <link href="/r/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="/r/css/reboot.css" rel="stylesheet">
 <link href="/r/css/theme.css" rel="stylesheet">
+<script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
 <script src="/r/j-src/room/head_view.js"></script>
 
  <script type="text/javascript"
@@ -44,7 +45,7 @@
 						<li><a href="http://bbs.ptteng.com/forum.php"
 							target="_blank">论坛</a></li>
 						<li><a href="http://xdylxdyl.diandian.com/" target="_blank">官博</a></li>
-						<li><a href="_blank" id="navLogout">退出</a></li>
+						<li><a href="" id="navLogout">退出</a></li>
 						<li><a href="#">关于</a></li>
 					</ul>
 

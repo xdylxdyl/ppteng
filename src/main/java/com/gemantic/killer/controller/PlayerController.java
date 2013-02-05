@@ -291,7 +291,9 @@ public class PlayerController {
 	 */
 	@RequestMapping(value = "/player/offline")
 	public String offline(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		
 		Long uid = cookieUtil.getID(request, response);
+		log.info(" uid "+ uid +" want offline ");
 		// mock a message of logout
 		Room r = this.memberService.getRoomOfUser(uid);
 		if (r == null) {
@@ -307,7 +309,7 @@ public class PlayerController {
 			this.memberService.userLogOut(r.getId(), uid);
 		}
 
-		log.debug(uid + " offline  ");
+		log.info(uid + " offline  ");
 		cookieUtil.clearCookie(response);
 
 		// 怎么把用户所在的房间踢掉
