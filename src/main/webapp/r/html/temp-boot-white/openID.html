@@ -2,62 +2,78 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="author" content="chill">
-    <!-- Le styles -->
-    <link href="../../css/bootstrap.css" rel="stylesheet">
-    <link href="../../css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="../../css/reboot.css" rel="stylesheet">
-    <link href="../../css/theme.css" rel="stylesheet">
+<meta charset="utf-8">
+	<title></title>
+	<meta name="description" content="">
+		<meta name="author" content="chill">
+			<!-- Le styles -->
+			<link href="../../css/bootstrap.css" rel="stylesheet">
+				<link href="../../css/bootstrap-responsive.css" rel="stylesheet">
+					<link href="../../css/reboot.css" rel="stylesheet">
+						<link href="../../css/theme.css" rel="stylesheet">
+
+							<script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
+							<script
+								src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
+
+							<script
+								src="<%=request.getContextPath()%>/r/j-src/util/httpUtil.js"></script>
+							<script
+								src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+
+							<script type="text/javascript"
+								src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+								charset="utf-8" data-callback="true"></script>
+
+						<script src="/r/j-src/commons/third.js?v=${frontVersion}"></script>
 </head>
 
 <body>
 
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="#">葡萄藤</a>
-            <div class="nav-collapse">
-                <ul class="nav pull-right">
-                    <li class="active"><a href="">首页</a></li>
-                    <li><a href="">游戏</a></li>
-                    <li><a href="">战列</a></li>
-                    <li><a href="">官博</a></li>
-                    <li><a href="">论坛</a></li>
-                    <li><a href="">其他</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!--/ nav bar-->
-<div id="wrap">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">葡萄藤</a>
+				<div class="nav-collapse">
+					<ul class="nav pull-right">
+						<li class="active"><a href="">首页</a></li>
+						<li><a href="">游戏</a></li>
+						<li><a href="">战列</a></li>
+						<li><a href="">官博</a></li>
+						<li><a href="">论坛</a></li>
+						<li><a href="">其他</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/ nav bar-->
+	<div id="wrap">
 
-     <!-- Begin page content -->
-     <div class="container">
-       <div class="page-header">
-         <h1>您正在使用QQ登录葡萄藤</h1>
-       </div>
-       <p class="lead">正在为您登录,如果没有在3秒内自动跳转,请点击<a href="" id="login">这里</a></p>
-     </div>
+		<!-- Begin page content -->
+		<div class="container">
+			<div class="page-header">
+				<h1>您正在使用QQ登录葡萄藤</h1>
+			</div>
+			<p class="lead">
+				正在为您登录,如果没有在3秒内自动跳转,请点击<a href="" id="login">这里</a>
+			</p>
+		</div>
 
-     <div id="push"></div>
-   </div>
+		<div id="push"></div>
+	</div>
 
 
 
 
-<div class="footer">
-    <div class="container">
-        <p>
-            © 2012 Company, Inc.
-            <a href="#">Contact us</a>
-        </p>
-    </div>
-</div>
-<!-- /footer -->
+	<div class="footer">
+		<div class="container">
+			<p>
+				© 2012 Company, Inc. <a href="#">Contact us</a>
+			</p>
+		</div>
+	</div>
+	<!-- /footer -->
 </body>
 </body>
 </html>
