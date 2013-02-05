@@ -26,10 +26,11 @@
         $('.carousel').carousel();
     })
      headView.highLight("index");
-</script> 
-<script type="text/javascript"
+</script> <script type="text/javascript"
 	src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
-	data-appid="100686632" data-redirecturi="http://www.ptteng.com/player/openID.do?type=qq" charset="utf-8"></script>
+	data-appid="100372616"
+	data-redirecturi="http://www.ptteng.com/player/openID.do?type=qq"
+	charset="utf-8"></script>
 </head>
 <body>
 
@@ -74,11 +75,7 @@
 								使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
 							</p>
 							<span id="qqLoginBtn"></span>
-							<script type="text/javascript">
-                                  QC.Login({
-                                       btnId:"qqLoginBtn"	//插入按钮的节点id
-                                    });
-                             </script>
+							<script type="text/javascript" src="/r/j-src/commons/third.js"></script>
 							<!-- 	<a href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a> <a
 								href="#"><img src="/r/img/qq_login.png" alt="QQ登录"></a> -->
 						</div>
@@ -129,8 +126,7 @@
 							<div class="chapter">
 								<div class="chapter-body">
 									<h4>
-										<a
-											href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5">静静的</a>
+										<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5">静静的</a>
 									</h4>
 									<p>你可以和朋友一起玩[杀人游戏],[多人扫雷],或者你什么都不做,就只是静静待着,和我一样.</p>
 								</div>
@@ -142,8 +138,7 @@
 									alt="杀人游戏简化版" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
-										<a
-											href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=7">杀人游戏[简化版]</a>
+										<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=7">杀人游戏[简化版]</a>
 									</h4>
 									<p>
 										杀人游戏,尤其是简化版,用高雅和艺术形容,一点都不过份.游戏中经常可以看到妙趣横生的对话,风格迥异的人物,和各种知性漂亮的姑娘...
@@ -153,27 +148,23 @@
 						</div>
 						<div class="span6">
 							<div class="chapter">
-								<a
-									href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=6"
+								<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=6"
 									class="pull-left"><img src="/r//img/icon_alpaca.png"
 									alt="多人扫雷" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
-										<a
-											href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=6">扫雷[多人版]</a>
+										<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=6">扫雷[多人版]</a>
 									</h4>
 									<p>可以和你的朋友一起 玩这个简单有趣的小游戏了~体验一下三五个人去扫一个[100*100]超大雷区的冒险历程?</p>
 								</div>
 							</div>
 							<div class="chapter">
-								<a
-									href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5"
+								<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5"
 									class="pull-left"><img src="/r//img/icon_alpaca.png"
 									alt="设计游戏" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
-										<a
-											href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5">这些游戏都不喜欢?</a>
+										<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5">这些游戏都不喜欢?</a>
 									</h4>
 									<p>想过设计一个自己喜欢的游戏呢?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以!来联系我吧~</p>
 								</div>

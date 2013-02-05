@@ -12,7 +12,9 @@
 <script type="text/javascript"
 src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
 
-<script src="/r/j-src/commons/third.js?v=${frontVersion}"></script>
+<script>
+alert("hello");
+</script>
 
 
 
