@@ -21,6 +21,8 @@
 
 <script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script>
+<script
+	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script type="text/javascript">
     $(function() {
         $('.carousel').carousel();
@@ -32,6 +34,7 @@
 	data-redirecturi="http://www.ptteng.com/qc_callback.html"
 	charset="utf-8"></script>
 	<script type="text/javascript" src="/r/j-src/commons/third.js"></script>
+	
 </head>
 
 

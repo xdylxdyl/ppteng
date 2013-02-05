@@ -108,7 +108,8 @@ public class PlayerController {
 
 		// 没有Email再判断是否是cookie
 		uid = this.userService.getUsersIdByOpenID(openID);
-		if (uid == null) {			
+		if (uid == null) {	
+			log.info("openID "+openID+" of name "+ name+" is a new user ,create at ");
 			//create user
 			User user=new User();
 			user.setName(name);
@@ -116,11 +117,13 @@ public class PlayerController {
 			
 			user.setOpenID(openID);
 			uid=this.userService.insert(user);
+			success=true;
 			
 			
 			
 		}else{
-			
+			log.info("openID "+openID+" of name "+ name+" is a old user of "+uid);
+			success=true;
 			
 			
 		}
