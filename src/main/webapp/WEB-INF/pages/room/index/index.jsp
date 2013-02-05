@@ -28,11 +28,8 @@
         $('.carousel').carousel();
     })
      headView.highLight("index");
-</script> <script type="text/javascript"
-	src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
-	data-appid="100372616"
-	data-redirecturi="http://www.ptteng.com/qc_callback.html"
-	charset="utf-8"></script>
+</script>
+	
 	<script type="text/javascript" src="/r/j-src/commons/third.js"></script>
 	
 </head>

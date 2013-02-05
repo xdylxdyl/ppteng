@@ -21,6 +21,13 @@
 <link href="/r/css/reboot.css" rel="stylesheet">
 <link href="/r/css/theme.css" rel="stylesheet">
 <script src="/r/j-src/room/head_view.js"></script>
+
+ <script type="text/javascript"
+	src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+	data-appid="100372616"
+	data-redirecturi="http://www.ptteng.com/qc_callback.html"
+	charset="utf-8"></script>
+
 </head>
 
 <body>
@@ -37,7 +44,7 @@
 						<li><a href="http://bbs.ptteng.com/forum.php"
 							target="_blank">论坛</a></li>
 						<li><a href="http://xdylxdyl.diandian.com/" target="_blank">官博</a></li>
-						<li><a href="/player/offline.do">退出</a></li>
+						<li><a href="_blank" id="navLogout">退出</a></li>
 						<li><a href="#">关于</a></li>
 					</ul>
 

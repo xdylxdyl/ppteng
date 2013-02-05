@@ -31,3 +31,18 @@ var headView = {
     }
 
 }
+
+
+$(document).ready(function () {
+
+
+
+        $("#navLogout").click(function () {
+            QC.Login.signOut();
+            window.document.href="/player/offline.do";
+
+        });
+
+    }
+)
+
