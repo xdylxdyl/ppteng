@@ -78,7 +78,7 @@ public class PlayerController {
 		model.addAttribute("code", "-0");		
 		model.addAttribute("type", type);
 		
-		return "room/player/third";
+		return "/room/player/third";
 
 	}
 

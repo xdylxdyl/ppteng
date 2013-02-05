@@ -1,8 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
-<script src="../j-src/commons/third.js?v=0.5"></script>
 
+<script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
+<script
+	src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 
+<script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil.js"></script>
+<script
+	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+	
+<script type="text/javascript"
+src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
+
+<script src="/r/j-src/commons/third.js?v=${frontVersion}"></script>
 
 
 

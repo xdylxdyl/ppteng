@@ -67,6 +67,7 @@
 				<value>*/record/list/*</value>
 				<value>*/player/*</value>
 				<value>*/room/index/*</value>
+				<value>*/room/player/*</value>
 			</list>
 		</property>
 	</bean>
