@@ -713,7 +713,7 @@ then
      for(Object o:$tags){
         Tag tag=(Tag)o;
        Pair p=  BombUtil.convertString2Pair(tag.getPid());
-        int index=BombUtil.convertIndex((Integer)p.fst, (Integer)p.snd, rowCount);
+        int index=BombUtil.convertIndex((Integer)p.getLeft(), (Integer)p.getRight(), rowCount);
 		bomb=BombUtil.replaceBomb(index, bomb, tag.getValue());
       } 
       $bombPic.setUser(bomb);

@@ -560,7 +560,7 @@ public class PlayerController {
 		this.userService.update(user);
 		model.addAttribute("money", m);
 		model.addAttribute("code", "0");
-		return "/room/player/punch";
+		return "/room/person/punch";
 
 	}
 

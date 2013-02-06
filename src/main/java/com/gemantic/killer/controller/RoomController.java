@@ -90,7 +90,7 @@ public class RoomController {
 			model.addAttribute("punch", true);
 		}
 
-		String uname = cookieUtil.getName(request, response);
+		String uname = user.getName();
 
 		/*
 		 * List<Long>
