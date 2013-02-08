@@ -39,8 +39,8 @@ $(document).ready(function () {
 
         $("#navLogout").click(function () {
             QC.Login.signOut();
-            window.location.href="/player/offline.do";
-            return false;
+           
+            return true;
 
         });
 
