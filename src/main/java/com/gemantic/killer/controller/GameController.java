@@ -17,6 +17,7 @@ import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.RoomService;
+import com.gemantic.killer.util.PunchUtil;
 import com.gemantic.labs.killer.service.UsersService;
 
 /**
@@ -60,6 +61,14 @@ public class GameController {
 			User user = this.userService.getObjectById(uid);
 			if(user!=null){
 				model.addAttribute("user", user);
+				boolean isPunch = PunchUtil.isPunched(user);
+				if(isPunch){
+					int punchCount = PunchUtil.getContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, user.getPunch());			
+					model.addAttribute("punchCount", punchCount);
+				}else{
+				
+				}
+
 			}
 			
 			

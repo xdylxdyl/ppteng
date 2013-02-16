@@ -24,17 +24,7 @@
 			<header></header>
 			<nav></nav>
 			<div id="index">
-				<div class="punch_area">
-					<c:choose>
-						<c:when test="${punch}">
-							<span class="button orange glossy" id="punch">打卡</span>
-						</c:when>
-						<c:otherwise>
-							<span class="button" id="punch" punch="true">已打卡</span>
-						</c:otherwise>
-					</c:choose>
-					<span id="punch_hint" class="punch_hint"></span>
-				</div>
+				
 				<div id="create">
 					<p>
 
@@ -42,23 +32,20 @@
 						葡萄币 <span id="money">${user.money}</span>, 总注册用户:[<span
 							style="color: #4B0082">${count}</span>]人
 					</p>
-					<p>
-						您是要进入一个房间呢呢还是创建一个房间呢还是什么都不想干呢 ,或者直接 ~~~ <a
-							href="/player/offline.do">走你~~~ </a>
-					</p>
-					                                        </p>
-<p>本站还在测试期,期间如果出现各种Bug,给您带来不便,无花表示代替站长XD对你们万般的歉意.有什么不喜欢的不爽的都可以直接拿砖头砸它扔它.如果对本站有任何的建议,欢迎稳步论坛(由于技术原因.论坛的帐号需要独立注册......BS我吧),或者是直接QQ我.</p>
 					<p class="right">
-						<a href="" class="button blue serif glossy skew" data-icon="♛">创建房间</a>
+						<a href="" class="btn btn-primary" id="createRoom">创建房间</a>
 					</p>
+					<h4>游戏房间列表</h4>
 				</div>
+				
 
-				<c:forEach items="${rooms}" var="room">
+				<c:forEach items="${rooms}" var="room"  begin="0" step="1" varStatus="status">
+				
 					<article class="sample">
 						<img src="${users[room.createrID].icon}" class="portrait"
 							id="portrait_img">
 						<h2>
-							<a href="" rid="${room.id}" uid="${uid}">${room.name}</a>
+							第 ${status.index+1}间房 - <a href="" rid="${room.id}" uid="${uid}">${room.name}</a>
 						</h2>
 						
 					
@@ -73,8 +60,8 @@
 						
 
 						<p class="sign"> 
-                 ${users[room.createrID].sign}
-			</p>
+                                                                    签名:   ${users[room.createrID].sign}
+			           </p>
 			
 			<c:set var="version" value="${room.version}"></c:set>
 

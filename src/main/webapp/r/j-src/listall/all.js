@@ -40,7 +40,7 @@ $(document).ready(function() {
         $(this).removeClass("samplehover");
     })
 
-    $("#create .button").bind('click', function() {
+    $("#createRoom").bind('click', function() {
         var uid = $("#uid").val();
 
         var oldRoom = playerService.getRoomOfPerson(uid);

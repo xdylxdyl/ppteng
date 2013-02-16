@@ -35,3 +35,22 @@ var login = function (type, openID, name) {
 }
 
 
+$(document).ready(function() {
+
+$("#punch").bind('click', function() {
+
+        var uid = $("#uid").val();
+
+        $.ajax({
+            url : "/player/punch.do",
+            data : {},
+            type: "post",
+            dataType:"json",
+            success : function(data) {
+                window.location.href = "/";
+            }
+        })
+        /**/
+        return false;
+    })
+})

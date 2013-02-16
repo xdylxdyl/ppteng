@@ -88,6 +88,17 @@
 			        <p>上次登录时间 :<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
 					value="${user.loginAt}"></date:date></p>
 			     </div>
+			     <div class="punch_area">
+					<c:choose>
+						<c:when test="${empty punchCount}">
+							<span class="btn btn-primary" id="punch">打卡</span>
+						</c:when>
+						<c:otherwise>
+							已连续打卡${punchCount}天
+						</c:otherwise>
+					</c:choose>
+					<span id="punch_hint" class="punch_hint"></span>
+				</div>
 			     
 			     <input type="hidden" id="uid" value="${user.id}" />
 			    
