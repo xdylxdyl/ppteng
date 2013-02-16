@@ -42,10 +42,10 @@
 				<c:forEach items="${rooms}" var="room"  begin="0" step="1" varStatus="status">
 				
 					<article class="sample">
-						<img src="${users[room.createrID].icon}" class="portrait"
+						<img src="${users[room.createrID].icon}" class="portrait img-polaroid"
 							id="portrait_img">
 						<h2>
-							第 ${status.index+1}间房 - <a href="" rid="${room.id}" uid="${uid}">${room.name}</a>
+							第 ${status.index+1}间房 - <a href="" rid="${room.id}" uid="${uid}">[${room.name}]</a>
 						</h2>
 						
 					
