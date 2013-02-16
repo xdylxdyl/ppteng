@@ -80,7 +80,7 @@ public class User implements Serializable {
 	/**
 	 * 头像
 	 */
-	private String icon = "";
+	private String icon = "/r/img/person/default-person-icon.jpg";
 	/**
 	 * 自定义表情
 	 */
@@ -93,7 +93,7 @@ public class User implements Serializable {
 	 * 
 	 * @return
 	 */
-	private String sign = "";
+	private String sign = "么有签名么有签名真心么有签名";
 
 	/**
 	 * musice

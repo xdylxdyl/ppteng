@@ -7,13 +7,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.killer.model.Room;
+import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.RoomService;
+import com.gemantic.labs.killer.service.UsersService;
 
 /**
  * 提供游戏房间的创建,删除,玩家列表等功能 
@@ -25,6 +29,12 @@ public class GameController {
     private static final Log log = LogFactory.getLog(GameController.class);
 	private RoomService roomService;
 
+	
+	@Autowired
+	private CookieUtil cookieUtil;
+	
+	@Autowired
+	private UsersService userService;
 	
     /**
      * 游戏准备
@@ -41,6 +51,19 @@ public class GameController {
     	if(code==null){
     		code=0;
     	}
+    	
+
+		Long uid = cookieUtil.getID(request, response);
+		if (uid == null) {
+		
+		}else{
+			User user = this.userService.getObjectById(uid);
+			if(user!=null){
+				model.addAttribute("user", user);
+			}
+			
+			
+		}
     	log.info("======================");
     	model.addAttribute("code", code);
         return "/room/index/index";

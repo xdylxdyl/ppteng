@@ -1,13 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json"%>
+<%@ include file="../../includes/includes.jsp"%>
 
 <!DOCTYPE HTML>
 <html>
@@ -30,7 +23,7 @@
      headView.highLight("index");
 </script>
 	
-	<script type="text/javascript" src="/r/j-src/commons/third.js"></script>
+	
 	
 </head>
 
@@ -42,7 +35,9 @@
 	<div class="banner">
 		<div class="container">
 			<div class="row">
-				<div class="span4">
+			  <c:choose>
+			    <c:when test="${empty user}">
+			    <div class="span4">
 					<form action="/player/login.do" method="post" class="login-box">
 						<h2>Login</h2>
 
@@ -84,6 +79,23 @@
 						</div>
 					</form>
 				</div>
+			    </c:when>
+			    <c:otherwise>
+			    <div class="span4">
+			    <div class="personal">
+			        <p>欢迎你:<h4>${user.name}</h4><p>
+			         <img src="${user.icon}" class="portrait" id="portrait_img">
+			        <p>上次登录时间 :<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
+					value="${user.loginAt}"></date:date></p>
+			     </div>
+			     
+			     <input type="hidden" id="uid" value="${user.id}" />
+			    
+			   </div>
+			    </c:otherwise>
+			  </c:choose>
+			
+				
 				<div class="span8 banner-screen">
 					<div id="indexCarousel" class="carousel">
 						<div class="carousel-inner">
@@ -229,6 +241,7 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
 </body>
 </html>
 
