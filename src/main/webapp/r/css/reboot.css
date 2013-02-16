@@ -205,3 +205,22 @@ span.login-checkbox > input[type="checkbox"] + label {
 }
 
 
+#mask {
+    background-color: #ffffff;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    display: none;
+    top: 0;
+    z-index: 3;
+    filter: alpha(opacity = 80); /* IE6 */
+    -moz-opacity: 0.8; /* Mozilla */
+    -khtml-opacity: 0.8; /* Safari */
+}
+
+#mask p {
+    margin-top: 30px;
+    font: bold 24px/24px "微软雅黑";
+    text-align: center;
+    color: red;
+}
