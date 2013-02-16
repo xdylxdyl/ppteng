@@ -219,7 +219,7 @@ public class PlayerController {
 				cookieUtil.setIdentity(request, response, uname, uid);
 				user.setLoginAt(System.currentTimeMillis());
 				this.userService.update(user);
-				String url = "/m/list.do";
+				String url = "/";
 				log.info(url);
 				return "redirect:" + url;
 
