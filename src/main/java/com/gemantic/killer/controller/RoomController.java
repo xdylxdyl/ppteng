@@ -104,7 +104,7 @@ public class RoomController {
 		List<Long> userIDS = new ArrayList();
 		for (Room r : rooms) {
 			userIDS.add(r.getCreaterID());
-
+		
 			List<Long> counts = this.memberService.getMembers(r.getId());
 			room_count.put(r.getId(), counts.size());
 

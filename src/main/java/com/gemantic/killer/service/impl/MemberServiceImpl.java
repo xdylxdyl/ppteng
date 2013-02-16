@@ -49,6 +49,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<Long> getMembers(Long roomID) throws ServiceException, ServiceDaoException {
+		try{
 		Room r = this.roomService.getRoom(roomID);
 		Message m = new Message("-500", "get", "member");
 		m.setVersion(r.getVersion());
@@ -69,6 +70,11 @@ public class MemberServiceImpl implements MemberService {
 
 		}
 		return new ArrayList<Long>(ids);
+		}catch(Throwable t){
+			log.error(t+" get member error "+roomID);
+			t.printStackTrace();
+			return new ArrayList();
+		}
 	}
 
 	@Override
