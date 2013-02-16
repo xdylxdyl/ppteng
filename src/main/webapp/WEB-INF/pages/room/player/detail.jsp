@@ -48,15 +48,8 @@
 				<a href="" id="portrait_view">预览</a>
 			</div>
 
-			<c:choose>
-				<c:when test="${user.sign==''}">
-					<div id="sign" class="sign">我想我是一个杀手,我和你们不一样.我说我很孤独,因为你和他们一样.可是如果没有我,没有这样一个不一样的人,还有谁,能证明你和他们一样的</div>
-				</c:when>
-				<c:otherwise>
-					<div id="sign" class="sign">${user.sign}</div>
-				</c:otherwise>
-			</c:choose>
-
+			<div id="sign" class="sign">${user.sign}</div>
+			
 
 
 

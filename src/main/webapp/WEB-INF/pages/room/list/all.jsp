@@ -49,8 +49,7 @@
 					                                        </p>
 <p>本站还在测试期,期间如果出现各种Bug,给您带来不便,无花表示代替站长XD对你们万般的歉意.有什么不喜欢的不爽的都可以直接拿砖头砸它扔它.如果对本站有任何的建议,欢迎稳步论坛(由于技术原因.论坛的帐号需要独立注册......BS我吧),或者是直接QQ我.</p>
 					<p class="right">
-						<a href="" class="button blue serif glossy skew" data-icon="♛">Create
-							Room </a>
+						<a href="" class="button blue serif glossy skew" data-icon="♛">创建房间</a>
 					</p>
 				</div>
 
@@ -73,16 +72,8 @@
 						</p>
 						
 
-						<p class="sign">    
-			<c:choose>
-              <c:when test="${users[room.createrID].sign==''}">
-                  我想我是一个杀手,我和你们不一样.我说我很孤独,因为你和他们一样.可是如果没有我,没有这样一个不一样的人,还有谁,能证明你和他们一样的             
-              </c:when>
-              <c:otherwise>
+						<p class="sign"> 
                  ${users[room.createrID].sign}
-              </c:otherwise>
-            </c:choose>
-						
 			</p>
 			
 			<c:set var="version" value="${room.version}"></c:set>
