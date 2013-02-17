@@ -6,6 +6,9 @@
 <c:when test="${'mine_1.0'==version}">
 多人扫雷[测试版]
 </c:when>
+<c:when test="${'video_1.0'==version}">
+一起看视频[测试版]
+</c:when>
 <c:otherwise>
 </c:otherwise>
 </c:choose>
