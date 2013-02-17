@@ -111,6 +111,12 @@ public class RoomController {
 		}
 		List<User> users = this.userService.getObjectsByIds(userIDS);
 		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);
+		
+		
+		Room room=this.memberService.getRoomOfUser(uid);
+		if(room!=null){
+			model.addAttribute("my_room", room);
+		}
 
 		Integer count = userService.getTotalCount();
 		model.addAttribute("count", count);

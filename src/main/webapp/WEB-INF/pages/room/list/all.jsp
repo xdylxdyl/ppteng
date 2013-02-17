@@ -33,7 +33,9 @@
 							style="color: #4B0082">${count}</span>]人
 					</p>
 					<p class="right">
-						<a href="" class="btn btn-primary" id="createRoom">创建房间</a>
+					   <c:if test="${empty my_room}">
+					   	<a href="" class="btn btn-primary" id="createRoom">创建房间</a>
+					   </c:if>					
 					</p>
 					<h4>游戏房间列表</h4>
 				</div>
@@ -45,7 +47,8 @@
 						<img src="${users[room.createrID].icon}" class="portrait img-polaroid"
 							id="portrait_img">
 						<h2>
-							第 ${status.index+1}间房 - <a href="" rid="${room.id}" uid="${uid}">[${room.name}]</a>
+						   
+							第 ${status.index+1}间房 - <a href="" rid="${room.id}" uid="${uid}">[${room.name}]</a> <c:if test="${my_room.id==room.id}">-你在这里</c:if>
 						</h2>
 						
 					
