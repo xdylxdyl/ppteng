@@ -100,6 +100,10 @@
 						<value>mine/multiplayer/mine_game.rf</value>
 					</list>
 				</entry>
+				<entry key="video_1.0">
+					<list>						
+					</list>
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>

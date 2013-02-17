@@ -189,9 +189,13 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 	private boolean IsRoomMessage(Message message, Room r) {
 
-		if (Room.status_start == r.getStatus() || "start".equals(message.getPredict())) {
+		if("video_1.0".equals(r.getVersion())){
+			return true;
+		}
+		
+		if( (Room.status_start == r.getStatus() || "start".equals(message.getPredict()))){
 			return false;
-		} else {
+		}else {
 			return true;
 
 		}

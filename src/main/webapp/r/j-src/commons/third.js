@@ -22,7 +22,7 @@ if (loginView.isLogin()) {
     QC.Login({btnId:"qqLoginBtn"}, function (oInfo, oOpts) {
         console.log("qq login");
         QC.Login.getMe(function (openId, accessToken) {
-            login("qq", openId, oInfo.nickname);
+            login(1, openId, oInfo.nickname);
         })
 
     });

@@ -25,6 +25,7 @@ var settingView = {
         $("#expContainer").hide();
     },
 
+
     showSetting:function(info) {
         $("nav article").html(info);
         //管理员才能看到设置按钮

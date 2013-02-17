@@ -21,6 +21,8 @@
 				</entry>
 				<entry key="mine_1.0" value-ref="mine_1.0_setting">				
 				</entry>
+				<entry key="video_1.0" value-ref="video_1.0_setting">				
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
@@ -40,7 +42,17 @@
 			</map>
 		</constructor-arg>
 	</bean>
-    
+	
+	
+	
+      <bean id="video_1.0_setting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="视频地址" value="">				
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
     
     <bean id="mine_1.0_setting" class="java.util.HashMap">
 		<constructor-arg>

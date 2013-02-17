@@ -34,6 +34,8 @@
 					<css:if test="${room.version=='color_game_1.0'}">selected="selected"</css:if>>猜颜色</option>--%>
 				<option value="mine_1.0"
 					<c:if test="${room.version=='mine_1.0'}">selected="selected"</c:if>>多人扫雷[测试版]</option> 
+					<option value="video_1.0"
+					<c:if test="${room.version=='video_1.0'}">selected="selected"</c:if>>一起看视频[测试版]</option> 
 			</select>
 		</spring:bind>
 		<br />

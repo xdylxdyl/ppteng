@@ -91,8 +91,13 @@ resolvePredict.setting = function(message) {
 
     if (message.subject != globalView.getCurrentID()) {
 
-        var s = settingService.getSetting(settingView.getSettingGetParameter());
+              var version=globalView.getVersion();
+              var rid=globalView.getRoomID();
+              var param= {"version":version,"rid":rid};
+
+        var s = settingService.getSetting(param);
         settingView.showSetting(s);
+        versionFunction["settingCallback"]();
 
     }
 
@@ -366,6 +371,9 @@ var initRoom = function() {
 
          //判断是否有音乐盒
         musicUtil.displayMusic();
+
+        versionFunction["init"];
+
 
     } else {
 
