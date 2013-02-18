@@ -23,7 +23,7 @@ var headView = {
                 $("#nav li").eq(3).addClass("active");
                 break;
             case 'about':
-                $("#nav li").eq(6).addClass("active");
+                $("#nav li").eq(7).addClass("active");
                 break;
             default:
                 ;

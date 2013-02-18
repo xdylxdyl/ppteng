@@ -46,7 +46,7 @@
 							target="_blank">论坛</a></li>
 						<li><a href="http://xdylxdyl.diandian.com/" target="_blank">官博</a></li>
 						<li><a href="/player/offline.do" id="navLogout">退出</a></li>
-						<li><a href="#">关于</a></li>
+						<li><a href="/about.do?type=about">关于</a></li>
 					</ul>
 
 				</div>

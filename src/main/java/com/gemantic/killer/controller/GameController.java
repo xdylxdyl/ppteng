@@ -116,6 +116,24 @@ public class GameController {
 
             return "/game/room/show";
         }
+        
+        
+
+    	/**
+         * 游戏开始
+         * @param request
+         * @param response
+         * @param model
+         * @return
+         * @throws Exception 
+         */
+        @RequestMapping(value = "/about")
+        public String about(HttpServletRequest request, HttpServletResponse response, ModelMap model,
+                String type) throws Exception {        	
+
+            return "/room/about/"+type;
+        }
+    
     
     
 }
