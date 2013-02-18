@@ -52,6 +52,7 @@ var settingView = {
             var s = versionFunction["getSettingParameter"]();
             var settingHtml = settingService.saveSetting(s);
             alert("你和洛洛一样聪明~都会更改设置了~~");
+            versionFunction["settingCallback"]();
             settingView.showSetting(settingHtml);
         });
 
