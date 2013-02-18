@@ -36,7 +36,7 @@
 
 			<div id="name" class="name">${user.name}</div>
 			<span id="score" class="score"><b>${user.score}</b>分</span> <span
-				id="money" class="money"><b>${user.money}</b>葡萄币</span>
+				id="money" class="money"><b>${user.money}</b>金币</span>
 
 
 			<div id="portrait_edit_container" class="portrait_edit_container">
