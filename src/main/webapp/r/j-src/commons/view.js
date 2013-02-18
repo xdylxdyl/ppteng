@@ -482,6 +482,7 @@ var controlView = {
     initButtonOfGame:function() {
         $("#replay").hide();
         $("#replay_time_hint").hide();
+        $("#replay_role").hide();
     },
     initButtonOfRecord:function() {
         $("#ready").hide();
@@ -489,6 +490,7 @@ var controlView = {
         $("#speed_hint").hide();
         $("#replay").show();
         $("#replay_time_hint").show();
+        $("#replay_role").show();
     },
     showRecordAllTime:function(time, all) {
         var timeStr = timeUtil.convertTime2Length(time);
@@ -518,6 +520,11 @@ var controlView = {
     },
     sayHint:function() {
         alert("内容不能为空！请输入内容重新发送");
+    },
+    isShow:function(){
+
+     return $("#replay_role_checkbox").attr("checked");
+
     }
 
 

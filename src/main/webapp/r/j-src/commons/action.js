@@ -244,6 +244,25 @@ $(document).ready(function () {
 
     });
 
+
+    $("#replay_role_checkbox").bind("click", function () {
+
+        if (controlView.isShow())
+        {
+            $("#role_area").hide();
+            $("#dead_area").hide();
+            $("#killeer_area").hide();
+        }
+        else
+        {
+            $("#role_area").show();
+            $("#dead_area").show();
+            $("#killeer_area").show();
+        }
+
+
+    });
+
     $("#music_controller").bind("click", function () {
 
         var isHide = $("#music_controller").attr("isHide");
@@ -251,6 +270,7 @@ $(document).ready(function () {
         return false;
 
     });
+
 
     function showMessage(index, messages, delay) {
 

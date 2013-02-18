@@ -5,7 +5,7 @@
 
 <style type="text/css">
 form {padding-left:10px;}
-input{ width: 80px; margin: 10px 0 0 10px; border: 1px solid #d9d5be;}
+#setting input{ width: 80px; margin: 10px 0 0 10px; border: 1px solid #d9d5be;}
 input:focus {
     -moz-box-shadow: inset 0 0 1px 1px #ddd;
     -webkit-box-shadow: inset 0 0 1px 1px #ddd;

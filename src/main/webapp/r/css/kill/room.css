@@ -338,6 +338,17 @@ iframe {
     display: none;
 }
 
+#replay_role{
+    margin: 0px;
+    display:inline;
+    padding: 0px;
+
+}
+
+#replay_role input{
+      margin: 1em;
+    padding: 0px;
+}
 
 
 

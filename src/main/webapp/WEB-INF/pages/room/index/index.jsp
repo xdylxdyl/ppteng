@@ -250,6 +250,12 @@
 						<a href="http://womenaikan.com/" target="_blank">我们爱看</a>
 					<p>
 				</div>
+				<div class="span3">
+					<p>
+						<a href="http://www.j-show.com/" target="_blank">吉时吉会展</a>
+					<p>
+					
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="/r/j-src/commons/third.js?version=${frontVersion}"></script>

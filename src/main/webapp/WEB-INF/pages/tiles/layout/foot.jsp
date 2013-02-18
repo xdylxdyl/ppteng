@@ -23,8 +23,11 @@
 				<option value="object">-对象-</option>
 			</select> <input type="text" class="nobg" value="00:00" disabled="true"> <input
 				type="button" class="button" id="ready" value="准备游戏"> <input
-				type="button" class="button" id="start" value="开始游戏"> <input
-				type="button" class="button" id="replay" value="开始播放">
+				type="button" class="button" id="start" value="开始游戏">
+				<div id="replay_role"><input type="checkbox" id="replay_role_checkbox" checked><span>隐藏身份</span></div>
+				 <input	type="button" class="button" id="replay" value="开始播放">
+				
+				
 
 		</fieldset>
 		<fieldset id="send">

@@ -377,9 +377,16 @@ var initRoom = function() {
 
     } else {
 
+              //默认隐藏
+               $("#role_area").hide();
+                $("#dead_area").hide();
+                 $("#killeer_area").hide();
+
         //Record
         var recordID = globalView.getRecordId();
         var recordTime = globalView.getRecordTime();
+
+
         var param = {recordID:recordID}
         var data = roomService.getRecordDetail(param);
         if (data == null) {
