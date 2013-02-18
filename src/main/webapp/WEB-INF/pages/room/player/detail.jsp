@@ -95,7 +95,7 @@
 		</div>
 
 
-		<div id="honour" class="honour">
+		<!-- <div id="honour" class="honour">
 			<h1>荣耀</h1>
 			<ul>
 				<li>
@@ -122,7 +122,7 @@
 			</ul>
 
 		</div>
-		<!-- 成就 -->
+		成就
 		<div id="achievement" class="achievement">
 			<h1>成就</h1>
 			<ul>
@@ -180,7 +180,7 @@
 			</ul>
 
 		</div>
-
+ -->
 	</div>
 
 
