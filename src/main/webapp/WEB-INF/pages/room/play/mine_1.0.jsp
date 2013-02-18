@@ -4,7 +4,7 @@
 <html>
 <head>
 
-<title>${room.name}</title>
+<title>${room.name}-多人扫雷-葡萄藤</title>
 <meta charset="utf-8">
 
 

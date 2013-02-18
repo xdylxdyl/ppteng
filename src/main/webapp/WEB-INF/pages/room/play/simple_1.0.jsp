@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 <head>
-<title>${room.name}</title>
+<title>${room.name}-简化-杀人游戏-葡萄藤</title>
 <meta charset="utf-8">
 
 <link rel="stylesheet"
