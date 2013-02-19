@@ -43,7 +43,7 @@
 
 	<div class="container">
 
-		<c:if test="${list== null || fn:length(list) == 0}">
+		<c:if test="${rooms== null || fn:length(rooms) == 0}">
 			<div class="row offset4" style="margin-top: 1em; margin-bottom: 1em">
 				<h1>
 					现在么有房间
