@@ -11,10 +11,9 @@
 	="description"  content="葡萄藤是一个集杀人游戏,多人在线扫雷等多种休闲娱乐在一起的轻游戏网站,支持房主自定义神态,自定义背景音乐,和朋友或者是自己一起相处着这静静的时光">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="text/javascript" src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script>
-
-<script type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script>
-<script
+<script type="text/javascript"
+	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script> <script
+	type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script> <script
 	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script type="text/javascript">
     $(function() {
@@ -22,9 +21,6 @@
     })
      headView.highLight("index");
 </script>
-	
-	
-	
 </head>
 
 
@@ -35,78 +31,81 @@
 	<div class="banner">
 		<div class="container">
 			<div class="row">
-			  <c:choose>
-			    <c:when test="${empty user}">
-			    <div class="span4">
-					<form action="/player/login.do" method="post" class="login-box">
-						<h2>Login</h2>
+				<c:choose>
+					<c:when test="${empty user}">
+						<div class="span4">
+							<form action="/player/login.do" method="post" class="login-box">
+								<h2>Login</h2>
 
 
-						<p>使用您的注册邮箱登录:</p>
-						<label for="email">email</label> <input type="text" id="email"
-							name="email" placeholder="Please enter your e-mail here"
-							class="login email-input"> <label for="password">password</label>
-						<input type="password" id="password" name="password"
-							placeholder="Please enter your password here"
-							class="login password-input">
-						<c:if test="${code!=0}">
-							<p class="hint">
-								<spring:message code="${code}" />
-							</p>
-						</c:if>
-						<p>
-							<a href="/player/regedit.do?type=email">忘记密码</a>
-						</p>
-						<div class="login-action">
+								<p>使用您的注册邮箱登录:</p>
+								<label for="email">email</label> <input type="text" id="email"
+									name="email" placeholder="Please enter your e-mail here"
+									class="login email-input"> <label for="password">password</label>
+								<input type="password" id="password" name="password"
+									placeholder="Please enter your password here"
+									class="login password-input">
+								<c:if test="${code!=0}">
+									<p class="hint">
+										<spring:message code="${code}" />
+									</p>
+								</c:if>
+								<p>
+									<a href="/player/regedit.do?type=email">忘记密码</a>
+								</p>
+								<div class="login-action">
 
-							<span class="login-checkbox"> <input type="checkbox"
-								id="keep" name="keep" class="login-checkbox"> <label
-								for="keep" class="choice">两周内保持登录</label>
-							</span>
+									<span class="login-checkbox"> <input type="checkbox"
+										id="keep" name="keep" class="login-checkbox"> <label
+										for="keep" class="choice">两周内保持登录</label>
+									</span>
 
-							<button class="btn btn-primary btn-large pull-right">登录</button>
+									<button class="btn btn-primary btn-large pull-right">登录</button>
 
-						</div>
+								</div>
 
-						<div class="login-social">
-							<p>
-								使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
-							</p>
-							<span id="qqLoginBtn"></span>
-						
-							<!-- 	<a href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a> <a
+								<div class="login-social">
+									<p>
+										使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
+									</p>
+									<span id="qqLoginBtn"></span>
+
+									<!-- 	<a href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a> <a
 								href="#"><img src="/r/img/qq_login.png" alt="QQ登录"></a> -->
+								</div>
+							</form>
 						</div>
-					</form>
-				</div>
-			    </c:when>
-			    <c:otherwise>
-			    <div class="span4">
-			    <div class="personal">
-			        <p>欢迎你:<h4>${user.name}</h4><p>
-			         <img src="${user.icon}" class="portrait" id="portrait_img">
-			        <p>上次登录时间 :<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
-					value="${user.loginAt}"></date:date></p>
-			     </div>
-			     <div class="punch_area">
-					<c:choose>
-						<c:when test="${empty punchCount}">
-							<span class="btn btn-primary" id="punch">打卡</span>
-						</c:when>
-						<c:otherwise>
-							已连续打卡${punchCount}天
-						</c:otherwise>
-					</c:choose>
-					<span id="punch_hint" class="punch_hint"></span>
-				</div>
-			     
-			     <input type="hidden" id="uid" value="${user.id}" />
-			    
-			   </div>
-			    </c:otherwise>
-			  </c:choose>
-			
-				
+					</c:when>
+					<c:otherwise>
+						<div class="span3 box">
+							
+								<h4>
+									<small>欢迎你:</small> ${user.name}
+								</h4>
+								<img src="http://www.ptteng.com/${user.icon}" class="portrait"
+									id="portrait_img" style="max-width:16em;height:8em">
+								<blockquote>
+									<small>上次登录:<date:date
+											pattern="yyyy年 MM月dd日  HH时mm分 " value="${user.loginAt}"></date:date></small>
+									<c:choose>
+										<c:when test="${empty punchCount}">
+											<span class="btn btn-primary" id="punch">打卡</span>
+										</c:when>
+										<c:otherwise>
+											<small>已连续打卡${punchCount}天</small>
+										</c:otherwise>
+									</c:choose>
+								</blockquote>
+							
+							
+
+							<input type="hidden" id="uid" value="${user.id}" />
+
+						</div>
+					</c:otherwise>
+				</c:choose>
+
+
 				<div class="span8 banner-screen">
 					<div id="indexCarousel" class="carousel">
 						<div class="carousel-inner">
@@ -254,24 +253,29 @@
 					<p>
 						<a href="http://www.j-show.com/" target="_blank">吉时吉会展</a>
 					<p>
-					
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
-		
-		
-	<div id="mask">
-		<p>抱歉,为了保证您获得更好的交互体验,本站不再支持过时的浏览器,他们会导致样式错乱以及JS无法使用</p>
-		<p>如果想继续访问本站,请使用最新版本的浏览器,如<a href="http://www.firefox.com.cn/download/">FireFox</a>/
-		<a href="http://dl.pconline.com.cn/download/51614.html">Chrome</a>/
-		<a href="http://ie.sogou.com/">Sogou</a>(高速模式)/
-		<a href="http://chrome.360.cn/">360极速浏览器</a>
-		
-		</p>
-		<p>点击以上链接可以直接下载,更多帮助请点击<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=88" target="_blank">这里</p>
-		
-	</div>
+		<script type="text/javascript"
+			src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
+
+
+		<div id="mask">
+			<p>抱歉,为了保证您获得更好的交互体验,本站不再支持过时的浏览器,他们会导致样式错乱以及JS无法使用</p>
+			<p>
+				如果想继续访问本站,请使用最新版本的浏览器,如<a href="http://www.firefox.com.cn/download/">FireFox</a>/
+				<a href="http://dl.pconline.com.cn/download/51614.html">Chrome</a>/
+				<a href="http://ie.sogou.com/">Sogou</a>(高速模式)/ <a
+					href="http://chrome.360.cn/">360极速浏览器</a>
+
+			</p>
+			<p>
+				点击以上链接可以直接下载,更多帮助请点击<a
+					href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=88"
+					target="_blank">这里 
+			</p>
+
+		</div>
 </body>
 </html>
 

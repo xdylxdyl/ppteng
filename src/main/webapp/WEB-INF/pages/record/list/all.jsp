@@ -3,7 +3,7 @@
 
 
 
-<div class="container">
+<div class="container" >
 	<c:forEach items="${records}" var="record">
 	 <c:set var="version" value="${record.room.version}"></c:set>
     <div class="row"  style="margin-top:1em;margin-bottom:1em">
