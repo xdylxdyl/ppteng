@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     }
 
-    $(".sample h2 a").bind('click', function() {
+    $(".roomItem h3 a").bind('click', function() {
 
         var uid = $(this).attr("uid");
         var rid = $(this).attr("rid");
@@ -96,7 +96,7 @@ $(document).ready(function() {
 
 
     function loadIn(data) {
-        var width = $("#wrap").width();
+        var width = $("body").width();
         var layerWidth = $("#uplayer").width();
         $("#uplayer").css({
             display : 'block',

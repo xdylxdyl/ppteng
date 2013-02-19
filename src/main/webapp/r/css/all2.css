@@ -1,104 +1,11 @@
-/**
- * @ directions
- */
-
-
-#wrap {
-    width: 100%;
-    margin: 2em;
-    overflow: hidden;
-
-
-}
-
-#wrap, p {
-   
-    padding: 0
-
-}
-
-#content {
-    background: #fff;
-    box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
-    margin-left: 20%;
-    margin-right: 20%;
-    max-width: 50%;
-    padding: 0 5%;
-    width: 100%;
-    float: left;
-
-}
-#box{
+.box{
     background: #fff;
        box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
-       margin-left: 20%;
-       margin-right: 20%;
-       max-width: 50%;
-       padding: 0 5%;
-       width: 100%;
-}
-
-#create {
-    border-bottom: 2px solid #e9eefa;
-    padding: 10px 5px;
-}
-
-#create p.right {
-    text-align: right;
-    display: block;
-    margin: 20px;
-}
-
-.sample {
-    border-bottom: 1px solid #e9eefa;
-    padding: 10px 5px;
-    width: 100%;
-    float: left;
-}
-
-.samplehover {
-    background: #eee;
-}
-
-#index h2 {
-    font-size: 18px;
-    font-weight: normal;
-    margin: 0;
-    padding: 0;
-    text-shadow: 0 1px 1px #aaa;
-}
-
-#index h2 a {
-    color: #3D5C9D;
-    text-decoration: none;
-}
-
-#index h2 a:hover {
-    text-decoration: underline;
-}
-
-.data {
-    color: #bbb;
-    margin-right: 5px;
-    padding: 4px 0;
-    font-size: 90%;
-}
-
-.data a {
-    color: #669966
-}
-
-.describe {
-    color: #333;
+       padding: 2em;
+        margin: 2em;
 
 }
 
-.sign {
-    color: #669966;
-    margin-right: 5px;
-    padding: 4px 0;
-    font-size: 90%;
-}
 
 #uplayer {
     width: 30%;
@@ -182,19 +89,4 @@
     padding: 2em;
     color: #008000;
     width: 100%;
-}
-
-.punch_area {
-    text-align: right;
-}
-
-.punch_hint {
-    display: none;
-}
-
-.portrait {
-    max-height: 15em;
-    max-width: 15em;
-    float: left;
-    margin: 1em;
 }

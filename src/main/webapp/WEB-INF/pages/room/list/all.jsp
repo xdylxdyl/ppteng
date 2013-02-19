@@ -4,8 +4,7 @@
 <head>
 <meta charset=utf-8">
 <title>LogIn</title>
-<link href="/r/css/all.css?v=${frontVersion}" rel="stylesheet" />
-<link href="/r/css/button.css?v=${frontVersion}" rel="stylesheet" />
+<link href="/r/css/all2.css" rel="stylesheet" type="text/css" />
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
 <script src="/r/j-src/listall/all.js?v=${frontVersion}"></script>
 <script
@@ -19,67 +18,68 @@
 
 
 
-	<div id="wrap">
-		<div id="content">
-			<header></header>
-			<nav></nav>
-			<div id="index">
-				
-				<div id="create">
-					<p>
+<div class="span2 box" >
 
-						<a href="/player/detail.do?uid=${uid}" target="_blank">${uname}</a>
-						葡萄币 <span id="money">${user.money}</span>, 总注册用户:[<span
-							style="color: #4B0082">${count}</span>]人
-					</p>
-					<p class="right">
-					   <c:if test="${empty my_room}">
-					   	<a href="" class="btn btn-primary" id="createRoom">创建房间</a>
-					   </c:if>					
-					</p>
-					<h4>游戏房间列表</h4>
-				</div>
-				
+				<p>
+					总注册用户:[<span style="color: #4B0082">${count}</span>]人
+				<p>
+				<blockquote>
+					<a href="/player/detail.do?uid=${uid}" target="_blank">欢迎你,${uname}</a>
+					<small>金币 ${user.money}</small>
 
-				<c:forEach items="${rooms}" var="room"  begin="0" step="1" varStatus="status">
-				
-					<article class="sample">
-						<img src="${users[room.createrID].icon}" class="portrait img-polaroid"
-							id="portrait_img">
-						<h2>
-						   
-							第 ${status.index+1}间房 - <a href="" rid="${room.id}" uid="${uid}">[${room.name}]</a> <c:if test="${my_room.id==room.id}">-你在这里</c:if>
-						</h2>
-						
-					
-						
-						<p class="data">
-							纪元：
-							<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
-								value="${room.createAt}"></date:date>
-							房主：<a href="/player/detail.do?uid=${room.createrID}"
-								target="_blank">${users[room.createrID].name}</a>
-						</p>
-						
+				</blockquote>
 
-						<p class="sign"> 
-                                                                    签名:   ${users[room.createrID].sign}
-			           </p>
-			
-			<c:set var="version" value="${room.version}"></c:set>
 
-						<p class="describe">
-							版本[<span style="color: #4B0082"><%@ include
-									file="../version/show.jsp"%></span>],有玩家 [<span
-								style="color: #4B0082">${room_count[room.id]}</span>] 人
-						</p>
-						
-							
-					</article>
-				</c:forEach>
+
+				<c:if test="${empty my_room}">
+					<a href="" class="btn btn-primary" id="createRoom">创建房间</a>
+				</c:if>
+
+
 			</div>
-		</div>
-		<div id="uplayer"></div>
+
+
+
+	<div class="container">
+	
+		
+
+		<c:forEach items="${rooms}" var="room" begin="0" step="1"
+			varStatus="status">
+			<c:set var="version" value="${room.version}"></c:set>
+			<div class="row offset2" style="margin-top: 1em; margin-bottom: 1em">
+				<div class="span2">
+					<img src="http://www.ptteng.com/${users[room.createrID].icon}"
+						alt="${users[room.createrID].name}" class="img-polaroid"
+						style="max-width: 8em; height: 8em">
+				</div>
+				<div class="span6 roomItem">
+					<h3>
+						<small>房间名:</small> ${status.index+1}.<a href="" rid="${room.id}" uid="${uid}">${room.name}</a>
+						
+						</h2>
+						<blockquote>
+						     
+							<small>
+								纪元：
+								<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
+									value="${room.createAt}"></date:date>
+								房主：<a href="/player/detail.do?uid=${room.createrID}"
+									target="_blank">${users[room.createrID].name}</a>
+							</small>
+							
+							<small> 版本[<span style="color: #4B0082"><%@ include
+										file="../version/show.jsp"%></span>],有玩家 [<span
+								style="color: #4B0082">${room_count[room.id]}</span>] 人 <c:if test="${my_room.id==room.id}">,你在这里</c:if>
+							</small>
+						</blockquote>
+						<p class="text-success">签名: ${users[room.createrID].sign}</p>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+
+	<div id="uplayer"></div>
 	</div>
 	<!-- <div id="foot" class="foot_nav">
 		<ul style="">
