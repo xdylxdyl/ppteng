@@ -36,10 +36,9 @@ var headView = {
 $(document).ready(function () {
 
 
-
         $("#navLogout").click(function () {
-            QC.Login.signOut();
-           
+
+
             return true;
 
         });

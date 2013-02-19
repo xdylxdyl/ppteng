@@ -32,6 +32,9 @@
 	data-redirecturi="http://www.ptteng.com/qc_callback.html"
 	charset="utf-8"></script>
 
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1999911523" type="text/javascript" charset="utf-8"></script>
+
+
 </head>
 
 <body>

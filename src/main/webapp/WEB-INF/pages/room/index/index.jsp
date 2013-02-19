@@ -68,8 +68,9 @@
 									<p>
 										使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
 									</p>
-									<span id="qqLoginBtn"></span>
-
+									<div style="display:inline"><span id="qqLoginBtn"></span></div> 
+									<div id="wb_connect_btn"></div>
+									
 									<!-- 	<a href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a> <a
 								href="#"><img src="/r/img/qq_login.png" alt="QQ登录"></a> -->
 								</div>
@@ -100,6 +101,7 @@
 							
 
 							<input type="hidden" id="uid" value="${user.id}" />
+							<input type="hidden" id="type" value="" />
 
 						</div>
 					</c:otherwise>
