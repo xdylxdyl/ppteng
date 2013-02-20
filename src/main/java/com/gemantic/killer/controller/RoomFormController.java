@@ -3,6 +3,7 @@ package com.gemantic.killer.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
+import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.kill.thread.RoomThread;
 import com.gemantic.killer.common.model.Message;
@@ -48,7 +50,8 @@ public class RoomFormController {
 	@Autowired	
 	private MessageService droolsGameMessageService;
 	
-	
+	@Autowired
+	private CookieUtil cookieUtil;
 	
 	
 
@@ -108,8 +111,14 @@ public class RoomFormController {
      */
     //TODO 切换到World
     @RequestMapping(method = RequestMethod.POST)
-    public String processSubmit(@ModelAttribute
+    public String processSubmit(HttpServletRequest request, HttpServletResponse response,@ModelAttribute
     Room room, BindingResult result, SessionStatus status, Model model) throws Exception {
+    	Long uid = cookieUtil.getID(request, response);
+		if (uid == null) {
+			// 登录不成功,重新登录
+			return "redirect:/";
+		}
+		
     	Long roomID=null;
     	String version=room.getVersion(); 
     	//房间要创建,World也要创建. 但是World的ID和房间的ID要分开.

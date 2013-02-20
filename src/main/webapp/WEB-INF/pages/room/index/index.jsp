@@ -94,11 +94,12 @@
 										</c:when>
 										<c:otherwise>
 											<small>已连续打卡${punchCount}天</small>
+											
 										</c:otherwise>
 									</c:choose>
 								</blockquote>
 							
-							
+							<p><a class="btn btn-primary" href="/m/list.do">进入游戏</a></p>
 
 							<input type="hidden" id="uid" value="${user.id}" />
 							<input type="hidden" id="type" value="" />
@@ -111,7 +112,14 @@
 				<div class="span8 banner-screen">
 					<div id="indexCarousel" class="carousel">
 						<div class="carousel-inner">
-							<div class="active item">
+						<div class="active item">
+								<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
+								<div class="carousel-caption">
+									<h4>368活动</h4>
+									<p>每周三,周六晚上八点半,约在一起玩简化</p>
+								</div>
+							</div>
+							<div class="item">
 								<img src="/r/img/img_banner_1.jpg" alt="杀人游戏">
 								<div class="carousel-caption">
 									<h4>武功再高也怕菜刀</h4>
@@ -125,13 +133,7 @@
 									<p>游戏通常分为两大阵营，水民和杀手；水民以投票为手段投死杀手获取最后胜利，杀手方隐匿于水民中间，靠夜晚杀人和白天伪装成水民,坚持活到最后为胜利</p>
 								</div>
 							</div>
-							<div class="item">
-								<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
-								<div class="carousel-caption">
-									<h4>双拳难敌四手</h4>
-									<p>交识朋友，可以和各种职业、各种类型的人结交朋友，通过游戏了解对方的性格特点并借助游戏中的交流加深彼此间的了解。</p>
-								</div>
-							</div>
+							
 						</div>
 						<a class="carousel-control left" href="#indexCarousel"
 							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
@@ -153,7 +155,7 @@
 							<div class="chapter">
 								<div class="chapter-body">
 									<h4>
-										<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5">静静的</a>
+										静静的
 									</h4>
 									<p>你可以和朋友一起玩[杀人游戏],[多人扫雷],或者你什么都不做,就只是静静待着,和我一样.</p>
 								</div>
@@ -165,11 +167,12 @@
 									alt="杀人游戏简化版" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
-										<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=7">杀人游戏[简化版]</a>
+										杀人游戏[简化版]
 									</h4>
 									<p>
-										杀人游戏,尤其是简化版,用高雅和艺术形容,一点都不过份.游戏中经常可以看到妙趣横生的对话,风格迥异的人物,和各种知性漂亮的姑娘...
+										高雅的简化,妙趣横生的对话,风格迥异的人物,知性漂亮的姑娘
 									</p>
+								
 								</div>
 							</div>
 						</div>
@@ -180,9 +183,9 @@
 									alt="多人扫雷" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
-										<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=6">扫雷[多人版]</a>
+										扫雷[多人版]
 									</h4>
-									<p>可以和你的朋友一起 玩这个简单有趣的小游戏了~体验一下三五个人去扫一个[100*100]超大雷区的冒险历程?</p>
+									<p>玩过单机扫雷,有没有和朋友玩过一起联机扫雷?</p>
 								</div>
 							</div>
 							<div class="chapter">
@@ -191,9 +194,9 @@
 									alt="设计游戏" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>
-										<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5">这些游戏都不喜欢?</a>
+										这些游戏都不喜欢?
 									</h4>
-									<p>想过设计一个自己喜欢的游戏呢?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以!来联系我吧~</p>
+									<p>设计一个自己喜欢的游戏吧?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以~</p>
 								</div>
 							</div>
 						</div>

@@ -3,6 +3,7 @@ package com.gemantic.killer.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,10 +21,12 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
+import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.common.model.Setting;
 import com.gemantic.killer.model.Room;
+import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.service.SettingService;
@@ -44,6 +47,9 @@ public class RoomSettingFormController {
 
 	@Autowired
 	private PushClient pushClient;
+	
+	@Autowired
+	private CookieUtil cookieUtil;
 
 	private static final Log log = LogFactory.getLog(RoomSettingFormController.class);
 
@@ -106,8 +112,16 @@ public class RoomSettingFormController {
 	 */
 	// TODO 切换到World
 	@RequestMapping(method = RequestMethod.POST)
-	public String processSubmit(@ModelAttribute Setting setting, BindingResult result, SessionStatus status, Model model)
+	public String processSubmit(HttpServletRequest request, HttpServletResponse response,@ModelAttribute Setting setting, BindingResult result, SessionStatus status, Model model)
 			throws Exception {
+		
+		Long uid = cookieUtil.getID(request, response);
+		if (uid == null) {
+			// 登录不成功,重新登录
+			return "redirect:/";
+		}
+		
+		
 		Long roomID = setting.getRid();
 		Room room = this.roomService.getRoom(roomID);
 		if (room == null) {

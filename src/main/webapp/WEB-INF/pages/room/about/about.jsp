@@ -31,7 +31,7 @@
 
                     </p>
 
-                    <p><a class="btn" href="/record/enter.do?recordID=7533652308250795008" target="_blank">示例&raquo;</a></p>
+                    <p><a class="btn" href="/record/enter.do?recordID=7533652308250795008" target="_blank">&raquo;</a></p>
 
                 </div>
                 <!--/span-->
