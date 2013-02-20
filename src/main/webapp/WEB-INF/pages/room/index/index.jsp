@@ -35,7 +35,7 @@
 					<c:when test="${empty user}">
 						<div class="span4">
 							<form action="/player/login.do" method="post" class="login-box">
-								<h2>Login</h2>
+								<h2>Login 总用户${count}人</h2>
 
 
 								<p>使用您的注册邮箱登录:</p>
@@ -81,7 +81,7 @@
 						<div class="span3 box">
 							
 								<h4>
-									<small>欢迎你:</small> ${user.name}
+									<small>总用户${count}人 欢迎你:</small> ${user.name}
 								</h4>
 								<img src="http://www.ptteng.com/${user.icon}" class="portrait"
 									id="portrait_img" style="max-width:16em;height:8em">
@@ -149,7 +149,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="span8">
-					<h3>葡萄藤轻游戏,总用户[${count}]人</h3>
+					<h3>葡萄藤轻游戏</h3>
 					<div class="row-fluid">
 						<div class="span6">
 							<div class="chapter">
