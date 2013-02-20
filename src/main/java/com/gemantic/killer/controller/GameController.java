@@ -73,8 +73,11 @@ public class GameController {
 			
 			
 		}
+		Integer count=this.userService.getTotalCount();
     	log.info("======================");
     	model.addAttribute("code", code);
+    	model.addAttribute("count", count);
+        
         return "/room/index/index";
     }
 

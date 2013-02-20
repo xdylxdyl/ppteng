@@ -149,7 +149,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="span8">
-					<h3>葡萄藤轻游戏</h3>
+					<h3>葡萄藤轻游戏,总用户[${count}]人</h3>
 					<div class="row-fluid">
 						<div class="span6">
 							<div class="chapter">
