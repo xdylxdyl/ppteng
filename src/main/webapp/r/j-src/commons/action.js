@@ -125,7 +125,7 @@ $(document).ready(function () {
             var command = $("#command").val();
             var content = hint[command];
             if (content == null) {
-                content = versionFunction["commandHint"]();
+                content = versionFunction["commandHint"](command);
             }
 
             controlView.hintSay(content);

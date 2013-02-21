@@ -369,8 +369,8 @@ var initRoom = function() {
         //initControllview
         controlView.initButtonOfGame();
 
-         //判断是否有音乐盒
-        musicUtil.displayMusic();
+         //判断是否有音乐盒,默认不显示
+      //  musicUtil.displayMusic();
 
         versionFunction["init"];
 

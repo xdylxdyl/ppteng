@@ -42,10 +42,12 @@
             if (music == "") {
 
             } else {
-                var html = "<embed src='" + music + "' type='application/x-shockwave-flash' class='music_player' wmode='opaque'></embed>";
+                var html="";
+                 html = html+"<embed src='" + music + "' type='application/x-shockwave-flash' class='music_player' wmode='opaque'></embed>";
                 $("#music_play").empty().html(html);
 
             }
+            $("#music_play").show();
             $("#music_play").Drag();
         },
         hideMusic:function (isHide) {
@@ -57,7 +59,8 @@
 
                 $("#music_controller").attr("isHide", false);
                 $("#music_controller").text("隐藏音乐盒");
-                $("#music_play").show();
+                musicUtil.displayMusic();
+
             }
 
         },

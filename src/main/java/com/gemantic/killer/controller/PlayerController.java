@@ -590,14 +590,22 @@ public class PlayerController {
 
 		String path = request.getRealPath(request.getContextPath());
 		String fullName = "/data/user_info/" + uid;
-		log.info(fullName);
+		boolean isUpdateIcon=false;
+		
 		try {
 			FileUtil.saveImage(user.getIcon(), fullName);
+			isUpdateIcon=true;
 		} catch (Exception e) {
 			log.error(fullName + " save failure " + user);
+			
+	}
+		log.info(fullName+" is update "+isUpdateIcon);
+		if(isUpdateIcon){
+			oldUser.setIcon("/r/user_info/" + uid);
 		}
-		oldUser.setIcon("/r/user_info/" + uid);
+	
 		oldUser.setName(user.getName());
+	
 		oldUser.setSign(user.getSign());
 		oldUser.setMusic(user.getMusic());
 		this.userService.update(oldUser);
