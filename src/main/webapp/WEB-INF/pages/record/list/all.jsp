@@ -11,7 +11,7 @@
             <img src="http://www.ptteng.com/${users[record.room.createrID].icon}" alt="${users[record.room.createrID].name}" class="img-polaroid" style="max-width:8em;height:8em" >
         </div>
         <div class="span10">
-            <h3 class="text-error">${record.room.name}</h2>
+            <h3 class="text-error"><a href="/record/enter.do?recordID=${record.id}">${record.room.name}</a></h2>
             <blockquote>
                 <p>纪元：
 						<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
