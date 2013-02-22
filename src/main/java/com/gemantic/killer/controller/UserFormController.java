@@ -182,6 +182,7 @@ public class UserFormController {
 			} else {
 				update = true;
 				u.setPassword(user.getPassword());
+				u.setName(user.getName());
 			}
 
 		}
