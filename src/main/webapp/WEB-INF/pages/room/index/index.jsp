@@ -11,8 +11,7 @@
 	="description"  content="葡萄藤是一个集杀人游戏,多人在线扫雷等多种休闲娱乐在一起的轻游戏网站,支持房主自定义神态,自定义背景音乐,和朋友或者是自己一起相处着这静静的时光">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="text/javascript"
-	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script> <script
+ <script
 	type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script> <script
 	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script type="text/javascript">
@@ -261,22 +260,6 @@
 			src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
 
 
-		<div id="mask">
-			<p>抱歉,为了保证您获得更好的交互体验,本站不再支持过时的浏览器,他们会导致样式错乱以及JS无法使用</p>
-			<p>
-				如果想继续访问本站,请使用最新版本的浏览器,如<a href="http://www.firefox.com.cn/download/">FireFox</a>/
-				<a href="http://dl.pconline.com.cn/download/51614.html">Chrome</a>/
-				<a href="http://ie.sogou.com/">Sogou</a>(高速模式)/ <a
-					href="http://chrome.360.cn/">360极速浏览器</a>
-
-			</p>
-			<p>
-				点击以上链接可以直接下载,更多帮助请点击<a
-					href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=88"
-					target="_blank">这里 
-			</p>
-
-		</div>
 </body>
 </html>
 
