@@ -54,10 +54,10 @@
 								</p>
 								<div class="login-action">
 
-									<span class="login-checkbox"> <input type="checkbox"
+									<!-- <span class="login-checkbox"> <input type="checkbox"
 										id="keep" name="keep" class="login-checkbox"> <label
 										for="keep" class="choice">两周内保持登录</label>
-									</span>
+									</span> -->
 
 									<button class="btn btn-primary btn-large pull-right">登录</button>
 
