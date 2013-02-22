@@ -75,7 +75,7 @@
 			<p>
 				点击以上链接可以直接下载,更多帮助请点击<a
 					href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=88"
-					target="_blank">这里 
+					target="_blank">这里 </a>
 			</p>
 
 		</div>
