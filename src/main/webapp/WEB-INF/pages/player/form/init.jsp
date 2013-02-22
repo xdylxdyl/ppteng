@@ -43,7 +43,7 @@
 								readonly />
 						</spring:bind>
 
-						<h1>修改用户名/密码</h1>
+						<h1>修改昵称/密码</h1>
 						<div class="signin-action">
 							<label for="name">name</label>
 							<spring:bind path="user.name">
