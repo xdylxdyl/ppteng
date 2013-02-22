@@ -251,13 +251,13 @@ $(document).ready(function () {
         {
             $("#role_area").hide();
             $("#dead_area").hide();
-            $("#killeer_area").hide();
+            $("#killer_area").hide();
         }
         else
         {
             $("#role_area").show();
             $("#dead_area").show();
-            $("#killeer_area").show();
+            $("#killer_area").show();
         }
 
 
