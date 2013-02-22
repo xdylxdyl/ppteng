@@ -395,7 +395,7 @@ var initRoom = function() {
 
         }
         if (data.person.length) {
-            roomService.parsePerson(data.person);
+            roomService.parseRecord(data.person);
             roomService.parseRoom(data.room);
 
         } else {

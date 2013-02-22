@@ -192,7 +192,29 @@ var roomService = {
         playerListView.sortPlayer();
     },
 
+    parseRecord:function(data) {
 
+        var rid=globalView.getRecordId();
+           //每个person下的信息有：id，name，status
+
+           var uids = [];
+           for (var key in data) {
+               var id = data[key].id;
+               uids.push(id);
+           }
+
+           //由nameID获取真正name
+           var name = this.getRecordPerson(rid, uids);
+           for (var j = 0; j < name.length; j++) {
+               console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
+               var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
+               playerService.addPlayer(p.id, p);
+               playerListView.login(p);
+
+           }
+
+           playerListView.sortPlayer();
+       },
 
 
 
@@ -253,6 +275,17 @@ var roomService = {
         return ajaxJson("/player/info.do", "GET", param, this.parsePersonDetail, 5000, "json");
 
     },
+    getRecordPerson:function(rid, uids) {
+          var param;
+          if (rid == null) {
+              param = {uids:uids};
+          } else {
+              param = {rid:rid,uids:uids};
+          }
+          return ajaxJson("/player/record.do", "GET", param, this.parsePersonDetail, 5000, "json");
+
+      },
+
     parsePersonDetail:function(data) {
         return  data.infos;
     }

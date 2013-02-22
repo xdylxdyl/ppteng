@@ -18,6 +18,8 @@ import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.FileUtil;
 import com.gemantic.killer.model.User;
+import com.gemantic.labs.killer.model.Records;
+import com.gemantic.labs.killer.service.RecordService;
 import com.gemantic.labs.killer.service.UsersService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -28,12 +30,15 @@ public class UsersServiceTest {
 
 	private UsersService usersService;
 
-	//@Before
+	private RecordService recordService;
+	
+	@Before
 	public void setUp() throws Exception {
 
 		// dao
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext*.xml");
 		usersService = (UsersService) context.getBean("usersServiceImpl");
+		recordService = (RecordService) context.getBean("recordServiceImpl");
 
 		// local server
 		/**
@@ -354,6 +359,37 @@ public class UsersServiceTest {
 		Map<Long, User> userID_USER = gson.fromJson(content, Map.class);
 		log.info(userID_USER);
 	
+		
+	}
+	
+	@Test
+	public void testRecord() throws ServiceException, ServiceDaoException{
+		List<Long> ids=this.recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
+		List<Records> records=this.recordService.getObjectsByIds(ids);
+		for(Records record:records){
+			record.setNames("");
+			
+			
+			List<Long> ls=record.getRoom().getPlayers();
+			List<User> users=this.usersService.getObjectsByIds(ls);
+			Map<Long,String> maps=new HashMap();
+			for(User u:users){
+				if(223==u.getId()){
+					u.setName("王二");
+				}
+				maps.put(u.getId(), u.getName());
+				
+			}
+			record.setUid_names(maps);
+			this.recordService.update(record);
+			
+			
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		
 		
 	}
 }

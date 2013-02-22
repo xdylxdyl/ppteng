@@ -1,8 +1,10 @@
 package com.gemantic.killer.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -162,7 +164,15 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 				record.setPath("record/" + operater.getRecordID());
 				record.setTime(time);
 				record.setRoom(r);
-				record.setVersion(r.getVersion());				
+				record.setVersion(r.getVersion());		
+				
+				List<Long> ls=r.getPlayers();
+			    List<User> users=this.userService.getObjectsByIds(ls);
+			    Map<Long,String> uid_names=new HashMap();
+				for(User user:users){
+					uid_names.put(user.getId(), user.getName());
+				}
+				record.setUid_names(uid_names);
 				this.recordService.insert(record);
 				log.info(" insert record " + record);
 			}

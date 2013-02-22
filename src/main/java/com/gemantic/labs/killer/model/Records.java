@@ -1,6 +1,7 @@
 package com.gemantic.labs.killer.model;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.util.RoomUtil;
+import com.gemantic.killer.util.UserUtil;
 
 @Entity
 @Table(name = "records")
@@ -38,6 +40,10 @@ public class Records implements Serializable {
 	private Long createAt;
 
 	private Room room;
+	
+	private String names;
+	
+	private Map<Long,String> uid_names;
 
 	@Id
 	@Column(name = "id")
@@ -74,6 +80,33 @@ public class Records implements Serializable {
 
 	public void setTime(Long time) {
 		this.time = time;
+	}
+	
+	
+	
+	
+	@Column(name = "names")
+	public String getNames() {
+		return names;
+	}
+
+	public void setNames(String names) {
+		this.names = names;
+		this.uid_names=UserUtil.json2userMap(this.names);
+	}
+	
+	@Transient
+	public Map<Long, String> getUid_names() {
+		if (this.uid_names == null) {			
+			this.uid_names = UserUtil.json2userMap(this.names);
+		}
+	
+		return uid_names;
+	}
+
+	public void setUid_names(Map<Long, String> uid_names) {
+		this.uid_names = uid_names;
+		this.names=UserUtil.userMap2Json(this.uid_names);
 	}
 
 	@Transient

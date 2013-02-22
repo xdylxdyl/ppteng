@@ -29,13 +29,16 @@ import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.common.model.Status;
 import com.gemantic.killer.exception.ServiceErrorCode;
+
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MemberService;
-import com.gemantic.killer.service.RoomService;
 
+import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.util.MailUtil;
 import com.gemantic.killer.util.PunchUtil;
+import com.gemantic.labs.killer.model.Records;
+import com.gemantic.labs.killer.service.RecordService;
 import com.gemantic.labs.killer.service.UsersService;
 
 /**
@@ -53,6 +56,9 @@ public class PlayerController {
 	private MemberService memberService;
 	@Autowired
 	private UsersService userService;
+	
+	@Autowired
+	private RecordService recordService;
 
 	@Autowired
 	private CookieUtil cookieUtil;
@@ -490,6 +496,30 @@ public class PlayerController {
 		return "/room/person/info";
 
 	}
+	
+	
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/record")
+	public String getRecordName(HttpServletRequest request, HttpServletResponse response, ModelMap model, @RequestParam Long[] uids, Long rid) throws Exception {
+
+		log.info(uids+" of record "+rid);
+		Records record=this.recordService.getObjectById(rid);
+	
+		model.addAttribute("names", record.getUid_names());
+
+		return "/room/person/record";
+
+	}
+	
 
 	/**
 	 * 获取玩家的状态信息
