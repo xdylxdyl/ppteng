@@ -162,6 +162,7 @@ public class UserFormController {
 			SessionStatus status, Model model) throws Exception {
 		log.info("new user regedit "+user);
 		Long uid = user.getId();
+		User u=null;
 		boolean update = false;
 		if (uid == null) {
 			Long id = this.userService.getUsersIdByEmail(user.getEmail());
@@ -175,16 +176,17 @@ public class UserFormController {
 			
 		} else {
 
-			User u = this.userService.getObjectById(uid);
+			 u = this.userService.getObjectById(uid);
 			if (u == null) {
 				update = false;
 			} else {
 				update = true;
+				u.setPassword(user.getPassword());
 			}
 
 		}
 		if (update) {
-			this.userService.update(user);
+			this.userService.update(u);
 		} else {
 			this.userService.insert(user);
 		}

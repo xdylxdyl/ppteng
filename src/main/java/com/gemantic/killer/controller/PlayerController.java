@@ -411,7 +411,7 @@ public class PlayerController {
 		log.info(mail + " forget password ");
 		Long uid = userService.getUsersIdByEmail(mail);
 		String token = DESUtil.encrypt((String.valueOf(uid) + "," + String.valueOf(System.currentTimeMillis())).getBytes());
-		String link = "http://42.121.113.70//player/regedit.do?type=forget&token=" + URLEncoder.encode(token, "utf8");
+		String link = "http://www.ptteng.com/player/regedit.do?type=forget&token=" + URLEncoder.encode(token, "utf8");
 		// 邮件内容，注意加参数true，表示启用html格式
 		String content = "此邮件为葡萄藤轻游戏系统自动发送,无须回复.点此链接找回密码,此链接在五分钟之内有效,如果不是您发起的,请直接忽视" + link;
 		MailUtil.send(sender, mail, content);

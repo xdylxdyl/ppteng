@@ -161,10 +161,8 @@
 								</div>
 							</div>
 							<div class="chapter">
-								<a
-									href="http://42.121.113.70:800/forum.php?mod=viewthread&tid=7"
-									class="pull-left"><img src="/r/img/icon_alpaca.png"
-									alt="杀人游戏简化版" width="64" height="64"></a>
+								<img src="/r/img/icon_alpaca.png"
+									alt="杀人游戏简化版" width="64" height="64">
 								<div class="chapter-body">
 									<h4>
 										杀人游戏[简化版]
@@ -178,9 +176,8 @@
 						</div>
 						<div class="span6">
 							<div class="chapter">
-								<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=6"
-									class="pull-left"><img src="/r//img/icon_alpaca.png"
-									alt="多人扫雷" width="64" height="64"></a>
+								<img src="/r//img/icon_alpaca.png"
+									alt="多人扫雷" width="64" height="64">
 								<div class="chapter-body">
 									<h4>
 										扫雷[多人版]
@@ -189,9 +186,8 @@
 								</div>
 							</div>
 							<div class="chapter">
-								<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5"
-									class="pull-left"><img src="/r//img/icon_alpaca.png"
-									alt="设计游戏" width="64" height="64"></a>
+								<img src="/r//img/icon_alpaca.png"
+									alt="设计游戏" width="64" height="64">
 								<div class="chapter-body">
 									<h4>
 										这些游戏都不喜欢?
