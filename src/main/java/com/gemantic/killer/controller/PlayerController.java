@@ -588,7 +588,6 @@ public class PlayerController {
 		}
 		User oldUser = this.userService.getObjectById(uid);
 
-		String path = request.getRealPath(request.getContextPath());
 		String fullName = "/data/user_info/" + uid;
 		boolean isUpdateIcon=false;
 		
