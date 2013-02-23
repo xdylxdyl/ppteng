@@ -28,7 +28,7 @@
     border-left: #808080 4px solid;
     border-right: #FFFFFF 4px solid;
     border-bottom: #FFFFFF 4px solid;
-    overflow: auto;
+    float: left;
     width: 144px;
 }
 
