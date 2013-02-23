@@ -80,7 +80,10 @@ then
 				  UserCount uc=new UserCount(uid,0);
 				  insert(uc);	  
 				  Message assignMessage=new Message(uid,"count","0");
-				  insert(assignMessage);	  
+				  insert(assignMessage);	
+				  
+	    p.setStatus("living");	  
+		 update(p);  
      
      }
      
@@ -187,7 +190,9 @@ rule 'click pane'
 ruleflow-group "user action"
 no-loop true
 when
-    $message:Message($subject:subject,$object:object,predict=="click")   
+    
+    $message:Message($subject:subject,$object:object,predict=="click")
+    $player:Player(id==$subject,status=="living")   
     $bombPic:BombPic($system:system,$user:user)    
     $room:Room()
     not Tag(pid==$object) 
@@ -224,6 +229,7 @@ no-loop true
 when
      $room:Room()
     $message:Message($subject:subject,$object:object,predict=="tag")
+    $player:Player(id==$subject,status=="living")  
     $bombPic:BombPic($system:system,$user:user)    
     not Tag(pid==$object)
     $count:Count($bomb:bomb,$right:right)
@@ -272,6 +278,7 @@ when
      $room:Room()
     $bombPic:BombPic($system:system,$user:user)    
     $message:Message($subject:subject,predict=="tag",$object:object)  
+    $player:Player(id==$subject,status=="living")  
     $count:Count($bomb:bomb,$right:right)
     $tag:Tag(pid==$object,value=="#")
      $userCount:UserCount($uc:count,uid==$subject)
@@ -321,6 +328,7 @@ ruleflow-group "user action"
 
 when
     $message:Message($subject:subject,predict=="double click",$object:object)
+    $player:Player(id==$subject,status=="living")  
     $bombPic:BombPic($system:system,$user:user) 
     $room:Room()
    
@@ -520,6 +528,8 @@ no-loop true
 when
  $game:Game($playerCount:playerCount);
  $message:Message($subject:subject,predict=="logout")
+ $person:Player(id==$subject,status=="living")
+ 
 
 then  
      LogUtil.log(" logout game live count start  ================="); 

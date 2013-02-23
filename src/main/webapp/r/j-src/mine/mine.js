@@ -1,13 +1,22 @@
 $(document).ready(function () {
     //左键
     $("#inner div").live("click", function () {
-        var mo = mineView.getMineOperater(this, mouseAction.click);
-        var rid = globalView.getRoomID();
-        var version = globalView.getVersion();
-        mineService.sendMineOperater(mo, rid, version);
+        var p = playerService.getPlayer(globalView.getCurrentID())
+        if ("living" == p.status||"ready"== p.status) {
+            var mo = mineView.getMineOperater(this, mouseAction.click);
+            var rid = globalView.getRoomID();
+            var version = globalView.getVersion();
+            mineService.sendMineOperater(mo, rid, version);
+
+        } else {
+            return;
+        }
 
 
     });
+
+
+    ;
 
 
     $("#restart").live("click", function () {
@@ -228,9 +237,9 @@ $(document).ready(function () {
 
 
             if ("win" == obj) {
-                $("section article").append("<p style='color:#F00'>【系统消息】 你居然赢了.~~赶紧的开始下一局,用时 [" + userTime + "]秒</p>");
+                $("section article").append("<p style='color:#F00'>【系统消息】 居然赢了.~~赶紧的开始下一局,用时 [" + userTime + "]秒</p>");
             } else {
-                $("section article").append("<p style='color:#F00'>【系统消息】 你果然输了,~~赶紧的开始下一局</p>");
+                $("section article").append("<p style='color:#F00'>【系统消息】 果然输了,~~赶紧的开始下一局</p>");
             }
 
 
@@ -271,15 +280,22 @@ $(document).ready(function () {
             }
             ;
 
-            //右键
+            //右键,似乎必须是要加在这个位置
             $("#inner div").rightClick(function (e) {
-                var mo = mineView.getMineOperater(this, mouseAction.rightClick);
-                var rid = globalView.getRoomID();
-                var version = globalView.getVersion();
-                mineService.sendMineOperater(mo, rid, version);
+
+                var p = playerService.getPlayer(globalView.getCurrentID())
+                if ("living" == p.status||"ready"== p.status) {
+                    var mo = mineView.getMineOperater(this, mouseAction.rightClick);
+                    var rid = globalView.getRoomID();
+                    var version = globalView.getVersion();
+                    mineService.sendMineOperater(mo, rid, version);
+
+                } else {
+                    return;
+                }
 
 
-            });
+            })
 
 
         }
@@ -388,7 +404,6 @@ $(document).ready(function () {
         "parseMessage":mineService.parseMessage,
         "parseDetail":mineService.parseDetail
         //   "settingPostParameter":settingPostParameter89,,
-
 
 
     }

@@ -12,7 +12,7 @@
   </header>
 
   <nodes>
-    <ruleSet id="68" name="logout action" x="497" y="30" width="80" height="48" ruleFlowGroup="logout action" />
+    <ruleSet id="68" name="logout action" x="982" y="396" width="80" height="48" ruleFlowGroup="logout action" />
     <start id="1" name="Start" x="200" y="16" width="49" height="49" />
     <ruleSet id="70" name="clear tag action" x="616" y="118" width="80" height="48" ruleFlowGroup="clear tag action" />
     <ruleSet id="71" name="clear click" x="1032" y="152" width="80" height="48" ruleFlowGroup="clear click" />
@@ -21,6 +21,7 @@
     <end id="5" name="End" x="88" y="806" width="49" height="49" />
     <ruleSet id="66" name="user action" x="449" y="164" width="80" height="48" ruleFlowGroup="user action" />
     <ruleSet id="67" name="person count" x="713" y="254" width="80" height="48" ruleFlowGroup="person count" />
+    <ruleSet id="72" name="action" x="1066" y="321" width="80" height="48" ruleFlowGroup="action" />
     <ruleSet id="47" name="game right" x="1093" y="235" width="80" height="48" ruleFlowGroup="game right" />
     <ruleSet id="44" name="query" x="566" y="262" width="80" height="48" ruleFlowGroup="query" />
     <ruleSet id="45" name="click action" x="310" y="219" width="80" height="48" ruleFlowGroup="click action" />
@@ -36,7 +37,7 @@
   </nodes>
 
   <connections>
-    <connection from="65" to="68" />
+    <connection from="72" to="68" />
     <connection from="61" to="70" />
     <connection from="57" to="71" />
     <connection from="60" to="64" />
@@ -44,17 +45,18 @@
     <connection from="63" to="5" />
     <connection from="70" to="66" />
     <connection from="44" to="67" />
+    <connection from="47" to="72" />
     <connection from="71" to="47" />
     <connection from="45" to="44" />
     <connection from="66" to="45" />
-    <connection from="47" to="51" />
+    <connection from="68" to="51" />
     <connection from="53" to="55" />
     <connection from="55" to="54" />
     <connection from="51" to="53" />
     <connection from="67" to="57" />
     <connection from="62" to="63" />
     <connection from="64" to="62" />
-    <connection from="68" to="61" />
+    <connection from="65" to="61" />
     <connection from="54" to="60" />
   </connections>
 
