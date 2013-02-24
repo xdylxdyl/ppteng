@@ -142,7 +142,7 @@ killController.status = function(message) {
     var name = idFindName(message.subject);
     if (message.object == "lastword") {
 
-        $("section article").append("<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了么,我了个去,lastwordTime，赶紧静下来聆听 [" + name + "] 的最后一句话。</p>");
+        $("section article").append("<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，赶紧静下来聆听 [" + name + "] 的最后一句话。</p>");
     }
     playerService.setStatus(message.subject, message.object);
     playerListView.setStatus(message.subject, message.object);
