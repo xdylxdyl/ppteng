@@ -37,7 +37,7 @@ var userEditView = {
         if(text==""){
             return {};
         }else{
-            return JSON.parse();
+            return JSON.parse(text);
         }
 
 
