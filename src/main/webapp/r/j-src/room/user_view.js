@@ -33,7 +33,13 @@ var userEditView = {
     getShow:function(){
 
 
-        return JSON.parse( $("#stageShow").text());
+        var text= $("#stageShow").text();
+        if(text==""){
+            return {};
+        }else{
+            return JSON.parse();
+        }
+
 
     }
 
