@@ -157,7 +157,7 @@ resolvePredict.log = function(message) {
                     var name = data.infos[0].name;
                     var p = new player(id, name, playerStatus.unready, 0);
                     playerService.addPlayer(p.id, p);
-                    gameAreaView.login(p);
+                    gameAreaView.login(p,message);
                     playerListView.login(p);
 
                 },

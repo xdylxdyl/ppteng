@@ -333,10 +333,12 @@ public class UsersServiceTest {
 
 	};
 	
-	//@Test
+	@Test
 	public void testGetAll() throws ServiceException, ServiceDaoException {
 		Integer count=this.usersService.getTotalCount();
 		log.info("get all users "+count);
+		User user=this.usersService.getObjectById(245L);
+		log.info("get user is "+user);
 	}
 	
 	//@Test
@@ -362,7 +364,7 @@ public class UsersServiceTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testRecord() throws ServiceException, ServiceDaoException{
 		List<Long> ids=this.recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
 		List<Records> records=this.recordService.getObjectsByIds(ids);

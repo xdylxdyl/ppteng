@@ -91,6 +91,10 @@ var playerService = {
         return ajaxJson("/player/update.do?", "post", userInfo, null, 5000, "html");
 
     },
+
+    updateShow:function(show){
+      return  ajaxJson("/player/update/stage.do?", "post",{"show":show}, null, 5000, "json");
+    },
     getRoomOfPerson: function (uid) {
         var room = {}
         var data = ajaxJson("/player/info.do?", "post", {uids:uid}, null, 5000, "json")

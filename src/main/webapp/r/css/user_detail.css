@@ -281,3 +281,43 @@ h1 {
     display: none;
 }
 
+
+.showCenter {
+    position: absolute;
+    top: 30%;
+    left:30%;
+    right: 50%;
+    height: 30%;
+    width: 60%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 6px solid rgba(0, 0, 0, 0.3);
+    position: absolute;
+    -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    padding: 1em;
+}
+
+.showCenter span {
+    color: #009999;
+    text-decoration: none;
+    float: left;
+    left:20%;
+    margin:1.5em;
+
+}
+.showCenter input {
+
+    width: 80%;
+    float: left;
+
+}
+
+.showCenter a {
+
+    float: left;
+    margin-top: 1.5em;
+    margin-left: 3em;
+    width: 30%;
+
+}

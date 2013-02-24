@@ -28,7 +28,7 @@ ruleflow-group "retract unlimit message"
 when
 	#conditions
     
-    $message:Message($subject:subject)
+    $message:Message($subject:subject,predict!="query")
     $plaery:Player(id==$subject,status=="unready")	
     Game()
     
@@ -232,9 +232,9 @@ when
      $operater:Operater()
 then      
 
-	LogUtil.log("game init process start =================");
+	LogUtil.log("game init process start ================="+$room);
 	LogUtil.log($allReadys);
-	 int  killerCount=Integer.valueOf(getRoomSetting($room,"杀手人数","1"));#1*60*1000  
+	 int  killerCount=Integer.valueOf(getRoomSetting($room,"killerCount","1"));#1*60*1000  
 	 int waterCount= $allReadys.size()-killerCount;
 	 
 	 Map<String,Integer> role_count=new HashMap();
@@ -981,7 +981,7 @@ then
     LogUtil.log("person die by voted,send night come  start=============");  
      
 
-     String  timeSetting=getRoomSetting($room,"晚上时间","15000");#1*60*1000  
+     String  timeSetting=getRoomSetting($room,"nightTime","15000");#1*60*1000  
      Message night=new Message("night","time",timeSetting);   
      insert(night);   
      LogUtil.log(" person die by voted,send night come   oveer =============");   
@@ -1014,9 +1014,9 @@ then
      update($game);
 
 
-      String  timeSetting=getRoomSetting($room,"白天时间","30000");#1*60*1000   
+      String  timeSetting=getRoomSetting($room,"dayTime","30000");#1*60*1000   
     Message day=new Message("day","send time",timeSetting);
-    String  time=getRoomSetting($room,"晚上时间","15000");#1*60*1000
+    String  time=getRoomSetting($room,"nightTime","15000");#1*60*1000
     day.setScheduledTime(Long.valueOf(time));   
      insert(day);    
     
@@ -1039,7 +1039,7 @@ when
 then  
  
      LogUtil.log("kill game process start  =================");   
-    String  timeSetting=getRoomSetting($room,"遗言时间","15000");#1*60*1000    
+    String  timeSetting=getRoomSetting($room,"lastwordTime","15000");#1*60*1000    
     Message lastWord=new Message("lastword","time",timeSetting);       
     insert(lastWord);  
      Message lastWorder=new Message($object,"status","lastword");       
@@ -1072,9 +1072,9 @@ then
      update($game);
 
     
-    String  timeSetting=getRoomSetting($room,"白天时间","30000");#1*60*1000   
+    String  timeSetting=getRoomSetting($room,"dayTime","30000");#1*60*1000   
     Message day=new Message("day","send time",timeSetting);
-    String  time=getRoomSetting($room,"遗言时间","15000");#1*60*1000
+    String  time=getRoomSetting($room,"lastwordTime","15000");#1*60*1000
     day.setScheduledTime(Long.valueOf(time));   
      insert(day);    
      LogUtil.log(" lastword come over =============");   
@@ -1108,9 +1108,9 @@ then
        LogUtil.log("no kill day come start last time ============= "+$game.getLastTime());   
      update($game);
 
-       String  timeSetting=getRoomSetting($room,"晚上时间","30000");#1*60*1000   
+       String  timeSetting=getRoomSetting($room,"nightTime","30000");#1*60*1000   
     Message night=new Message("night","send time",timeSetting); 
-    String  time=getRoomSetting($room,"白天时间","15000");#1*60*1000
+    String  time=getRoomSetting($room,"dayTime","15000");#1*60*1000
     night.setScheduledTime(Long.valueOf(time));    
     insert(night); 
      LogUtil.log("no kill day come start =============");   
@@ -1141,9 +1141,9 @@ then
      LogUtil.log("kill, day come start============= "+$game.getLastTime());  
      update($game);   
      
-    String  timeSetting=getRoomSetting($room,"晚上时间","30000");#1*60*1000   
+    String  timeSetting=getRoomSetting($room,"nightTime","30000");#1*60*1000   
     Message night=new Message(timeSetting,"send time",timeSetting);
-    String  time=getRoomSetting($room,"白天时间","15000");#1*60*1000
+    String  time=getRoomSetting($room,"dayTime","15000");#1*60*1000
     night.setScheduledTime(Long.valueOf(time));
   
     insert(night);
@@ -1167,15 +1167,15 @@ then
       LogUtil.log("user send lastword, day come start  "+$game.getLastTime());
      update($game);
 
-    String  timeSetting=getRoomSetting($room,"晚上时间","30000");#1*60*1000   
+    String  timeSetting=getRoomSetting($room,"nightTime","30000");#1*60*1000   
    Message night=new Message("night","send time",timeSetting);
-    String  time=getRoomSetting($room,"白天时间","15000");
+    String  time=getRoomSetting($room,"dayTime","15000");
     night.setScheduledTime(Long.valueOf(time));  
     insert(night);
     
     
     
-    String  dayTime=getRoomSetting($room,"白天时间","30000");#1*60*1000
+    String  dayTime=getRoomSetting($room,"dayTime","30000");#1*60*1000
     Message day=new Message("day","time",dayTime); 
     insert(day); 
     
@@ -1210,14 +1210,16 @@ then
       
      update($game);
 
-    String  timeSetting=getRoomSetting($room,"晚上时间","30000");#1*60*1000   
+    String  timeSetting=getRoomSetting($room,"nightTime","30000");#1*60*1000   
+     LogUtil.log("start, day come start ,night come after ============= nightTime "+timeSetting);
+    
    Message night=new Message("night","send time",timeSetting);
-    String  time=getRoomSetting($room,"白天时间","15000");#1*60*1000
+    String  time=getRoomSetting($room,"dayTime","15000");#1*60*1000
     night.setScheduledTime(Long.valueOf(time));
    
     insert(night); 
     
-    String  dayTime=getRoomSetting($room,"白天时间","30000");#1*60*1000
+    String  dayTime=getRoomSetting($room,"dayTime","30000");#1*60*1000
     Message day=new Message("day","time",dayTime);
     LogUtil.log(day);
     insert(day); 
@@ -1596,11 +1598,11 @@ end
 
 
 rule 'game player query'
-ruleflow-group "query"
+ruleflow-group "refresh"
 when
 	#conditions
     $message:Message($subject:subject,predict=="query")
-    $room:Room(status=="run")
+    $room:Room()
     $allLogins:ArrayList()
 	      from accumulate(
 	      $person:Player()	     
@@ -1642,15 +1644,20 @@ end
 
 
 
-
-
+rule 'game query test'
+ruleflow-group "refresh"
+when
+ $message:Message($subject:subject,predict=="query")
+ then  
+  LogUtil.log("game query test =================");
+  end
 
 rule 'game unplayer query'
-ruleflow-group "query"
+ruleflow-group "refresh"
 when
 	#conditions
     $message:Message($subject:subject,predict=="query")
-   $room:Room(status=="run")
+   $room:Room()
     $allLogins:ArrayList()
 	      from accumulate(
 	      $person:Player()	     

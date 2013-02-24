@@ -61,7 +61,7 @@ public class GameMessage implements Serializable{
 	public static final int Predict_Night = 10;
 
 	/**
-	 * 遗言时间
+	 * lastwordTime
 	 */
 	public static final int Predict_LastWords = 11;
 	

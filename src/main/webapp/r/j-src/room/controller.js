@@ -47,6 +47,58 @@ $(document).ready(function () {
         //判断是否有音乐盒
         musicUtil.displayMusic();
 
+
+        $("#show_edit").bind("click", function () {
+
+
+            var stageShow = userEditView.getShow();
+
+            var shows = stageShow.login;
+            var show;
+            if (shows != null) {
+                show = JSON.stringify(shows);
+            } else {
+                show = "[]";
+            }
+            $("#showContent").val(show);
+            $("#showContainer").removeClass().show().addClass("showCenter");
+            $("#expContainer").show();
+
+            return false;
+
+        });
+
+        $("#showCommit").bind("click", function () {
+
+            var v = $("#showContent").val();
+
+            var expArray;
+            try {
+                expArray = eval(v);
+                if (expArray.length > 5) {
+                    alert("亲,说好的五个呢,想多定义个人秀不用花钱啊");
+                    return false;
+                }
+            } catch (err) {
+                alert("会不会看格式啊亲,敢不敢靠谱一点儿");
+                return false;
+            }
+
+            var stageShow = {};
+            stageShow["login"] = expArray;
+            playerService.updateShow(JSON.stringify(stageShow));
+
+
+            $("#showContainer").hide();
+            return false;
+
+        });
+        $("#showCancel").bind("click", function () {
+            $("#showContainer").hide();
+            return false;
+
+        });
+
     }
 )
 

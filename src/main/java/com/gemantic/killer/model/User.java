@@ -87,6 +87,14 @@ public class User implements Serializable {
 	private List<String> expression = new ArrayList();
 
 	private String expressionContent;
+	
+	
+	private Map<String,List<String>> stageShowList;
+	
+	private String stageShow;
+	
+	
+	
 
 	/**
 	 * 签名
@@ -274,6 +282,33 @@ public class User implements Serializable {
 	
 	
 	
+	
+	@Transient
+	public Map<String, List<String>> getStageShowList() {
+		
+		if (this.stageShowList == null) {
+			this.stageShowList = UserUtil.json2StageShow(this.stageShow);
+		}
+
+		return stageShowList;
+	}
+
+	public void setStageShowList(Map<String, List<String>> stageShowList) {
+		this.stageShowList = stageShowList;
+		this.stageShow = UserUtil.stageShow2Json(stageShowList);
+	}
+	
+	
+	
+	
+	@Column(name = "stage_show")	
+	public String getStageShow() {
+		return stageShow;
+	}
+
+	public void setStageShow(String stageShow) {
+		this.stageShow = stageShow;
+	}
 
 	public String getSign() {
 		return sign;

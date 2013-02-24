@@ -25,13 +25,14 @@
       </constraints>
     </split>
     <join id="19" name="Gateway" x="124" y="337" width="49" height="49" type="2" />
-    <ruleSet id="21" name="query" x="16" y="177" width="80" height="48" ruleFlowGroup="query" />
-    <ruleSet id="20" name="action" x="215" y="188" width="80" height="48" ruleFlowGroup="action" />
+    <ruleSet id="21" name="query" x="2" y="220" width="80" height="48" ruleFlowGroup="query" />
+    <ruleSet id="20" name="action" x="298" y="211" width="80" height="48" ruleFlowGroup="action" />
     <ruleSet id="23" name="action" x="794" y="226" width="80" height="48" ruleFlowGroup="action" />
     <ruleSet id="25" name="all accepts" x="89" y="576" width="242" height="48" ruleFlowGroup="all accepts message" />
     <ruleSet id="24" name="generate message" x="109" y="406" width="301" height="48" ruleFlowGroup="generate message" />
     <ruleSet id="27" name="snapshot" x="413" y="620" width="157" height="48" ruleFlowGroup="snapshot" />
     <ruleSet id="26" name="next operator" x="168" y="731" width="176" height="48" ruleFlowGroup="next of operater" />
+    <ruleSet id="29" name="login action" x="185" y="261" width="80" height="48" ruleFlowGroup="login action" />
     <ruleSet id="28" name="logout action" x="439" y="290" width="80" height="48" ruleFlowGroup="logout action" />
   </nodes>
 
@@ -41,7 +42,7 @@
     <connection from="1" to="16" />
     <connection from="21" to="19" />
     <connection from="28" to="19" />
-    <connection from="20" to="19" />
+    <connection from="29" to="19" />
     <connection from="16" to="21" />
     <connection from="16" to="20" />
     <connection from="16" to="23" />
@@ -49,6 +50,7 @@
     <connection from="19" to="24" />
     <connection from="25" to="27" />
     <connection from="27" to="26" />
+    <connection from="20" to="29" />
     <connection from="23" to="28" />
   </connections>
 

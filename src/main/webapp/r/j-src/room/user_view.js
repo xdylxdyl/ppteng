@@ -7,12 +7,17 @@ var userEditView = {
 
 
 
+
+
         $("#user_edit").attr("command", "commit");
         $("#user_edit").html("complete");
         $("#user_cancel").show();
         $("#portrait_container").removeClass().addClass("portrait_container");
         $("#portrait_edit").removeClass().addClass("portrait_edit border_show");
         $("#music_container").removeClass().addClass("music_set_container");
+
+        $("#password_edit").hide();
+        $("#show_edit").hide();
 
 
     },
@@ -23,6 +28,12 @@ var userEditView = {
         var sign = $("#sign").text();
         var music=$("#music").text();
         return new userInfo(id, name, icon, sign,music);
+
+    },
+    getShow:function(){
+
+
+        return JSON.parse( $("#stageShow").text());
 
     }
 

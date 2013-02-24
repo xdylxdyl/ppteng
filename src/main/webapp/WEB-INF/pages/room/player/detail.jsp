@@ -4,7 +4,8 @@
 <head>
 <link href="/r/css/user_detail.css" rel="stylesheet" />
 <link href="/r/css/button.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/r/css/music.css?v=${frontVersion}">
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/r/css/music.css?v=${frontVersion}">
 
 
 
@@ -14,14 +15,14 @@
 <script src="/r/j-src/room/user_view.js?v=${frontVersion}"></script>
 <script src="/r/j-src/room/controller.js?v=${frontVersion}"></script>
 <script src="/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/util/musicUtil.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/musicUtil.js?v=${frontVersion}"></script>
 
 </head>
 
 <body>
 
-	<div id="music_play" class="music_play">		
-	</div>
+	<div id="music_play" class="music_play"></div>
 
 	<!-- 个人信息,积分,金币 -->
 	<div class="detail_container">
@@ -49,13 +50,14 @@
 			</div>
 
 			<div id="sign" class="sign">${user.sign}</div>
-			
+
 
 
 
 			<div id="music_container" class="music_set_container hidden">
-			
-				<span>在<a href="http://www.xiami.com/widget/imulti" target="_blank">虾米</a>制作自己的音乐盒,粘贴Flash地址到下面
+
+				<span>在<a href="http://www.xiami.com/widget/imulti"
+					target="_blank">虾米</a>制作自己的音乐盒,粘贴Flash地址到下面
 				</span>
 
 				<div id="music" class="music border_show" contenteditable="true">${user.music}</div>
@@ -73,23 +75,45 @@
 
 			</div>
 
-			<div class="edit">
 
-				<c:choose>
-					<c:when test="${user.id==selfID}">
-						<a href="" class="button green glass" id="user_edit"
-							command="edit">编辑</a>
-						<a href="/player/regedit.do?type=edit" class="button green glass">修改密码</a>	
+			<c:choose>
+				<c:when test="${user.id==selfID}">
+					<div class="edit">
+						<a href="" class="btn btn-primary" id="user_edit" command="edit">编辑</a>
+						<a href="/player/regedit.do?type=edit" class="btn btn-primary" id="password_edit">修改密码</a>
+						
+
+						<a href="" id="show_edit" class="btn btn-primary">设置个人秀</a>
+
+
+
+						<a href="" class="user_cancel" id="user_cancel">Cancel</a>
+						<div id="stageShow" class="hidden">${user.stageShow}</div>	
+
+					</div>
+					
+					<div id="showContainer" class="hidden">
+							<span class="hint">自定义进出房间个人秀~~~每月200金币~便宜的不行~</span> <input
+								id="showContent" type="text" value="" /> <span class="hint">按格式输入表情["提着剑","默默的"]~~最多五个</span>
+
+							<a href="" class="cancel" id="showCommit">确定</a> <a href=""
+								class="cancel" id="showCancel">关闭</a>
 							
-					</c:when>
-					<c:otherwise>
-					</c:otherwise>
-				</c:choose>
+						</div>
+				</c:when>
+				<c:otherwise>
+				<div class="edit">
+						<a href="" class="user_cancel" id="user_cancel">Cancel</a>
+
+					</div>
+				
+				</c:otherwise>
+			</c:choose>
 
 
 
-				<a href="" class="user_cancel" id="user_cancel">Cancel</a>
-			</div>
+			
+
 
 
 		</div>

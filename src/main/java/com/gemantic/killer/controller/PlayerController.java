@@ -637,11 +637,39 @@ public class PlayerController {
 	
 		oldUser.setSign(user.getSign());
 		oldUser.setMusic(user.getMusic());
+		oldUser.setStageShow(user.getStageShow());
 		this.userService.update(oldUser);
 
 		return "redirect:/player/detail.do?uid=" + uid;
 
 	}
+	
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/update/stage", method = RequestMethod.POST)
+	public String updateStage(HttpServletRequest request, HttpServletResponse response, ModelMap model,String show) throws Exception {
+
+		Long uid = cookieUtil.getID(request, response);
+		log.info(uid + " update "+show );
+		User oldUser = this.userService.getObjectById(uid);
+
+		oldUser.setStageShow(show);
+		this.userService.update(oldUser);		
+		model.addAttribute("code", 0);
+		return "/common/success";
+
+	}
+
+	
+	
 
 	/**
 	 * 获取玩家的状态信息

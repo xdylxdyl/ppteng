@@ -31,13 +31,13 @@
       <bean id="simple_1.0_setting" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-				<entry key="杀手人数" value="1">				
+				<entry key="killerCount" value="1">				
 				</entry>
-				<entry key="白天时间" value="240000">				
+				<entry key="dayTime" value="240000">				
 				</entry>
-				<entry key="晚上时间" value="60000">				
+				<entry key="nightTime" value="60000">				
 				</entry>
-				<entry key="遗言时间" value="60000">				
+				<entry key="lastwordTime" value="60000">				
 				</entry>
 			</map>
 		</constructor-arg>
@@ -68,6 +68,23 @@
 		</constructor-arg>
 	</bean>
     
+    
+     <bean id="settingDisplay" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+			   <!-- simple-version -->
+				<entry key="killerCount" value="杀手人数">				
+				</entry>
+				<entry key="dayTime" value="白天时间">				
+				</entry>
+				<entry key="nightTime" value="晚上时间">				
+				</entry>
+				<entry key="lastwordTime" value="遗言时间">				
+				</entry>			
+				
+			</map>
+		</constructor-arg>
+	</bean>
     
     
 </beans>

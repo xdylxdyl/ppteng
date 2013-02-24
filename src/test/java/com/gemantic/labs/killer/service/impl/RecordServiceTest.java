@@ -126,7 +126,7 @@ public class RecordServiceTest {
 
 	}
 
-	@Test
+	//@Test
 	public void getRecordIdsByVersion() throws ServiceException, ServiceDaoException {
 
 		List<Records> list = new ArrayList<Records>();
@@ -164,6 +164,18 @@ public class RecordServiceTest {
 		for (Records o : insertResults) {
 			this.recordService.delete(o.getId());
 		}
+
+	};
+	
+	@Test
+	public void getRecordIdsByVersionssssss() throws ServiceException, ServiceDaoException {
+
+		
+
+		List<Long> lists = recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
+		log.info("success get datas " + lists);
+		// TODO 增加自己的验证逻辑
+	
 
 	};
 

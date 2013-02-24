@@ -93,19 +93,19 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 		Long roomID = Long.valueOf(operater.getMessage().getWhere());
 		// 大爷的.这个时候还没有Room
-		log.info(operater + " =========== start,room  ======================== " + r);
+		//log.info(operater + " =========== start,room  ======================== " + r);
 		Long start = System.currentTimeMillis();
 		StatefulKnowledgeSession ksession = sessionService.getSesseion(operater.getMessage());
 
 		FactHandle fo = ksession.insert(operater);
 
-		log.info(operater + " =========== after insert");
+		//log.info(operater + " =========== after insert");
 		FactHandle fm = ksession.insert(operater.getMessage());
 		if (IsRoomMessage(operater.getMessage(), r)) {
-			log.info("room operator " + operater.getMessage());
+			//log.info("room operator " + operater.getMessage());
 			ksession.startProcess("room");
 		} else {
-			log.info("game operator " + operater.getMessage());
+			//log.info("game operator " + operater.getMessage());
 			ksession.startProcess("game");
 		}
 
@@ -115,14 +115,14 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 		// 什么时候关闭Session呢.规则里触发游戏结束的事件.
 
-		log.info(" use time " + (System.currentTimeMillis() - start));
-		log.info(operater + " =========== over");
+		//log.info(" use time " + (System.currentTimeMillis() - start));
+		//log.info(operater + " =========== over");
 		List<Message> messages = new ArrayList();
 		messages = operater.getNextMessages();
 		
 		if (operater.getGameStart()) {
 			// 创建的时候不会更新.因为创建的时候不会是Start
-			log.info("game start");// 主要是在Session里.愁死我了.Gameover的时候不能把Session给Remove了.
+			//log.info("game start");// 主要是在Session里.愁死我了.Gameover的时候不能把Session给Remove了.
 			r.setStartAt(operater.getMessage().getTime());
 
 			r.setStatus(Room.status_start);
@@ -137,7 +137,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		
 		if (operater.getGameOver()) {
 
-			log.info("game over");// 主要是在Session里.愁死我了.Gameover的时候不能把Session给Remove了.
+		//	log.info("game over");// 主要是在Session里.愁死我了.Gameover的时候不能把Session给Remove了.
 
 			this.roomTimerSevice.removeRoomTimer(Long.valueOf(operater.getMessage().getWhere()));
 			operater.getTimerMessages().clear();
@@ -174,7 +174,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 				}
 				record.setUid_names(uid_names);
 				this.recordService.insert(record);
-				log.info(" insert record " + record);
+			//	log.info(" insert record " + record);
 			}
 
 			
@@ -183,14 +183,14 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 		// 开始之后就没有了计房间的状态了.
 
-		log.info(roomID + " room is  empty ?  " + operater.getRoomEmpty());
+		//log.info(roomID + " room is  empty ?  " + operater.getRoomEmpty());
 
 		if (operater.getRoomEmpty()) {
 			log.info("room empty ");
 
 			this.roomService.removeRoom(roomID);
 			this.sessionService.removeSession(operater.getMessage());
-			log.info("room over ===================" + r);
+			//log.info("room over ===================" + r);
 
 		}
 

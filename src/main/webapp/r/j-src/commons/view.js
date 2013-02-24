@@ -308,12 +308,19 @@ var rightView = {
 var gameAreaView = {
 
 
-    login:function(player) {
+    login:function(player,message) {
+
+        var action;
+        if(message.content==""){
+            action="";
+        }else{
+            action=message.content;
+        }
 
         var name = player.name;
         if (globalView.isStop()) {
             //只有房间是处在结束状态下才在游戏区显示消息
-            $("section article").append("<p style='color:#F00'>【系统消息】[" + name + "] 进入了房间。</p>");
+            $("section article").append("<p style='color:#F00'>【系统消息】[" + name + "]"+action+"进入了房间</p>");
             viewUtil.autoBottom("section article");
         } else {
             //不显示
@@ -336,7 +343,7 @@ var gameAreaView = {
             }
         }
         if (isDisplay) {
-            $("section article").append("<p style='color:#F00'>【系统消息】[" + name + "] 退出了房间。</p>");
+            $("section article").append("<p style='color:#F00'>【系统消息】[" + name + "] 坚决的退出了房间。</p>");
             viewUtil.autoBottom("section article");
         }
 

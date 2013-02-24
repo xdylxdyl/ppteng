@@ -12,10 +12,10 @@ var settingPostParameter = function(rid, version, killCount, dayTime, nightTime,
         rid:rid,
         version:version,
         setting:[
-            {"杀手人数":killCount},
-            {"白天时间":dayTime},
-            {"夜晚时间":nightTime},
-            {"遗言时间":lastwordTime}
+            {"killerCount":killCount},
+            {"dayTime":dayTime},
+            {"nightTime":nightTime},
+            {"lastwordTime":lastwordTime}
         ]
     }
 }
@@ -39,8 +39,8 @@ var killGameAreaView = {
     Hint:{
         vote:"人生就是这样,何必挣扎说自己不是杀手呢",
         kill:"杀谁都一样,你只是太闪亮了",
-        night:"【系统消息】 月黑风高杀人夜，大家各自保重！",
-        day:"【系统消息】 天光大亮，大家集中精力找出凶手！",
+        night:"【系统消息】 月黑风高杀人夜，大家各自保重",
+        day:"【系统消息】 天光大亮，大家集中精力找出凶手",
         killerList:"【系统消息】 绝密杀手名单： ",
         kick:"你好,再见"
     },
@@ -83,8 +83,7 @@ var killGameAreaView = {
                         } else {
                             place = "discard";
                         }
-                    }
-                    ;
+                    } ;
                     break;
                 case "lastword":
                     break;
@@ -237,18 +236,18 @@ var simpleRightView = {
 var simpleSettingView = {
     initSetting:function() {
 
-        $("#白天时间").val($("#白天时间").val() / 60000);
-        $("#晚上时间").val($("#晚上时间").val() / 60000);
-        $("#遗言时间").val($("#遗言时间").val() / 60000);
+        $("#dayTime").val($("#dayTime").val() / 60000);
+        $("#nightTime").val($("#nightTime").val() / 60000);
+        $("#lastwordTime").val($("#lastwordTime").val() / 60000);
 
-        $("<span>分</span>").insertAfter("#白天时间");
-        $("<span>分</span>").insertAfter("#晚上时间");
-        $("<span>分</span>").insertAfter("#遗言时间");
+        $("<span>分</span>").insertAfter("#dayTime");
+        $("<span>分</span>").insertAfter("#nightTime");
+        $("<span>分</span>").insertAfter("#lastwordTime");
     },
     getSettingParameter:function() {
-        $("#白天时间").val($("#白天时间").val() * 60000);
-        $("#晚上时间").val($("#晚上时间").val() * 60000);
-        $("#遗言时间").val($("#遗言时间").val() * 60000);
+        $("#dayTime").val($("#dayTime").val() * 60000);
+        $("#nightTime").val($("#nightTime").val() * 60000);
+        $("#lastwordTime").val($("#lastwordTime").val() * 60000);
         var params = jQuery("#setting").serialize();
         return params;
     }

@@ -22,6 +22,7 @@
     <ruleSet id="66" name="user action" x="449" y="164" width="80" height="48" ruleFlowGroup="user action" />
     <ruleSet id="67" name="person count" x="713" y="254" width="80" height="48" ruleFlowGroup="person count" />
     <ruleSet id="72" name="action" x="1066" y="321" width="80" height="48" ruleFlowGroup="action" />
+    <ruleSet id="73" name="login action" x="477" y="261" width="80" height="48" ruleFlowGroup="login action" />
     <ruleSet id="47" name="game right" x="1093" y="235" width="80" height="48" ruleFlowGroup="game right" />
     <ruleSet id="44" name="query" x="566" y="262" width="80" height="48" ruleFlowGroup="query" />
     <ruleSet id="45" name="click action" x="310" y="219" width="80" height="48" ruleFlowGroup="click action" />
@@ -46,8 +47,9 @@
     <connection from="70" to="66" />
     <connection from="44" to="67" />
     <connection from="47" to="72" />
+    <connection from="45" to="73" />
     <connection from="71" to="47" />
-    <connection from="45" to="44" />
+    <connection from="73" to="44" />
     <connection from="66" to="45" />
     <connection from="68" to="51" />
     <connection from="53" to="55" />

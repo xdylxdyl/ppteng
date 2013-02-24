@@ -42,6 +42,8 @@ then
 	  }else{
 	  
 	      set=$setting.getSetting();
+	      
+	      
 	  }	 	 
 	 Room room=new Room($message.getSubject(),$message.getContent(),$message.getWhere().toString(),set,$message.getVersion(),"unrun") ;
 	
@@ -49,7 +51,7 @@ then
  
      Message loginMessage=new Message($message.getSubject(),"login",""); 
      insert(loginMessage);
- 
+  LogUtil.log("create rooom ================="+room);	
     LogUtil.log("create rooom over =================");
 
     
@@ -170,7 +172,7 @@ end
 
 
 rule 'login'
-ruleflow-group "action"
+ruleflow-group "login action"
 when
 	#conditions
     $room:Room()
@@ -192,7 +194,7 @@ end
 
 
 rule 'login init right when unrun'
-ruleflow-group "action"
+ruleflow-group "login action"
 no-loop true
 when
 	#conditions
@@ -215,7 +217,7 @@ end
 
 
 rule 'login init right when run'
-ruleflow-group "action"
+ruleflow-group "login action"
 no-loop true
 when
 	#conditions

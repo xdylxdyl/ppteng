@@ -1,6 +1,7 @@
 package com.gemantic.killer.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,6 @@ import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.common.model.Setting;
 import com.gemantic.killer.model.Room;
-import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.service.SettingService;
@@ -95,7 +95,11 @@ public class RoomSettingFormController {
 			}
 		}
 
+		Map<String,String> settingDisplay=this.settingService.getSettingDisplay();
+		log.info(settingDisplay);
 		model.addAttribute("setting", setting);
+		
+		model.addAttribute("settingDisplay", settingDisplay);
 		return "/room/form/setting";
 
 	}
@@ -137,7 +141,11 @@ public class RoomSettingFormController {
 
 		}
 
+		Map<String,String> settingDisplay=this.settingService.getSettingDisplay();
+		log.info(settingDisplay);
 		model.addAttribute("setting", setting);
+		
+		model.addAttribute("settingDisplay", settingDisplay);
 		return "/room/form/setting";
 		// return
 		// "redirect:/m/form/setting.do?rid="+roomID+"&version="+setting.getVersion();

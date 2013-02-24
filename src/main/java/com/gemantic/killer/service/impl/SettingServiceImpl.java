@@ -19,6 +19,9 @@ public class SettingServiceImpl implements SettingService {
 	@Resource(name = "setting")	
 	private Map<String,Map<String,String>> setting;
 	
+	@Resource(name = "settingDisplay")	
+	private Map<String,String> settingDisplay;
+	
 	
 	
 	@Override
@@ -39,6 +42,16 @@ public class SettingServiceImpl implements SettingService {
 		log.info(version +" get setting "+ setting);
 		return setting;
 	}
+
+
+
+	@Override
+	public Map<String, String> getSettingDisplay() {
+		// TODO Auto-generated method stub
+		return this.settingDisplay;
+	}
+	
+	
 	
 	
 	

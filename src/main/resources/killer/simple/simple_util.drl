@@ -17,15 +17,15 @@ import org.apache.commons.lang.StringUtils;
 function void setRemainTime(String status,Game game,Room room) {
 
      if("day"==status){
-       status="白天时间";
+       status="dayTime";
      };
      
      if("night"==status){
-       status="晚上时间";
+       status="nightTime";
      };
      
      if("lastword"==status){
-       status="遗言时间";
+       status="lastwordTime";
      };
      
     

@@ -33,6 +33,7 @@ import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.util.MessageUtil;
 import com.gemantic.killer.util.PunchUtil;
+import com.gemantic.killer.util.UserUtil;
 import com.gemantic.labs.killer.service.UsersService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -168,9 +169,12 @@ public class RoomController {
 		List<Long> userIDS = this.memberService.getMembers(rid);
 		List<User> users = this.userService.getObjectsByIds(userIDS);
 
+		User u=this.userService.getObjectById(uid);
 		String version = room.getVersion();
 		log.info("version is " + version);
-		Message loginMessage = new Message(uid.toString(), "login", "-500", "#0000FF", "78", rid.toString(), "我进入了房间", version);
+		String stageShow=UserUtil.getRandomStageShow(UserUtil.StageShow_Login,u);
+		log.info(u+"get stage show is "+stageShow);
+		Message loginMessage = new Message(uid.toString(), "login", "-500", "#0000FF", "78", rid.toString(), stageShow, version);
 		List<Message> messages = this.droolsGameMessageService.generate(loginMessage, room);
 		MessageUtil.sendMessage(version, messages, this.pushClient);
 
@@ -364,6 +368,7 @@ public class RoomController {
 		// messages=this.droolsGameMessageService.generate(queryMessage);
 
 		String snapshots = this.droolsGameMessageService.getSnapshots(queryMessage, room);
+		log.info("get snapshot is "+snapshots);
 
 		// no world start
 		// game is not start,return room info
