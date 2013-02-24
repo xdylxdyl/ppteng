@@ -148,35 +148,43 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			this.roomService.updateRoom(r);
 			// 从哪知道游戏里的玩家呢
 
-			for (Message m : messages) {
-				if ("decryption" == m.getPredict()) {
-					Long uid = Long.valueOf(m.getSubject());
-					User u = this.userService.getObjectById(uid);
-					u.setMoney(u.getMoney() + 2000);
-					this.userService.update(u);
-				}
+			if(r.getPlayers().size()>6&&time>3*60*1000){
+				//六人局才发钱和超过三分钟才给钱存战例
+				for (Message m : messages) {
+					if ("decryption" == m.getPredict()) {
+						Long uid = Long.valueOf(m.getSubject());
+						User u = this.userService.getObjectById(uid);
+						u.setMoney(u.getMoney() + 2000);
+						this.userService.update(u);
+					}
 
-			}
-			if(r.getVersion().equals("simple_1.0")){
-				
-				// 更新战例记录
-				Records record = new Records();
-				record.setId(operater.getRecordID());
-				record.setPath("record/" + operater.getRecordID());
-				record.setTime(time);
-				record.setRoom(r);
-				record.setVersion(r.getVersion());		
-				
-				List<Long> ls=r.getPlayers();
-			    List<User> users=this.userService.getObjectsByIds(ls);
-			    Map<Long,String> uid_names=new HashMap();
-				for(User user:users){
-					uid_names.put(user.getId(), user.getName());
 				}
-				record.setUid_names(uid_names);
-				this.recordService.insert(record);
-			//	log.info(" insert record " + record);
+				if(r.getVersion().equals("simple_1.0")){
+					
+					// 更新战例记录
+					Records record = new Records();
+					record.setId(operater.getRecordID());
+					record.setPath("record/" + operater.getRecordID());
+					record.setTime(time);
+					record.setRoom(r);
+					record.setVersion(r.getVersion());		
+					
+					List<Long> ls=r.getPlayers();
+				    List<User> users=this.userService.getObjectsByIds(ls);
+				    Map<Long,String> uid_names=new HashMap();
+					for(User user:users){
+						uid_names.put(user.getId(), user.getName());
+					}
+					record.setUid_names(uid_names);
+					this.recordService.insert(record);
+				//	log.info(" insert record " + record);
+				}
+				
+				
 			}
+			
+			
+			
 
 			
 
