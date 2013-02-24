@@ -658,6 +658,10 @@ then
      $game.setLiverCount($liverCount-1);
      $game.setWaterCount($waterCount-1);
      update($game);     
+     
+       LogUtil.log(" after water die liver count "+$liverCount);
+     LogUtil.log("after water di  water count "+$liverCount);
+     
      #LogUtil.log(" after die game status "+$game);    
     
      
@@ -683,7 +687,8 @@ then
      $game.setKillerCount($killerCount-1);
      update($game);
      #LogUtil.log(" after die game status "+$game);
-     
+        LogUtil.log(" after water die liver count "+$liverCount);
+     LogUtil.log("after water di  water count "+$liverCount);
      
      Message dieMessage=new Message($id,"die",$type);   
      insert(dieMessage);
@@ -701,13 +706,18 @@ when
  $game:Game($liverCount:liverCount,$killerCount:killerCount);
  $message:Message($subject:subject,predict=="logout")
  $role:Role(id==$subject,role=="killer")
+  $person:Player(id==$subject,status=="living")  
 then  
      LogUtil.log("killer logout game live count start  ================="); 
       
-     
+        LogUtil.log("  liver count "+$liverCount);
+     LogUtil.log(" water count "+$liverCount);
     $game.setLiverCount($liverCount-1);
     $game.setKillerCount($killerCount-1);
      update($game);
+     
+        LogUtil.log(" after killer logout  liver count "+$liverCount);
+     LogUtil.log("after killer logout  water count "+$liverCount);
      LogUtil.log("killer logout game live count over  ================="); 
 
 end
@@ -721,13 +731,19 @@ when
  $game:Game($liverCount:liverCount,$waterCount:waterCount);
  $message:Message($subject:subject,predict=="logout")
  $role:Role(id==$subject,role=="water")
+  $person:Player(id==$subject,status=="living")  
 then  
      LogUtil.log("water logout game live count start  ================="); 
-      
+       LogUtil.log("  liver count "+$liverCount);
+     LogUtil.log(" water count "+$liverCount);
      
     $game.setLiverCount($liverCount-1);
     $game.setWaterCount($waterCount-1);
+    
      update($game);
+     
+       LogUtil.log(" after water logout  liver count "+$liverCount);
+     LogUtil.log("after water logout  water count "+$liverCount);
      LogUtil.log("water logout game live count over  ================="); 
 
 end
