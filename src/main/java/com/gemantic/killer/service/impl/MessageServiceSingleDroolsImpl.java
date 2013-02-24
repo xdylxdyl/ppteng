@@ -158,6 +158,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 			}
 			if(r.getVersion().equals("simple_1.0")){
+				
 				// 更新战例记录
 				Records record = new Records();
 				record.setId(operater.getRecordID());

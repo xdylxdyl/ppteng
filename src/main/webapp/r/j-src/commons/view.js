@@ -311,7 +311,7 @@ var gameAreaView = {
     login:function(player,message) {
 
         var action;
-        if(message.content==""){
+        if(message==null||message.content==""){
             action="";
         }else{
             action=message.content;
