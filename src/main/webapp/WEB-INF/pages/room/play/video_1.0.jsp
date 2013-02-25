@@ -55,7 +55,7 @@
 <input type="hidden" id="recordID" value="${record.id}">
 <input type="hidden" id="recordTime" value="${record.time}">
 <div id="contents" class="hidden">${contents}</div>
-
+<div id="stageShow" class=hidden>${stageShow}</div>
 
 </head>
 

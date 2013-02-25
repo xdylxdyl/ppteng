@@ -200,13 +200,22 @@ $(document).ready(function () {
 
     $("#start").click(function () {
         //检查准备人数是否合规则，否则return
-        //TODO
+        var isReady=playerService.statusCount("ready",3);
+        if(isReady){
+             //TODO
         information.sendInfo("start", null, information.info);
+
+        $("#start").hide();
+        }else{
+            alert("超过三人再开游戏好不好啊~~~~~");
+        }
+
     });
     $("#ready").click(function () {
         //检查准备人数是否合规则，否则return
         //TODO
         information.sendInfo("ready", null, information.info);
+
     });
     $("#logout").click(function () {
         var type = globalView.getRoomType();

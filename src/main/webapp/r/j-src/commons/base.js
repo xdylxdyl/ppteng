@@ -372,7 +372,16 @@ var initRoom = function() {
          //判断是否有音乐盒,默认不显示
       //  musicUtil.displayMusic();
 
+        var player=playerService.getPlayer(uid);
+        var message={};
+        message.content=globalView.getLoginShow();
+        if( message.content){
+            gameAreaView.login(player,message);
+        }
+
+
         versionFunction["init"];
+
 
 
     } else {

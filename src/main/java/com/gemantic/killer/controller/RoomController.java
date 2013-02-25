@@ -152,6 +152,12 @@ public class RoomController {
 
 		log.debug("id is " + rid + " uid " + uid);
 
+		boolean first=true;
+		List<Long> userIDS = this.memberService.getMembers(rid);
+		if(userIDS.contains(uid)){
+			first=false;
+			
+		}
 		// 进入房间,判断房间这些都是相同的
 
 		Room room = this.roomService.getRoom(rid);
@@ -166,7 +172,7 @@ public class RoomController {
 		}
 
 		// 从MemberService中获取成员列表
-		List<Long> userIDS = this.memberService.getMembers(rid);
+	
 		List<User> users = this.userService.getObjectsByIds(userIDS);
 
 		User u=this.userService.getObjectById(uid);
@@ -186,6 +192,10 @@ public class RoomController {
 		model.addAttribute("users", users);
 		model.addAttribute("type", "game");
 		model.addAttribute("uid", uid);
+		if(first){
+			model.addAttribute("stageShow", stageShow);	
+		}
+	
 		return "/room/play/" + version;
 
 	}

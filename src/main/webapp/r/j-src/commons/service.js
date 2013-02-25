@@ -81,6 +81,23 @@ var playerService = {
         }
 
     },
+    statusCount:function(status,c){
+        var count=0;
+        for (var key in id_name) {
+            var player = this.getPlayer(key);
+
+            if(status== player.status){
+                count++;
+            }
+        }
+        if(count>c){
+            return true;
+        }else{
+            return false;
+        }
+       
+    },
+
     setUnreadyStatus:function() {
         for (var key in id_name) {
             this.setStatus(key, playerStatus.unready);

@@ -150,6 +150,9 @@ var globalView = {
     },
     getRecordTime:function() {
         return $("#recordTime").val();
+    },
+    getLoginShow:function(){
+        return $("#stageShow").text();
     }
 
 
