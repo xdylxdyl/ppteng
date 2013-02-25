@@ -259,13 +259,14 @@ $(document).ready(function () {
             var maxCount = mineView.getSettingMineCount();
             mineView.initMineCount(maxCount);
 
-            var containerWidth = (mineSize.width + 2 * mineSize.border) * parseInt(column);
+            //12的Div+左右两个2PX+1
+            var containerWidth = (mineSize.width + 3) * parseInt(column)+2;
             console.log("mine width is " + mineSize.width + " border is " + mineSize.border + " column is " + column + " ,so Total" +
                 "weith is " + containerWidth);
-
+/*
             var containerHeight = (mineSize.width + mineSize.border) * parseInt(column);
             console.log("mine height is " + mineSize.height + " border is " + mineSize.border + " row is " + row + " ,so Total" +
-                "height is " + containerHeight);
+                "height is " + containerHeight);*/
 
             $("#inner").width(containerWidth);
 
@@ -276,7 +277,7 @@ $(document).ready(function () {
                 var c = Math.floor(i % column) + 1;
                 var mineHtml = "<div x='" + r + "' y='" + c + "' id='" + r + "-" + c + "'></div>"
                 $("#inner").append(mineHtml);
-                $("#inner2").append(mineHtml);
+              //  $("#inner2").append(mineHtml);
             }
             ;
 
