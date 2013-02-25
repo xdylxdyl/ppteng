@@ -154,9 +154,11 @@
 							<div class="chapter">
 								<div class="chapter-body">
 									<h4>
-										静静的
+										电影院
 									</h4>
-									<p>你可以和朋友一起玩[杀人游戏],[多人扫雷],或者你什么都不做,就只是静静待着,和我一样.</p>
+									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
+									  <p><a class="btn" href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=159" target="_blank">活动报名&raquo;</a></p>
+									
 								</div>
 							</div>
 							<div class="chapter">
