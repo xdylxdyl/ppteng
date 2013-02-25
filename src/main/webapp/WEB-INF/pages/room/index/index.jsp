@@ -121,8 +121,8 @@
 							<div class="item">
 								<img src="/r/img/img_banner_1.jpg" alt="杀人游戏">
 								<div class="carousel-caption">
-									<h4>武功再高也怕菜刀</h4>
-									<p>杀人游戏是一类注重分析和推理的游戏,而简化是诸多版本中最能将分析/推理/说服/计谋等多种能力展现淋漓尽致的版本</p>
+									<h4>葡萄藤电影院</h4>
+									<p>和朋友一起,约个时间,一边看电影,一边聊天</p>
 								</div>
 							</div>
 							<div class="item">
