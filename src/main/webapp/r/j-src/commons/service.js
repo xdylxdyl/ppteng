@@ -95,7 +95,7 @@ var playerService = {
         }else{
             return false;
         }
-       
+
     },
 
     setUnreadyStatus:function() {

@@ -200,7 +200,17 @@ $(document).ready(function () {
 
     $("#start").click(function () {
         //检查准备人数是否合规则，否则return
-        var isReady=playerService.statusCount("ready",3);
+
+        var version=globalView.getVersion();
+        var isReady=true;
+
+        if(version=="simple_1.0"){
+            isReady=playerService.statusCount("ready",3);
+
+        }else{
+            isReady=false;
+        }
+
         if(isReady){
              //TODO
         information.sendInfo("start", null, information.info);
