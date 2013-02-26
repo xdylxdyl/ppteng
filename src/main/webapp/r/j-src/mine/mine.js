@@ -262,7 +262,7 @@ $(document).ready(function () {
             mineView.initMineCount(maxCount);
 
             //12的Div+左右两个2PX+1
-            var containerWidth = 16 * parseInt(column);
+            var containerWidth = 15 * parseInt(column);
             console.log("mine width is " + mineSize.width + " border is " + mineSize.border + " column is " + column + " ,so Total" +
                 "weith is " + containerWidth);
 /*
