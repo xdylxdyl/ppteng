@@ -63,7 +63,7 @@
 			<div class="span6 roomItem">
 				<h3>
 					<small>房间名:</small> ${status.index+1}.<a href="" rid="${room.id}"
-						uid="${uid}">${room.name}</a>
+						uid="${uid}">${room.name}[进入房间]</a> 
 
 					</h2>
 					<blockquote>
