@@ -313,6 +313,8 @@ versionFunction = {
     "settingPostParameter":settingPostParameter,
     //游戏中发言
     "say":killController.say,
+    //游戏中开始游戏的限制
+    "readyCount":3,
      //Command Hint
     "commandHint":  killGameAreaView.getCommandHint
 

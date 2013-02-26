@@ -95,15 +95,17 @@ $(document).ready(function () {
     var mineSettingView = {
         initSetting:function () {
 
+            
+
         },
         getSettingParameter:function () {
-            var r = parseInt($("#行数").val());
+            var r = parseInt($("#rowCount").val());
             if (r > 20) {
-                $("#行数").val(20);
+                $("#rowCount").val(20);
             }
-            var c = parseInt($("#列数").val());
+            var c = parseInt($("#columnCount").val());
             if (c > 20) {
-                $("#列数").val(20);
+                $("#columnCount").val(20);
             }
 
 
@@ -176,13 +178,13 @@ $(document).ready(function () {
 
         },
         getSettingRow:function () {
-            return $("#行数").val();
+            return $("#rowCount").val();
         },
         getSettingColumn:function () {
-            return $("#列数").val();
+            return $("#columnCount").val();
         },
         getSettingMineCount:function () {
-            return $("#雷数").val();
+            return $("#mineCount").val();
         },
 
         tagMine:function () {
@@ -260,7 +262,7 @@ $(document).ready(function () {
             mineView.initMineCount(maxCount);
 
             //12的Div+左右两个2PX+1
-            var containerWidth = (mineSize.width + 3) * parseInt(column)+2;
+            var containerWidth = 16 * parseInt(column);
             console.log("mine width is " + mineSize.width + " border is " + mineSize.border + " column is " + column + " ,so Total" +
                 "weith is " + containerWidth);
 /*

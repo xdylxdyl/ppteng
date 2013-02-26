@@ -201,15 +201,14 @@ $(document).ready(function () {
     $("#start").click(function () {
         //检查准备人数是否合规则，否则return
 
-        var version=globalView.getVersion();
-        var isReady=true;
-
-        if(version=="simple_1.0"){
-            isReady=playerService.statusCount("ready",3);
+     var count=versionFunction["readyCount"];;
+        if(count){
 
         }else{
-            isReady=false;
+            count=0;
         }
+       var  isReady=playerService.statusCount("ready",count);
+
 
         if(isReady){
              //TODO

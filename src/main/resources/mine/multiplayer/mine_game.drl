@@ -60,9 +60,9 @@ when
 then      
 	LogUtil.log("bomb assign  =================");
 	LogUtil.log($allReadys);
-	 int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));#1*60*1000  
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  
-	 int  bombCount=Integer.valueOf(getRoomSetting($room,"雷数","10"));#1*60*1000  
+	 int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
+	 int  bombCount=Integer.valueOf(getRoomSetting($room,"mineCount","10"));#1*60*1000  
 
      String systemBombPic=BombUtil.assign(rowCount,columnCount,bombCount);
      LogUtil.log(" systemBombPic ================= "+systemBombPic);
@@ -201,9 +201,9 @@ then
     
      Pair p=BombUtil.convertString2Pair($object);   
      
-     int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));#1*60*1000  
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
      LogUtil.log("=========");
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  	 
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  	 
 	 
 	  LogUtil.log("=========");
     String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);     
@@ -238,9 +238,9 @@ then
     LogUtil.log("tag pane start  ================="); 
      Pair p=BombUtil.convertString2Pair($object);
      
-      int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));#1*60*1000  
+      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
       LogUtil.log("=========");
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
     String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);    
     
     if("*".equals(userTag)){
@@ -286,8 +286,8 @@ when
 then
     LogUtil.log("clear tag pane start  ================="); 
     Pair p=BombUtil.convertString2Pair($object);
-     int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));#1*60*1000      
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000      
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
     String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);   
     if("*".equals(userTag)){
       $right=$right-1;
@@ -336,9 +336,9 @@ then
     LogUtil.log("double click pane start  ================= "+$object+" system "+ $system);
  
         Pair pair=BombUtil.convertString2Pair($object);
-     int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));#1*60*1000  
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
       LogUtil.log("=========");
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
 	  LogUtil.log("=========");
     List<Pair> roundPanes=BombUtil.getRoundPanes(pair,rowCount,columnCount);
      LogUtil.log("=========");
@@ -403,9 +403,9 @@ when
     $room:Room()
 then
     LogUtil.log("click  zero number  start  ================= "+$click);   
-     int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));#1*60*1000  
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
       LogUtil.log("=========");
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));#1*60*1000  
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
 	 Pair pair=BombUtil.convertString2Pair($pid);
     List<Pair> roundPanes=BombUtil.getRoundPanes(pair,rowCount,columnCount);
       LogUtil.log(pair+" list pair is   ================= "+roundPanes);  
@@ -717,8 +717,8 @@ then
       m.put("person",$allLogins);     
       setRemainTime($status+"Time",$game,$room) ; 
       m.put("game",$game);     
-     int  rowCount=Integer.valueOf(getRoomSetting($room,"行数","9"));	 
-     int  columnCount=Integer.valueOf(getRoomSetting($room,"列数","9"));
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));	 
+     int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));
      String bomb=BombUtil.initBomb(rowCount,columnCount);
      for(Object o:$tags){
         Tag tag=(Tag)o;
