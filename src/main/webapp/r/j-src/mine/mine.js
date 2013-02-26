@@ -2,7 +2,7 @@ $(document).ready(function () {
     //左键
     $("#inner div").live("click", function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
-        if ("living" == p.status||"ready"== p.status) {
+        if ("living" == p.status || "ready" == p.status) {
             var mo = mineView.getMineOperater(this, mouseAction.click);
             var rid = globalView.getRoomID();
             var version = globalView.getVersion();
@@ -96,7 +96,6 @@ $(document).ready(function () {
         initSetting:function () {
 
 
-
         },
         getSettingParameter:function () {
             var r = parseInt($("#rowCount").val());
@@ -166,7 +165,11 @@ $(document).ready(function () {
                     $(id).empty();
                     $(id).removeClass();
                     break;
-
+                case "0":
+                    $(id).empty();
+                    $(id).removeClass();
+                    $(id).addClass("square").addClass("q" + value);
+                    break;
 
                 default:
                     $(id).empty();
@@ -262,13 +265,13 @@ $(document).ready(function () {
             mineView.initMineCount(maxCount);
 
             //12的Div+左右两个2PX+1
-            var containerWidth = 15 * parseInt(column);
+            var containerWidth = 16 * parseInt(column);
             console.log("mine width is " + mineSize.width + " border is " + mineSize.border + " column is " + column + " ,so Total" +
                 "weith is " + containerWidth);
-/*
-            var containerHeight = (mineSize.width + mineSize.border) * parseInt(column);
-            console.log("mine height is " + mineSize.height + " border is " + mineSize.border + " row is " + row + " ,so Total" +
-                "height is " + containerHeight);*/
+            /*
+             var containerHeight = (mineSize.width + mineSize.border) * parseInt(column);
+             console.log("mine height is " + mineSize.height + " border is " + mineSize.border + " row is " + row + " ,so Total" +
+             "height is " + containerHeight);*/
 
             $("#inner").width(containerWidth);
 
@@ -279,7 +282,7 @@ $(document).ready(function () {
                 var c = Math.floor(i % column) + 1;
                 var mineHtml = "<div x='" + r + "' y='" + c + "' id='" + r + "-" + c + "'></div>"
                 $("#inner").append(mineHtml);
-              //  $("#inner2").append(mineHtml);
+                //  $("#inner2").append(mineHtml);
             }
             ;
 
@@ -287,7 +290,7 @@ $(document).ready(function () {
             $("#inner div").rightClick(function (e) {
 
                 var p = playerService.getPlayer(globalView.getCurrentID())
-                if ("living" == p.status||"ready"== p.status) {
+                if ("living" == p.status || "ready" == p.status) {
                     var mo = mineView.getMineOperater(this, mouseAction.rightClick);
                     var rid = globalView.getRoomID();
                     var version = globalView.getVersion();

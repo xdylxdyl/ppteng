@@ -41,7 +41,7 @@
 			<div class="netspeed" id="replay_time_hint">
 				<span id="all_time"></span> <span id="current_time"></span>
 			</div>
-		</fieldset
+		</fieldset>
 		<div class="quiet" id="logout"></div>
 	</form>
 
