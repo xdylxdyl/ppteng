@@ -95,7 +95,7 @@ $(document).ready(function () {
     var mineSettingView = {
         initSetting:function () {
 
-            
+
 
         },
         getSettingParameter:function () {
