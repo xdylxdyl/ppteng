@@ -62,6 +62,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 	public List<Message> generate(Message message, Room room) throws ServiceException, ServiceDaoException {
 		// 根据不同的房间ID创建不同的Session.这样怎么能支持扩展性呢.Session能否序列化.除非支持按房间分布Service的Session.
 
+		Long start=System.currentTimeMillis();
 		Operater operater = new Operater(message);
 		try{
 		process(operater, room);
@@ -84,6 +85,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			roomTimerSevice.nextMessages(operater.getTimerMessages());
 		}
 		// 怎么对顺序排序
+		log.info(message.getId()+" user time is "+(System.currentTimeMillis()-start));
 
 		return operater.getNextMessages();
 
