@@ -1,10 +1,11 @@
 $(document).ready(function () {
-
-
+    videoUtil.drag("outer");
+    $("#music_container").hide();
     var videoView = {
         setVideo:function (address) {
             var html = "<embed src='" + address + "' type='application/x-shockwave-flash' allowscriptaccess='always' allowfullscreen='true' wmode='opaque' width='480' height='400'></embed>";
             $("#outer").empty().html(html);
+
         }
 
     }

@@ -13,4 +13,4 @@
 	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
 	//response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
-<c:set var="frontVersion" value="5.0"></c:set>
+<c:set var="frontVersion" value="6.0"></c:set>

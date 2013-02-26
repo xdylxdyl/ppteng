@@ -9,6 +9,9 @@
     background: #C0C0C0;
     float: left;
     margin: 2em;
+    position: absolute;
+
+
 }
 
 .outer .right {
@@ -101,18 +104,18 @@ section {
 }
 
 section header {
-    height: 80%;
+    height: 10%;
     overflow: auto;
 }
 
 section header .mine_area {
 
     overflow-y: auto;
-    height: 85%;
+    height: 50%;
 }
 
 section article {
-    height: 20%;
+    height: 50%;
     overflow: auto;
     padding: 10px 0 0 0;
 }

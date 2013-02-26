@@ -28,8 +28,8 @@
 	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath()%>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/musicUtil.js?v=${frontVersion}"></script>
+
+	<script src="/r/j-src/video/videoUtil.js?v=${frontVersion}"></script>
 <script src="/r/j-src/video/video.js?v=${frontVersion}"></script>
 <script src="/r/j-src/commons/model.js?v=${frontVersion}"></script>
 <script src="/r/j-src/commons/view.js?v=${frontVersion}"></script>
