@@ -52,6 +52,7 @@ declare Count
         all:Integer
         init:Integer
         right:Integer
+        user:Integer
 end
 
 declare UserCount

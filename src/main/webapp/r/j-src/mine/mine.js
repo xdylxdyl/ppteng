@@ -1,4 +1,5 @@
 $(document).ready(function () {
+     timer = null;
     //左键
     $("#inner div").live("click", function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
@@ -208,7 +209,7 @@ $(document).ready(function () {
 
 
             $("#start").hide();
-            $(".nobg").val("");
+            $(".nobg").show();
             $("section article, section .killer_area, section .dead_area,#role_area").empty();
             $("section .killer_area, section .dead_area").hide();
             $("section article").append("<p style='color:#F00'>【系统消息】 游戏开始~~赶紧的扫扫扫扫扫扫雷吧</p>");
@@ -222,6 +223,14 @@ $(document).ready(function () {
 
             mineView.initMine();
 
+
+            mineView.startCountTime();
+
+
+        },
+        startCountTime:function(){
+          controlView.clearCountDownTime();
+          controlView.startCountTime(0);
         },
         showWrong:function (message) {
             var uid = message.subject;
@@ -254,6 +263,8 @@ $(document).ready(function () {
             }
 
             //展示错误的地方,以及谁点错的
+
+            controlView.clearCountDownTime();
 
         },
         initMine:function () {

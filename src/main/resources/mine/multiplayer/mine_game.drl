@@ -96,7 +96,7 @@ then
 	
 	LogUtil.log(" game status  ================="+game);
 	
-	Count count=new Count(0,bombCount,rowCount*columnCount,0);
+	Count count=new Count(0,bombCount,rowCount*columnCount,0,0);
 	insert(count);
 	
 	$room.setStatus("run");	
@@ -127,7 +127,21 @@ then
 end
 
 
+rule 'clear click'
+ruleflow-group "game init"
+when
+	
+    $message:Message(predict=="start",$time:time)   
+    $room:Room(status=="unrun")    
+    $operater:Operater()
+    $click:Click()   
+then      
 
+	LogUtil.log("clear click start  =================");	
+    retract($click);
+
+	LogUtil.log("clear click over  =================");
+end
 
 
 rule 'start game right'
@@ -196,6 +210,7 @@ when
     $bombPic:BombPic($system:system,$user:user)    
     $room:Room()
     not Tag(pid==$object) 
+   
 then
     LogUtil.log("click pane start  ================="); 
     
@@ -208,6 +223,7 @@ then
 	  LogUtil.log("=========");
     String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);     
    
+    
     //  LogUtil.log("=========");
     Click click=new Click($subject,userTag,$object);
       LogUtil.log("=========");
@@ -364,7 +380,6 @@ end
 
 
 
-
 rule 'click number'
 ruleflow-group "click action"
 
@@ -374,7 +389,7 @@ when
     $bombPic:BombPic()    
     $game:Game() 
      $room:Room()
-      
+      $count:Count($user:user) 
 then
     LogUtil.log("click number  start  =================");   
    
@@ -385,8 +400,12 @@ then
   
     Tag tag=new Tag($click.getUid(),$click.getValue(),$pid);
      insert(tag);
-     
+    
     retract($click); 
+    
+     $count.setUser($user+1);
+     update($count);
+     LogUtil.log(" count is  ================="+$count); 
     LogUtil.log("click number over  ================="); 
 end
 
@@ -401,6 +420,7 @@ when
     not Tag(pid==$pid)
     $game:Game()    
     $room:Room()
+     $count:Count($userCount:user)
 then
     LogUtil.log("click  zero number  start  ================= "+$click);   
      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
@@ -423,6 +443,10 @@ then
        Tag tag=new Tag($click.getUid(),$click.getValue(),$pid);
      insert(tag);
       retract($click);
+      
+        $count.setUser($userCount+1);
+         LogUtil.log(" count is  ================="+$count); 
+     update($count);
     LogUtil.log("click zero number over  ================="); 
 end
 
@@ -490,14 +514,18 @@ end
 
 
 
+
+
+
+
 rule 'complete'
 ruleflow-group "game status"
 
 when
     $bombPic:BombPic()
     $game:Game($recordName:recordName)    
-    $count:Count($all:all,$right:right)    
-    eval($right==$all)
+    $count:Count($all:all,$right:right,$user:user,$bomb:bomb,$init:init)    
+    eval($right==$all||$user==$init-$all)
     
     
 then

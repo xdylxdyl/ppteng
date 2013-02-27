@@ -408,6 +408,19 @@ var controlView = {
         }
     },
 
+    startCountTime:function(time){
+        var t = Math.floor(time / 1000);
+               var m = Math.floor(t / 60);
+               var s = t - m * 60;
+               m < 10 ? m = "0" + m : m;
+               s < 10 ? s = "0" + s : s;
+               var result = m + ":" + s;
+               $(".nobg").val(result);
+               time = time + 1000;
+
+                timer = setTimeout("controlView.startCountTime(" + time + ")", 1000);
+
+    },
     setCountDownTime:function(time) {
 
         var t = Math.floor(time / 1000);
