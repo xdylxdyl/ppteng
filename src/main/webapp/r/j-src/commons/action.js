@@ -216,7 +216,7 @@ $(document).ready(function () {
 
         $("#start").hide();
         }else{
-            alert("超过三人再开游戏好不好啊~~~~~");
+            alert("超过"+count+"人再开游戏好不好啊~~~~~");
         }
 
     });

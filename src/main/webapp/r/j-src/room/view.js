@@ -113,7 +113,6 @@ var killGameAreaView = {
     vote:function(subjectName, objectName, color, exp, content) {
 
 
-        color = "#F00";
         $("section article").append("<p style='color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
         viewUtil.autoBottom("section article");
     },
