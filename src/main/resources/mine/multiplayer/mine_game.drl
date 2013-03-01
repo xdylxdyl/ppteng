@@ -391,7 +391,7 @@ when
      $room:Room()
       $count:Count($user:user) 
 then
-    LogUtil.log("click number  start  =================");   
+   // LogUtil.log("click number  start  =================");   
    
     
     
@@ -405,8 +405,8 @@ then
     
      $count.setUser($user+1);
      update($count);
-     LogUtil.log(" count is  ================="+$count); 
-    LogUtil.log("click number over  ================="); 
+   //  LogUtil.log(" count is  ================="+$count); 
+    //LogUtil.log("click number over  ================="); 
 end
 
 
@@ -422,13 +422,13 @@ when
     $room:Room()
      $count:Count($userCount:user)
 then
-    LogUtil.log("click  zero number  start  ================= "+$click);   
+    //LogUtil.log("click  zero number  start  ================= "+$click);   
      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
-      LogUtil.log("=========");
+     // LogUtil.log("=========");
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
 	 Pair pair=BombUtil.convertString2Pair($pid);
     List<Pair> roundPanes=BombUtil.getRoundPanes(pair,rowCount,columnCount);
-      LogUtil.log(pair+" list pair is   ================= "+roundPanes);  
+    //  LogUtil.log(pair+" list pair is   ================= "+roundPanes);  
     for(Pair p:roundPanes){
     
        String value=BombUtil.clickOpen(p,$system,rowCount,columnCount); 
@@ -445,9 +445,9 @@ then
       retract($click);
       
         $count.setUser($userCount+1);
-         LogUtil.log(" count is  ================="+$count); 
+       //  LogUtil.log(" count is  ================="+$count); 
      update($count);
-    LogUtil.log("click zero number over  ================="); 
+    //LogUtil.log("click zero number over  ================="); 
 end
 
 

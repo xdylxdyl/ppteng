@@ -113,7 +113,7 @@ var killGameAreaView = {
     vote:function(subjectName, objectName, color, exp, content) {
 
 
-        $("section article").append("<p style='color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
+        $("section article").append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
         viewUtil.autoBottom("section article");
     },
 
