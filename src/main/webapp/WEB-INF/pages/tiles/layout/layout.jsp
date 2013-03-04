@@ -17,13 +17,13 @@
 
 <div id="container">
     <div class="clearfix">
-        <nav>
+      
             <tiles:insertAttribute name="header" />
-        </nav>
+       
 
-        <section>
+       
             <tiles:insertAttribute name="body" />
-        </section>
+       
     </div>
 
     <footer>

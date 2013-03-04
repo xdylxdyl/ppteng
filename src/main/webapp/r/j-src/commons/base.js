@@ -380,7 +380,7 @@ var initRoom = function() {
         }
 
 
-        versionFunction["init"];
+        versionFunction["init"]();
 
 
 

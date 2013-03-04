@@ -1,11 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
-<!doctype html>
-<html>
-<head>
 
-<title>${room.name}-多人扫雷-葡萄藤</title>
-<meta charset="utf-8">
 
 
 
@@ -55,10 +50,7 @@
 <input type="hidden" id="recordTime" value="${record.time}">
 <div id="contents" class="hidden">${contents}</div>
 <div id="stageShow" class=hidden>${stageShow}</div>
-
-</head>
-
-<body>
+<section>
 
 	<div id="music" class="hidden">${music}</div>
 
@@ -96,11 +88,4 @@
 
 	<article></article>
 
-
-
-
-
-
-</body>
-
-</html>
+</section>

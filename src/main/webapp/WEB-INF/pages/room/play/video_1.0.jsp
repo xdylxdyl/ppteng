@@ -1,11 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
-<!doctype html>
-<html>
-<head>
 
-<title>${room.name}-一起看视频-葡萄藤</title>
-<meta charset="utf-8">
 
 
 
@@ -57,41 +52,25 @@
 <div id="contents" class="hidden">${contents}</div>
 <div id="stageShow" class=hidden>${stageShow}</div>
 
-</head>
 
-<body>
+  
+     
+     
+    
 
-	<div id="music" class="hidden">${music}</div>
-
-	<div id="music_play" class="music_play"></div>
-
-	<div id="music_container" class="music_container">
-		<img id="music_controller" src="/r/img/music/music.jpg">
-	</div>
-
-	<header>
-
-		<div id="outer" class="outer">
+	<div id="outer" class="outer">
 		
 		<embed src="http://www.tudou.com/a/B2wm4t-ogxA/&resourceId=0_05_05_99&iid=130772196&bid=05/v.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="480" height="400"></embed>
 			
 		</div>
 
 
-
-	</header>
-	<div class="line"></div>
-
-
-
-
+<section>
 	<article></article>
+  </section>
+ 
 
 
 
 
 
-
-</body>
-
-</html>

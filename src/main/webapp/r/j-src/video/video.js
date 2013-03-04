@@ -53,14 +53,28 @@ $(document).ready(function () {
         updateSetting:function (init) {
 
             var address = videoSettingView.getVideoAddress();
-             videoView.setVideo(address);
+            if(address==null|address==""){
+
+            }else{
+                videoView.setVideo(address);
+            }
+
             if (init) {
 
             } else {
 
                 alert("亲爱的管理员已经更改视频了~");
             }
+        },
+        init:function(){
+            gameAreaView.systemMessage("【系统消息】亲爱的朋友,欢迎您来到" +
+                "<a href='http://bbs.ptteng.com/forum.php?mod=viewthread&tid=159' target='_blank''>葡萄藤电影院</a>" +
+                ",请保持安静,电影结束时,带好您的手机钱包和男朋友~" );
+            videoService.updateSetting(true);
+
         }
+
+
 
 
 
@@ -75,7 +89,7 @@ $(document).ready(function () {
         "getSettingParameter":videoSettingView.getSettingParameter,
         "parseMessage":videoService.parseMessage,
         "parseDetail":videoService.parseDetail,
-        "init":videoService.updateSetting,
+        "init":videoService.init,
         "settingCallback":videoService.updateSetting
         //   "settingPostParameter":settingPostParameter89,,
 

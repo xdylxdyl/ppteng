@@ -371,6 +371,10 @@ var gameAreaView = {
         viewUtil.autoBottom("section article");
 
 
+    },
+    systemMessage:function(content){
+        $("section article").append("<p style='color:#F00'>" + content + "</p>");
+             viewUtil.autoBottom("section article");
     }
 
 

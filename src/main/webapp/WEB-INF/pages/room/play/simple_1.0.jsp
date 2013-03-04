@@ -1,10 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
-<!doctype html>
-<html>
-<head>
-<title>${room.name}-简化-杀人游戏-葡萄藤</title>
-<meta charset="utf-8">
+
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/r/css/kill/room.css?v=${frontVersion}">
@@ -52,14 +48,12 @@
 <div id="stageShow" class=hidden>${stageShow}</div>
 <div id="contents" class="hidden">${contents}</div>
 
-
-</head>
-
-<body>
 	<div id="music" class="hidden">${music}</div>
 	<div id="music_play" class="music_play"></div>
 	<div id="music_container" class="music_container"><img id="music_controller" src="/r/img/music/music.jpg"></div>
+<section>
 
+  
 	<header>
 		<div class="role_area" id="role_area">
 			<span class="phase_area" id="phase_area" style="color: #F00"></span>
@@ -69,7 +63,4 @@
 	</header>
 	<div class="line"></div>
 	<article></article>
-
-
-</body>
-</html>
+	</section>

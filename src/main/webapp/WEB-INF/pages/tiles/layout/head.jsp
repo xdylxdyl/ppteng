@@ -1,17 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
-<!doctype html>
-<html>
-    <head>
-    
-        <title>${room.name}</title>
-        <meta charset="utf-8">
+<nav>
+          
         
-        
-    </head>
-    
-    <body>
-       
+
         <article>
 
         </article>
@@ -21,6 +13,5 @@
           
         </ul>
         
-      
-    </body>
-</html>
+  </nav>
+  
