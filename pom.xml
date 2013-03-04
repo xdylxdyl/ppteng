@@ -128,6 +128,18 @@
 					<artifactId>spring-core</artifactId>
 					<groupId>org.springframework</groupId>
 				</exclusion>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-webmvc</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
 			</exclusions>
 
 
@@ -137,6 +149,28 @@
 			<groupId>com.gemantic.commons</groupId>
 			<artifactId>commons-push-client</artifactId>
 			<version>1.4</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-webmvc</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 
@@ -303,6 +337,26 @@
 					<artifactId>commons-core</artifactId>
 					<groupId>com.gemantic.commons</groupId>
 				</exclusion>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-webmvc</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -459,6 +513,18 @@
 					<artifactId>hibernate-c3p0</artifactId>
 					<groupId>org.hibernate</groupId>
 				</exclusion>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -470,6 +536,18 @@
 				<exclusion>
 					<artifactId>hibernate-c3p0</artifactId>
 					<groupId>org.hibernate</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -493,44 +571,29 @@
 
 		<!-- public dependency -->
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
 
 		<!-- Expression Language (depends on spring-core) Define this if you use 
 			Spring Expression APIs (org.springframework.expression.*) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.version}</version>			
 		</dependency>
 
 		<!-- Bean Factory and JavaBeans utilities (depends on spring-core) Define 
 			this if you use Spring Bean APIs (org.springframework.beans.*) -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
 
 		<!-- Aspect Oriented Programming (AOP) Framework (depends on spring-core, 
 			spring-beans) Define this if you use Spring AOP APIs (org.springframework.aop.*) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.version}</version>			
 		</dependency>
 
 		<!-- Application Context (depends on spring-core, spring-expression, spring-aop, 
 			spring-beans) This is the central artifact for Spring's Dependency Injection 
 			Container and is generally always defined -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
 
 		<!-- Various Application Context utilities, including EhCache, JavaMail, 
 			Quartz, and Freemarker integration Define this if you need any of these integrations -->
@@ -538,6 +601,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework.version}</version>
+			
 		</dependency>
 
 		<!-- Transaction Management Abstraction (depends on spring-core, spring-beans, 
@@ -546,7 +610,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.version}</version>			
 		</dependency>
 
 		<!-- JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, 
@@ -573,17 +637,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.version}</version>			
 		</dependency>
 
 		<!-- Spring MVC for Servlet Environments (depends on spring-core, spring-beans, 
 			spring-context, spring-web) Define this if you use Spring MVC with a Servlet 
 			Container such as Apache Tomcat (org.springframework.web.servlet.*) -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
 
 		<!-- Spring MVC for Portlet Environments (depends on spring-core, spring-beans, 
 			spring-context, spring-web) Define this if you use Spring MVC with a Portlet 
@@ -591,7 +650,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc-portlet</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.version}</version>			
 		</dependency>
 
 		<!-- Support for testing Spring applications with tools such as JUnit and 
@@ -609,7 +668,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework.version}</version>
-			<scope>compile</scope>
+			<scope>compile</scope>			
 		</dependency>
 
 
@@ -618,7 +677,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework.version}</version>
-			<scope>compile</scope>
+			<scope>compile</scope>			
 		</dependency>
 
 
