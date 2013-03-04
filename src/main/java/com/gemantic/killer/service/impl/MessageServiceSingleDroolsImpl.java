@@ -150,7 +150,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			this.roomService.updateRoom(r);
 			// 从哪知道游戏里的玩家呢
 
-			if(r.getPlayers().size()>6&&time>3*60*1000){
+			if(r.getPlayers().size()>=6&&time>3*60*1000){
 				//六人局才发钱和超过三分钟才给钱存战例
 				for (Message m : messages) {
 					if ("decryption" == m.getPredict()) {

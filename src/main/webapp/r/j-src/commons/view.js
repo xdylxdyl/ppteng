@@ -156,7 +156,6 @@ var globalView = {
     }
 
 
-
 }
 
 
@@ -383,8 +382,12 @@ var gameAreaView = {
 
 var viewUtil = {
     autoBottom:function(dom) {
-        var height = $(dom)[0].scrollHeight;
-        $(dom).scrollTop(height);
+        var isAuto=controlView.getAutoRoll();
+        if(isAuto){
+            var height = $(dom)[0].scrollHeight;
+                   $(dom).scrollTop(height);
+        }
+
     }
 
 }
@@ -545,10 +548,12 @@ var controlView = {
         alert("内容不能为空！请输入内容重新发送");
     },
     isShow:function(){
-
      return $("#replay_role_checkbox").attr("checked");
 
-    }
+    }    ,
+     getAutoRoll:function(){
+         return $("#autoroll_checkbox").attr("checked");
+   }
 
 
 
