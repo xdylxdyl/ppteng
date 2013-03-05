@@ -290,6 +290,22 @@ $(document).ready(function () {
     });
 
 
+
+    $("section article p").live("click", function () {
+
+
+        getContent.call(this);
+
+          return false;
+
+      });
+
+   function getContent(){
+       var content=  $(this).html();
+       controlView.hintSay(content);
+   }
+
+
     function showMessage(index, messages, delay) {
 
         setTimeout(showMessage(index), delay);
