@@ -2,7 +2,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <!DOCTYPE HTML>
 <head>
-
+<script src="/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
 <style type="text/css">
 form {
 	padding-left: 10px;

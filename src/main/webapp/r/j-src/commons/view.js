@@ -74,6 +74,9 @@ var settingView = {
 
             var v = $("#expContent").val();
 
+            v=DBC2SBC(v);
+            v=full2half(v);
+
             var expArray;
             try {
                 expArray = eval(v);

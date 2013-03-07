@@ -71,7 +71,8 @@ $(document).ready(function () {
         $("#showCommit").bind("click", function () {
 
             var v = $("#showContent").val();
-
+            v=DBC2SBC(v);
+            v=full2half(v);
             var expArray;
             try {
                 expArray = eval(v);
@@ -88,6 +89,7 @@ $(document).ready(function () {
             stageShow["login"] = expArray;
             playerService.updateShow(JSON.stringify(stageShow));
 
+            userEditView.updateShow(JSON.stringify(stageShow));
 
             $("#showContainer").hide();
             return false;

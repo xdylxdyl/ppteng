@@ -41,6 +41,9 @@ var userEditView = {
         }
 
 
+    },
+    updateShow:function(text){
+        $("#stageShow").text(text)
     }
 
 

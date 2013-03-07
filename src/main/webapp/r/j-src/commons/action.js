@@ -201,22 +201,23 @@ $(document).ready(function () {
     $("#start").click(function () {
         //检查准备人数是否合规则，否则return
 
-     var count=versionFunction["readyCount"];;
-        if(count){
+        var count = versionFunction["readyCount"];
+        ;
+        if (count) {
 
-        }else{
-            count=0;
+        } else {
+            count = 0;
         }
-       var  isReady=playerService.statusCount("ready",count);
+        var isReady = playerService.statusCount("ready", count);
 
 
-        if(isReady){
-             //TODO
-        information.sendInfo("start", null, information.info);
+        if (isReady) {
+            //TODO
+            information.sendInfo("start", null, information.info);
 
-        $("#start").hide();
-        }else{
-            alert("超过"+count+"人再开游戏好不好啊~~~~~");
+            $("#start").hide();
+        } else {
+            alert("超过" + count + "人再开游戏好不好啊~~~~~");
         }
 
     });
@@ -265,14 +266,12 @@ $(document).ready(function () {
 
     $("#replay_role_checkbox").bind("click", function () {
 
-        if (controlView.isShow())
-        {
+        if (controlView.isShow()) {
             $("#role_area").hide();
             $("#dead_area").hide();
             $("#killer_area").hide();
         }
-        else
-        {
+        else {
             $("#role_area").show();
             $("#dead_area").show();
             $("#killer_area").show();
@@ -291,19 +290,18 @@ $(document).ready(function () {
 
 
 
-    $("section article p").live("click", function () {
 
+    $("section article p").live("dblclick", function () {
 
         getContent.call(this);
+        return false;
 
-          return false;
+    });
 
-      });
-
-   function getContent(){
-       var content=  $(this).html();
-       controlView.hintSay(content);
-   }
+    function getContent() {
+        var content = $(this).html();
+        controlView.hintSay(content);
+    }
 
 
     function showMessage(index, messages, delay) {
