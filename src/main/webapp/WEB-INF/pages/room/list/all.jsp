@@ -65,7 +65,7 @@
 					<small>房间名:</small> ${status.index+1}.<a href="" rid="${room.id}"
 						uid="${uid}">${room.name}[进入房间]</a> 
 
-					</h2>
+					</h3>
 					<blockquote>
 
 						<small> 纪元： <date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "

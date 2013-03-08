@@ -43,6 +43,7 @@
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="brand" href="#">葡萄藤</a>
+				
 				<div class="nav-collapse" id="nav">
 					<ul class="nav pull-right">
 						<li><a href="/">首页</a></li>

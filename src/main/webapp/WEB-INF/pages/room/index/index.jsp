@@ -111,7 +111,7 @@
 				<div class="span8 banner-screen">
 					<div id="indexCarousel" class="carousel">
 						<div class="carousel-inner">
-						<div class="active item">
+						<div class="item">
 								<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
 								<div class="carousel-caption">
 									<h4>368活动</h4>
@@ -125,11 +125,11 @@
 									<p>和朋友一起,约个时间,一边看电影,一边聊天</p>
 								</div>
 							</div>
-							<div class="item">
-								<img src="/r/img/img_banner_2.jpg" alt="简化">
+							<div class="active item">
+								<img src="/r/img/highday/38.gif" alt="三八快乐">
 								<div class="carousel-caption">
-									<h4>自古太监功夫高</h4>
-									<p>游戏通常分为两大阵营，水民和杀手；水民以投票为手段投死杀手获取最后胜利，杀手方隐匿于水民中间，靠夜晚杀人和白天伪装成水民,坚持活到最后为胜利</p>
+									<h4>节日快乐</h4>
+									<p>开心每一天~今日打卡,游戏金币三倍~</p>
 								</div>
 							</div>
 							
