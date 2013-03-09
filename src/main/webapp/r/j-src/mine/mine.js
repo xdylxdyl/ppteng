@@ -99,9 +99,9 @@ $(document).ready(function () {
     var mineSettingView = {
         initSetting:function () {
 
-            var html = " <span>*必须提交才会生效</span><select id='mineSelect'><option value ='0' selected='selected'>级别</option><option value ='1'>低级</option><option value ='2'>中级</option><option value='3'>高级</option><option value='4'>神级</option>" +
+            var html = "<select id='mineSelect'><option value ='0' selected='selected'>级别</option><option value ='1'>低级</option><option value ='2'>中级</option><option value='3'>高级</option><option value='4'>神级</option>" +
                 "<option value='5'>自定义</option>" +
-                "</select>";
+                "</select> <span>*提交生效</span>";
             $("#versionDefined").empty().html(html);
             //default mineSelect is 1.
            mineSettingView.updateSettingParameter(null, null, null, true);
