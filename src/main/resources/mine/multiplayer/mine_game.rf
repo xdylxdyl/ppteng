@@ -12,25 +12,26 @@
   </header>
 
   <nodes>
-    <ruleSet id="68" name="logout action" x="982" y="396" width="80" height="48" ruleFlowGroup="logout action" />
+    <ruleSet id="68" name="logout action" x="906" y="405" width="80" height="48" ruleFlowGroup="logout action" />
     <start id="1" name="Start" x="200" y="16" width="49" height="49" />
     <ruleSet id="70" name="clear tag action" x="616" y="118" width="80" height="48" ruleFlowGroup="clear tag action" />
-    <ruleSet id="71" name="clear click" x="1032" y="152" width="80" height="48" ruleFlowGroup="clear click" />
+    <ruleSet id="71" name="clear click" x="1094" y="124" width="80" height="48" ruleFlowGroup="clear click" />
     <ruleSet id="64" name="log snapshot" x="445" y="591" width="80" height="48" ruleFlowGroup="log snapshot" />
     <ruleSet id="65" name="game init" x="146" y="85" width="80" height="48" ruleFlowGroup="game init" />
     <end id="5" name="End" x="88" y="806" width="49" height="49" />
     <ruleSet id="66" name="user action" x="449" y="164" width="80" height="48" ruleFlowGroup="user action" />
-    <ruleSet id="67" name="person count" x="713" y="254" width="80" height="48" ruleFlowGroup="person count" />
+    <ruleSet id="67" name="person count" x="768" y="271" width="80" height="48" ruleFlowGroup="person count" />
     <ruleSet id="72" name="action" x="1066" y="321" width="80" height="48" ruleFlowGroup="action" />
-    <ruleSet id="73" name="login action" x="477" y="261" width="80" height="48" ruleFlowGroup="login action" />
+    <ruleSet id="73" name="login action" x="510" y="263" width="80" height="48" ruleFlowGroup="login action" />
     <ruleSet id="47" name="game right" x="1093" y="235" width="80" height="48" ruleFlowGroup="game right" />
-    <ruleSet id="44" name="query" x="566" y="262" width="80" height="48" ruleFlowGroup="query" />
+    <ruleSet id="74" name="merge message" x="378" y="292" width="80" height="48" ruleFlowGroup="merge message" />
+    <ruleSet id="44" name="query" x="623" y="267" width="80" height="48" ruleFlowGroup="query" />
     <ruleSet id="45" name="click action" x="310" y="219" width="80" height="48" ruleFlowGroup="click action" />
-    <ruleSet id="51" name="generate message" x="729" y="400" width="224" height="48" ruleFlowGroup="generate message" />
+    <ruleSet id="51" name="generate message" x="555" y="380" width="224" height="48" ruleFlowGroup="generate message" />
     <ruleSet id="55" name="time operator" x="230" y="421" width="80" height="48" ruleFlowGroup="time of operater" />
     <ruleSet id="54" name="next operator" x="181" y="514" width="122" height="48" ruleFlowGroup="next of operater" />
     <ruleSet id="53" name="all accepts" x="92" y="348" width="80" height="48" ruleFlowGroup="all accepts message" />
-    <ruleSet id="57" name="game status" x="810" y="206" width="150" height="48" ruleFlowGroup="game status" />
+    <ruleSet id="57" name="game status" x="862" y="171" width="150" height="48" ruleFlowGroup="game status" />
     <ruleSet id="63" name="game over" x="230" y="788" width="80" height="48" ruleFlowGroup="game over" />
     <ruleSet id="62" name="remove snapshot" x="248" y="670" width="271" height="48" ruleFlowGroup="remove snapshot" />
     <ruleSet id="61" name="create snapshot" x="766" y="58" width="80" height="48" ruleFlowGroup="create snapshot" />
@@ -47,8 +48,9 @@
     <connection from="70" to="66" />
     <connection from="44" to="67" />
     <connection from="47" to="72" />
-    <connection from="45" to="73" />
+    <connection from="74" to="73" />
     <connection from="71" to="47" />
+    <connection from="45" to="74" />
     <connection from="73" to="44" />
     <connection from="66" to="45" />
     <connection from="68" to="51" />

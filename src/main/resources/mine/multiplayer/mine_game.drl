@@ -393,7 +393,7 @@ when
 then
    // LogUtil.log("click number  start  =================");   
    
-    
+   //  Long start=System.currentTimeMillis();
     
      Message tagMessage=new Message($pid,"mine",$click.getValue()); 
      insert(tagMessage);       
@@ -407,6 +407,7 @@ then
      update($count);
    //  LogUtil.log(" count is  ================="+$count); 
     //LogUtil.log("click number over  ================="); 
+   //  LogUtil.log("click  number use time   ================="+(System.currentTimeMillis()-start));
 end
 
 
@@ -423,6 +424,7 @@ when
      $count:Count($userCount:user)
 then
     //LogUtil.log("click  zero number  start  ================= "+$click);   
+   // Long start=System.currentTimeMillis();
      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
      // LogUtil.log("=========");
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
@@ -447,12 +449,52 @@ then
         $count.setUser($userCount+1);
        //  LogUtil.log(" count is  ================="+$count); 
      update($count);
-    //LogUtil.log("click zero number over  ================="); 
+    //LogUtil.log("click zero number use time   ================="+(System.currentTimeMillis()-start)); 
 end
 
 
 
 
+
+
+rule 'merge message'
+ruleflow-group "merge message"
+no-loop true
+when    
+    $game:Game()    
+    $room:Room() 
+    $msgs:ArrayList()
+	      from accumulate(
+	      $msg:Message(predict=="mine")	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($msg);),
+	      result(ls)
+	      );
+	      
+	 eval($msgs.size()>1)
+     
+then
+    //LogUtil.log("click  zero number  start  ================= "+$click);   
+     Long start=System.currentTimeMillis();
+  StringBuffer sb=new StringBuffer();
+		
+		
+    for(Object o: $msgs){
+    
+     Message msg=(Message)o;
+        sb=sb.append(msg.getSubject());
+		sb=sb.append(BombUtil.Split_Underline);
+		sb=sb.append(msg.getObject());
+        sb=sb.append(",");
+        retract(msg);
+        
+    }    
+       
+     Message mergeMessage=new Message("","mergeMine",sb.toString()); 
+     insert(mergeMessage);      
+     LogUtil.log("merge message use time   ================="+(System.currentTimeMillis()-start)); 
+    //LogUtil.log("click zero number use time   ================="+(System.currentTimeMillis()-start)); 
+end
 
 
 
@@ -499,6 +541,8 @@ end
 
 
 
+
+
 rule 'taged click zero number'
 ruleflow-group "clear click"
 when
@@ -506,10 +550,10 @@ when
     $game:Game()    
     $room:Room()
 then
-    LogUtil.log("taged click  zero number  start  ================= "+$click);   
+    //LogUtil.log("taged click  zero number  start  ================= "+$click);   
      
       retract($click);
-    LogUtil.log("taged click zero number over  ================="); 
+   // LogUtil.log("taged click zero number over  ================="); 
 end
 
 

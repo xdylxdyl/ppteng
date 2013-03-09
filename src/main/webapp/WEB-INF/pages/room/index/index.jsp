@@ -11,8 +11,8 @@
 	="description"  content="葡萄藤是一个集杀人游戏,多人在线扫雷等多种休闲娱乐在一起的轻游戏网站,支持房主自定义神态,自定义背景音乐,和朋友或者是自己一起相处着这静静的时光">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- <script
-	type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script> <script
+<script type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script>
+<script
 	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script type="text/javascript">
     $(function() {
@@ -67,9 +67,11 @@
 									<p>
 										使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
 									</p>
-									<div style="display:inline"><span id="qqLoginBtn"></span></div> 
+									<div style="display: inline">
+										<span id="qqLoginBtn"></span>
+									</div>
 									<div id="wb_connect_btn"></div>
-									
+
 									<!-- 	<a href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a> <a
 								href="#"><img src="/r/img/qq_login.png" alt="QQ登录"></a> -->
 								</div>
@@ -78,30 +80,33 @@
 					</c:when>
 					<c:otherwise>
 						<div class="span3 box">
-							
-								<h4>
-									<small>总用户${count}人 欢迎你:</small> ${user.name}
-								</h4>
-								<img src="http://www.ptteng.com/${user.icon}" class="portrait"
-									id="portrait_img" style="max-width:16em;height:8em">
-								<blockquote>
-									<small>上次登录:<date:date
-											pattern="yyyy年 MM月dd日  HH时mm分 " value="${user.loginAt}"></date:date></small>
-									<c:choose>
-										<c:when test="${empty punchCount}">
-											<span class="btn btn-primary" id="punch">打卡</span>
-										</c:when>
-										<c:otherwise>
-											<small>已连续打卡${punchCount}天</small>
-											
-										</c:otherwise>
-									</c:choose>
-								</blockquote>
-							
-							<p><a class="btn btn-primary" href="/m/list.do">进入游戏</a></p>
 
-							<input type="hidden" id="uid" value="${user.id}" />
-							<input type="hidden" id="type" value="" />
+							<h4>
+								<small>总用户${count}人 欢迎你:</small> ${user.name}
+							</h4>
+							<img src="http://www.ptteng.com/${user.icon}" class="portrait"
+								id="portrait_img" style="max-width: 16em; height: 8em">
+							<blockquote>
+								<small>上次登录:<date:date pattern="yyyy年 MM月dd日  HH时mm分 "
+										value="${user.loginAt}"></date:date></small>
+								<c:choose>
+									<c:when test="${empty punchCount}">
+										<span class="btn btn-primary" id="punch">打卡</span>
+									</c:when>
+									<c:otherwise>
+										<small>已连续打卡${punchCount}天</small>
+										<small>金币 ${user.money}</small>
+
+									</c:otherwise>
+								</c:choose>
+							</blockquote>
+
+							<p>
+								<a class="btn btn-primary" href="/m/list.do">进入游戏</a>
+							</p>
+
+							<input type="hidden" id="uid" value="${user.id}" /> <input
+								type="hidden" id="type" value="" />
 
 						</div>
 					</c:otherwise>
@@ -111,7 +116,7 @@
 				<div class="span8 banner-screen">
 					<div id="indexCarousel" class="carousel">
 						<div class="carousel-inner">
-						<div class="item">
+							<div class="active item">
 								<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
 								<div class="carousel-caption">
 									<h4>368活动</h4>
@@ -125,14 +130,14 @@
 									<p>和朋友一起,约个时间,一边看电影,一边聊天</p>
 								</div>
 							</div>
-							<div class="active item">
-								<img src="/r/img/highday/38.gif" alt="三八快乐">
+							<div class="item">
+								<img src="/r/img/img_banner_2.jpg" alt="简化">
 								<div class="carousel-caption">
-									<h4>节日快乐</h4>
-									<p>开心每一天~今日打卡,游戏金币三倍~</p>
+									<h4>自古太监功夫高</h4>
+									<p>游戏通常分为两大阵营，水民和杀手；水民以投票为手段投死杀手获取最后胜利，杀手方隐匿于水民中间，靠夜晚杀人和白天伪装成水民,坚持活到最后为胜利</p>
 								</div>
 							</div>
-							
+
 						</div>
 						<a class="carousel-control left" href="#indexCarousel"
 							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
@@ -153,46 +158,40 @@
 						<div class="span6">
 							<div class="chapter">
 								<div class="chapter-body">
-									<h4>
-										电影院
-									</h4>
+									<h4>电影院</h4>
 									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
-									  <p><a class="btn" href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=159" target="_blank">活动报名&raquo;</a></p>
-									
+									<p>
+										<a class="btn"
+											href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=159"
+											target="_blank">活动报名&raquo;</a>
+									</p>
+
 								</div>
 							</div>
 							<div class="chapter">
-								<img src="/r/img/icon_alpaca.png"
-									alt="杀人游戏简化版" width="64" height="64">
+								<img src="/r/img/icon_alpaca.png" alt="杀人游戏简化版" width="64"
+									height="64">
 								<div class="chapter-body">
-									<h4>
-										杀人游戏[简化版]
-									</h4>
-									<p>
-										高雅的简化,妙趣横生的对话,风格迥异的人物,知性漂亮的姑娘
-									</p>
-								
+									<h4>杀人游戏[简化版]</h4>
+									<p>高雅的简化,妙趣横生的对话,风格迥异的人物,知性漂亮的姑娘</p>
+
 								</div>
 							</div>
 						</div>
 						<div class="span6">
 							<div class="chapter">
-								<img src="/r//img/icon_alpaca.png"
-									alt="多人扫雷" width="64" height="64">
+								<img src="/r//img/icon_alpaca.png" alt="多人扫雷" width="64"
+									height="64">
 								<div class="chapter-body">
-									<h4>
-										扫雷[多人版]
-									</h4>
+									<h4>扫雷[多人版]</h4>
 									<p>玩过单机扫雷,有没有和朋友一起玩过联机扫雷?</p>
 								</div>
 							</div>
 							<div class="chapter">
-								<img src="/r//img/icon_alpaca.png"
-									alt="设计游戏" width="64" height="64">
+								<img src="/r//img/icon_alpaca.png" alt="设计游戏" width="64"
+									height="64">
 								<div class="chapter-body">
-									<h4>
-										这些游戏都不喜欢?
-									</h4>
+									<h4>这些游戏都不喜欢?</h4>
 									<p>设计一个自己喜欢的游戏吧?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以~</p>
 								</div>
 							</div>
@@ -255,18 +254,14 @@
 					<p>
 						<a href="http://www.j-show.com/" target="_blank">吉时吉会展</a>
 					<p>
-					
 					<p>
 						<a href="http://zhujiusanguo.5d6d.net/" target="_blank">煮酒三国文史论坛</a>
 					<p>
-					
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript"
 			src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
-
-
 </body>
 </html>
 

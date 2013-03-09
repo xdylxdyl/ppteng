@@ -585,7 +585,7 @@ public class PlayerController {
 
 		user.setPunch(str);
 		user.setPunchAt(MyTimeUtil.getPreZeroTimeMillions(0));
-		int m = 6000;//三八节日快乐
+		int m = 2000;
 		user.setMoney(user.getMoney() + m);
 		this.userService.update(user);
 		model.addAttribute("money", m);

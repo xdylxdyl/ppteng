@@ -1,5 +1,5 @@
 $(document).ready(function () {
-     timer = null;
+    timer = null;
     //左键
     $("#inner div").live("click", function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
@@ -87,7 +87,10 @@ $(document).ready(function () {
 
             return result;
         }
-    };
+
+
+
+    }
 
     var bombStr = {
 
@@ -181,6 +184,18 @@ $(document).ready(function () {
 
 
         },
+        showMergeMessage:function (contents) {
+            var singles = contents.split(",");
+            var result = [];
+            $.each(singles, function (n, value) {
+                var ids = value.split("-");
+                if (ids.length == 3) {
+                    var mo = new mineOperater("mine", ids[0], ids[1], ids[2]);
+                    mineView.showMineOperater(mo);
+                }
+            });
+
+        },
         getSettingRow:function () {
             return $("#rowCount").val();
         },
@@ -228,9 +243,9 @@ $(document).ready(function () {
 
 
         },
-        startCountTime:function(){
-          controlView.clearCountDownTime();
-          controlView.startCountTime(0);
+        startCountTime:function () {
+            controlView.clearCountDownTime();
+            controlView.startCountTime(0);
         },
         showWrong:function (message) {
             var uid = message.subject;
@@ -248,19 +263,18 @@ $(document).ready(function () {
             playerService.setUnreadyStatus();
             //只重新显示.不用重新计算
             settingView.displaySetting();
-
-
+            mineService.parseBomb(bombStr.system, "mine");
             if ("win" == obj) {
                 $("section article").append("<p style='color:#F00'>【系统消息】 居然赢了.~~赶紧的开始下一局,用时 [" + userTime + "]秒</p>");
             } else {
                 $("section article").append("<p style='color:#F00'>【系统消息】 果然输了,~~赶紧的开始下一局</p>");
+                  mineView.showMineOperater(wrongMine);
+
             }
 
 
-            mineService.parseBomb(bombStr.system);
-            if (wrongMine) {
-                mineView.showMineOperater(wrongMine);
-            }
+         
+
 
             //展示错误的地方,以及谁点错的
 
@@ -362,6 +376,14 @@ $(document).ready(function () {
 
                     break;
 
+                case "mergeMine":
+                    //console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
+
+                    mineView.showMergeMessage(message.object);
+
+
+                    break;
+
                 case "init":
                     bombStr.system = message.object;
                     console.log("init is " + bombStr.system);
@@ -399,10 +421,19 @@ $(document).ready(function () {
             //  console.log("parse use time "+(new Date().getTime()-start));
         },
 
-        parseBomb:function (str) {
+        parseBomb:function (str, mine) {
             var mines = mineUtil.convertStr2Mine(str);
             for (var key in mines) {
-                mineView.showMineOperater(mines[key]);
+                //是否只显示雷
+                if (mine) {
+                    if (mines[key].value == "bomb" || mines[key].value == "*") {
+                        mineView.showMineOperater(mines[key]);
+                    }
+                } else {
+                    mineView.showMineOperater(mines[key]);
+                }
+
+
             }
 
         },

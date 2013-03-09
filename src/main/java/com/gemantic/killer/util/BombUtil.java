@@ -11,12 +11,14 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gemantic.killer.common.model.Message;
+
 
 
 public class BombUtil {
 	private static final Log log = LogFactory.getLog(BombUtil.class);
-	private static final String Split_Underline = "-";
-	private static final String Bomb="*";
+	public static final String Split_Underline = "-";
+	public static final String Bomb="*";
 	/**
 	 * 
 	 * @param row 多少行
@@ -80,8 +82,63 @@ public class BombUtil {
 		return sb.toString();
 	}
 
+	
+	public static void getRoundPanes2(Pair pair, int rowCount, int columnCount,String system,Map<Pair,String> pairMap){
+		
+		
+			
+	     String systemValue=BombUtil.clickOpen(pair, system, rowCount, columnCount);
+	     if(BombUtil.Bomb.equals(systemValue)){
+	    	 pairMap.put(pair, systemValue);
+	    	 //是雷就不再继续
+	    	 return ;
+	    	 
+	     }else{
+	    	//不是雷判断是不是空
+	    	 if("0".equals(systemValue)){
+	    		 if(pairMap.containsKey(pair)){
+	    			 return;
+	    		 }else{
+	    			//继续迭代
+	    			 pairMap.put(pair, systemValue);
+		    		 List<Pair> pairs=BombUtil.getRoundPanes(pair, rowCount, columnCount);
+		    			
+		    			for(Pair p:pairs){			
+		    				BombUtil.getRoundPanes2(p, rowCount, columnCount, system, pairMap);
+		    		} 
+	    		 } 
+	    		
+	    		
+	    	 }else{
+	    		 //到达边界,返回
+	    		 pairMap.put(pair, systemValue);
+	    		 return;
+	    	 }
+	    	 
+	    	 
+	     }
+			
+		
+			
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		return ;
+		
+		
+		
+	};
+	
 	public static List<Pair> getRoundPanes(Pair pair, int rowCount, int columnCount) {
-		log.info(pair+"get round panes in row "+rowCount+" columnCount "+columnCount);
+		Long start=System.currentTimeMillis();
+		//log.info(pair+"get round panes in row "+rowCount+" columnCount "+columnCount);
 		List<Pair> pairs=new ArrayList();
 		int row=(Integer) pair.getLeft();
 		int column=(Integer) pair.getRight();
@@ -117,8 +174,9 @@ public class BombUtil {
 			}
 		}
 		
-		
+		//log.info("get round use time "+(System.currentTimeMillis()-start));
 		return pairs;
+		
 	}
 
 	
@@ -128,16 +186,16 @@ public class BombUtil {
 		int r=(Integer) pair.getLeft()-1;
 		int c=(Integer) pair.getRight()-1;
         int index=r*column+c;
-        log.info("index is "+index);
+       // log.info("index is "+index);
 		String result=String.valueOf(systemBombPic.charAt(index));
-		log.info(result);
+		//log.info(result);
 		return result;
 	}
 
 	
 	public static void main(String[] args) {
 		
-		String[][] pic=new String[][]{{"1","2"},{"3","4"}};
+		/*String[][] pic=new String[][]{{"1","2"},{"3","4"}};
 		log.info(pic);
 		
 		log.info(BombUtil.convertString2Pair("3-4"));
@@ -149,7 +207,24 @@ public class BombUtil {
 		log.info(s);
 		
 		List<Pair> ls=BombUtil.getRoundPanes(BombUtil.convertString2Pair("1-1"), 9, 100);
-		log.info(ls);
+		
+		log.info(ls);*/
+		Map pairs=new HashMap();
+		String mineStr="000001*10000001*212*00112221000012322*32001*2*" +
+				"2211001**2112*123222*2*10014*300112**10112121102*20000*3" +
+				"21000012*112210000121100001*211*10111001*10000222011101*21011111101" +
+				"*10000012*100002*3132200111011122102*3*2*2111*11221**101121212*11111**1*421000" +
+				"000233100123223*21211001**100001*1*22*2*21012210000111111122*100000000000000000" +
+				"11211111000000011100112*22*100000002*2001*322*2101110002*20012*1111001*100";
+		Long start=System.currentTimeMillis();
+		BombUtil.getRoundPanes2(BombUtil.convertString2Pair("16-18"), 20, 20, mineStr, pairs);
+		log.info("usetime is "+(System.currentTimeMillis()-start)+pairs);
+		Message m=new Message();
+		StringBuffer sb=new StringBuffer();
+		sb=sb.append(m.getSubject());
+		sb=sb.append(BombUtil.Split_Underline);
+		sb=sb.append(m.getObject());
+		
 		
 		
 	}
@@ -163,10 +238,10 @@ public class BombUtil {
 	}
 	
 	public static int convertIndex(int row,int column,int maxRow){
-		log.info("row is "+row);
-		log.info("column is "+column);
+		//log.info("row is "+row);
+		//log.info("column is "+column);
 		int index=(row-1)*maxRow+(column-1);
-		log.info("index is "+index);
+		//log.info("index is "+index);
 		return index;
 	}
 	

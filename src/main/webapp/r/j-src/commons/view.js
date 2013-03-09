@@ -9,7 +9,7 @@
 
 var settingView = {
 
-    displaySetting:function() {
+    displaySetting:function () {
         if (globalView.getCurrentID() == globalView.getCreaterId()) {
             if ("over" == globalView.getGameStatus()) {//游戏结束后才能看到设置按钮
                 $("#submitSetting").show();
@@ -25,7 +25,7 @@ var settingView = {
         $("#expContainer").hide();
     },
 
-    showSetting:function(info) {
+    showSetting:function (info) {
         $("nav article").html(info);
         //管理员才能看到设置按钮
 
@@ -44,20 +44,24 @@ var settingView = {
         $("#expContainer").hide();
 
 
-       versionFunction["initSetting"]();
-        
+        if (versionFunction["initSetting"]) {
+            versionFunction["initSetting"]()
+        }
 
 
-        $("#submitSetting").bind("click", function() {
+        $("#submitSetting").bind("click", function () {
             var s = versionFunction["getSettingParameter"]();
             var settingHtml = settingService.saveSetting(s);
             alert("你和洛洛一样聪明~都会更改设置了~~");
-            versionFunction["settingCallback"]();
+            if (versionFunction["settingCallback"]) {
+                versionFunction["settingCallback"]();
+            }
+
             settingView.showSetting(settingHtml);
         });
 
 
-        $("#defineExp").bind("click", function() {
+        $("#defineExp").bind("click", function () {
 
             var width = $("body").width();
             var layerWidth = $("#expContainer").width();
@@ -70,12 +74,12 @@ var settingView = {
 
         });
 
-        $("#expCommit").bind("click", function() {
+        $("#expCommit").bind("click", function () {
 
             var v = $("#expContent").val();
 
-            v=DBC2SBC(v);
-            v=full2half(v);
+            v = DBC2SBC(v);
+            v = full2half(v);
 
             var expArray;
             try {
@@ -84,7 +88,7 @@ var settingView = {
                     alert("亲,说好的五个呢,想多定义表情不用花钱啊");
                     return false;
                 }
-            } catch(err) {
+            } catch (err) {
                 alert("会不会看格式啊亲,敢不敢靠谱一点儿");
                 return false;
             }
@@ -94,7 +98,7 @@ var settingView = {
             return false;
 
         });
-        $("#expCancel").bind("click", function() {
+        $("#expCancel").bind("click", function () {
             $("#expContainer").hide();
             return false;
 
@@ -103,15 +107,15 @@ var settingView = {
 
     },
 
-    hideSettingButton:function() {
+    hideSettingButton:function () {
         $("#submitSetting").hide();
         $("#defineExp").hide();
     },
-    showSettingButton:function() {
+    showSettingButton:function () {
         $("#submitSetting").show();
         $("#defineExp").show();
     },
-    getSettingParameter:function(fun) {
+    getSettingParameter:function (fun) {
         return fun;
     }
 
@@ -120,41 +124,41 @@ var settingView = {
 
 var globalView = {
 
-    getGameStatus:function() {
+    getGameStatus:function () {
         return   $("#time").val();
     },
-    setGameStatus:function(status) {
+    setGameStatus:function (status) {
         $("#time").val(status);
     },
-    isStop:function() {
+    isStop:function () {
         if ($("#time").val() == "over") {
             return true;
         } else {
             return false;
         }
     },
-    getCurrentID:function() {
+    getCurrentID:function () {
         return $("#uid").val();
     },
-    getRoomID:function() {
+    getRoomID:function () {
         return $("#rid").val();
     },
-    getVersion:function() {
+    getVersion:function () {
         return  $("#version").val();
     },
-    getCreaterId:function() {
+    getCreaterId:function () {
         return $("#createrID").val();
     },
-    getRoomType:function() {
+    getRoomType:function () {
         return $("#type").val();
     },
-    getRecordId:function() {
+    getRecordId:function () {
         return $("#recordID").val();
     },
-    getRecordTime:function() {
+    getRecordTime:function () {
         return $("#recordTime").val();
     },
-    getLoginShow:function(){
+    getLoginShow:function () {
         return $("#stageShow").text();
     }
 
@@ -167,7 +171,7 @@ var globalView = {
  */
 
 var playerListView = {
-    login:function(player) {
+    login:function (player) {
         var name = player.name;
         var id = player.id;
         //判断是否已经存在这个玩家的List了.
@@ -179,11 +183,11 @@ var playerListView = {
         //更新值就好了
         $("#" + id).children("span").eq(0).text(name);
     },
-    logout:function(id) {
+    logout:function (id) {
         $("#" + id).remove();
     },
 
-    isExistPlayer:function(id) {
+    isExistPlayer:function (id) {
         var id_li = $("#" + id);
         if (id_li.length > 0) {
             return true;
@@ -191,20 +195,20 @@ var playerListView = {
             return false;
         }
     },
-    setVote:function(id, count) {
+    setVote:function (id, count) {
         if (count == 0) {
             $("#" + id).children("i").text("");
         } else {
             $("#" + id).children("i").text(" +" + count);
         }
     },
-    displayCreater:function(id) {
+    displayCreater:function (id) {
 
         var tip = $("<em>(房主)</em>");
         tip.insertAfter("#" + id + " i");
 
     },
-    sortPlayer:function() {
+    sortPlayer:function () {
 
         var sortPlayers = playerService.getAll();
 
@@ -218,7 +222,7 @@ var playerListView = {
         }
 
     },
-    appendPlayerItem:function(player) {
+    appendPlayerItem:function (player) {
         if (player.count == 0) {
             $("nav ul").append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' class='" + player.status + "' target='_blank'></a><span>" + player.name + "</span><i></i></li>");
         } else {
@@ -227,13 +231,13 @@ var playerListView = {
 
 
     },
-    die:function() {
+    die:function () {
         this.sortPlayer();
     },
-    setStatus:function(id, status) {
+    setStatus:function (id, status) {
         this.sortPlayer();
     },
-    kill:function(id) {
+    kill:function (id) {
 
         //this.setStatus(id, playerStatus.die);
     }
@@ -244,7 +248,7 @@ var playerListView = {
 
 //处理权限
 var rightView = {
-    branch : function(right) {
+    branch:function (right) {
         switch (right) {
             case "say" :
                 this.sayRight(right);
@@ -269,23 +273,22 @@ var rightView = {
         }
 
 
-
     },
 //各种权利
-    sayRight : function(right) {
+    sayRight:function (right) {
         $("#say").prop("disabled", false);
         $("#sendSay").prop("disabled", false);
         $("#say").attr("name", right);//? 这个有什么用处
     },
-    readyRight : function() {
+    readyRight:function () {
         $("#ready").css("display", "inline");
         $("#ready").prop("disabled", false);
 
     },
-    startRight : function() {
+    startRight:function () {
         $("#start").css("display", "inline");
     },
-    commandRight : function(right) {
+    commandRight:function (right) {
         $("#command option:gt(0)").remove();
         var array = [];
         array["kick"] = "果断一脚";
@@ -293,17 +296,17 @@ var rightView = {
         array["kill"] = "杀人灭口";
         $("#command").append("<option value='" + right + "'>" + array[right] + "</option>");
     },
-    noRight: function() {
+    noRight:function () {
         $("#say").prop("disabled", true);
         $("#sendSay").prop("disabled", true);
         $("#ready").prop("disabled", true);
         $("#command option:gt(0)").remove();
     },
-    getContentByRight:function(right){
-        var c=commandCommonSetting[right];
-        if(c){
+    getContentByRight:function (right) {
+        var c = commandCommonSetting[right];
+        if (c) {
             return c;
-        }else{
+        } else {
             return versionFunction["rightContent"][right];
         }
     }
@@ -313,19 +316,19 @@ var rightView = {
 var gameAreaView = {
 
 
-    login:function(player,message) {
+    login:function (player, message) {
 
         var action;
-        if(message==null||message.content==""){
-            action="";
-        }else{
-            action=message.content;
+        if (message == null || message.content == "") {
+            action = "";
+        } else {
+            action = message.content;
         }
 
         var name = player.name;
         if (globalView.isStop()) {
             //只有房间是处在结束状态下才在游戏区显示消息
-            $("section article").append("<p style='color:#F00'>【系统消息】[" + name + "]"+action+"进入了房间</p>");
+            $("section article").append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
             viewUtil.autoBottom("section article");
         } else {
             //不显示
@@ -333,7 +336,7 @@ var gameAreaView = {
         }
 
     },
-    logout:function(player) {
+    logout:function (player) {
         var name = player.name;
         var isDisplay = false;
         if (globalView.isStop()) {
@@ -354,12 +357,12 @@ var gameAreaView = {
 
 
     },
-    kick:function(player) {
+    kick:function (player) {
         var name = player.name;
         $("section article").append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
         viewUtil.autoBottom("section article");
     },
-    say:function(id, name, content, exp, color, subject, subjectName) {
+    say:function (id, name, content, exp, color, subject, subjectName) {
         var express = controlView.showExpression(exp);
         var obj;
         if (subjectName != null) {
@@ -375,11 +378,11 @@ var gameAreaView = {
 
 
     },
-    systemMessage:function(content){
+    systemMessage:function (content) {
         $("section article").append("<p style='color:#F00'>" + content + "</p>");
-             viewUtil.autoBottom("section article");
+        viewUtil.autoBottom("section article");
     },
-    getContent:function(){
+    getContent:function () {
 
         alert("click me");
         return  $(this).html();
@@ -394,11 +397,11 @@ var gameAreaView = {
 
 
 var viewUtil = {
-    autoBottom:function(dom) {
-        var isAuto=controlView.getAutoRoll();
-        if(isAuto){
+    autoBottom:function (dom) {
+        var isAuto = controlView.getAutoRoll();
+        if (isAuto) {
             var height = $(dom)[0].scrollHeight;
-                   $(dom).scrollTop(height);
+            $(dom).scrollTop(height);
         }
 
     }
@@ -408,13 +411,13 @@ var viewUtil = {
 
 var controlView = {
 
-    resetCommand:function() {
+    resetCommand:function () {
 
         $("#object option:gt(0)").remove();
         $("#command").val("command");
 
     },
-    ready:function(id) {
+    ready:function (id) {
 
         if ($("#uid").val() == id) {
             $("#ready").hide();
@@ -424,20 +427,20 @@ var controlView = {
         }
     },
 
-    startCountTime:function(time){
+    startCountTime:function (time) {
         var t = Math.floor(time / 1000);
-               var m = Math.floor(t / 60);
-               var s = t - m * 60;
-               m < 10 ? m = "0" + m : m;
-               s < 10 ? s = "0" + s : s;
-               var result = m + ":" + s;
-               $(".nobg").val(result);
-               time = time + 1000;
+        var m = Math.floor(t / 60);
+        var s = t - m * 60;
+        m < 10 ? m = "0" + m : m;
+        s < 10 ? s = "0" + s : s;
+        var result = m + ":" + s;
+        $(".nobg").val(result);
+        time = time + 1000;
 
-                timer = setTimeout("controlView.startCountTime(" + time + ")", 1000);
+        timer = setTimeout("controlView.startCountTime(" + time + ")", 1000);
 
     },
-    setCountDownTime:function(time) {
+    setCountDownTime:function (time) {
 
         var t = Math.floor(time / 1000);
         var m = Math.floor(t / 60);
@@ -452,10 +455,10 @@ var controlView = {
         }
 
     },
-    clearCountDownTime:function() {
+    clearCountDownTime:function () {
         clearTimeout(timer);
     },
-    initExpression:function(exp) {
+    initExpression:function (exp) {
 
 
         var index = 1000;
@@ -481,7 +484,7 @@ var controlView = {
     },
 
 
-    initColor:function() {
+    initColor:function () {
 
 
         var colorStr = "";
@@ -494,15 +497,15 @@ var controlView = {
 
 
     },
-    sortColor:function(a, b) {
+    sortColor:function (a, b) {
         var a2 = a.value.substring(1, a.value.length);
         var b2 = b.value.substring(1, b.value.length);
         var a16 = parseInt(a2, 16);
         var b16 = parseInt(b2, 16);
         return a16 > b16 ? 1 : -1;
-    } ,
+    },
     //表情翻译
-    showExpression:function(express) {
+    showExpression:function (express) {
         if (express == "0") {
             return "";
         }
@@ -518,12 +521,12 @@ var controlView = {
             return exp;
         }
     },
-    initButtonOfGame:function() {
+    initButtonOfGame:function () {
         $("#replay").hide();
         $("#replay_time_hint").hide();
         $("#replay_role").hide();
     },
-    initButtonOfRecord:function() {
+    initButtonOfRecord:function () {
         $("#ready").hide();
         $("#start").hide();
         $("#speed_hint").hide();
@@ -531,11 +534,11 @@ var controlView = {
         $("#replay_time_hint").show();
         $("#replay_role").show();
     },
-    showRecordAllTime:function(time, all) {
+    showRecordAllTime:function (time, all) {
         var timeStr = timeUtil.convertTime2Length(time);
         $("#all_time").empty().append("时长[" + timeStr + "]");
     },
-    showRecordCurrentTime:function(time, all) {
+    showRecordCurrentTime:function (time, all) {
         var timeStr = timeUtil.convertTime2Length(time);
         $("#current_time").empty().append("已播放[" + timeStr + "]");
         time = time + 1000;
@@ -543,10 +546,10 @@ var controlView = {
             record_timer = setTimeout(controlView.showRecordCurrentTime, 1000, time, all);
         }
     },
-    clearSayInput:function() {
+    clearSayInput:function () {
         $("#say").val("");
     },
-    checkSayNotEmpty:function() {
+    checkSayNotEmpty:function () {
         if ($("#say").val() == "" || $("#say").val() == undefined) {
             return false;
         } else {
@@ -554,19 +557,19 @@ var controlView = {
 
         }
     },
-    hintSay:function(text) {
+    hintSay:function (text) {
         $("#say").val(text);
     },
-    sayHint:function() {
+    sayHint:function () {
         alert("内容不能为空！请输入内容重新发送");
     },
-    isShow:function(){
-     return $("#replay_role_checkbox").attr("checked");
+    isShow:function () {
+        return $("#replay_role_checkbox").attr("checked");
 
-    }    ,
-     getAutoRoll:function(){
-         return $("#autoroll_checkbox").attr("checked");
-   }
+    },
+    getAutoRoll:function () {
+        return $("#autoroll_checkbox").attr("checked");
+    }
 
 
 

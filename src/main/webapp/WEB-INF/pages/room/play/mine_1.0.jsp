@@ -63,6 +63,7 @@
 	<header>
 
 		<div class="remainMine" id="remainMine">
+		
 			剩余雷数<span id="count"></span>
 		</div>
 
