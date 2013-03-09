@@ -52,15 +52,26 @@ public class RecordController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/record/list")
-	public String list(HttpServletRequest request, HttpServletResponse response, ModelMap model,String version) throws Exception {
+	public String list(HttpServletRequest request, HttpServletResponse response, ModelMap model,String version,Integer page,Integer size) throws Exception {
 		log.debug("start get room list ");
 		
 		if(StringUtils.isBlank(version)){
 			version="simple_1.0";
 		}
+		if(page==null){
+			page=1;
+		}
+		if(page<1){
+			page=1;
+		}
+		if(size==null){
+			size=20;
+		}
+		Integer start=(page-1)*size;
+		
 
 		//考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
-		List<Long> ids = recordService.getRecordIdsByVersion(version, 0,Integer.MAX_VALUE);
+		List<Long> ids = recordService.getRecordIdsByVersion(version, start,size);
 		List<Records> records=recordService.getObjectsByIds(ids);
 		log.info("get record size " + records.size());
 		model.addAttribute("records", records);
@@ -76,6 +87,8 @@ public class RecordController {
 
 		model.addAttribute("records", records);
 		model.addAttribute("users", id_user);
+		model.addAttribute("page", page);
+		model.addAttribute("size", size);
 		return "/record/list/all";
 	}
 
