@@ -99,19 +99,65 @@ $(document).ready(function () {
     var mineSettingView = {
         initSetting:function () {
 
+            var html = " <select id='mineSelect'><option value ='1' selected='selected'>低级</option><option value ='2'>中级</option><option value='3'>高级</option><option value='4'>神级</option>" +
+                "<option value='5'>自定义</option>" +
+                "</select>";
+            $("#versionDefined").empty().html(html);
+            //default mineSelect is 1.
+            mineSettingView.updateSettingParameter(16, 16, 40);
+
+
+            $("#mineSelect").live("change", function () {
+                var level = $(this).children('option:selected').val();
+                switch (level) {
+                    case "1":
+                        mineSettingView.updateSettingParameter(16, 16, 40);
+                        break;
+                    case "2":
+                        mineSettingView.updateSettingParameter(16, 30, 99);
+                        break;
+                    case "3":
+                        mineSettingView.updateSettingParameter(40, 40, 500);
+                        break;
+                    case "4":
+                        mineSettingView.updateSettingParameter(100, 100, 5000);
+                        break;
+                    default:
+                        //self
+
+                        ;
+
+                }
+
+
+            });
+
+
+        },
+        updateSettingParameter:function (row, column, mine) {
+            $("#rowCount").val(row);
+            $("#columnCount").val(column);
+            $("#mineCount").val(mine);
 
         },
         getSettingParameter:function () {
             var r = parseInt($("#rowCount").val());
-            if (r > 20) {
-                $("#rowCount").val(20);
+            if (r > 100) {
+                $("#rowCount").val(100);
             }
             var c = parseInt($("#columnCount").val());
-            if (c > 20) {
-                $("#columnCount").val(20);
+            if (c > 100) {
+                $("#columnCount").val(100);
+            }
+            var m = parseInt($("#mineCount").val());
+            if (m > c * r) {
+                m = c * r / 2;
+            }
+            if (m < 10) {
+                m = 10;
             }
 
-
+            $("#columnCount").val(m);
             var params = jQuery("#setting").serialize();
             return params;
         }
@@ -136,6 +182,23 @@ $(document).ready(function () {
 
             var mo = new mineOperater(act, x, y, value);
             return mo;
+
+        },
+        showPlayerHint:function (message, mine) {
+            var place = message.subject;
+
+            var content = message.object;
+
+            var uid = message.content;
+            var action;
+            if (content == "#") {
+                action = "标记";
+            } else {
+                action = "点击";
+            }
+
+            var player = playerService.getPlayer(uid);
+            $("section article").append("<p style='color:#F00'>【系统消息】 [" + player.name + "] " + action + "了 [" + place + "] </p>");
 
         },
         showMineOperater:function (mo) {
@@ -268,12 +331,11 @@ $(document).ready(function () {
                 $("section article").append("<p style='color:#F00'>【系统消息】 居然赢了.~~赶紧的开始下一局,用时 [" + userTime + "]秒</p>");
             } else {
                 $("section article").append("<p style='color:#F00'>【系统消息】 果然输了,~~赶紧的开始下一局</p>");
-                  mineView.showMineOperater(wrongMine);
+                mineView.showMineOperater(wrongMine);
 
             }
 
-
-         
+            mineView.initMineCount(0);
 
 
             //展示错误的地方,以及谁点错的
@@ -372,6 +434,8 @@ $(document).ready(function () {
                         wrongMine = mine;
                     } else {
                         mineView.showMineOperater(mine);
+                        mineView.showPlayerHint(message, mine);
+
                     }
 
                     break;

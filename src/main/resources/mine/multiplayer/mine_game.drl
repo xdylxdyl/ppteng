@@ -263,6 +263,7 @@ then
     $right=$right+1;    
     }
     Message tagMessage=new Message($object,"mine","#");
+    tagMessage.setContent($subject);
     insert(tagMessage);     
     $bomb=$bomb+1;    
     $count.setBomb($bomb);
@@ -328,6 +329,7 @@ then
     retract($tag);
     retract($message);
     Message m=new Message($object,"mine","clear");
+     m.setContent($subject);
     insert(m);
     
     LogUtil.log("clear tag pane over  ================="); 
@@ -384,7 +386,7 @@ rule 'click number'
 ruleflow-group "click action"
 
 when
-    $click:Click($pid:pid,value != "0" && value != "*")    
+    $click:Click($pid:pid,value != "0" && value != "*",$uid:uid)    
     not Tag(pid==$pid)   
     $bombPic:BombPic()    
     $game:Game() 
@@ -396,6 +398,7 @@ then
    //  Long start=System.currentTimeMillis();
     
      Message tagMessage=new Message($pid,"mine",$click.getValue()); 
+      tagMessage.setContent($uid);
      insert(tagMessage);       
   
     Tag tag=new Tag($click.getUid(),$click.getValue(),$pid);
@@ -415,7 +418,7 @@ end
 rule 'click zero number'
 ruleflow-group "click action"
 when
-    $click:Click($pid:pid,value == "0")  
+    $click:Click($pid:pid,value == "0",$uid:uid)  
     $bombPic:BombPic($system:system,$user:user)
     not Message(subject==$pid,predict=="mine")
     not Tag(pid==$pid)
@@ -440,6 +443,7 @@ then
     }    
        
      Message tagMessage=new Message($pid,"mine",$click.getValue()); 
+      tagMessage.setContent($uid);
      insert(tagMessage); 
      
        Tag tag=new Tag($click.getUid(),$click.getValue(),$pid);
@@ -478,10 +482,11 @@ then
      Long start=System.currentTimeMillis();
   StringBuffer sb=new StringBuffer();
 		
-		
+	
     for(Object o: $msgs){
     
      Message msg=(Message)o;
+       
         sb=sb.append(msg.getSubject());
 		sb=sb.append(BombUtil.Split_Underline);
 		sb=sb.append(msg.getObject());
@@ -490,7 +495,7 @@ then
         
     }    
        
-     Message mergeMessage=new Message("","mergeMine",sb.toString()); 
+     Message mergeMessage=new Message("","mergeMine",sb.toString());      
      insert(mergeMessage);      
      LogUtil.log("merge message use time   ================="+(System.currentTimeMillis()-start)); 
     //LogUtil.log("click zero number use time   ================="+(System.currentTimeMillis()-start)); 
