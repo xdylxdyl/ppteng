@@ -52,12 +52,13 @@ var settingView = {
         $("#submitSetting").bind("click", function () {
             var s = versionFunction["getSettingParameter"]();
             var settingHtml = settingService.saveSetting(s);
-            alert("你和洛洛一样聪明~都会更改设置了~~");
+            alert("设置已更改~~");
+
             if (versionFunction["settingCallback"]) {
                 versionFunction["settingCallback"]();
             }
-
             settingView.showSetting(settingHtml);
+
         });
 
 

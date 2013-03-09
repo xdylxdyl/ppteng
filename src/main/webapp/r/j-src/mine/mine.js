@@ -56,9 +56,9 @@ $(document).ready(function () {
             rid:rid,
             version:version,
             setting:[
-                {"行数":killCount},
-                {"列数":dayTime},
-                {"雷数":nightTime}
+                {"rowCount":row},
+                {"columnCount":column},
+                {"mineCount":count}
             ]
         }
     }
@@ -99,33 +99,35 @@ $(document).ready(function () {
     var mineSettingView = {
         initSetting:function () {
 
-            var html = " <select id='mineSelect'><option value ='1' selected='selected'>低级</option><option value ='2'>中级</option><option value='3'>高级</option><option value='4'>神级</option>" +
+            var html = " <span>*必须提交才会生效</span><select id='mineSelect'><option value ='0' selected='selected'>级别</option><option value ='1'>低级</option><option value ='2'>中级</option><option value='3'>高级</option><option value='4'>神级</option>" +
                 "<option value='5'>自定义</option>" +
                 "</select>";
             $("#versionDefined").empty().html(html);
             //default mineSelect is 1.
-            mineSettingView.updateSettingParameter(16, 16, 40);
-
+           mineSettingView.updateSettingParameter(null, null, null, true);
 
             $("#mineSelect").live("change", function () {
                 var level = $(this).children('option:selected').val();
                 switch (level) {
                     case "1":
-                        mineSettingView.updateSettingParameter(16, 16, 40);
+                        mineSettingView.updateSettingParameter(16, 16, 40, true);
                         break;
                     case "2":
-                        mineSettingView.updateSettingParameter(16, 30, 99);
+                        mineSettingView.updateSettingParameter(16, 30, 99, true);
                         break;
                     case "3":
-                        mineSettingView.updateSettingParameter(40, 40, 500);
+                        mineSettingView.updateSettingParameter(40, 40, 500, true);
                         break;
                     case "4":
-                        mineSettingView.updateSettingParameter(100, 100, 5000);
+                        mineSettingView.updateSettingParameter(100, 100, 2000, true);
+                        break;
+                    case "5":
+                        //self
+                        mineSettingView.updateSettingParameter(16, 16, 40, false);
                         break;
                     default:
-                        //self
+                        break;
 
-                        ;
 
                 }
 
@@ -134,10 +136,32 @@ $(document).ready(function () {
 
 
         },
-        updateSettingParameter:function (row, column, mine) {
-            $("#rowCount").val(row);
-            $("#columnCount").val(column);
-            $("#mineCount").val(mine);
+        updateSettingParameter:function (row, column, mine, readOnly) {
+            if (row) {
+                $("#rowCount").val(row);
+
+            } else {
+                $("#rowCount").attr("old", $("#rowCount").val());
+            }
+            if (column) {
+                $("#columnCount").val(column);
+
+
+            } else {
+                $("#columnCount").attr("old", $("#columnCount").val());
+            }
+            if (mine) {
+                $("#mineCount").val(mine);
+
+            } else {
+                $("#mineCount").attr("old", $("#mineCount").val());
+            }
+
+
+            $("#rowCount").attr("readOnly", readOnly);
+            $("#columnCount").attr("readOnly", readOnly);
+            $("#mineCount").attr("readOnly", readOnly);
+
 
         },
         getSettingParameter:function () {
@@ -157,7 +181,7 @@ $(document).ready(function () {
                 m = 10;
             }
 
-            $("#columnCount").val(m);
+            $("#mineCount").val(m);
             var params = jQuery("#setting").serialize();
             return params;
         }
@@ -260,13 +284,13 @@ $(document).ready(function () {
 
         },
         getSettingRow:function () {
-            return $("#rowCount").val();
+            return $("#rowCount").attr("old");
         },
         getSettingColumn:function () {
-            return $("#columnCount").val();
+            return $("#columnCount").attr("old");
         },
         getSettingMineCount:function () {
-            return $("#mineCount").val();
+            return $("#mineCount").attr("old");
         },
 
         tagMine:function () {
