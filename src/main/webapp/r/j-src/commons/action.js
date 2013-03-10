@@ -168,9 +168,11 @@ $(document).ready(function () {
 
             } else {
                 var p = "say";
-                if ("lastword" == globalView.getGameStatus()) {
+                var player=playerService.getPlayer(globalView.getCurrentID());
+                if(player.status==playerStatus.lastword&&"lastword" == globalView.getGameStatus()){
                     p = globalView.getGameStatus();
                 }
+
                 information.sendInfo(p, $("#send b").val(), information.info);
 
             }

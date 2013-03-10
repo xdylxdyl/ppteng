@@ -826,10 +826,10 @@ ruleflow-group "player status"
 
 when
 	
-	$message:Message(predict=="lastword")   
+	$message:Message(predict=="lastword",$subject:subject)   
     $game:Game(status=="lastword")     
     $room:Room(status=="run")
-    $lastworder:Player($id:id,status=="lastword");
+    $lastworder:Player(id==$subject,status=="lastword");
 then     
      LogUtil.log("user lastword, start  =============");        
      $lastworder.setStatus("die");
