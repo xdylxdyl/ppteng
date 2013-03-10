@@ -26,15 +26,16 @@
 
 				<div class="caption">
 					<span class="badge badge-info">${(page-1)*size+status.index+1}</span>
+					
 					<h3>
-						<a href="/player/detail.do?uid=${user.id}" target="_blank">${user.name}</a>
+						<a href="/player/detail.do?uid=${user.id}" target="_blank"><c:out value="${user.name}"></c:out></a>
 						<span class="label label-important">金币 ${user.money}</span>
 					</h3>
 
 					<div>
 
 						<img src="http://www.ptteng.com/${user.icon}" class="thumbnail"
-							style="max-width: 16em; height: 8em">
+							style="max-width: 16em; height: 12em">
 
 
 

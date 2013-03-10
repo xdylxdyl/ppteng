@@ -7,9 +7,14 @@
  */
 
 
+
+
 $(document).ready(function() {
 
     headView.highLight("rank");
+    leftView.highLight("money");
+
+
 })
 
 

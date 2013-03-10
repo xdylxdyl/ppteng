@@ -3,12 +3,11 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-
  <div class="span3">
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <li class="nav-header">玩家榜单</li>
-                    <li id="ran_money"><a href="/rank/list.do?type=money">炫富榜</a></li>
+                    <li id="leftNav_money"><a href="/rank/list.do?type=money">炫富榜</a></li>
                  <!--   <li class="nav-header">杀人游戏</li>
                     <li id="simple"><a href="/about.do?type=simple">简化</a></li>
                     
@@ -22,3 +21,4 @@
             <!--/.well -->
         </div>
         <!--/span-->
+<script src="/r/j-src/rank/left.js"></script>
