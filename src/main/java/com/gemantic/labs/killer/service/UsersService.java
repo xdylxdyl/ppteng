@@ -72,6 +72,18 @@ public interface UsersService {
 
 
 	public Integer getTotalCount()throws ServiceException, ServiceDaoException;
+
+
+
+	/**
+	 * 得到金钱排名
+	 * @param start
+	 * @param size
+	 * @return
+	 * @throws ServiceException
+	 * @throws ServiceDaoException
+	 */
+	public List<Long> getUIdsOrderByMoney(Integer start, Integer size)throws ServiceException, ServiceDaoException;;
 		
 	
 

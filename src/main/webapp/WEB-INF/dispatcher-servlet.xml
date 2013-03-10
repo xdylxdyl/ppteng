@@ -65,6 +65,7 @@
 				<value>*/room/play/*</value>
 				<value>*/room/list/*</value>
 				<value>*/record/list/*</value>
+				<value>*/room/rank/*</value>
 				<value>*/player/*</value>
 				<value>*/room/index/*</value>
 				<value>*/room/player/*</value>

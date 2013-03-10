@@ -19,12 +19,11 @@
 
 
 	<div class="span2 box">
-		<%-- <small> 总注册用户:[<span style="color: #4B0082">${count}</span>]人 --%>
-		<small>
+		
 
 			<h4>
 				<small>欢迎你</small>,${uname}
-				</h3>
+				</h4>
 				<img src="http://www.ptteng.com/${user.icon}" class="portrait"
 					id="portrait_img" style="max-width: 16em; height: 8em">
 				<blockquote>

@@ -330,6 +330,39 @@ public class UsersServiceImpl implements UsersService {
 		return idList.size();
 	}
 
+	@Override
+	public List<Long> getUIdsOrderByMoney(Integer start, Integer limit) throws ServiceException, ServiceDaoException {
+		if (log.isInfoEnabled()) {
+			log.info(" getUIdsOrderByMoney,start,limit  : " + " , " + start + " , " + limit);
+		}
+		List<Long> idList = null;
+
+		// TODO 参数检查!
+
+		if (start == null) {
+			start = 0;
+		}
+
+		if (limit == null) {
+			limit = Integer.MAX_VALUE;
+		}
+
+		try {
+			//idList = (List<Long>) dao.excuteSimpleSql("select id from records where version = "+version, Records.class);
+			idList = dao.getIdList("getUIdsOrderByMoney", new Object[] {  }, start, limit, false);
+
+		} catch (DaoException e) {
+			log.error(" getUIdsOrderByMoney,start,limit)  : "  + " , " + start + " , " + limit);
+			log.error(e);
+			e.printStackTrace();
+			throw new ServiceDaoException(e);
+		}
+		if (log.isInfoEnabled()) {
+			log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
+		}
+		return idList;
+	}
+
 	
 
 }

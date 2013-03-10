@@ -11,19 +11,22 @@ var headView = {
 
         switch (v) {
             case 'index':
-                $("#nav li").eq(0).addClass("active");
+                $("#nav_index").addClass("active");
                 break;
             case 'game':
-                $("#nav li").eq(1).addClass("active");
+                $("#nav_game").addClass("active");
                 break;
             case 'case':
-                $("#nav li").eq(2).addClass("active");
+                $("#nav_case").addClass("active");
                 break;
             case 'person':
-                $("#nav li").eq(3).addClass("active");
+                $("#nav_person").addClass("active");
                 break;
             case 'about':
-                $("#nav li").eq(7).addClass("active");
+                $("#nav_about").addClass("active");
+                break;
+            case 'rank':
+                $("#nav_rank").addClass("active");
                 break;
             default:
                 ;

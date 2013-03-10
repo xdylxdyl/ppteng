@@ -69,7 +69,7 @@ public class BombTest {
 		log.info(" how to destory ");
 
 	}
-	//@Test
+	@Test
 	public void testClient() throws ServiceException{
 		
 		

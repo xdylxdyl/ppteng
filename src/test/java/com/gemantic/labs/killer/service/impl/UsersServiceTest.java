@@ -388,6 +388,12 @@ public class UsersServiceTest {
 			
 		}
 	}
+	//@Test
+	public void testGetUserByMone() throws ServiceException, ServiceDaoException{
+		List<Long> ids=this.usersService.getUIdsOrderByMoney(0, 1000);
+		List<User> users=this.usersService.getObjectsByIds(ids);
+		log.info(users);
+	}
 	
 	public static void main(String[] args) {
 		

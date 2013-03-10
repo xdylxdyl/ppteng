@@ -46,15 +46,16 @@
 				
 				<div class="nav-collapse" id="nav">
 					<ul class="nav pull-right">
-						<li><a href="/">首页</a></li>
-						<li><a href="/m/list.do">游戏</a></li>
-						<li><a href="/record/list.do">战例</a></li>
-						<li><a href="/player/detail.do">个人</a></li>
+						<li id="nav_index"><a href="/">首页</a></li>
+						<li id="nav_game"><a href="/m/list.do">游戏</a></li>
+						<li id="nav_case"><a href="/record/list.do">战例</a></li>
+						<li id="nav_person"><a href="/player/detail.do">个人</a></li>
+						<li id="nav_rank"><a href="/rank/list.do?type=money">排行</a></li>
 						<li><a href="http://bbs.ptteng.com/forum.php"
 							target="_blank">论坛</a></li>
 						<li><a href="http://xdylxdyl.diandian.com/" target="_blank">博客</a></li>
-						<li><a href="/player/offline.do" id="navLogout">退出</a></li>
-						<li><a href="/about.do?type=about">关于</a></li>
+						<li id="nav_quit"><a href="/player/offline.do" id="navLogout">退出</a></li>
+						<li id="nav_about"><a href="/about.do?type=about">关于</a></li>
 					</ul>
 
 				</div>

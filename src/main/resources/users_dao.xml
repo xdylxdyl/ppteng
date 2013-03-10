@@ -19,6 +19,10 @@
 				sqlType="hsql" keyProperty="nonSence" valueProperty="id" keyColumn="id" />
 				
 						
+					<list name="getUIdsOrderByMoney" sqlitem="select id from users where 1 = 1 order by money desc "
+				sqlType="hsql" keyProperty="nonSence" valueProperty="id" keyColumn="id" />	
+						
+						
 			<dbStrategy name="mutiDS"
                 clasz="com.gemantic.dal.route.strategy.DefaultStrategy">  <pattern value="[0-9]$" group="labsKiller" />
             </dbStrategy>
