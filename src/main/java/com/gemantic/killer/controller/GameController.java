@@ -63,7 +63,7 @@ public class GameController {
 				model.addAttribute("user", user);
 				boolean isPunch = PunchUtil.isPunched(user);
 				if(isPunch){
-					int punchCount = PunchUtil.getContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, user.getPunch());			
+					int punchCount = PunchUtil.getLatestContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, user.getPunch());			
 					model.addAttribute("punchCount", punchCount);
 				}else{
 				

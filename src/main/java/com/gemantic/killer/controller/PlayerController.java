@@ -547,7 +547,7 @@ public class PlayerController {
 		User u = this.userService.getObjectById(uid);
 		log.info(" get user info " + u);
 
-		int punchCount = PunchUtil.getContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, u.getPunch());
+		int punchCount = PunchUtil.getLatestContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, u.getPunch());
 
 		model.addAttribute("user", u);
 		model.addAttribute("punchCount", punchCount);

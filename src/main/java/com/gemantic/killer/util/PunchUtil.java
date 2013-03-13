@@ -36,7 +36,7 @@ public class PunchUtil {
 	public static final Long Punch_Time_Start = 1356602918406L;
 
 	/**
-	 * 获取从Start日起,一个Period内连续打卡的次数. 如果获取从今天起一周内总共打卡的数字
+	 * 获取从Start日起,一个Period内连续打卡的次数. 如获取从今天起一周内总共打卡的数字
 	 * 
 	 * @param zipContent
 	 * @param zipStartTime
@@ -63,7 +63,7 @@ public class PunchUtil {
 	
 	/**
 	 * 获取从Start日起,一个Period内连续打卡的次数. 
-	 * 如果获取从今天起一周内连续打卡的数字
+	 * 如获取从今天起一周内连续打卡的数字
 	 * @param zipContent 
 	 * @param zipStartTime 
 	 * @param currentTimeMillis
@@ -104,6 +104,32 @@ public class PunchUtil {
 		}
 		
 		return big;
+	}
+	
+	/**
+	 * 获取从Start日起,一个Period内连续打卡的次数. 
+	 * 如获取从今天起一周内连续打卡的数字
+	 * @param zipContent 
+	 * @param zipStartTime 
+	 * @param currentTimeMillis
+	 * @param weekOfMonth
+	 * @return 
+	 */
+	public static int getLatestContinueDay(long start, int timePeriod, long zipStartTime, String zipContent) {
+		
+		int count = 0;		
+		List<String> punchList = RunLengthEncoding.decode2List(zipContent);
+		List<Integer> counts = new ArrayList();
+		for( int i = punchList.size()-1; i >=0  ; i--){
+			//统计连续是Ｐ的个数
+			if(punchList.get(i).equals("P")){
+				count++;
+			}else{
+				break;
+			}
+		}
+		
+		return count;
 	}
 	
 	/**
