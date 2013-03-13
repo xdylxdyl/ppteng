@@ -35,7 +35,7 @@
 		<fieldset id="send">
 			<span><strong>我</strong>要<b value="-500"></b>说：</span> <input
 				type="text" class="hid"> <input type="text" class="text"
-				id="say" disabled="disabled"> <input type="button"
+				id="say" readonly="readonly"> <input type="button"
 				class="submit" value="发送" id="sendSay" disabled="disabled">
 			<div class="netspeed" id="speed_hint">
 				网络延迟<span id="netspeed"></span>毫秒

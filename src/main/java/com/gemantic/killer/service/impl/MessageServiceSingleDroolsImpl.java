@@ -156,7 +156,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 					if ("decryption" == m.getPredict()) {
 						Long uid = Long.valueOf(m.getSubject());
 						User u = this.userService.getObjectById(uid);
-						u.setMoney(u.getMoney() + 2000);//
+						u.setMoney(u.getMoney() + 1000);//
 						this.userService.update(u);
 					}
 

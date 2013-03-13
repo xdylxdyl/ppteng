@@ -35,7 +35,7 @@
 					<div>
 
 						<img src="http://www.ptteng.com/${user.icon}" class="thumbnail"
-							style="max-width: 16em; height: 12em">
+							style="max-width: 90%; max-height: 15%">
 
 
 

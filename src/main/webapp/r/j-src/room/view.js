@@ -172,11 +172,11 @@ var killGameAreaView = {
         var share;
         switch (obj) {
             case "killer win" :
-                $("section article").append("<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！感谢大家参与测试,每个玩家可获取2000金币</p> " + recordLink);
+                $("section article").append("<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！感谢大家参与测试,每个玩家可获取1000金币</p> " + recordLink);
                 share = "这局杀人游戏[简化]中,杀手又赢了~,抢走了2000金币~点此链接回放场景,重现杀人现场: " + shareLink + ";";
                 break;
             case "water win" :
-                $("section article").append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！感谢大家参与测试,每个玩家可获取2000金币</p> " + recordLink);
+                $("section article").append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！感谢大家参与测试,每个玩家可获取1000金币</p> " + recordLink);
                 share = "这局杀人游戏[简化]中,水民又赢了~,赢回了2000金币~点此链接回放场景,重现水民分析实况:" + shareLink + ";";
                 break;
             default :
@@ -223,7 +223,7 @@ var simpleRightView = {
         $("#command").append("<option value='" + right + "'>" + content + "</option>");
     },
      sayRight : function(right) {
-        $("#say").prop("disabled", false);
+        $("#say").prop("readonly", false);
         $("#sendSay").prop("disabled", false);
         $("#say").attr("name", right);//? 这个有什么用处
     }

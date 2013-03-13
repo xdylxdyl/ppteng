@@ -27,7 +27,7 @@ function parseMessage(message) {
 
 
 var resolvePredict = {};
-resolvePredict.branch = function(message) {
+resolvePredict.branch = function (message) {
     console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
     var rid = globalView.getRoomID();
     var type = globalView.getRoomType();
@@ -77,7 +77,7 @@ resolvePredict.branch = function(message) {
 };
 
 
-resolvePredict.updateExpression = function(message) {
+resolvePredict.updateExpression = function (message) {
 
     var exp = eval(message.object);
 
@@ -86,23 +86,26 @@ resolvePredict.updateExpression = function(message) {
 };
 
 
-resolvePredict.setting = function(message) {
+resolvePredict.setting = function (message) {
 
 
     if (message.subject != globalView.getCurrentID()) {
 
-              var version=globalView.getVersion();
-              var rid=globalView.getRoomID();
-              var param= {"version":version,"rid":rid};
+        var version = globalView.getVersion();
+        var rid = globalView.getRoomID();
+        var param = {"version":version, "rid":rid};
 
         var s = settingService.getSetting(param);
         settingView.showSetting(s);
-        versionFunction["settingCallback"]();
+        if (versionFunction["settingCallback"]) {
+            versionFunction["settingCallback"]();
+        }
+
 
     }
 
 };
-resolvePredict.say = function(message) {
+resolvePredict.say = function (message) {
 
 
     var status = globalView.getGameStatus();
@@ -122,7 +125,7 @@ resolvePredict.say = function(message) {
 
 
 };
-resolvePredict.ready = function(message) {
+resolvePredict.ready = function (message) {
 
 
     playerService.setStatus(message.subject, playerStatus.ready)
@@ -133,14 +136,14 @@ resolvePredict.ready = function(message) {
 };
 
 
-resolvePredict.start = function(message) {
+resolvePredict.start = function (message) {
     //  console.log(message);
     playerService.setStartStatus();
     gameView.start();
 };
 
 
-resolvePredict.log = function(message) {
+resolvePredict.log = function (message) {
     //进入退出游戏，1、需要通报全场；2、加减玩家列表响应的玩家信息。
     var id = message.subject;
     if (message.predict == "login") {
@@ -149,19 +152,19 @@ resolvePredict.log = function(message) {
         if ("game" == type) {
             var rid = $("#rid").val();
             $.ajax({
-                type : "GET",
-                dataType : 'json',
-                url : "/player/info.do?rid=" + rid + "&uids=" + message.subject,
-                success : function(data) {
+                type:"GET",
+                dataType:'json',
+                url:"/player/info.do?rid=" + rid + "&uids=" + message.subject,
+                success:function (data) {
                     console.log(data);
                     var name = data.infos[0].name;
                     var p = new player(id, name, playerStatus.unready, 0);
                     playerService.addPlayer(p.id, p);
-                    gameAreaView.login(p,message);
+                    gameAreaView.login(p, message);
                     playerListView.login(p);
 
                 },
-                error : function(data) {
+                error:function (data) {
                     console.log("此人名字获取失败");
                 }
             })
@@ -184,12 +187,11 @@ resolvePredict.log = function(message) {
     }
 
 };
-resolvePredict.kick = function(message) {
-    var kickID=message.object;
+resolvePredict.kick = function (message) {
+    var kickID = message.object;
     if (globalView.getCreaterId() == kickID) {
         document.location.href = "/m/list.do";
     } else {
-
 
 
         var p = playerService.getPlayer(kickID);
@@ -202,9 +204,7 @@ resolvePredict.kick = function(message) {
 };
 
 
-
-
-resolvePredict.right = function(message) {
+resolvePredict.right = function (message) {
 
     var type = globalView.getRoomType();
     if ("game" == type) {
@@ -237,9 +237,9 @@ resolvePredict.right = function(message) {
 
 
 var doms = {
-    uid : "#uid",
-    rid : "#rid",
-    player : "nav ul"
+    uid:"#uid",
+    rid:"#rid",
+    player:"nav ul"
 };
 
 function showRecord(messages, speed) {
@@ -316,7 +316,7 @@ function sleep(n) {
     var start = new Date().getTime();
     while (true)  if (new Date().getTime() - start > n) break;
 }
-var initRoom = function() {
+var initRoom = function () {
 
     //1.判断是房间还是记录,这个功能是放在哪里呢.是合到Service里,还是在Controller里控制
     var type = globalView.getRoomType();
@@ -342,8 +342,8 @@ var initRoom = function() {
 
         //1.init game players/setting
         var param = {
-            uid :uid,
-            rid : rid
+            uid:uid,
+            rid:rid
         };
         var data = roomService.getRoomDetail(param);
         if (data == null) {
@@ -369,29 +369,28 @@ var initRoom = function() {
         //initControllview
         controlView.initButtonOfGame();
 
-         //判断是否有音乐盒,默认不显示
-      //  musicUtil.displayMusic();
+        //判断是否有音乐盒,默认不显示
+        //  musicUtil.displayMusic();
 
-        var player=playerService.getPlayer(uid);
-        var message={};
-        message.content=globalView.getLoginShow();
-        if( message.content){
-            gameAreaView.login(player,message);
+        var player = playerService.getPlayer(uid);
+        var message = {};
+        message.content = globalView.getLoginShow();
+        if (message.content) {
+            gameAreaView.login(player, message);
         }
 
 
-        if( versionFunction["init"] ){
-            versionFunction["init"] ();
+        if (versionFunction["init"]) {
+            versionFunction["init"]();
         }
-
 
 
     } else {
 
-              //默认隐藏
-               $("#role_area").hide();
-                $("#dead_area").hide();
-                 $("#killeer_area").hide();
+        //默认隐藏
+        $("#role_area").hide();
+        $("#dead_area").hide();
+        $("#killeer_area").hide();
 
         //Record
         var recordID = globalView.getRecordId();
@@ -451,7 +450,7 @@ var initRoom = function() {
 }
 
 
-$(document).ready(function() {
+$(document).ready(function () {
     $.ajaxSettings.traditional = true;
     //初始化，获取房间所有信息,有可能是玩的房间,有可能是战例播放
     initRoom();
