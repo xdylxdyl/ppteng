@@ -1,31 +1,48 @@
 var playerService = {
 
-    updatePlayer:function(p) {
+    updatePlayer:function (p) {
         id_name[p.id] = p;
     },
-    deletePlayer:function(id) {
+    deletePlayer:function (id) {
         delete id_name[id];
     },
-    addPlayer:function(id, player) {
+    addPlayer:function (id, player) {
         id_name[id] = player;
     },
-    getPlayer:function(id) {
+    getPlayer:function (id) {
         var p = id_name[id];
         if (p == null) {
             p = new player("", "", "", "");
         }
         return p;
     },
-    setStatus:function(id, status) {
+
+    getName:function (id) {
+
+
+        var p = id_name[id];
+        if (p == null) {
+
+            return  ajaxJson("/player/detail/show.do?", "get", {"uid":id}, playerService.parseDetail, 5000, "json");
+        }else{
+            return p.name;
+        }
+
+
+    },
+    parseDetail:function(data){
+        return data.user.name;
+    },
+    setStatus:function (id, status) {
         id_name[id].status = status;
     },
-    setName:function(id, name) {
+    setName:function (id, name) {
         id_name[id].name = name;
     },
-    setCount:function(id, count) {
+    setCount:function (id, count) {
         id_name[id].count = name;
     },
-    getAll:function() {
+    getAll:function () {
         var living = playerStatus.living;
         var die = playerStatus.die;
         var unready = playerStatus.unready;
@@ -70,7 +87,7 @@ var playerService = {
 
         return result;
     },
-    setStartStatus:function() {
+    setStartStatus:function () {
         //只有已准备的玩家才是活着的
         for (var key in id_name) {
             var p = this.getPlayer(key);
@@ -81,38 +98,38 @@ var playerService = {
         }
 
     },
-    statusCount:function(status,c){
-        var count=0;
+    statusCount:function (status, c) {
+        var count = 0;
         for (var key in id_name) {
             var player = this.getPlayer(key);
 
-            if(status== player.status){
+            if (status == player.status) {
                 count++;
             }
         }
-        if(count>c){
+        if (count > c) {
             return true;
-        }else{
+        } else {
             return false;
         }
 
     },
 
-    setUnreadyStatus:function() {
+    setUnreadyStatus:function () {
         for (var key in id_name) {
             this.setStatus(key, playerStatus.unready);
         }
 
     },
-    updateUserInfo:function(userInfo) {
+    updateUserInfo:function (userInfo) {
         return ajaxJson("/player/update.do?", "post", userInfo, null, 5000, "html");
 
     },
 
-    updateShow:function(show){
-      return  ajaxJson("/player/update/stage.do?", "post",{"show":show}, null, 5000, "json");
+    updateShow:function (show) {
+        return  ajaxJson("/player/update/stage.do?", "post", {"show":show}, null, 5000, "json");
     },
-    getRoomOfPerson: function (uid) {
+    getRoomOfPerson:function (uid) {
         var room = {}
         var data = ajaxJson("/player/info.do?", "post", {uids:uid}, null, 5000, "json")
         var users = data.infos;
@@ -135,31 +152,31 @@ var playerService = {
 
 
 var settingService = {
-    getSetting:function(parameter) {
+    getSetting:function (parameter) {
         return ajaxJson("/m/form/setting.do?", "get", parameter, null, 5000, "html")
 
     },
 
-    saveSetting:function(s) {
+    saveSetting:function (s) {
 
 
         return ajaxJson("/m/form/setting.do?", "post", s, null, 5000, "html");
     },
-    saveExpress:function(exp) {
+    saveExpress:function (exp) {
         return ajaxJson("/m/expression/update.do?", "post", exp, null, 5000, "html");
     },
-    getExpress:function(rid) {
+    getExpress:function (rid) {
 
         return ajaxJson("/m/expression/show.do?", "get", {rid:rid}, this.parseExpress, 5000, "json");
     },
-    parseExpress:function(data) {
+    parseExpress:function (data) {
         return data.expression;
     },
-    getExpressFromRecord:function(recordID) {
+    getExpressFromRecord:function (recordID) {
         return ajaxJson("/record/expression/show.do?", "get", {recordID:recordID}, this.parseExpress, 5000, "json");
     },
 
-    getSettingFromRecord:function(recordID) {
+    getSettingFromRecord:function (recordID) {
         return ajaxJson("/record/setting.do?", "get", {recordID:recordID}, null, 5000, "html")
     }
 
@@ -167,14 +184,14 @@ var settingService = {
 
 var roomService = {
 
-    getRoomDetail:function(baseParam) {
+    getRoomDetail:function (baseParam) {
 
 
         return  ajaxJson("/room/detail.do?", "POST", baseParam, null, 5000, "json");
 
 
     },
-    getRecordDetail:function(param) {
+    getRecordDetail:function (param) {
 
         return  ajaxJson("/record/detail.do?", "get", param, null, 5000, "json");
     },
@@ -188,10 +205,9 @@ var roomService = {
     },
 
 
+    parsePerson:function (data) {
 
-    parsePerson:function(data) {
-
-     var rid=globalView.getRoomID();
+        var rid = globalView.getRoomID();
         //每个person下的信息有：id，name，status
 
         var uids = [];
@@ -213,33 +229,32 @@ var roomService = {
         playerListView.sortPlayer();
     },
 
-    parseRecord:function(data) {
+    parseRecord:function (data) {
 
-        var rid=globalView.getRecordId();
-           //每个person下的信息有：id，name，status
+        var rid = globalView.getRecordId();
+        //每个person下的信息有：id，name，status
 
-           var uids = [];
-           for (var key in data) {
-               var id = data[key].id;
-               uids.push(id);
-           }
+        var uids = [];
+        for (var key in data) {
+            var id = data[key].id;
+            uids.push(id);
+        }
 
-           //由nameID获取真正name
-           var name = this.getRecordPerson(rid, uids);
-           for (var j = 0; j < name.length; j++) {
-               console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
-               var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
-               playerService.addPlayer(p.id, p);
-               playerListView.login(p);
+        //由nameID获取真正name
+        var name = this.getRecordPerson(rid, uids);
+        for (var j = 0; j < name.length; j++) {
+            console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
+            var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
+            playerService.addPlayer(p.id, p);
+            playerListView.login(p);
 
-           }
+        }
 
-           playerListView.sortPlayer();
-       },
+        playerListView.sortPlayer();
+    },
 
 
-
-    parseRole:function(data) {
+    parseRole:function (data) {
         if (data == null) {
             return;
         }
@@ -254,7 +269,7 @@ var roomService = {
         }
 
     },
-    parseGame:function(data) {
+    parseGame:function (data) {
         if (data == null) {
             return;
         }
@@ -268,15 +283,15 @@ var roomService = {
 
         }
     },
-    parseRoom:function(data) {
+    parseRoom:function (data) {
         var creater = data.creater;
         playerListView.displayCreater(creater);
     },
-    parseRight:function( data) {
-         var uid = globalView.getCurrentID();
+    parseRight:function (data) {
+        var uid = globalView.getCurrentID();
         //每个right下的信息有：id，isNotify, right[]
 
-        if (data!=null&&data.isNotify && data.id == uid) {
+        if (data != null && data.isNotify && data.id == uid) {
             for (var i = 0; i < data.right.length; i++) {
                 var right = data.right[i];
                 // console.log("process right " + right);
@@ -286,42 +301,42 @@ var roomService = {
 
     },
 
-    getPerson:function(rid, uids) {
+    getPerson:function (rid, uids) {
         var param;
         if (rid == null) {
             param = {uids:uids};
         } else {
-            param = {rid:rid,uids:uids};
+            param = {rid:rid, uids:uids};
         }
         return ajaxJson("/player/info.do", "GET", param, this.parsePersonDetail, 5000, "json");
 
     },
-    getRecordPerson:function(rid, uids) {
-          var param;
-          if (rid == null) {
-              param = {uids:uids};
-          } else {
-              param = {rid:rid,uids:uids};
-          }
-          return ajaxJson("/player/record.do", "GET", param, this.parsePersonDetail, 5000, "json");
+    getRecordPerson:function (rid, uids) {
+        var param;
+        if (rid == null) {
+            param = {uids:uids};
+        } else {
+            param = {rid:rid, uids:uids};
+        }
+        return ajaxJson("/player/record.do", "GET", param, this.parsePersonDetail, 5000, "json");
 
-      },
+    },
 
-    parsePersonDetail:function(data) {
+    parsePersonDetail:function (data) {
         return  data.infos;
     }
 
 
 };
 
-roomService.info = function() {
+roomService.info = function () {
     var option = $.extend({}, doms, {
-        uid: $(doms.uid).val(),
-        rid: $(doms.rid).val()
+        uid:$(doms.uid).val(),
+        rid:$(doms.rid).val()
     });
     var baseParam = {
-        uid : option.uid,
-        rid : option.rid
+        uid:option.uid,
+        rid:option.rid
     };
 
     function _ajax(baseParam, success, error) {
@@ -396,11 +411,11 @@ roomService.info = function() {
     function getPersonName(uids) {
         var names;
         $.ajax({
-            type : "GET",
-            dataType: "json",
-            async : false,
-            url: "/player/info.do?rid=" + option.rid + uids,
-            success: function(data) {
+            type:"GET",
+            dataType:"json",
+            async:false,
+            url:"/player/info.do?rid=" + option.rid + uids,
+            success:function (data) {
                 names = data.infos;
             }
         });
@@ -440,7 +455,7 @@ roomService.info = function() {
 
 
 var cometService = {
-    comet: function (id, parse) {
+    comet:function (id, parse) {
         var url = "http://42.121.113.70:8000/channel/" + id;
         cometUtil.polling(url, parse);
     }

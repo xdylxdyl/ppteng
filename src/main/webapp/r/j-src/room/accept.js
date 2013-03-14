@@ -82,10 +82,12 @@ killController.role = function(message) {
 };
 
 killController.decryption = function(message) {
-
+    var name = playerService.getName(message.subject);
     if ("killer" == message.object) {
-        var name = idFindName(message.subject);
-        $("section article").append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是真正的杀手</p>");
+
+        $("section article").append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是杀手</p>");
+    }else{
+        $("section article").append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是水民</p>");
     }
 
 };

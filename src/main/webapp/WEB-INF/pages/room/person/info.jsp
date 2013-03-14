@@ -2,6 +2,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@page contentType="text/html;charset=utf-8"%>
 
+
 <json:object escapeXml="false">
 	<json:property name="code" value="0"></json:property>
 	<json:property name="message" value=""></json:property>
@@ -16,6 +17,7 @@
 		</c:forEach>
 	</json:array>
 </json:object>
+
 
 
 

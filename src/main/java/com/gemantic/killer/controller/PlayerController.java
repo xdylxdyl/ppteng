@@ -439,6 +439,27 @@ public class PlayerController {
 
 		return "/game/room/show";
 	}
+	
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/detail/show")
+	public String getDetail(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long uid) throws Exception {
+		
+		
+		User user=this.userService.getObjectById(uid);
+		
+		model.addAttribute("user", user);
+		return "/room/person/detail";
+	}
+	
 
 	/**
 	 * 获取玩家的状态信息
