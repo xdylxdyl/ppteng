@@ -13,6 +13,7 @@
 <script src="/r/j-src/commons/model.js?v=${frontVersion}"></script>
 <script src="/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
 <script src="/r/j-src/commons/service.js?v=${frontVersion}"></script>
+<script src="/r/j-src/commons/left.js?v=${frontVersion}"></script>
 <script src="/r/j-src/room/user_view.js?v=${frontVersion}"></script>
 <script src="/r/j-src/room/controller.js?v=${frontVersion}"></script>
 <script src="/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>

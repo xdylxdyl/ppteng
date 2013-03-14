@@ -5,26 +5,22 @@
 
     <title>${room.name}</title>
     <meta charset="utf-8">
-    <link href="../../css/mine/mine.css" rel="stylesheet">
-    <script src="../../j-src/jquery/jquery-1.6.1.js"></script>
-    <script src="../../j-src/commons/view.js"></script>
-    <script src="../../j-src/mine/mine.js"></script>
-    <script src="../../j-src/commons/service.js"></script>
-    <script src="../../j-src/commons/base.js"></script>
-    <script src="../../j-src/util/httpUtil.js"></script>
-    <script src="../../j-src/util/httpUtil2.js?v=1.0"></script>
+    <script src="flotr2.min.js"></script>
 
+    <script src="../../j-src/util/line.js?v=1.0"></script>
 
-    <input type="hidden" id="uid" value="${uid}"> <!-- 玩家ID -->
-<input type="hidden"  id="rid" value="${room.id}"><!-- 房间ID -->
-<input type="hidden" id="version" value="${room.version}">
-<input type="hidden" id="assign" value=""><!-- 玩家角色 -->
-<input type="hidden" id="time" value="over"><!-- 游戏时间白天黑夜 -->
-<input type="hidden" id="createrID" value="${room.createrID}">
-<input type="hidden" id="type" value="game">
-<input type="hidden" id="recordID" value="${record.id}">
-<input type="hidden" id="recordTime" value="${record.time}">
-<div id="contents" class="hidden">${contents}</div>
+    <style type="text/css">
+         body {
+           margin: 0px;
+           padding: 0px;
+         }
+         #container {
+           width : 600px;
+           height: 384px;
+           margin: 8px auto;
+         }
+       </style>
+
 
 
 </head>
@@ -34,106 +30,28 @@
     <div class="dead_area"></div>
     <div class="killer_area"></div>
 </header>
-<div class="line"></div>
 
-<article>
-    <div id="outer">
-        <div id="inner">
-            <div class="square" mvalue="empty" x="0" y="0" id="0_0"></div>
-            <div class="flag" mvalue="flag" x="0" y="1" id="0_1"></div>
-            <div class="square q1" mvalue="1" x="0" y="2" id="0_2">1</div>
-            <div class="square q2" mvalue="2" x="0" y="3" id="0_3">2</div>
-            <div class="square q3" mvalue="3" x="0" y="4" id="0_4">3</div>
-            <div class="square q4" mvalue="4" x="0" y="5" id="0_5">4</div>
-            <div class="square q5" mvalue="5" x="0" y="6" id="0_6">5</div>
-            <div class="square q6" mvalue="6" x="0" y="7" id="0_7">6</div>
-            <div class="square q7" mvalue="7" x="0" y="8" id="0_8">7</div>
-            <div class="square q8" mvalue="8" x="1" y="0" id="1_0">8</div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+<body>
+<div id="container"></div>
+<canvas width="500" height="250"></canvas>
+</body>
+<script type="text/javascript">
+    (function () {
 
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+      var
+        container = document.getElementById('container');
+    var  start = new Date("2009/01/01 01:00:00").getTime();
+    var data=[];
 
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        for (i = 0; i < 100; i++) {
+          x = start+(i*1000*3600*24*100);
+            data.push([x,Math.floor(Math.random()*2+4)]);
+        }
+      drawUtil.line(container,data)
 
 
-        </div>
-    </div>
-
-</article>
-
+    })();
+  </script>
 
 </body>
 

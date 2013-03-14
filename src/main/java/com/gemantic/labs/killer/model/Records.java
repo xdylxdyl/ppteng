@@ -121,6 +121,7 @@ public class Records implements Serializable {
 
 	public void setRoom(Room room) {
 		this.room = room;
+		
 		this.snapshot = RoomUtil.room2Json(room);
 	}
 
@@ -131,6 +132,7 @@ public class Records implements Serializable {
 
 	public void setSnapshot(String snapshot) {
 		this.snapshot = snapshot;
+		
 		this.room= RoomUtil.json2Room(this.snapshot);
 		
 	}

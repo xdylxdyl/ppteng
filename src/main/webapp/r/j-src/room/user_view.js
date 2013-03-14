@@ -1,3 +1,6 @@
+
+leftView.highLight("leftNav_basic");
+
 var userEditView = {
 
     showEdit:function () {
