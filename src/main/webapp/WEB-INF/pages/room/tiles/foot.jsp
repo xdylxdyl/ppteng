@@ -62,7 +62,7 @@
 							src="http://wpa.qq.com/imgd?IDKEY=8971a9b0581ad8da3c8686766f8f9c69b8f587e5fa00eb0f&pic=41"
 							alt="给葡萄藤发消息" title="联系站长"></a>
 					</p>
-					<p>QQ群: 213709605 </p>
+					<p>QQ群: 213709605</p>
 				</div>
 
 			</div>
@@ -83,19 +83,22 @@
         </script>
 			</p>
 		</div>
-		
-		
+
+
 		<div id="mask">
-			<p>抱歉,为了保证您获得更好的交互体验,本站不再支持过时的浏览器,他们会导致样式错乱以及JS无法使用</p>
+			<p>您的浏览器已经过时了~</p>
+			<p>非常抱歉,请使用以下浏览器访问本站</p>
 			<p>
-				如果想继续访问本站,请使用最新版本的浏览器,如<a href="http://www.firefox.com.cn/download/">FireFox</a>/
-				<a href="http://dl.pconline.com.cn/download/51614.html">Chrome</a>/
-				<a href="http://ie.sogou.com/">Sogou</a>(高速模式)/ <a
-					href="http://chrome.360.cn/">360极速浏览器</a>
+			<ul>
+				<li><p><a href="http://www.firefox.com.cn/download/">FireFox</a></p></li>
+				<li><p><a href="http://dl.pconline.com.cn/download/51614.html">Chrome</a></p></li>
+				<li><p><a href="http://ie.sogou.com/">Sogou(高速模式)</a></p></li>
+				<li><p><a href="http://chrome.360.cn/">360极速浏览器</a></p></li>
+			</ul>			
 
 			</p>
 			<p>
-				点击以上链接可以直接下载,更多帮助请点击<a
+				更多帮助请点击<a
 					href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=88"
 					target="_blank">这里 </a>
 			</p>
