@@ -6,9 +6,9 @@
     <title>${room.name}</title>
     <meta charset="utf-8">
     <script src="flotr2.min.js"></script>
-
+    <script type="text/javascript" src="../../j-src/jquery/jquery-1.7.1.min.js"></script>
     <script src="../../j-src/util/line.js?v=1.0"></script>
-
+    <script src="../../j-src/person/punchlist.js"></script>
     <style type="text/css">
          body {
            margin: 0px;
@@ -26,33 +26,12 @@
 </head>
 
 <body>
-<header>
-    <div class="dead_area"></div>
-    <div class="killer_area"></div>
-</header>
 
-<body>
 <div id="container"></div>
 <canvas width="500" height="250"></canvas>
 </body>
-<script type="text/javascript">
-    (function () {
-
-      var
-        container = document.getElementById('container');
-    var  start = new Date("2009/01/01 01:00:00").getTime();
-    var data=[];
-
-        for (i = 0; i < 100; i++) {
-          x = start+(i*1000*3600*24*100);
-            data.push([x,Math.floor(Math.random()*2+4)]);
-        }
-      drawUtil.line(container,data)
 
 
-    })();
-  </script>
 
-</body>
 
 </html>

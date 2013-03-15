@@ -6,18 +6,41 @@
  * To change this template use File | Settings | File Templates.
  */
 
+var punchView = {
+    getPunchStart:function () {
+        return parseInt($("#punchStart").val());
+    },
+    getPunchContent:function(){
+        return $("#punch").val();
+    }
+}
+
 $(document).ready(function () {
 
     headView.highLight("person");
+
+
     leftView.highLight("leftNav_punch");
 
-    var  container = document.getElementById('container');
-    var start = new Date("2009/01/01 01:00:00").getTime();
+
+    var container = document.getElementById('container');
+    var start =punchView.getPunchStart();
     var data = [];
 
-    for (i = 0; i < 100; i++) {
-        x = start + (i * 1000 * 3600 * 24 * 100);
-        data.push([x, Math.floor(Math.random() * 2 + 4)]);
+    var content=punchView.getPunchContent();
+
+    for (i = 0; i < content.length; i++) {
+
+        var y;
+        console.log(content.charAt(i));
+        if('N'==content.charAt(i)){
+            y=0;
+        }else{
+            y=1;
+        }
+        data.push([start, y]);
+        start = start + 1000 * 3600 * 24;
+        console.log(start+" is "+y);
     }
     drawUtil.line(container, data)
 
