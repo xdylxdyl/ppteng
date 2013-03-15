@@ -83,6 +83,24 @@
         </script>
 			</p>
 		</div>
+		
+		
+		<div id="mask">
+			<p>抱歉,为了保证您获得更好的交互体验,本站不再支持过时的浏览器,他们会导致样式错乱以及JS无法使用</p>
+			<p>
+				如果想继续访问本站,请使用最新版本的浏览器,如<a href="http://www.firefox.com.cn/download/">FireFox</a>/
+				<a href="http://dl.pconline.com.cn/download/51614.html">Chrome</a>/
+				<a href="http://ie.sogou.com/">Sogou</a>(高速模式)/ <a
+					href="http://chrome.360.cn/">360极速浏览器</a>
+
+			</p>
+			<p>
+				点击以上链接可以直接下载,更多帮助请点击<a
+					href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=88"
+					target="_blank">这里 </a>
+			</p>
+
+		</div>
 
 	</div>
 </body>

@@ -13,6 +13,37 @@ var punchView = {
     getPunchContent:function(){
         return $("#punch").val();
     }
+
+}
+
+var punchService={
+    getData:function(){
+
+           var start =punchView.getPunchStart();
+           var data = [];
+
+           var content=punchView.getPunchContent();
+
+           for (i = 0; i < content.length; i++) {
+
+               var y;
+               console.log(content.charAt(i));
+               if('N'==content.charAt(i)){
+                   y=0;
+               }else{
+                   y=1;
+               }
+               data.push([start, y]);
+               start = start + 1000 * 3600 * 24;
+           }
+        return data;
+    },
+    draw:function(){
+        var container = document.getElementById('container');
+          var data=punchService.getData();
+          drawUtil.line(container, data)
+
+    }
 }
 
 $(document).ready(function () {
@@ -22,27 +53,11 @@ $(document).ready(function () {
 
     leftView.highLight("leftNav_punch");
 
+    punchService.draw();
 
-    var container = document.getElementById('container');
-    var start =punchView.getPunchStart();
-    var data = [];
-
-    var content=punchView.getPunchContent();
-
-    for (i = 0; i < content.length; i++) {
-
-        var y;
-        console.log(content.charAt(i));
-        if('N'==content.charAt(i)){
-            y=0;
-        }else{
-            y=1;
-        }
-        data.push([start, y]);
-        start = start + 1000 * 3600 * 24;
-        console.log(start+" is "+y);
-    }
-    drawUtil.line(container, data)
+    $(window).resize(function() {
+        punchService.draw();
+    });
 
 
 })
