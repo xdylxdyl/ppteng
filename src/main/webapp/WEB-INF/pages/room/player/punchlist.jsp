@@ -12,8 +12,8 @@
 
 <input type="hidden" id="punch" value="${punch}" />
 <input type="hidden" id="punchStart" value="${punchStart}" />
-
-
+<input type="hidden" id="punchStart" value="${punchStart}" />
+<input type="hidden" id="uname" value="${user.name}" />
 
 <!-- container start  -->
 <div class="span9">

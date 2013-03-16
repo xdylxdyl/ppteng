@@ -26,18 +26,20 @@
 
 				<div class="caption">
 					<span class="badge badge-info">${(page-1)*size+status.index+1}</span>
-					
+
 					<h3>
-						<a href="/player/detail.do?uid=${user.id}" target="_blank"><c:out value="${user.name}"></c:out></a>
-						<span class="label label-important">金币 ${user.money}</span>
+						<a href="/player/detail.do?uid=${user.id}" target="_blank"><c:out
+								value="${user.name}"></c:out></a> <span
+							class="label label-important">金币 ${user.money}</span>
 					</h3>
 
 					<div>
 
-						<img src="http://www.ptteng.com/${user.icon}" class="thumbnail"
+						<a href="/player/detail.do?uid=${user.id}" target="_blank"> <img
+							src="http://www.ptteng.com/${user.icon}" class="thumbnail"
 							style="max-width: 90%; max-height: 15%">
 
-
+						</a>
 
 						<div class="caption">
 							<p class="text-success">${user.sign}</p>
@@ -71,9 +73,14 @@
 <!-- container over  -->
 
 <div class="pagination pagination-centered">
-  <ul>
-    <li><a href="/rank/list.do?type=money&page=${page-1}&size=${size}" id="pagePrev">Prev</a></li>   
-      <li class="active"><a href="/rank/list.do?type=money&page=${page}&size=${size}">${page}</a></li>
-    <li><a href="/rank/list.do?type=money&page=${page+1}&size=${size}" id="pageNext">Next</a></li>
-  </ul>
+	<ul>
+		<li><a
+			href="/rank/list.do?type=money&page=${page-1}&size=${size}"
+			id="pagePrev">Prev</a></li>
+		<li class="active"><a
+			href="/rank/list.do?type=money&page=${page}&size=${size}">${page}</a></li>
+		<li><a
+			href="/rank/list.do?type=money&page=${page+1}&size=${size}"
+			id="pageNext">Next</a></li>
+	</ul>
 </div>

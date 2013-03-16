@@ -572,7 +572,7 @@ public class PlayerController {
 		model.addAttribute("user", u);
 		model.addAttribute("punchCount", punchCount);
 		model.addAttribute("selfID", selfID);
-
+		model.addAttribute("uid", uid);
 		return "/room/player/detail";
 
 	}
@@ -624,9 +624,12 @@ public class PlayerController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/player/punchlist", method = RequestMethod.GET)
-	public String punchList(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+	public String punchList(HttpServletRequest request, HttpServletResponse response, ModelMap model,Long uid) throws Exception {
 
-		Long uid = cookieUtil.getID(request, response);
+		if(uid==null){
+			 uid = cookieUtil.getID(request, response);
+		}
+	
 		log.info(uid + " punch ");
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
@@ -634,12 +637,12 @@ public class PlayerController {
 			return "redirect:/";
 		}
 	
-		User u = this.userService.getObjectById(uid);
-		log.info(" get user info " + u);
-		String punchStr = RunLengthEncoding.decode( u.getPunch());
+	
+		log.info(" get user info " + user);
+		String punchStr = RunLengthEncoding.decode( user.getPunch());
 		model.addAttribute("punchStart", PunchUtil.Punch_Time_Start);
-		model.addAttribute("punch", punchStr);
-		model.addAttribute("code", "0");
+		model.addAttribute("punch", punchStr);	
+		model.addAttribute("user", user);
 		return "/room/player/punchlist";
 
 	}

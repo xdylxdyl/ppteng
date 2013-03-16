@@ -8,7 +8,7 @@
 
 
 var drawUtil = {
-    line:function (canv, xdata) {
+    line:function (canv, xdata,title) {
 
         var graph;
 
@@ -69,7 +69,7 @@ var drawUtil = {
                 mode:'x'
             },
             HtmlText:false,
-            title:'打卡线'
+            title:title
         }
 
 

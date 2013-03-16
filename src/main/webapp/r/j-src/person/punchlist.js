@@ -12,6 +12,9 @@ var punchView = {
     },
     getPunchContent:function(){
         return $("#punch").val();
+    },
+    getUserName:function(){
+        return $("#uname").val();
     }
 
 }
@@ -29,7 +32,7 @@ var punchService={
                var y;
                console.log(content.charAt(i));
                if('N'==content.charAt(i)){
-                   y=0;
+                   y=0.3;
                }else{
                    y=1;
                }
@@ -41,7 +44,7 @@ var punchService={
     draw:function(){
         var container = document.getElementById('container');
           var data=punchService.getData();
-          drawUtil.line(container, data)
+          drawUtil.line(container, data,punchView.getUserName()+"--打卡线")
 
     }
 }

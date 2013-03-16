@@ -7,11 +7,11 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <li class="nav-header">个人资料</li>
-                    <li id="leftNav_basic"><a href="/player/detail.do">基本信息</a></li>
+                    <li id="leftNav_basic"><a href="/player/detail.do?uid=${user.id}">基本信息</a></li>
                     <!-- <li id="leftNav_stageShow"><a href="/player/regedit.do?type=edit">修改密码</a></li>
                     <li id="leftNav_basic"><a href="/player/detail.do">出场秀</a></li> -->
                     <li class="nav-header">打卡统计</li>
-                    <li id="leftNav_punch"><a href="/player/punchlist.do">打卡线</a></li>
+                    <li id="leftNav_punch"><a href="/player/punchlist.do?uid=${user.id}">打卡线</a></li>
                  <!--   <li class="nav-header">杀人游戏</li>
                     <li id="simple"><a href="/about.do?type=simple">简化</a></li>
                     
