@@ -22,6 +22,7 @@ if (loginView.isLogin()) {
 
 } else {
 //qq
+    try{
     QC.Login({btnId:"qqLoginBtn"}, function (oInfo, oOpts) {
         console.log("qq login");
         $("#type").val(1);
@@ -34,12 +35,16 @@ if (loginView.isLogin()) {
         })
 
     });
+    }catch(e){
+        console.log("qq error "+e);
+        alert("qq");
+    }
 }
 //sina
 if (loginView.isLogin()) {
 
 } else {
-
+    try{
     WB2.anyWhere(function (W) {
         W.widget.connectButton({
             id:"wb_connect_btn",
@@ -62,6 +67,10 @@ if (loginView.isLogin()) {
         });
         $("#type").val(2);
     })
+    }catch(e){
+          console.log("sina error "+e);
+        alert("sina");
+      }
 }
 
 var login = function (type, openID, name) {

@@ -24,17 +24,11 @@
 <link href="/r/css/reboot.css" rel="stylesheet">
 <link href="/r/css/theme.css" rel="stylesheet">
 <script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
-<script src="/r/j-src/room/head_view.js"></script>
 
- <script type="text/javascript"
-	src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
-	data-appid="100372616"
-	data-redirecturi="http://www.ptteng.com/qc_callback.html"
-	charset="utf-8"></script>
-
-<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1999911523" type="text/javascript" charset="utf-8"></script>
-
-<script type="text/javascript"
+	
+		<script src="/r/j-src/room/head_view.js"></script>
+	<script
+	type="text/javascript"
 	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script>
 </head>
 
@@ -42,25 +36,33 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="#">葡萄藤</a>
-				
-				<div class="nav-collapse" id="nav">
-					<ul class="nav pull-right">
-						<li id="nav_index"><a href="/">首页</a></li>
-						<li id="nav_game"><a href="/m/list.do">游戏</a></li>
-						<li id="nav_case"><a href="/record/list.do">战例</a></li>
-						<li id="nav_person"><a href="/player/detail.do">个人</a></li>
-						<li id="nav_rank"><a href="/rank/list.do?type=money">排行</a></li>
-						<li><a href="http://bbs.ptteng.com/forum.php"
-							target="_blank">论坛</a></li>
-						<li><a href="http://xdylxdyl.diandian.com/" target="_blank">博客</a></li>
-						<li id="nav_quit"><a href="/player/offline.do" id="navLogout">退出</a></li>
-						<li id="nav_about"><a href="/about.do?type=about">关于</a></li>
-					</ul>
+				<div class="span1">
+					<img class="marketing-img" src="/r/img/logo1.jpg">
 
 				</div>
+				<div class="span3">
+					<h2><p class="brankd text-white">葡萄藤</p></h2>
+					<p class="text-white">www.ptteng.com</p>
+				</div>
+
+				<ul class="nav pull-right">
+					<li id="nav_index"><a href="/">首页</a></li>
+					<li id="nav_game"><a href="/m/list.do">游戏</a></li>
+					<li id="nav_case"><a href="/record/list.do">战例</a></li>
+					<li id="nav_person"><a href="/player/detail.do">个人</a></li>
+					<li id="nav_rank"><a href="/rank/list.do?type=money">排行</a></li>
+					<li><a href="http://bbs.ptteng.com/forum.php" target="_blank">论坛</a></li>
+					<li><a href="http://xdylxdyl.diandian.com/" target="_blank">博客</a></li>
+					<li id="nav_quit"><a href="/player/offline.do" id="navLogout">退出</a></li>
+					<li id="nav_about"><a href="/about.do?type=about">关于</a></li>
+					<li id="nav_favorite"><a href="javascript:AddFavorite('http://www.ptteng.com/','葡萄藤')">收藏</a></li>
+					
+					
+				</ul>
+
 			</div>
 		</div>
+	</div>
 	</div>
 
 

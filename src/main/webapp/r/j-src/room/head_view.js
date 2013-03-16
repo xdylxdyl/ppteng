@@ -33,8 +33,26 @@ var headView = {
         }
     }
 
+
 }
 
+function AddFavorite(sURL, sTitle) {
+    if (sTitle == '') {
+        sTitle = '葡萄藤';
+    }
+    try {
+        window.external.addFavorite(sURL, sTitle);
+    } catch (e) {
+        try {
+            window.sidebar.addPanel(sTitle, sURL, "");
+        } catch (e) {
+            alert("按下Ctrl+D加入收藏夹~");
+        }
+    }
+
+
+    ;
+}
 
 $(document).ready(function () {
 
