@@ -48,7 +48,7 @@
 
 
 
-	<div class="span9 offset2">
+	<div class="span9">
 
 		<c:if test="${rooms== null || fn:length(rooms) == 0}">
 			<div class="row offset4" style="margin-top: 1em; margin-bottom: 1em">
