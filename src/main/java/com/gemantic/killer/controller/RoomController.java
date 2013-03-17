@@ -500,7 +500,7 @@ public class RoomController {
 				this.roomService.updateRoom(r);
 			}
 
-			log.info(uid + " is admin so get express from use " + ls);
+			log.info(uid + " is admin so get express from use " +r.getExpressions());
 		} else {
 
 			log.info(uid + " is not admin so get express from room " + ls);

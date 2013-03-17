@@ -1,6 +1,7 @@
 package com.gemantic.killer.util;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.CollectionUtils;
-
 
 import com.gemantic.killer.model.User;
 import com.google.gson.Gson;
@@ -45,7 +45,8 @@ public class UserUtil {
 
 	public static List<String> json2Expression(String content) {
 		Gson gson = new GsonBuilder().create();
-		List<String> list = gson.fromJson(content, List.class);
+	
+		List<String> list = gson.fromJson(content,  new TypeToken<Collection<String>>(){}.getType());
 		return list;
 
 	}

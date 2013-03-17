@@ -71,8 +71,7 @@ $(document).ready(function () {
         $("#showCommit").bind("click", function () {
 
             var v = $("#showContent").val();
-            v=DBC2SBC(v);
-            v=full2half(v);
+            v=format(v);
             var expArray;
             try {
                 expArray = eval(v);

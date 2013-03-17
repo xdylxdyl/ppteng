@@ -692,6 +692,7 @@ public class PlayerController {
 		oldUser.setSign(user.getSign());
 		oldUser.setMusic(user.getMusic());
 		oldUser.setStageShow(user.getStageShow());
+		
 		this.userService.update(oldUser);
 
 		return "redirect:/player/detail.do?uid=" + uid;

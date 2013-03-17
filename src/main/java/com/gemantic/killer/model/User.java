@@ -84,7 +84,7 @@ public class User implements Serializable {
 	/**
 	 * 自定义表情
 	 */
-	private List<String> expression = new ArrayList();
+	private List<String> expression ;
 
 	private String expressionContent;
 	
