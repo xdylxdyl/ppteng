@@ -189,7 +189,7 @@ resolvePredict.log = function (message) {
 };
 resolvePredict.kick = function (message) {
     var kickID = message.object;
-    if (globalView.getCreaterId() == kickID) {
+    if (globalView.getCreaterId() == kickID||globalView.getCurrentID()==kickID) {
         document.location.href = "/m/list.do";
     } else {
 
