@@ -141,7 +141,14 @@ $(document).ready(function () {
         //回车就发送消息
         if (event.keyCode == "13") {
 
-            say();
+            if ($("#sendSay").prop("disabled"))
+            {
+                alert("嘘.现在不能说话.");
+            }
+            else {
+                say();
+            }
+
 
         } else {
 
@@ -168,8 +175,8 @@ $(document).ready(function () {
 
             } else {
                 var p = "say";
-                var player=playerService.getPlayer(globalView.getCurrentID());
-                if(player.status==playerStatus.lastword&&"lastword" == globalView.getGameStatus()){
+                var player = playerService.getPlayer(globalView.getCurrentID());
+                if (player.status == playerStatus.lastword && "lastword" == globalView.getGameStatus()) {
                     p = globalView.getGameStatus();
                 }
 
@@ -289,8 +296,6 @@ $(document).ready(function () {
         return false;
 
     });
-
-
 
 
     $("section article p").live("dblclick", function () {
