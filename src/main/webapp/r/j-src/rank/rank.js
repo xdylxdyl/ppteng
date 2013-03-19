@@ -12,7 +12,8 @@
 $(document).ready(function() {
 
     headView.highLight("rank");
-    leftView.highLight("money");
+    var leftType=$("#left_type").val();
+    leftView.highLight(leftType);
 
 
 })

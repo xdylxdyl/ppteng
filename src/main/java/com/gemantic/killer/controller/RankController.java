@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gemantic.common.util.MyListUtil;
+import com.gemantic.common.util.MyTimeUtil;
 import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
@@ -37,8 +38,8 @@ public class RankController {
 	private PushClient pushClient;
 
 	@Autowired
-	private RecordService recordService; 
-	
+	private RecordService recordService;
+
 	@Autowired
 	private UsersService userSevice;
 
@@ -68,18 +69,25 @@ public class RankController {
 			size=21;
 		}
 		Integer start=(page-1)*size;
-		
-
-		List<Long> userIDS=this.userSevice.getUIdsOrderByMoney(start,size);
-		List<User> users = this.userSevice.getObjectsByIds(userIDS);
+		List<Long> userIDS=new ArrayList();
+		List<User> users=new ArrayList();
+		if("money".equals(type)){
+			 userIDS=this.userSevice.getUIdsOrderByMoney(start,size);
+			
+		}else{
+			
+		}
+		if("punch".equals(type)){
+			 userIDS=this.userSevice.getUIdsByPunchAtOrderByPunchAt(MyTimeUtil.getTodayZeroTimeMillions(), start, size);
+			 
+		}
+		users = this.userSevice.getObjectsByIds(userIDS);
 		
 		model.addAttribute("users", users);
 		model.addAttribute("type", type);
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
-		return "/room/rank/money";
+		return "/room/rank/"+type;
 	}
-
-	
 
 }

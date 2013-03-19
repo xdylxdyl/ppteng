@@ -22,7 +22,7 @@
 					<list name="getUIdsOrderByMoney" sqlitem="select id from users where 1 = 1 order by money desc "
 				sqlType="hsql" keyProperty="nonSence" valueProperty="id" keyColumn="id" />	
 				
-					<list name="getUIdsByPunchAtOrderByPunchAt" sqlitem="select id from users where punch_at = ? order by unch_at desc "
+					<list name="getUIdsByPunchAtOrderByPunchAt" sqlitem="select id from users where punch_at = ? order by punch_at desc "
 				sqlType="hsql" keyProperty="nonSence" valueProperty="id" keyColumn="id" />
 						
 						

@@ -17,6 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.FileUtil;
+import com.gemantic.common.util.MyTimeUtil;
 import com.gemantic.killer.model.User;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.service.RecordService;
@@ -57,10 +58,17 @@ public class UsersServiceTest {
 
 	
 	@Test
-	public void testOrderByPunchAt(){
+	public void testOrderByPunchAt() throws ServiceException, ServiceDaoException{
 		
-	
+	 List<Long> ids=this.usersService.getUIdsByPunchAtOrderByPunchAt(MyTimeUtil.getTodayZeroTimeMillions(), 0, Integer.MAX_VALUE);
+	 List<User> users=this.usersService.getObjectsByIds(ids);
+	 for(User user:users){
+		log.info(user); 
+	 }
 		
+	 String content=MyTimeUtil.convertLong2String(1363622400000L, "yyyy-MM-dd HH:mm:ss");
+	 log.info(content);
+	 
 	}
 	
 	

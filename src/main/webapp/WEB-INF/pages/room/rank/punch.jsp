@@ -5,7 +5,7 @@
 
 <script src="/r/j-src/rank/rank.js"></script>
 
-<input type="hidden" id="left_type" value="${type}"/>
+<input type="hidden" id="left_type" value="${type}" />
 <!-- container start  -->
 <div class="span9">
 
@@ -32,7 +32,8 @@
 					<h3>
 						<a href="/player/detail.do?uid=${user.id}" target="_blank"><c:out
 								value="${user.name}"></c:out></a> <span
-							class="label label-important">金币 ${user.money}</span>
+							class="label label-important"><date:date
+								pattern="HH时mm分ss秒" value="${user.punchAt}"></date:date></span>
 					</h3>
 
 					<div>
@@ -52,11 +53,15 @@
 
 							</small>
 
+
 							<p>
 								<small>注册时间:<date:date pattern="yyyy年 MM月dd日  HH时mm分 "
 										value="${user.createAt}"></date:date>
 
 								</small>
+							</p>
+							<p>
+								<small> 金币 ${user.money} </small>
 							</p>
 							<div></div>
 							<!-- div over -->
