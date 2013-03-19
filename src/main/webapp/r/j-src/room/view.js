@@ -223,7 +223,6 @@ var simpleRightView = {
         $("#command").append("<option value='" + right + "'>" + content + "</option>");
     },
      sayRight : function(right) {
-        $("#say").prop("readonly", false);
         $("#sendSay").prop("disabled", false);
         $("#say").attr("name", right);//? 这个有什么用处
     }

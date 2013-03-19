@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     }
 
-    $(".roomItem h3 a").bind('click', function() {
+    $("h3 a").bind('click', function() {
 
         var uid = $(this).attr("uid");
         var rid = $(this).attr("rid");

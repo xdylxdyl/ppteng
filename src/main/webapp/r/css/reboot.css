@@ -15,7 +15,6 @@
     position: relative;
     display: block;
     top: 0;
-    width: 180px;
     height: 70px;
     padding: 0 0 0 70px;
     margin: 2px 0 0 10px;
@@ -26,6 +25,11 @@
     font: 38px/70px "微软雅黑";
     text-shadow: none;
 }
+.text-white{
+    color: #fff;
+}
+
+
 .navbar .nav {
     margin-top: 20px;
 }

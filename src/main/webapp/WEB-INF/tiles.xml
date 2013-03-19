@@ -51,15 +51,18 @@
 		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-战例" type="string" />
 	</definition>
 
-	<definition name="/room/player/*" extends="ptt">
-		<put-attribute name="body"
-			value="/WEB-INF/pages/room/player/{1}.jsp" />
-	</definition>
+	
 	
 	<definition name="/player/form/*" extends="ptt">
 		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
 		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-注册" type="string" />
 	</definition>
+	
+	
+	
+	
+	
+	
 	
 	
 	<definition name="about*"
@@ -97,6 +100,20 @@
 		<put-attribute name="title" value="葡萄藤" type="string" />
 		<put-attribute name="body" value="rank{1}">
 		</put-attribute>
+	</definition>
+	
+	
+	<definition name="player*"
+		template="/WEB-INF/pages/room/player/layout.jsp">
+		<put-attribute name="left"
+			value="/WEB-INF/pages/room/player/left.jsp" />
+		<put-attribute name="right"
+			value="/WEB-INF/pages/room/player/{1}.jsp" />
+	</definition>
+	
+	<definition name="/room/player/*" extends="ptt">
+		<put-attribute name="body"
+			value="player{1}" />
 	</definition>
 	
 

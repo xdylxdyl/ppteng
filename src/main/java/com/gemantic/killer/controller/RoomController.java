@@ -85,10 +85,12 @@ public class RoomController {
 		if(user==null){
 			return "redirect:/";
 		}
-		if (PunchUtil.isPunched(user)) {
-			model.addAttribute("punch", false);
-		} else {
-			model.addAttribute("punch", true);
+		boolean isPunch = PunchUtil.isPunched(user);
+		if(isPunch){
+			int punchCount = PunchUtil.getLatestContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, user.getPunch());			
+			model.addAttribute("punchCount", punchCount);
+		}else{
+		
 		}
 
 		String uname = user.getName();
@@ -498,7 +500,7 @@ public class RoomController {
 				this.roomService.updateRoom(r);
 			}
 
-			log.info(uid + " is admin so get express from use " + ls);
+			log.info(uid + " is admin so get express from use " +r.getExpressions());
 		} else {
 
 			log.info(uid + " is not admin so get express from room " + ls);

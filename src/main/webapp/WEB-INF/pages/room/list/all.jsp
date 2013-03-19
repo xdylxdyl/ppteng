@@ -17,72 +17,86 @@
 <body>
 
 
-
-	<div class="span2 box">
-		
-
-			<h4>
-				<small>欢迎你</small>,${uname}
-				</h4>
-				<img src="http://www.ptteng.com/${user.icon}" class="portrait"
-					id="portrait_img" style="max-width: 16em; height: 8em">
-				<blockquote>
-					<small>金币 ${user.money}</small>
-
-				</blockquote>
+<div class="container-fluid">
+	<div class="span3 box">
 
 
+		<h4>
+			<small>欢迎你</small>,${uname}
+		</h4>
+		<img src="http://www.ptteng.com/${user.icon}" class="portrait"
+			id="portrait_img" style="max-width: 16em; height: 8em">
+		<blockquote>
+			<small>金币 ${user.money}</small>
+			<c:choose>
+				<c:when test="${empty punchCount}">
+					<span class="btn btn-primary" id="punch">打卡</span>
+				</c:when>
+				<c:otherwise>
+					<small>已连续打卡${punchCount}天</small>
 
-				<c:if test="${empty my_room}">
-					<a href="" class="btn btn-primary" id="createRoom">创建房间</a>
-				</c:if>
+				</c:otherwise>
+			</c:choose>
+		</blockquote>
+
+
+
+		<c:if test="${empty my_room}">
+			<a href="" class="btn btn-primary" id="createRoom">创建房间</a>
+		</c:if>
 	</div>
 
 
 
-	<div class="container">
+	<div class="span9">
 
 		<c:if test="${rooms== null || fn:length(rooms) == 0}">
 			<div class="row offset4" style="margin-top: 1em; margin-bottom: 1em">
-				<h1>
-					现在么有房间
+				<h1>现在么有房间,建房有金币拿哦~
 			</div>
 		</c:if>
 
+		<div class="row-fluid">
 
-	<c:forEach items="${rooms}" var="room" begin="0" step="1"
-		varStatus="status">
-		<c:set var="version" value="${room.version}"></c:set>
-		<div class="row offset2" style="margin-top: 1em; margin-bottom: 1em">
-			<div class="span2">
-				<img src="http://www.ptteng.com/${users[room.createrID].icon}"
-					alt="${users[room.createrID].name}" class="img-polaroid"
-					style="max-width: 8em; height: 8em">
-			</div>
-			<div class="span6 roomItem">
-				<h3>
-					<small>房间名:</small> ${status.index+1}.<a href="" rid="${room.id}"
-						uid="${uid}">${room.name}[进入房间]</a> 
+			
+				<c:forEach items="${rooms}" var="room" begin="0" step="1"
+					varStatus="status">
+					<c:set var="version" value="${room.version}"></c:set>
+						<div class="row"
+							style="margin-top: 1em; margin-bottom: 1em">
+							<div class="span3">
+								<img src="http://www.ptteng.com/${users[room.createrID].icon}"
+									alt="${users[room.createrID].name}" class="img-polaroid"
+									style="max-width: 8em; height: 8em">
+							</div>
+							<div class="span6">
 
-					</h3>
-					<blockquote>
 
-						<small> 纪元： <date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
-								value="${room.createAt}"></date:date> 房主：<a
-							href="/player/detail.do?uid=${room.createrID}" target="_blank">${users[room.createrID].name}</a>
-						</small> <small> 版本[<span style="color: #4B0082"><%@ include
-									file="../version/show.jsp"%></span>],有玩家 [<span
-							style="color: #4B0082">${room_count[room.id]}</span>] 人 <c:if
-								test="${my_room.id==room.id}">,你在这里</c:if>
-						</small>
-					</blockquote>
-					<p class="text-success">签名: ${users[room.createrID].sign}</p>
-			</div>
+								<h3>
+									<small>房间名:</small> ${status.index+1}.<a href=""
+										rid="${room.id}" uid="${uid}">${room.name}[进入房间]</a>
+
+								</h3>
+								<blockquote>
+
+									<small> 纪元： <date:date
+											pattern="yyyy年 MM月dd日  HH时mm分mm秒 " value="${room.createAt}"></date:date>
+										房主：<a href="/player/detail.do?uid=${room.createrID}"
+										target="_blank">${users[room.createrID].name}</a>
+									</small> <small> 版本[<span style="color: #4B0082"><%@ include
+												file="../version/show.jsp"%></span>],有玩家 [<span
+										style="color: #4B0082">${room_count[room.id]}</span>] 人 <c:if
+											test="${my_room.id==room.id}">,你在这里</c:if>
+									</small>
+								</blockquote>
+								<p class="text-success">签名: ${users[room.createrID].sign}</p>
+							</div>
+						</div>
+				</c:forEach>
+
+
 		</div>
-	</c:forEach>
-	</div>
-
-	<div id="uplayer"></div>
+		<div id="uplayer"></div>
 	</div>
 	<!-- <div id="foot" class="foot_nav">
 		<ul style="">
@@ -98,5 +112,6 @@
 
 	</div> -->
 	<input type="hidden" id="uid" value="${uid}" />
+	</div>
 </body>
 </html>

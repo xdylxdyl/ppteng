@@ -79,8 +79,7 @@ var settingView = {
 
             var v = $("#expContent").val();
 
-            v = DBC2SBC(v);
-            v = full2half(v);
+            v = format(v);
 
             var expArray;
             try {
@@ -277,7 +276,7 @@ var rightView = {
     },
 //各种权利
     sayRight:function (right) {
-        $("#say").prop("readonly", false);
+
         $("#sendSay").prop("disabled", false);
         $("#say").attr("name", right);//? 这个有什么用处
     },
@@ -298,7 +297,7 @@ var rightView = {
         $("#command").append("<option value='" + right + "'>" + array[right] + "</option>");
     },
     noRight:function () {
-        $("#say").prop("readonly", true);
+
         $("#sendSay").prop("disabled", true);
         $("#ready").prop("disabled", true);
         $("#command option:gt(0)").remove();
