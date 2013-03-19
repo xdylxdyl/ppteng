@@ -173,7 +173,7 @@ public class PunchUtil {
 		// TODO Auto-generated method stub
 		//return false;
 	
-		 Date date = MyTimeUtil.getDateZeroTimeMillions(System.currentTimeMillis());	
+		 Date date = MyTimeUtil.getDateZeroTimeMillions(user.getPunchAt());	
 		 log.info(date);
 		if (user.getPunchAt() == null || System.currentTimeMillis() -	date.getTime()  > 24 * 3600 * 1000L) {
 			return false;
@@ -184,7 +184,10 @@ public class PunchUtil {
 	}
 	
 	public static void main(String[] args) {
-	log.info(PunchUtil.isPunched(null));
+		User user=new User();
+		user.setPunchAt(System.currentTimeMillis()-20 * 3600 * 1000L);
+		
+	log.info(PunchUtil.isPunched(user));
 		
 		
 	}
