@@ -117,6 +117,9 @@ $(document).ready(function() {
 
     $(".cancel").click(function() {
         $("#uplayer").hide();
+    });
+    $("#cancel").click(function() {
+        $("#uplayer").hide();
     })
 
 

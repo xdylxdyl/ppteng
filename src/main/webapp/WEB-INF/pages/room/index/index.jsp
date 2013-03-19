@@ -73,6 +73,7 @@
 							</h4>
 							<img src="http://www.ptteng.com/${user.icon}" class="portrait"
 								id="portrait_img" style="max-width: 16em; height: 8em">
+                            <br><br>
 							<blockquote>
 								<small>上次登录:<date:date pattern="yyyy年 MM月dd日  HH时mm分 "
 										value="${user.loginAt}"></date:date></small>
@@ -88,9 +89,7 @@
 								</c:choose>
 							</blockquote>
 
-							<p>
 								<a class="btn btn-primary" href="/m/list.do">进入游戏</a>
-							</p>
 
 							<input type="hidden" id="uid" value="${user.id}" /> <input
 								type="hidden" id="type" value="" />
@@ -145,6 +144,7 @@
 						<div class="span6">
 							<div class="chapter">
 								<div class="chapter-body">
+                                    <a href="#" class="pull-left"><img src="/r/img/icon_movie.png" alt="电影院" width="64" height="64"></a>
 									<h4>电影院</h4>
 									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
 									<p>

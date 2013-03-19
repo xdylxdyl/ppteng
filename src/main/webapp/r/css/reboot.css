@@ -238,7 +238,6 @@ span.login-checkbox > input[type="checkbox"] + label {
 .box{
     background: #fff;
        box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
-       padding: 2em;
-        margin: 2em;
-
+       padding: 1.3em 2em;
+    margin-top: 10px;
 }

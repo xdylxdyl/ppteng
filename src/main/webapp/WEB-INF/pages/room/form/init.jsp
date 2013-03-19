@@ -23,8 +23,6 @@
 				class="text" />
 		</spring:bind>
 		<br />
-		<span></span>
-		<br />
 		<label>游戏版本：</label>
 		<spring:bind path="room.version">
 			<select name="version">
@@ -38,18 +36,18 @@
 					<c:if test="${room.version=='video_1.0'}">selected="selected"</c:if>>一起看视频[测试版]</option> 
 			</select>
 		</spring:bind>
-		<br />
 
 		<%--设置:--%>
 		<%--<css:forEach items="${room.setting}" var="entry"> --%>
 		<%--<spring:bind path="${entry.key}"> </spring:bind>: <spring:bind path="${entry.value}"></spring:bind>--%>
 		<%--</css:forEach>--%>
 
-		<br />
-		<input class="submit" type="submit" />
-		<a href="" class="cancel">取消并返回房间列表</a>
+		<br /><br />
 
+		<input class="btn btn-primary" type="submit" value="创建新世界" />
+        <a href=""  id="cancel" class="btn">取消</a>
 
+        <br /><br />
 		<P class="hint">测试期间每局游戏获取2000葡萄币~~~~测试版不保证游戏可以正常使用,遇到错误,退出重新登录即可</P>
 	</form:form>
 	<div id="mask"></div>

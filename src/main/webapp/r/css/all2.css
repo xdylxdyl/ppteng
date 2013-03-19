@@ -1,14 +1,19 @@
 .box{
     background: #fff;
-       box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
-       padding: 2em;
-        margin: 2em;
-
+   box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
+}
+.left-box {
+    box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
+}
+.left-box-in {
+    padding: 20px;
+}
+.section {
+    padding: 30px 0;
 }
 
-
 #uplayer {
-    width: 30%;
+    width: 300px;
 
     background: rgba(255, 255, 255, 0.9);
     border: 6px solid rgba(0, 0, 0, 0.3);
@@ -20,8 +25,7 @@
 }
 
 #uplayer form {
-    width: 300px;
-    margin: 20px auto;
+    margin: 20px;
 }
 
 #uplayer label {
@@ -85,8 +89,5 @@
 .hint {
     font-size: 12px;
     font-weight: normal;
-    margin: 2em;
-    padding: 2em;
     color: #008000;
-    width: 100%;
 }
