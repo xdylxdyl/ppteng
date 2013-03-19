@@ -604,7 +604,7 @@ public class PlayerController {
 		String str = PunchUtil.punchTheClock(System.currentTimeMillis(), PunchUtil.Punch_Time_Start, user.getPunch());
 
 		user.setPunch(str);
-		user.setPunchAt(MyTimeUtil.getPreZeroTimeMillions(0));
+		user.setPunchAt(System.currentTimeMillis());
 		int m = 2000;
 		user.setMoney(user.getMoney() + m);
 		this.userService.update(user);

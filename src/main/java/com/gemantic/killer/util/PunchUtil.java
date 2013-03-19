@@ -1,6 +1,8 @@
 package com.gemantic.killer.util;
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -170,12 +172,22 @@ public class PunchUtil {
 	public static boolean isPunched(User user) {
 		// TODO Auto-generated method stub
 		//return false;
-		if (user.getPunchAt() == null || System.currentTimeMillis() - user.getPunchAt() > 24 * 3600 * 1000L) {
+	
+		 Date date = MyTimeUtil.getDateZeroTimeMillions(System.currentTimeMillis());	
+		 log.info(date);
+		if (user.getPunchAt() == null || System.currentTimeMillis() -	date.getTime()  > 24 * 3600 * 1000L) {
 			return false;
 		} else {
 
 		}
 		return true;
 	}
+	
+	public static void main(String[] args) {
+	log.info(PunchUtil.isPunched(null));
+		
+		
+	}
+	
 
 }
