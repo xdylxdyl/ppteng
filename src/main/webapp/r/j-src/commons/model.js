@@ -156,13 +156,14 @@ var expressionParameter = function (rid, exp) {
     }
 }
 
-var userInfo = function (id, name, icon, sign, music) {
+var userInfo = function (id, name, icon, sign, music,stageShow) {
     return {
         id:id,
         name:name,
         icon:icon,
         sign:sign,
-        music:music
+        music:music,
+        stageShow:stageShow
     }
 }
 

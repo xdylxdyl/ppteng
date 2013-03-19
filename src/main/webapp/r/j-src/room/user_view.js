@@ -30,7 +30,8 @@ var userEditView = {
         var icon = $("#portrait_edit").text();
         var sign = $("#sign").text();
         var music=$("#music").text();
-        return new userInfo(id, name, icon, sign,music);
+        var stageShow= $("#stageShow").text();
+        return new userInfo(id, name, icon, sign,music,stageShow);
 
     },
     getShow:function(){
