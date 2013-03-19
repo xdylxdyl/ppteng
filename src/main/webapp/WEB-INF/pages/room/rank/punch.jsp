@@ -80,14 +80,15 @@
 <!-- container over  -->
 
 <div class="pagination pagination-centered">
+<c:set var="link" value="/rank/list.do?type=punch"></c:set>
 	<ul>
 		<li><a
-			href="/rank/list.do?type=money&page=${page-1}&size=${size}"
+			href="${link}&page=${page-1}&size=${size}"
 			id="pagePrev">Prev</a></li>
 		<li class="active"><a
-			href="/rank/list.do?type=money&page=${page}&size=${size}">${page}</a></li>
+			href="${link}&page=${page}&size=${size}">${page}</a></li>
 		<li><a
-			href="/rank/list.do?type=money&page=${page+1}&size=${size}"
+			href="${link}&page=${page+1}&size=${size}"
 			id="pageNext">Next</a></li>
 	</ul>
 </div>

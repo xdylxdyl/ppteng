@@ -7,14 +7,9 @@
  */
 var leftView = {
     highLight:function (v) {
+        var id="leftNav_"+v;
+        $("#"+id).addClass("active");
 
-        switch (v) {
-            case 'money':
-                $("#leftNav_money").addClass("active");
-                break;
-            default:
-                ;
-        }
     }
 
 }
