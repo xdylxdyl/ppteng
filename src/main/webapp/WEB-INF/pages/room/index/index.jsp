@@ -53,17 +53,14 @@
 								<div class="login-action">
                                     <span class="login-checkbox"><a href="/player/regedit.do?type=email">忘记密码</a></span>
 									<button class="btn btn-primary btn-large pull-right">登录</button>
-
 								</div>
 
 								<div class="login-social">
 									<p>
 										使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
 									</p>
-
                                     <span id="qqLoginBtn"></span>
                                     <span id="wb_connect_btn"></span>
-
 								</div>
 							</form>
 						</div>
@@ -155,12 +152,10 @@
 											href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=159"
 											target="_blank">活动报名&raquo;</a>
 									</p>
-
 								</div>
 							</div>
 							<div class="chapter">
-								<img src="/r/img/icon_alpaca.png" alt="杀人游戏简化版" width="64"
-									height="64">
+                                <a href="#" class="pull-left"><img src="/r/img/icon_killer.png" alt="杀人游戏简化版" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>杀人游戏[简化版]</h4>
 									<p>高雅的简化,妙趣横生的对话,风格迥异的人物,知性漂亮的姑娘</p>
@@ -170,16 +165,14 @@
 						</div>
 						<div class="span6">
 							<div class="chapter">
-								<img src="/r//img/icon_alpaca.png" alt="多人扫雷" width="64"
-									height="64">
-								<div class="chapter-body">
+                                    <a href="#" class="pull-left"><img src="/r/img/icon_clearance.png" alt="多人扫雷" width="64" height="64"></a>
+                                    <div class="chapter-body">
 									<h4>扫雷[多人版]</h4>
 									<p>玩过单机扫雷,有没有和朋友一起玩过联机扫雷?</p>
 								</div>
 							</div>
 							<div class="chapter">
-								<img src="/r//img/icon_alpaca.png" alt="设计游戏" width="64"
-									height="64">
+                                <a href="#" class="pull-left"><img src="/r/img/icon_design.png" alt="多人扫雷" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>这些游戏都不喜欢?</h4>
 									<p>设计一个自己喜欢的游戏吧?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以~</p>
@@ -221,10 +214,11 @@
 
 
 	<div id="friendLink" class="friendLink">
-		<p>友情链接</p>
+
 		<div class="container">
+            <p>友情链接</p>
 			<div class="row">
-				<div class="span1">
+				<div class="span4">
 					<p>
 						<a href="http://www.pickupstudio.org/" target="_blank">皮卡工作室</a>
 					<p>
@@ -232,7 +226,7 @@
 						<a href="http://www.15tiance.com/" target="_blank">天策策划</a>
 					<p>
 				</div>
-				<div class="span2">
+				<div class="span4">
 					<p>
 						<a href="http://www.qqwaiyu.com/" target="_blank">青青外语</a>
 					<p>
@@ -240,7 +234,7 @@
 						<a href="http://womenaikan.com/" target="_blank">我们爱看</a>
 					<p>
 				</div>
-				<div class="span3">
+				<div class="span4">
 					<p>
 						<a href="http://www.j-show.com/" target="_blank">吉时吉会展</a>
 					<p>

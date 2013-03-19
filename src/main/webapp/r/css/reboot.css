@@ -1,5 +1,7 @@
 
-
+.fz-12 {
+    font-size: 12px;
+}
 
 .navbar {
     margin-bottom: 0;
@@ -10,6 +12,9 @@
 }
 .navbar-inner {
     padding: 15px 0 12px;
+}
+.navbar-inner h2, .navbar-inner h2 p {
+    margin-bottom: 0;
 }
 .navbar .brand {
     position: relative;
@@ -147,7 +152,7 @@ span.login-checkbox > input[type="checkbox"] + label {
 .chapter .chapter-body {
     overflow: hidden;
     zoom: 1;
-    height: 220px;
+    height: 150px;
 }
 .chapter-body h4 {
     font-size: 16px;
@@ -205,6 +210,7 @@ span.login-checkbox > input[type="checkbox"] + label {
     box-shadow: inset 2px 2px 4px #f1f1f1;
 }
 .friendLink{
+    padding-top: 20px;
     border-top: 2px solid #e9eefa;
 }
 
