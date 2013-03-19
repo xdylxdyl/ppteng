@@ -84,6 +84,17 @@ public interface UsersService {
 	 * @throws ServiceDaoException
 	 */
 	public List<Long> getUIdsOrderByMoney(Integer start, Integer size)throws ServiceException, ServiceDaoException;;
+	
+	
+	/**
+	 * 得到打卡排名
+	 * @param start
+	 * @param size
+	 * @return
+	 * @throws ServiceException
+	 * @throws ServiceDaoException
+	 */
+	public List<Long> getUIdsByPunchAtOrderByPunchAt(Long punch,Integer start, Integer size)throws ServiceException, ServiceDaoException;;
 		
 	
 

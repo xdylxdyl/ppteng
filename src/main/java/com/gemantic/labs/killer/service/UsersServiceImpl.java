@@ -363,6 +363,40 @@ public class UsersServiceImpl implements UsersService {
 		return idList;
 	}
 
+	@Override
+	public List<Long> getUIdsByPunchAtOrderByPunchAt(Long punch, Integer start, Integer size) throws ServiceException, ServiceDaoException {
+		
+		if (log.isInfoEnabled()) {
+			log.info(" getUIdsByPunchAtOrderByPunchAt,start,limit  : " + " , " + start + " , " + size);
+		}
+		List<Long> idList = null;
+
+		// TODO 参数检查!
+
+		if (start == null) {
+			start = 0;
+		}
+
+		if (size == null) {
+			size = Integer.MAX_VALUE;
+		}
+
+		try {
+			//idList = (List<Long>) dao.excuteSimpleSql("select id from records where version = "+version, Records.class);
+			idList = dao.getIdList("getUIdsByPunchAtOrderByPunchAt", new Object[] { punch }, start, size, false);
+
+		} catch (DaoException e) {
+			log.error(" getUIdsByPunchAtOrderByPunchAt,start,limit)  : "  + " , " + start + " , " + size);
+			log.error(e);
+			e.printStackTrace();
+			throw new ServiceDaoException(e);
+		}
+		if (log.isInfoEnabled()) {
+			log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
+		}
+		return idList;
+	}
+
 	
 
 }
