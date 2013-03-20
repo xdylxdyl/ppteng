@@ -173,8 +173,11 @@ public class PunchUtil {
 		// TODO Auto-generated method stub
 		//return false;
 	
+		if(user.getPunchAt()==null){
+			return false;
+		}
 		 Date date = MyTimeUtil.getDateZeroTimeMillions(user.getPunchAt());	
-		 log.info(date);
+		 
 		if (user.getPunchAt() == null || System.currentTimeMillis() -	date.getTime()  > 24 * 3600 * 1000L) {
 			return false;
 		} else {
