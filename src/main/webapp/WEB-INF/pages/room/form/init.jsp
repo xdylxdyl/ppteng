@@ -44,11 +44,11 @@
 
 		<br /><br />
 
-		<input class="btn btn-primary" type="submit" value="创建新世界" />
+		<input class="btn btn-primary" type="submit" value="创建房间" />
         <a href=""  id="cancel" class="btn">取消</a>
 
         <br /><br />
-		<P class="hint">测试期间每局游戏获取2000葡萄币~~~~测试版不保证游戏可以正常使用,遇到错误,退出重新登录即可</P>
+		<P class="hint">测试期间每局游戏获取1000葡萄币~~~~测试版不保证游戏可以正常使用,遇到错误,退出重新登录即可</P>
 	</form:form>
 	<div id="mask"></div>
 </body>
