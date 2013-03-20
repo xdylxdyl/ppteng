@@ -57,8 +57,11 @@ public class UsersServiceTest {
 	}
 
 	
-	@Test
+	//@Test
 	public void testOrderByPunchAt() throws ServiceException, ServiceDaoException{
+		
+		Long zero=MyTimeUtil.getTodayZeroTimeMillions();
+		log.info(zero);
 		
 	 List<Long> ids=this.usersService.getUIdsByPunchAtOrderByPunchAt(MyTimeUtil.getTodayZeroTimeMillions(), 0, Integer.MAX_VALUE);
 	 List<User> users=this.usersService.getObjectsByIds(ids);
@@ -66,7 +69,7 @@ public class UsersServiceTest {
 		log.info(user); 
 	 }
 		
-	 String content=MyTimeUtil.convertLong2String(1363622400000L, "yyyy-MM-dd HH:mm:ss");
+	 String content=MyTimeUtil.convertLong2String(1363731864894L, "yyyy-MM-dd HH:mm:ss");
 	 log.info(content);
 	 
 	}
