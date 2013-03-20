@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="author" content="chill">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/bootstrap-responsive.css" rel="stylesheet">
+    <style type="text/css">
+        body {padding: 0}
+        .preheader {
+
+        }
+        .preheader .social {
+            float: right;
+            line-height: 30px;
+            position: relative;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .social li {
+            display: inline-block;
+            padding: 0 7px 0 7px;
+            list-style: none;
+        }
+        .mobinav {
+            float: left;
+            line-height: 30px;
+            background: #369;
+            padding: 0 10px;
+            cursor: pointer;
+            display: none;
+        }
+        .header {
+            position: relative;
+            clear: both;
+            padding: 0;
+            background: #369;
+            z-index: 100;
+            border-top: 1px solid #305a8a;
+            border-bottom: 1px solid #305a8a;
+        }
+        .header .smoothmenu {
+            padding: 0;
+            clear: none;
+            position: relative;
+            float: right;
+        }
+        .header .smoothmenu ul {
+             float: right;
+             margin: 0;
+             padding: 0;
+             position: relative;
+             list-style: none;
+         }
+        .header .smoothmenu li {
+            float: left;
+            margin: 0 0 0 2px;
+            padding: 0;
+            position: relative;
+        }
+        .header .smoothmenu li a {
+            display: block;
+            padding: 0 12px;
+            height: 90px;
+            line-height: 90px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #fff;
+        }
+        .header .smoothmenu li a:hover,
+        .header .smoothmenu li.active {
+            background: #4C5966;
+        }
+        #logo, #logo img {
+            height: 70px;
+        }
+        #logo {
+            padding: 10px 0 10px 0;
+            float: left;
+            position: relative;
+            background: url("") no-repeat;
+        }
+
+
+        @media screen and (max-width: 700px) {
+            #logo,
+            .header .smoothmenu,
+            .header .smoothmenu ul,
+            .header .smoothmenu li {
+                float: none;
+            }
+            .mobinav {
+                display: block;
+            }
+            .header .smoothmenu {
+                display: none;
+            }
+            #logo {
+                text-align: center;
+                margin: 0 auto;
+            }
+            .header .smoothmenu li {
+                margin-bottom: 1px;
+            }
+            .header .smoothmenu li a {
+                padding: 0 18px;
+                height: 28px;
+                line-height: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container preheader">
+    <div class="mobinav" id="mobinav">
+        <i class="icon-th-list icon-white"></i>
+    </div>
+    <ul class="social">
+        <li><a href="#">BBS</a></li>
+        <li><a href="#">BLOG</a></li>
+    </ul>
+</div>
+<div class="header clearfix">
+    <div class="container">
+        <div id="main_menu" class="smoothmenu">
+            <ul>
+                <li class="active"><a href="#">首页</a></li>
+                <li class="parent"><a href="#">游戏</a></li>
+                <li class="parent"><a href="#">个人</a></li>
+                <li class="parent"><a href="#">关于</a></li>
+            </ul>
+        </div>
+        <div id="logo">
+            <a href="#"><img src="../../img/logo.png" alt=""></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../../j-src/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#mobinav").bind("click", function() {
+            console.log("1");
+            $("#main_menu").slideToggle();
+        });
+        $(window).resize(function() {
+            //额，还没想好要做嘛，貌似目前没事做
+        })
+    })
+</script>
