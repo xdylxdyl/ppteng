@@ -63,14 +63,16 @@ public class UsersServiceTest {
 		Long zero=MyTimeUtil.getTodayZeroTimeMillions();
 		log.info(zero);
 		
-	 List<Long> ids=this.usersService.getUIdsByPunchAtOrderByPunchAt(MyTimeUtil.getTodayZeroTimeMillions(), 0, Integer.MAX_VALUE);
+	 /*List<Long> ids=this.usersService.getUIdsByPunchAtOrderByPunchAt(MyTimeUtil.getTodayZeroTimeMillions(), 0, Integer.MAX_VALUE);
 	 List<User> users=this.usersService.getObjectsByIds(ids);
 	 for(User user:users){
 		log.info(user); 
-	 }
+	 }*/
 		
-	 String content=MyTimeUtil.convertLong2String(1363731864894L, "yyyy-MM-dd HH:mm:ss");
+	 String content=MyTimeUtil.convertLong2String(1363708800000L, "yyyy-MM-dd HH:mm:ss");
 	 log.info(content);
+	 
+	log.info(1363708800000L+7*24*3600*1000L);
 	 
 	}
 	
