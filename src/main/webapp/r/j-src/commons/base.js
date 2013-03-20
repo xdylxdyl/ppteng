@@ -278,10 +278,15 @@ function showMessage(index, messages, speed) {
 
     } else {
         var nextMessage = messages[index + 1];
-        recordFirstTime = message.time;
-        recordSecondTime = nextMessage.time;
-        //间隔期
-        msg_interval = (recordSecondTime - recordFirstTime) * speed;
+        if(nextMessage==null){
+
+        }else{
+            recordFirstTime = message.time;
+            recordSecondTime = nextMessage.time;
+            //间隔期
+            msg_interval = (recordSecondTime - recordFirstTime) * speed;
+        }
+
 
     }
     index++;

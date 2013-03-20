@@ -130,6 +130,7 @@ public class RecordController {
 		// 先创建一个假房间?那房间里的Query怎么办.
 
 		Records record = this.recordService.getObjectById(recordID);
+	
 
 		List<String> contents = this.recordService.getContent(recordID);
 
