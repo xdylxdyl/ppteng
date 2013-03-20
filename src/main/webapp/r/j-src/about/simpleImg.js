@@ -8,6 +8,6 @@
 
 $(document).ready(function() {
     headView.highLight("about");
-    leftView.highLight("simple");
+    leftView.highLight("simpleImg");
 
 })
