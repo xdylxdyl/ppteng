@@ -64,6 +64,11 @@ $(document).ready(function () {
 
         });
 
+
+        $("#mobinav").bind("click", function () {
+            $("#main_menu").slideToggle();
+        });
+
     }
 )
 
