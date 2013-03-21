@@ -189,7 +189,7 @@ resolvePredict.log = function (message) {
 };
 resolvePredict.kick = function (message) {
     var kickID = message.object;
-    if (globalView.getCreaterId() == kickID||globalView.getCurrentID()==kickID) {
+    if (globalView.getCreaterId() == kickID || globalView.getCurrentID() == kickID) {
         document.location.href = "/m/list.do";
     } else {
 
@@ -278,9 +278,9 @@ function showMessage(index, messages, speed) {
 
     } else {
         var nextMessage = messages[index + 1];
-        if(nextMessage==null){
+        if (nextMessage == null) {
 
-        }else{
+        } else {
             recordFirstTime = message.time;
             recordSecondTime = nextMessage.time;
             //间隔期
@@ -384,7 +384,6 @@ var initRoom = function () {
             gameAreaView.login(player, message);
         }
 
-
         if (versionFunction["init"]) {
             versionFunction["init"]();
         }
@@ -434,6 +433,9 @@ var initRoom = function () {
         //init setting
         settingView.showSetting(settingHtml);
 
+        if (versionFunction["init"]) {
+            versionFunction["init"]();
+        }
 
     }
 
