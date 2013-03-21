@@ -1,6 +1,6 @@
 .box{
     background: #fff;
-   box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
+    box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
 }
 .left-box {
     box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
@@ -11,83 +11,32 @@
 .section {
     padding: 30px 0;
 }
-
-#uplayer {
-    width: 300px;
-
-    background: rgba(255, 255, 255, 0.9);
-    border: 6px solid rgba(0, 0, 0, 0.3);
-    position: absolute;
-    -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    z-index: 10;
-    display: none;
-}
-
-#uplayer form {
-    margin: 20px;
-}
-
-#uplayer label {
-    height: 40px;
-    line-height: 40px;
-}
-
-#uplayer span {
-    color: red;
-}
-
-#uplayer .text {
-    width: 200px;
-    border: 1px solid #ccc;
-}
-
-#uplayer select {
-    width: 100px;
-}
-
-#uplayer .submit {
-    width: 100px;
-    height: 30px;
-    margin: 20px 20px 0 0;
-    background: #bbb;
-    background: -moz-linear-gradient(top, #fff, #eaeaea);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), to(#eaeaea));
-    background: -o-linear-gradient(top, #fff, #eaeaea);
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: 1px solid #bbb;
-}
-
-#uplayer .submit:hover {
-    background: #E9EEF2;
-}
-
-#uplayer .cancel {
-    color: #3D5C9D;
-    text-decoration: none;
-}
-
-#uplayer .cancel:hover {
-    color: #6A8ED8;
-    text-decoration: underline;
-}
-
-#mask {
-    position: absolute;
-    display: none;
+/*弹出层*/
+#overlay {
+    position: fixed;
     left: 0;
     top: 0;
-    width: 350px;
-    height: 250px;
-    background: url("../img/loading.gif") 50% 50% no-repeat rgba(200, 200, 200, 0.5);
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
 }
-
-
-
-.hint {
-    font-size: 12px;
-    font-weight: normal;
-    color: #008000;
+#modal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 5px;
 }
+#modal-content {
+    border-radius: 5px;
+    background: #fff;
+    padding: 10px;
+}
+#modal-close {}
+
+/*字体颜色*/
+.c-green {color: #008000;}
+

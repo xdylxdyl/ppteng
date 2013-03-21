@@ -56,9 +56,7 @@
                 <c:set var="version" value="${room.version}"></c:set>
 
                     <div class="span2">
-                    <img src="http://www.ptteng.com/${users[room.createrID].icon}"
-                    alt="${users[room.createrID].name}" class="img-polaroid"
-                    style="max-width: 170px; max-height: 170px">
+                    <img src="http://www.ptteng.com/${users[room.createrID].icon}" alt="${users[room.createrID].name}" class="img-polaroid">
                     </div>
                     <div class="span7">
                         <h4>
@@ -80,11 +78,13 @@
 
             </div>
     </c:forEach>
-            <div id="uplayer"></div>
+      
+
         </div>
     </div>
 
 	<input type="hidden" id="uid" value="${uid}" />
 	</div>
+    </div>
 </body>
 </html>

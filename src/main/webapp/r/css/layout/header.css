@@ -35,7 +35,6 @@ body {
     clear: both;
     padding: 0;
     background: #369;
-    z-index: 100;
     border-top: 1px solid #305a8a;
     border-bottom: 1px solid #305a8a;
 }

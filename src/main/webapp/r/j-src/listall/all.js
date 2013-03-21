@@ -31,15 +31,19 @@ $(document).ready(function() {
 
         return false;
 
-    })
+    });
 
 
     $(".sample").hover(function() {
         $(this).addClass("samplehover");
     }, function() {
         $(this).removeClass("samplehover");
-    })
+    });
 
+
+    /*
+    * 创建房间
+    * */
     $("#createRoom").bind('click', function() {
         var uid = $("#uid").val();
 
@@ -55,12 +59,13 @@ $(document).ready(function() {
             data : {uid : uid},
             type: "GET",
             success : function(data) {
-                loadIn(data);
+                //loadIn(data);
+                modal.open(data);
             }
-        })
+        });
         /**/
         return false;
-    })
+    });
 
     $("#punch").bind('click', function() {
         var p = $("#punch").attr("punch");
@@ -92,28 +97,55 @@ $(document).ready(function() {
         })
         /**/
         return false;
-    })
+    });
 
 
-    function loadIn(data) {
-        var width = $("body").width();
-        var layerWidth = $("#uplayer").width();
-        $("#uplayer").css({
-            display : 'block',
-            top : 100,
-            left : (width - layerWidth) / 2
+    /*
+    * 弹出层
+    * */
+    var modal = (function() {
+        var $overlay = $('<div id="overlay"></div>'),
+            $modal = $('<div id="modal"></div>'),
+            $content = $('<div id="modal-content"></div>'),
+            $close = $('#close-content');
+        var method = {};
+
+        $modal.hide();
+        $overlay.hide();
+        $modal.append($content);
+        $(document).ready(function(){
+            $('body').append($overlay, $modal);
         });
-        $("#uplayer").html(data);
-        $(window).resize(function() {
-            var width = $("#wrap").width();
-            var layerWidth = $("#uplayer").width();
-            $("#uplayer").css({
-                display : 'block',
-                top : 100,
-                left : (width - layerWidth) / 2
-            });
-        })
-    }
+
+        method.center = function() {
+            var left = Math.max($(window).width() - $modal.outerWidth() , 0) / 2;
+            var top = Math.max($(window).height() - $modal.outerHeight() , 0) / 2;
+
+            $modal.css({
+                top: top + $(window).scrollTop(),
+                left: left + $(window).scrollLeft()
+            })
+        };
+
+        method.open = function(data) {
+            $content.empty().append(data);
+            method.center();
+            $(window).bind('resize.modal', this.center);
+
+            $modal.show();
+            $overlay.show();
+        };
+
+        method.close = function() {
+            $modal.hide();
+            $overlay.hide();
+            $content.empty();
+            $(window).unbind('resize.modal');
+        };
+
+        return method;
+    }());
+
 
     $(".cancel").click(function() {
         $("#uplayer").hide();
