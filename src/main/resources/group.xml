@@ -6,8 +6,8 @@
 			url="jdbc:mysql://sp50fd0efa1eafe.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
 			username="game"
 			password="xdyl1314"
-			maxActive="8"
-			maxIdle="8"
+			maxActive="20"
+			maxIdle="4"
 			maxWait="50"
             check="true"
 		/>
