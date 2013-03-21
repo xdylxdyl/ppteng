@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dal>
+	<route>
+		<object name="com.gemantic.labs.killer.model.SimpleStatistics"
+			listenerClass="" strategyProperty="">
+			
+			
+			
+						
+			
+						
+			<dbStrategy name="mutiDS"
+                clasz="com.gemantic.dal.route.strategy.DefaultStrategy">  <pattern value="[0-9]$" group="labsKiller" />
+            </dbStrategy>
+			
+		</object>
+	</route>
+</dal>
