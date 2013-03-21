@@ -26,43 +26,43 @@
 <link href="/r/css/layout/header.css" rel="stylesheet">
 <script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
 
-	
-		<script src="/r/j-src/room/head_view.js"></script>
-	<script
+
+<script src="/r/j-src/room/head_view.js"></script> <script
 	type="text/javascript"
 	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script>
 </head>
 
 
 <div class="container preheader">
-    <div class="mobinav" id="mobinav">
-        <i class="icon-th-list icon-white"></i>
-    </div>
-    <ul class="social">
-       	<li><a href="http://bbs.ptteng.com/forum.php" target="_blank">论坛</a></li>
-        <li><a href="http://xdylxdyl.diandian.com/" target="_blank">博客</a></li>
-        <li id="nav_favorite"><a href="javascript:AddFavorite('http://www.ptteng.com/','葡萄藤')">收藏</a></li>
-        	
-					<li id="nav_quit"><a href="/player/offline.do" id="navLogout">退出</a></li>
-    </ul>
+	<div class="mobinav" id="mobinav">
+		<i class="icon-th-list icon-white"></i>
+	</div>
+	<ul class="social">	    
+	
+		<li><a href="http://bbs.ptteng.com/forum.php" target="_blank">论坛</a></li>
+		<li><a href="http://xdylxdyl.diandian.com/" target="_blank">博客</a></li>
+		<li id="nav_favorite"><a
+			href="javascript:AddFavorite('http://www.ptteng.com/','葡萄藤')">收藏</a></li>
+		<li id="nav_quit"><a href="/player/offline.do" id="navLogout">退出</a></li>
+	</ul>
 </div>
 <div class="header clearfix">
-    <div class="container">
-        <div id="main_menu" class="smoothmenu">
-            <ul>
-               	<li id="nav_index"><a href="/">首页</a></li>
-					<li id="nav_game"><a href="/m/list.do">游戏</a></li>
-					<li id="nav_case"><a href="/record/list.do">战例</a></li>
-					<li id="nav_person"><a href="/player/detail.do">个人</a></li>
-					<li id="nav_rank"><a href="/rank/list.do?type=money">排行</a></li>	
-				
-					<li id="nav_about"><a href="/about.do?type=about">帮助</a></li>
-            </ul>
-        </div>
-        <div id="logo">
-            <a href="#"><img src="/r/img/logo.png" alt=""></a>
-        </div>
-    </div>
+	<div class="container">
+		<div id="main_menu" class="smoothmenu">
+			<ul>
+				<li id="nav_index"><a href="/">首页</a></li>
+				<li id="nav_game"><a href="/m/list.do">游戏</a></li>
+				<li id="nav_case"><a href="/record/list.do">战例</a></li>
+				<li id="nav_person"><a href="/player/detail.do">个人</a></li>
+				<li id="nav_rank"><a href="/rank/list.do?type=money">排行</a></li>
+
+				<li id="nav_about"><a href="/about.do?type=about">帮助</a></li>
+			</ul>
+		</div>
+		<div id="logo">
+			<a href="#"><img src="/r/img/logo.png" alt=""></a>
+		</div>
+	</div>
 </div>
 
 

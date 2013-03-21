@@ -6,9 +6,14 @@
 			<path>record_dao.xml</path>
 
 		</config>
-	
+
 		<config>
 			<path>users_dao.xml</path>
+		</config>
+
+
+		<config>
+			<path>simpleStatistics_dao.xml</path>
 		</config>
 
 	</list>

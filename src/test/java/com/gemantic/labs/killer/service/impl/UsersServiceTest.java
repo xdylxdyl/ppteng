@@ -33,7 +33,7 @@ public class UsersServiceTest {
 
 	private RecordService recordService;
 	
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 
 		// dao

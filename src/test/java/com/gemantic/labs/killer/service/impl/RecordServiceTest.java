@@ -23,7 +23,7 @@ public class RecordServiceTest {
 
 	private RecordService recordService;
 
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 
 		// dao
@@ -167,7 +167,7 @@ public class RecordServiceTest {
 
 	};
 	
-	@Test
+	//@Test
 	public void getRecordIdsByVersionssssss() throws ServiceException, ServiceDaoException {
 
 		
