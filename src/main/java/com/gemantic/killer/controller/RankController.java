@@ -117,7 +117,7 @@ public class RankController {
 			page=1;
 		}
 		if(size==null){
-			size=21;
+			size=20;
 		}
 		Integer start=(page-1)*size;
 		
