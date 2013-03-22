@@ -121,7 +121,9 @@ public class RankController {
 		}
 		Integer start=(page-1)*size;
 		
-		if(StringUtils.isBlank(desc)){
+		if("asc".equals(desc)){
+			
+		}else{
 			desc="desc";
 		}
 	

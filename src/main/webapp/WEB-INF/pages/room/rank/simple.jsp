@@ -16,9 +16,9 @@
 			<tr>
 				<th>序号</th>
 				<th>姓名</th>
-				<th id="win" query="win" class="cursor-pointer">赢<i class="icon-arrow-down"></i></th>
-				<th id="lose" query="lose" class="cursor-pointer">输<i class="icon-arrow-down"></i></th>
-				<th id="all" query="all" class="cursor-pointer">总局数<i class="icon-arrow-down"></i></th>
+				<th id="win" query="win" class="cursor-pointer">赢<i class=""></i></th>
+				<th id="lose" query="lose" class="cursor-pointer">输<i class=""></i></th>
+				<th id="all" query="all" class="cursor-pointer">总局数<i class=""></i></th>
 			</tr>
 		</thead>
 		<tbody>

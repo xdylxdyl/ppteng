@@ -239,7 +239,7 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 			query="all_count";
 			isField=true;
 		}else{
-			Field[] fields=SimpleStatistics.class.getFields();
+			Field[] fields=SimpleStatistics.class.getDeclaredFields();
 			
 			for(Field f:fields){
 				if(f.getName().equals(query)){
