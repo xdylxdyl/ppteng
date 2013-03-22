@@ -37,7 +37,7 @@
 				<td>${statistics.lose}</td>
 				<td>${statistics.all}</td>
 			</tr>
-			</tr>
+			
 		</tbody>
 	</table>
 

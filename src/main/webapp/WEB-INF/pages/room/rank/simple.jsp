@@ -5,74 +5,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <script src="/r/j-src/about/simple.js"></script>
 <html xmlns="http://www.w3.org/1999/xhtml">
- <div class="span9">
-            <div class="hero-unit">
-                <h1>简化是什么?</h1>
+<div class="span9">
+	<table class="table table-bordered table-striped">
+		<caption>排行</caption>
+		<thead>
+			<tr>
+				<th>序号</th>
+				<th>姓名</th>
+				<th>赢</th>
+				<th>输</th>
+				<th>总局数</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${statistics}" var="statistic" begin="0" step="1"
+				varStatus="status">
+				<c:set var="user" value="${id_users[statistics.id]}"></c:set>
 
-                <p>是杀人游戏中最典雅的一种.</p>
+				<c:choose>
+					<c:when test="${status.index%4==0}">
+						<c:set var="trClass" value="success"></c:set>
+					</c:when>
+					<c:when test="${status.index%4==1}">
+						<c:set var="trClass" value="error"></c:set>
+					</c:when>
+					<c:when test="${status.index%4==2}">
+						<c:set var="trClass" value="warning"></c:set>
+					</c:when>
+					<c:otherwise>
+						<c:set var="trClass" value="info"></c:set>
+					</c:otherwise>
+				</c:choose>
 
-                <p>简化而不简单.</p>
 
-                <p>游戏中只有杀手和水民两种角色. </p>
-
-                <p>水民可以展示强大的分析力,杀手能展现出色的布局能力</p>
-
-                <p> 这就是简化.</p>
-
-
-                <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=15" class="btn btn-primary btn-large" target="_blank">简化术语表 &raquo;</a></p>
-            </div>
-            <div class="row-fluid">
-                <div class="span6">
-                    <h2>角色</h2>
-
-                    <p>
-                        杀人和水民.一般是8人1杀.游戏从白天开始,玩家只能看到自己身份(多杀互相知道身份),
-
-                    </p>
-
-                   
-
-                </div>
-                <!--/span-->
-
-                <div class="span6">
-                    <h2>投票</h2>
-
-                    <p>
-                                                可以随意出票换票,任何一个玩家票数超过场上存活玩家的一半,玩家会被投死
-                    </p>
-                   
-                </div>
-                <!--/span-->
-
-            </div>
-            <!--/row-->
-            <div class="row-fluid">
-                           <div class="span6">
-                               <h2>杀人</h2>
-
-                               <p>夜晚时间,杀手可以杀死任何一个场上存活玩家
-
-                               </p>
-                               
-                           </div>
-                           <!--/span-->
-
-                           <div class="span6">
-                               <h2>遗言</h2>
-
-                               <p>被杀的玩家会有一次遗言的机会
-
-                               </p>
-                        
-                           </div>
-                           <!--/span-->
-
-                       </div>
-                       <!--/row-->
-
-        </div>
-        <!--/span-->
-    </div>
-    <!--/row-->
+				<tr class="${trClass}">
+					<td>${status.index+1}</td>
+					<td>${user.name}</td>
+					<td>${statistics.win}</td>
+					<td>${statistics.lose}</td>
+					<td>${statistics.all}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+</div>
+<!--/row-->

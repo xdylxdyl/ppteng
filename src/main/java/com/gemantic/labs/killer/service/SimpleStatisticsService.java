@@ -40,6 +40,10 @@ public interface SimpleStatisticsService {
     	   
 		
 		public List<SimpleStatistics> getObjectsByIds(List<Long> ids)throws ServiceException, ServiceDaoException;
+		
+		
+		
+		public List<Long> getSimpleStatisticsIDSByQuery(String query)throws ServiceException, ServiceDaoException;
 		  
     	
 	
