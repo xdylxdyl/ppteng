@@ -44,7 +44,7 @@
 
 				<tr class="${trClass}">
 					<td>${status.index+1}</td>
-					<td>${user.name}</td>
+					<td><a href="/player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
 					<td>${statistics.win}</td>
 					<td>${statistics.lose}</td>
 					<td>${statistics.all}</td>
