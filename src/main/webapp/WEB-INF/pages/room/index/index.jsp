@@ -67,7 +67,6 @@
 					</c:when>
 					<c:otherwise>
 						<div class="span3 box">
-
 							<h4>
 								<small>总用户${count}人 欢迎你:</small> ${user.name}
 							</h4>
@@ -79,7 +78,10 @@
 										value="${user.loginAt}"></date:date></small>
 								<c:choose>
 									<c:when test="${empty punchCount}">
-										<span class="btn btn-primary" id="punch">打卡</span>
+                                    <div id="punchBox">
+                                        <div id="punchOver"></div>
+                                        <span class="btn btn-primary" id="punch">打卡</span>
+                                    </div>
 									</c:when>
 									<c:otherwise>
 										<small>已连续打卡${punchCount}天</small>
@@ -253,8 +255,8 @@
 	charset="utf-8"></script> <script
 	src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1999911523"
 	type="text/javascript" charset="utf-8"></script> 
-		<script type="text/javascript"
-			src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
+	<script type="text/javascript" src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
+    <script type="text/javascript" src="/r/j-src/punch/punch.js?version=${frontVersion}"></script>
 </body>
 </html>
 

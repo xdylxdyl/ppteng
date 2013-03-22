@@ -59,49 +59,14 @@ $(document).ready(function() {
             data : {uid : uid},
             type: "GET",
             success : function(data) {
-                //loadIn(data);
                 modal.open(data);
             }
         });
-        /**/
         return false;
     });
-
-    $("#punch").bind('click', function() {
-        var p = $("#punch").attr("punch");
-        if ("true" == p) {
-            return false;
-        }
-        $("#punch").attr("punch", true);
-        $("#punch").html("已打卡");
-        $("#punch").removeClass().addClass("button");
-
-
-        var uid = $("#uid").val();
-
-        $.ajax({
-            url : "/player/punch.do",
-            data : {},
-            type: "post",
-            dataType:"json",
-            success : function(data) {
-
-                if (data.code == "0") {
-                    $("#money").empty().html("金币 "+data.umoney );
-                }
-
-
-            }
-        })
-
-        /**/
-        return false;
-    });
-
-
     /*
-    * 弹出层
-    * */
+     * 弹出层
+     * */
     var modal = (function() {
         var $overlay = $('<div id="overlay"></div>'),
             $modal = $('<div id="modal"></div>'),
@@ -145,13 +110,13 @@ $(document).ready(function() {
         return method;
     }());
 
-
+/*
     $(".cancel").click(function() {
         $("#uplayer").hide();
     });
     $("#cancel").click(function() {
         $("#uplayer").hide();
-    })
+    })*/
 
 
-})
+});

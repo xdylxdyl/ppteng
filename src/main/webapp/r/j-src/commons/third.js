@@ -79,7 +79,7 @@ var login = function (type, openID, name) {
 }
 
 
-$(document).ready(function () {
+/*$(document).ready(function () {
 
     $("#punch").bind('click', function () {
 
@@ -94,7 +94,7 @@ $(document).ready(function () {
                 window.location.href = "/";
             }
         })
-        /**/
+
         return false;
     })
-})
+})*/

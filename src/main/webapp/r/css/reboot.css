@@ -1,8 +1,23 @@
+/*打卡*/
+#punchBox {
+    position: relative;
+}
+#punchOver {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 4px 10px;
+    color: #ffad56;
+    font-weight: 800;
+    display: none;
+    font-size: 16px;
+}
 
+/*字体*/
 .fz-12 {
     font-size: 12px;
 }
-
+/* */
 .navbar {
     margin-bottom: 0;
     border: none;

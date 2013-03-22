@@ -7,9 +7,9 @@
 <link href="/r/css/all2.css" rel="stylesheet" type="text/css" />
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
 <script src="/r/j-src/listall/all.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath()%>/r/j-src/commons/service.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath()%>/r/j-src/commons/service.js?v=${frontVersion}"></script>
 <script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/r/j-src/punch/punch.js?version=${frontVersion}"></script>
 
 <input type="hidden" value="${oldRoom}" id="oldRoom">
 </head>
@@ -20,6 +20,10 @@
 <div class="container">
 	<div class="row section">
         <div class="span3 left-box">
+
+
+
+
             <div class="left-box-in">
                 <h4>
                 <small>欢迎你</small>,${uname}
@@ -31,7 +35,10 @@
                 <small id="money">金币 ${user.money}</small>
                 <c:choose>
                 <c:when test="${empty punchCount}">
-                <span class="btn btn-primary" id="punch">打卡</span>
+                <div id="punchBox">
+                    <div id="punchOver"></div>
+                    <span class="btn btn-primary" id="punch">打卡</span>
+                </div>
                 </c:when>
                 <c:otherwise>
                 <small>已连续打卡${punchCount}天</small>
@@ -78,7 +85,7 @@
 
             </div>
     </c:forEach>
-      
+
 
         </div>
     </div>

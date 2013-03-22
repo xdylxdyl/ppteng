@@ -13,34 +13,51 @@ var punchService = {
         $.ajax({
             url:"/player/punch.do",
             data:{},
+            async: false,
             type:"post",
             dataType:"json",
             success:function (result) {
                 if (result.code == "0") {
                     data = result;
+                } else {
+                    data = false;
                 }
             }
-        })
+        });
+        return data;
     }
 
-}
+};
 
 var punchView = {
     showPunch:function (data) {
+        if (data != false) {
+            var $over = $("#punchOver");//增加的分数
+            var $money = $("#money");//总的分数
+            $over.text('+' + data.money).show()
+                .animate({
+                    top: -20,
+                    opacity: 0
+                },
+                function() {
+                    $over.hide().css({
+                        top: 0,
+                        opacity: 1
+                    });
+                });
 
-        $("#money").empty().html("金币 " + data.umoney);
-        //动画
-
-
+            $money.empty().html("金币 "+data.umoney );
+        }
     }
-}
+};
 
 $(document).ready(function () {
     $("#punch").bind('click', function () {
+
         var data = punchService.punch();
         punchView.showPunch(data);
-        /**/
+
         return false;
     })
 
-})
+});
