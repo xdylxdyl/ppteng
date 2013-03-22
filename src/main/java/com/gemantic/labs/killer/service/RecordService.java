@@ -54,6 +54,15 @@ public interface RecordService {
 	 * @throws ServiceDaoException
 	 */
 	public List<Long>  getRecordIdsByVersion(String version,Integer start,Integer limit)throws ServiceException, ServiceDaoException;
+	
+	/**
+	 * 
+	 * @param 
+	 * @return 
+	 * @throws ServiceException
+	 * @throws ServiceDaoException
+	 */
+	public List<Long>  getRecordIdsByVersionAndCreateAt(String version,Long createAt,Integer start,Integer limit)throws ServiceException, ServiceDaoException;
 
 
 

@@ -355,7 +355,7 @@ public class UsersServiceTest {
 
 	};
 	
-	@Test
+	//@Test
 	public void testGetAll() throws ServiceException, ServiceDaoException {
 		Integer count=this.usersService.getTotalCount();
 		log.info("get all users "+count);

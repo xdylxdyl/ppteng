@@ -28,7 +28,7 @@
                 id="portrait_img" style="max-width: 16em; height: 8em">
                 <br><br>
                 <blockquote>
-                <small>金币 ${user.money}</small>
+                <small id="money">金币 ${user.money}</small>
                 <c:choose>
                 <c:when test="${empty punchCount}">
                 <span class="btn btn-primary" id="punch">打卡</span>

@@ -1,7 +1,10 @@
 package com.gemantic.labs.killer.service.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.logging.Log;
@@ -14,8 +17,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
+import com.gemantic.common.util.MyTimeUtil;
+import com.gemantic.killer.common.model.Message;
+import com.gemantic.killer.util.MessageUtil;
 import com.gemantic.labs.killer.model.Records;
+import com.gemantic.labs.killer.model.SimpleStatistics;
 import com.gemantic.labs.killer.service.RecordService;
+import com.gemantic.labs.killer.service.SimpleStatisticsService;
 
 public class RecordServiceTest {
 
@@ -23,12 +31,16 @@ public class RecordServiceTest {
 
 	private RecordService recordService;
 
+	private SimpleStatisticsService simpleStatisticsService;
+
 	//@Before
 	public void setUp() throws Exception {
 
 		// dao
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext*.xml");
 		recordService = (RecordService) context.getBean("recordServiceImpl");
+
+		simpleStatisticsService = (SimpleStatisticsService) context.getBean("simpleStatisticsServiceImpl");
 
 		// local server
 		/**
@@ -126,7 +138,7 @@ public class RecordServiceTest {
 
 	}
 
-	//@Test
+	// @Test
 	public void getRecordIdsByVersion() throws ServiceException, ServiceDaoException {
 
 		List<Records> list = new ArrayList<Records>();
@@ -166,16 +178,100 @@ public class RecordServiceTest {
 		}
 
 	};
-	
+
 	//@Test
-	public void getRecordIdsByVersionssssss() throws ServiceException, ServiceDaoException {
+	public void getRecordIdsByVersionssssss() throws ServiceException, ServiceDaoException, IOException, InterruptedException {
 
+		//List<Long> lists = recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
+		List<Long> lists=this.recordService.getRecordIdsByVersionAndCreateAt("simple_1.0",MyTimeUtil.getTodayZeroTimeMillions(), 0, Integer.MAX_VALUE);
+
+		log.info("success get datas " + lists.size());
+		List<Records> records = this.recordService.getObjectsByIds(lists);
 		
+		
+		for (Records record : records) {
 
-		List<Long> lists = recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
-		log.info("success get datas " + lists);
+			Thread.sleep(1000);
+			String path = record.getPath();
+			List<String> contents = this.recordService.getContent(record.getId());
+			Set<Long> water = new HashSet();
+			Set<Long> killer = new HashSet();
+			Message overMessage = null;
+			for (String row : contents) {
+
+				List<Message> messages = MessageUtil.fromStrings(row);
+
+				for (Message message : messages) {
+
+					if ("role".equals(message.getPredict())) {
+
+						Long uid = Long.valueOf(message.getSubject());
+						if ("water".equals(message.getObject())) {
+							log.info("water " + message);
+							water.add(uid);
+
+						} else {
+							log.info("killer " + message);
+							killer.add(uid);
+
+						}
+					}
+					if ("over".equals(message.getPredict())) {
+						log.info(message);
+						overMessage = message;
+					} else {
+
+					}
+					;
+
+				}
+
+			}
+
+			log.info(record.getPath() + " water is " + water);
+			log.info(record.getPath() + " killer is " + killer);
+
+			if (overMessage != null) {
+				if ("water win".equals(overMessage.getObject())) {
+					log.info("water win " + overMessage);
+					for (Long w : water) {
+						SimpleStatistics ss = this.simpleStatisticsService.getObjectById(w);
+						if (ss == null) {
+							ss = new SimpleStatistics(w);
+							ss.setWin(ss.getWin() + 1);
+							ss.setAll(ss.getAll() + 1);
+
+							this.simpleStatisticsService.insert(ss);
+
+						} else {
+							ss.setWin(ss.getWin() + 1);
+							ss.setAll(ss.getAll() + 1);
+							this.simpleStatisticsService.update(ss);
+						}
+
+					}
+
+				} else {
+					log.info("killer win" + overMessage);
+					for (Long kid : killer) {
+						SimpleStatistics ss = this.simpleStatisticsService.getObjectById(kid);
+						if (ss == null) {
+							ss = new SimpleStatistics(kid);
+							ss.setWin(ss.getWin() + 1);
+							ss.setAll(ss.getAll() + 1);
+							this.simpleStatisticsService.insert(ss);
+						} else {
+							ss.setWin(ss.getWin() + 1);
+							ss.setAll(ss.getAll() + 1);
+							this.simpleStatisticsService.update(ss);
+						}
+
+					}
+				}
+			}
+
+		}
 		// TODO 增加自己的验证逻辑
-	
 
 	};
 

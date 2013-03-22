@@ -82,16 +82,15 @@ $(document).ready(function() {
             success : function(data) {
 
                 if (data.code == "0") {
-                    $("#punch_hint").empty().html("获取 " + data.money + " 金币").show();
-                    var m = parseInt($("#money").html());
-                    $("#money").empty().html(data.money + m);
+                    $("#money").empty().html("金币 "+data.umoney );
                 }
 
 
             }
         })
+
         /**/
-        return false;
+        return true;
     })
 
 

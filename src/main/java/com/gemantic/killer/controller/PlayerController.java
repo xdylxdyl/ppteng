@@ -609,6 +609,7 @@ public class PlayerController {
 		user.setMoney(user.getMoney() + m);
 		this.userService.update(user);
 		model.addAttribute("money", m);
+		model.addAttribute("umoney", user.getMoney());
 		model.addAttribute("code", "0");
 		return "/room/person/punch";
 

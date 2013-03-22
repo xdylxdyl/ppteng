@@ -334,5 +334,39 @@ public class RecordServiceImpl implements RecordService {
 		return new ArrayList();
 	}
 
+	@Override
+	public List<Long> getRecordIdsByVersionAndCreateAt(String version, Long createAt, Integer start, Integer limit) throws ServiceException,
+			ServiceDaoException {
+		if (log.isInfoEnabled()) {
+			log.info(" get all ids ,start,limit  :  " + start + " , " + limit);
+		}
+		List<Long> idList = null;
+
+		// TODO 参数检查!
+
+		if (start == null) {
+			start = 0;
+		}
+
+		if (limit == null) {
+			limit = Integer.MAX_VALUE;
+		}
+
+		try {
+			//idList = (List<Long>) dao.excuteSimpleSql("select id from records where version = "+version, Records.class);
+			idList = dao.getIdList("getRecordIdsByVersionAndCreateAt", new Object[] { version,createAt }, start, limit, false);
+
+		} catch (DaoException e) {
+			log.error(" get ids  wrong by version,start,limit)  , " + start + " , " + limit);
+			log.error(e);
+			e.printStackTrace();
+			throw new ServiceDaoException(e);
+		}
+		if (log.isInfoEnabled()) {
+			log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
+		}
+		return idList;
+	}
+
 
 }

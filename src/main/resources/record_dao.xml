@@ -12,6 +12,15 @@
 			<list name="getAll" sqlitem="select id from records where 1 = 1 "
 				keyProperty="version" valueProperty="id" keyColumn="version" />
 
+
+		<list name="getRecordIdsByVersionAndCreateAt" sqlitem="select id from records where version = ? and create_at >= ? order by create_at desc"
+			sqlType="hsql" 	keyProperty="nonSence" valueProperty="id" keyColumn="version,create_at" />
+				
+						
+				
+				
+				
+				
 			<dbStrategy name="mutiDS"
 				clasz="com.gemantic.dal.route.strategy.DefaultStrategy">
 				<pattern value="[0-9]$" group="labsKiller" />
