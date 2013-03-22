@@ -129,7 +129,7 @@ public class RankController {
 		
 		
 		model.addAttribute("id_users", id_users);
-		model.addAttribute("statistics", statistics);
+		model.addAttribute("statisticsList", statistics);
 		model.addAttribute("query", query);
 		model.addAttribute("desc", desc);
 		model.addAttribute("type", type);

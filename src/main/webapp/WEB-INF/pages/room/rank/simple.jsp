@@ -12,24 +12,23 @@
 			<tr>
 				<th>序号</th>
 				<th>姓名</th>
-				<th>赢</th>
-				<th>输</th>
-				<th>总局数</th>
+				<th id="win">赢</th>
+				<th id="lose">输</th>
+				<th id="all">总局数</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${statistics}" var="statistic" begin="0" step="1"
-				varStatus="status">
+			<c:forEach items="${statisticsList}" var="statistics" begin="0" step="1"	varStatus="status">
 				<c:set var="user" value="${id_users[statistics.id]}"></c:set>
 
 				<c:choose>
-					<c:when test="${status.index%4==0}">
+					<c:when test="${status.index<=2}">
 						<c:set var="trClass" value="success"></c:set>
 					</c:when>
-					<c:when test="${status.index%4==1}">
+					<c:when test="${status.index>2&&status.index<=9}">
 						<c:set var="trClass" value="error"></c:set>
 					</c:when>
-					<c:when test="${status.index%4==2}">
+					<c:when test="${status.index>9&&status.index<20}">
 						<c:set var="trClass" value="warning"></c:set>
 					</c:when>
 					<c:otherwise>
@@ -48,5 +47,18 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<div class="pagination pagination-centered">
+	<ul>
+		<li><a
+			href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page-1}&size=${size}"
+			id="pagePrev">Prev</a></li>
+		<li class="active"><a
+			href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page}&size=${size}">${page}</a></li>
+		<li><a
+			href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page+1}&size=${size}"
+			id="pageNext">Next</a></li>
+	</ul>
+</div>
 </div>
 <!--/row-->
