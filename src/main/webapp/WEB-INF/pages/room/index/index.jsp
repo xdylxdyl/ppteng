@@ -76,16 +76,17 @@
 							<blockquote>
 								<small>上次登录:<date:date pattern="yyyy年 MM月dd日  HH时mm分 "
 										value="${user.loginAt}"></date:date></small>
+								<small>金币 ${user.money}</small>
 								<c:choose>
 									<c:when test="${empty punchCount}">
                                     <div id="punchBox">
                                         <div id="punchOver"></div>
                                         <span class="btn btn-primary" id="punch">打卡</span>
                                     </div>
+                                    
 									</c:when>
 									<c:otherwise>
-										<small>已连续打卡${punchCount}天</small>
-										<small>金币 ${user.money}</small>
+										<small>已连续打卡${punchCount}天</small>									
 
 									</c:otherwise>
 								</c:choose>

@@ -13,7 +13,7 @@ var punchService = {
         $.ajax({
             url:"/player/punch.do",
             data:{},
-            async: false,
+            async:false,
             type:"post",
             dataType:"json",
             success:function (result) {
@@ -36,17 +36,24 @@ var punchView = {
             var $money = $("#money");//总的分数
             $over.text('+' + data.money).show()
                 .animate({
-                    top: -20,
-                    opacity: 0
-                },
-                function() {
-                    $over.hide().css({
-                        top: 0,
-                        opacity: 1
-                    });
-                });
+                    top:-100,
+                    opacity:0.5,
+                    fontSize:"2em"
 
-            $money.empty().html("金币 "+data.umoney );
+                }, 800, "swing", function () {
+                    $over.hide().css({
+                        top:0,
+                        opacity:1
+                    });
+
+                    $("#punchBox").hide();
+
+                })
+            ;
+            $("#punch").removeClass().addClass("btn btn-warning").attr("disabled", true)
+              $money.empty().html("金币 " + data.umoney);
+
+
         }
     }
 };
@@ -54,7 +61,8 @@ var punchView = {
 $(document).ready(function () {
     $("#punch").bind('click', function () {
 
-        var data = punchService.punch();
+         var data = punchService.punch();
+       // var data = {"umoney":2200, "money":200};
         punchView.showPunch(data);
 
         return false;
