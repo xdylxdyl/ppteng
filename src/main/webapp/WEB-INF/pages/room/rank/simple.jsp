@@ -6,19 +6,19 @@
 <script src="/r/j-src/rank/simple.js"></script>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <div class="span9">
-	<input type="hidden" id="desc" value="${desc}"></input> 
-	<input type="hidden" id="query" value="${query}"></input>
-	 <input	type="hidden" id="page" value="${page}"></input> 
-	 <input type="hidden" id="size" value="${size}"></input>
+	<input type="hidden" id="desc" value="${desc}">
+	<input type="hidden" id="query" value="${query}">
+	<input	type="hidden" id="page" value="${page}">
+	<input type="hidden" id="size" value="${size}">
 	<table class="table table-bordered table-striped">
-		<caption>排行</caption>
+		<caption class=""><h2>排行</h2></caption>
 		<thead>
 			<tr>
 				<th>序号</th>
 				<th>姓名</th>
-				<th id="win" query="win">赢</th>
-				<th id="lose" query="lose">输</th>
-				<th id="all" query="lose">总局数</th>
+				<th id="win" query="win" class="cursor-pointer">赢<i class="icon-arrow-down"></i></th>
+				<th id="lose" query="lose" class="cursor-pointer">输<i class="icon-arrow-down"></i></th>
+				<th id="all" query="all" class="cursor-pointer">总局数<i class="icon-arrow-down"></i></th>
 			</tr>
 		</thead>
 		<tbody>
