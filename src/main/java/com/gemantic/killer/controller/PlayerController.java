@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.DESUtil;
 import com.gemantic.common.util.FileUtil;
-import com.gemantic.common.util.MyTimeUtil;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.common.util.zip.RunLengthEncoding;
 import com.gemantic.killer.common.model.Message;
@@ -37,7 +36,9 @@ import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.util.MailUtil;
 import com.gemantic.killer.util.PunchUtil;
 import com.gemantic.labs.killer.model.Records;
+import com.gemantic.labs.killer.model.SimpleStatistics;
 import com.gemantic.labs.killer.service.RecordService;
+import com.gemantic.labs.killer.service.SimpleStatisticsService;
 import com.gemantic.labs.killer.service.UsersService;
 
 /**
@@ -64,6 +65,9 @@ public class PlayerController {
 
 	@Autowired
 	private JavaMailSender sender;
+	
+	@Autowired
+	private SimpleStatisticsService simpleStatisticsService;
 
 	/**
 	 * 玩家登入
@@ -647,6 +651,41 @@ public class PlayerController {
 		return "/room/player/punchlist";
 
 	}
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/statistics", method = RequestMethod.GET)
+	public String statistics(HttpServletRequest request, HttpServletResponse response, ModelMap model,Long uid,String version) throws Exception {
+
+		if(uid==null){
+			 uid = cookieUtil.getID(request, response);
+		}
+	
+		log.info(uid + " punch ");
+		User user = this.userService.getObjectById(uid);
+		if (user == null) {
+
+			return "redirect:/";
+		}
+	
+		log.info(" get user statistics info " + user);
+		SimpleStatistics statistics=this.simpleStatisticsService.getObjectById(uid);
+		if(statistics==null){
+			statistics=new SimpleStatistics();
+		}
+		model.addAttribute("statistics", statistics);	
+		model.addAttribute("user", user);
+		return "/room/player/statistics";
+
+	}
+	
 	
 
 	/**

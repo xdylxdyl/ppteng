@@ -12,6 +12,8 @@
                     <li id="leftNav_basic"><a href="/player/detail.do">出场秀</a></li> -->
                     <li class="nav-header">打卡统计</li>
                     <li id="leftNav_punch"><a href="/player/punchlist.do?uid=${user.id}">打卡线</a></li>
+                    <li class="nav-header">简化统计</li>
+                    <li id="leftNav_statistics"><a href="/player/statistics.do?uid=${user.id}&version=simple">胜负</a></li>
                  <!--   <li class="nav-header">杀人游戏</li>
                     <li id="simple"><a href="/about.do?type=simple">简化</a></li>
                     

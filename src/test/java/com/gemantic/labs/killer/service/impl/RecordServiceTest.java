@@ -182,20 +182,23 @@ public class RecordServiceTest {
 	//@Test
 	public void getRecordIdsByVersionssssss() throws ServiceException, ServiceDaoException, IOException, InterruptedException {
 
-		//List<Long> lists = recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
-		List<Long> lists=this.recordService.getRecordIdsByVersionAndCreateAt("simple_1.0",MyTimeUtil.getTodayZeroTimeMillions(), 0, Integer.MAX_VALUE);
+		List<Long> lists = recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
+		// List<Long>
+		// lists=this.recordService.getRecordIdsByVersionAndCreateAt("simple_1.0",MyTimeUtil.getTodayZeroTimeMillions(),
+		// 0, Integer.MAX_VALUE);
 
 		log.info("success get datas " + lists.size());
 		List<Records> records = this.recordService.getObjectsByIds(lists);
-		
-		
+		log.info("get record size " + records.size());
+		int index = 0;
 		for (Records record : records) {
-
-			Thread.sleep(1000);
+			index++;
+			Thread.sleep(2000);
 			String path = record.getPath();
 			List<String> contents = this.recordService.getContent(record.getId());
 			Set<Long> water = new HashSet();
 			Set<Long> killer = new HashSet();
+			Set<Long> all = new HashSet();
 			Message overMessage = null;
 			for (String row : contents) {
 
@@ -203,10 +206,10 @@ public class RecordServiceTest {
 
 				for (Message message : messages) {
 
-					if ("role".equals(message.getPredict())) {
+					if ("assign".equals(message.getPredict())) {
 
-						Long uid = Long.valueOf(message.getSubject());
-						if ("water".equals(message.getObject())) {
+						Long uid = Long.valueOf(message.getObject());
+						if ("water".equals(message.getSubject())) {
 							log.info("water " + message);
 							water.add(uid);
 
@@ -228,8 +231,11 @@ public class RecordServiceTest {
 
 			}
 
-			log.info(record.getPath() + " water is " + water);
-			log.info(record.getPath() + " killer is " + killer);
+			all.addAll(water);
+			all.addAll(killer);
+			log.info(index + " ---- " + record.getPath() + " water is " + water);
+			log.info(index + " ---- " + record.getPath() + " killer is " + killer);
+			log.info(index + " ---- " + record.getPath() + " all is " + all);
 
 			if (overMessage != null) {
 				if ("water win".equals(overMessage.getObject())) {
@@ -239,13 +245,26 @@ public class RecordServiceTest {
 						if (ss == null) {
 							ss = new SimpleStatistics(w);
 							ss.setWin(ss.getWin() + 1);
-							ss.setAll(ss.getAll() + 1);
 
 							this.simpleStatisticsService.insert(ss);
 
 						} else {
 							ss.setWin(ss.getWin() + 1);
-							ss.setAll(ss.getAll() + 1);
+
+							this.simpleStatisticsService.update(ss);
+						}
+
+					}
+					for (Long kid : killer) {
+						SimpleStatistics ss = this.simpleStatisticsService.getObjectById(kid);
+						if (ss == null) {
+							ss = new SimpleStatistics(kid);
+							ss.setLose(ss.getLose() + 1);
+
+							this.simpleStatisticsService.insert(ss);
+						} else {
+							ss.setLose(ss.getLose() + 1);
+
 							this.simpleStatisticsService.update(ss);
 						}
 
@@ -258,16 +277,46 @@ public class RecordServiceTest {
 						if (ss == null) {
 							ss = new SimpleStatistics(kid);
 							ss.setWin(ss.getWin() + 1);
-							ss.setAll(ss.getAll() + 1);
+
 							this.simpleStatisticsService.insert(ss);
 						} else {
 							ss.setWin(ss.getWin() + 1);
-							ss.setAll(ss.getAll() + 1);
+
+							this.simpleStatisticsService.update(ss);
+						}
+
+					}
+					for (Long w : water) {
+						SimpleStatistics ss = this.simpleStatisticsService.getObjectById(w);
+						if (ss == null) {
+							ss = new SimpleStatistics(w);
+							ss.setLose(ss.getLose() + 1);
+
+							this.simpleStatisticsService.insert(ss);
+
+						} else {
+							ss.setLose(ss.getLose() + 1);
+
 							this.simpleStatisticsService.update(ss);
 						}
 
 					}
 				}
+				for (Long aid : all) {
+					SimpleStatistics ss = this.simpleStatisticsService.getObjectById(aid);
+					if (ss == null) {
+						ss = new SimpleStatistics(aid);
+						ss.setAll(ss.getAll() + 1);
+
+						this.simpleStatisticsService.insert(ss);
+					} else {
+						ss.setAll(ss.getAll() + 1);
+
+						this.simpleStatisticsService.update(ss);
+					}
+
+				}
+
 			}
 
 		}
