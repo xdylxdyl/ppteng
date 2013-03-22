@@ -60,7 +60,7 @@
 			</ul>
 		</div>
 		<div id="logo">
-			<a href="#"><img src="/r/img/logo.png" alt=""></a>
+			<a href="/"><img src="/r/img/logo.png" alt=""></a>
 		</div>
 	</div>
 </div>

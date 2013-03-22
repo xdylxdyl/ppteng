@@ -30,7 +30,8 @@ public class RecordStastisticsEtl {
 	@Autowired
 	private SimpleStatisticsService simpleStatisticsService;
 
-	// @Scheduled(cron="0 3 3 * * ?")
+	 @Scheduled(cron="0 4 4 * * ?")
+	// @Scheduled(fixedDelay=5000)
 	public void calculate() throws ServiceException, ServiceDaoException, InterruptedException {
 
 		// List<Long> lists = recordService.getRecordIdsByVersion("simple_1.0",
