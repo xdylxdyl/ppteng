@@ -22,7 +22,7 @@ public class SimpleStatisticsServiceTest {
 
 	private SimpleStatisticsService simpleStatisticsService;
 
-	 @Before
+	// @Before
 	public void setUp() throws Exception {
 
 		// dao
@@ -118,9 +118,9 @@ public class SimpleStatisticsServiceTest {
 
 	}
 
-	@Test
+	//@Test
 	public void testQuery() throws ServiceException, ServiceDaoException{
-	List<Long>	ids=this.simpleStatisticsService.getSimpleStatisticsIDSByQuery("all");
+	List<Long>	ids=this.simpleStatisticsService.getSimpleStatisticsIDSByQuery("all","desc",0,20);
 	log.info(ids);
 	}
 	@Test

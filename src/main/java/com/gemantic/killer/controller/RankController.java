@@ -122,7 +122,7 @@ public class RankController {
 		Integer start=(page-1)*size;
 	
 		List<User> users=new ArrayList();
-		List<Long> userIDS=simpleStatisticsService.getSimpleStatisticsIDSByQuery(query);
+		List<Long> userIDS=simpleStatisticsService.getSimpleStatisticsIDSByQuery(query,desc,start,size);
 		List<SimpleStatistics> statistics=this.simpleStatisticsService.getObjectsByIds(userIDS);
 		users = this.userSevice.getObjectsByIds(userIDS);
 		Map<Long,User> id_users=MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);

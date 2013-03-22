@@ -43,7 +43,7 @@ public interface SimpleStatisticsService {
 		
 		
 		
-		public List<Long> getSimpleStatisticsIDSByQuery(String query)throws ServiceException, ServiceDaoException;
+		public List<Long> getSimpleStatisticsIDSByQuery(String query, String desc, Integer start, Integer size)throws ServiceException, ServiceDaoException;
 		  
     	
 	

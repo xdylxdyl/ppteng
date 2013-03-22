@@ -232,7 +232,7 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 	}
 
 	@Override
-	public List<Long> getSimpleStatisticsIDSByQuery(String query) throws ServiceException, ServiceDaoException {
+	public List<Long> getSimpleStatisticsIDSByQuery(String query,String desc, Integer start, Integer size) throws ServiceException, ServiceDaoException {
 		
 		boolean isField=false;
 		if("all".equals(query)){
@@ -252,7 +252,7 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 		}
 		
 		if(isField){
-			String sql = "select id from simple_statistics order by " + query + " desc ";
+			String sql = "select id from simple_statistics order by " + query + " "+desc +" "+"limit "+start+","+size;
 			try {
 				List<Long> ids = (List<Long>) dao.excuteSimpleSql(sql, SimpleStatistics.class);
 				return ids;

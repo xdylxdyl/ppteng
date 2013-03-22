@@ -6,6 +6,7 @@
 <script src="/r/j-src/about/simple.js"></script>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <div class="span9">
+   <input type="hidden" id="desc" value="${desc}"></input>
 	<table class="table table-bordered table-striped">
 		<caption>排行</caption>
 		<thead>
