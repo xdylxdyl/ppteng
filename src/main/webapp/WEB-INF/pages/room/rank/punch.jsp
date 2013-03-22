@@ -3,9 +3,9 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<script src="/r/j-src/rank/rank.js"></script>
+<script src="/r/j-src/rank/punch.js"></script>
 
-<input type="hidden" id="left_type" value="${type}" />
+
 <!-- container start  -->
 <div class="span9">
 

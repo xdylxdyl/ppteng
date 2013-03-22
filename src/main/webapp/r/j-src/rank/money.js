@@ -12,7 +12,8 @@
 $(document).ready(function() {
 
     headView.highLight("rank");
-    leftView.highLight("leftNav_simple");
+
+    leftView.highLight("leftNav_money");
 
 
 })
