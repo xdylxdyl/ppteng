@@ -1,5 +1,6 @@
 package com.gemantic.labs.killer.service.impl;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -228,6 +229,45 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 			log.info(" get data success : " + (simpleStatistics == null ? "null" : simpleStatistics.size()));
 		}
 		return simpleStatistics;
+	}
+
+	@Override
+	public List<Long> getSimpleStatisticsIDSByQuery(String query) throws ServiceException, ServiceDaoException {
+		
+		boolean isField=false;
+		if("all".equals(query)){
+			query="all_count";
+			isField=true;
+		}else{
+			Field[] fields=SimpleStatistics.class.getFields();
+			
+			for(Field f:fields){
+				if(f.getName().equals(query)){
+					isField=true;
+					break;
+				}else{
+					continue;
+				}
+			}
+		}
+		
+		if(isField){
+			String sql = "select id from simple_statistics order by " + query + " desc ";
+			try {
+				List<Long> ids = (List<Long>) dao.excuteSimpleSql(sql, SimpleStatistics.class);
+				return ids;
+			} catch (DaoException e) {
+				log.error(" get wrong : " + query);
+				log.error(e);
+				e.printStackTrace();
+				throw new ServiceDaoException(e);
+			}
+		}else{
+			throw new ServiceException(-222,"no query");
+		}
+		
+		
+		
 	}
 
 }

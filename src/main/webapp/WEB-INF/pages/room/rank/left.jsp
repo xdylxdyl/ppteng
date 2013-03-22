@@ -6,11 +6,12 @@
  <div class="span3">
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
-                    <li class="nav-header">玩家榜单</li>
+                    <li class="nav-header">社区榜单</li>
                     <li id="leftNav_money"><a href="/rank/list.do?type=money">炫富榜</a></li>
                       <li id="leftNav_punch"><a href="/rank/list.do?type=punch">勤奋打卡榜</a></li>
-                 <!--   <li class="nav-header">杀人游戏</li>
-                    <li id="simple"><a href="/about.do?type=simple">简化</a></li>
+               <li class="nav-header">游戏榜单</li>
+               <li id="simple"><a href="//rank/statistics.do?type=simple">简化</a></li>
+                <!--   <li id="simple"><a href="/about.do?type=simple">简化</a></li>
                     
                     <li class="nav-header">扫雷</li>
                     <li><a href="#">多人扫雷</a></li>
