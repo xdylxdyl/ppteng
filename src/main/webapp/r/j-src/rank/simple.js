@@ -12,8 +12,7 @@
 $(document).ready(function() {
 
     headView.highLight("rank");
-    var leftType=$("#left_type").val();
-    leftView.highLight(leftType);
+    leftView.highLight("simple");
 
 
 })
