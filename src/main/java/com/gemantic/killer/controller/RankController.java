@@ -120,6 +120,10 @@ public class RankController {
 			size=21;
 		}
 		Integer start=(page-1)*size;
+		
+		if(StringUtils.isBlank(desc)){
+			desc="desc";
+		}
 	
 		List<User> users=new ArrayList();
 		List<Long> userIDS=simpleStatisticsService.getSimpleStatisticsIDSByQuery(query,desc,start,size);
