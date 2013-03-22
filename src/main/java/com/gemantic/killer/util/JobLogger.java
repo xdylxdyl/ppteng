@@ -46,7 +46,7 @@ public class JobLogger {
 			try {
 				File file = new File(m_filename);
 				file.mkdirs();
-				file = new File(m_filename + "/" + jobName);
+				file = new File(m_filename + "/" + jobName+".txt");
 				FileAppender appender = new FileAppender(layout, file.getAbsolutePath(), true);
 				logger.removeAllAppenders();
 				logger.addAppender(appender);

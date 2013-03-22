@@ -16,6 +16,7 @@ import com.gemantic.commons.push.client.impl.HttpPushClientImpl;
 import com.gemantic.killer.common.model.Message;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 public class MessageUtil {
 
@@ -395,5 +396,10 @@ public class MessageUtil {
 		return obj2;
 	} 
 	
+	public static List<Message> fromStrings(String line){
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		List<Message> messages = gson.fromJson(line, new TypeToken< List<Message>>() {}.getType());
+		return messages;
+	}
 
 }

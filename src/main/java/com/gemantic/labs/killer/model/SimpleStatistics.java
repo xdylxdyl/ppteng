@@ -27,15 +27,23 @@ public class SimpleStatistics implements Serializable {
 
 	private Long id;
 
-	private Integer win;
+	private Integer win=0;
 
-	private Integer lose;
+	private Integer lose=0;
 
-	private Integer all;
+	private Integer all=0;
 
 	private Long updateAt;
 
 	private Long createAt;
+
+	public SimpleStatistics(Long id) {
+		this.id=id;
+	}
+
+	public SimpleStatistics() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Id
 	@Column(name = "id")

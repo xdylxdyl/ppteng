@@ -166,7 +166,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 					// 更新战例记录
 					Records record = new Records();
 					record.setId(operater.getRecordID());
-					record.setPath("record/" + operater.getRecordID());
+					record.setPath("record/" + operater.getRecordID()+".txt");
 					record.setTime(time);
 					record.setRoom(r);
 					record.setVersion(r.getVersion());		

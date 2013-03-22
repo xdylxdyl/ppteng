@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
 	<datasources>
-		<ds name="labsKiller"
+		 <ds name="labsKiller"
 			driverClassName="com.mysql.jdbc.Driver"
 			url="jdbc:mysql://sp50fd0efa1eafe.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
 			username="game"
 			password="xdyl1314"
-			maxActive=""
-			maxIdle=""
-			maxWait=""
+			maxActive="8"
+			maxIdle="4"
+			maxWait="50"
             check="true"
-		/>
-		<!-- 
-		<ds name="wealthApplication"
+		/> 
+		
+		<!--<ds name="wealthApplication"
 			driverClassName="com.mysql.jdbc.Driver"
 			url="jdbc:mysql://db.wealth.application:3307/wealth-Application?defaultBatchValue=1000"
 			username="wealth_appuser"
@@ -21,7 +21,7 @@
 			maxIdle="50"
 			maxWait="10"
             check="true"
-		/>	 -->
+		/>	-->
 		  
 		
 		<ds name="idCenterDS"
