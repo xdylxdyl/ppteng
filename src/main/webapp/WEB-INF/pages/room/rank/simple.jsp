@@ -6,7 +6,10 @@
 <script src="/r/j-src/about/simple.js"></script>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <div class="span9">
-   <input type="hidden" id="desc" value="${desc}"></input>
+	<input type="hidden" id="desc" value="${desc}"></input> 
+	<input type="hidden" id="query" value="${query}"></input>
+	 <input	type="hidden" id="page" value="${page}"></input> 
+	 <input type="hidden" id="size" value="${size}"></input>
 	<table class="table table-bordered table-striped">
 		<caption>排行</caption>
 		<thead>
@@ -19,7 +22,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${statisticsList}" var="statistics" begin="0" step="1"	varStatus="status">
+			<c:forEach items="${statisticsList}" var="statistics" begin="0"
+				step="1" varStatus="status">
 				<c:set var="user" value="${id_users[statistics.id]}"></c:set>
 
 				<c:choose>
@@ -48,18 +52,18 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
+
 	<div class="pagination pagination-centered">
-	<ul>
-		<li><a
-			href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page-1}&size=${size}"
-			id="pagePrev">Prev</a></li>
-		<li class="active"><a
-			href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page}&size=${size}">${page}</a></li>
-		<li><a
-			href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page+1}&size=${size}"
-			id="pageNext">Next</a></li>
-	</ul>
-</div>
+		<ul>
+			<li><a
+				href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page-1}&size=${size}"
+				id="pagePrev">Prev</a></li>
+			<li class="active"><a
+				href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page}&size=${size}">${page}</a></li>
+			<li><a
+				href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page+1}&size=${size}"
+				id="pageNext">Next</a></li>
+		</ul>
+	</div>
 </div>
 <!--/row-->
