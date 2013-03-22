@@ -16,9 +16,9 @@
 			<tr>
 				<th>序号</th>
 				<th>姓名</th>
-				<th id="win">赢</th>
-				<th id="lose">输</th>
-				<th id="all">总局数</th>
+				<th id="win" query="win">赢</th>
+				<th id="lose" query="lose">输</th>
+				<th id="all" query="lose">总局数</th>
 			</tr>
 		</thead>
 		<tbody>
