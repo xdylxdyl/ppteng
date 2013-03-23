@@ -14,7 +14,7 @@
 		<caption class=""><h2>排行</h2></caption>
 		<thead>
 			<tr>
-				<th>序号</th>
+				<th>排名</th>
 				<th>姓名</th>
 				<th id="win" query="win" class="cursor-pointer">赢<i class=""></i></th>
 				<th id="lose" query="lose" class="cursor-pointer">输<i class=""></i></th>
@@ -44,7 +44,7 @@
 
 
 				<tr class="${trClass}">
-					<td>${status.index+1}</td>
+					<td>${index+1}</td>
 					<td><a href="/player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
 					<td>${statistics.win}</td>
 					<td>${statistics.lose}</td>
