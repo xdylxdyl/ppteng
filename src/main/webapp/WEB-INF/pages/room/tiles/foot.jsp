@@ -61,7 +61,7 @@
 					</p>					
 				</div>
                 <div class="span3">
-                    <p>二维码</p>
+                    <p>扫下二维码记住我们</p>
                     <img src="/r/img/qrcode.png" alt="葡萄藤二维码">
                 </div>
 
