@@ -25,15 +25,16 @@
 			<c:forEach items="${statisticsList}" var="statistics" begin="0"
 				step="1" varStatus="status">
 				<c:set var="user" value="${id_users[statistics.id]}"></c:set>
+				<c:set var="index" value="${(page-1)*size+status.index}"></c:set>
 
 				<c:choose>
-					<c:when test="${status.index<=2}">
+					<c:when test="${index<=2}">
 						<c:set var="trClass" value="success"></c:set>
 					</c:when>
-					<c:when test="${status.index>2&&status.index<=9}">
+					<c:when test="${index>2&&index<=9}">
 						<c:set var="trClass" value="error"></c:set>
 					</c:when>
-					<c:when test="${status.index>9&&status.index<20}">
+					<c:when test="${index>9&&index<20}">
 						<c:set var="trClass" value="warning"></c:set>
 					</c:when>
 					<c:otherwise>
