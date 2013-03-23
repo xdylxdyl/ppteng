@@ -7,17 +7,24 @@
  */
 
 var tableRankView = {
-    makeLink:function (query) {
+    makeLink:function (query,secondQuery) {
         var url = "/rank/statistics.do?type=simple";
+
         var desc = tableRankView.getNextDesc(query);
         var page = tableRankView.getPage();
         var size = tableRankView.getSize();
         url = url + '&query=' + query + "&desc=" + desc + "&page=" + page + "&size=" + size;
+        if(secondQuery!=null&&secondQuery!=''){
+            url=url+"&secondQuery="+secondQuery;
+        }
         return url;
     },
     getQuery:function () {
 
         return $("#query").val();
+    },
+    getSecondQuery:function(){
+        return $("#secondQuery").val();
     },
     getDesc:function () {
 
@@ -48,9 +55,16 @@ var tableRankView = {
     },
     showDesc:function () {
         var query = tableRankView.getQuery();
+        var secondQuery=tableRankView.getSecondQuery();
+        var id=query;
+        if(secondQuery==null||secondQuery==''){
+
+        }else{
+            id=query+"_"+secondQuery;
+        }
         var desc = tableRankView.getDesc();
         var curClass = tableRankView.getDescClass(desc);
-        $("#" + query + " i").removeClass().addClass(curClass);
+        $("#" + id + " i").removeClass().addClass(curClass);
     },
     getDescClass:function (desc) {
         var classUp = "icon-arrow-up";
@@ -73,7 +87,8 @@ $(document).ready(function () {
 
     $("[query]").click(function () {
         var curQuery = $(this).attr("query");
-        var link = tableRankView.makeLink(curQuery);
+        var secondQuery=$(this).attr("secondQuery");
+        var link = tableRankView.makeLink(curQuery,secondQuery);
         window.location.href = link;
         return false;
     })

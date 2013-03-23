@@ -8,12 +8,13 @@
 <div class="span9">
 	<input type="hidden" id="desc" value="${desc}"> <input
 		type="hidden" id="query" value="${query}"> <input
+			type="hidden" id="secondQuery" value="${secondQuery}"><input
 			type="hidden" id="page" value="${page}"> <input type="hidden"
 				id="size" value="${size}">
 					<table class="table table-bordered table-striped">
 						<caption class="">
 							<h2>英雄榜</h2>
-							 <P class="text-success">20局以上生效</P>
+							<P class="text-success">20局以上生效</P>
 						</caption>
 						<thead>
 							<tr>
@@ -21,24 +22,30 @@
 								<th>姓名</th>
 								<th id="win" query="win" class="cursor-pointer">胜<i
 									class=""></i></th>
-								<th>胜率</th>
+								<th id="win_all" query="win" secondQuery="all"
+									class="cursor-pointer">胜率<i class=""></i></th>
 								<th id="lose" query="lose" class="cursor-pointer">败<i
 									class=""></i></th>
 								<th id="waterWin" query="waterWin" class="cursor-pointer">做水胜<i
 									class=""></i></th>
-								<th>做水胜率</th>
+								<th id="waterWin_water" query="waterWin" secondQuery="water"
+									class="cursor-pointer">做水胜率<i class=""></i></th>
 								<th id="waterLose" query="waterLose" class="cursor-pointer">做水败<i
 									class=""></i></th>
 								<th id="water" query="water" class="cursor-pointer">做水胜<i
 									class=""></i></th>
 								<th id="killerWin" query="killerWin" class="cursor-pointer">做杀胜<i
 									class=""></i></th>
-								<th>做杀胜率</th>
+									<th id="killerWin_killer" query="killerWin" secondQuery="killer" class="cursor-pointer">做杀胜率<i
+									class=""></i></th>
+								
 								<th id="killerLose" query="killerLose" class="cursor-pointer">做杀败<i
 									class=""></i></th>
 								<th id="killer" query="killer" class="cursor-pointer">做杀数<i
 									class=""></i></th>
-								<th>拿刀率</th>
+								
+								<th id="killer_all" query="killer" secondQuery="all" class="cursor-pointer">拿刀率<i
+									class=""></i></th>
 								<th id="all" query="all" class="cursor-pointer">总局数<i
 									class=""></i></th>
 							</tr>

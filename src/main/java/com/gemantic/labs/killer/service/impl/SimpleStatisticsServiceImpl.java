@@ -237,13 +237,53 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 	}
 
 	@Override
-	public List<Long> getSimpleStatisticsIDSByQuery(String query,String desc, Integer start, Integer size) throws ServiceException, ServiceDaoException {
+	public List<Long> getSimpleStatisticsIDSByQuery(String query,String secondQuery,String desc, Integer start, Integer size) throws ServiceException, ServiceDaoException {
 		
+	
+		
+		
+		String dbQuery = convertField2Query(query);
+		String secondDBQuery = null;
+		if(StringUtils.isNotBlank(secondQuery)){
+			secondDBQuery = convertField2Query(secondQuery);
+		}else{
+			
+		}
+		
+		
+		if(StringUtils.isNotBlank(dbQuery)){
+			String sql;
+			if(StringUtils.isNotBlank(secondDBQuery)){
+				 sql="select id from (select id,"+dbQuery+"/"+secondDBQuery+" as query_rate from simple_statistics where all_count >= 20 order by query_rate  "+desc +" "+"limit "+start+","+size+")as rates";
+				 
+			}else{
+				 sql = "select id from simple_statistics where all_count >= 20 order by " + dbQuery + " "+desc +" "+"limit "+start+","+size;
+			}
+			
+			
+			 log.info(sql);
+			try {
+				List<Long> ids = (List<Long>) dao.excuteSimpleSql(sql, SimpleStatistics.class);
+				return ids;
+			} catch (DaoException e) {
+				log.error(" get wrong : " + query);
+				log.error(e);
+				e.printStackTrace();
+				throw new ServiceDaoException(e);
+			}
+		}else{
+			throw new ServiceException(-222,"no query");
+		}
+		
+		
+		
+	}
+
+	private String convertField2Query(String query) {
 		String dbQuery = null;
-		boolean isField=false;
 		if("all".equals(query)){
 			dbQuery="all_count";
-			isField=true;
+			
 		}else{
 			Field[] fields=SimpleStatistics.class.getDeclaredFields();
 			
@@ -266,31 +306,14 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 					
 					
 				
-					isField=true;
+					
 					break;
 				}else{
 					continue;
 				}
 			}
 		}
-		
-		if(isField){
-			String sql = "select id from simple_statistics where all_count >= 20 order by " + dbQuery + " "+desc +" "+"limit "+start+","+size;
-			try {
-				List<Long> ids = (List<Long>) dao.excuteSimpleSql(sql, SimpleStatistics.class);
-				return ids;
-			} catch (DaoException e) {
-				log.error(" get wrong : " + query);
-				log.error(e);
-				e.printStackTrace();
-				throw new ServiceDaoException(e);
-			}
-		}else{
-			throw new ServiceException(-222,"no query");
-		}
-		
-		
-		
+		return dbQuery;
 	}
 	
 	public static void main(String[] args) {
