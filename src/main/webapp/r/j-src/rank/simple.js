@@ -26,7 +26,7 @@ var tableRankView = {
     getNextDesc:function (query) {
         var oldDesc = $("#desc").val();
         var oldQuery = tableRankView.getQuery();
-        if (query == oldDesc) {
+        if (query == oldQuery) {
             return tableRankView.revertDesc(oldDesc);
         } else {
             return oldDesc;

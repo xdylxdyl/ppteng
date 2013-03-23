@@ -58,8 +58,7 @@
 							border="0"
 							src="http://wpa.qq.com/imgd?IDKEY=8971a9b0581ad8da3c8686766f8f9c69b8f587e5fa00eb0f&pic=41"
 							alt="给葡萄藤发消息" title="联系站长"></a>
-					</p>
-					<p>QQ群: 215117784</p>
+					</p>					
 				</div>
                 <div class="span3">
                     <p>二维码</p>

@@ -661,8 +661,8 @@ then
      $game.setWaterCount($waterCount-1);
      update($game);     
      
-       LogUtil.log(" after water die liver count "+$liverCount);
-     LogUtil.log("after water di  water count "+$liverCount);
+     LogUtil.log(" after water die liver count "+  $game.getLiverCount());
+     LogUtil.log("after water di  water count "+$game.getWaterCount());
      
      #LogUtil.log(" after die game status "+$game);    
     
