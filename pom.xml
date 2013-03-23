@@ -12,13 +12,13 @@
 	<repositories>
 		<repository>
 			<releases>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
 				<checksumPolicy>warn</checksumPolicy>
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
+				<updatePolicy>daily</updatePolicy>
 				<checksumPolicy>fail</checksumPolicy>
 			</snapshots>
 			<id>nexus</id>
