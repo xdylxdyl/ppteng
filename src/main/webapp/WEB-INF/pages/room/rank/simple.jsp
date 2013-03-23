@@ -17,7 +17,13 @@
 				<th>排名</th>
 				<th>姓名</th>
 				<th id="win" query="win" class="cursor-pointer">赢<i class=""></i></th>
-				<th id="lose" query="lose" class="cursor-pointer">输<i class=""></i></th>
+				<th id="lose" query="lose" class="cursor-pointer">输<i class=""></i></th>				
+				<th id="waterWin" query="waterWin" class="cursor-pointer">做水赢<i class=""></i></th>
+				<th id="waterLose" query="waterLose" class="cursor-pointer">做水输<i class=""></i></th>
+				<th id="water" query="water" class="cursor-pointer">做水数<i class=""></i></th>
+				<th id="killerWin" query="killerWin" class="cursor-pointer">做杀赢<i class=""></i></th>
+				<th id="killerLose" query="killerLose" class="cursor-pointer">做杀输<i class=""></i></th>
+				<th id="killer" query="killer" class="cursor-pointer">做杀数<i class=""></i></th>
 				<th id="all" query="all" class="cursor-pointer">总局数<i class=""></i></th>
 			</tr>
 		</thead>
@@ -48,6 +54,13 @@
 					<td><a href="/player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
 					<td>${statistics.win}</td>
 					<td>${statistics.lose}</td>
+					
+					<td>${statistics.waterWin}</td>
+					<td>${statistics.waterLose}</td>
+					<td>${statistics.water}</td>
+					<td>${statistics.killerWin}</td>
+					<td>${statistics.killerLose}</td>
+					<td>${statistics.killer}</td>
 					<td>${statistics.all}</td>
 				</tr>
 			</c:forEach>

@@ -26,7 +26,14 @@
 				<th>姓名</th>
 				<th>赢</th>
 				<th>输</th>
+				<th>做水赢</th>
+				<th>做水输</th>
+				<th>做水数</th>
+				<th>做杀赢</th>
+				<th>做杀输</th>
+				<th>做杀数</th>
 				<th>总局数</th>
+
 			</tr>
 		</thead>
 		<tbody>
@@ -35,9 +42,15 @@
 				<td>${user.name}</td>
 				<td>${statistics.win}</td>
 				<td>${statistics.lose}</td>
+				<td>${statistics.waterWin}</td>
+				<td>${statistics.waterLose}</td>
+				<td>${statistics.water}</td>
+				<td>${statistics.killerWin}</td>
+				<td>${statistics.killerLose}</td>
+				<td>${statistics.killer}</td>
 				<td>${statistics.all}</td>
 			</tr>
-			
+
 		</tbody>
 	</table>
 
