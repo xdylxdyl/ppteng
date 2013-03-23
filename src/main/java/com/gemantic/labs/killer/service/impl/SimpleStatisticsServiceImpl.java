@@ -275,7 +275,7 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 		}
 		
 		if(isField){
-			String sql = "select id from simple_statistics order by " + dbQuery + " "+desc +" "+"limit "+start+","+size;
+			String sql = "select id from simple_statistics where all_count >= 20 order by " + dbQuery + " "+desc +" "+"limit "+start+","+size;
 			try {
 				List<Long> ids = (List<Long>) dao.excuteSimpleSql(sql, SimpleStatistics.class);
 				return ids;
