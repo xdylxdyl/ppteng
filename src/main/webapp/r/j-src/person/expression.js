@@ -47,15 +47,15 @@ var expressionView = {
     getNewShow:function () {
         var content = $("#showTags").val();
         var cs = content.split(",");
-        var shows = {};
+      
         var arrays = [];
         for (var index in cs) {
             var show = cs[index];
             arrays.push(show);
 
         }
-        shows["login"] = arrays;
-        return  JSON.stringify(shows);
+
+        return  JSON.stringify(arrays);
         ;
     },
     editStatus:function () {
@@ -93,14 +93,14 @@ $(document).ready(function () {
 
     $("#submitShow").click(function () {
         var value = expressionView.getNewShow();
-        expressionView.updateShow(value);
+        stageShowService.updateShow(value);
         expressionView.viewStatus();
         window.location.href=window.location.href;
         return true;
 
     });
     $("#editShow").click(function () {
-        stageShowView.editStatus();
+        expressionView.editStatus();
     });
 
     $('#myTags').tagit({

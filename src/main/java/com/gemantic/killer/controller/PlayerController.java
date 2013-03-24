@@ -804,6 +804,7 @@ public class PlayerController {
 			log.info(" not support type " + type);
 		}
 		this.userService.update(user);
+		log.info("after update "+user);
 
 		return "/common/success";
 

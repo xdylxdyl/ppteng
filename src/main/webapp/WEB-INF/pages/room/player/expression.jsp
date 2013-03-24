@@ -10,12 +10,12 @@
 <script type="text/javascript" src="/r/j-src/tagit/tag-it.js"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script src="/r/j-src/person/expression.js"></script>
+<script src="/r/j-src/person/expression.js?v=${frontVersion}"></script>
 
 <input id="uid" type="hidden" value="${current.id}" />
 <input id="name" type="hidden" value="${current.name}" />
 
-
+${self}
 
 <!-- container start  -->
 <div class="span9">
@@ -29,29 +29,33 @@
 		<p>让生活每天都有所不同</p>
 	</div>
 
-	<div id="expression">${current.expression}</div>
+	<div id="expression">${current.expressionContent}</div>
+	
+	
+	
 	<input id="type" type="hidden" name="type" value="${type}" />
+	
 	<h1>玩家自定义神态</h1>
 	<div id="showArea"></div>
-	<div id="showEditContainer">
-		<c:choose>
+
+	<c:choose>
+	
 			<c:when test="${self}">
 
-
-
+	<div id="showEditContainer">
 				<ul id="myTags"></ul>
 				<input name="tags" id="showTags" value="" disabled="true"
 					class="hide">
 				<button class="btn btn-primary pull-right" id="submitShow">提交</button>
 				<button class="btn" id="clearTag">清空全部</button>
-	</div>
-	<button class="btn btn-primary pull-right" id="editShow">修改</button>
 
+				
+		</div>
+		<button class="btn btn-primary pull-right" id="editShow">修改</button>
+		</c:when>
+		<c:otherwise>
 
-	</c:when>
-	<c:otherwise>
-
-	</c:otherwise>
+		</c:otherwise>
 	</c:choose>
 
 </div>
