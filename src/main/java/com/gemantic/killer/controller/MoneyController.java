@@ -91,24 +91,22 @@ public class MoneyController {
 		uids.add(uid);
 		for (MoneyFlow mf : mfs) {
 			uids.add(mf.getFid());
+			uids.add(mf.getUid());
 		}
 
 		users = this.userSevice.getObjectsByIds(new ArrayList(uids));
-		Map<Long, User> ids_user = new HashMap();
-		if("in".equals(type)){
-			 ids_user = MyListUtil.convert2Map(MoneyFlow.class.getDeclaredField("fid"), mfs);	
-		}else{
-			ids_user = MyListUtil.convert2Map(MoneyFlow.class.getDeclaredField("uid"), mfs);	
-		}
+		Map<Long, User>  ids_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);	
+	
 	
 		log.info("money all "+ids_user);
 
 		users = this.userSevice.getObjectsByIds(userIDS);
 		
 		model.addAttribute("uid", uid);
+		model.addAttribute("current", ids_user.get(uid));
 		model.addAttribute("mfs", mfs);
 		model.addAttribute("id_users", ids_user);
-		model.addAttribute("tye", type);
+		model.addAttribute("type", type);
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
 		

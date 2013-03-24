@@ -563,7 +563,7 @@ public class PlayerController {
 
 		int punchCount = PunchUtil.getLatestContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, u.getPunch());
 
-		model.addAttribute("user", u);
+		model.addAttribute("current", u);
 		model.addAttribute("punchCount", punchCount);
 		model.addAttribute("selfID", selfID);
 		model.addAttribute("uid", uid);
@@ -793,7 +793,7 @@ public class PlayerController {
 		User user = this.userService.getObjectById(uid);
 		log.info(uid + " update " + user+" type  "+ type+" value "+value);
 
-		if ("stagShow".equals(type)) {
+		if ("stageShow".equals(type)) {
 			user.setStageShow(value);
 
 		} else if ("expression".equals(type)) {
@@ -803,8 +803,9 @@ public class PlayerController {
 		} else {
 			log.info(" not support type " + type);
 		}
+		this.userService.update(user);
 
-		return "redirect:/player/setting.do?type=" + type;
+		return "/common/success";
 
 	}
 
@@ -819,13 +820,17 @@ public class PlayerController {
 	 */
 	@RequestMapping(value = "/player/setting")
 	public String getPlayerShow(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long uid, String type) throws Exception {
-
+		Long selfID= cookieUtil.getID(request, response);
 		if (uid == null) {
-			uid = cookieUtil.getID(request, response);
+			uid =selfID;
 			model.addAttribute("self", true);
 		}
+		
 		if (uid == null) {
 			return "/";
+		}
+		if(uid.equals(selfID)){
+			model.addAttribute("self", true);
 		}
 		if(StringUtils.isBlank(type)){
 			type="music";
@@ -833,7 +838,7 @@ public class PlayerController {
 		User user = this.userService.getObjectById(uid);
 		log.info(uid + " get " + user);
 
-		model.addAttribute("user", user);
+		model.addAttribute("current", user);
 		model.addAttribute("type", type);
 		return "/room/player/"+type;
 

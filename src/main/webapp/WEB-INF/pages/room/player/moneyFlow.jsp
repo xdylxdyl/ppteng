@@ -8,7 +8,7 @@
 <c:set var="prevPageLink" value="/money/flow.do?uid=${uid}&type=${type}&page=${page-1}&size=${size}"></c:set>
 <c:set var="NextPageLink" value="/money/flow.do?uid=${uid}&type=${type}&page=${page+1}&size=${size}"></c:set>
 <c:set var="curPageLink" value="/money/flow.do?uid=${uid}&type=${type}&page=${page}&size=${size}"></c:set>
-
+<input type="hidden" id="type" value="${type}">
 <c:choose>
 <c:when test="${'in'==type}">
 <c:set var="typeName" value="流入"></c:set>

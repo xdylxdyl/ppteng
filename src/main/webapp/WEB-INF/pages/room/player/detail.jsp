@@ -20,7 +20,7 @@
 	src="<%=request.getContextPath() %>/r/j-src/util/musicUtil.js?v=${frontVersion}"></script>
 
 </head>
-<input type="hidden" id="uid" value="${user.id}">
+<input type="hidden" id="uid" value="${current.id}">
 <body>
 
 	<div id="music_play" class="music_play"></div>
@@ -30,18 +30,18 @@
 		<div id="personal" class="personal">
 			<!--名字，分数-->
 			<div class="row-fluid">
-				<div class="title pull-left" id="editName">${user.name}</div>
+				<div class="title pull-left" id="editName">${current.name}</div>
 				<p class="pull-right" id="fraction">
-					<span class="label label-info">金币 ${user.money}</span>
+					<span class="label label-info">金币 ${current.money}</span>
 				</p>
 			</div>
 			<!--照片，签名-->
 			<div class="row-fluid">
 				<div class="img pull-right">
-					<img src="${user.icon}" id="img">
+					<img src="${current.icon}" id="img">
 				</div>
 				<div class="info-text">
-					<p id="editSignature">${user.sign}</p>
+					<p id="editSignature">${current.sign}</p>
 					<div class="clearfix" id="editImg">
 						输入图片地址,网页图片右键选择复制图片地址,本地图片需要临时上传,推荐使用:<a
 							href="http://tu.58task.com/" target="_blank">58广告任务网</a>
@@ -70,7 +70,7 @@
 
 
 			<c:choose>
-				<c:when test="${user.id==selfID}">
+				<c:when test="${current.id==selfID}">
 					<!--按钮-->
 					<div class="row-fluid align-right">
 						<button class="btn btn-primary pull-right" id="completeBtn">完成</button>
