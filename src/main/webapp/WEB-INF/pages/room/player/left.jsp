@@ -8,12 +8,18 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">个人资料</li>
                     <li id="leftNav_basic"><a href="/player/detail.do?uid=${user.id}">基本信息</a></li>
+                      <li class="nav-header">个性设置</li>                 
+                    <li id="leftNav_stageShow"><a href="/player/stageShow.do">拉风出场秀</a></li> 
+                    <li id="leftNav_expression"><a href="/player/expression.do">神态随心变</a></li> 
                     <!-- <li id="leftNav_stageShow"><a href="/player/regedit.do?type=edit">修改密码</a></li>
-                    <li id="leftNav_basic"><a href="/player/detail.do">出场秀</a></li> -->
+                    -->
                     <li class="nav-header">打卡统计</li>
                     <li id="leftNav_punch"><a href="/player/punchlist.do?uid=${user.id}">打卡线</a></li>
                     <li class="nav-header">简化统计</li>
                     <li id="leftNav_statistics"><a href="/player/statistics.do?uid=${user.id}&version=simple">胜负</a></li>
+                    <li class="nav-header">安全中心</li>
+                    <li id="leftNav_edit"><a href="/player/regedit.do?type=edit">修改密码</a></li>
+                     <li id="leftNav_email"><a href="/player/regedit.do?type=email">找回密码</a></li>
                  <!--   <li class="nav-header">杀人游戏</li>
                     <li id="simple"><a href="/about.do?type=simple">简化</a></li>
                     
