@@ -120,7 +120,7 @@ public class SimpleStatisticsServiceTest {
 
 	//@Test
 	public void testQuery() throws ServiceException, ServiceDaoException{
-	List<Long>	ids=this.simpleStatisticsService.getSimpleStatisticsIDSByQuery("all","desc",0,20);
+	List<Long>	ids=this.simpleStatisticsService.getSimpleStatisticsIDSByQuery("all","","desc",0,20);
 	log.info(ids);
 	}
 	@Test

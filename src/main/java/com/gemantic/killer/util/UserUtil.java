@@ -59,7 +59,7 @@ public class UserUtil {
 
 	public static Map json2userMap(String json) {
 		Gson gson = new GsonBuilder().create();
-		Map uin_name = gson.fromJson(json, new TypeToken<Map<String, String>>() {}.getType());
+		Map uin_name = gson.fromJson(json, new TypeToken<Map<Long, String>>() {}.getType());
 		return uin_name;
 
 	}

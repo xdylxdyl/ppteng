@@ -24,9 +24,20 @@
 			<tr>
 				<th>序号</th>
 				<th>姓名</th>
-				<th>赢</th>
-				<th>输</th>
+				<th>胜</th>
+				<th>胜率</th>
+				<th>败</th>				
+				<th>做水胜</th>
+				<th>做水胜率</th>
+				<th>做水败</th>
+				<th>做水数</th>
+				<th>做杀胜</th>
+				<th>做杀胜率</th>
+				<th>做杀败</th>
+				<th>做杀数</th>
+				<th>拿刀率</th>
 				<th>总局数</th>
+
 			</tr>
 		</thead>
 		<tbody>
@@ -34,10 +45,24 @@
 				<td>1</td>
 				<td>${user.name}</td>
 				<td>${statistics.win}</td>
-				<td>${statistics.lose}</td>
+				<td><fmt:formatNumber pattern="0.00"
+											value="${statistics.win/statistics.all}"></fmt:formatNumber></td>
+				<td>${statistics.lose}</td>				
+				<td>${statistics.waterWin}</td>
+				<td><fmt:formatNumber pattern="0.00"
+											value="${statistics.waterWin/statistics.water}"></fmt:formatNumber></td>
+				<td>${statistics.waterLose}</td>
+				<td>${statistics.water}</td>
+				<td>${statistics.killerWin}</td>
+				<td><fmt:formatNumber pattern="0.00"
+											value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber></td>
+				<td>${statistics.killerLose}</td>
+				<td>${statistics.killer}</td>
+				<td><fmt:formatNumber pattern="0.00"
+											value="${statistics.killer/statistics.all}"></fmt:formatNumber></td>
 				<td>${statistics.all}</td>
 			</tr>
-			
+
 		</tbody>
 	</table>
 

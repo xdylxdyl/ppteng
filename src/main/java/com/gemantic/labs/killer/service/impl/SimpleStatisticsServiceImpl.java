@@ -1,10 +1,15 @@
 package com.gemantic.labs.killer.service.impl;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -232,27 +237,31 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 	}
 
 	@Override
-	public List<Long> getSimpleStatisticsIDSByQuery(String query,String desc, Integer start, Integer size) throws ServiceException, ServiceDaoException {
+	public List<Long> getSimpleStatisticsIDSByQuery(String query,String secondQuery,String desc, Integer start, Integer size) throws ServiceException, ServiceDaoException {
 		
-		boolean isField=false;
-		if("all".equals(query)){
-			query="all_count";
-			isField=true;
+	
+		
+		
+		String dbQuery = convertField2Query(query);
+		String secondDBQuery = null;
+		if(StringUtils.isNotBlank(secondQuery)){
+			secondDBQuery = convertField2Query(secondQuery);
 		}else{
-			Field[] fields=SimpleStatistics.class.getDeclaredFields();
 			
-			for(Field f:fields){
-				if(f.getName().equals(query)){
-					isField=true;
-					break;
-				}else{
-					continue;
-				}
-			}
 		}
 		
-		if(isField){
-			String sql = "select id from simple_statistics order by " + query + " "+desc +" "+"limit "+start+","+size;
+		
+		if(StringUtils.isNotBlank(dbQuery)){
+			String sql;
+			if(StringUtils.isNotBlank(secondDBQuery)){
+				 sql="select id from (select id,"+dbQuery+"/"+secondDBQuery+" as query_rate from simple_statistics where all_count >= 20 order by query_rate  "+desc +" "+"limit "+start+","+size+")as rates";
+				 
+			}else{
+				 sql = "select id from simple_statistics where all_count >= 20 order by " + dbQuery + " "+desc +" "+"limit "+start+","+size;
+			}
+			
+			
+			 log.info(sql);
 			try {
 				List<Long> ids = (List<Long>) dao.excuteSimpleSql(sql, SimpleStatistics.class);
 				return ids;
@@ -268,6 +277,48 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 		
 		
 		
+	}
+
+	private String convertField2Query(String query) {
+		String dbQuery = null;
+		if("all".equals(query)){
+			dbQuery="all_count";
+			
+		}else{
+			Field[] fields=SimpleStatistics.class.getDeclaredFields();
+			
+			for(Field f:fields){
+			
+				if(f.getName().equals(query)){
+					Method[] methods=SimpleStatistics.class.getMethods();
+					Method method;
+					try {
+						method = SimpleStatistics.class.getMethod("get"+StringUtils.capitalise(f.getName()));
+						Column c=method.getAnnotation(Column.class);
+						dbQuery=	c.name();
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}				
+					
+					
+				
+					
+					break;
+				}else{
+					continue;
+				}
+			}
+		}
+		return dbQuery;
+	}
+	
+	public static void main(String[] args) {
+		String xd=StringUtils.capitalise("xdyl");
+		log.info(xd);
 	}
 
 }

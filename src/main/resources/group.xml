@@ -3,7 +3,7 @@
 	<datasources>
 		 <ds name="labsKiller"
 			driverClassName="com.mysql.jdbc.Driver"
-			url="jdbc:mysql://sp50fd0efa1eafe.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
+			url="jdbc:mysql://xdylxdyl.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
 			username="game"
 			password="xdyl1314"
 			maxActive="8"
@@ -12,7 +12,18 @@
             check="true"
 		/> 
 		
-		<!--<ds name="wealthApplication"
+	<!-- 	<ds name="labsKiller"
+			driverClassName="com.mysql.jdbc.Driver"
+			url="jdbc:mysql://xdylxdyl.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
+			username="analyse"
+			password="GemanticYes!"
+			maxActive="8"
+			maxIdle="4"
+			maxWait="50"
+            check="true"
+		/>  -->
+		
+		<!-- ds name="wealthApplication"
 			driverClassName="com.mysql.jdbc.Driver"
 			url="jdbc:mysql://db.wealth.application:3307/wealth-Application?defaultBatchValue=1000"
 			username="wealth_appuser"
@@ -21,19 +32,29 @@
 			maxIdle="50"
 			maxWait="10"
             check="true"
-		/>	-->
-		  
+		/>	
+		   -->
+		   
+		  <!--  <ds name="idCenterDS"
+                        driverClassName="com.mysql.jdbc.Driver"
+                        url="jdbc:mysql://db.gemantic.idGenerator:3306/id_generator?defaultBatchValue=1000"
+                        username="analyse"
+                        password="GemanticYes!"
+                        maxActive=""
+                        maxIdle=""
+                        maxWait=""
+                /> -->
 		
-		<ds name="idCenterDS"
+		 <ds name="idCenterDS"
 			driverClassName="com.mysql.jdbc.Driver"
-			url="jdbc:mysql://sp50fd0efa1eafe.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
+			url="jdbc:mysql://xdylxdyl.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
 			username="game"
 			password="xdyl1314"
 			maxActive=""
 			maxIdle=""
 			maxWait=""
             check="true"
-		/> 
+		/>  
 	</datasources>
 	<groups>
 		<group name="labsKiller" master="labsKiller"  />			

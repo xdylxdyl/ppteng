@@ -104,7 +104,7 @@ public class RankController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/rank/statistics")
-	public String statisticsList(HttpServletRequest request, HttpServletResponse response, ModelMap model,Integer page,Integer size,String type,String query,String desc) throws Exception {
+	public String statisticsList(HttpServletRequest request, HttpServletResponse response, ModelMap model,Integer page,Integer size,String type,String query,String secondQuery,String desc) throws Exception {
 		log.info("start get rank list ");
 		
 		if(StringUtils.isBlank(type)){
@@ -119,6 +119,9 @@ public class RankController {
 		if(size==null){
 			size=20;
 		}
+		if(size>50){
+			size=50;
+		}
 		Integer start=(page-1)*size;
 		
 		if("asc".equals(desc)){
@@ -128,7 +131,7 @@ public class RankController {
 		}
 	
 		List<User> users=new ArrayList();
-		List<Long> userIDS=simpleStatisticsService.getSimpleStatisticsIDSByQuery(query,desc,start,size);
+		List<Long> userIDS=simpleStatisticsService.getSimpleStatisticsIDSByQuery(query,secondQuery,desc,start,size);
 		List<SimpleStatistics> statistics=this.simpleStatisticsService.getObjectsByIds(userIDS);
 		users = this.userSevice.getObjectsByIds(userIDS);
 		Map<Long,User> id_users=MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);
@@ -137,6 +140,7 @@ public class RankController {
 		model.addAttribute("id_users", id_users);
 		model.addAttribute("statisticsList", statistics);
 		model.addAttribute("query", query);
+		model.addAttribute("secondQuery", secondQuery);
 		model.addAttribute("desc", desc);
 		model.addAttribute("type", type);
 		model.addAttribute("page", page);
