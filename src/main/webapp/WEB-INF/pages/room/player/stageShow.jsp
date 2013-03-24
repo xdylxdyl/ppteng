@@ -41,6 +41,7 @@
 					<input name="tags" id="showTags" value="" disabled="true"
 						class="hide">
 					<button class="btn btn-primary pull-right" id="submitShow">提交</button>
+					<button class="btn btn-primary pull-right" id="cancel">取消</button>					
 					<button class="btn" id="clearTag">清空全部</button>
 		</div>
 		<button class="btn btn-primary pull-right" id="editShow">修改</button>

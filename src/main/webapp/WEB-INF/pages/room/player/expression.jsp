@@ -15,7 +15,7 @@
 <input id="uid" type="hidden" value="${current.id}" />
 <input id="name" type="hidden" value="${current.name}" />
 
-${self}
+
 
 <!-- container start  -->
 <div class="span9">
@@ -47,6 +47,8 @@ ${self}
 				<input name="tags" id="showTags" value="" disabled="true"
 					class="hide">
 				<button class="btn btn-primary pull-right" id="submitShow">提交</button>
+				<button class="btn btn-primary pull-right" id="cancel">取消</button>
+				
 				<button class="btn" id="clearTag">清空全部</button>
 
 				

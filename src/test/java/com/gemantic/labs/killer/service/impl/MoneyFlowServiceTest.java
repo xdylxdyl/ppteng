@@ -217,4 +217,27 @@ public class MoneyFlowServiceTest {
 	public void testNULL() throws ServiceException, ServiceDaoException {
 
 	};
+	
+	//@Test
+	public void testRecord() throws ServiceException, ServiceDaoException{
+		MoneyFlow moneyFlow1 = new MoneyFlow();
+
+		moneyFlow1.setUid(228L);
+
+		moneyFlow1.setFid(256L);
+
+		moneyFlow1.setMoney(50000);
+
+		moneyFlow1.setComments("葡萄藤电影院奖金");
+
+		moneyFlow1.setHappenAt(System.currentTimeMillis()-7*24*3600*1000);
+
+		this.moneyFlowService.insert(moneyFlow1);
+		
+	
+		
+	}
+	public static void main(String[] args) {
+		
+	}
 }

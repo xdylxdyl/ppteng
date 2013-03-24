@@ -103,6 +103,12 @@ $(document).ready(function () {
         stageShowView.editStatus();
     });
 
+
+    $("#cancel").click(function () {
+        stageShowView. viewStatus();
+       });
+
+
     $('#myTags').tagit({
         maxTags:5, //最大数限制
         singleField:true,

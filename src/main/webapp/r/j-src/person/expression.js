@@ -47,7 +47,7 @@ var expressionView = {
     getNewShow:function () {
         var content = $("#showTags").val();
         var cs = content.split(",");
-      
+
         var arrays = [];
         for (var index in cs) {
             var show = cs[index];
@@ -102,6 +102,11 @@ $(document).ready(function () {
     $("#editShow").click(function () {
         expressionView.editStatus();
     });
+
+
+    $("#cancel").click(function () {
+        expressionView. viewStatus();
+       });
 
     $('#myTags').tagit({
         maxTags:5, //最大数限制
