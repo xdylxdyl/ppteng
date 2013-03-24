@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dal>
+	<route>
+		<object name="com.gemantic.labs.killer.model.MoneyFlow"
+			listenerClass="" strategyProperty="">
+			
+			
+			
+					<list name="getMoneyFlowIdsByFid"
+				sqlitem="select id from money_flow where fid = ?"
+				keyProperty="fid" valueProperty="id" keyColumn="fid" />
+					<list name="getMoneyFlowIdsByUid"
+				sqlitem="select id from money_flow where uid = ?"
+				keyProperty="uid" valueProperty="id" keyColumn="uid" />
+						
+			
+						
+			<dbStrategy name="mutiDS"
+                clasz="com.gemantic.dal.route.strategy.DefaultStrategy">  <pattern value="[0-9]$" group="labsKiller" />
+            </dbStrategy>
+			
+		</object>
+	</route>
+</dal>
