@@ -67,8 +67,14 @@ h1 {
 }
 .info-text {
     position: relative;
-    top: -4px;
     margin-left: 170px;
+}
+#editSignature {
+    font-size: 1.2em;
+}
+#editImg {
+    margin-top: 1em;
+    display: none;
 }
 .stats {
     margin-bottom: 0;

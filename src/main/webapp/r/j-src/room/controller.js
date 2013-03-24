@@ -8,8 +8,37 @@ $(document).ready(function () {
 
         headView.highLight("person");
 
+        userEditView().hideEdit();
 
-        $("#user_edit").click(function () {
+        $("#editBtn").click(function(e) {
+            if ($(this).attr("command", "edit")) {
+                userEditView().showEdit();
+            } else {
+                var user = userEditView.getUser();
+
+                playerService.updateUserInfo(user);
+                window.location.replace(window.location.href);
+
+
+                userEditView().submitEdit();
+            }
+            return false;
+        });
+
+        $("#preview").click(function() {
+            userEditView().preview();
+            return false;
+        });
+
+        $("#cancelBtn").click(function() {
+            userEditView().hideEdit();
+            return false;
+        });
+
+
+
+
+        /*$("#user_edit").click(function () {
 
 
             var command = $("#user_edit").attr("command");
@@ -98,7 +127,7 @@ $(document).ready(function () {
             $("#showContainer").hide();
             return false;
 
-        });
+        });*/
 
     }
 )

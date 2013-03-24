@@ -31,58 +31,41 @@
 		<div id="personal" class="personal">
             <!--名字，分数-->
             <div class="row-fluid">
-                <div class="title pull-left">名字名字</div>
-                <p class="pull-right"><span class="label label-info">0分</span> <span class="label label-info">2000分</span></p>
+                <div class="title pull-left" id="editName">名字名字</div>
+                <p class="pull-right" id="fraction"><span class="label label-info">0分</span> <span class="label label-info">2000分</span></p>
             </div>
             <!--照片，签名-->
             <div class="row-fluid">
-                <div class="img pull-right"><img src="/r/img/person/default-person-icon.jpg"></div>
+                <div class="img pull-right"><img src="/r/img/person/default-person-icon.jpg" id="img"></div>
                 <div class="info-text">
-                    <p>我身骑白马走三关，改换素衣回中原，放下西凉无人管，一心只想王宝钏。</p>
+                    <p id="editSignature">我身骑白马走三关，改换素衣回中原，放下西凉无人管，一心只想王宝钏。</p>
+                    <div class="clearfix" id="editImg">
+                        输入图片地址,网页图片右键选择复制图片地址,本地图片需要临时上传,推荐使用:<a href="http://tu.58task.com/" target="_blank">58广告任务网</a>
+                        <p contenteditable="true" id="imgUrl">http://</p>
+                        <a href="#" class="btn" id="preview">预览</a>
+                    </div>
+                    <!--<div class="clearfix" id="editMusic">
+                        在<a href="http://www.xiami.com/widget/imulti" target="_blank">虾米</a> ,粘贴Flash地址到下面
+                        <p contenteditable="true"></p>
+                        <a href="" class="btn">预览</a>
+                    </div>-->
                 </div>
             </div>
             <!--额外信息-->
-            <div class="row-fluid stats">
+            <div class="row-fluid stats" id="statsInfo">
                 <p class="time">注册时间: 2013年 02月03日 14时37分37秒 , 上次登录时间: 2013年 03月24日 10时13分13秒</p>
                 <span>已连续打卡6天</span>
             </div>
             <!--按钮-->
-            <div class="row-fluid">
-                <a href="" class="btn btn-primary  pull-right" id="user_edit" command="edit">
-                    <i class="icon-pencil icon-white"></i>
+            <div class="row-fluid align-right">
+                <button class="btn hide pull-right" id="cancelBtn">
+                    取消
+                </button>
+                <button class="btn btn-primary pull-right" id="editBtn" command="edit">
                     编辑基本信息
-                </a>
+                </button>
+
             </div>
-    <!-- 修改个人信息-->
-    <!--名字，分数-->
-    <div class="row-fluid">
-        <div class="title pull-left" contenteditable="true">名字名字</div>
-        <p class="pull-right"><span class="label label-info">0分</span> <span class="label label-info">2000分</span></p>
-    </div>
-    <!--照片，签名-->
-    <div class="row-fluid">
-        <div class="img pull-right"><img src="/r/img/person/default-person-icon.jpg"></div>
-        <div class="info-text">
-            <p contenteditable="true">我身骑白马走三关，改换素衣回中原，放下西凉无人管，一心只想王宝钏。</p>
-            <div class="clearfix">
-                输入图片地址,网页图片右键选择复制图片地址,本地图片需要临时上传,推荐使用:<a href="http://tu.58task.com/" target="_blank">58广告任务网</a>
-                <p contenteditable="true">http://</p>
-                <a href="" class="btn">预览</a>
-            </div>
-            <div>
-                在<a href="http://www.xiami.com/widget/imulti" target="_blank">虾米</a> ,粘贴Flash地址到下面
-                <p contenteditable="true"></p>
-                <a href="" class="btn">预览</a>
-            </div>
-        </div>
-    </div>
-    <!--按钮-->
-    <div class="row-fluid">
-        <a href="" class="btn btn-primary  pull-right" id="user_edit" command="edit">
-            <i class="icon-pencil icon-white"></i>
-            编辑基本信息
-        </a>
-    </div>
 
 
 
@@ -154,24 +137,24 @@
 					<div class="edit">
 						<a href="" class="btn btn-primary" id="user_edit" command="edit">编辑</a>
 						<a href="/player/regedit.do?type=edit" class="btn btn-primary" id="password_edit">修改密码</a>
-						
+
 
 						<a href="" id="show_edit" class="btn btn-primary">设置个人秀</a>
 
 
 
 						<a href="" class="user_cancel" id="user_cancel">Cancel</a>
-						<div id="stageShow" class="hidden">${user.stageShow}</div>	
+						<div id="stageShow" class="hidden">${user.stageShow}</div>
 
 					</div>
-					
+
 					<div id="showContainer" class="hidden">
 							<span class="hint">自定义进出房间个人秀~~~每月200金币~便宜的不行~</span> <input
 								id="showContent" type="text" value="" /> <span class="hint">按格式输入表情["提着剑","默默的"]~~最多五个</span>
 
 							<a href="" class="cancel" id="showCommit">确定</a> <a href=""
 								class="cancel" id="showCancel">关闭</a>
-							
+
 						</div>
 				</c:when>
 				<c:otherwise>
@@ -179,7 +162,7 @@
 						<a href="" class="user_cancel" id="user_cancel">Cancel</a>
 
 					</div>
-				
+
 				</c:otherwise>
 			</c:choose>
 
