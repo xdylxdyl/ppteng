@@ -866,11 +866,12 @@ end
 rule 'game over killer win'
 ruleflow-group "game status"
 when
-    #$operater:Operater()  
+   
      $game:Game($killerCount:killerCount,$waterCount:waterCount,$recordName:recordName);
      eval($killerCount >= $waterCount)  
      $room:Room(status=="run")
-     
+  
+	      
       
 then 
      LogUtil.log("game over kill win start  ================="); 
@@ -879,7 +880,7 @@ then
     Message gameOver=new Message($recordName,"over","killer win");   
     insert(gameOver);
   
-    
+   
   
     
       
@@ -935,7 +936,9 @@ then
       Message dec=new Message("-500","ready decryption","");
       insert(dec);
     
-    
+     
+     Message money=new Message("-500","money","1000");
+      insert(money);
   
      $operater.setGameOver(true);
      $room.setStatus("unrun");
@@ -957,6 +960,7 @@ when
     
      $game:Game()
      Role(id==$subject,$role:role)
+     Player(id==$subject,status!="die");
       
 then 
      LogUtil.log("logout decryption process  ================="); 

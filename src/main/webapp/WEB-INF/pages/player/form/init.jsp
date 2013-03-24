@@ -16,6 +16,7 @@
 		<title>葡萄藤轻游戏-注册</title>
 	</c:otherwise>
 </c:choose>
+<input type="hidden" value="${type}" id="type" />
 
 <script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
 <script src="/r/j-src/listall/init.js"></script>
