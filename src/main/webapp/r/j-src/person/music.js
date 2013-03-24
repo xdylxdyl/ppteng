@@ -13,7 +13,8 @@ $(document).ready(function () {
 
     leftView.highLight("leftNav_music");
 
-
+   //判断是否有音乐盒
+        musicUtil.displayMusic();
 })
 
 

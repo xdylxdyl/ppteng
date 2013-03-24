@@ -788,8 +788,11 @@ public class PlayerController {
 		if (uid == null) {
 			return "/";
 		}
+		if(type==null){
+			return "redirect:/player/setting.do" ;
+		}
 		User user = this.userService.getObjectById(uid);
-		log.info(uid + " update " + user);
+		log.info(uid + " update " + user+" type  "+ type+" value "+value);
 
 		if ("stagShow".equals(type)) {
 			user.setStageShow(value);
@@ -825,8 +828,11 @@ public class PlayerController {
 		if (uid == null) {
 			return "/";
 		}
+		if(StringUtils.isBlank(type)){
+			type="music";
+		}
 		User user = this.userService.getObjectById(uid);
-		log.info(uid + " update " + user);
+		log.info(uid + " get " + user);
 
 		model.addAttribute("user", user);
 		model.addAttribute("type", type);

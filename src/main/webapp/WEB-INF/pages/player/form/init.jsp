@@ -140,7 +140,7 @@
 				<input class="btn btn-primary btn-large pull-right" type="submit"
 					id="submit" />
 			</div>
-			<p>请在五分钟之内登录邮箱并点击链接,修改密码</p>
+			<p>请输入注册邮箱,五分钟之内登录邮箱并点击链接,即可修改密码</p>
 			<div id="escape"></div>
 
 			<a href="/" class="return">返回首页</a>
