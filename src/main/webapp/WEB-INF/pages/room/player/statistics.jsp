@@ -43,7 +43,7 @@
 		<tbody>
 			<tr class="success">
 				<td>1</td>
-				<td>${user.name}</td>
+				<td>${current.name}</td>
 				<td>${statistics.win}</td>
 				<td><fmt:formatNumber pattern="0.00"
 											value="${statistics.win/statistics.all}"></fmt:formatNumber></td>
