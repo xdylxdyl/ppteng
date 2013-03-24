@@ -17,8 +17,11 @@ body {
 h1 {
     margin: 2em;
 }
-
-.detail_container {
+.margin-seesaw30 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+/*.detail_container {
     background: #fff;
     box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
 
@@ -38,7 +41,66 @@ h1 {
     float: left;
     margin: 4em;
     box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
+}*/
+.detail_container {
+    background: #fff;
+
 }
+.personal {
+    margin: 2em;
+    overflow: hidden;
+    zoom: 1;
+}
+.title {
+    color: #008000;
+    font-size: 1.5em;
+    line-height: 1.2em;
+    margin-bottom: 1em;
+}
+.img {
+    display: block;
+    width: 150px;
+    float: left;
+    margin: 0 1em 1em 0;
+    padding: 4px;
+    border: 1px solid #ddd;
+}
+.info-text {
+    position: relative;
+    margin-left: 170px;
+}
+#editSignature {
+    font-size: 1.2em;
+}
+#editImg {
+    margin-top: 1em;
+    display: none;
+}
+.stats {
+    margin-bottom: 0;
+    font-size: .8em;
+    color: #ccc;
+    overflow: hidden;
+    zoom: 1;
+}
+.time {
+    float: right;
+}
+[contenteditable="true"] {
+    border: 1px solid #999;
+    outline: none;
+    border-radius: 3px;
+}
+[contenteditable="true"]:focus {
+    border: 1px solid #0088cc;
+    box-shadow: 0 0 3px #08c;
+}
+
+
+
+
+
+/*以下废弃？*/
 .portrait_container{
    
 
