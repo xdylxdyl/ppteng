@@ -1,29 +1,99 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <root>
 	<cache>
-		<datasource
-			name="default"
-			timeout="300"
-			port="11211"
-			server="cache.labs.killer"
-			maxActive="18" 
-			maxIdle="18" 
-			maxWait="-1" 
-		/>
+		<datasource name="default" timeout="300" port="11211"
+			server="cache.labs.killer" maxActive="18" maxIdle="18" maxWait="-1" />
 	</cache>
 	<regions>
-		
 
-                            
-                		
-		
-					
-			
-			
-			
-		
-		
-	
+		<region name="com.gemantic.labs.killer.model.Users"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
+		<region name="com.gemantic.labs.killer.model.Records"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
+		<region name="com.gemantic.labs.killer.model.SimpleStatistics"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
+		<region name="com.gemantic.labs.killer.model.MoneyFlow"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
+
+
+
+		<region name="getUsersIdByOpenID"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
+
+
+
+		<region name="getUsersIdByEmail"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
+
+
+
+
+
+
+		<region name="getRecordsIdsByVersion"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
+
+
+
+
+
+
+
+
+
+		<region name="getMoneyFlowIdsByFid"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
+
+
+
+		<region name="getMoneyFlowIdsByUid"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
+
+
+
+
+
+
+
+
+
+
 
 
 	</regions>

@@ -636,7 +636,7 @@ public class PlayerController {
 		String punchStr = RunLengthEncoding.decode(user.getPunch());
 		model.addAttribute("punchStart", PunchUtil.Punch_Time_Start);
 		model.addAttribute("punch", punchStr);
-		model.addAttribute("user", user);
+		model.addAttribute("current", user);
 		return "/room/player/punchlist";
 
 	}
@@ -670,7 +670,7 @@ public class PlayerController {
 			statistics = new SimpleStatistics();
 		}
 		model.addAttribute("statistics", statistics);
-		model.addAttribute("user", user);
+		model.addAttribute("current", user);
 		return "/room/player/statistics";
 
 	}
@@ -717,8 +717,7 @@ public class PlayerController {
 		oldUser.setName(user.getName());
 
 		oldUser.setSign(user.getSign());
-		oldUser.setMusic(user.getMusic());
-		oldUser.setStageShow(user.getStageShow());
+		
 
 		this.userService.update(oldUser);
 
