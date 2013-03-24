@@ -27,7 +27,7 @@ import com.gemantic.labs.killer.service.RecordService;
 import com.gemantic.labs.killer.service.SimpleStatisticsService;
 
 @Component
-public class RecordStastisticsEtl {
+public class RecordStastisticsEtl{
 
 	private static final Log log = LogFactory.getLog(RecordStastisticsEtl.class);
 
@@ -63,7 +63,7 @@ public class RecordStastisticsEtl {
 		List<Long> lists ;
 		if("day".equals(type)){
 			// 1.init all players and init all statistics
-			lists = this.recordService.getRecordIdsByVersionAndCreateAt("simple_1.0", MyTimeUtil.getTodayZeroTimeMillions(), 0, Integer.MAX_VALUE);
+			lists = this.recordService.getRecordIdsByVersionAndCreateAt("simple_1.0", MyTimeUtil.getPreZeroTimeMillions(1), 0, Integer.MAX_VALUE);
 		}else{
 			lists=this.recordService.getRecordIdsByVersion("simple_1.0",  0, Integer.MAX_VALUE);
 		}

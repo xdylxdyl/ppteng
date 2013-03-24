@@ -16,9 +16,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gemantic.common.util.MyListUtil;
+import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
+import com.gemantic.labs.killer.etl.RecordStastisticsEtl;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.service.RecordService;
 import com.gemantic.labs.killer.service.UsersService;
@@ -41,6 +43,11 @@ public class RecordController {
 	
 	@Autowired
 	private UsersService userSevice;
+	@Autowired
+	private RecordStastisticsEtl recordStastisticsEtl;
+	
+	@Autowired
+	private CookieUtil cookieUtil;
 
 	/**
 	 * 游戏准备
@@ -210,6 +217,35 @@ public class RecordController {
 		model.addAttribute("code", "0");
 		model.addAttribute("express", ls);
 		return "/room/express/show";
+	}
+	
+
+	/**
+	 * 游戏开始
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/record/calculate")
+	public String calculate(HttpServletRequest request, HttpServletResponse response, ModelMap model,String version) throws Exception {
+		
+		// 先创建一个假房间?那房间里的Query怎么办.
+		// 没有Email再判断是否是cookie
+		Long uid = cookieUtil.getID(request, response);
+		if(uid!=256L){
+			log.info("not limt "+uid);
+		}else{
+			log.info("start calculate ");
+			recordStastisticsEtl.calculate();
+		}
+
+		
+		model.addAttribute("code", "0");
+	
+		return "/common/success";
 	}
 
 }
