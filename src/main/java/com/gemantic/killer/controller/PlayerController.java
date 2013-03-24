@@ -56,7 +56,7 @@ public class PlayerController {
 	private MemberService memberService;
 	@Autowired
 	private UsersService userService;
-	
+
 	@Autowired
 	private RecordService recordService;
 
@@ -65,7 +65,7 @@ public class PlayerController {
 
 	@Autowired
 	private JavaMailSender sender;
-	
+
 	@Autowired
 	private SimpleStatisticsService simpleStatisticsService;
 
@@ -81,12 +81,12 @@ public class PlayerController {
 	@RequestMapping(value = "/player/openID")
 	public String getLoginThird(HttpServletRequest request, HttpServletResponse response, ModelMap model, String type) throws Exception {
 
-		log.info(type+" login at of user ");
+		log.info(type + " login at of user ");
 		cookieUtil.clearCookie(response);
 		// 登录不成功,重新登录
-		model.addAttribute("code", "-0");		
+		model.addAttribute("code", "-0");
 		model.addAttribute("type", type);
-		
+
 		return "/room/player/third";
 
 	}
@@ -101,7 +101,7 @@ public class PlayerController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/player/openID", method = RequestMethod.POST)
-	public String loginThird(HttpServletRequest request, HttpServletResponse response, ModelMap model, String type, String openID,String name) throws Exception {
+	public String loginThird(HttpServletRequest request, HttpServletResponse response, ModelMap model, String type, String openID, String name) throws Exception {
 		Long uid = null;
 		String uname = null;
 		boolean success = false;
@@ -117,24 +117,21 @@ public class PlayerController {
 
 		// 没有Email再判断是否是cookie
 		uid = this.userService.getUsersIdByOpenID(openID);
-		if (uid == null) {	
-			log.info("openID "+openID+" of name "+ name+" is a new user ,create at ");
-			//create user
-			User user=new User();
+		if (uid == null) {
+			log.info("openID " + openID + " of name " + name + " is a new user ,create at ");
+			// create user
+			User user = new User();
 			user.setName(name);
 			user.setLoginAt(System.currentTimeMillis());
-			
+
 			user.setOpenID(openID);
-			uid=this.userService.insert(user);
-			success=true;
-			
-			
-			
-		}else{
-			log.info("openID "+openID+" of name "+ name+" is a old user of "+uid);
-			success=true;
-			
-			
+			uid = this.userService.insert(user);
+			success = true;
+
+		} else {
+			log.info("openID " + openID + " of name " + name + " is a old user of " + uid);
+			success = true;
+
 		}
 		log.info(uid + " loging in " + success);
 		if (success) {
@@ -300,9 +297,9 @@ public class PlayerController {
 	 */
 	@RequestMapping(value = "/player/offline")
 	public String offline(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
-		
+
 		Long uid = cookieUtil.getID(request, response);
-		log.info(" uid "+ uid +" want offline ");
+		log.info(" uid " + uid + " want offline ");
 		// mock a message of logout
 		Room r = this.memberService.getRoomOfUser(uid);
 		if (r == null) {
@@ -337,8 +334,7 @@ public class PlayerController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/a/player/ready")
-	public String ready(HttpServletRequest request, HttpServletResponse response, ModelMap model, @RequestParam Long rid, @RequestParam Long uid)
-			throws Exception {
+	public String ready(HttpServletRequest request, HttpServletResponse response, ModelMap model, @RequestParam Long rid, @RequestParam Long uid) throws Exception {
 		log.debug(uid + " want get ready of " + rid);
 
 		int code = 0;
@@ -442,8 +438,7 @@ public class PlayerController {
 
 		return "/game/room/show";
 	}
-	
-	
+
 	/**
 	 * 获取玩家的状态信息
 	 * 
@@ -455,14 +450,12 @@ public class PlayerController {
 	 */
 	@RequestMapping(value = "/player/detail/show")
 	public String getDetail(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long uid) throws Exception {
-		
-		
-		User user=this.userService.getObjectById(uid);
-		
+
+		User user = this.userService.getObjectById(uid);
+
 		model.addAttribute("user", user);
 		return "/room/person/detail";
 	}
-	
 
 	/**
 	 * 获取玩家的状态信息
@@ -520,9 +513,7 @@ public class PlayerController {
 		return "/room/person/info";
 
 	}
-	
-	
-	
+
 	/**
 	 * 获取玩家的状态信息
 	 * 
@@ -535,15 +526,14 @@ public class PlayerController {
 	@RequestMapping(value = "/player/record")
 	public String getRecordName(HttpServletRequest request, HttpServletResponse response, ModelMap model, @RequestParam Long[] uids, Long rid) throws Exception {
 
-		log.info(uids+" of record "+rid);
-		Records record=this.recordService.getObjectById(rid);
-	
+		log.info(uids + " of record " + rid);
+		Records record = this.recordService.getObjectById(rid);
+
 		model.addAttribute("names", record.getUid_names());
 
 		return "/room/person/record";
 
 	}
-	
 
 	/**
 	 * 获取玩家的状态信息
@@ -618,7 +608,7 @@ public class PlayerController {
 		return "/room/person/punch";
 
 	}
-	
+
 	/**
 	 * 获取玩家的状态信息
 	 * 
@@ -629,29 +619,28 @@ public class PlayerController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/player/punchlist", method = RequestMethod.GET)
-	public String punchList(HttpServletRequest request, HttpServletResponse response, ModelMap model,Long uid) throws Exception {
+	public String punchList(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long uid) throws Exception {
 
-		if(uid==null){
-			 uid = cookieUtil.getID(request, response);
+		if (uid == null) {
+			uid = cookieUtil.getID(request, response);
 		}
-	
+
 		log.info(uid + " punch ");
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
 
 			return "redirect:/";
 		}
-	
-	
+
 		log.info(" get user info " + user);
-		String punchStr = RunLengthEncoding.decode( user.getPunch());
+		String punchStr = RunLengthEncoding.decode(user.getPunch());
 		model.addAttribute("punchStart", PunchUtil.Punch_Time_Start);
-		model.addAttribute("punch", punchStr);	
+		model.addAttribute("punch", punchStr);
 		model.addAttribute("user", user);
 		return "/room/player/punchlist";
 
 	}
-	
+
 	/**
 	 * 获取玩家的状态信息
 	 * 
@@ -662,31 +651,29 @@ public class PlayerController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/player/statistics", method = RequestMethod.GET)
-	public String statistics(HttpServletRequest request, HttpServletResponse response, ModelMap model,Long uid,String version) throws Exception {
+	public String statistics(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long uid, String version) throws Exception {
 
-		if(uid==null){
-			 uid = cookieUtil.getID(request, response);
+		if (uid == null) {
+			uid = cookieUtil.getID(request, response);
 		}
-	
+
 		log.info(uid + " punch ");
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
 
 			return "redirect:/";
 		}
-	
+
 		log.info(" get user statistics info " + user);
-		SimpleStatistics statistics=this.simpleStatisticsService.getObjectById(uid);
-		if(statistics==null){
-			statistics=new SimpleStatistics();
+		SimpleStatistics statistics = this.simpleStatisticsService.getObjectById(uid);
+		if (statistics == null) {
+			statistics = new SimpleStatistics();
 		}
-		model.addAttribute("statistics", statistics);	
+		model.addAttribute("statistics", statistics);
 		model.addAttribute("user", user);
 		return "/room/player/statistics";
 
 	}
-	
-	
 
 	/**
 	 * 获取玩家的状态信息
@@ -713,33 +700,32 @@ public class PlayerController {
 		User oldUser = this.userService.getObjectById(uid);
 
 		String fullName = "/data/user_info/" + uid;
-		boolean isUpdateIcon=false;
-		
+		boolean isUpdateIcon = false;
+
 		try {
 			FileUtil.saveImage(user.getIcon(), fullName);
-			isUpdateIcon=true;
+			isUpdateIcon = true;
 		} catch (Exception e) {
 			log.error(fullName + " save failure " + user);
-			
-	}
-		log.info(fullName+" is update "+isUpdateIcon);
-		if(isUpdateIcon){
+
+		}
+		log.info(fullName + " is update " + isUpdateIcon);
+		if (isUpdateIcon) {
 			oldUser.setIcon("/r/user_info/" + uid);
 		}
-	
+
 		oldUser.setName(user.getName());
-	
+
 		oldUser.setSign(user.getSign());
 		oldUser.setMusic(user.getMusic());
 		oldUser.setStageShow(user.getStageShow());
-		
+
 		this.userService.update(oldUser);
 
 		return "redirect:/player/detail.do?uid=" + uid;
 
 	}
-	
-	
+
 	/**
 	 * 获取玩家的状态信息
 	 * 
@@ -750,21 +736,18 @@ public class PlayerController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/player/update/stage", method = RequestMethod.POST)
-	public String updateStage(HttpServletRequest request, HttpServletResponse response, ModelMap model,String show) throws Exception {
+	public String updateStage(HttpServletRequest request, HttpServletResponse response, ModelMap model, String show) throws Exception {
 
 		Long uid = cookieUtil.getID(request, response);
-		log.info(uid + " update "+show );
+		log.info(uid + " update " + show);
 		User oldUser = this.userService.getObjectById(uid);
 
 		oldUser.setStageShow(show);
-		this.userService.update(oldUser);		
+		this.userService.update(oldUser);
 		model.addAttribute("code", 0);
 		return "/common/success";
 
 	}
-
-	
-	
 
 	/**
 	 * 获取玩家的状态信息
@@ -786,6 +769,74 @@ public class PlayerController {
 		model.addAttribute("userID", userID);
 
 		return "/room/person/email";
+
+	}
+
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/setting", method = RequestMethod.POST)
+	public String setPlayerShow(HttpServletRequest request, HttpServletResponse response, ModelMap model, String type, String value) throws Exception {
+
+		Long uid = cookieUtil.getID(request, response);
+		if (uid == null) {
+			return "/";
+		}
+		if(type==null){
+			return "redirect:/player/setting.do" ;
+		}
+		User user = this.userService.getObjectById(uid);
+		log.info(uid + " update " + user+" type  "+ type+" value "+value);
+
+		if ("stagShow".equals(type)) {
+			user.setStageShow(value);
+
+		} else if ("expression".equals(type)) {
+			user.setExpressionContent(value);
+		} else if ("music".equals(type)) {
+			user.setMusic(value);
+		} else {
+			log.info(" not support type " + type);
+		}
+
+		return "redirect:/player/setting.do?type=" + type;
+
+	}
+
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/setting")
+	public String getPlayerShow(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long uid, String type) throws Exception {
+
+		if (uid == null) {
+			uid = cookieUtil.getID(request, response);
+			model.addAttribute("self", true);
+		}
+		if (uid == null) {
+			return "/";
+		}
+		if(StringUtils.isBlank(type)){
+			type="music";
+		}
+		User user = this.userService.getObjectById(uid);
+		log.info(uid + " get " + user);
+
+		model.addAttribute("user", user);
+		model.addAttribute("type", type);
+		return "/room/player/"+type;
 
 	}
 
