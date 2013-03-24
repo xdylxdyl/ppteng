@@ -51,7 +51,8 @@
 								</c:if>
 
 								<div class="login-action">
-                                    <span class="login-checkbox"><a href="/player/regedit.do?type=email">忘记密码</a></span>
+									<span class="login-checkbox"><a
+										href="/player/regedit.do?type=email">忘记密码</a></span>
 									<button class="btn btn-primary btn-large pull-right">登录</button>
 								</div>
 
@@ -59,8 +60,7 @@
 									<p>
 										使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
 									</p>
-                                    <span id="qqLoginBtn"></span>
-                                    <span id="wb_connect_btn"></span>
+									<span id="qqLoginBtn"></span> <span id="wb_connect_btn"></span>
 								</div>
 							</form>
 						</div>
@@ -71,30 +71,29 @@
 								<small>总用户${count}人 欢迎你:</small> ${user.name}
 							</h4>
 							<img src="http://www.ptteng.com/${user.icon}" class="portrait"
-								id="portrait_img" style="max-width: 16em; height: 8em">
-                            <br><br>
+								id="portrait_img" style="max-width: 16em; height: 8em"> <br>
+							<br>
 							<blockquote>
 								<small>上次登录:<date:date pattern="yyyy年 MM月dd日  HH时mm分 "
-										value="${user.loginAt}"></date:date></small>
-								<small>金币 ${user.money}</small>
+										value="${user.loginAt}"></date:date></small> <small>金币
+									${user.money}</small>
 								<c:choose>
 									<c:when test="${empty punchCount}">
-                                    <div id="punchBox">
-                                        <div id="punchOver"></div>
-                                        <span class="btn btn-primary" id="punch">打卡</span>
-                                    </div>
-                                    
+										<div id="punchBox">
+											<div id="punchOver"></div>
+											<span class="btn btn-primary" id="punch">打卡</span>
+										</div>
+
 									</c:when>
 									<c:otherwise>
-										<small>已连续打卡${punchCount}天</small>									
+										<small>已连续打卡${punchCount}天</small>
 
 									</c:otherwise>
 								</c:choose>
 							</blockquote>
 
-								<a class="btn btn-primary" href="/m/list.do">进入游戏</a>
-
-							<input type="hidden" id="uid" value="${user.id}" /> <input
+							<a class="btn btn-primary" href="/m/list.do">进入游戏</a> <input
+								type="hidden" id="uid" value="${user.id}" /> <input
 								type="hidden" id="type" value="" />
 
 						</div>
@@ -147,7 +146,8 @@
 						<div class="span6">
 							<div class="chapter">
 								<div class="chapter-body">
-                                    <a href="#" class="pull-left"><img src="/r/img/icon_movie.png" alt="电影院" width="64" height="64"></a>
+									<a href="#" class="pull-left"><img
+										src="/r/img/icon_movie.png" alt="电影院" width="64" height="64"></a>
 									<h4>电影院</h4>
 									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
 									<p>
@@ -158,7 +158,9 @@
 								</div>
 							</div>
 							<div class="chapter">
-                                <a href="#" class="pull-left"><img src="/r/img/icon_killer.png" alt="杀人游戏简化版" width="64" height="64"></a>
+								<a href="#" class="pull-left"><img
+									src="/r/img/icon_killer.png" alt="杀人游戏简化版" width="64"
+									height="64"></a>
 								<div class="chapter-body">
 									<h4>杀人游戏[简化版]</h4>
 									<p>高雅的简化,妙趣横生的对话,风格迥异的人物,知性漂亮的姑娘</p>
@@ -168,14 +170,17 @@
 						</div>
 						<div class="span6">
 							<div class="chapter">
-                                    <a href="#" class="pull-left"><img src="/r/img/icon_clearance.png" alt="多人扫雷" width="64" height="64"></a>
-                                    <div class="chapter-body">
+								<a href="#" class="pull-left"><img
+									src="/r/img/icon_clearance.png" alt="多人扫雷" width="64"
+									height="64"></a>
+								<div class="chapter-body">
 									<h4>扫雷[多人版]</h4>
 									<p>玩过单机扫雷,有没有和朋友一起玩过联机扫雷?</p>
 								</div>
 							</div>
 							<div class="chapter">
-                                <a href="#" class="pull-left"><img src="/r/img/icon_design.png" alt="多人扫雷" width="64" height="64"></a>
+								<a href="#" class="pull-left"><img
+									src="/r/img/icon_design.png" alt="多人扫雷" width="64" height="64"></a>
 								<div class="chapter-body">
 									<h4>这些游戏都不喜欢?</h4>
 									<p>设计一个自己喜欢的游戏吧?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以~</p>
@@ -185,29 +190,25 @@
 					</div>
 				</div>
 				<div class="span4">
-					<h3>本周英雄榜</h3>
+					<h3 ><a
+						href="/rank/statistics.do?type=simple&query=killerWin&desc=desc&page=1&size=20&secondQuery=killer">金牌杀手榜</a></h3>
 					<table class="table ranking">
+						<thead>
+							<tr>
+								<th>胜率</th>
+								<th>玩家</th>
+							</tr>
+						</thead>
 						<tbody>
-							<tr>
-								<td class="score">54903</td>
-								<td class="name">小午</td>
-							</tr>
-							<tr>
-								<td class="score">1314</td>
-								<td class="name">子氏</td>
-							</tr>
-							<tr>
-								<td class="score">44903</td>
-								<td class="name">白菜</td>
-							</tr>
-							<tr>
-								<td class="score">41902</td>
-								<td class="name">七八</td>
-							</tr>
-							<tr>
-								<td class="score">33902</td>
-								<td class="name">月落</td>
-							</tr>
+							<c:forEach items="${statisticsList}" var="statistics">
+								<c:set var="user" value="${id_users[statistics.id]}"></c:set>
+								<tr>
+									<td class="score"><fmt:formatNumber pattern="0.00"
+											value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber></td>
+									<td class="name"><a href="player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
+								</tr>
+							</c:forEach>
+
 						</tbody>
 					</table>
 				</div>
@@ -219,7 +220,7 @@
 	<div id="friendLink" class="friendLink">
 
 		<div class="container">
-            <p>友情链接</p>
+			<p>友情链接</p>
 			<div class="row">
 				<div class="span4">
 					<p>
@@ -247,17 +248,19 @@
 				</div>
 			</div>
 		</div>
-		
-	 <script
-	type="text/javascript"
-	src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
-	data-appid="100372616"
-	data-redirecturi="http://www.ptteng.com/qc_callback.html"
-	charset="utf-8"></script> <script
-	src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1999911523"
-	type="text/javascript" charset="utf-8"></script> 
-	<script type="text/javascript" src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
-    <script type="text/javascript" src="/r/j-src/punch/punch.js?version=${frontVersion}"></script>
+
+		<script type="text/javascript"
+			src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+			data-appid="100372616"
+			data-redirecturi="http://www.ptteng.com/qc_callback.html"
+			charset="utf-8"></script>
+		<script
+			src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1999911523"
+			type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript"
+			src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
+		<script type="text/javascript"
+			src="/r/j-src/punch/punch.js?version=${frontVersion}"></script>
 </body>
 </html>
 
