@@ -9,8 +9,9 @@
                     <li class="nav-header">个人资料</li>
                     <li id="leftNav_basic"><a href="/player/detail.do?uid=${user.id}">基本信息</a></li>
                       <li class="nav-header">个性设置</li>                 
-                    <li id="leftNav_stageShow"><a href="/player/stageShow.do">拉风出场秀</a></li> 
-                    <li id="leftNav_expression"><a href="/player/expression.do">神态随心变</a></li> 
+                    <li id="leftNav_stageShow"><a href="/player/setting.do?type=stageShow">拉风出场秀</a></li> 
+                    <li id="leftNav_expression"><a href="/player/setting.do?type=expression">神态随心变</a></li> 
+                     <li id="leftNav_music"><a href="/player/setting.do?type=music">音乐伴我行</a></li> 
                     <!-- <li id="leftNav_stageShow"><a href="/player/regedit.do?type=edit">修改密码</a></li>
                     -->
                     <li class="nav-header">打卡统计</li>
