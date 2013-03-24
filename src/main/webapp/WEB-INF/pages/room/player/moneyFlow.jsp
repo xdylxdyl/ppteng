@@ -42,7 +42,7 @@
 				varStatus="status">
 
 				<c:set var="index" value="${(page-1)*size+status.index}"></c:set>
-				<c:set var="user" value="${id_users[mfs.fid]}"></c:set>
+				<c:set var="user" value="${id_users[mf.fid]}"></c:set>
 				<c:choose>
 					<c:when test="${index/2==1}">
 						<c:set var="trClass" value="success"></c:set>
