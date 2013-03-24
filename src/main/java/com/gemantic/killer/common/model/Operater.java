@@ -2,7 +2,9 @@ package com.gemantic.killer.common.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -47,6 +49,8 @@ public class Operater implements Serializable{
 	
 	private List<Long> players=new ArrayList();
 	
+	
+	private Map<Long,Integer> money=new HashMap();
 	
 	
 	
@@ -250,6 +254,22 @@ public class Operater implements Serializable{
 
 	public void setGameStart(Boolean gameStart) {
 		this.gameStart = gameStart;
+	}
+	
+	
+	
+	
+
+
+
+	public Map<Long, Integer> getMoney() {
+		return money;
+	}
+
+
+
+	public void setMoney(Map<Long, Integer> money) {
+		this.money = money;
 	}
 
 

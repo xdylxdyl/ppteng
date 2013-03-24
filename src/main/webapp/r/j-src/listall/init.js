@@ -2,29 +2,6 @@ $(document).ready(function() {
     $("#name").focus();
 
 
-    $("#room .text").blur(function() {
-        if ($(this).val() == "") {
-            $(this).nextAll("span").html("　　　　　&nbsp;房间名不能为空");
-        } else {
-            $(this).nextAll("span").html("");
-        }
-    })
-        .focus(function() {
-            $(this).nextAll("span").html("");
-        });
-
-    $("#room .submit").click(function(e) {
-        if ($("#room .text").val() == "") {
-            $("#room .text").nextAll("span").html("　　　　　&nbsp;房间名不能为空");
-            e.preventDefault();
-        } else {
-
-
-            $("#mask").show();
-            e.submit();
-        }
-    })
-
 
     $("#regedit #submit").click(function(e) {
         var content = $("#name").val();

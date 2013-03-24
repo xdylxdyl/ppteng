@@ -92,6 +92,7 @@ $(document).ready(function() {
         };
 
         method.open = function(data) {
+
             $content.empty().append(data);
             method.center();
             $(window).bind('resize.modal', this.center);
