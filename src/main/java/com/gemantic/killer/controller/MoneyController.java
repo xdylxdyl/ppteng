@@ -121,29 +121,34 @@ public class MoneyController {
 	@RequestMapping(value = "/money/trade", method = RequestMethod.POST)
 	public String trade(HttpServletRequest request, HttpServletResponse response, ModelMap model, MoneyFlow mf) throws Exception {
 
-		Long uid = cookieUtil.getID(request, response);
+		log.info("start trade "+mf);
+		Long currentID = cookieUtil.getID(request, response);
 
-		if (mf==null||uid == null||mf.getFid()==null) {
-		
+		if (mf==null||currentID == null||mf.getUid()==null) {
+			log.warn(mf+" not exist or not login ");
 			model.addAttribute("code", -9001);
 			return "/message/accept/show";
 		}
-		mf.setFid(uid);
-        User fuser=this.userSevice.getObjectById(uid);
+		mf.setFid(currentID);
+        User fuser=this.userSevice.getObjectById(currentID);
         if(fuser==null){
+        	log.warn(currentID+"not exist ");
         	model.addAttribute("code", -9001);
         	return "/room/person/trade";
         }
         if(mf.getMoney()<=0){
+        	log.warn(mf+" incorrect money ");
         	model.addAttribute("code", -9004);
         	return "/room/person/trade";
         }
         if(fuser.getMoney()<mf.getMoney()){
+        	log.warn(fuser+" no money  "+mf);
         	model.addAttribute("code", -9002);
         	return "/room/person/trade";
         }
-        User tuser=this.userSevice.getObjectById(mf.getId());
+        User tuser=this.userSevice.getObjectById(mf.getUid());
         if(tuser==null){
+        	log.warn(mf.getId()+" to use not exist   ");
         	model.addAttribute("code", -9003);
         	return "/room/person/trade";
         }
@@ -168,6 +173,9 @@ public class MoneyController {
 	public String getTrade(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 
 		Long uid = cookieUtil.getID(request, response);
+		if(uid==null){
+			return "redirect:/";
+		}
 
 		
         User user=this.userSevice.getObjectById(uid);

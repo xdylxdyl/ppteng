@@ -8,9 +8,9 @@
 
 
 var tradeModel = {
-    init:function (id, money, comments) {
+    init:function (uid, money, comments) {
         return{
-            id:id,
+            uid:uid,
             money:money,
             comments:comments
         }
@@ -20,14 +20,17 @@ var tradeModel = {
 var tradeView = {
 
     getTrade:function () {
-        var id = parseInt(tradeView.getId());
+        var uid = parseInt(tradeView.getUid());
         var money = parseInt(tradeView.getMoney());
         var comments = tradeView.getComments();
-         return tradeModel.init(id, money, comments);
+        return tradeModel.init(uid, money, comments);
 
     },
-    getId:function () {
-        return $("#id").val();
+    getUserMoney:function () {
+        return parseInt($("#currentMoney").text());
+    },
+    getUid:function () {
+        return $("#uid").val();
 
     },
     getMoney:function () {
@@ -35,7 +38,9 @@ var tradeView = {
 
     },
     getComments:function () {
-        return $("#comments").text();
+        var text = $("#comments").val();
+        return  $("#hint").text(text).html();
+
     },
     showResult:function (result) {
 
@@ -45,8 +50,9 @@ var tradeView = {
             message = "转帐成功~";
             tradeView.showMoney(result.money);
         } else {
-            tradeView.showHint(result.message);
+            message=result.message;
         }
+        tradeView.showHint(message);
 
     },
     showMoney:function (money) {
@@ -54,6 +60,13 @@ var tradeView = {
     },
     showHint:function (hint) {
         $("#hint").empty().text(hint);
+    },
+    disableCommit:function () {
+
+        $("completeBtn").attr("disabled", true);
+    },
+    enableCommit:function () {
+        $("completeBtn").attr("disabled", false);
     }
 
 }
@@ -74,12 +87,45 @@ $(document).ready(function () {
     $("#completeBtn").click(function () {
         var trade = tradeView.getTrade();
         var result = tradeService.trade(trade);
-        tradeView.showHint(result.message);
+        tradeView.showResult(result);
 
         return false;
 
     });
 
+
+    $("#uid").blur(function () {
+        var value = tradeView.getUid();
+        if (/^\d+$/.test(value)) {
+            tradeView.showHint("");
+        } else {
+            tradeView.disableCommit();
+            tradeView.showHint("葡萄号只能是数字");
+        }
+
+    });
+
+    $("#money").blur(function () {
+        var value = tradeView.getMoney();
+        if (/^\d+$/.test(value)) {
+            tradeView.showHint("");
+        } else {
+            tradeView.disableCommit();
+            tradeView.showHint("金额只能输入数字");
+        }
+        ;
+
+
+        var userMoney = tradeView.getUserMoney();
+        if (value > userMoney || value <= 0) {
+            tradeView.showHint("");
+            tradeView.disableCommit();
+            tradeView.showHint("不能输入负值或超出当账户余额");
+        } else {
+
+        }
+
+    });
 
 })
 

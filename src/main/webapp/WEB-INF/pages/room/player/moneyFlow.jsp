@@ -5,17 +5,21 @@
 
 <script src="/r/j-src/person/moneyFlow.js"></script>
 <c:set var="current" value="${id_users[uid]}"></c:set>
-<c:set var="prevPageLink" value="/money/flow.do?uid=${uid}&type=${type}&page=${page-1}&size=${size}"></c:set>
-<c:set var="NextPageLink" value="/money/flow.do?uid=${uid}&type=${type}&page=${page+1}&size=${size}"></c:set>
-<c:set var="curPageLink" value="/money/flow.do?uid=${uid}&type=${type}&page=${page}&size=${size}"></c:set>
+<c:set var="prevPageLink"
+	value="/money/flow.do?uid=${uid}&type=${type}&page=${page-1}&size=${size}"></c:set>
+<c:set var="NextPageLink"
+	value="/money/flow.do?uid=${uid}&type=${type}&page=${page+1}&size=${size}"></c:set>
+<c:set var="curPageLink"
+	value="/money/flow.do?uid=${uid}&type=${type}&page=${page}&size=${size}"></c:set>
 <input type="hidden" id="type" value="${type}">
 <c:choose>
-<c:when test="${'in'==type}">
-<c:set var="typeName" value="流入"></c:set>
-</c:when>
-<c:otherwise>
-<c:set var="typeName" value="流出"></c:set>
-</c:otherwise>
+	<c:when test="${'in'==type}">
+		<c:set var="typeName" value="流入"></c:set>
+	</c:when>
+	<c:otherwise>
+		<c:set var="typeName" value="流出"></c:set>
+
+	</c:otherwise>
 </c:choose>
 
 
@@ -25,7 +29,7 @@
 
 	<table class="table table-bordered table-striped">
 		<caption class="">
-			<h2>${current.name}的资金${typeName}单</h2>		
+			<h2>${current.name}的资金${typeName}单</h2>
 		</caption>
 		<thead>
 			<tr>
@@ -42,7 +46,20 @@
 				varStatus="status">
 
 				<c:set var="index" value="${(page-1)*size+status.index}"></c:set>
-				<c:set var="user" value="${id_users[mf.fid]}"></c:set>
+
+				<c:choose>
+					<c:when test="${'in'==type}">
+					<c:set var="user" value="${id_users[mf.fid]}"></c:set>
+					</c:when>
+					<c:otherwise>
+					<c:set var="user" value="${id_users[mf.uid]}"></c:set>
+
+					</c:otherwise>
+				</c:choose>
+
+				
+
+
 				<c:choose>
 					<c:when test="${index/2==1}">
 						<c:set var="trClass" value="success"></c:set>
@@ -69,14 +86,9 @@
 
 	<div class="pagination pagination-centered">
 		<ul>
-			<li><a
-				href="${prevPageLink}"
-				id="pagePrev">Prev</a></li>
-			<li class="active"><a
-				href="${curPageLink}">${page}</a></li>
-			<li><a
-				href="${nextPageLink}"
-				id="pageNext">Next</a></li>
+			<li><a href="${prevPageLink}" id="pagePrev">Prev</a></li>
+			<li class="active"><a href="${curPageLink}">${page}</a></li>
+			<li><a href="${nextPageLink}" id="pageNext">Next</a></li>
 		</ul>
 	</div>
 </div>

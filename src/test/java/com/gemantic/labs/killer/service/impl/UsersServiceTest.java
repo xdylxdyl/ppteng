@@ -33,7 +33,7 @@ public class UsersServiceTest {
 
 	private RecordService recordService;
 	
-	//@Before
+	@Before
 	public void setUp() throws Exception {
 
 		// dao
@@ -415,6 +415,15 @@ public class UsersServiceTest {
 		List<Long> ids=this.usersService.getUIdsOrderByMoney(0, 1000);
 		List<User> users=this.usersService.getObjectsByIds(ids);
 		log.info(users);
+	}
+	
+	@Test
+	public void testUtf8() throws ServiceException, ServiceDaoException{
+		User u=this.usersService.getObjectById(300L);
+		u.setName("我是中文啊");
+		this.usersService.update(u);
+		u=this.usersService.getObjectById(300L);
+		log.info(u);
 	}
 	
 	public static void main(String[] args) {

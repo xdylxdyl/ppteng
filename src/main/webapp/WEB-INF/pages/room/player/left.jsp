@@ -21,8 +21,8 @@
 				<a href="/money/flow.do?uid=${current.id}&type=in">现金流入</a></li>
 			<li id="leftNav_moneyFlow_out"><a
 				href="/money/flow.do?uid=${current.id}&type=out">现金流出</a></li>
-			<!-- 	<li id="leftNav_trade"><a
-				href="/money/trade.do">转账</a></li> -->
+				<li id="leftNav_trade"><a
+				href="/money/trade.do">转账</a></li> 
 
 			<li class="nav-header">打卡统计</li>
 			<li id="leftNav_punch"><a

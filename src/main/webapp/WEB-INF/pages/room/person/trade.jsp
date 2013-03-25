@@ -4,7 +4,7 @@
 <%@page contentType="text/html;charset=utf-8"%>
 
 <json:object escapeXml="false">
-	<json:property name="code" value="${code}"></json:property>	
+	<json:property name="code">${code}</json:property>	
 	<json:property name="message" >
 	<spring:message code="${code}"/>
 	</json:property>

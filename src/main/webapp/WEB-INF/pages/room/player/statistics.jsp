@@ -26,7 +26,7 @@
 				<th>姓名</th>
 				<th>胜</th>
 				<th>胜率</th>
-				<th>败</th>				
+				<th>败</th>
 				<th>做水胜</th>
 				<th>做水胜率</th>
 				<th>做水败</th>
@@ -45,21 +45,56 @@
 				<td>1</td>
 				<td>${current.name}</td>
 				<td>${statistics.win}</td>
-				<td><fmt:formatNumber pattern="0.00"
-											value="${statistics.win/statistics.all}"></fmt:formatNumber></td>
-				<td>${statistics.lose}</td>				
+				<td><c:choose>
+						<c:when test="${statistics.all==0}">0</c:when>
+						<c:otherwise>
+							<fmt:formatNumber pattern="0.00"
+								value="${statistics.win/statistics.all}"></fmt:formatNumber>
+						</c:otherwise>
+
+					</c:choose></td>
+				<td>${statistics.lose}</td>
 				<td>${statistics.waterWin}</td>
-				<td><fmt:formatNumber pattern="0.00"
-											value="${statistics.waterWin/statistics.water}"></fmt:formatNumber></td>
+				<td><c:choose>
+						<c:when test="${statistics.all==0}">0</c:when>
+						<c:otherwise>
+							<fmt:formatNumber pattern="0.00"
+								value="${statistics.waterWin/statistics.water}"></fmt:formatNumber>
+
+
+						</c:otherwise>
+
+					</c:choose></td>
+				</td>
 				<td>${statistics.waterLose}</td>
 				<td>${statistics.water}</td>
 				<td>${statistics.killerWin}</td>
-				<td><fmt:formatNumber pattern="0.00"
-											value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber></td>
+				<td><c:choose>
+						<c:when test="${statistics.all==0}">0</c:when>
+						<c:otherwise>
+							<fmt:formatNumber pattern="0.00"
+								value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber>
+						</c:otherwise>
+
+
+
+					</c:choose></td>
+
+
+
+				</td>
 				<td>${statistics.killerLose}</td>
 				<td>${statistics.killer}</td>
-				<td><fmt:formatNumber pattern="0.00"
-											value="${statistics.killer/statistics.all}"></fmt:formatNumber></td>
+				<td><c:choose>
+						<c:when test="${statistics.all==0}">0</c:when>
+						<c:otherwise>
+							<fmt:formatNumber pattern="0.00"
+								value="${statistics.killer/statistics.all}"></fmt:formatNumber>
+						</c:otherwise>
+
+
+
+					</c:choose></td>
 				<td>${statistics.all}</td>
 			</tr>
 
