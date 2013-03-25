@@ -23,7 +23,11 @@
 		<p>自行决定是否打开音乐</p>
 		<p>需要Flash支持</p>
 		<p>很可惜,Pad/手机无法播放</p>
-
+		<p>
+			<a class="btn"
+				href="	http://bbs.ptteng.com/forum.php?mod=viewthread&tid=96"
+				target="_blank">更多帮助&raquo;</a>
+		</p>
 	</div>
 
 

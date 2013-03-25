@@ -844,5 +844,35 @@ public class PlayerController {
 		return "/room/player/"+type;
 
 	}
+	
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/self", method = RequestMethod.POST)
+	public String getPlayerSelf(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+
+		Long uid = cookieUtil.getID(request, response);
+		if (uid == null) {
+			model.addAttribute("code", -1);
+		}else{
+			User user = this.userService.getObjectById(uid);
+			model.addAttribute("code", 0);
+			model.addAttribute("user", user);
+		}
+		
+		
+	
+		
+
+		return "/room/person/self";
+
+	}
 
 }

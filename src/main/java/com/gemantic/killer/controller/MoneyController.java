@@ -154,6 +154,7 @@ public class MoneyController {
         }
         mf.setHappenAt(System.currentTimeMillis());
         
+        //s@163.com sogou@163.com qq        
         if(currentID.equals(284L)||currentID.equals(256L)||currentID.equals(245L)){
         	log.info("admin give money ~ "+mf);
         }else{

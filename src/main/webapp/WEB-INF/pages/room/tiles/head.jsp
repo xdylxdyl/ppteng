@@ -25,7 +25,8 @@
 <link href="/r/css/theme.css" rel="stylesheet">
 <link href="/r/css/layout/header.css" rel="stylesheet">
 <script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
-
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 
 <script src="/r/j-src/room/head_view.js"></script> <script
 	type="text/javascript"
@@ -37,7 +38,7 @@
 	<div class="mobinav" id="mobinav">
 		<i class="icon-th-list icon-white"></i>
 	</div>
-	<ul class="social">	    
+	<ul id="firstHead" class="social">	    
 	
 		<li><a href="http://bbs.ptteng.com/forum.php" target="_blank">论坛</a></li>
 		<li><a href="http://xdylxdyl.diandian.com/" target="_blank">博客</a></li>

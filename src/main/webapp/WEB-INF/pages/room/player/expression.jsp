@@ -20,13 +20,15 @@
 <!-- container start  -->
 <div class="span9">
 	<div class="hero-unit">
-		<h1>xdyl 站在天桥上 说:长日落日圆,大漠孤烟直</h1>
-		<p>葡萄藤的神态不多?</p>
+		<h1>葡萄藤的神态不多?</h1>		
 		<p>那么展示自我吧</p>
 
-		<p>管理员可设置最多五个自定义的神态</p>
+		<p>管理员可随意设置最多五个自定义的神态</p>
 		<p>只要你想</p>
 		<p>让生活每天都有所不同</p>
+		
+		
+	
 	</div>
 
 	<div id="expression">${current.expressionContent}</div>

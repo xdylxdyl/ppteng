@@ -1,6 +1,9 @@
-function ajaxJson(url, type, param, parse,timeout,dataType) {
+function ajaxJson(url, type, param, parse,timeout,dataType,async) {
     if(timeout==null){
         timeout=10000;
+    }
+    if(async==null){
+        async=false;
     }
     var result;
     $.ajax({
@@ -9,7 +12,7 @@ function ajaxJson(url, type, param, parse,timeout,dataType) {
         data: param,
         dataType :dataType,
         timeout:timeout,
-        async : false,
+        async : async,
         success : function(data) {
 
             if (parse == null) {
