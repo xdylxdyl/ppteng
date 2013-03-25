@@ -48,7 +48,7 @@ var userEditView = function () {
             var id = $("#uid").val();
             var name = selects.$name.text();
             var sign = selects.$signature.text();
-            var img = selects.$editImg.text();
+            var img = selects.$imgUrl.text();
             return new userInfo(id, name, img, sign);
 
         }

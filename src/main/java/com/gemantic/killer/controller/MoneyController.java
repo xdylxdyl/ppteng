@@ -1,7 +1,6 @@
 package com.gemantic.killer.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gemantic.common.util.MyListUtil;
 import com.gemantic.common.util.http.cookie.CookieUtil;
@@ -34,11 +34,8 @@ import com.gemantic.labs.killer.service.UsersService;
 public class MoneyController {
 	private static final Log log = LogFactory.getLog(MoneyController.class);
 
-	
-
 	@Autowired
 	private UsersService userSevice;
-
 
 	@Autowired
 	private MoneyFlowService moneyFlowService;
@@ -95,13 +92,12 @@ public class MoneyController {
 		}
 
 		users = this.userSevice.getObjectsByIds(new ArrayList(uids));
-		Map<Long, User>  ids_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);	
-	
-	
-		log.info("money all "+ids_user);
+		Map<Long, User> ids_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);
+
+		log.info("money all " + ids_user);
 
 		users = this.userSevice.getObjectsByIds(userIDS);
-		
+
 		model.addAttribute("uid", uid);
 		model.addAttribute("current", ids_user.get(uid));
 		model.addAttribute("mfs", mfs);
@@ -109,10 +105,76 @@ public class MoneyController {
 		model.addAttribute("type", type);
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
-		
-		
+
 		return "/room/player/moneyFlow";
 	}
 
+	/**
+	 * 游戏准备
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/money/trade", method = RequestMethod.POST)
+	public String trade(HttpServletRequest request, HttpServletResponse response, ModelMap model, MoneyFlow mf) throws Exception {
+
+		Long uid = cookieUtil.getID(request, response);
+
+		if (mf==null||uid == null||mf.getFid()==null) {
+		
+			model.addAttribute("code", -9001);
+			return "/message/accept/show";
+		}
+		mf.setFid(uid);
+        User fuser=this.userSevice.getObjectById(uid);
+        if(fuser==null){
+        	model.addAttribute("code", -9001);
+        	return "/room/person/trade";
+        }
+        if(mf.getMoney()<=0){
+        	model.addAttribute("code", -9004);
+        	return "/room/person/trade";
+        }
+        if(fuser.getMoney()<mf.getMoney()){
+        	model.addAttribute("code", -9002);
+        	return "/room/person/trade";
+        }
+        User tuser=this.userSevice.getObjectById(mf.getId());
+        if(tuser==null){
+        	model.addAttribute("code", -9003);
+        	return "/room/person/trade";
+        }
+        mf.setHappenAt(System.currentTimeMillis());
+        
+        fuser.setMoney(fuser.getMoney()-mf.getMoney());
+        tuser.setMoney(tuser.getMoney()+mf.getMoney());
+        List<User> users=new ArrayList();
+        users.add(fuser);
+        users.add(tuser);
+        this.userSevice.updateList(users);
+        this.moneyFlowService.insert(mf);
+
+
+        model.addAttribute("code", 0);
+        model.addAttribute("money", fuser.getMoney());
+    	return "/room/person/trade";
+	}
 	
+	
+	@RequestMapping(value = "/money/trade")
+	public String getTrade(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+
+		Long uid = cookieUtil.getID(request, response);
+
+		
+        User user=this.userSevice.getObjectById(uid);
+       
+
+        model.addAttribute("current", user);
+    	return "/room/player/trade";
+	}
+
 }

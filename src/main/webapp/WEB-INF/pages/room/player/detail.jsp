@@ -23,16 +23,18 @@
 <input type="hidden" id="uid" value="${current.id}">
 <body>
 
-	<div id="music_play" class="music_play"></div>
+
 
 	<!-- 个人信息,积分,金币 -->
 	<div class="span9 detail_container">
 		<div id="personal" class="personal">
 			<!--名字，分数-->
 			<div class="row-fluid">
+				<p>葡萄号<span class="label label-inverse"> ${current.id}</span></p>
 				<div class="title pull-left" id="editName">${current.name}</div>
 				<p class="pull-right" id="fraction">
 					<span class="label label-info">金币 ${current.money}</span>
+				
 				</p>
 			</div>
 			<!--照片，签名-->

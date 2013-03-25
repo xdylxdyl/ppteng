@@ -5,4 +5,5 @@
 
 <json:object escapeXml="false">
 	<json:property name="code" value="${code}"></json:property>		
+		<json:property name="message" value="${message}"></json:property>		
 </json:object>
