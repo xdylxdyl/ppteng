@@ -68,18 +68,8 @@ input.submit {
 			</spring:bind>
 		</c:forEach>
 		<input id="submitSetting" class="submit" type="button" value="提交设置" />
-		<a href="" class="cancel" id="defineExp">自定义神态</a>
+	
 	</form:form>
-
-
-
-	<div id="expContainer" class="expContainer">
-		<span class="hint">自定义神态~~~每月200金币~便宜的不行~</span> <input
-			id="expContent" type="text" value="" /> <span class="hint">按格式输入表情["XD般温柔的","默默的"]~~最多五个</span>
-
-		<a href="" class="cancel" id="expCommit">确定</a> <a href=""
-			class="cancel" id="expCancel">关闭</a>
-	</div>
 
 
 </body>
