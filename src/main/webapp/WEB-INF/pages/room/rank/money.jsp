@@ -11,7 +11,30 @@
 
 <!-- container start  -->
 <div class="span9">
+<div class="rank_content">
+    <div class="rank clearfix">
+        <img src="/player/detail.do?uid=${user.id}" class="rank_img">
+        <div class="rank_person">
+            <a title href="#">此处无话<span class="label label-important">金币300000</span></a>
+            <span>此处无话的签名此处无话的签名此处无话的签名</span>
+        </div>
+        <div class="rank_num">
+            <span class="ranking">01</span>
+        </div>
+    </div>
 
+    <div class="rank clearfix">
+    <img src="/player/detail.do?uid=${user.id}" class="rank_img">
+    <div class="rank_person">
+    <a title href="#">此处无话<span class="label label-important">金币300000</span></a>
+    <span>此处无话的签名此处无话的签名此处无话的签名</span>
+    </div>
+    <div class="rank_num">
+    <span class="ranking">02</span>
+    </div>
+    </div>
+
+</div>
 
 
 	<c:forEach items="${users}" var="user" begin="0" step="1"

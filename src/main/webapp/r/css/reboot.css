@@ -28,6 +28,56 @@ body {
     width: 100%;
     margin: 0;
 }
+/*排行榜*/
+
+.rank_content {
+   border: 1px solid #cdcdcd;;
+}
+.rank {
+    padding: 10px 12px;
+    border-top: 1px solid #DDDDDD;
+}
+.rank:first-child {
+    border-top: medium none;
+}
+.rank_img {
+    float: left;
+    margin: 3px 13px 0 0;
+    width: 96px;
+}
+.rank_person {
+    display: block;
+    float: left;
+    max-width: 76%;
+}
+.rank_person a {
+    color: #08c;
+    font-size: 26px;
+    display: block;
+}
+.rank .label {
+    margin-left: 5px;
+}
+.rank_num {
+    color: #bbb;
+    float: right;
+    margin: 4px -2px 0 0;
+    text-align: center;
+    width: 40px;
+}
+.rank_num .ranking {
+    display: block;
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: -4px;
+}
+.rank_time {
+    display: block;
+    float: left;
+    max-width: 76%;
+}
+
+
 /* */
 .navbar {
     margin-bottom: 0;
