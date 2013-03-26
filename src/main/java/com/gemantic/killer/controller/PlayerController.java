@@ -599,7 +599,14 @@ public class PlayerController {
 
 		user.setPunch(str);
 		user.setPunchAt(System.currentTimeMillis());
-		int m = 2000;
+		int m = 500;
+		
+		int punchCount = PunchUtil.getLatestContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, user.getPunch());
+
+		//500的基本金额+打卡连续天数*1用户级别对应权重*连续打卡奖励 
+		m=500+punchCount*1*100;
+		log.info(uid+" punch get money "+m+" of punchCount "+punchCount);
+		
 		user.setMoney(user.getMoney() + m);
 		this.userService.update(user);
 		model.addAttribute("money", m);
