@@ -62,10 +62,10 @@
 				<p class="time">
 					注册时间:
 					<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
-						value="${user.createAt}"></date:date>
+						value="${current.createAt}"></date:date>
 					, 上次登录时间:
 					<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
-						value="${user.loginAt}"></date:date>
+						value="${current.loginAt}"></date:date>
 				</p>
 				<span>已连续打卡${punchCount}天</span>
 			</div>
