@@ -121,6 +121,7 @@ $(document).ready(function () {
         });
 
 
+        //set self
         headService.ajaInitSelf();
     }
 )
