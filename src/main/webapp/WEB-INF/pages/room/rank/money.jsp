@@ -6,6 +6,9 @@
 <script src="/r/j-src/rank/money.js"></script>
 
 
+
+
+
 <!-- container start  -->
 <div class="span9">
 
