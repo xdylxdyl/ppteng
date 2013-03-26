@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -18,6 +19,7 @@ import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.FileUtil;
 import com.gemantic.common.util.MyTimeUtil;
+import com.gemantic.common.util.PasswordUtils;
 import com.gemantic.killer.model.User;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.service.RecordService;
@@ -33,7 +35,7 @@ public class UsersServiceTest {
 
 	private RecordService recordService;
 	
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 
 		// dao
@@ -417,13 +419,28 @@ public class UsersServiceTest {
 		log.info(users);
 	}
 	
-	@Test
+	//@Test
 	public void testUtf8() throws ServiceException, ServiceDaoException{
-		User u=this.usersService.getObjectById(300L);
-		u.setName("我是中文啊");
+	/*	User u=this.usersService.getObjectById(300L);
+		String pa=PasswordUtils.encode(u.getPassword());
+		u.setPassword(pa);		
 		this.usersService.update(u);
 		u=this.usersService.getObjectById(300L);
-		log.info(u);
+		log.info(u);*/
+		
+		List<Long> ids=this.usersService.getUIdsOrderByMoney(0, Integer.MAX_VALUE);
+		List<User> users=this.usersService.getObjectsByIds(ids);
+		for(User user:users){
+			if(StringUtils.isBlank(user.getPassword())){
+				
+			}else{
+				String updateSql=("update users set password = '"+PasswordUtils.encode(user.getPassword())+"' where id = "+user.getId()+";");
+				FileUtil.writeFile("d:/password.sql",true,updateSql);
+			}
+		
+		}
+		
+		
 	}
 	
 	public static void main(String[] args) {

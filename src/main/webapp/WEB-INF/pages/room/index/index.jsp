@@ -86,7 +86,7 @@
 
 									</c:when>
 									<c:otherwise>
-										<small>已连续打卡${punchCount}天</small>
+										<small>连续打卡${punchCount}天,额外获取金币 ${punchCount}*100</small>
 
 									</c:otherwise>
 								</c:choose>

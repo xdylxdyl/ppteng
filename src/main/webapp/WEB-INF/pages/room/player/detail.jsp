@@ -68,7 +68,7 @@
 					<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
 						value="${current.loginAt}"></date:date>
 				</p>
-				<span>已连续打卡${punchCount}天</span>
+				<span>连续打卡${punchCount}天,额外获取金币 ${punchCount}*100</span>
 			</div>
 
 

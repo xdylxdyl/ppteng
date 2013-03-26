@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
+import com.gemantic.common.util.PasswordUtils;
 import com.gemantic.dal.dao.Dao;
 import com.gemantic.dal.dao.exception.DaoException;
 import com.gemantic.killer.model.User;
@@ -302,8 +303,8 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public boolean verify(Long uid, String password) throws ServiceException, ServiceDaoException {
 		User u=this.getObjectById(uid);
-		
-		return u.getPassword().equals(password);
+		String pass = PasswordUtils.encode(password);
+		return u.getPassword().equals(pass);
 	}
 
 	@Override
