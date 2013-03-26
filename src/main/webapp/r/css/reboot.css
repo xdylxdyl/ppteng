@@ -17,6 +17,17 @@
 .fz-12 {
     font-size: 12px;
 }
+/**/
+.margin-seesaw30 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+/**/
+body {
+    font: 14px "微软雅黑", Arial;
+    width: 100%;
+    margin: 0;
+}
 /* */
 .navbar {
     margin-bottom: 0;

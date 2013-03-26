@@ -19,8 +19,8 @@
 
 <!-- container start  -->
 <div class="span9">
-	<div class="hero-unit">
-		<h1>葡萄藤的神态不多?</h1>		
+	<div class="well">
+		<h2>葡萄藤的神态不多?</h2>
 		<p>那么展示自我吧</p>
 
 		<p>管理员可随意设置最多五个自定义的神态</p>
@@ -29,22 +29,16 @@
 		
 		
 	
-	</div>
+
 
 	<div id="expression">${current.expressionContent}</div>
-	
-	
-	
 	<input id="type" type="hidden" name="type" value="${type}" />
-	
-	<h1>玩家自定义神态</h1>
+	<h3>玩家自定义神态:</h3>
 	<div id="showArea"></div>
-
 	<c:choose>
-	
 			<c:when test="${self}">
-
-	<div id="showEditContainer">
+    <div class="form-actions">
+	    <div id="showEditContainer">
 				<ul id="myTags"></ul>
 				<input name="tags" id="showTags" value="" disabled="true"
 					class="hide">
@@ -56,10 +50,11 @@
 				
 		</div>
 		<button class="btn btn-primary pull-right" id="editShow">修改</button>
+    </div>
 		</c:when>
 		<c:otherwise>
 
 		</c:otherwise>
 	</c:choose>
-
+    </div>
 </div>

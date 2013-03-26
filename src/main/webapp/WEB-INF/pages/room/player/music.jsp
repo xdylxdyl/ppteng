@@ -17,8 +17,8 @@
 
 <!-- container start  -->
 <div class="span9">
-	<div class="hero-unit">
-		<h1>给自己留下听音乐的时间</h1>
+	<div class="well">
+		<h2>给自己留下听音乐的时间</h2>
 		<p>支持虾米音乐播放器</p>
 		<p>自行决定是否打开音乐</p>
 		<p>需要Flash支持</p>
@@ -28,23 +28,15 @@
 				href="	http://bbs.ptteng.com/forum.php?mod=viewthread&tid=96"
 				target="_blank">更多帮助&raquo;</a>
 		</p>
-	</div>
-
-
 
 
 	<input id="type" type="hidden" name="type" value="${type}" />
-
-	<h1>${current.name }的自定义音乐</h1>
-
-
+	<h3>${current.name }的自定义音乐</h3>
 	<div id="music">${current.music}</div>
 	<div id="music_play" class="music_play"></div>
-
 	<c:choose>
-
 		<c:when test="${self}">
-
+    <div class="form-actions">
 			<div id="showEditContainer">
 				<ul id="myTags"></ul>
 				<p>输入虾米音乐播放器地址:</P>
@@ -54,16 +46,14 @@
 				</p>
 				<button class="btn btn-primary pull-right" id="submitShow">提交</button>
 				<button class="btn btn-primary pull-right" id="cancel">取消</button>
-
-
-
 			</div>
 			<button class="btn btn-primary pull-right" id="editShow">修改</button>
+    </div>
 		</c:when>
 		<c:otherwise>
 
 		</c:otherwise>
 	</c:choose>
 
-
+    </div>
 </div>

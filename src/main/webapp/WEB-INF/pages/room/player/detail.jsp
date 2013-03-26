@@ -28,7 +28,7 @@
 
 	<!-- 个人信息,积分,金币 -->
 	<div class="span9 detail_container">
-		<div id="personal" class="personal">
+		<div id="personal" class="personal well">
 			<!--名字，分数-->
 			<div class="row-fluid">
 				<p>葡萄号<span class="label label-inverse"> ${current.id}</span></p>
@@ -51,11 +51,6 @@
 						<p contenteditable="true" id="imgUrl"></p>
 						<a href="#" class="btn" id="preview">预览(若预览不成功,无法保存头像)</a>
 					</div>
-					<!--<div class="clearfix" id="editMusic">
-                        在<a href="http://www.xiami.com/widget/imulti" target="_blank">虾米</a> ,粘贴Flash地址到下面
-                        <p contenteditable="true"></p>
-                        <a href="" class="btn">预览</a>
-                    </div>-->
 				</div>
 			</div>
 			<!--额外信息-->
