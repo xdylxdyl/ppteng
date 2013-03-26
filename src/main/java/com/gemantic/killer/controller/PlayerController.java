@@ -664,7 +664,7 @@ public class PlayerController {
 			uid = cookieUtil.getID(request, response);
 		}
 
-		log.info(uid + " punch ");
+	
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
 
@@ -678,7 +678,7 @@ public class PlayerController {
 		}
 		model.addAttribute("statistics", statistics);
 		model.addAttribute("current", user);
-		return "/room/player/statistics";
+		return "/room/player/"+version;
 
 	}
 

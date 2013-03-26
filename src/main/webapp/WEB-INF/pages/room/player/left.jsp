@@ -30,7 +30,9 @@
 				href="/player/punchlist.do?uid=${current.id}">打卡线</a></li>
 			<li class="nav-header">简化统计</li>
 			<li id="leftNav_statistics"><a
-				href="/player/statistics.do?uid=${current.id}&version=simple">胜负</a></li>
+				href="/player/statistics.do?uid=${current.id}&version=statistics">总计</a></li>
+				<li id="leftNav_statistics_third"><a
+				href="/player/statistics.do?uid=${current.id}&version=statistics_third">三人局</a></li>
 			<li class="nav-header">安全中心</li>
 			<li id="leftNav_edit"><a href="/player/regedit.do?type=edit">修改密码</a></li>
 			<li id="leftNav_email"><a href="/player/regedit.do?type=email">找回密码</a></li>

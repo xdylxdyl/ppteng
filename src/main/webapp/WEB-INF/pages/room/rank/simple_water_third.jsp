@@ -13,7 +13,7 @@
 					type="hidden" id="size" value="${size}">
 						<table class="table table-bordered table-striped">
 							<caption class="">
-								<h2>英雄榜</h2>
+								<h2>三人局英雄榜</h2>
 								<P class="text-success">20局以上生效</P>
 							</caption>
 							<thead>
@@ -73,7 +73,7 @@
 									<tr class="${trClass}">
 										<td>${index+1}</td>
 										<td><a
-											href="/player/statistics.do?uid=${user.id}&version=statistics">${user.name}</a></td>
+											href="/player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
 										<td>${statistics.win}</td>
 										<td><fmt:formatNumber pattern="0.00"
 												value="${statistics.win/statistics.all}"></fmt:formatNumber></td>

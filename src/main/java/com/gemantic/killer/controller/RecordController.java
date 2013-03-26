@@ -1,13 +1,14 @@
 package com.gemantic.killer.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -231,16 +232,26 @@ public class RecordController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/record/calculate")
-	public String calculate(HttpServletRequest request, HttpServletResponse response, ModelMap model,String version) throws Exception {
+	public String calculate(HttpServletRequest request, HttpServletResponse response, ModelMap model,String version,String type,String[] functionTypes) throws Exception {
 		
 		// 先创建一个假房间?那房间里的Query怎么办.
 		// 没有Email再判断是否是cookie
 		Long uid = cookieUtil.getID(request, response);
-		if(uid!=256L){
+		if(uid!=256L&&uid!=245L){
 			log.info("not limt "+uid);
 		}else{
-			log.info("start calculate ");
-			recordStastisticsEtl.calculate();
+			
+			Set<String> ftSet=null;
+			if(functionTypes==null){
+				
+			}else{
+				ftSet=new HashSet();
+				for(String ft:functionTypes){
+					ftSet.add(ft);
+				}
+			}
+			log.info("start calculate "+type+" function type "+ftSet);
+			recordStastisticsEtl.calculateProcess(type,ftSet);
 		}
 
 		

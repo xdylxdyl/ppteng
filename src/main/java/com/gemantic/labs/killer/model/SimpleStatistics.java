@@ -27,33 +27,42 @@ public class SimpleStatistics implements Serializable {
 
 	private Long id;
 
-	private Integer win=0;
+	private Integer win = 0;
 
-	private Integer lose=0;
+	private Integer lose = 0;
 
-	private Integer all=0;
-	
-	
-	private Integer waterWin=0;
+	private Integer all = 0;
 
-	private Integer waterLose=0;
+	private Integer waterWin = 0;
 
-	private Integer water=0;
-	
-	private Integer killer=0;
-	
-	private Integer killerWin=0;
+	private Integer waterLose = 0;
 
-	private Integer killerLose=0;
-	
-	
+	private Integer water = 0;
+
+	private Integer killer = 0;
+
+	private Integer killerWin = 0;
+
+	private Integer killerLose = 0;
+
+	private Integer third = 0;
+
+	private Integer killerThirdWin = 0;
+
+	private Integer thirdWin = 0;
+
+	private Integer waterThirdWin = 0;
+
+	private Integer waterThird = 0;
+
+	private Integer killerThird = 0;
 
 	private Long updateAt;
 
 	private Long createAt;
 
 	public SimpleStatistics(Long id) {
-		this.id=id;
+		this.id = id;
 	}
 
 	public SimpleStatistics() {
@@ -96,23 +105,7 @@ public class SimpleStatistics implements Serializable {
 	public void setAll(Integer all) {
 		this.all = all;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@Column(name = "water_win")
 	public Integer getWaterWin() {
 		return waterWin;
@@ -145,7 +138,6 @@ public class SimpleStatistics implements Serializable {
 		return killer;
 	}
 
-	
 	public void setKiller(Integer killer) {
 		this.killer = killer;
 	}
@@ -168,6 +160,60 @@ public class SimpleStatistics implements Serializable {
 		this.killerLose = killerLose;
 	}
 
+	@Column(name = "third")
+	public Integer getThird() {
+		return third;
+	}
+
+	public void setThird(Integer third) {
+		this.third = third;
+	}
+
+	@Column(name = "killer_third_win")
+	public Integer getKillerThirdWin() {
+		return killerThirdWin;
+	}
+
+	public void setKillerThirdWin(Integer killerThirdWin) {
+		this.killerThirdWin = killerThirdWin;
+	}
+
+	@Column(name = "third_win")
+	public Integer getThirdWin() {
+		return thirdWin;
+	}
+
+	public void setThirdWin(Integer thirdWin) {
+		this.thirdWin = thirdWin;
+	}
+
+	@Column(name = "water_third_win")
+	public Integer getWaterThirdWin() {
+		return waterThirdWin;
+	}
+
+	public void setWaterThirdWin(Integer waterThirdWin) {
+		this.waterThirdWin = waterThirdWin;
+	}
+
+	@Column(name = "water_third")
+	public Integer getWaterThird() {
+		return waterThird;
+	}
+
+	public void setWaterThird(Integer waterThird) {
+		this.waterThird = waterThird;
+	}
+
+	@Column(name = "killer_third")
+	public Integer getKillerThird() {
+		return killerThird;
+	}
+
+	public void setKillerThird(Integer killerThird) {
+		this.killerThird = killerThird;
+	}
+
 	@Column(name = "update_at")
 	public Long getUpdateAt() {
 		return updateAt;
@@ -185,21 +231,6 @@ public class SimpleStatistics implements Serializable {
 	public void setCreateAt(Long createAt) {
 		this.createAt = createAt;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
