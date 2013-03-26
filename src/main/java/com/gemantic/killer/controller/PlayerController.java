@@ -711,7 +711,7 @@ public class PlayerController {
 		}
 		log.info(fullName + " is update " + isUpdateIcon);
 		if (isUpdateIcon) {
-			oldUser.setIcon("/r/user_info/" + uid);
+			oldUser.setIcon("/r/user_info/" + uid+"?version="+System.currentTimeMillis());
 		}
 
 		oldUser.setName(user.getName());
@@ -872,6 +872,53 @@ public class PlayerController {
 		
 
 		return "/room/person/self";
+
+	}
+	
+	
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/search", method = RequestMethod.POST)
+	public String searchUser(HttpServletRequest request, HttpServletResponse response, ModelMap model,Long uid) throws Exception {
+	
+		if (uid == null) {
+			model.addAttribute("code", -1);
+		}else{
+			User user = this.userService.getObjectById(uid);
+			model.addAttribute("code", 0);
+			model.addAttribute("user", user);
+		}
+		
+		
+	
+		
+
+		return "/room/person/search";
+
+	}
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/search")
+	public String search(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		
+
+		return "/room/player/search";
 
 	}
 

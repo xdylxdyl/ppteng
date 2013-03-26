@@ -49,15 +49,17 @@
 
 				<c:choose>
 					<c:when test="${'in'==type}">
-					<c:set var="user" value="${id_users[mf.fid]}"></c:set>
+						<c:set var="user" value="${id_users[mf.fid]}"></c:set>
+						<c:set var="userLink"
+							value="money/flow.do?uid=${user.id}&type=out"></c:set>
 					</c:when>
 					<c:otherwise>
-					<c:set var="user" value="${id_users[mf.uid]}"></c:set>
-
+						<c:set var="user" value="${id_users[mf.uid]}"></c:set>
+						<c:set var="userLink" value="money/flow.do?uid=${user.id}&type=in"></c:set>
 					</c:otherwise>
 				</c:choose>
 
-				
+
 
 
 				<c:choose>
@@ -73,8 +75,7 @@
 				<tr class="${trClass}">
 					<td>${index+1}</td>
 					<td>${mf.money}</td>
-					<td><a
-						href="/player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
+					<td><a href="${userLink}">${user.name}</a></td>
 					<td>${mf.comments}</td>
 					<td><date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
 							value="${mf.createAt}"></date:date></td>
