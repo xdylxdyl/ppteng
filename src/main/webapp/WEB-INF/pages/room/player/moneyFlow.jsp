@@ -7,7 +7,7 @@
 <c:set var="current" value="${id_users[uid]}"></c:set>
 <c:set var="prevPageLink"
 	value="/money/flow.do?uid=${uid}&type=${type}&page=${page-1}&size=${size}"></c:set>
-<c:set var="NextPageLink"
+<c:set var="nextPageLink"
 	value="/money/flow.do?uid=${uid}&type=${type}&page=${page+1}&size=${size}"></c:set>
 <c:set var="curPageLink"
 	value="/money/flow.do?uid=${uid}&type=${type}&page=${page}&size=${size}"></c:set>
@@ -15,10 +15,11 @@
 <c:choose>
 	<c:when test="${'in'==type}">
 		<c:set var="typeName" value="流入"></c:set>
+		<c:set var="typeHead" value="来自"></c:set>
 	</c:when>
 	<c:otherwise>
 		<c:set var="typeName" value="流出"></c:set>
-
+		<c:set var="typeHead" value="转给"></c:set>
 	</c:otherwise>
 </c:choose>
 
@@ -35,7 +36,9 @@
 			<tr>
 				<th>序号</th>
 				<th>数量</th>
-				<th>来自</th>
+
+				<th>${typeHead}</th>
+
 				<th>备注</th>
 				<th>时间</th>
 

@@ -16,12 +16,11 @@ import com.gemantic.dal.dao.exception.DaoException;
 import com.gemantic.labs.killer.model.MoneyFlow;
 import com.gemantic.labs.killer.service.MoneyFlowService;
 
-
 @Component
 public class MoneyFlowServiceImpl implements MoneyFlowService {
 
 	@Autowired
-    private Dao dao;
+	private Dao dao;
 
 	private static final Log log = LogFactory.getLog(MoneyFlowServiceImpl.class);
 
@@ -33,15 +32,12 @@ public class MoneyFlowServiceImpl implements MoneyFlowService {
 		this.dao = dao;
 	}
 
+	@Override
+	public Long insert(MoneyFlow moneyFlow) throws ServiceException, ServiceDaoException {
 
-		   
-		@Override
-		public Long insert(MoneyFlow moneyFlow)throws ServiceException, ServiceDaoException{
-		
-	
-		           if(log.isInfoEnabled()){	
-    log.info(" insert data : " + moneyFlow);
- }
+		if (log.isInfoEnabled()) {
+			log.info(" insert data : " + moneyFlow);
+		}
 		if (moneyFlow == null) {
 			return null;
 		}
@@ -59,20 +55,18 @@ public class MoneyFlowServiceImpl implements MoneyFlowService {
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-      if(log.isInfoEnabled()){
-		log.info(" insert data success : " + result);
-      }
-return result;	
-		}	
-		  
-    	   
-		@Override
-		public List<MoneyFlow> insertList(List<MoneyFlow> moneyFlowList)throws ServiceException, ServiceDaoException{
-		
-	
-		          	 if(log.isInfoEnabled()){
-        log.info(" insert lists : " + (moneyFlowList == null ? "null" : moneyFlowList.size()));
-      }
+		if (log.isInfoEnabled()) {
+			log.info(" insert data success : " + result);
+		}
+		return result;
+	}
+
+	@Override
+	public List<MoneyFlow> insertList(List<MoneyFlow> moneyFlowList) throws ServiceException, ServiceDaoException {
+
+		if (log.isInfoEnabled()) {
+			log.info(" insert lists : " + (moneyFlowList == null ? "null" : moneyFlowList.size()));
+		}
 		List<MoneyFlow> resultList = null;
 
 		if (CollectionUtils.isEmpty(moneyFlowList)) {
@@ -93,23 +87,19 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-     if(log.isInfoEnabled()){
-		log.info(" insert lists  success : " + (resultList == null ? "null" : resultList.size()));
-      }
+		if (log.isInfoEnabled()) {
+			log.info(" insert lists  success : " + (resultList == null ? "null" : resultList.size()));
+		}
 		return resultList;
-		
-		
-			
-		}	
-		  
-    	   
-		@Override
-		public boolean delete(Long id)throws ServiceException, ServiceDaoException{
-		
-	
-		             if(log.isInfoEnabled()){
-	    log.info(" delete data : " + id);
-    }
+
+	}
+
+	@Override
+	public boolean delete(Long id) throws ServiceException, ServiceDaoException {
+
+		if (log.isInfoEnabled()) {
+			log.info(" delete data : " + id);
+		}
 		boolean result = false;
 
 		if (id == null) {
@@ -124,20 +114,17 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-   if(log.isInfoEnabled()){
-		log.info(" delete data success : " + id);
-    }
+		if (log.isInfoEnabled()) {
+			log.info(" delete data success : " + id);
+		}
 		return result;
-		
-		}	
-		  
-    	   
-		@Override
-		public boolean update(MoneyFlow moneyFlow)throws ServiceException, ServiceDaoException{
-		
-	
-		          
-	log.info(" update data : " + (moneyFlow == null ? "null" : moneyFlow.getId()));
+
+	}
+
+	@Override
+	public boolean update(MoneyFlow moneyFlow) throws ServiceException, ServiceDaoException {
+
+		log.info(" update data : " + (moneyFlow == null ? "null" : moneyFlow.getId()));
 
 		boolean result = false;
 
@@ -155,18 +142,16 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-       if(log.isInfoEnabled()){
-		log.info(" update data success : " + moneyFlow);
-       }
-		return result;	
-		}	
-		  
-    	   
-		@Override
-		public boolean updateList(List<MoneyFlow> moneyFlowList)throws ServiceException, ServiceDaoException{
-		
-	
-		          log.info(" update lists : " + (moneyFlowList == null ? "null" : moneyFlowList.size()));
+		if (log.isInfoEnabled()) {
+			log.info(" update data success : " + moneyFlow);
+		}
+		return result;
+	}
+
+	@Override
+	public boolean updateList(List<MoneyFlow> moneyFlowList) throws ServiceException, ServiceDaoException {
+
+		log.info(" update lists : " + (moneyFlowList == null ? "null" : moneyFlowList.size()));
 
 		boolean result = false;
 
@@ -187,20 +172,18 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-         if(log.isInfoEnabled()){
-		log.info(" update lists success : " + moneyFlowList.size());
-         }
-		return result;	
-		}	
-		  
-    	   
-		@Override
-		public MoneyFlow getObjectById(Long id)throws ServiceException, ServiceDaoException{
-		
-	
-		                 if(log.isInfoEnabled()){
-        log.info(" get data : " + id);
-       }
+		if (log.isInfoEnabled()) {
+			log.info(" update lists success : " + moneyFlowList.size());
+		}
+		return result;
+	}
+
+	@Override
+	public MoneyFlow getObjectById(Long id) throws ServiceException, ServiceDaoException {
+
+		if (log.isInfoEnabled()) {
+			log.info(" get data : " + id);
+		}
 		MoneyFlow moneyFlow = null;
 
 		if (id == null) {
@@ -215,20 +198,18 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-       if(log.isInfoEnabled()){
-		log.info(" get data success : " + id);
-        }
-		return moneyFlow;		
-		}	
-		  
-    	   
-		@Override
-		public List<MoneyFlow> getObjectsByIds(List<Long> ids)throws ServiceException, ServiceDaoException{
-		
-	
-		          	  if(log.isInfoEnabled()){
-	    log.info(" get lists : " + (ids == null ? "null" : ids));
-      }
+		if (log.isInfoEnabled()) {
+			log.info(" get data success : " + id);
+		}
+		return moneyFlow;
+	}
+
+	@Override
+	public List<MoneyFlow> getObjectsByIds(List<Long> ids) throws ServiceException, ServiceDaoException {
+
+		if (log.isInfoEnabled()) {
+			log.info(" get lists : " + (ids == null ? "null" : ids));
+		}
 		List<MoneyFlow> moneyFlow = null;
 
 		if (CollectionUtils.isEmpty(ids)) {
@@ -243,110 +224,92 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-     if(log.isInfoEnabled()){
-		log.info(" get data success : " + (moneyFlow == null ? "null" : moneyFlow.size()));
-     }
-		return moneyFlow;	
-		}	
-		  
-    	
-		
-	
-	
-			
-			
-		/**
+		if (log.isInfoEnabled()) {
+			log.info(" get data success : " + (moneyFlow == null ? "null" : moneyFlow.size()));
+		}
+		return moneyFlow;
+	}
+
+	/**
 	 * 
-	 * @param 
-	 * @return 
+	 * @param
+	 * @return
 	 * @throws ServiceException
 	 * @throws ServiceDaoException
 	 */
-	 @Override
-	public List<Long>  getMoneyFlowIdsByFid(Long fid,Integer start,Integer limit)throws ServiceException, ServiceDaoException{
-		
-		       if(log.isInfoEnabled()){
-      log.info(" get ids by fid,start,limit  : " + fid+" , "+start+" , "+limit );
-	  }
-	 	List<Long> idList = null;
-        
-        // TODO 参数检查!
+	@Override
+	public List<Long> getMoneyFlowIdsByFid(Long fid, Integer start, Integer limit) throws ServiceException, ServiceDaoException {
 
-        if (start == null) {
-            start = 0;
-        }
+		if (log.isInfoEnabled()) {
+			log.info(" get ids by fid,start,limit  : " + fid + " , " + start + " , " + limit);
+		}
+		List<Long> idList = null;
 
-        if (limit == null) {
-            limit = Integer.MAX_VALUE;
-        }
+		// TODO 参数检查!
 
-	try {
-		idList = dao.getIdList("getMoneyFlowIdsByFid", new Object[] { fid},start,limit, false);
+		if (start == null) {
+			start = 0;
+		}
 
-   
-   } catch (DaoException e) {
-			log.error(" get ids  wrong by fid,start,limit)  : " + fid+" , "+start+" , "+limit );
+		if (limit == null) {
+			limit = Integer.MAX_VALUE;
+		}
+
+		try {
+			idList = dao.getIdList("getMoneyFlowIdsByFid", new Object[] { fid }, start, limit, true);
+
+		} catch (DaoException e) {
+			log.error(" get ids  wrong by fid,start,limit)  : " + fid + " , " + start + " , " + limit);
 			log.error(e);
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-  if(log.isInfoEnabled()){
-   log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
-  }
+		if (log.isInfoEnabled()) {
+			log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
+		}
 		return idList;
-		
-	
-	
+
 	}
-	
-			
-			
-		/**
+
+	/**
 	 * 
-	 * @param 
-	 * @return 
+	 * @param
+	 * @return
 	 * @throws ServiceException
 	 * @throws ServiceDaoException
 	 */
-	 @Override
-	public List<Long>  getMoneyFlowIdsByUid(Long uid,Integer start,Integer limit)throws ServiceException, ServiceDaoException{
-		
-		       if(log.isInfoEnabled()){
-      log.info(" get ids by uid,start,limit  : " + uid+" , "+start+" , "+limit );
-	  }
-	 	List<Long> idList = null;
-        
-        // TODO 参数检查!
+	@Override
+	public List<Long> getMoneyFlowIdsByUid(Long uid, Integer start, Integer limit) throws ServiceException, ServiceDaoException {
 
-        if (start == null) {
-            start = 0;
-        }
+		if (log.isInfoEnabled()) {
+			log.info(" get ids by uid,start,limit  : " + uid + " , " + start + " , " + limit);
+		}
+		List<Long> idList = null;
 
-        if (limit == null) {
-            limit = Integer.MAX_VALUE;
-        }
+		// TODO 参数检查!
 
-	try {
-		idList = dao.getIdList("getMoneyFlowIdsByUid", new Object[] { uid},start,limit, false);
+		if (start == null) {
+			start = 0;
+		}
 
-   
-   } catch (DaoException e) {
-			log.error(" get ids  wrong by uid,start,limit)  : " + uid+" , "+start+" , "+limit );
+		if (limit == null) {
+			limit = Integer.MAX_VALUE;
+		}
+
+		try {
+			idList = dao.getIdList("getMoneyFlowIdsByUid", new Object[] { uid }, start, limit, true);
+
+		} catch (DaoException e) {
+			log.error(" get ids  wrong by uid,start,limit)  : " + uid + " , " + start + " , " + limit);
 			log.error(e);
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-  if(log.isInfoEnabled()){
-   log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
-  }
+		if (log.isInfoEnabled()) {
+			log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
+		}
 		return idList;
-		
-	
-	
+
 	}
-	
-		
-	
 
 }
-

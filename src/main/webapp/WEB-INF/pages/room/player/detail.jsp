@@ -21,6 +21,7 @@
 
 </head>
 <input type="hidden" id="uid" value="${current.id}">
+<input type="hidden" id="oldImg" value="${current.icon}">
 <body>
 
 

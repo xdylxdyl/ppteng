@@ -18,7 +18,8 @@ var userEditView = function () {
         $cancel:$("#cancelBtn"),
         $preview:$("#preview"),
         $imgUrl:$("#imgUrl"),
-        $completeBtn:$("#completeBtn")
+        $completeBtn:$("#completeBtn"),
+        $oldImg:$("#oldImg")
     };
 
     return {
@@ -30,6 +31,7 @@ var userEditView = function () {
             selects.$cancel.hide();
             selects.$completeBtn.hide();
             selects.$btn.show();
+
         },
         showEdit:function () {
             selects.$name.attr('contenteditable', 'true');
@@ -42,6 +44,10 @@ var userEditView = function () {
         },
         preview:function () {
             var str = selects.$imgUrl.text();
+            selects.$img.attr("src", str);
+        },
+        rollbackImg:function(){
+            var str= selects.$oldImg.val();
             selects.$img.attr("src", str);
         },
         getInfo:function () {
@@ -87,6 +93,8 @@ $(document).ready(function () {
 
         $("#cancelBtn").click(function () {
             userEditView().hideEdit();
+              //恢复用户头像
+            userEditView().rollbackImg();
             return false;
         });
 
