@@ -24,19 +24,21 @@
 			<tr>
 				<th>序号</th>
 				<th>姓名</th>
-				<th>胜</th>
-				<th>胜率</th>
-				<th>败</th>
-				<th>做水胜</th>
-				<th>做水胜率</th>
-				<th>做水败</th>
-				<th>做水数</th>
-				<th>做杀胜</th>
-				<th>做杀胜率</th>
-				<th>做杀败</th>
-				<th>做杀数</th>
+
+				<th>总胜局</th>
+				<th>总胜率</th>
+
+				<th>水胜局</th>
+				<th>水胜率</th>
+				<th>杀胜局</th>
+				<th>杀胜率</th>
+
+				<th>做水总数</th>
+				<th>做杀总数</th>
+
 				<th>拿刀率</th>
 				<th>总局数</th>
+
 
 			</tr>
 		</thead>
@@ -53,7 +55,7 @@
 						</c:otherwise>
 
 					</c:choose></td>
-				<td>${statistics.lose}</td>
+				
 				<td>${statistics.waterWin}</td>
 				<td><c:choose>
 						<c:when test="${statistics.all==0}">0</c:when>
@@ -66,8 +68,7 @@
 
 					</c:choose></td>
 				</td>
-				<td>${statistics.waterLose}</td>
-				<td>${statistics.water}</td>
+			
 				<td>${statistics.killerWin}</td>
 				<td><c:choose>
 						<c:when test="${statistics.all==0}">0</c:when>
@@ -83,7 +84,7 @@
 
 
 				</td>
-				<td>${statistics.killerLose}</td>
+				<td>${statistics.water}</td>
 				<td>${statistics.killer}</td>
 				<td><c:choose>
 						<c:when test="${statistics.all==0}">0</c:when>

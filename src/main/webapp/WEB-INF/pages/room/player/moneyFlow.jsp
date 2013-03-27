@@ -54,11 +54,11 @@
 					<c:when test="${'in'==type}">
 						<c:set var="user" value="${id_users[mf.fid]}"></c:set>
 						<c:set var="userLink"
-							value="money/flow.do?uid=${user.id}&type=out"></c:set>
+							value="/money/flow.do?uid=${user.id}&type=out"></c:set>
 					</c:when>
 					<c:otherwise>
 						<c:set var="user" value="${id_users[mf.uid]}"></c:set>
-						<c:set var="userLink" value="money/flow.do?uid=${user.id}&type=in"></c:set>
+						<c:set var="userLink" value="/money/flow.do?uid=${user.id}&type=in"></c:set>
 					</c:otherwise>
 				</c:choose>
 

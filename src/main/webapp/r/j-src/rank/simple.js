@@ -8,7 +8,9 @@
 
 var tableRankView = {
     makeLink:function (query,secondQuery) {
-        var url = "/rank/statistics.do?type=simple";
+        var type=tableRankView.getType();
+        
+        var url = "/rank/statistics.do?type="+type;
 
         var desc = tableRankView.getNextDesc(query,secondQuery);
         var page = tableRankView.getPage();
@@ -29,6 +31,10 @@ var tableRankView = {
     getDesc:function () {
 
         return $("#desc").val();
+    },
+    getType:function(){
+
+        return $("#type").val();
     },
     getNextDesc:function (query,secondQuery) {
         var oldDesc = $("#desc").val();
@@ -83,7 +89,8 @@ var tableRankView = {
 $(document).ready(function () {
 
     headView.highLight("rank");
-    leftView.highLight("leftNav_simple");
+    var type=tableRankView.getType();
+    leftView.highLight("leftNav_"+type);
     tableRankView.showDesc();
 
     $("[query]").click(function () {
