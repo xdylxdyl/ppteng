@@ -29,7 +29,7 @@
 				</c:if>
 
 				<div class="rank clearfix">
-					<img src="${userLink}" class="rank_img">
+					<img src="${current.icon}" class="rank_img">
 					<div class="rank_person">
 						<a title href="${userLink}">${user.name}<span
 							class="label label-important">金币${user.money}</span></a> <span>${user.sign
