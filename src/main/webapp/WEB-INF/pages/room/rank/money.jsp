@@ -11,7 +11,7 @@
 
 <!-- container start  -->
 <div class="span9">
-<div class="rank_content">
+<%-- <div class="rank_content">
     <div class="rank clearfix">
         <img src="/player/detail.do?uid=${user.id}" class="rank_img">
         <div class="rank_person">
@@ -36,7 +36,7 @@
 
 </div>
 
-
+ --%>
 	<c:forEach items="${users}" var="user" begin="0" step="1"
 		varStatus="status">
 		<c:if test="${status.index%3==0}">
