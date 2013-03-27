@@ -11,91 +11,111 @@
 
 <!-- container start  -->
 <div class="span9">
-<%-- <div class="rank_content">
-    <div class="rank clearfix">
-        <img src="/player/detail.do?uid=${user.id}" class="rank_img">
-        <div class="rank_person">
-            <a title href="#">此处无话<span class="label label-important">金币300000</span></a>
-            <span>此处无话的签名此处无话的签名此处无话的签名</span>
-        </div>
-        <div class="rank_num">
-            <span class="ranking">01</span>
-        </div>
-    </div>
 
-    <div class="rank clearfix">
-    <img src="/player/detail.do?uid=${user.id}" class="rank_img">
-    <div class="rank_person">
-    <a title href="#">此处无话<span class="label label-important">金币300000</span></a>
-    <span>此处无话的签名此处无话的签名此处无话的签名</span>
-    </div>
-    <div class="rank_num">
-    <span class="ranking">02</span>
-    </div>
-    </div>
 
-</div>
 
- --%>
 	<c:forEach items="${users}" var="user" begin="0" step="1"
 		varStatus="status">
-		<c:if test="${status.index%3==0}">
 
-			<!-- row-fluid start  -->
-			<div class=row-fluid">
+		<c:set var="userLink" value="/player/detail.do?uid=${user.id}"></c:set>
+		<c:set var="allIndex" value="${(page-1)*size+status.index+1}"></c:set>
 
-				<ul class="thumbnails">
-		</c:if>
+		<c:choose>
 
-		<!-- li start -->
-		<li class="span3">
-			<!-- div start -->
-			<div class="thumbnail">
+			<c:when test="${allIndex<=3}">
 
-				<div class="caption">
-					<span class="badge badge-info">${(page-1)*size+status.index+1}</span>
+				<c:if test="${allIndex==1}">
+					<div class="rank_content">
+				</c:if>
 
-					<h3>
-						<a href="/player/detail.do?uid=${user.id}" target="_blank"><c:out
-								value="${user.name}"></c:out></a> <span
-							class="label label-important">金币 ${user.money}</span>
-					</h3>
+				<div class="rank clearfix">
+					<img src="${userLink}" class="rank_img">
+					<div class="rank_person">
+						<a title href="${userLink}">${user.name}<span
+							class="label label-important">金币${user.money}</span></a> <span>${user.sign
+							}</span>
 
-					<div>
-
-						<a href="/player/detail.do?uid=${user.id}" target="_blank"> <img
-							src="http://www.ptteng.com/${user.icon}" class="thumbnail"
-							style="max-width: 90%; max-height: 15%">
-
-						</a>
-
-						<div class="caption">
-							<p class="text-success">${user.sign}</p>
-
-							<small>上次登录:<date:date pattern="yyyy年 MM月dd日  HH时mm分 "
-									value="${user.loginAt}"></date:date>
-
+						<p>
+							<small>注册时间:<date:date pattern="yyyy年 MM月dd日  HH时mm分 "
+									value="${user.createAt}"></date:date>
 
 							</small>
-
-							<p>
-								<small>注册时间:<date:date pattern="yyyy年 MM月dd日  HH时mm分 "
-										value="${user.createAt}"></date:date>
-
-								</small>
-							</p>
-							<div></div>
-							<!-- div over -->
-							<li>
-								<!-- li over --> <c:if test="${status.index%3==2||status.last}">
+						</p>
+					</div>
+					<div class="rank_num">
+						<span class="ranking">${allIndex}</span>
+					</div>
+				</div>
 
 
-									</ul>
-						</div>
+				<c:if test="${allIndex==3}">
+</div>
+</c:if>
 
-						<!-- row-fluid over  -->
-						</c:if>
-	</c:forEach>
+</c:when>
+
+
+<c:otherwise>
+
+
+
+	<c:if test="${status.index%3==0}">
+
+		<!-- row-fluid start  -->
+		<div class=row-fluid">
+
+			<ul class="thumbnails">
+	</c:if>
+
+	<!-- li start -->
+	<li class="span2">
+		<!-- div start -->
+		<div class="thumbnail">
+
+			<div class="caption">
+				<span class="badge badge-info">${(page-1)*size+status.index+1}</span>
+
+				<h3>
+					<a href="/player/detail.do?uid=${user.id}" target="_blank"><c:out
+							value="${user.name}"></c:out></a> <span class="label label-important">金币
+						${user.money}</span>
+				</h3>
+
+				<div>
+
+					<a href="/player/detail.do?uid=${user.id}" target="_blank"> <img
+						src="http://www.ptteng.com/${user.icon}" class="thumbnail"
+						style="max-width: 90%; max-height: 15%">
+
+					</a>
+
+					<div class="caption">
+						<p class="text-success">${user.sign}</p>
+
+
+
+						<p>
+							<small>注册时间:<date:date pattern="yyyy年 MM月dd日  HH时mm分 "
+									value="${user.createAt}"></date:date>
+
+							</small>
+						</p>
+						<div></div>
+						<!-- div over -->
+						<li>
+							<!-- li over --> <c:if test="${status.index%3==2||status.last}">
+
+
+								</ul>
+					</div>
+
+					<!-- row-fluid over  -->
+					</c:if>
+</c:otherwise>
+
+
+</c:choose>
+</c:forEach>
 
 </div>
 <!-- container over  -->

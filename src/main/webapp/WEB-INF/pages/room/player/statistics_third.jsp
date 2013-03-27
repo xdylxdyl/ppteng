@@ -20,7 +20,7 @@
 	</div>
 
 	<table class="table table-bordered table-striped">
-		<caption>做为一个水,你在 [${statistics.water}] 局游戏中进三 [${statistics.waterThird}] 次</caption>
+		<caption>做为一个水,${current.name} 在 [${statistics.water}] 局游戏中进三 [${statistics.waterThird}] 次</caption>
 		<thead>
 			<tr>
 				<th>序号</th>
@@ -69,7 +69,7 @@
 	</table>
 
 	<table class="table table-bordered table-striped">
-		<caption>做为一个水,你在 [${statistics.killer}] 局游戏中进三 [${statistics.killerThird}] 次</caption>
+		<caption>做为一个杀,${current.name} 在 [${statistics.killer}] 局游戏中进三 [${statistics.killerThird}] 次</caption>
 		<thead>
 			<tr>
 
