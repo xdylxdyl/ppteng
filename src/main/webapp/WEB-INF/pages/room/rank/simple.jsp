@@ -23,7 +23,7 @@
 									<th>姓名</th>
 									<th id="win" query="win" class="cursor-pointer">总胜局<i
 										class=""></i></th>
-									<th id="winAll" query="win" secondQuery="all"
+									<th id="win_all" query="win" secondQuery="all"
 										class="cursor-pointer">总胜率<i class=""></i></th>
 									<th id="waterWin" query="waterWin" class="cursor-pointer">水胜局<i
 										class=""></i></th>
