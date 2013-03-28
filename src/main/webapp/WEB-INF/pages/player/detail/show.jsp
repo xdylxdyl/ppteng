@@ -11,7 +11,7 @@
 			<p>
 				葡萄号<span class="label label-inverse"> ${current.id}</span>
 			</p>
-			<div class="title pull-left" id="editName">${current.name}</div>
+			<div class="title pull-left" id="editName"><a href="player/detail.do?uid=${current.id}">${current.name}</a></div>
 			<p class="pull-right" id="fraction">
 				<span class="label label-info">金币 ${current.money}</span>
 			</p>

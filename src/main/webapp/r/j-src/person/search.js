@@ -35,6 +35,7 @@ var searchView = {
         $("#icon").attr("alt",data.name);
     }
 
+
 }
 
 var searchService={
@@ -70,7 +71,7 @@ $(document).ready(function () {
     $("#completeBtn").click(function () {
         var value = searchView.getUid();
          var result = searchService.search(value);
-        searchView.showResult(result);
+      //  searchView.showResult(result);
 
          return false;
 

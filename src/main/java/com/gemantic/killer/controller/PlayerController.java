@@ -903,8 +903,14 @@ public class PlayerController {
 			model.addAttribute("code", -1);
 		}else{
 			User user = this.userService.getObjectById(uid);
-			model.addAttribute("code", 0);
-			model.addAttribute("user", user);
+			if(user==null){
+				model.addAttribute("code", -1);
+		
+			}else{
+				model.addAttribute("code", 0);
+				model.addAttribute("user", user);	
+			}
+			
 		}
 		
 		
