@@ -13,6 +13,17 @@
 			id="secondQuery" value="${secondQuery}"><input type="hidden"
 				id="page" value="${page}"> <input type="hidden" id="size"
 					value="${size}">
+					
+								<div class="hero-unit">
+							<h1>三人局显然不是简化的目标</h1>
+
+							<p>但进三是每一个人都会遇到的事情</p>
+						    <p>来看一下胜率吧</p>
+							<p class="text-warning">能否进三有太多不确定,所以进三率仅以用来自嘲</p>
+						
+
+
+						</div>
 						<table class="table table-bordered table-striped">
 							<caption class="">
 								<h2>三人局强杀榜</h2>

@@ -127,5 +127,13 @@
 	</definition>
 	
 	
+	
+	
+	
+	
+	
+		<!--personCard -->
+	<definition name="personCard" template="/WEB-INF/pages/player/detail/show.jsp" />
+	
 
 </tiles-definitions>
