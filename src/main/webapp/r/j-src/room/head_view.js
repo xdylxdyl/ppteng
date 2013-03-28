@@ -15,29 +15,9 @@ var headLink = function (link, name) {
 
 var headView = {
     highLight:function (v) {
+        var id="nav_"+v;
+        $("#"+id).addClass("active");
 
-        switch (v) {
-            case 'index':
-                $("#nav_index").addClass("active");
-                break;
-            case 'game':
-                $("#nav_game").addClass("active");
-                break;
-            case 'case':
-                $("#nav_case").addClass("active");
-                break;
-            case 'person':
-                $("#nav_person").addClass("active");
-                break;
-            case 'about':
-                $("#nav_about").addClass("active");
-                break;
-            case 'rank':
-                $("#nav_rank").addClass("active");
-                break;
-            default:
-                ;
-        }
     },
     showSelf:function (link) {
 

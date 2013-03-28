@@ -53,10 +53,11 @@
 			<ul>
 				<li id="nav_index"><a href="/">首页</a></li>
 				<li id="nav_game"><a href="/m/list.do">游戏</a></li>
-				<li id="nav_case"><a href="/record/list.do">战例</a></li>
-				<li id="nav_person"><a href="/player/detail.do">个人</a></li>
 				<li id="nav_rank"><a href="/rank/list.do?type=money">排行</a></li>
-
+				<li id="nav_statistics"><a href="/player/statistics.do">统计</a></li>
+				<li id="nav_case"><a href="/record/list.do">战例</a></li>
+				<li id="nav_person"><a href="/player/detail.do">设置</a></li>				
+				<li id="nav_financial"><a href="/money/flow.do">财务</a></li>
 				<li id="nav_about"><a href="/about.do?type=about">帮助</a></li>
 			</ul>
 		</div>

@@ -75,7 +75,7 @@ public class RecordStastisticsEtl {
 
 		log.info("success get datas " + lists.size());
 		List<Records> records = this.recordService.getObjectsByIds(lists);
-		log.info("get record size " + records.size());
+		log.info("get record size " + records);
 
 		Set<Long> totalPlayers = new HashSet();
 		Set<Long> allPlayers = new HashSet();

@@ -12,16 +12,23 @@
 <!-- container start  -->
 <div class="span9">
 
-
+<c:set var="class" value="background-first" scope="session"></c:set>
+<c:set var="indexClass" value="badge badge-important" scope="session"></c:set>
 
 	<c:forEach items="${users}" var="user" begin="0" step="1"
 		varStatus="status">
 		<div class="container row-fluid">
 			<c:set var="current" value="${user}" scope="session"></c:set>
+				<c:if test="${((page-1)*size+status.index+1)> 3}">
+				<c:set var="class" value="" scope="session"></c:set>
+				<c:set var="indexClass" value="badge badge-info" scope="session"></c:set>
+			</c:if>
 			<p>
-			<span class="badge badge-info">${(page-1)*size+status.index+1} 	</span> <span class="badge badge-warning"><date:date pattern="HH时mm分mm秒 "
-					value="${current.punchAt}"></date:date></span><p>
-			<tiles:insertDefinition name="personCard" />
+				<span class="${indexClass}">${(page-1)*size+status.index+1}
+				</span> <span class="${indexClass}"><date:date
+						pattern="HH时mm分mm秒 " value="${current.punchAt}"></date:date></span>
+			<p>
+				<tiles:insertDefinition name="personCard" />
 		</div>
 
 	</c:forEach>

@@ -7,7 +7,7 @@
  */
 
 $(document).ready(function() {
-    headView.highLight("person");
+    headView.highLight("statistics");
     leftView.highLight("leftNav_statistics_third");
 
 })

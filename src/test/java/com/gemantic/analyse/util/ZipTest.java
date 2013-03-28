@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 import com.gemantic.common.util.FileUtil;
+import com.gemantic.common.util.MyTimeUtil;
 import com.gemantic.common.util.zip.RunLengthEncoding;
 import com.gemantic.killer.util.PunchUtil;
 
@@ -51,6 +52,12 @@ public class ZipTest {
 		String url = "http://www.popo8.com/host/data/20121231/ac4a366.jpg";
 		FileUtil.saveImage(url, "d://test");
 
+	}
+	
+	public static void main(String[] args) {
+		Long pre=MyTimeUtil.getPreZeroTimeMillions(1);
+		log.info(pre+" day is "+MyTimeUtil.convertLong2String(pre, "yyyy-MM-dd"));
+		log.info(1364309002676L+" day is "+MyTimeUtil.convertLong2String(1364309002676L, "yyyy-MM-dd"));
 	}
 
 }

@@ -15,7 +15,7 @@ var moneyFlowView = {
 
 $(document).ready(function () {
 
-    headView.highLight("person");
+    headView.highLight("financial");
     var type = moneyFlowView.getType();
     leftView.highLight("leftNav_moneyFlow_" + type);
 

@@ -79,7 +79,7 @@ var tradeService = {
 
 $(document).ready(function () {
 
-    headView.highLight("person");
+    headView.highLight("financial");
 
     leftView.highLight("leftNav_trade");
 

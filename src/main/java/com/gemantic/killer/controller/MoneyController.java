@@ -57,6 +57,9 @@ public class MoneyController {
 
 		if (uid == null) {
 			uid = cookieUtil.getID(request, response);
+			if(uid==null){
+				return "redirect/";
+			}
 		}
 		if ("out".equals(type)) {
 
@@ -106,7 +109,7 @@ public class MoneyController {
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
 
-		return "/room/player/moneyFlow";
+		return "/room/financial/moneyFlow";
 	}
 
 	/**
@@ -188,7 +191,7 @@ public class MoneyController {
        
 
         model.addAttribute("current", user);
-    	return "/room/player/trade";
+    	return "/room/financial/trade";
 	}
 
 }

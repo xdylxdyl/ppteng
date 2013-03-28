@@ -644,7 +644,7 @@ public class PlayerController {
 		model.addAttribute("punchStart", PunchUtil.Punch_Time_Start);
 		model.addAttribute("punch", punchStr);
 		model.addAttribute("current", user);
-		return "/room/player/punchlist";
+		return "/room/statistics/punchlist";
 
 	}
 
@@ -664,6 +664,9 @@ public class PlayerController {
 			uid = cookieUtil.getID(request, response);
 		}
 
+		if(StringUtils.isBlank(version)){
+			version="statistics";
+		}
 	
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
@@ -678,7 +681,7 @@ public class PlayerController {
 		}
 		model.addAttribute("statistics", statistics);
 		model.addAttribute("current", user);
-		return "/room/player/"+version;
+		return "/room/statistics/"+version;
 
 	}
 

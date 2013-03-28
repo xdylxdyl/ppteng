@@ -127,6 +127,33 @@
 	</definition>
 	
 	
+	<definition name="financial*"
+		template="/WEB-INF/pages/room/player/layout.jsp">
+		<put-attribute name="left"
+			value="/WEB-INF/pages/room/financial/left.jsp" />
+		<put-attribute name="right"
+			value="/WEB-INF/pages/room/financial/{1}.jsp" />
+	</definition>
+	
+	<definition name="/room/financial/*" extends="ptt">
+		<put-attribute name="body"
+			value="financial{1}" />
+	</definition>
+	
+	
+	
+	<definition name="statistics*"
+		template="/WEB-INF/pages/room/player/layout.jsp">
+		<put-attribute name="left"
+			value="/WEB-INF/pages/room/statistics/left.jsp" />
+		<put-attribute name="right"
+			value="/WEB-INF/pages/room/statistics/{1}.jsp" />
+	</definition>
+	
+	<definition name="/room/statistics/*" extends="ptt">
+		<put-attribute name="body"
+			value="statistics{1}" />
+	</definition>
 	
 	
 	

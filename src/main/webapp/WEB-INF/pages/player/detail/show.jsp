@@ -5,7 +5,7 @@
 
 <!-- 个人信息,积分,金币 -->
 <div class="span9 detail_container">
-	<div id="personal" class="personal well">
+	<div id="personal" class="${class} personal well">
 		<!--名字，分数-->
 		<div class="row-fluid">
 			<p>
