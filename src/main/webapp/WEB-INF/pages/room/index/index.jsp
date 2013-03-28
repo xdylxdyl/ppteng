@@ -104,11 +104,11 @@
 				<div class="span8 banner-screen">
 					<div id="indexCarousel" class="carousel">
 						<div class="carousel-inner">
-							<div class="active item">
+							<!-- <div class="item">
 								<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
 								<div class="carousel-caption">
-									<h4>368活动</h4>
-									<p>每周三,周六晚上八点半,约在一起玩简化</p>
+									<h4>268活动</h4>
+									<p>每周二,周六晚上八点半,约在一起玩简化</p>
 								</div>
 							</div>
 							<div class="item">
@@ -117,14 +117,48 @@
 									<h4>葡萄藤电影院</h4>
 									<p>和朋友一起,约个时间,一边看电影,一边聊天</p>
 								</div>
-							</div>
-							<div class="item">
-								<img src="/r/img/img_banner_2.jpg" alt="简化">
+							</div> 
+							-->
+							<div class="active item">
+								<img
+									src="http://www.baidupcs.com/thumbnail/b46b85f0ffef60def44e1c9ac6f496a9?fid=4043593929-250528-2328322191&time=1364435764&sign=FDTA-DCb740ccc5511e5e8fedcff06b081203-UmjBO8YCn1ZQi33OpEwA4u5kimM%3D&expires=8h&size=c850_u580&quality=100"
+									alt="葡萄藤电影院">
 								<div class="carousel-caption">
-									<h4>自古太监功夫高</h4>
-									<p>游戏通常分为两大阵营，水民和杀手；水民以投票为手段投死杀手获取最后胜利，杀手方隐匿于水民中间，靠夜晚杀人和白天伪装成水民,坚持活到最后为胜利</p>
+									<h4>今天晚上八点半 东邪西毒</h4>
+									<p>一场自言自语的故事</p>
 								</div>
 							</div>
+							<div class="item">
+								<img
+									src="http://www.baidupcs.com/thumbnail/aa2299e44e8a38d0c34705fa8b7ea5c9?fid=4043593929-250528-2564807811&time=1364435692&sign=FDTA-DCb740ccc5511e5e8fedcff06b081203-0r8MuXVzGrXbfV%2FyCebOBuPtjI0%3D&expires=8h&size=c850_u580&quality=100"
+									alt="葡萄藤电影院">
+								<div class="carousel-caption">
+									<h4>东邪西毒</h4>
+									<p>一种若有若无的怀念</p>
+								</div>
+							</div>
+						<!-- 	<div class="item">
+								<img
+									src="http://www.baidupcs.com/thumbnail/ad8d4e4a719292cd954b68a677e11334?fid=4043593929-250528-1616736912&time=1364435847&sign=FDTA-DCb740ccc5511e5e8fedcff06b081203-msCAukgXRNyXWJRxkHQXdvxWGrU%3D&expires=8h&size=c850_u580&quality=100"
+									alt="葡萄藤电影院">
+								<div class="carousel-caption">
+									<h4>刀光剑影</h4>
+									<p>斩不去心中的寂寞</p>
+								</div>
+							</div> -->
+
+
+							<div class="item">
+								<img
+									src="http://www.baidupcs.com/thumbnail/46f5c88fb466d252d1a35b20bc83912c?fid=4043593929-250528-709213923&time=1364435847&sign=FDTA-DCb740ccc5511e5e8fedcff06b081203-hkyGpQMv%2Fhn47R4MRv7JB37mH5A%3D&expires=8h&size=c850_u580&quality=100"
+									alt="葡萄藤电影院">
+								<div class="carousel-caption">
+									<h4>[东邪西毒]等待</h4>
+									<p>并非是要你回来,而是想和你一起离开</p>
+								</div>
+							</div>
+
+
 
 						</div>
 						<a class="carousel-control left" href="#indexCarousel"
@@ -190,8 +224,10 @@
 					</div>
 				</div>
 				<div class="span4">
-					<h3 ><a
-						href="/rank/statistics.do?type=simple&query=killerWin&desc=desc&page=1&size=20&secondQuery=killer">金牌杀手榜</a></h3>
+					<h3>
+						<a
+							href="/rank/statistics.do?type=simple&query=killerWin&desc=desc&page=1&size=20&secondQuery=killer">金牌杀手榜</a>
+					</h3>
 					<table class="table ranking">
 						<thead>
 							<tr>
@@ -205,7 +241,8 @@
 								<tr>
 									<td class="score"><fmt:formatNumber pattern="0.00"
 											value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber></td>
-									<td class="name"><a href="player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
+									<td class="name"><a
+										href="player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
 								</tr>
 							</c:forEach>
 
