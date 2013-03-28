@@ -27,7 +27,8 @@
 		
 		<div class="container">
 			<c:set var="current" value="${user}" scope="session"></c:set>
-			<span class="badge badge-info">${(page-1)*size+status.index+1}</span>
+				<p>
+			<span class="badge badge-info">${(page-1)*size+status.index+1} 	</span> <span class="badge badge-warning">${user.money}</span><p>
 			<tiles:insertDefinition name="personCard" />
 		</div>
 		

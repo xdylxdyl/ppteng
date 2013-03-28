@@ -16,9 +16,11 @@
 
 	<c:forEach items="${users}" var="user" begin="0" step="1"
 		varStatus="status">
-		<div class="container">
+		<div class="container row-fluid">
 			<c:set var="current" value="${user}" scope="session"></c:set>
-			<span class="badge badge-info">${(page-1)*size+status.index+1}</span>
+			<p>
+			<span class="badge badge-info">${(page-1)*size+status.index+1} 	</span> <span class="badge badge-warning"><date:date pattern="HH时mm分mm秒 "
+					value="${current.punchAt}"></date:date></span><p>
 			<tiles:insertDefinition name="personCard" />
 		</div>
 

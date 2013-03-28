@@ -36,6 +36,9 @@
 				, 上次登录时间:
 				<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
 					value="${current.loginAt}"></date:date>
+				,打卡时间
+				<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
+					value="${current.punchAt}"></date:date>
 			</p>
 		</div>
 
