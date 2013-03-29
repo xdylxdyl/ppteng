@@ -283,7 +283,7 @@
 				</div>
 				<div class="span">
 					<p>
-						<a href="http://www.j-show.com/" target="_blank">乐唯网</a>
+						<a href="http://www.joywi.com/" target="_blank">乐唯网</a>
 					<p>
 					
 				</div>
