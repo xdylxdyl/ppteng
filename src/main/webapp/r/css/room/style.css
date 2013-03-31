@@ -1,0 +1,17 @@
+body {
+    background: #f9f9f9;
+    color: #333;
+}
+.sidebar-nav {
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    float: left;
+    margin-top: 1.5em;
+
+}
+.content {
+    position: relative;
+    float: right;
+
+}
