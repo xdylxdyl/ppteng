@@ -33,7 +33,7 @@
 				<option value="mine_1.0"
 					<c:if test="${room.version=='mine_1.0'}">selected="selected"</c:if>>多人扫雷[测试版]</option>
 				<option value="video_1.0"
-					<c:if test="${room.version=='video_1.0'}">selected="selected"</c:if>>一起看视频[测试版]</option>
+					<c:if test="${room.version=='video_1.0'}">selected="selected"</c:if>>虚拟电影院[测试版]</option>
 			</select>
 		</spring:bind>
 

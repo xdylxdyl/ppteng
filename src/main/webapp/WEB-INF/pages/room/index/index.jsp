@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 
 <!DOCTYPE HTML>
-<html>
+<html ng-app="imgList">
 <head>
 <title>葡萄藤轻游戏"</title>
 <meta name="keywords" content="杀人游戏,简化,警版,电影院,扫雷,多人扫雷">
@@ -11,15 +11,17 @@
 	="description"  content="葡萄藤是一个集杀人游戏,多人在线扫雷等多种休闲娱乐在一起的轻游戏网站,支持房主自定义神态,自定义背景音乐,和朋友或者是自己一起相处着这静静的时光">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script>
+
 <script
 	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script type="text/javascript">
-    $(function() {
-        $('.carousel').carousel();
-    })
-     headView.highLight("index");
-</script>
+
+<!-- <script src="/r/j-src/angular/angular.js"></script>
+ <script
+	src="/r/j-src/angular/angular-resource.js"></script> -->
+	 <script
+	src="/r/j-src/index/index.js?v=${frontVersion}"></script>
+	 <script
+	type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script>
 </head>
 
 
@@ -100,71 +102,18 @@
 					</c:otherwise>
 				</c:choose>
 
+				
 
 				<div class="span8 banner-screen">
-					<div id="indexCarousel" class="carousel">
-						<div class="carousel-inner">
-							<!-- <div class="item">
-								<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
-								<div class="carousel-caption">
-									<h4>268活动</h4>
-									<p>每周二,周六晚上八点半,约在一起玩简化</p>
-								</div>
-							</div>
-							<div class="item">
-								<img src="/r/img/img_banner_1.jpg" alt="杀人游戏">
-								<div class="carousel-caption">
-									<h4>葡萄藤电影院</h4>
-									<p>和朋友一起,约个时间,一边看电影,一边聊天</p>
-								</div>
-							</div> 
-							-->
-							<div class="active item">
-								<img
-									src="http://www.baidupcs.com/thumbnail/b46b85f0ffef60def44e1c9ac6f496a9?fid=4043593929-250528-2328322191&time=1364435764&sign=FDTA-DCb740ccc5511e5e8fedcff06b081203-UmjBO8YCn1ZQi33OpEwA4u5kimM%3D&expires=8h&size=c850_u580&quality=100"
-									alt="葡萄藤电影院">
-								<div class="carousel-caption">
-									<h4>今天晚上八点半 东邪西毒</h4>
-									<p>一场自言自语的故事</p>
-								</div>
-							</div>
-							<div class="item">
-								<img
-									src="http://www.baidupcs.com/thumbnail/aa2299e44e8a38d0c34705fa8b7ea5c9?fid=4043593929-250528-2564807811&time=1364435692&sign=FDTA-DCb740ccc5511e5e8fedcff06b081203-0r8MuXVzGrXbfV%2FyCebOBuPtjI0%3D&expires=8h&size=c850_u580&quality=100"
-									alt="葡萄藤电影院">
-								<div class="carousel-caption">
-									<h4>东邪西毒</h4>
-									<p>一种若有若无的怀念</p>
-								</div>
-							</div>
-						<!-- 	<div class="item">
-								<img
-									src="http://www.baidupcs.com/thumbnail/ad8d4e4a719292cd954b68a677e11334?fid=4043593929-250528-1616736912&time=1364435847&sign=FDTA-DCb740ccc5511e5e8fedcff06b081203-msCAukgXRNyXWJRxkHQXdvxWGrU%3D&expires=8h&size=c850_u580&quality=100"
-									alt="葡萄藤电影院">
-								<div class="carousel-caption">
-									<h4>刀光剑影</h4>
-									<p>斩不去心中的寂寞</p>
-								</div>
-							</div> -->
-
-
-							<div class="item">
-								<img
-									src="http://www.baidupcs.com/thumbnail/46f5c88fb466d252d1a35b20bc83912c?fid=4043593929-250528-709213923&time=1364435847&sign=FDTA-DCb740ccc5511e5e8fedcff06b081203-hkyGpQMv%2Fhn47R4MRv7JB37mH5A%3D&expires=8h&size=c850_u580&quality=100"
-									alt="葡萄藤电影院">
-								<div class="carousel-caption">
-									<h4>[东邪西毒]等待</h4>
-									<p>并非是要你回来,而是想和你一起离开</p>
-								</div>
-							</div>
-
-
-
+				
+					 <div id="indexCarousel" class="carousel ng-scope" interval="500" ng-controller="ImgCtrl">
+						<div class="carousel-inner"   >
+							<<tiles:insertDefinition name="carousel" />
 						</div>
 						<a class="carousel-control left" href="#indexCarousel"
 							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
 							href="#indexCarousel" data-slide="next">&rsaquo;</a>
-					</div>
+					</div> 
 				</div>
 			</div>
 		</div>
@@ -182,7 +131,7 @@
 								<div class="chapter-body">
 									<a href="#" class="pull-left"><img
 										src="/r/img/icon_movie.png" alt="电影院" width="64" height="64"></a>
-									<h4>电影院</h4>
+									<h4>虚拟电影院</h4>
 									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
 									<p>
 										<a class="btn"
@@ -242,7 +191,7 @@
 									<td class="score"><fmt:formatNumber pattern="0.00"
 											value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber></td>
 									<td class="name"><a
-										href="player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
+										href="player/statistics.do?uid=${user.id}">${user.name}</a></td>
 								</tr>
 							</c:forEach>
 
@@ -259,7 +208,7 @@
 		<div class="container">
 			<p>友情链接</p>
 			<div class="row">
-				<div class="span4">
+				<div class="span3">
 					<p>
 						<a href="http://www.pickupstudio.org/" target="_blank">皮卡工作室</a>
 					<p>
@@ -267,7 +216,7 @@
 						<a href="http://www.15tiance.com/" target="_blank">天策策划</a>
 					<p>
 				</div>
-				<div class="span4">
+				<div class="span3">
 					<p>
 						<a href="http://www.qqwaiyu.com/" target="_blank">青青外语</a>
 					<p>
@@ -275,12 +224,17 @@
 						<a href="http://womenaikan.com/" target="_blank">我们爱看</a>
 					<p>
 				</div>
-				<div class="span4">
+				<div class="span3">
 					<p>
 						<a href="http://www.j-show.com/" target="_blank">吉时吉会展</a>
 					<p>
 					<p>
 						<a href="http://zhujiusanguo.5d6d.net/" target="_blank">煮酒三国文史论坛</a>
+					<p>
+				</div>
+				<div class="span">
+					<p>
+						<a href="http://www.joywi.com/" target="_blank">乐唯网</a>
 					<p>
 				</div>
 			</div>

@@ -1,27 +1,31 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app >
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>LogIn</title>
-<link href="../css/index.css" rel="stylesheet"/>
-<script src="../j-src/jquery/jquery-1.6.1.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>LogIn</title>
+    <link href="../css/index.css" rel="stylesheet"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
+
+    <script src="todo.js"></script>
+    <link rel="stylesheet" href="todo.css">
+
+
+
 </head>
 
 <body>
-	<form>
-	<h1>Log In</h1>
-	<fieldset class="radios">
-		<input type="radio" value="lei" name="lei" checked="checked">Google
-		<input type="radio" value="lei" name="lei">Yahoo
-		<input type="radio" value="lei" name="lei">cms
-	</fieldset>
-	<fieldset class="username">
-		<label>USERNAME</label><input type="text"><br />
-		<label>PASSWORD</label><input type="password">
-	</fieldset>
-	<fieldset class="action">
-		<input type="submit" value="Log in">
-	</fieldset>
-	</form>
+
+
+
+
+<div ng-controller="TodoCtrl">
+      <ul class="unstyled">
+        <li ng-repeat="todo in todos">
+          <span class="done-{{todo.done}}">{{todo.text}}</span>
+        </li>
+      </ul>
+    </div>
 </body>
 </html>
+

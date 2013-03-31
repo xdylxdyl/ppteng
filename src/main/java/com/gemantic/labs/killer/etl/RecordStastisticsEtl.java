@@ -65,6 +65,10 @@ public class RecordStastisticsEtl {
 
 	public void calculateProcess(String type, Set<String> functionType) throws ServiceException, ServiceDaoException, IllegalAccessException, NoSuchFieldException,
 			InterruptedException {
+		if(functionType==null||functionType.size()==0){
+			functionType.add("all");
+			functionType.add("third");
+		}
 		List<Long> lists;
 		if ("day".equals(type)) {
 			// 1.init all players and init all statistics
@@ -104,7 +108,7 @@ public class RecordStastisticsEtl {
 		existIDS = MyListUtil.convert2Map(SimpleStatistics.class.getDeclaredField("id"), sss);
 
 		// 2.calculate all win/lose
-		if (functionType!=null&&functionType.contains("all")) {
+		if (functionType.contains("all")) {
 			log.info("start calculate all");
 			Long start=System.currentTimeMillis();
 			calculateWinAll(records, existIDS);
@@ -112,7 +116,7 @@ public class RecordStastisticsEtl {
 		}
 
 		// 4.calcualte third
-		if (functionType!=null&&functionType.contains("third")) {
+		if (functionType.contains("third")) {
 			log.info("start calculate third");
 			Long startThird=System.currentTimeMillis();
 			calculatePhase(records, existIDS, totalPlayers);

@@ -4,6 +4,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 <div class="span3">
+   		<tiles:insertDefinition name="currentUserHint" />
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">			
 

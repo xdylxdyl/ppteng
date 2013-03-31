@@ -55,7 +55,11 @@
 
         <div class="span9">
             <c:if test="${rooms== null || fn:length(rooms) == 0}">
-                <h1>现在么有房间,建房有金币拿哦~</h1>
+                <h1>现在么有房间</h1>
+                <h1>但是你可以创建"简化/多人扫雷/虚拟电影院"~~</h1>             
+                 <P>管理员可以自定义房间背景乐~~</p>
+                 <P>管理员可以自定义神态~~</p>
+                 <P>管理员在游戏结束可获取更多金币~~~</p>
             </c:if>
     <c:forEach items="${rooms}" var="room" begin="0" step="1" varStatus="status">
             <div class="row" style="margin-bottom: 30px;">

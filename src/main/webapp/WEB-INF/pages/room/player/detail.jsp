@@ -31,11 +31,13 @@
 		<div id="personal" class="personal well">
 			<!--名字，分数-->
 			<div class="row-fluid">
-				<p>葡萄号<span class="label label-inverse"> ${current.id}</span></p>
+				<p>
+					葡萄号<span class="label label-inverse"> ${current.id}</span>
+				</p>
 				<div class="title pull-left" id="editName">${current.name}</div>
 				<p class="pull-right" id="fraction">
 					<span class="label label-info">金币 ${current.money}</span>
-				
+
 				</p>
 			</div>
 			<!--照片，签名-->
@@ -62,7 +64,7 @@
 					, 上次登录时间:
 					<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
 						value="${current.loginAt}"></date:date>
-				</p>		
+				</p>
 			</div>
 
 
@@ -88,7 +90,13 @@
 
 
 
-
+		
+			<P>
+				<a href="/money/flow.do?uid=${current.id}">查看财务</a>
+			</p>
+			<P>
+				<a href="/player/statistics.do?uid=${current.id}">查看统计</a>
+			</p>
 
 
 
