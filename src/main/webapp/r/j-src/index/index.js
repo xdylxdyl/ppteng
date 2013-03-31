@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function ImgCtrl($scope, Image) {
+/*function ImgCtrl($scope, Image) {
     $scope.imgs = Image.query();
     $('.carousel').carousel();
 
@@ -15,14 +15,14 @@ function ImgCtrl($scope, Image) {
 angular.module('imgList', [ 'imgListServices'])
 
 
-/* Services */
+*//* Services *//*
 
 angular.module('imgListServices', ['ngResource']).
     factory('Image', function ($resource) {
         return $resource('/r/json/index.json', {}, {
             query:{method:'GET', params:{}, isArray:true}
         });
-    });
+    });*/
 
 
 headView.highLight("index");

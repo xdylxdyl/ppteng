@@ -15,9 +15,9 @@
 <script
 	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 
-<script src="/r/j-src/angular/angular.js"></script>
+<!-- <script src="/r/j-src/angular/angular.js"></script>
  <script
-	src="/r/j-src/angular/angular-resource.js"></script>
+	src="/r/j-src/angular/angular-resource.js"></script> -->
 	 <script
 	src="/r/j-src/index/index.js?v=${frontVersion}"></script>
 	 <script

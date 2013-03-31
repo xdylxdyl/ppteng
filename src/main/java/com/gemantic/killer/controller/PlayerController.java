@@ -581,10 +581,10 @@ public class PlayerController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/player/punch", method = RequestMethod.POST)
-	public String punch(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+	public String punch(HttpServletRequest request, HttpServletResponse response, ModelMap model,Boolean isBeautiful) throws Exception {
 
 		Long uid = cookieUtil.getID(request, response);
-		log.info(uid + " punch ");
+		log.info(uid + " punch "+isBeautiful);
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
 
@@ -601,10 +601,17 @@ public class PlayerController {
 		user.setPunchAt(System.currentTimeMillis());
 		int m = 500;
 		
+		if(isBeautiful){
+			m=500*10;			
+		}else{
+			m=500*2;
+		}
+	
+		
 		int punchCount = PunchUtil.getLatestContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, user.getPunch());
 
 		//500的基本金额+打卡连续天数*1用户级别对应权重*连续打卡奖励 
-		m=500+punchCount*1*100;
+		m=m+punchCount*1*100;
 		log.info(uid+" punch get money "+m+" of punchCount "+punchCount);
 		
 		user.setMoney(user.getMoney() + m);
