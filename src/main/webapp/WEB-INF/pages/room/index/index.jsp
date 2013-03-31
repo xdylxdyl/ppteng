@@ -131,7 +131,7 @@
 								<div class="chapter-body">
 									<a href="#" class="pull-left"><img
 										src="/r/img/icon_movie.png" alt="电影院" width="64" height="64"></a>
-									<h4>电影院</h4>
+									<h4>虚拟电影院</h4>
 									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
 									<p>
 										<a class="btn"
