@@ -108,13 +108,7 @@
 				
 					 <div id="indexCarousel" class="carousel ng-scope" interval="500" ng-controller="ImgCtrl">
 						<div class="carousel-inner"   >
-							<div class="item" ng-repeat="img in imgs">
-								<img ng-src="{{img.url}}" alt="杀人游戏" slide>
-								<div class="carousel-caption">
-									<h4>{{img.title}}</h4>
-									<p>{{img.comments}}</p>
-								</div>
-							</div>
+							<<tiles:insertDefinition name="carousel" />
 						</div>
 						<a class="carousel-control left" href="#indexCarousel"
 							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"

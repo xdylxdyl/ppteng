@@ -164,4 +164,10 @@
 	
 		<!--leftNavHead -->
 	<definition name="currentUserHint" template="/WEB-INF/pages/room/tiles/left_nav_head.jsp" />
+	
+	
+	
+		<!--carousel -->
+	<definition name="carousel" template="/WEB-INF/pages/room/index/img.jsp" />
+	
 </tiles-definitions>
