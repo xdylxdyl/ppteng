@@ -15,11 +15,11 @@
 					value="${size}">
 					
 								<div class="hero-unit">
-							<h1>三人局显然不是简化的目标</h1>
+							<h1>进三是杀手获胜的必要条件</h1>
 
-							<p>但进三是每一个人都会遇到的事情</p>
-						    <p>来看一下胜率吧</p>
-							<p class="text-warning">能否进三有太多不确定,所以进三率仅以用来自嘲</p>
+							<p>很多杀手很难进三,但是一旦进三,胜率很高</p>
+						    <p>还有些杀手经常进三,却常常功亏一篑</p>
+							<p class="text-warning">进三率对于杀手来说,还是蛮重要的</p>
 						
 
 
@@ -34,13 +34,13 @@
 								<tr>
 									<th>序号</th>
 									<th>姓名</th>
-									<th id="killeThirdWin" query="killerThirdWin">胜<i></i></th>
-									<th id="killerThird" query="killerThird" class="cursor-pointer">进三<i></i></th>
-									<th id="" query="">做杀<i></i></th>
+									<th id="killerThirdWin" query="killerThirdWin">胜<i></i></th>
+									<th id="killerThird" query="killerThird">进三<i></i></th>
+									<th id="killer" query="killer">做杀<i></i></th>
 									<th id="killerThirdWin_killerThird" query="killerThirdWin"
 										secondQuery="killerThird">胜率<i></i></th>
 									<th id="killerThird_killer" query="killerThird"
-										secondQuery="">进三率<i></i></th>
+										secondQuery="killer">进三率<i></i></th>
 
 								</tr>
 							</thead>

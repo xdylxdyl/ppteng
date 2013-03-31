@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 
 <!DOCTYPE HTML>
-<html>
+<html ng-app="imgList">
 <head>
 <title>葡萄藤轻游戏"</title>
 <meta name="keywords" content="杀人游戏,简化,警版,电影院,扫雷,多人扫雷">
@@ -11,15 +11,17 @@
 	="description"  content="葡萄藤是一个集杀人游戏,多人在线扫雷等多种休闲娱乐在一起的轻游戏网站,支持房主自定义神态,自定义背景音乐,和朋友或者是自己一起相处着这静静的时光">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script>
+
 <script
 	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script type="text/javascript">
-    $(function() {
-        $('.carousel').carousel();
-    })
-     headView.highLight("index");
-</script>
+
+<script src="/r/j-src/angular/angular.js"></script>
+ <script
+	src="/r/j-src/angular/angular-resource.js"></script>
+	 <script
+	src="/r/j-src/index/index.js?v=${frontVersion}"></script>
+	 <script
+	type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script>
 </head>
 
 
@@ -100,69 +102,24 @@
 					</c:otherwise>
 				</c:choose>
 
+				
 
 				<div class="span8 banner-screen">
-					<div id="indexCarousel" class="carousel">
-						<div class="carousel-inner">
-							<div class="item">
-								<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
+				
+					 <div id="indexCarousel" class="carousel ng-scope" interval="500" ng-controller="ImgCtrl">
+						<div class="carousel-inner"   >
+							<div class="item" ng-repeat="img in imgs">
+								<img ng-src="{{img.url}}" alt="杀人游戏" slide>
 								<div class="carousel-caption">
-									<h4>268活动</h4>
-									<p>每周二,周六晚上八点半,约在一起玩简化</p>
+									<h4>{{img.title}}</h4>
+									<p>{{img.comments}}</p>
 								</div>
 							</div>
-							<!--  <div class="item">
-                                                                <img src="/r/img/img_banner_1.jpg" alt="杀人游戏">
-                                                                <div class="carousel-caption">
-                                                                        <h4>葡萄藤电影院</h4>
-                                                                        <p>和朋友一起,约个时间,一边看电影,一边聊天</p>
-                                                                </div>
-                                                        </div> -->
-
-							<div class="active item">
-								<img
-									src="http://tu.58task.com/pics/46f5c88fb466d252d1a35b20bc83912c.jpg"
-									alt="葡萄藤电影院">
-								<div class="carousel-caption">
-									<h4>告别东邪西毒</h4>
-									<p>敬请期待,下周葡萄藤电影院</p>
-								</div>
-							</div>
-							<!-- <div class="item">
-								<img
-									src="http://tu.58task.com/pics/b46b85f0ffef60def44e1c9ac6f496a9.jpg"
-									alt="葡萄藤电影院">
-								<div class="carousel-caption">
-									<h4>东邪西毒</h4>
-									<p>一种若有若无的怀念</p>
-								</div>
-							</div> -->
-							<!--    <div class="item">
-                                                                <img src="http://tu.58task.com/pics/aa2299e44e8a38d0c34705fa8b7ea5c9.jpg"
-                                                                        alt="葡萄藤电影院">
-                                                                <div class="carousel-caption">
-                                                                        <h4>刀光剑影</h4>
-                                                                        <p>斩不去心中的寂寞</p>
-                                                                </div>
-                                                        </div> -->
-
-
-							<!-- <div class="item">
-								<img
-									src="http://tu.58task.com/pics/aa2299e44e8a38d0c34705fa8b7ea5c9.jpg"
-									alt="葡萄藤电影院">
-								<div class="carousel-caption">
-									<h4>[东邪西毒]等待</h4>
-									<p>并非是要你回来,而是想和你一起离开</p>
-								</div>
-							</div> -->
-
-
 						</div>
 						<a class="carousel-control left" href="#indexCarousel"
 							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
 							href="#indexCarousel" data-slide="next">&rsaquo;</a>
-					</div>
+					</div> 
 				</div>
 			</div>
 		</div>
@@ -240,7 +197,7 @@
 									<td class="score"><fmt:formatNumber pattern="0.00"
 											value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber></td>
 									<td class="name"><a
-										href="player/statistics.do?uid=${user.id}&version=simple">${user.name}</a></td>
+										href="player/statistics.do?uid=${user.id}">${user.name}</a></td>
 								</tr>
 							</c:forEach>
 
@@ -285,7 +242,6 @@
 					<p>
 						<a href="http://www.joywi.com/" target="_blank">乐唯网</a>
 					<p>
-					
 				</div>
 			</div>
 		</div>

@@ -21,14 +21,15 @@
 								<tr>
 									<th>排名</th>
 									<th>姓名</th>
-									<th id="win_all" query="win" secondQuery="all"
-										class="cursor-pointer">胜率<i class=""></i></th>
-									<th id="win" query="win" class="cursor-pointer">胜局<i
+
+									<th id="killerWin_killer" query="killerWin"
+										secondQuery="killer" class="cursor-pointer">胜率<i class=""></i></th>
+									<th id="killerWin" query="killerWin" class="cursor-pointer">胜局<i
 										class=""></i></th>
+									<th id="killer_all" query="killer" secondQuery="all"
+										class="cursor-pointer">做杀<i class=""></i></th>
 
 
-									<th id="all" query="all" class="cursor-pointer">总局<i
-										class=""></i></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -58,12 +59,15 @@
 										<td><a
 											href="/player/statistics.do?uid=${user.id}&version=statistics">${user.name}</a></td>
 
+
+
 										<td><fmt:formatNumber pattern="0.00"
-												value="${statistics.win/statistics.all}"></fmt:formatNumber></td>
-										<td>${statistics.win}</td>
+												value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber>
+										</td>
+										<td>${statistics.killerWin}</td>
 
+										<td>${statistics.killer}</td>
 
-										<td>${statistics.all}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
