@@ -66,6 +66,7 @@ public class RecordStastisticsEtl {
 	public void calculateProcess(String type, Set<String> functionType) throws ServiceException, ServiceDaoException, IllegalAccessException, NoSuchFieldException,
 			InterruptedException {
 		if(functionType==null||functionType.size()==0){
+			functionType=new HashSet();
 			functionType.add("all");
 			functionType.add("third");
 		}
