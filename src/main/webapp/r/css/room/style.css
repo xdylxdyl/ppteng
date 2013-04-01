@@ -2,16 +2,47 @@ body {
     background: #f9f9f9;
     color: #333;
 }
+/*head*/
+.navbar {
+    margin-bottom: 0;
+}
+/*left*/
 .sidebar-nav {
-    position: relative;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    position: absolute;
     width: 200px;
     float: left;
-    margin-top: 1.5em;
-
+    margin: 0;
+    padding-top: 1.5em;
 }
+.sidebar-nav .nav-list {
+    padding: 0;
+}
+.sidebar-nav li a {
+    color: #585868;
+    text-shadow: 1px 1px 0 #fff;
+    padding: .5em 2em;
+    border: 0;
+    margin: 0 1px;
+    background: none;
+}
+/*right*/
 .content {
+    min-width: 400px;
     position: relative;
-    float: right;
-
+    background: #fff;
+    margin-left: 200px;
+    border-left: 1px solid #cfcfd6;
+}
+/*foot*/
+.foot {
+    background: #f9f9f9;
+    border-top: 1px solid #cfcfd6;
+    min-width: 600px;
+}
+.foot .foot-send {
+    margin: 10px 0;
+}
+.foot .select {
+    margin-left: 180px;
+    margin-top: 10px;
 }
