@@ -29,13 +29,13 @@ no-loop true
 when
 	//conditions    
     $message:Message($subject:subject,predict=="start")   
-    
+    $right:Right()
     //clear source    
     
 then      
 	//actions
      LogUtil.log("clear prev game info start================= ");      
-      
+      retract $right;
         
      LogUtil.log("clear prev game infoage over ================="); 
     
@@ -107,7 +107,7 @@ then
 	Game game=new Game("ready",$allReadys.size(),waterCount,killerCount,System.currentTimeMillis(),0L,$time,rname);
 	
 	 
-	 //3.create Role/status/vote record message create log 
+	 //3.create Role/status/vote record message create log ,how to update all unready players status;
 	 
 		LogUtil.log("============================ role is "+ids_role);
 		for(Object o: $allReadys){
@@ -116,7 +116,7 @@ then
 			    String uid=p.getId();
 			    String role=ids_role.get(uid);
 			      p.setStatus("living");	  
-				  update(p);
+				  modify(p);
 				  
 				  Role r=new Role(uid,role);
 				  insert(r);	  
@@ -141,7 +141,7 @@ then
 	LogUtil.log(" game status  ================="+game);
 	//4 update room status ||repeat with game	
 	$room.setStatus("run");		
-	update($room);
+	modify($room);
 	
 	
 	//5.create time message	
