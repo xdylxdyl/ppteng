@@ -20,7 +20,7 @@ body {
 .sidebar-nav li a {
     color: #585868;
     text-shadow: 1px 1px 0 #fff;
-    padding: .5em 2em;
+    padding: .1em 1.5em;
     border: 0;
     margin: 0 1px;
     background: none;
@@ -45,4 +45,23 @@ body {
 .foot .select {
     margin-left: 180px;
     margin-top: 10px;
+}
+/*icon*/
+.icon-blue {
+    background-image: url("../../img/glyphicons-halflings-blue.png");
+}
+.icon-red {
+    background-image: url("../../img/glyphicons-halflings-red.png");
+}
+.icon-male {
+    background-position: 0 -167px;
+ }
+.icon-female {
+    background-position: -24px -167px;
+}
+.icon-dead {
+    background-position: -48px -167px;
+}
+.icon-kill {
+    background-position: -72px -167px;
 }
