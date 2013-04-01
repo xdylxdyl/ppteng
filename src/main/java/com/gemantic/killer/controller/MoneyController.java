@@ -170,7 +170,7 @@ public class MoneyController {
         List<User> users=new ArrayList();
         users.add(fuser);
         users.add(tuser);
-        this.userSevice.updateList(users);
+        this.userSevice.updateList(users);     
         this.moneyFlowService.insert(mf);
 
 

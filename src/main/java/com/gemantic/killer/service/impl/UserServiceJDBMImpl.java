@@ -30,7 +30,7 @@ import com.gemantic.labs.killer.service.UsersService;
 
 
 
-@Component
+//@Component
 public class UserServiceJDBMImpl implements UserService {
 
 	private static final Log log = LogFactory.getLog(UserServiceJDBMImpl.class);

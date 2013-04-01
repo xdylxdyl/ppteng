@@ -28,8 +28,8 @@ declare Pane
     
      id:String
      coordinate:Pair
-     value:String#如果.是雷就是m. 标记为雷是t, 其它的就是周围雷的数目.	
-     tag:String#用户的标记  
+     value:String//如果.是雷就是m. 标记为雷是t, 其它的就是周围雷的数目.	
+     tag:String//用户的标记  
      
 end
 
@@ -39,7 +39,7 @@ declare Click
      value:String
      pid:String
 end
-#这个Tag不只是用户标记.用户点开的内容都有的
+//这个Tag不只是用户标记.用户点开的内容都有的
 declare Tag 
      uid:String  
      value:String

@@ -21,13 +21,13 @@ import  com.gemantic.common.util.json.GsonUtil;
 
 
 
-#========================action group start =========================
+//========================action group start =========================
 
 
 rule 'create room'
 ruleflow-group "action"
 when
-	#conditions
+	//conditions
 
     $message:Message(predict=="create")
     $operater:Operater($setting:setting)
@@ -62,7 +62,7 @@ rule 'update room setting'
 ruleflow-group "action"
 no-loop true
 when
-	#conditions
+	//conditions
 
     $message:Message(predict=="setting")
     $operater:Operater($setting:setting)
@@ -99,7 +99,7 @@ when
     $right:Right(id==$creater,right not contains "kick")
 
 then      
-   #why not run 
+   //why not run 
     LogUtil.log("admin right start   =============");
     
    
@@ -125,7 +125,7 @@ when
    
 
 then      
-   #why not run 
+   //why not run 
     LogUtil.log("admin right start   =============");
     $right.getRight().add("start"); 
     $right.setIsNotify(false);
@@ -139,7 +139,7 @@ end
 rule 'change admin'
 ruleflow-group "action"
 when
-	#conditions
+	//conditions
 	    $room:Room($creater:creater,$rid:id)
     not Player(id==$creater)
      $person:Player($pid:id)
@@ -174,12 +174,12 @@ end
 rule 'login'
 ruleflow-group "login action"
 when
-	#conditions
+	//conditions
     $room:Room()
     $message:Message($subject:subject,predict=="login")
     not Player(id==$subject)
 then      
-	#actions
+	//actions
      LogUtil.log("login =================");  
     Player person=new Player($message.getSubject(),"","unready");
     insert(person);
@@ -197,13 +197,13 @@ rule 'login init right when unrun'
 ruleflow-group "login action"
 no-loop true
 when
-	#conditions
+	//conditions
     
     $person:Player($id:id)
     not right:Right(id==$id)
     $room:Room(status!="run")
 then      
-	#actions
+	//actions
      LogUtil.log("login init right ================="); 
      Right r=new Right($id,convertString2Set("say,ready"),false);
      insert(r);
@@ -220,13 +220,13 @@ rule 'login init right when run'
 ruleflow-group "login action"
 no-loop true
 when
-	#conditions
+	//conditions
     
     $person:Player($id:id)
     not right:Right(id==$id)
     $room:Room(status=="run")
 then      
-	#actions
+	//actions
      LogUtil.log("login init right ================="); 
      Right r=new Right($id,convertString2Set(""),false);
      insert(r);
@@ -247,12 +247,12 @@ end
 rule 'logout clear person'
 ruleflow-group "logout action"
 when
-	#conditions    
+	//conditions    
     $message:Message($subject:subject,predict=="logout")
     $person:Player(id==$subject)
     $room:Room()   
 then      
-	#actions
+	//actions
      LogUtil.log("logout clear person ================= "+$person); 
      retract($person); 
      LogUtil.log("logout  clear person over ================="); 
@@ -264,13 +264,13 @@ end
 rule 'logout clear room'
 ruleflow-group "logout action"
 when
-	#conditions
+	//conditions
     
     $message:Message($subject:subject,predict=="logout")     
     $operater:Operater(roomEmpty==false) 
     not Player()
 then      
-	#actions
+	//actions
      LogUtil.log("logout clear person ================= "); 
      $operater.setRoomEmpty(true);
      update($operater);     
@@ -281,13 +281,13 @@ end
 rule 'kick clear room'
 ruleflow-group "logout action"
 when
-	#conditions
+	//conditions
     
     $message:Message($subject:subject,predict=="kick")     
     $operater:Operater(roomEmpty==false) 
     not Player()
 then      
-	#actions
+	//actions
      LogUtil.log("logout clear person ================= "); 
      $operater.setRoomEmpty(true);
      update($operater);     
@@ -300,13 +300,13 @@ end
 rule 'logout clear right'
 ruleflow-group "logout action"
 when
-	#conditions
+	//conditions
     
     $right:Right($id:id)
     not Player(id==$id)
     
 then      
-	#actions
+	//actions
      LogUtil.log("logout clear right start ================= "); 
    
     
@@ -331,7 +331,7 @@ when
     $person:Player(id==$subject,status!="ready")
     $right:Right(id==$subject,right contains "ready")
 then      
-	#actions
+	//actions
      LogUtil.log("ready ================= "+$person+" room is "+$room); 
        
      $right.getRight().remove("ready");
@@ -352,12 +352,12 @@ end
 rule 'kick'
 ruleflow-group "action"
 when
-	#conditions
+	//conditions
     
     $message:Message($object:object,predict=="kick")
     $person:Player(id==$object)
 then      
-	#actions
+	//actions
     LogUtil.log("kick ================= "+$person); 
 
    
@@ -370,11 +370,11 @@ end
 
 
 
-#========================action group over  =========================
+//========================action group over  =========================
 
 
 
-#========================query group start =========================
+//========================query group start =========================
 
 
 
@@ -382,12 +382,12 @@ end
 rule 'login repeat'
 ruleflow-group "query"
 when
-	#conditions
+	//conditions
     $room:Room()
     $message:Message($subject:subject,predict=="login")
     Player(id==$subject)
 then      
-	#actions
+	//actions
      LogUtil.log("login repeat ================="); 
     retract($message);
     //  LogUtil.log(person); 
@@ -402,13 +402,13 @@ end
 
 
 
-#========================query group over =========================
+//========================query group over =========================
 
 
 
 
 
-#======================== game over   =========================
+//======================== game over   =========================
 
 
 
@@ -416,7 +416,7 @@ rule 'game over '
 ruleflow-group "generate message"
 
 when
-	#conditions	
+	//conditions	
     $message:Message(predict=="over")
     $operater:Operater(gameOver==false)   
     
@@ -439,7 +439,7 @@ end
 
 
 
-#========================message group  start=========================
+//========================message group  start=========================
 
 
 
@@ -468,7 +468,7 @@ rule 'say to one person message'
 ruleflow-group "part accepts message"
 
 when
-	#conditions	
+	//conditions	
     $message:Message($subject:subject,predict=="say",object!="-500")   
 	$room:Room(status=="unrun")
 	 eval($message.getAccepts().size()==0)
@@ -485,7 +485,7 @@ rule 'admin kick message'
 ruleflow-group "part accepts message"
 
 when
-	#conditions	
+	//conditions	
     $message:Message($subject:subject,predict=="kick",$object:object)   
 	
 	 eval($message.getAccepts().size()==0)
@@ -503,7 +503,7 @@ rule 'right  message'
 ruleflow-group "part accepts message"
 
 when
-	#conditions	
+	//conditions	
     $message:Message($subject:subject,predict=="right",$object:object)   
     eval($message.getAccepts().size()==0)
 
@@ -512,7 +512,7 @@ then
     LogUtil.log(" right  message  accepts start  =============");     
     $message.getAccepts().add($subject);
      update($message);
-     #LogUtil.log($message.getAccepts()); 
+     //LogUtil.log($message.getAccepts()); 
     LogUtil.log("right  message accepts over =============");  
 end
 
@@ -527,7 +527,7 @@ no-loop true
 when
 
 then      
-	#actions
+	//actions
      LogUtil.log("ready test  all accepts message================= "); 
     
      LogUtil.log("ready test all accepts message over =================");
@@ -539,7 +539,7 @@ rule 'all accepts message'
 ruleflow-group "all accepts message"
 
 when
-	#conditions	
+	//conditions	
     $message:Message($subject:subject,$object:object,$accepts:accepts)    
     eval($message.getAccepts().size()==0)
    $all_login_ids:HashSet()
@@ -551,12 +551,12 @@ when
 	      );
     
 then      
-   # LogUtil.log("all message   start ?=============");
-   # LogUtil.log($message);
+   // LogUtil.log("all message   start ?=============");
+   // LogUtil.log($message);
     
-     #LogUtil.log($accepts.size());
+     //LogUtil.log($accepts.size());
    $accepts.addAll(new ArrayList($all_login_ids));	
-  # LogUtil.log("all message over =============");
+  // LogUtil.log("all message over =============");
 end
 
 
@@ -567,12 +567,12 @@ rule 'next operater '
 ruleflow-group "next of operater"
 
 when
-	#conditions	
+	//conditions	
     $message:Message()
     $room:Room($rid:id)
     $operater:Operater()
 then      
-    #LogUtil.log("next operater  start  =============222");   
+    //LogUtil.log("next operater  start  =============222");   
      $message.setWhere($rid);
      $message.setTime(System.currentTimeMillis());
   
@@ -580,7 +580,7 @@ then
    
 	 retract($message);
 	
-    #LogUtil.log("next operater over =============");
+    //LogUtil.log("next operater over =============");
   
 end
 
@@ -596,7 +596,7 @@ rule 'query rule'
 ruleflow-group "snapshot"
 
 when
-	#conditions
+	//conditions
      Message($subject:subject,predict=="query")
     $room:Room()
     $allLogins:ArrayList()
@@ -618,7 +618,7 @@ then
       m.put("right",$right); 
 
       $operater.setSnapshots(GsonUtil.toJson(m));
-    	#actions
+    	//actions
 	LogUtil.log("room get query info over =================");
 end
 

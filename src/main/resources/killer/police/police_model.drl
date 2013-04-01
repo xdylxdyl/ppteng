@@ -1,0 +1,50 @@
+package drools.common
+
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import org.apache.commons.lang.StringUtils;
+
+
+declare Game
+	status: String
+	liverCount:int	
+	waterCount:int
+	killerCount:int
+	policeCount:int
+	lastTime:Long
+	remainTime:Long
+	startAt:Long
+	recordName:String	
+end
+
+declare Vote
+	id: String	
+	voters: Set
+	vote:String
+	type:String
+end
+
+
+
+declare Role
+       id:String
+       role:String
+       status:String
+end
+
+
+declare Die
+	id: String
+	type: String
+end
+
+
+declare Verify
+	id: String
+	type: String
+end
+
+
+
