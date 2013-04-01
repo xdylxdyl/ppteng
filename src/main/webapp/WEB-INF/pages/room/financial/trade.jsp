@@ -26,7 +26,7 @@
 		type="text" id="comments" name="comments" placeholder="此处填写转帐备注~"
 		class="sign" value="">
 
-	<p id="hint" class="text-error">注意葡萄号为数字,并非登录邮箱</p>
+	<p id="hint" class="text-error">注意葡萄号为数字,并非登录邮箱.转帐会收取百分之五的手续费,上不封顶,最少转帐金额为五金币</p>
 	<div class="form-actions">
 		<button class="btn btn-primary pull-left" id="completeBtn">提交</button>
 	</div>
