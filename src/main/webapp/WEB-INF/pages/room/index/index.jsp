@@ -108,7 +108,7 @@
 				
 					 <div id="indexCarousel" class="carousel ng-scope" interval="500" ng-controller="ImgCtrl">
 						<div class="carousel-inner"   >
-							<<tiles:insertDefinition name="carousel" />
+							<tiles:insertDefinition name="carousel" />
 						</div>
 						<a class="carousel-control left" href="#indexCarousel"
 							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"

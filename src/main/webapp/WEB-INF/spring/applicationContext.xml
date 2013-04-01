@@ -91,6 +91,16 @@
 						<value>killer/simple/simple_game.rf</value>
 					</list>
 				</entry>
+				<entry key="killer_police_1.0">
+					<list>
+						<value>killer/police/police_model.drl</value>
+						<value>killer/police/police_query.drl</value>
+						<value>killer/police/police_util.drl</value>
+						<value>killer/police/police_game.drl</value>
+						<value>killer/police/police_game.rf</value>
+					</list>
+				</entry>
+				
 				<entry key="mine_1.0">
 					<list>
 						<value>mine/multiplayer/mine_model.drl</value>
@@ -116,22 +126,6 @@
 	</bean>
 
 
-	<bean id="gameMaker" class="net.kotek.jdbm.DBMaker">
-		<constructor-arg>
-			<value>db/game</value>
-		</constructor-arg>
-	</bean>
-	<bean id="recordMaker" class="net.kotek.jdbm.DBMaker">
-		<constructor-arg>
-			<value>db/record</value>
-		</constructor-arg>
-	</bean>
-
-	<bean id="stockMaker" class="net.kotek.jdbm.DBMaker">
-		<constructor-arg>
-			<value>db/stock</value>
-		</constructor-arg>
-	</bean>
 
 
 

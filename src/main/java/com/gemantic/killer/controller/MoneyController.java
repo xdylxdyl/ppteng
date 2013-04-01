@@ -164,11 +164,13 @@ public class MoneyController {
         	 fuser.setMoney(fuser.getMoney()-mf.getMoney());
         }
        
-        tuser.setMoney(tuser.getMoney()+mf.getMoney());
+        Integer tax=mf.getMoney()/20;
+        log.info("tax is "+tax);
+        tuser.setMoney(tuser.getMoney()+mf.getMoney()-tax);
         List<User> users=new ArrayList();
         users.add(fuser);
         users.add(tuser);
-        this.userSevice.updateList(users);
+        this.userSevice.updateList(users);     
         this.moneyFlowService.insert(mf);
 
 

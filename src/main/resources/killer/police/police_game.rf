@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<process xmlns="http://drools.org/drools-5.0/process"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+         xs:schemaLocation="http://drools.org/drools-5.0/process drools-processes-5.0.xsd"
+         type="RuleFlow" name="game" id="game" package-name="drools.common" >
+
+  <header>
+    <imports>
+      <import name="com.gemantic.killer.common.model.Message" />
+      <import name="simple.killer.*" />
+    </imports>
+  </header>
+
+  <nodes>
+    <ruleSet id="68" name="game result" x="498" y="461" width="80" height="48" ruleFlowGroup="game init" />
+    <start id="1" name="Start" x="123" y="7" width="49" height="49" />
+    <ruleSet id="70" name="game phase person" x="811" y="407" width="172" height="48" ruleFlowGroup="clear vote at start" />
+    <end id="5" name="End" x="88" y="806" width="49" height="49" />
+    <ruleSet id="67" name="person status" x="1006" y="225" width="153" height="48" ruleFlowGroup="clear role" />
+    <ruleSet id="76" name="game prepare" x="368" y="22" width="191" height="48" ruleFlowGroup="retract unlimit message" />
+    <ruleSet id="61" name="game phase time" x="677" y="118" width="129" height="48" ruleFlowGroup="create snapshot" />
+  </nodes>
+
+  <connections>
+    <connection from="70" to="68" />
+    <connection from="67" to="70" />
+    <connection from="68" to="5" />
+    <connection from="61" to="67" />
+    <connection from="1" to="76" />
+    <connection from="76" to="61" />
+  </connections>
+
+</process>

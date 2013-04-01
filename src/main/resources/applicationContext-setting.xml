@@ -23,6 +23,8 @@
 			<map>
 				<entry key="simple_1.0" value-ref="simple_1.0_setting">				
 				</entry>
+				<entry key="killer_police_1.0" value-ref="killer_police_1.0_setting">				
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
@@ -58,7 +60,22 @@
 			</map>
 		</constructor-arg>
 	</bean>
-    
+     <bean id="killer_police_1.0_setting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="killerCount" value="1">				
+				</entry>
+				<entry key="policeCount" value="1">				
+				</entry>
+				<entry key="dayTime" value="240000">				
+				</entry>
+				<entry key="nightTime" value="60000">				
+				</entry>
+				<entry key="lastwordTime" value="60000">				
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
     
     
 </beans>

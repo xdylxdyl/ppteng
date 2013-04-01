@@ -25,7 +25,7 @@ import com.gemantic.common.drools.util.LogUtil;
 
 
 
-#========================query group start =========================
+//========================query group start =========================
 
 
 
@@ -60,9 +60,9 @@ when
 then      
 	LogUtil.log("bomb assign  =================");
 	LogUtil.log($allReadys);
-	 int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
-	 int  bombCount=Integer.valueOf(getRoomSetting($room,"mineCount","10"));#1*60*1000  
+	 int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  
+	 int  bombCount=Integer.valueOf(getRoomSetting($room,"mineCount","10"));//1*60*1000  
 
      String systemBombPic=BombUtil.assign(rowCount,columnCount,bombCount);
      LogUtil.log(" systemBombPic ================= "+systemBombPic);
@@ -198,7 +198,7 @@ end
 
 
 
-#========================action group start =========================
+//========================action group start =========================
 
 rule 'click pane'
 ruleflow-group "user action"
@@ -216,9 +216,9 @@ then
     
      Pair p=BombUtil.convertString2Pair($object);   
      
-     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
      LogUtil.log("=========");
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  	 
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  	 
 	 
 	  LogUtil.log("=========");
     String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);     
@@ -238,7 +238,7 @@ then
 end
 
 
-#tag Pane 
+//tag Pane 
 rule 'tag pane'
 ruleflow-group "user action"
 no-loop true
@@ -254,15 +254,15 @@ then
     LogUtil.log("tag pane start  ================="); 
      Pair p=BombUtil.convertString2Pair($object);
      
-      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
+      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
       LogUtil.log("=========");
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  
     String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);    
     
     if("*".equals(userTag)){
     $right=$right+1;    
     }
-    Message tagMessage=new Message($object,"mine","#");
+    Message tagMessage=new Message($object,"mine","//");
     tagMessage.setContent($subject);
     insert(tagMessage);     
     $bomb=$bomb+1;    
@@ -280,14 +280,14 @@ then
     LogUtil.log("user count is   ================="+$uc);
     
     
-    Tag tag=new Tag($subject,"#",$object);
+    Tag tag=new Tag($subject,"//",$object);
     insert(tag);
     retract($message);
     
     LogUtil.log("tag pane over  ================="); 
 end
 
-#tag Pane
+//tag Pane
 rule 'clear tag pane'
 ruleflow-group "clear tag action"
 no-loop true
@@ -297,14 +297,14 @@ when
     $message:Message($subject:subject,predict=="tag",$object:object)  
     $player:Player(id==$subject,status=="living")  
     $count:Count($bomb:bomb,$right:right)
-    $tag:Tag(pid==$object,value=="#")
+    $tag:Tag(pid==$object,value=="//")
      $userCount:UserCount($uc:count,uid==$subject)
        
 then
     LogUtil.log("clear tag pane start  ================="); 
     Pair p=BombUtil.convertString2Pair($object);
-     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000      
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000      
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  
     String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);   
     if("*".equals(userTag)){
       $right=$right-1;
@@ -354,9 +354,9 @@ then
     LogUtil.log("double click pane start  ================= "+$object+" system "+ $system);
  
         Pair pair=BombUtil.convertString2Pair($object);
-     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
       LogUtil.log("=========");
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  
 	  LogUtil.log("=========");
     List<Pair> roundPanes=BombUtil.getRoundPanes(pair,rowCount,columnCount);
      LogUtil.log("=========");
@@ -428,9 +428,9 @@ when
 then
     //LogUtil.log("click  zero number  start  ================= "+$click);   
    // Long start=System.currentTimeMillis();
-     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));#1*60*1000  
+     int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
      // LogUtil.log("=========");
-	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));#1*60*1000  
+	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  
 	 Pair pair=BombUtil.convertString2Pair($pid);
     List<Pair> roundPanes=BombUtil.getRoundPanes(pair,rowCount,columnCount);
     //  LogUtil.log(pair+" list pair is   ================= "+roundPanes);  
@@ -711,7 +711,7 @@ end
 
 
 
-#========================game status group over =========================
+//========================game status group over =========================
 
 
 
@@ -719,7 +719,7 @@ end
 
 
 
-#========================message group start =========================
+//========================message group start =========================
 
 
 
@@ -728,7 +728,7 @@ rule 'time operater '
 ruleflow-group "time of operater"
 
 when
-	#conditions	
+	//conditions	
     $message:Message($subject:subject,predict=="send time")
     $room:Room($rid:id,status=="run")
     $operater:Operater()
@@ -753,7 +753,7 @@ end
 rule 'game player query'
 ruleflow-group "query"
 when
-	#conditions
+	//conditions
     $message:Message($subject:subject,predict=="query")
     $room:Room(status=="run")
     $allLogins:ArrayList()
@@ -823,7 +823,7 @@ end
 
 
 
-#========================message group over =========================
+//========================message group over =========================
 
 
   

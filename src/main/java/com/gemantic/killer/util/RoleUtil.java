@@ -41,7 +41,8 @@ public class RoleUtil {
 	
 	public static void main(String[] args) {
 		Map<String,Integer> role_count=new HashMap();
-		role_count.put("killer", 2);
+		role_count.put("killer", 1);
+		role_count.put("police", 1);
 		role_count.put("water", 3);
 		
 		RoleUtil.assingRole(role_count, Arrays.asList(new String[]{"1","2","3","4","5"}));

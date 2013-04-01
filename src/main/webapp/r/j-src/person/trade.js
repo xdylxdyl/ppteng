@@ -50,7 +50,7 @@ var tradeView = {
             message = "转帐成功~";
             tradeView.showMoney(result.money);
         } else {
-            message=result.message;
+            message = result.message;
         }
         tradeView.showHint(message);
 
@@ -108,7 +108,15 @@ $(document).ready(function () {
     $("#money").blur(function () {
         var value = tradeView.getMoney();
         if (/^\d+$/.test(value)) {
-            tradeView.showHint("");
+
+            var money = parseInt(value);
+            if (money < 5) {
+                tradeView.disableCommit();
+                tradeView.showHint("最小转帐金额为5金币");
+            } else {
+                tradeView.showHint("允许转帐");
+            }
+
         } else {
             tradeView.disableCommit();
             tradeView.showHint("金额只能输入数字");
