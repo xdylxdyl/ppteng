@@ -10,25 +10,29 @@
 
 <!-- container start  -->
 <div class="span9">
-    <div class="well">
-	<h2>
-		${current.name}当前有资金<span id="currentMoney">${current.money}<span></span>
-	</h2>
+	<div class="well">
+		<h2>
+			${current.name}当前有资金<span id="currentMoney">${current.money}<span></span>
+		</h2>
 
-	<label for="uid">对方葡萄号</label> <input type="text" id="uid" name="uid"
-		placeholder="输入对方葡萄号,可在对方个人主页上查看" value=""> 
+		<label for="uid">对方葡萄号</label> <input type="text" id="uid" name="uid"
+			placeholder="输入对方葡萄号,可在对方个人主页上查看" value=""> <label
+			for="money">转出金额</label> <input type="text" id="money" name="money"
+			placeholder="输入金额,只允许输入整数" class="sign" value=""> <label
+			for="comments">赠言</label> <input type="text" id="comments"
+			name="comments" placeholder="此处填写转帐备注~" class="sign" value="">
 
-		<label for="money">转出金额</label>
-	<input type="text" id="money" name="money" placeholder="输入金额,只允许输入整数"
-		class="sign" value=""> 
+		<p id="hint" class="text-error">注意葡萄号为数字,并非登录邮箱.</p>
 
-		<label for="comments">赠言</label> <input
-		type="text" id="comments" name="comments" placeholder="此处填写转帐备注~"
-		class="sign" value="">
+		<p class="text-info">最少转帐金额为五金币.</p>
+		<p class="text-info">转帐会收取百分之五的手续费</p>
+		<p class="text-info">用户等级越高,手续费收取比例越低</p>
 
-	<p id="hint" class="text-error">注意葡萄号为数字,并非登录邮箱.转帐会收取百分之五的手续费,上不封顶,最少转帐金额为五金币</p>
-	<div class="form-actions">
-		<button class="btn btn-primary pull-left" id="completeBtn">提交</button>
+
+		<div class="form-actions">
+			<button class="btn btn-primary pull-left" id="completeBtn">提交</button>
+		</div>
+
+
 	</div>
-    </div>
 </div>
