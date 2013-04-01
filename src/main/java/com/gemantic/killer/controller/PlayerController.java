@@ -581,10 +581,10 @@ public class PlayerController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/player/punch", method = RequestMethod.POST)
-	public String punch(HttpServletRequest request, HttpServletResponse response, ModelMap model,Boolean isBeautiful) throws Exception {
+	public String punch(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 
 		Long uid = cookieUtil.getID(request, response);
-		log.info(uid + " punch "+isBeautiful);
+		log.info(uid + " punch ");
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
 
@@ -601,11 +601,11 @@ public class PlayerController {
 		user.setPunchAt(System.currentTimeMillis());
 		int m = 500;
 		
-		if(isBeautiful){
+	/*	if(isBeautiful){
 			m=500*10;			
 		}else{
 			m=500*2;
-		}
+		}*/
 	
 		
 		int punchCount = PunchUtil.getLatestContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, user.getPunch());
