@@ -15,6 +15,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.StringUtils;
+
+import com.gemantic.killer.util.RoleUtil;
 
 @Entity
 @Table(name = "simple_statistics")
@@ -56,7 +59,15 @@ public class SimpleStatistics implements Serializable {
 	private Integer waterThird = 0;
 
 	private Integer killerThird = 0;
-
+	
+	private Integer maxWater=0;
+	
+	private Integer maxKiller=0;
+	
+	private String role="";
+	
+    private String unZipRole="";
+	
 	private Long updateAt;
 
 	private Long createAt;
@@ -212,6 +223,61 @@ public class SimpleStatistics implements Serializable {
 
 	public void setKillerThird(Integer killerThird) {
 		this.killerThird = killerThird;
+	}
+	
+	
+	
+	
+	@Column(name = "max_water")
+	public Integer getMaxWater() {
+		return maxWater;
+	}
+
+	public void setMaxWater(Integer maxWater) {
+		this.maxWater = maxWater;
+	}
+	
+	
+	
+	
+	@Column(name = "max_killer")
+	public Integer getMaxKiller() {
+		return maxKiller;
+	}
+
+	public void setMaxKiller(Integer maxKiller) {
+		this.maxKiller = maxKiller;
+	}
+
+	@Column(name = "role")
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	
+	
+	
+	
+	
+
+	@Transient
+	public String getUnZipRole() {
+		if(StringUtils.isBlank(unZipRole)){
+			if(StringUtils.isBlank(role)){
+				
+			}else{
+				return RoleUtil.decodeRole(role);
+			}
+		}
+		return unZipRole;
+	}
+
+	public void setUnZipRole(String unZipRole) {
+		this.unZipRole = unZipRole;
 	}
 
 	@Column(name = "update_at")

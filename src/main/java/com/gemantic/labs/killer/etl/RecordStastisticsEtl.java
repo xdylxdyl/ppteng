@@ -23,6 +23,7 @@ import com.gemantic.common.util.MyMapUtil;
 import com.gemantic.common.util.MyTimeUtil;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.util.MessageUtil;
+import com.gemantic.killer.util.RoleUtil;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.model.SimpleStatistics;
 import com.gemantic.labs.killer.service.RecordService;
@@ -378,11 +379,16 @@ public class RecordStastisticsEtl {
 				for (Long wid : water) {
 					SimpleStatistics wss = existIDS.get(wid);
 					wss.setWater(wss.getWater() + 1);
+					wss.setRole(RoleUtil.setRole(RoleUtil.Role_Water, wss.getRole()));
+					wss.setMaxWater(RoleUtil.getMaxContinueRole(RoleUtil.Role_Water, wss.getRole()));
+					
 				}
 				// 总杀手数
 				for (Long kid : killer) {
 					SimpleStatistics wss = existIDS.get(kid);
 					wss.setKiller(wss.getKiller() + 1);
+					wss.setRole(RoleUtil.setRole(RoleUtil.Role_Killer, wss.getRole()));
+					wss.setMaxKiller(RoleUtil.getMaxContinueRole(RoleUtil.Role_Killer, wss.getRole()));
 
 				}
 

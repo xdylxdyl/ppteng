@@ -15,7 +15,9 @@
 			<li id="leftNav_statistics"><a
 				href="/player/statistics.do?uid=${current.id}&version=statistics">总计</a></li>
 				<li id="leftNav_statistics_third"><a
-				href="/player/statistics.do?uid=${current.id}&version=statistics_third">三人局</a></li>			
+				href="/player/statistics.do?uid=${current.id}&version=statistics_third">三人局</a></li>		
+					<li id="leftNav_role"><a
+				href="/player/statistics.do?uid=${current.id}&version=statistics_role">身份</a></li>		
 		</ul>
 	</div>
 	<!--/.well -->

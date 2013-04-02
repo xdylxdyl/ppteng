@@ -25,7 +25,15 @@
 										class="cursor-pointer">拿刀率<i class=""></i></th>
 									<th id="water" query="water" class="cursor-pointer">做水<i
 										class=""></i></th>
+										
+											<th id="max_water" query="max_water" class="">连水<i
+										class=""></i></th>
+										
+										
 									<th id="killer" query="killer" class="cursor-pointer">做杀<i
+										class=""></i></th>
+										
+											<th id="max_killer" query="max_killer" class="">连杀<i
 										class=""></i></th>
 
 									<th id="all" query="all" class="cursor-pointer">总局数<i
@@ -62,7 +70,9 @@
 										<td><fmt:formatNumber pattern="0.00"
 												value="${statistics.killer/statistics.all}"></fmt:formatNumber></td>
 										<td>${statistics.water}</td>
+										<td>${statistics.maxWater}</td>
 										<td>${statistics.killer}</td>
+										<td>${statistics.maxKiller}</td>
 
 										<td>${statistics.all}</td>
 									</tr>
