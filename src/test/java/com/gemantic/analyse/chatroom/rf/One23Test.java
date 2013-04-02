@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.logging.Log;
@@ -55,8 +53,10 @@ public class One23Test {
 
 	@Before
 	public void init() throws ServiceException, ServiceDaoException {
-		context = new ClassPathXmlApplicationContext("classpath:applicationContext*.xml");
-		droolsGameMessageService = (MessageService) context.getBean("messageServiceSingleDroolsImpl");
+		context = new ClassPathXmlApplicationContext(
+				"classpath:applicationContext*.xml");
+		droolsGameMessageService = (MessageService) context
+				.getBean("messageServiceSingleDroolsImpl");
 		roomService = (RoomService) context.getBean("roomServiceImpl");
 	}
 
@@ -67,7 +67,7 @@ public class One23Test {
 
 	}
 
-	//@Test
+	// @Test
 	public void testSort() {
 		List ls = new ArrayList();
 
@@ -93,7 +93,8 @@ public class One23Test {
 
 	}
 
-	private Map<String, String> assingRole(Map<String, Integer> role_count, List<String> ls) {
+	private Map<String, String> assingRole(Map<String, Integer> role_count,
+			List<String> ls) {
 
 		Map<String, String> results = new HashMap();
 		Collections.shuffle(ls);
@@ -110,12 +111,13 @@ public class One23Test {
 		return results;
 	}
 
-	
 	@Test
 	public void testRF() throws InterruptedException {
 		StringUtils.isBlank("");
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		kbuilder.add(ResourceFactory.newClassPathResource("test.drl"), ResourceType.DRL);
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
+				.newKnowledgeBuilder();
+		kbuilder.add(ResourceFactory.newClassPathResource("test.drl"),
+				ResourceType.DRL);
 
 		Long start = System.currentTimeMillis();
 		log.info("start ");
@@ -123,8 +125,10 @@ public class One23Test {
 		log.info(" new knowledge " + (System.currentTimeMillis() - start));
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 		log.info(" add knowledge " + (System.currentTimeMillis() - start));
-		final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
-		log.info(" session knowledge ========" + (System.currentTimeMillis() - start));
+		final StatefulKnowledgeSession ksession = kbase
+				.newStatefulKnowledgeSession();
+		log.info(" session knowledge ========"
+				+ (System.currentTimeMillis() - start));
 		// KnowledgeRuntimeLogger logger =
 		// KnowledgeRuntimeLoggerFactory.newFileLogger(ksession,
 		// "log/numberguess");
@@ -150,13 +154,30 @@ public class One23Test {
 
 	}
 
-	
-	//@Test
+	@Test
+	public void testPoliceRule() throws ServiceException, ServiceDaoException {
+
+		Room room = new Room("sss", 3L, "killer_police_1.0");
+		// TODO 我判断不出来用Int还是用String好
+		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
+				"78", "4", "", "killer_police_1.0");
+		List<Message> messages = this.droolsGameMessageService.generate(
+				loginMessage, room);
+		log.info(messages);
+
+	}
+
+	// @Test
 	public void testSimpleRF() throws InterruptedException {
 
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		kbuilder.add(ResourceFactory.newClassPathResource("killer/simple/simple_killer.drl"), ResourceType.DRL);
-		kbuilder.add(ResourceFactory.newClassPathResource("killer/simple/simple_room.rf"), ResourceType.DRF);
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
+				.newKnowledgeBuilder();
+		kbuilder.add(ResourceFactory
+				.newClassPathResource("killer/simple/simple_killer.drl"),
+				ResourceType.DRL);
+		kbuilder.add(ResourceFactory
+				.newClassPathResource("killer/simple/simple_room.rf"),
+				ResourceType.DRF);
 
 		Long start = System.currentTimeMillis();
 		log.info("start ");
@@ -164,7 +185,8 @@ public class One23Test {
 		log.info(" new knowledge " + (System.currentTimeMillis() - start));
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 		log.info(" add knowledge " + (System.currentTimeMillis() - start));
-		final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+		final StatefulKnowledgeSession ksession = kbase
+				.newStatefulKnowledgeSession();
 		log.info(" session knowledge " + (System.currentTimeMillis() - start));
 		// KnowledgeRuntimeLogger logger =
 		// KnowledgeRuntimeLoggerFactory.newFileLogger(ksession,
@@ -183,9 +205,11 @@ public class One23Test {
 	// @Test
 	public void testTimerDemo() throws InterruptedException {
 
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
+				.newKnowledgeBuilder();
 
-		kbuilder.add(ResourceFactory.newClassPathResource("TimeDemo.rf"), ResourceType.DRF);
+		kbuilder.add(ResourceFactory.newClassPathResource("TimeDemo.rf"),
+				ResourceType.DRF);
 
 		Long start = System.currentTimeMillis();
 		log.info("start ");
@@ -193,7 +217,8 @@ public class One23Test {
 		log.info(" new knowledge " + (System.currentTimeMillis() - start));
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 		log.info(" add knowledge " + (System.currentTimeMillis() - start));
-		final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+		final StatefulKnowledgeSession ksession = kbase
+				.newStatefulKnowledgeSession();
 		log.info(" session knowledge " + (System.currentTimeMillis() - start));
 		// KnowledgeRuntimeLogger logger =
 		// KnowledgeRuntimeLoggerFactory.newFileLogger(ksession,
@@ -212,10 +237,13 @@ public class One23Test {
 	// @Test
 	public void testSimleDemo() throws InterruptedException {
 
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
+				.newKnowledgeBuilder();
 
-		kbuilder.add(ResourceFactory.newClassPathResource("simple_room.drl"), ResourceType.DRL);
-		kbuilder.add(ResourceFactory.newClassPathResource("simple_room.rf"), ResourceType.DRF);
+		kbuilder.add(ResourceFactory.newClassPathResource("simple_room.drl"),
+				ResourceType.DRL);
+		kbuilder.add(ResourceFactory.newClassPathResource("simple_room.rf"),
+				ResourceType.DRF);
 
 		Long start = System.currentTimeMillis();
 		log.info("start ");
@@ -223,7 +251,8 @@ public class One23Test {
 		log.info(" new knowledge " + (System.currentTimeMillis() - start));
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 		log.info(" add knowledge " + (System.currentTimeMillis() - start));
-		final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+		final StatefulKnowledgeSession ksession = kbase
+				.newStatefulKnowledgeSession();
 		log.info(" session knowledge " + (System.currentTimeMillis() - start));
 		// KnowledgeRuntimeLogger logger =
 		// KnowledgeRuntimeLoggerFactory.newFileLogger(ksession,
@@ -239,10 +268,12 @@ public class One23Test {
 
 	}
 
-	//@Test
-	public void testMessage() throws IOException, ServiceException, ServiceDaoException, InterruptedException {
+	// @Test
+	public void testMessage() throws IOException, ServiceException,
+			ServiceDaoException, InterruptedException {
 
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
+				.newKnowledgeBuilder();
 		log.info("ffffffffffffffffffffffffl");
 		/*
 		 * kbuilder.add( ResourceFactory.newClassPathResource(
@@ -267,10 +298,12 @@ public class One23Test {
 		// kbase.addKnowledgePackages( kbuilder.getKnowledgePackages() );
 		log.info(" add knowledge " + (System.currentTimeMillis() - start));
 
-		final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+		final StatefulKnowledgeSession ksession = kbase
+				.newStatefulKnowledgeSession();
 		log.info(" session knowledge " + (System.currentTimeMillis() - start));
 
-		List<String> messages = FileUtil.readFileAsList("src/test/resources/simple_killer.txt");
+		List<String> messages = FileUtil
+				.readFileAsList("src/test/resources/simple_killer.txt");
 		List<Message> ms = new ArrayList();
 
 		Long rid = null;
@@ -301,7 +334,8 @@ public class One23Test {
 			 * ksession.fireAllRules(); log.info(operater);
 			 */
 
-			log.info("start process use method of service  ========================= " + message);
+			log.info("start process use method of service  ========================= "
+					+ message);
 
 			List<Message> ls = droolsGameMessageService.generate(m, room);
 			log.info(ls);
@@ -322,9 +356,8 @@ public class One23Test {
 
 	}
 
-	
-
-	private String getCityName(String ppname, int cnum, TreeMap<String, List<String>> cityNames) {
+	private String getCityName(String ppname, int cnum,
+			TreeMap<String, List<String>> cityNames) {
 		// TODO Auto-generated method stub
 		try {
 			return cityNames.get(ppname).get(cnum);
@@ -340,50 +373,48 @@ public class One23Test {
 		// TODO Auto-generated method stub
 		return ls.get(pnum);
 	}
-	
-	
+
 	public static void main(String[] args) throws InterruptedException {
-		
-		
-	
-			StringUtils.isBlank("");
-			final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-			kbuilder.add(ResourceFactory.newClassPathResource("test.drl"), ResourceType.DRL);
 
-			Long start = System.currentTimeMillis();
-			log.info("start ");
-			final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-			log.info(" new knowledge " + (System.currentTimeMillis() - start));
-			kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-			log.info(" add knowledge " + (System.currentTimeMillis() - start));
-			final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
-			log.info(" session knowledge ========" + (System.currentTimeMillis() - start));
-			// KnowledgeRuntimeLogger logger =
-			// KnowledgeRuntimeLoggerFactory.newFileLogger(ksession,
-			// "log/numberguess");
+		StringUtils.isBlank("");
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
+				.newKnowledgeBuilder();
+		kbuilder.add(ResourceFactory.newClassPathResource("test.drl"),
+				ResourceType.DRL);
 
-			Message m = new Message();
-			m.setPredict("go");
+		Long start = System.currentTimeMillis();
+		log.info("start ");
+		final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		log.info(" new knowledge " + (System.currentTimeMillis() - start));
+		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+		log.info(" add knowledge " + (System.currentTimeMillis() - start));
+		final StatefulKnowledgeSession ksession = kbase
+				.newStatefulKnowledgeSession();
+		log.info(" session knowledge ========"
+				+ (System.currentTimeMillis() - start));
+		// KnowledgeRuntimeLogger logger =
+		// KnowledgeRuntimeLoggerFactory.newFileLogger(ksession,
+		// "log/numberguess");
 
-			// ksession.insert(r2);
-			ksession.insert(m);
-			ksession.getAgenda().getAgendaGroup("add").setFocus();
-			ksession.fireAllRules();
+		Message m = new Message();
+		m.setPredict("go");
 
-			/*
-			 * Message m2=new Message(); m2.setPredict("go"); ksession.insert(m2);
-			 * ksession.fireAllRules();
-			 */
+		// ksession.insert(r2);
+		ksession.insert(m);
+		ksession.getAgenda().getAgendaGroup("add").setFocus();
+		ksession.fireAllRules();
 
-			Thread.sleep(5000L);
-			log.info(" session knowledge " + (System.currentTimeMillis() - start));
-			// logger.close();
+		/*
+		 * Message m2=new Message(); m2.setPredict("go"); ksession.insert(m2);
+		 * ksession.fireAllRules();
+		 */
 
-			ksession.dispose();
+		Thread.sleep(5000L);
+		log.info(" session knowledge " + (System.currentTimeMillis() - start));
+		// logger.close();
 
-		
-		
+		ksession.dispose();
+
 	}
-	
 
 }

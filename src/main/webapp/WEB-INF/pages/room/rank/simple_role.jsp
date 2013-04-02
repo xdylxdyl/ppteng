@@ -26,14 +26,14 @@
 									<th id="water" query="water" class="cursor-pointer">做水<i
 										class=""></i></th>
 										
-											<th id="max_water" query="max_water" class="">连水<i
+											<th id="maxWater" query="maxWater" class="">连水<i
 										class=""></i></th>
 										
 										
 									<th id="killer" query="killer" class="cursor-pointer">做杀<i
 										class=""></i></th>
 										
-											<th id="max_killer" query="max_killer" class="">连杀<i
+											<th id="maxKiller" query="maxKiller" class="">连杀<i
 										class=""></i></th>
 
 									<th id="all" query="all" class="cursor-pointer">总局数<i

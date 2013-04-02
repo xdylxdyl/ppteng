@@ -45,7 +45,7 @@ function void setRemainTime(String status,Game game,Room room) {
 
 function List<String>  getIDFromPlayer(List<Player> players) {
 
-      List<Long> pids=new ArrayList();
+      List<String> pids=new ArrayList();
 	    for(Object o:players){
 	          Player p=(Player)o;			 
 			  pids.add(p.getId());

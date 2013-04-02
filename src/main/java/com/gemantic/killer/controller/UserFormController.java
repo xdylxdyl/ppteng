@@ -20,6 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.DESUtil;
+import com.gemantic.common.util.PasswordUtils;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.killer.exception.ServiceErrorCode;
 import com.gemantic.killer.model.User;
@@ -181,7 +182,9 @@ public class UserFormController {
 				update = false;
 			} else {
 				update = true;
-				u.setPassword(user.getPassword());
+				
+				
+				u.setPassword(PasswordUtils.encode(user.getPassword()));
 				u.setName(user.getName());
 			}
 

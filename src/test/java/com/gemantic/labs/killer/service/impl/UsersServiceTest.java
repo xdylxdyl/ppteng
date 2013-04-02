@@ -428,7 +428,22 @@ public class UsersServiceTest {
 		u=this.usersService.getObjectById(300L);
 		log.info(u);*/
 		
-		List<Long> ids=this.usersService.getUIdsOrderByMoney(0, Integer.MAX_VALUE);
+		//List<Long> ids=this.usersService.getUIdsOrderByMoney(0, Integer.MAX_VALUE);
+		List<Long> ids=new ArrayList();
+		ids.add(473L);
+		ids.add(472L);
+		ids.add(471L);
+		ids.add(470L);
+		ids.add(469L);
+		ids.add(468L);
+		ids.add(467L);
+		ids.add(466L);
+		ids.add(465L);
+		ids.add(462L);
+		ids.add(460L);
+		ids.add(459L);
+
+		
 		List<User> users=this.usersService.getObjectsByIds(ids);
 		for(User user:users){
 			if(StringUtils.isBlank(user.getPassword())){

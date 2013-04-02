@@ -9,10 +9,13 @@
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
             http://www.springframework.org/schema/sca http://www.springframework.org/schema/sca/spring-sca.xsd">
 
+
 	<context:annotation-config />
+	<context:component-scan base-package="com.gemantic" />
+	<!-- Activates mapping of @Controller -->
 
 
-	<import resource="classpath:applicationContext-setting.xml" />
+
 	<!-- hotFacet fitler -->
 	<bean id="pushClient"
 		class="com.gemantic.commons.push.client.impl.HttpPushClientImpl">
@@ -90,6 +93,16 @@
 						<value>killer/simple/simple_game.rf</value>
 					</list>
 				</entry>
+				<entry key="killer_police_1.0">
+					<list>
+						<value>killer/police/police_model.drl</value>
+						<value>killer/police/police_query.drl</value>
+						<value>killer/police/police_util.drl</value>
+						<value>killer/police/police_game.drl</value>
+						<value>killer/police/police_game.rf</value>
+					</list>
+				</entry>
+				
 				<entry key="mine_1.0">
 					<list>
 						<value>mine/multiplayer/mine_model.drl</value>
@@ -99,41 +112,21 @@
 						<value>mine/multiplayer/mine_game.rf</value>
 					</list>
 				</entry>
-
+				<entry key="video_1.0">
+					<list>						
+					</list>
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
 
 
+
 	<bean id="cookieUtil" class="com.gemantic.common.util.http.cookie.CookieUtil">
-		<property name="home" value="putaotent.com"></property>
-		<property name="domain" value="http://manager.gemantic.com:9090"></property>
+		<property name="home" value="ppteng.com"></property>
+		<property name="domain" value="http://www.ppteng.com:9090"></property>
 	</bean>
 
-
-	<bean id="maker" class="net.kotek.jdbm.DBMaker">
-		<constructor-arg>
-			<value>jdbm/test132</value>
-		</constructor-arg>
-	</bean>
-
-
-	<bean id="gameMaker" class="net.kotek.jdbm.DBMaker">
-		<constructor-arg>
-			<value>jdbm/test22132</value>
-		</constructor-arg>
-	</bean>
-	<bean id="recordMaker" class="net.kotek.jdbm.DBMaker">
-		<constructor-arg>
-			<value>jdbm/test33312</value>
-		</constructor-arg>
-	</bean>
-
-	<bean id="stockMaker" class="net.kotek.jdbm.DBMaker">
-		<constructor-arg>
-			<value>jdbm/test444312</value>
-		</constructor-arg>
-	</bean>
 
 
 
@@ -161,10 +154,12 @@
 
 
 
+
+
 	<bean id="dao" class="com.gemantic.dal.dao.impl.CompositeDaoImpl" />
 
 
-	
+
 
 
 
