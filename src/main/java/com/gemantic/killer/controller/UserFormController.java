@@ -184,7 +184,7 @@ public class UserFormController {
 				update = true;
 				
 				
-				u.setPassword(PasswordUtils.encode(user.getPassword()));
+				u.setPassword(PasswordUtils.encode(u.getPassword()));
 				u.setName(user.getName());
 			}
 
@@ -192,6 +192,7 @@ public class UserFormController {
 		if (update) {
 			this.userService.update(u);
 		} else {
+			user.setPassword(PasswordUtils.encode(user.getPassword()));
 			this.userService.insert(user);
 		}
 
