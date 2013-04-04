@@ -41,17 +41,21 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row-fluid">
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#1" data-toggle="tab">日常</a></li>
+                    <li><a href="#2" data-toggle="tab">亡灵</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="1">
+                        <p>这里是章节 1.</p>
+                    </div>
+                    <div class="tab-pane" id="2">
+                        <p>这里是章节 2.</p>
+                    </div>
+                </div>
+            </div>
             <!--text content-->
-            <p>Most Frequently Asked Questions</p>
-            <p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p>
-            <p>Most Frequently Asked Questions</p>
-            <!--text content over-->
-        </div>
-        <hr>
-        <div class="row-fluid">
-            <!--text content-->
-            <p>Most Frequently Asked Questions</p>
-            <p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p>
             <p>Most Frequently Asked Questions</p>
             <!--text content over-->
         </div>
@@ -59,48 +63,100 @@
 </div>
 
 <div class="foot">
-    <div class="container-fluid">
-        <!--下拉选矿-->
-        <div class="row-fluid select">
-            <div class="btn-group dropup">
-                <button class="btn primary btn-toggle">上弹按钮</button>
-                <button class="btn primary dropdown-toggle btn-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">动作</a></li>
-                    <li><a href="#">其他动作</a></li>
-                    <li><a href="#">其他</a></li>
-                </ul>
-            </div>
-            <div class="btn-group dropup">
-                <button class="btn primary btn-toggle">上弹按钮</button>
-                <button class="btn primary dropdown-toggle btn-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">动作</a></li>
-                    <li><a href="#">其他动作</a></li>
-                    <li><a href="#">其他</a></li>
-                </ul>
-            </div>
-        </div>
-        <!--输入框-->
-        <form action="" class="form-horizontal foot-send">
-            <div class="row-fluid">
-                <label for="" class="control-label">I say:</label>
-                <div class="controls">
-                    <div class="input-append">
-                        <input type="text" name="" id="" class="">
-                        <button class="btn" type="button">send</button>
+    <div class="row-fluid">
+        <div class="inner-space">
+            <!--act-->
+            <ul class="toolbar">
+                <li class="dropup">
+                    <a href="#" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>dropup</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">123</a></li>
+                        <li><a href="#">223</a></li>
+                        <li><a href="#">323</a></li>
+                    </ul>
+                </li>
+                <li class="dropup">
+                    <a href="#" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>color</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="color-block" data-theme="black"></div>
+                            <a href="#" class="color-font">black</a>
+                        </li>
+                        <li>
+                            <div class="color-block" data-theme="red"></div>
+                            <a href="#" class="color-font">red</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropup">
+                    <a href="#" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>dropup</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">123</a></li>
+                        <li><a href="#">223</a></li>
+                        <li><a href="#">323</a></li>
+                    </ul>
+                </li>
+                <li class="dropup">
+                    <a href="#" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>dropup</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">123</a></li>
+                        <li><a href="#">223</a></li>
+                        <li><a href="#">323</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <label for="" class="checkbox">
+                        <input type="checkbox">
+                        滚屏选我选我
+                    </label>
+                </li>
+                <li>
+                    <span class="help-inline">04:00</span>
+                </li>
+            </ul>
+            <!--input-->
+            <form action="" class="form-horizontal">
+                <div class="control-group">
+                    <label for="" class="control-label">I say:</label>
+                    <div class="controls">
+                        <input type="text" class="span12">
                     </div>
                 </div>
+            </form>
+            <!--button-->
+            <div class="pull-right">
+                <a href="#" class="btn medium">clear</a>
+                <a href="#" class="btn medium btn-primary">send</a>
+
             </div>
-
-
-        </form>
+        </div>
     </div>
 </div>
 </body>
 </html>
 <script type="text/javascript" src="../../j-src/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="../../j-src/bootstrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="../../j-src/bootstrap/bootstrap-tab.js"></script>
 <script type="text/javascript">
     $('.btn-toggle').dropdown()
 </script>

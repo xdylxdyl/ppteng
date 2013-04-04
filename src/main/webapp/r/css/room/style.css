@@ -13,6 +13,7 @@ body {
     float: left;
     margin: 0;
     padding-top: 1.5em;
+    max-height: 500px;
 }
 .sidebar-nav .nav-list {
     padding: 0;
@@ -32,6 +33,7 @@ body {
     background: #fff;
     margin-left: 200px;
     border-left: 1px solid #cfcfd6;
+    height: 500px;
 }
 /*foot*/
 .foot {
@@ -39,12 +41,54 @@ body {
     border-top: 1px solid #cfcfd6;
     min-width: 600px;
 }
-.foot .foot-send {
-    margin: 10px 0;
+.inner-space {
+    padding: 20px;
+    box-sizing: border-box;
 }
-.foot .select {
-    margin-left: 180px;
-    margin-top: 10px;
+.form-horizontal .control-label {
+    padding-top: 4px;
+    text-align: left;
+}
+.btn.medium {
+    font-size: 12px;
+    font-weight: bold;
+}
+ul.toolbar {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+ul.toolbar {
+    clear: both;
+    display: table;
+    content: "";
+}
+ul.toolbar > li {
+    float: left;
+    display: list-item;
+    list-style: none;
+    margin: 0 10px 10px 0;
+}
+ul > li a.color-font {
+    padding-left: 70px;
+}
+li label.checkbox, li .help-inline {
+    padding-top: 3px;
+}
+.color-block {
+    display: block;
+    width: 50px;
+    height: 20px;
+    margin-top: 2px;
+    margin-left: 5px;
+    position: absolute;
+    pointer-events: none;
+}
+.color-block[data-theme="black"] {
+    background: #000;
+}
+.color-block[data-theme="red"] {
+    background: #f00;
 }
 /*icon*/
 .icon-blue {
