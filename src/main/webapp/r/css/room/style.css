@@ -6,14 +6,19 @@ body {
 .navbar {
     margin-bottom: 0;
 }
+.navbar-inner {
+    min-width: 600px;
+}
 /*left*/
 .sidebar-nav {
     position: absolute;
     width: 200px;
     float: left;
     margin: 0;
-    padding-top: 1.5em;
-    max-height: 500px;
+    padding-top: 20px;
+    max-height: 478px;
+    min-height: 278px;
+    overflow-y: auto;
 }
 .sidebar-nav .nav-list {
     padding: 0;
@@ -33,7 +38,12 @@ body {
     background: #fff;
     margin-left: 200px;
     border-left: 1px solid #cfcfd6;
-    height: 500px;
+}
+.content .tab-pane {
+    max-height: 442px;
+    min-height: 242px;
+    overflow-y: auto;
+    word-break:break-all;
 }
 /*foot*/
 .foot {
@@ -42,8 +52,13 @@ body {
     min-width: 600px;
 }
 .inner-space {
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     box-sizing: border-box;
+}
+.inner-space:after {
+    clear: both;
+    display: table;
+    content: "";
 }
 .form-horizontal .control-label {
     padding-top: 4px;
@@ -58,7 +73,7 @@ ul.toolbar {
     margin: 0;
     padding: 0;
 }
-ul.toolbar {
+ul.toolbar:after {
     clear: both;
     display: table;
     content: "";
@@ -74,6 +89,13 @@ ul > li a.color-font {
 }
 li label.checkbox, li .help-inline {
     padding-top: 3px;
+}
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+}
+.dropdown-menu .select {
+
 }
 .color-block {
     display: block;
