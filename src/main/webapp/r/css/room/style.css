@@ -112,6 +112,17 @@ li label.checkbox, li .help-inline {
 .color-block[data-theme="red"] {
     background: #f00;
 }
+/*music*/
+/*a { color: #888; text-decoration: none; }*/
+#wrapper { width: 400px; margin: 0 auto; }
+
+#wrapper ol { padding: 0px; margin: 0px; list-style: decimal-leading-zero inside; color: #ccc; width: 460px; border-top: 1px solid #ccc; font-size: 0.9em; }
+#wrapper ol li { position: relative; margin: 0px; padding: 9px 2px 10px; border-bottom: 1px solid #ccc; cursor: pointer; }
+#wrapper ol li a { display: block; text-indent: -3.3ex; padding: 0px 0px 0px 20px; }
+#wrapper li.playing { color: #aaa; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3); }
+#wrapper li.playing a { color: #000; }
+#wrapper li.playing:before { content: '♬'; width: 14px; height: 14px; padding: 3px; line-height: 14px; margin: 0px; position: absolute; left: -24px; top: 9px; color: #000; font-size: 13px; text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2); }
+
 /*icon*/
 .icon-blue {
     background-image: url("../../img/glyphicons-halflings-blue.png");

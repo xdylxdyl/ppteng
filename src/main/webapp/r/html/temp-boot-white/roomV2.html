@@ -84,6 +84,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#1" data-toggle="tab">日常</a></li>
                     <li><a href="#2" data-toggle="tab">DEATH</a></li>
+                    <li><a href="#3" data-toggle="tab">music</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="1">
@@ -95,6 +96,16 @@
                     </div>
                     <div class="tab-pane" id="2">
                         <p>这里是章节 2.</p>
+                    </div>
+                    <div class="tab-pane" id="3">
+                        <div id="wrapper">
+                            <audio preload></audio>
+                            <ol>
+                                <li><a href="#" data-src="http://imade.118100.cn/library/music/1307949575730.mp3">你的歌声里</a></li>
+                                <li><a href="#" data-src="http://lianzidi.com/COFFdD0xMzY1MDg3MTM3Jmk9MTE4LjExNC4xNzAuMTk5JnU9U29uZ3MvdjEvZmFpbnRRQy9iYi8zMDU5NWUwOWY3MWU2ZWIyNWIyYzFhYjE0ZGZiZmFiYi5tcDMmbT00MTE1Y2MwOWJlMWIwYmFlNDM4NjQ4YjhkZjdjMmNjNiZ2PWxpc3RlbiZuPdChx+m46CUyMG1peCZzPcvVtPLCzCZwPXM=.mp3">小情歌</a></li>
+                                <li><a href="#" data-src="http://www.time.ac.cn/timebbs/uploadfile/mp3/hktk.mp3">想你的夜</a></li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -213,7 +224,36 @@
 <script type="text/javascript" src="../../j-src/bootstrap/bootstrap-modal.js"></script>
 <script type="text/javascript" src="../../j-src/bootstrap/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="../../j-src/kibo/kibo.js"></script><!--侦测键盘-->
+<script type="text/javascript" src="../../j-src/music/audio.min.js"></script>
+<script>
+    /*音乐播放器*/
+    $(function() {
+        // Setup the player to autoplay the next track
+        var a = audiojs.createAll({
+            trackEnded: function() {
+                var next = $('ol li.playing').next();
+                if (!next.length) next = $('ol li').first();
+                next.addClass('playing').siblings().removeClass('playing');
+                audio.load($('a', next).attr('data-src'));
+                audio.play();
+            }
+        });
 
+        // Load in the first track
+        var audio = a[0];
+        first = $('ol a').attr('data-src');
+        $('ol li').first().addClass('playing');
+        audio.load(first);
+
+        // Load in a track on click
+        $('ol li').click(function(e) {
+            e.preventDefault();
+            $(this).addClass('playing').siblings().removeClass('playing');
+            audio.load($('a', this).attr('data-src'));
+            audio.play();
+        });
+    });
+</script>
 
 <script type="text/javascript">
     /*小提示*/
@@ -233,8 +273,14 @@
         var footH = $('.foot').outerHeight();
         var mainH = winH - headH - footH - 20;
         var contentH = mainH - $('ul.nav-tabs').outerHeight();
-        $('.sidebar-nav').css({maxHeight: mainH});
-        $('.tab-pane').css({maxHeight: contentH});
+        $('.sidebar-nav').css({
+            maxHeight: mainH,
+            minHeight: mainH
+        });
+        $('.tab-pane').css({
+            maxHeight: contentH,
+            minHeight: contentH
+        });
 
     }
     controlHeight();
