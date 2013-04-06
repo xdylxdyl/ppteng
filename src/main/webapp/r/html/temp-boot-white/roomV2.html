@@ -7,23 +7,58 @@
     <link rel="stylesheet" href="../../css/room/style.css">
 </head>
 <body>
-
+<!--header-->
 <div class="navbar">
     <div class="navbar-inner">
         <a href="#" class="brand">PTT</a>
         <ul class="nav pull-right">
-            <li><a href="#">Settings</a></li>
+            <li><a href="#setRoomBlock" data-toggle="modal" id="setRoom" rel="tooltip" title="点此设置房间" data-original-title="点此设置房间" data-placement="bottom">Settings</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">users <i class="caret"></i></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">还没想好 <i class="caret"></i></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">account</a></li>
                     <li><a href="#">others</a></li>
                 </ul>
             </li>
+            <li><a href="#" id="closeRoom" rel="tooltip" title="点此离开房间" data-original-title="点此离开房间" data-placement="bottom">close <i class="icon-off"></i></a></li>
         </ul>
     </div>
 </div>
 
+<!--room setting div-->
+<div class="modal hide fade in" id="setRoomBlock">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>设置</h3>
+    </div>
+    <div class="modal-body">
+        <form action="" class="form-horizontal">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="">TIME:</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="">
+                        <p class="help-block">how to set TIME...</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="">PERSON:</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="">
+                        <p class="help-block">how to set PERSON...</p>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        <a href="#" class="btn btn-primary">保存更新</a>
+    </div>
+</div>
+<!--room setting div over-->
+
+<!--left list-->
 <div class="sidebar-nav">
     <ul class="nav nav-list">
         <li><a href="#"><i class="icon-male"></i>list item</a></li>
@@ -34,73 +69,248 @@
         <li><a href="#"><i class="icon-female icon-blue"></i>list item</a></li>
         <li><a href="#"><i class="icon-dead icon-red"></i>list item</a></li>
         <li><a href="#"><i class="icon-kill icon-red"></i>list item</a></li>
+        <li><a href="#"><i class="icon-male"></i>list item</a></li>
+        <li><a href="#"><i class="icon-female"></i>list item</a></li>
+
 
     </ul>
 </div>
 
+<!--main-->
 <div class="content">
     <div class="container-fluid">
         <div class="row-fluid">
-            <!--text content-->
-            <p>Most Frequently Asked Questions</p>
-            <p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p>
-            <p>Most Frequently Asked Questions</p>
-            <!--text content over-->
-        </div>
-        <hr>
-        <div class="row-fluid">
-            <!--text content-->
-            <p>Most Frequently Asked Questions</p>
-            <p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p><p>Most Frequently Asked Questions</p>
-            <p>Most Frequently Asked Questions</p>
-            <!--text content over-->
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#1" data-toggle="tab">日常</a></li>
+                    <li><a href="#2" data-toggle="tab">DEATH</a></li>
+                    <li><a href="#3" data-toggle="tab">music</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="1">
+                        <p>这里是章节 1.</p>
+                        <p>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</p>
+                        <p>这里是章节 1.</p>
+                        <p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p><p>这里是章节 1.</p>
+
+                    </div>
+                    <div class="tab-pane" id="2">
+                        <p>这里是章节 2.</p>
+                    </div>
+                    <div class="tab-pane" id="3">
+                        <div id="wrapper">
+                            <audio preload></audio>
+                            <ol>
+                                <li><a href="#" data-src="http://imade.118100.cn/library/music/1307949575730.mp3">你的歌声里</a></li>
+                                <li><a href="#" data-src="http://lianzidi.com/COFFdD0xMzY1MDg3MTM3Jmk9MTE4LjExNC4xNzAuMTk5JnU9U29uZ3MvdjEvZmFpbnRRQy9iYi8zMDU5NWUwOWY3MWU2ZWIyNWIyYzFhYjE0ZGZiZmFiYi5tcDMmbT00MTE1Y2MwOWJlMWIwYmFlNDM4NjQ4YjhkZjdjMmNjNiZ2PWxpc3RlbiZuPdChx+m46CUyMG1peCZzPcvVtPLCzCZwPXM=.mp3">小情歌</a></li>
+                                <li><a href="#" data-src="http://www.time.ac.cn/timebbs/uploadfile/mp3/hktk.mp3">想你的夜</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<!--footer-->
 <div class="foot">
-    <div class="container-fluid">
-        <!--下拉选矿-->
-        <div class="row-fluid select">
-            <div class="btn-group dropup">
-                <button class="btn primary btn-toggle">上弹按钮</button>
-                <button class="btn primary dropdown-toggle btn-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">动作</a></li>
-                    <li><a href="#">其他动作</a></li>
-                    <li><a href="#">其他</a></li>
-                </ul>
-            </div>
-            <div class="btn-group dropup">
-                <button class="btn primary btn-toggle">上弹按钮</button>
-                <button class="btn primary dropdown-toggle btn-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">动作</a></li>
-                    <li><a href="#">其他动作</a></li>
-                    <li><a href="#">其他</a></li>
-                </ul>
-            </div>
-        </div>
-        <!--输入框-->
-        <form action="" class="form-horizontal foot-send">
-            <div class="row-fluid">
-                <label for="" class="control-label">I say:</label>
-                <div class="controls">
-                    <div class="input-append">
-                        <input type="text" name="" id="" class="">
-                        <button class="btn" type="button">send</button>
+    <div class="row-fluid">
+        <div class="inner-space">
+            <!--act-->
+            <ul class="toolbar">
+                <li class="dropup">
+                    <a href="#" id="selectExpression" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>神态</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">神态</a></li>
+                        <li class="divider"></li>
+                        <li data-default="123"><a href="#">123</a></li>
+                        <li data-default="123"><a href="#">223</a></li>
+                        <li data-default="123"><a href="#">323</a></li>
+                        <li data-default="123"><a href="#">123</a></li>
+                        <li data-default="123"><a href="#">223</a></li>
+                        <li data-default="123"><a href="#">323</a></li>
+                        <li data-default="123"><a href="#">123</a></li>
+                        <li data-default="123"><a href="#">223</a></li>
+                    </ul>
+                </li>
+                <li class="dropup">
+                    <a href="#" id="selectColor" data-default="#000" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>color</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li data-default="#000"><a href="#">color</a></li>
+                        <li class="divider"></li>
+                        <li data-default="#000">
+                            <div class="color-block" data-theme="black"></div>
+                            <a href="#" class="color-font">black</a>
+                        </li>
+                        <li  data-default="#f00">
+                            <div class="color-block" data-theme="red"></div>
+                            <a href="#" class="color-font">red</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropup">
+                    <a href="#" id="selectOrder" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>指令</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li data-default=""><a href="#">指令</a></li>
+                        <li class="divider"></li>
+                        <li data-default=""><a href="#">123</a></li>
+                        <li data-default=""><a href="#">223</a></li>
+                        <li data-default=""><a href="#">323</a></li>
+                    </ul>
+                </li>
+                <li class="dropup">
+                    <a href="#" id="selectObject" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>对象</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li data-default=""><a href="#">对象</a></li>
+                        <li class="divider"></li>
+                        <li data-default=""><a href="#">123</a></li>
+                        <li data-default=""><a href="#">223</a></li>
+                        <li data-default=""><a href="#">323</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <label for="scroll" class="checkbox">
+                        <input type="checkbox" checked="checked" value="scroll" id="scroll">
+                        滚屏选我选我
+                    </label>
+                </li>
+                <li>
+                    <span class="help-inline">04:00</span>
+                </li>
+            </ul>
+            <!--input-->
+            <form action="" class="form-horizontal">
+                <div class="control-group">
+                    <label for="" class="control-label">I say:</label>
+                    <div class="controls">
+                        <div class="row-fluid">
+                            <div class="span10"><input type="text" class="span12" id="inputText"></div>
+                            <div class="span2">
+                                <a href="#" class="btn medium btn-primary">send</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 </body>
 </html>
 <script type="text/javascript" src="../../j-src/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="../../j-src/bootstrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="../../j-src/bootstrap/bootstrap-tab.js"></script>
+<script type="text/javascript" src="../../j-src/bootstrap/bootstrap-modal.js"></script>
+<script type="text/javascript" src="../../j-src/bootstrap/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="../../j-src/kibo/kibo.js"></script><!--侦测键盘-->
+<script type="text/javascript" src="../../j-src/music/audio.min.js"></script>
+<script>
+    /*音乐播放器*/
+    $(function() {
+        // Setup the player to autoplay the next track
+        var a = audiojs.createAll({
+            trackEnded: function() {
+                var next = $('ol li.playing').next();
+                if (!next.length) next = $('ol li').first();
+                next.addClass('playing').siblings().removeClass('playing');
+                audio.load($('a', next).attr('data-src'));
+                audio.play();
+            }
+        });
+
+        // Load in the first track
+        var audio = a[0];
+        first = $('ol a').attr('data-src');
+        $('ol li').first().addClass('playing');
+        audio.load(first);
+
+        // Load in a track on click
+        $('ol li').click(function(e) {
+            e.preventDefault();
+            $(this).addClass('playing').siblings().removeClass('playing');
+            audio.load($('a', this).attr('data-src'));
+            audio.play();
+        });
+    });
+</script>
+
 <script type="text/javascript">
-    $('.btn-toggle').dropdown()
+    /*小提示*/
+    $('#closeRoom').tooltip();
+    $('#setRoom').tooltip();
+    /*键盘快捷控制，还未想好如何设置*/
+    var key = new Kibo();
+    $('#inputText').focus(function() {
+        key.down(['alt 1'], function() {
+            $("#selectExpression").click();
+        })
+    });
+    /*宽度min-width: 600px时页面高度控制*/
+    function controlHeight() {
+        var winH = $(window).height();
+        var headH = $('.navbar').outerHeight();
+        var footH = $('.foot').outerHeight();
+        var mainH = winH - headH - footH - 20;
+        var contentH = mainH - $('ul.nav-tabs').outerHeight();
+        $('.sidebar-nav').css({
+            maxHeight: mainH,
+            minHeight: mainH
+        });
+        $('.tab-pane').css({
+            maxHeight: contentH,
+            minHeight: contentH
+        });
+
+    }
+    controlHeight();
+    $(window).resize(controlHeight);
+
+
+    /*
+    * 动作栏下拉框
+    * @elem 传入选择器ID
+    * 选择器的文本变为所选项文本
+    * 选择器的data-default属性变为所选项data-default属性
+    * 所选项如果为color，则选择器文本颜色也改为相应颜色*/
+    function selectors(elem) {
+        var $elem = $('#' + elem);
+        var $menu = $elem.siblings('ul.dropdown-menu');
+        $menu.children('li').click(function() {
+            var txt = $(this).text();
+            var val = $(this).attr('data-default');
+            $elem.find('span').text(txt);
+            $elem.attr('data-default', val);
+            if (val.indexOf('#') == '0') {
+                $elem.find('span').css({
+                    color: val
+                })
+            }
+        })
+    }
+    selectors('selectExpression');
+    selectors('selectColor');
+    selectors('selectOrder');
+    selectors('selectObject');
+
 </script>

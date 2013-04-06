@@ -1,7 +1,5 @@
 package drools.common
 
-
-
 import drools.common.*
 import java.util.List;
 import java.util.Set;

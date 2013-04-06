@@ -17,8 +17,7 @@
     <ruleSet id="70" name="game phase person" x="811" y="407" width="172" height="48" ruleFlowGroup="clear vote at start" />
     <end id="5" name="End" x="88" y="806" width="49" height="49" />
     <ruleSet id="67" name="person status" x="1006" y="225" width="153" height="48" ruleFlowGroup="clear role" />
-    <ruleSet id="76" name="game prepare" x="469" y="46" width="191" height="48" ruleFlowGroup="game prepare" />
-    <ruleSet id="77" name="game clear" x="333" y="46" width="80" height="48" ruleFlowGroup="game clear" />
+    <ruleSet id="76" name="game prepare" x="368" y="22" width="191" height="48" ruleFlowGroup="retract unlimit message" />
     <ruleSet id="61" name="game phase time" x="677" y="118" width="129" height="48" ruleFlowGroup="create snapshot" />
   </nodes>
 
@@ -27,8 +26,7 @@
     <connection from="67" to="70" />
     <connection from="68" to="5" />
     <connection from="61" to="67" />
-    <connection from="77" to="76" />
-    <connection from="1" to="77" />
+    <connection from="1" to="76" />
     <connection from="76" to="61" />
   </connections>
 

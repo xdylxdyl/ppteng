@@ -6,13 +6,19 @@ body {
 .navbar {
     margin-bottom: 0;
 }
+.navbar-inner {
+    min-width: 600px;
+}
 /*left*/
 .sidebar-nav {
     position: absolute;
     width: 200px;
     float: left;
     margin: 0;
-    padding-top: 1.5em;
+    padding-top: 20px;
+    max-height: 478px;
+    min-height: 278px;
+    overflow-y: auto;
 }
 .sidebar-nav .nav-list {
     padding: 0;
@@ -33,19 +39,90 @@ body {
     margin-left: 200px;
     border-left: 1px solid #cfcfd6;
 }
+.content .tab-pane {
+    max-height: 442px;
+    min-height: 242px;
+    overflow-y: auto;
+    word-break:break-all;
+}
 /*foot*/
 .foot {
     background: #f9f9f9;
     border-top: 1px solid #cfcfd6;
     min-width: 600px;
 }
-.foot .foot-send {
-    margin: 10px 0;
+.inner-space {
+    padding: 20px 20px 0 20px;
+    box-sizing: border-box;
 }
-.foot .select {
-    margin-left: 180px;
-    margin-top: 10px;
+.inner-space:after {
+    clear: both;
+    display: table;
+    content: "";
 }
+.form-horizontal .control-label {
+    padding-top: 4px;
+    text-align: left;
+}
+.btn.medium {
+    font-size: 12px;
+    font-weight: bold;
+}
+ul.toolbar {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+ul.toolbar:after {
+    clear: both;
+    display: table;
+    content: "";
+}
+ul.toolbar > li {
+    float: left;
+    display: list-item;
+    list-style: none;
+    margin: 0 10px 10px 0;
+}
+ul > li a.color-font {
+    padding-left: 70px;
+}
+li label.checkbox, li .help-inline {
+    padding-top: 3px;
+}
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+}
+.dropdown-menu .select {
+
+}
+.color-block {
+    display: block;
+    width: 50px;
+    height: 20px;
+    margin-top: 2px;
+    margin-left: 5px;
+    position: absolute;
+    pointer-events: none;
+}
+.color-block[data-theme="black"] {
+    background: #000;
+}
+.color-block[data-theme="red"] {
+    background: #f00;
+}
+/*music*/
+/*a { color: #888; text-decoration: none; }*/
+#wrapper { width: 400px; margin: 0 auto; }
+
+#wrapper ol { padding: 0px; margin: 0px; list-style: decimal-leading-zero inside; color: #ccc; width: 460px; border-top: 1px solid #ccc; font-size: 0.9em; }
+#wrapper ol li { position: relative; margin: 0px; padding: 9px 2px 10px; border-bottom: 1px solid #ccc; cursor: pointer; }
+#wrapper ol li a { display: block; text-indent: -3.3ex; padding: 0px 0px 0px 20px; }
+#wrapper li.playing { color: #aaa; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3); }
+#wrapper li.playing a { color: #000; }
+#wrapper li.playing:before { content: '♬'; width: 14px; height: 14px; padding: 3px; line-height: 14px; margin: 0px; position: absolute; left: -24px; top: 9px; color: #000; font-size: 13px; text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2); }
+
 /*icon*/
 .icon-blue {
     background-image: url("../../img/glyphicons-halflings-blue.png");

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/sca http://www.springframework.org/schema/sca/spring-sca.xsd">
+
+
+  <context:component-scan base-package="com.gemantic"/>
+    
+    
+    
+    
+    
+     <bean id="setting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="simple_1.0" value-ref="simple_1.0_setting">				
+				</entry>
+				<entry key="killer_police_1.0" value-ref="killer_police_1.0_setting">				
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+    
+    
+      <bean id="settingDisplay" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="killerCount" value="杀手人数">				
+				</entry>
+				<entry key="dayTime" value="白天时间">				
+				</entry>
+				<entry key="nightTime" value="晚上时间">				
+				</entry>
+				<entry key="lastwordTime" value="遗言时间">				
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+    
+ 
+      <bean id="simple_1.0_setting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+					<entry key="killerCount" value="1">				
+				</entry>
+				<entry key="dayTime" value="240000">				
+				</entry>
+				<entry key="nightTime" value="60000">				
+				</entry>
+				<entry key="lastwordTime" value="60000">				
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+     <bean id="killer_police_1.0_setting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="killerCount" value="1">				
+				</entry>
+				<entry key="policeCount" value="1">				
+				</entry>
+				<entry key="dayTime" value="240000">				
+				</entry>
+				<entry key="nightTime" value="60000">				
+				</entry>
+				<entry key="lastwordTime" value="60000">				
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+    
+    
+</beans>

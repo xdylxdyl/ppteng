@@ -1,6 +1,5 @@
 package drools.common
 
-
 import drools.common.*
 import com.gemantic.killer.common.model.Message
 import com.gemantic.killer.common.model.Operater;

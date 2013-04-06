@@ -1,5 +1,6 @@
 package drools.common
-import drools.common.*;
+
+import drools.common.*
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
@@ -32,7 +33,7 @@ function void setRemainTime(String status,Game game,Room room) {
       Long lastTime=game.getLastTime();
       Long time=lastTime+setting-System.currentTimeMillis();
       if(time < 0){
-             
+            LogUtil.log("=========== error ======= "+time);          
       }else{
           game.setRemainTime(time);
       }
