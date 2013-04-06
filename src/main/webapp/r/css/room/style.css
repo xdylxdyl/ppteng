@@ -26,10 +26,14 @@ body {
 .sidebar-nav li a {
     color: #585868;
     text-shadow: 1px 1px 0 #fff;
-    padding: .1em 1.5em;
+    padding: .1em 1em;
     border: 0;
     margin: 0 1px;
     background: none;
+}
+.vote {
+    color: #d80400;
+    padding: 0 0 0 10px;
 }
 /*right*/
 .content {
@@ -83,6 +87,10 @@ ul.toolbar > li {
     display: list-item;
     list-style: none;
     margin: 0 10px 10px 0;
+}
+ul.toolbar > li.pull-right {
+    float: right;
+
 }
 ul > li a.color-font {
     padding-left: 70px;
