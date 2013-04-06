@@ -94,16 +94,16 @@ var killGameAreaView = {
         }
         switch (place) {
             case "normal":
-                $("section article").append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
-                viewUtil.autoBottom("section article");
+                selects.$gameArea.append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+                viewUtil.autoBottom( selects.$gameArea);
                 break;
             case "deadArea":
-                $("section .dead_area").append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
-                viewUtil.autoBottom("section .dead_area");
+                selects.$dieArea.append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+                viewUtil.autoBottom( selects.$dieArea);
                 break;
             case "killArea":
-                $("section .killer_area").append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
-                viewUtil.autoBottom("section .killer_area");
+                selects.$killerArea.append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+                viewUtil.autoBottom(selects.$killerArea);
                 break;
             default:
         }
@@ -113,46 +113,40 @@ var killGameAreaView = {
     vote:function(subjectName, objectName, color, exp, content) {
 
 
-        $("section article").append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
-        viewUtil.autoBottom("section article");
+        selects.$gameArea.append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
+        viewUtil.autoBottom(selects.$gameArea);
     },
 
     die:function(id, name, action) {
         $("#" + id).children("a").removeClass().addClass("die");
         if (action == "vote") {
-            $("section article").append("<p style='color:#F00;'>【系统消息】 积毁销骨，众口铄金，[" + name + "]你就认命吧！</p>");
+            selects.$gameArea.append("<p style='color:#F00;'>【系统消息】 积毁销骨，众口铄金，[" + name + "]你就认命吧！</p>");
         } else if (action == "kill") {
 
-            $("section article").append("<p style='color:#F00;'>【系统消息】 [" + name + "] 被杀了。</p>");
+            selects.$gameArea.append("<p style='color:#F00;'>【系统消息】 [" + name + "] 被杀了。</p>");
 
 
         }
         if ($("#uid").val() == id) {
-            this.swithTopArea("deadArea");
+            this.swithTopArea(selects.$dieArea);
         }
     },
     kill:function(killerName, objName, exp, content) {
 
         $("section .killer_area").show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
-        viewUtil.autoBottom("section .killer_area");
+        viewUtil.autoBottom(selects.$dieArea);
     },
     swithTopArea:function(area) {
-        if ("deadArea" == area) {
-            $("section .killer_area").hide();
-            $("section .dead_area").show();
-        } else {
-            $("section .killer_area").show();
-            $("section .dead_area").hide();
-        }
+
     },
     showContentForRoleArea:function(content) {
-        $("#role_area").append("<span style='color: #F00'>" + content + "</span>");
+
     },
     showContentForGameArea:function(content) {
         if (content == "" || content == undefined) {
 
         } else {
-            $("section article").append("<p><span style='color: #F00'>" + content + "</span></p>");
+            selects.$gameArea.append("<p><span style='color: #F00'>" + content + "</span></p>");
         }
 
     },
@@ -163,7 +157,7 @@ var killGameAreaView = {
         $("#phase_area").empty();
     },
     clearGameArea:function() {
-        $("#section article").empty();
+        selects.$gameAreay.empty();
     },
     clearRoleArea:function() {
         $("#role_area").empty();
@@ -175,15 +169,15 @@ var killGameAreaView = {
         var share;
         switch (obj) {
             case "killer win" :
-                $("section article").append("<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink);
+                selects.$gameArea.append("<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink);
                 share = "这局杀人游戏[简化]中,杀手又赢了~,抢走了2000金币~点此链接回放场景,重现杀人现场: " + shareLink + ";";
                 break;
             case "water win" :
-                $("section article").append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！</p> " + recordLink);
+                selects.$gameArea.append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！</p> " + recordLink);
                 share = "这局杀人游戏[简化]中,水民又赢了~,赢回了2000金币~点此链接回放场景,重现水民分析实况:" + shareLink + ";";
                 break;
             default :
-                $("section article").append("<p style='color:#F00'>" + obj + "</p>");
+                selects.$gameArea.append("<p style='color:#F00'>" + obj + "</p>");
         }
 
         //楼上展示位重置
@@ -192,7 +186,7 @@ var killGameAreaView = {
         clearTimeout(timer);
         timer = null;
         $(".nobg").val("00:00");
-        viewUtil.autoBottom("section article");
+        viewUtil.autoBottom(selects.$gameArea);
 
 
         jiathis_config.title = share;
@@ -263,7 +257,7 @@ var gameView = {
         $(".nobg").val("");
         $("section article, section .killer_area, section .dead_area,#role_area").empty();
         $("section .killer_area, section .dead_area").hide();
-        $("section article").append("<p style='color:#F00'>【系统消息】 游戏开始,白天时间~</p>");
+        selects.$gameArea.append("<p style='color:#F00'>【系统消息】 游戏开始,白天时间~</p>");
         $('section article').scrollTop($('section article')[0].scrollHeight);
         playerListView.sortPlayer();
         killGameAreaView.clearStatusArea();

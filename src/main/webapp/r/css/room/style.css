@@ -142,3 +142,7 @@ li label.checkbox, li .help-inline {
 .icon-kill {
     background-position: -72px -167px;
 }
+
+.hidden{
+    display: none;
+}
