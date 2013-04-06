@@ -208,10 +208,14 @@ var playerListView = {
 
     },
     appendPlayerItem:function (player) {
+        console.log(player);
         if (player.count == 0) {
-            selects.$playerList.append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'></a><span>" + player.name + "</span><i class='" + player.status +"></i></li>");
+            selects.$playerList.append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'>" +
+                "<i class='icon-" + player.status +"></i><span>" + player.name + "</span></a></li>");
         } else {
-            selects.$playerList.append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'></a><span>" + player.name + "</span><i class='" + player.status +"></i></li>");    }
+            selects.$playerList.append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'>" +
+                "<i class='icon-" + player.status +"></i><span>" + player.name + "</span></a></li>");
+        }
 
 
     },

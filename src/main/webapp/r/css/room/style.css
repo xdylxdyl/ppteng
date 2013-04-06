@@ -124,21 +124,21 @@ li label.checkbox, li .help-inline {
 #wrapper li.playing:before { content: '♬'; width: 14px; height: 14px; padding: 3px; line-height: 14px; margin: 0px; position: absolute; left: -24px; top: 9px; color: #000; font-size: 13px; text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2); }
 
 /*icon*/
-.icon-blue {
-    background-image: url("../../img/glyphicons-halflings-blue.png");
+.icon-ready, .icon-unready, .icon-living, .icon-die, .icon-lastword {
+    background-image: url("../../img/user-status.png");
 }
-.icon-red {
-    background-image: url("../../img/glyphicons-halflings-red.png");
+.icon-ready {
+    background-position: 0 0;
 }
-.icon-male {
-    background-position: 0 -167px;
- }
-.icon-female {
-    background-position: -24px -167px;
+.icon-unready {
+    background-position: -15px 0;
 }
-.icon-dead {
-    background-position: -48px -167px;
+.icon-living {
+    background-position: -30px 0;
 }
-.icon-kill {
-    background-position: -72px -167px;
+.icon-die {
+    background-position: -45px 0;
+}
+.icon-lastword {
+    background-position: -60px 0;
 }

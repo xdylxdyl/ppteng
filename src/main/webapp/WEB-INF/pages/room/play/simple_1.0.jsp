@@ -19,21 +19,19 @@
 <input type="hidden" id="type" value="${type}">
 <input type="hidden" id="recordID" value="${record.id}">
 <input type="hidden" id="recordTime" value="${record.time}">
-<div id="stageShow" class="hidden">${stageShow}</div>
-<div id="contents" class="hidden">${contents}</div>
+<div id="stageShow" class="hide">${stageShow}</div>
+<div id="contents" class="hide">${contents}</div>
 
 
 
 <div class="navbar">
     <div class="navbar-inner">
-        <a href="#" class="brand">${room.name}</a>
+        <a class="brand">${room.name}</a>
         <ul class="nav pull-right">           
             <li><a href="#" id="exitRoom" rel="tooltip" title="点此离开房间" data-original-title="点此离开房间" data-placement="bottom">退出房间 <i class="icon-off"></i></a></li>
         </ul>
     </div>
 </div>
-
-<!--room setting div over-->
 
 <!--left list-->
 <div class="sidebar-nav">
@@ -152,8 +150,7 @@
 
 <script type="text/javascript">
     /*小提示*/
-    $('#closeRoom').tooltip();
-    $('#setRoom').tooltip();
+    $('#exitRoom').tooltip();
     /*键盘快捷控制，还未想好如何设置*/
     var key = new Kibo();
     $('#inputText').focus(function() {
