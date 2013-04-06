@@ -13,13 +13,13 @@
 
   <nodes>
     <ruleSet id="68" name="game init" x="351" y="162" width="80" height="48" ruleFlowGroup="game init" />
-    <start id="1" name="Start" x="123" y="7" width="49" height="49" />
     <ruleSet id="69" name="action" x="1193" y="319" width="95" height="48" ruleFlowGroup="action" />
+    <start id="1" name="Start" x="123" y="7" width="49" height="49" />
     <ruleSet id="70" name="clear vote at start" x="108" y="171" width="172" height="48" ruleFlowGroup="clear vote at start" />
     <ruleSet id="71" name="logout action" x="1043" y="83" width="80" height="48" ruleFlowGroup="logout action" />
     <ruleSet id="64" name="log snapshot" x="687" y="556" width="80" height="48" ruleFlowGroup="log snapshot" />
-    <end id="5" name="End" x="88" y="806" width="49" height="49" />
     <ruleSet id="65" name="game live count" x="804" y="35" width="176" height="48" ruleFlowGroup="game live count" />
+    <end id="5" name="End" x="88" y="806" width="49" height="49" />
     <ruleSet id="66" name="game phase status" x="1237" y="140" width="169" height="48" ruleFlowGroup="game phase status" />
     <ruleSet id="67" name="clear role" x="49" y="78" width="80" height="48" ruleFlowGroup="clear role" />
     <ruleSet id="76" name="retract unlimit message" x="262" y="25" width="191" height="48" ruleFlowGroup="retract unlimit message" />
@@ -52,8 +52,8 @@
     <connection from="67" to="70" />
     <connection from="65" to="71" />
     <connection from="60" to="64" />
-    <connection from="63" to="5" />
     <connection from="57" to="65" />
+    <connection from="63" to="5" />
     <connection from="58" to="66" />
     <connection from="61" to="67" />
     <connection from="1" to="76" />

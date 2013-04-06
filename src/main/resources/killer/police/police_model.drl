@@ -1,4 +1,4 @@
-package drools.common
+package  drools.common
 
 import java.util.List;
 import java.util.Set;
@@ -30,8 +30,7 @@ end
 
 declare Role
        id:String
-       role:String
-       status:String
+       role:String    
 end
 
 

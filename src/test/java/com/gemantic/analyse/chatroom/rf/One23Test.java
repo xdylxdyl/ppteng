@@ -155,17 +155,70 @@ public class One23Test {
 	}
 
 	@Test
-	public void testPoliceRule() throws ServiceException, ServiceDaoException {
+	public void testPoliceRule() throws ServiceException, ServiceDaoException, IOException {
 
 		Room room = new Room("sss", 3L, "killer_police_1.0");
+		
+		
+		
+		
+		List<String> messages = FileUtil
+				.readFileAsList("src/test/resources/killer_police.txt");
+		List<Message> ms = new ArrayList();
+
+		Long rid = null;
+		
+		for (String message : messages) {
+			if (message.startsWith("#")) {
+				continue;
+			}
+			Message m = MessageUtil.parse("killer_police_1.0", message);
+			m.setId(RandomUtils.nextLong());
+			if (rid == null) {
+				room = new Room();
+				room.setId(System.currentTimeMillis());
+				room.setVersion(m.getVersion());
+				this.roomService.createRoom(room);
+				rid = room.getId();
+			} else {
+
+				room = this.roomService.getRoom(rid);
+			}
+
+			
+
+			log.info("start process use method of service  ========================= "
+					+ message);
+
+			List<Message> ls = droolsGameMessageService.generate(m, room);
+			log.info(ls);
+
+		}
+		
+		
+		
+		
+		
+		
+		
+
+	}
+	
+	
+	@Test
+	public void testSimpleRule() throws ServiceException, ServiceDaoException {
+
+		Room room = new Room("sss", 3L, "simple_1.0");
 		// TODO 我判断不出来用Int还是用String好
 		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
-				"78", "4", "", "killer_police_1.0");
+				"78", "4", "", "simple_1.0");
 		List<Message> messages = this.droolsGameMessageService.generate(
 				loginMessage, room);
 		log.info(messages);
 
 	}
+
+	
 
 	// @Test
 	public void testSimpleRF() throws InterruptedException {

@@ -754,6 +754,7 @@ public class PlayerController {
 	@RequestMapping(value = "/player/update/stage", method = RequestMethod.POST)
 	public String updateStage(HttpServletRequest request, HttpServletResponse response, ModelMap model, String show) throws Exception {
 
+		
 		Long uid = cookieUtil.getID(request, response);
 		log.info(uid + " update " + show);
 		User oldUser = this.userService.getObjectById(uid);

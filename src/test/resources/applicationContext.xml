@@ -9,13 +9,10 @@
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
             http://www.springframework.org/schema/sca http://www.springframework.org/schema/sca/spring-sca.xsd">
 
-
 	<context:annotation-config />
-	<context:component-scan base-package="com.gemantic" />
-	<!-- Activates mapping of @Controller -->
 
 
-
+	<import resource="classpath:applicationContext-setting.xml" />
 	<!-- hotFacet fitler -->
 	<bean id="pushClient"
 		class="com.gemantic.commons.push.client.impl.HttpPushClientImpl">
@@ -112,23 +109,16 @@
 						<value>mine/multiplayer/mine_game.rf</value>
 					</list>
 				</entry>
-				<entry key="video_1.0">
-					<list>						
-					</list>
-				</entry>
+
 			</map>
 		</constructor-arg>
 	</bean>
 
 
-
 	<bean id="cookieUtil" class="com.gemantic.common.util.http.cookie.CookieUtil">
-		<property name="home" value="ppteng.com"></property>
-		<property name="domain" value="http://www.ppteng.com:9090"></property>
+		<property name="home" value="www.ptteng.com"></property>
+		<property name="domain" value="http://www.ptteng.com"></property>
 	</bean>
-
-
-
 
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -154,12 +144,10 @@
 
 
 
-
-
 	<bean id="dao" class="com.gemantic.dal.dao.impl.CompositeDaoImpl" />
 
 
-
+	
 
 
 

@@ -1,54 +1,41 @@
-package drools.common
+package  drools.common
 
 import drools.common.*
+import java.util.*;
 import com.gemantic.killer.common.model.Message
 import com.gemantic.killer.common.model.Operater;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
+
 import  com.gemantic.common.util.json.GsonUtil;
-import java.util.HashMap;
-import java.util.Map;
+
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang.StringUtils;
 import com.gemantic.killer.util.*;
 
 
 
-
-
 //===========game prepare will process clear info,role assing ,right assign
 
-//========== 
 
-rule 'clear prev game info'
-ruleflow-group "game prepare"
-no-loop true
+
+rule 'clear init '
+ruleflow-group "game clear"
 when
 	//conditions    
-    $message:Message($subject:subject,predict=="start")   
-     $allRight:HashSet()
-	      from accumulate(
-	     $right:Right()	     
-	      init(Set ls=new HashSet();),
-	      action(ls.add($right);),
-	      result(ls)
-	      );
+    $message:Message($subject:subject,predict=="start")
+    not Game()      
+   $right:Right()
     //clear source    
     
 then      
 	//actions
-     LogUtil.log("clear prev game info start================= "); 
-     
-     
-     for(Object o: $allRight){
-                retract o;
-        }
-     LogUtil.log("clear prev game infoage over ================="); 
-    
+   
+     LogUtil.log("game  prepare clear start ================="+$right);   
+     retract($right); 
+     LogUtil.log("game  prepare clear over =================");
 end
+
+
+
 
 
 
@@ -58,33 +45,24 @@ ruleflow-group "game prepare"
 no-loop true
 when
 	//conditions    
-    $message:Message($subject:subject,predict=="start")
+    $message:Message($subject:subject,predict=="start",$time:time)
     $room:Room(status=="unrun")  
     not Game()  
     
     //get all players
-    $all_login_ids:HashSet()
+    $allLoginers:ArrayList()
 	      from accumulate(
-	      Player($id:id)	     
-	      init(Set ls=new HashSet();),
+	       $person:Player($id:id)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($person);),
+	      result(ls)
+	      ); 
+	    //get all readys
+    $allReadyIDS:ArrayList()
+	      from accumulate(
+	      $person:Player(status=="ready",$id:id)	     
+	      init(List ls=new ArrayList();),
 	      action(ls.add($id);),
-	      result(ls)
-	      );
-	      
-    //get all readys
-    $allReadys:ArrayList()
-	      from accumulate(
-	      $person:Player(status=="ready")	     
-	      init(List ls=new ArrayList();),
-	      action(ls.add($person);),
-	      result(ls)
-	      );
-	      
-	$unReadys:ArrayList(0
-      from accumulate(
-	      $person:Player(status=="unready")	     
-	      init(List ls=new ArrayList();),
-	      action(ls.add($person);),
 	      result(ls)
 	      );
      //get operater
@@ -101,29 +79,32 @@ then
      //1.assign role	
 	 int  killerCount=Integer.valueOf(getRoomSetting($room,"killerCount","1")); 
 	 int  policeCount=Integer.valueOf(getRoomSetting($room,"policeCount","1")); 
-	 int  waterCount= $allReadys.size()-killerCount-policeCount;
+	 int  waterCount= $allReadyIDS.size()-killerCount-policeCount;
 	 
-	 Map<String,Integer> role_count=new HashMap();
+	 Map role_count=new HashMap();
 		role_count.put("killer", killerCount);
 	    role_count.put("police", policeCount);
 		role_count.put("water", waterCount);
 
-	 //get uid id List
-	 List<String> ls=getIDFromPlayer($allReadys);
-	 Map<String,String>	ids_role=RoleUtil.assingRole(role_count,ls);
+	 //get uid id List	
+	 Map	ids_role=RoleUtil.assingRole(role_count,$allReadyIDS);
 	 
 	 //2. creae game
-	Game game=new Game("ready",$allReadys.size(),waterCount,killerCount,System.currentTimeMillis(),0L,$time,rname);
+	Game game=new Game("ready",$allReadyIDS.size(),waterCount,killerCount,policeCount,System.currentTimeMillis(),0L,$time,rname);
 	
 	 
 	 //3.create Role/status/vote record message create log ,how to update all unready players status;
 	 
 		LogUtil.log("============================ role is "+ids_role);
-		for(Object o: $allReadys){
+		for(Object o: $allLoginers){
 			      Player p=(Player)o;
 			      	LogUtil.log(p);
 			    String uid=p.getId();
-			    String role=ids_role.get(uid);			      
+			    if("ready".equals(p.getStatus())){
+			    
+			        //ready players
+			    
+			      String role=(String)ids_role.get(uid);			      
 				  modify(p){setStatus("living")};
 				  
 				  Role r=new Role(uid,role);
@@ -134,24 +115,33 @@ then
 				  Message assignMessage=new Message(role,"assign",uid); 
 				  insert(assignMessage);	  
 				  
-				   Message livingMessage=new Message(uid,"living",""); 
+				  Message livingMessage=new Message(uid,"living",""); 
 				  insert(livingMessage);
 				  
-				  
-				   Vote vote=new Vote(uid,new HashSet(),"");
-                   insert(vote);		
-                   
-                   Right right= new Right($id,convertString2Set("say,vote"),false);		
-		            insert(right);	
+				        
+                   Right right= new Right(uid,convertString2Set("say,vote"),false);		
+		           insert(right);	
 		            
 		             
-               Message rightMessage=new Message($id,"right","say,vote"); 
+               Message rightMessage=new Message(uid,"right","say,vote"); 
                insert(rightMessage);
 		            
 		            
 		            
 		       JobLogger.logMessages(rname,Arrays.asList(new Message[]{new Message(uid,"ready",""),new Message(uid,"login","")}));			
-	  	
+			    
+			    
+			    }else{
+			       //no ready right 
+			    
+			       Right right= new Right(uid,convertString2Set(""),false);		
+		           insert(right);	
+		            
+		             
+                   Message rightMessage=new Message(uid,"right",""); 
+                   insert(rightMessage);
+		        
+			    }
 			
 		}
 
@@ -164,7 +154,7 @@ then
 	
 	//5.create time message	
 	Message nightDelay=createDelayNight($room);
-    insert(night); 
+    insert(nightDelay); 
      Message day=createDay($room);
      insert(day); 
      
@@ -172,18 +162,15 @@ then
 	//6.update game phase	
 	 game.setStatus("day");
      game.setLastTime(System.currentTimeMillis());
-     LogUtil.log("start, day come start "+$game.getLastTime());      
+     LogUtil.log("start, day come start "+game.getLastTime());      
     insert(game);
 
     
 	
-	
-	
-	LogUtil.log("game init process over  =================");
-	
+	LogUtil.log("game init process over  =================");	
 	//7. update operater 
 	$operater.setGameStart(true);
-	$operater.setPlayers(readyIDS);
+	$operater.setPlayers($allReadyIDS);
         
    
 end
@@ -193,3 +180,4 @@ end
 
 
   
+
