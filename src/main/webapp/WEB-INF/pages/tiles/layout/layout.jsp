@@ -15,20 +15,13 @@
 
 
 
-<div id="container">
-    <div class="clearfix">
-      
-            <tiles:insertAttribute name="header" />
+       
+   <tiles:insertAttribute name="body" />
        
 
-       
-            <tiles:insertAttribute name="body" />
-       
-    </div>
 
-    <footer>
-        <tiles:insertAttribute name="footer" />
-    </footer>
+   <tiles:insertAttribute name="footer" />
+
 </div>
 </body>
 </html>
