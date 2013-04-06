@@ -21,14 +21,14 @@
 <input type="hidden" id="recordTime" value="${record.time}">
 <div id="stageShow" class="hide">${stageShow}</div>
 <div id="contents" class="hide">${contents}</div>
-
+<div id="escape" class="hide"></div>
 
 
 <div class="navbar">
     <div class="navbar-inner">
         <a class="brand">${room.name}</a>
         <ul class="nav pull-right">           
-            <li><a href="#" id="exitRoom" rel="tooltip" title="点此离开房间" data-original-title="点此离开房间" data-placement="bottom">退出房间 <i class="icon-off"></i></a></li>
+            <li><a href="#" id="exitButton" rel="tooltip" title="点此离开房间" data-original-title="点此离开房间" data-placement="bottom">退出房间 <i class="icon-off"></i></a></li>
         </ul>
     </div>
 </div>

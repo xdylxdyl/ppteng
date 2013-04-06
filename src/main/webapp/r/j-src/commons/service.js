@@ -222,7 +222,7 @@ var roomService = {
             console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
             var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
             playerService.addPlayer(p.id, p);
-            playerListView.login(p);
+           // playerListView.login(p);
 
         }
 
@@ -285,7 +285,7 @@ var roomService = {
     },
     parseRoom:function (data) {
         var creater = data.creater;
-        playerListView.displayCreater(creater);
+       // playerListView.displayCreater(creater);
     },
     parseRight:function (data) {
         var uid = globalView.getCurrentID();

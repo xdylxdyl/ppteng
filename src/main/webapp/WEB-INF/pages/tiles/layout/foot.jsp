@@ -61,22 +61,34 @@
                 <li>
                     <label for="scroll" class="checkbox">
                         <input type="checkbox" checked="checked" value="scroll" id="scroll">
-                        滚屏选我选我
+                        滚屏
                     </label>
                 </li>
                 <li>
-                    <span class="help-inline">04:00</span>
+                    <span class="help-inline" id="countDown">04:00</span>
+                </li>
+                 <li class="pull-right">
+                    <button class="btn btn-info" id="readyButton">准备</button>
+                </li>
+                 <li class="pull-right">
+                    <button class="btn btn-info" id="startButton">开始游戏</button>
+                </li>
+                 <li class="pull-right">
+                    <button class="btn btn-info" id="recordButton">播放战例</button>
+                </li>
+                <li class="pull-right">
+                    <span class="help-inline" id="netSpeedHint">延迟：120毫秒</span>
                 </li>
             </ul>
             <!--input-->
             <form action="" class="form-horizontal">
                 <div class="control-group">
-                    <label for="" class="control-label">I say:</label>
+                    <label for="" class="control-label">说:</label>
                     <div class="controls">
                         <div class="row-fluid">
-                            <div class="span10"><input type="text" class="span12" id="inputText"></div>
+                            <div class="span10"><input type="text" class="span12" id="sayInput"></div>
                             <div class="span2">
-                                <a href="#" class="btn medium btn-primary">send</a>
+                                <a href="#" class="btn medium btn-primary" id-"sayButtion">发送</a>
                             </div>
                         </div>
                     </div>

@@ -8,7 +8,6 @@ var information = {};
 information.info = function (active, object) {
     object == null || object == "" ? object = -500 : object;
     var content = $("#say").val();
-    console.log($("#say").val());
     content = $("#escape").text(content).html();
     $("#escape").empty();
     console.log($("#say").val() + " after escape " + content);
@@ -133,7 +132,7 @@ $(document).ready(function () {
     });
 
     //玩家动作：say, ready, start, kick, vote, kill
-    $("#say").bind("keydown", function (event) {
+    $("#sayInput").bind("keydown", function (event) {
 
         //发送内容违禁词过滤检查函数
         //TODO
@@ -192,7 +191,7 @@ $(document).ready(function () {
 
     }
 
-    $("#sendSay").bind("click", function () {
+    $("#sayButton").bind("click", function () {
         say();
 
 
@@ -207,7 +206,7 @@ $(document).ready(function () {
     ;
 
 
-    $("#start").click(function () {
+    $("#startButton").click(function () {
         //检查准备人数是否合规则，否则return
 
         var count = versionFunction["readyCount"];
@@ -230,13 +229,13 @@ $(document).ready(function () {
         }
 
     });
-    $("#ready").click(function () {
+    $("#readyButton").click(function () {
         //检查准备人数是否合规则，否则return
         //TODO
         information.sendInfo("ready", null, information.info);
 
     });
-    $("#logout").click(function () {
+    $("#exitButton").click(function () {
         var type = globalView.getRoomType();
         var url;
         var r = confirm("确定退出？");
@@ -256,7 +255,7 @@ $(document).ready(function () {
 
     });
 
-    $("#replay").click(function () {
+    $("#replayButton").click(function () {
         recordFirstTime = null;
         recordSecondTime = null;
         msg_interval = null;
@@ -266,7 +265,7 @@ $(document).ready(function () {
         var text = $("#contents").text();
         var messages = eval(text);
         showRecord(messages, 1);
-        $("#replay").val("播放中..");
+        $("#replayButton").val("播放中..");
         controlView.showRecordCurrentTime(0, globalView.getRecordTime());
 
 

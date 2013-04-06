@@ -21,10 +21,14 @@ selects={
     $sayInput:$("#sayInput"),
     $sayButton:$("#sayButtion"),
     $readyButton:$("#readyButton"),
-    $startButton:$("#startstart"),
+    $startButton:$("#startButton"),
+    $recordButton:$("#recordButton"),
+    $exitButton:$("#exitButton"),
     $command:$("#command"),
     $expression:$("#expression"),
-    $color:$("#color")
+    $color:$("#color"),
+    $netSpeedHint:$("#netSpeedHint"),
+    $countDown:$("#countDown")
 
 
 
@@ -210,11 +214,16 @@ var playerListView = {
     appendPlayerItem:function (player) {
         console.log(player);
         if (player.count == 0) {
-            selects.$playerList.append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'>" +
-                "<i class='icon-" + player.status +"></i><span>" + player.name + "</span></a></li>");
+
+            var item="<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'><i class='icon-" + player.status +"'></i><span>" + player.name + "</span></a></li>";
+            console.log(item);
+            selects.$playerList.append(item);
         } else {
-            selects.$playerList.append("<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'>" +
-                "<i class='icon-" + player.status +"></i><span>" + player.name + "</span></a></li>");
+            var item="<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'><i class='icon-" + player.status +"'></i><span>" + player.name + "<span class='vote'>+"+player.count+"</span></span></a></li>";
+                 console.log(item);
+                 selects.$playerList.append(item);
+
+
         }
 
 
@@ -405,9 +414,6 @@ var controlView = {
 
         if ($("#uid").val() == id) {
             selects.$readyButton.hide();
-            $(".nobg").val("已准备就绪");
-
-
         }
     },
 
@@ -418,7 +424,7 @@ var controlView = {
         m < 10 ? m = "0" + m : m;
         s < 10 ? s = "0" + s : s;
         var result = m + ":" + s;
-        $(".nobg").val(result);
+        selects.$countDown.empty().html(result);
         time = time + 1000;
 
         timer = setTimeout("controlView.startCountTime(" + time + ")", 1000);
@@ -432,7 +438,7 @@ var controlView = {
         m < 10 ? m = "0" + m : m;
         s < 10 ? s = "0" + s : s;
         var result = m + ":" + s;
-        $(".nobg").val(result);
+        selects.$countDown.empty().html(result);
         time = time - 1000;
         if (time >= 0) {
             timer = setTimeout("controlView.setCountDownTime(" + time + ")", 1000);

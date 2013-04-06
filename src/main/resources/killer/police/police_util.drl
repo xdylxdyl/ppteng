@@ -43,7 +43,7 @@ function void setRemainTime(String status,Game game,Room room) {
 
 
 
-function List<String>  getIDFromPlayer(List<Player> players) {
+function List<String>  getIDFromPlayer(List players) {
 
       List<String> pids=new ArrayList();
 	    for(Object o:players){
@@ -56,9 +56,9 @@ function List<String>  getIDFromPlayer(List<Player> players) {
 
 function Message createDelayNight(Room room) {
 
-    String  timeSetting=getRoomSetting(room,"nightTime","30000");#1*60*1000 
+    String  timeSetting=getRoomSetting(room,"nightTime","30000");//1*60*1000 
     Message night=new Message("night","send time",timeSetting);
-    String  time=getRoomSetting($room,"dayTime","15000");#1*60*1000
+    String  time=getRoomSetting(room,"dayTime","15000");//1*60*1000
     night.setScheduledTime(Long.valueOf(time));
     
     return night;
@@ -70,7 +70,7 @@ function Message createDelayNight(Room room) {
 
 
 function Message createDay(Room room) {
-    String  dayTime=getRoomSetting($room,"dayTime","30000");#1*60*1000
+    String  dayTime=getRoomSetting(room,"dayTime","30000");//1*60*1000
     Message day=new Message("day","time",dayTime);
  
      return day;

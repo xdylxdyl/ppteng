@@ -44,7 +44,8 @@ then
      
      
      for(Object o: $allRight){
-                retract o;
+           Right right=(Right)o
+                retract right;
         }
      LogUtil.log("clear prev game infoage over ================="); 
     
@@ -80,7 +81,7 @@ when
 	      result(ls)
 	      );
 	      
-	$unReadys:ArrayList(0
+	$unReadys:ArrayList()
       from accumulate(
 	      $person:Player(status=="unready")	     
 	      init(List ls=new ArrayList();),
