@@ -6,76 +6,12 @@
 
 
 
-var playerList = {};
-playerList.order = function (command) {
-    switch (command) {
-        case "kick" :
-            this.filter();
-            break;
-        case "kill" :
-            this.filter("living");
-            break;
-        case "vote" :
-            this.filter("living");
-            break;
-        case "command" :
-            this.filter("command");
-            break;
-        default :
-            console.log("亲，这个指令你还没写嘛.");
-    }
-};
-playerList.filter = function (keyword) {
-
-    $("#object option:gt(0)").remove();
-
-    if (keyword) {
-        if (keyword == "command") {
-
-        } else {
-            for (var key in id_name) {
-                var player = playerService.getPlayer(key);
-                if (keyword == player.status) {
-                    $("#object").append("<option value='" + player.id + "'>" + player.name + "</option>");
-                }
-
-
-            }
-
-        }
-    } else {
-        for (var key in id_name) {
-            var player = playerService.getPlayer(key);
-            $("#object").append("<option value='" + player.id + "'>" + player.name + "</option>");
-
-        }
-
-
-    }
-};
 
 
 $(document).ready(function () {
 
 
-    $("#command").change(function () {
-        var command = $(this).val();
-        playerList.order(command);
-    });
-    $("#object").change(function () {
-        if (controlView.checkSayNotEmpty()) {
 
-        } else {
-
-            var command = $("#command").val();
-            var content = hint[command];
-            if (content == null) {
-                content = versionFunction["commandHint"](command);
-            }
-
-            controlView.hintSay(content);
-        }
-    });
 
     //玩家动作：say, ready, start, kick, vote, kill
     $("#sayInput").bind("keydown", function (event) {

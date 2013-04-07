@@ -24,13 +24,13 @@ var playerService = {
         if (p == null) {
 
             return  ajaxJson("/player/detail/show.do?", "get", {"uid":id}, playerService.parseDetail, 5000, "json");
-        }else{
+        } else {
             return p.name;
         }
 
 
     },
-    parseDetail:function(data){
+    parseDetail:function (data) {
         return data.user.name;
     },
     setStatus:function (id, status) {
@@ -41,6 +41,15 @@ var playerService = {
     },
     setCount:function (id, count) {
         id_name[id].count = name;
+    },
+    getAllPlayer:function () {
+        var result = [];
+        for (var key in id_name) {
+            var player = this.getPlayer(key);
+            result.push(player);
+
+        }
+        return result;
     },
     getAll:function () {
         var living = playerStatus.living;
@@ -222,7 +231,7 @@ var roomService = {
             console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
             var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
             playerService.addPlayer(p.id, p);
-           // playerListView.login(p);
+            // playerListView.login(p);
 
         }
 
@@ -285,7 +294,7 @@ var roomService = {
     },
     parseRoom:function (data) {
         var creater = data.creater;
-       // playerListView.displayCreater(creater);
+        // playerListView.displayCreater(creater);
     },
     parseRight:function (data) {
         var uid = globalView.getCurrentID();
@@ -459,7 +468,8 @@ var cometService = {
         var url = "http://42.121.113.70:8000/channel/" + id;
         cometUtil.polling(url, parse);
     },
-    sendMessage:function(message){
-        lastMessageSendAt= jQuery.now();
-        return ajaxJson("/message/accept2.do", "POST", message, controlView.showDelay, 5000, "json");    }
+    sendMessage:function (message) {
+        lastMessageSendAt = jQuery.now();
+        return ajaxJson("/message/accept2.do", "POST", message, controlView.showDelay, 5000, "json");
+    }
 }

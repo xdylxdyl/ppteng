@@ -50,12 +50,8 @@
                         &nbsp;
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li data-default=""><a href="#">对象</a></li>
-                        <li class="divider"></li>
-                        <li data-default=""><a href="#">123</a></li>
-                        <li data-default=""><a href="#">223</a></li>
-                        <li data-default=""><a href="#">323</a></li>
+                    <ul class="dropdown-menu" id="object">
+                     
                     </ul>
                 </li>
                 <li>

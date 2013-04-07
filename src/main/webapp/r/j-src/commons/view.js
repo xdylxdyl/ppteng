@@ -392,7 +392,7 @@ var controlView = {
 
         var message = {
             subject:$("#uid").val(),
-            predict:controlView.getCommadValue(),
+            predict:controlView.getCommandValue(),
             object:object,
             where:$("#rid").val(),
             color:controlView.getColorValue(),
@@ -408,7 +408,7 @@ var controlView = {
     },
     checkFormat:function () {
         var result = {};
-        var command = controlView.getCommadValue();
+        var command = controlView.getCommandValue();
         switch (command) {
             case "say":
                 var sayNotEmpty = controlView.checkSayNotEmpty();
@@ -426,7 +426,7 @@ var controlView = {
                     result.code = -2;
                     result.message = sayHint.select;
                 } else {
-                    result.code == 0;
+                    result.code = 0;
                 }
                 break;
 
@@ -435,9 +435,9 @@ var controlView = {
         return result;
 
     },
-    getColorValue:function(){
+    getColorValue:function () {
         var color = $("#color").attr("data-default");
-         return  color == "" || color == undefined ? color = "" : color;
+        return  color == "" || color == undefined ? color = "" : color;
     },
     getExpressionValue:function () {
         var expression = $("#expression").attr("data-default");
@@ -447,7 +447,7 @@ var controlView = {
         var object = $("#object").attr("data-default");
         return  object == "" || object == undefined ? object = -500 : object;
     },
-    getCommadValue:function () {
+    getCommandValue:function () {
         var command = $("#command").attr("data-default");
         return  command == "" || command == undefined ? command = "say" : command;
 
@@ -615,8 +615,61 @@ var controlView = {
     },
     getSayInput:function () {
         return $("#sayInput").val();
-    }
+    },
+    filterObject:function (command, playerList) {
+        switch (command) {
+            case "kick" :
+                controlView.filterSingleObject("all", playerList);
+                break;
+            case "kill" :
+                controlView.filterSingleObject("living", playerList);
+                break;
+            case "vote" :
+                controlView.filterSingleObject("living", playerList);
+                break;
+            case "command" :
+                controlView.filterSingleObject("none", playerList);
+                break;
+            default :
+                console.log("亲，这个指令你还没写嘛.");
+        }
+    },
+    filterSingleObject:function (keyword, playerList) {
+        var objectStr = "<li data-default=''><a href='#'>对象</a></li> <li class='divider'></li>";
+        $("#object").empty().append(objectStr);
 
+
+        switch (keyword) {
+            case "none":
+                break;
+            case "all":
+                for (var key in playerList) {
+                    controlView.appendObject(playerList[key]);
+
+
+                }
+                break;
+            case "living":
+                for (var key in playerList) {
+                    var player = playerList[key];
+                    if ("living" == player.status) {
+                        controlView.appendObject(player);
+                    }
+
+
+                }
+                break;
+        }
+
+
+    },
+
+    appendObject:function (player) {
+
+        var objectStr = " <li data-default='" + player.id + "'><a href='#'>" + player.name + "</a></li>";
+        $("#object").append(objectStr);
+
+    }
 
 
 
