@@ -17,7 +17,12 @@ $('#inputText').focus(function () {
 });
 /*宽度min-width: 600px时页面高度控制*/
 function controlHeight() {
-    var winH = $(window).height();
+    var winH;
+    if ($(window).height() <= 300) {
+        winH =  300;
+    } else {
+        winH = $(window).height();
+    }
     var headH = $('.navbar').outerHeight();
     var footH = $('.foot').outerHeight();
     var mainH = winH - headH - footH - 20;
@@ -32,8 +37,11 @@ function controlHeight() {
     });
 
 }
-controlHeight();
-$(window).resize(controlHeight);
+$(function() {
+    controlHeight();
+    $(window).resize(controlHeight);
+});
+
 
 
 /*

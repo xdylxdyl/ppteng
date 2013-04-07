@@ -335,10 +335,9 @@ var initRoom = function () {
         //init expression
         exp = settingService.getExpress(globalView.getRoomID());
         settingHtml = settingService.getSetting(new settingGetParameter(globalView.getRoomID(), globalView.getVersion()))
-
+        console.log(exp)
 
         //init expression
-
         controlView.initExpression(exp);
         //init color
         controlView.initColor();

@@ -39,6 +39,7 @@ var settingView = {
     },
 
     showSetting:function (info) {
+        console.log(info)
        $("#"+ selects.$settingArea).html(info);
         //管理员才能看到设置按钮
 

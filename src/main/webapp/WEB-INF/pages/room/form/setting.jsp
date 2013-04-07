@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 <!--room setting div-->
-<div class="modal hide fade in" id="setRoomBlock">
+<div class="help-block">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3>设置</h3>
