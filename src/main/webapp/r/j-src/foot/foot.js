@@ -66,28 +66,28 @@ selectors('selectObject');
 
 
 $("#expression li").live("click", function () {
-    extracted.call(this,"select_"+$(this).parent().attr("id"));
+    extracted.call(this,"select_"+$(this).parent().attr("id"),$(this).parent().attr("id"));
     return false;
 })
 $("#color li").live("click", function () {
-    extracted.call(this,"select_"+$(this).parent().attr("id"));
+    extracted.call(this,"select_"+$(this).parent().attr("id"),$(this).parent().attr("id"));
     return false;
 })
 $("#command li").live("click", function () {
-    extracted.call(this,"select_"+$(this).parent().attr("id"));
+    extracted.call(this,"select_"+$(this).parent().attr("id"),$(this).parent().attr("id"));
     return false;
 })
 $("#object li").live("click", function () {
-    extracted.call(this,"select_"+$(this).parent().attr("id"));
+    extracted.call(this,"select_"+$(this).parent().attr("id"),$(this).parent().attr("id"));
     return false;
 })
 
 
 
 
-function extracted(mid) {
+function extracted(mid,did) {
      var txt = $(this).text();
      var val = $(this).attr('data-default');
      $("#"+mid).find('span').text(txt);
-     $("#"+mid).attr('data-default', val);
+     $("#"+did).attr('data-default', val);
  }

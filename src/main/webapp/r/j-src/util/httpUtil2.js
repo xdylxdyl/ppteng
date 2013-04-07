@@ -21,8 +21,13 @@ function ajaxJson(url, type, param, parse,timeout,dataType,async) {
             } else {
                 if(parse!=null){
                     result = parse(data);
-                console.log("In Ajax The Result Is:");
-                console.log(result);
+                    if(result==undefined){
+
+                    }else{
+                        console.log("In Ajax The Result Is:"+result);
+
+                    }
+
                 }
 
             }

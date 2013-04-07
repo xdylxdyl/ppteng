@@ -9,13 +9,13 @@
 
 
 var commandText = {
-        kick :"果断一脚",
-        vote :"投他一票",
-        kill: "杀人灭口"
+    kick:"果断一脚",
+    vote:"投他一票",
+    kill:"杀人灭口"
 };
 
 
-var sayHint={
+var sayHint = {
     empty:"不能为空啊",
     select:"先选个人啊"
 }
@@ -39,7 +39,7 @@ var settingView = {
     },
 
     showSetting:function (info) {
-       selects.$settingArea.html(info);
+        selects.$settingArea.html(info);
         //管理员才能看到设置按钮
 
         if (globalView.getCurrentID() == globalView.getCreaterId()) {
@@ -71,7 +71,6 @@ var settingView = {
             settingView.showSetting(settingHtml);
 
         });
-
 
 
     },
@@ -193,13 +192,13 @@ var playerListView = {
         console.log(player);
         if (player.count == 0) {
 
-            var item="<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'><i class='icon-" + player.status +"'></i><span>" + player.name + "</span></a></li>";
+            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span></a></li>";
             console.log(item);
             selects.$playerList.append(item);
         } else {
-            var item="<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id +  "' target='_blank'><i class='icon-" + player.status +"'></i><span>" + player.name + "<span class='vote'>+"+player.count+"</span></span></a></li>";
-                 console.log(item);
-                 selects.$playerList.append(item);
+            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote'>+" + player.count + "</span></span></a></li>";
+            console.log(item);
+            selects.$playerList.append(item);
 
 
         }
@@ -252,7 +251,7 @@ var rightView = {
     },
 //各种权利
     sayRight:function (right) {
-      selects.$sayButton.prop("disabled", false);
+        selects.$sayButton.prop("disabled", false);
     },
     readyRight:function () {
         selects.$readyButton.css("display", "inline");
@@ -264,8 +263,8 @@ var rightView = {
     },
     commandRight:function (right) {
         $("#command").empty();
-        var content="<li data-default=''><a href=''#'>指令</a></li><li class='divider'></li>";
-        $("#command").append(content+ "<li data-default='"+right+"'><a href='#'>"+commandText[right] +"</a></li>");
+        var content = "<li data-default=''><a href=''#'>指令</a></li><li class='divider'></li>";
+        $("#command").append(content + "<li data-default='" + right + "'><a href='#'>" + commandText[right] + "</a></li>");
     },
     noRight:function () {
 
@@ -299,8 +298,8 @@ var gameAreaView = {
         var name = player.name;
         if (globalView.isStop()) {
             //只有房间是处在结束状态下才在游戏区显示消息
-            selects.$gameArea.append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
-            viewUtil.autoBottom(selects.$gameArea);
+            $("#game_area").append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
+            viewUtil.autoBottom($("#game_area"));
         } else {
             //不显示
 
@@ -322,16 +321,16 @@ var gameAreaView = {
             }
         }
         if (isDisplay) {
-            selects.$gameArea.append("<p style='color:#F00'>【系统消息】[" + name + "] 坚决的退出了房间。</p>");
-            viewUtil.autoBottom( selects.$gameArea);
+            game_area.append("<p style='color:#F00'>【系统消息】[" + name + "] 坚决的退出了房间。</p>");
+            viewUtil.autoBottom($("#game_area"));
         }
 
 
     },
     kick:function (player) {
         var name = player.name;
-        selects.$gameArea.append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
-        viewUtil.autoBottom( selects.$gameArea);
+        game_area.append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
+        viewUtil.autoBottom($("#game_area"));
     },
     say:function (id, name, content, exp, color, subject, subjectName) {
         var express = controlView.showExpression(exp);
@@ -344,14 +343,14 @@ var gameAreaView = {
         var player = playerService.getPlayer(id);
 
 
-        selects.$gameArea.append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
-        viewUtil.autoBottom( selects.$gameArea);
+        $("#game_area").append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+        viewUtil.autoBottom($("#game_area"));
 
 
     },
     systemMessage:function (content) {
-        selects.$gameArea.append("<p style='color:#F00'>" + content + "</p>");
-        viewUtil.autoBottom( selects.$gameArea);
+        $("#game_area").append("<p style='color:#F00'>" + content + "</p>");
+        viewUtil.autoBottom($("#game_area"));
     },
     getContent:function () {
 
@@ -381,74 +380,76 @@ var viewUtil = {
 
 
 var controlView = {
-    showDelay:function(){
-        $("#netspeed").text(jQuery.now() - lastMessageSendAt);
+    showDelay:function () {
+        $("#netSpeedHint").text("延迟:" + (jQuery.now() - lastMessageSendAt) + "毫秒");
     },
-    getMessage:function(){
+    getMessage:function () {
 
-     var content = controlView.getSayInput();
-     content=   controlView.escape(content);
-      var  object =controlView.getExpressionValue()
-      object == ""||object==undefined ? object = -500 : object;
+        var content = controlView.getSayInput();
+        content = controlView.escape(content);
+        var object = controlView.getObjectValue();
 
-     var message = {
-         subject:$("#uid").val(),
-         predict:controlView.getCommadValue(),
-         object:object,
-         where:$("#rid").val(),
-         color:$("#color").val(),
-         expression:object,
-         "content":content,
-         "isDrools":"true",
-         "version":$("#version").val()
-     };
-     return message;
+
+        var message = {
+            subject:$("#uid").val(),
+            predict:controlView.getCommadValue(),
+            object:object,
+            where:$("#rid").val(),
+            color:controlView.getColorValue(),
+            expression:controlView.getExpressionValue(),
+            "content":content,
+            "isDrools":"true",
+            "version":$("#version").val()
+        };
+        return message;
     },
-    escape:function(content){
+    escape:function (content) {
         return  $("#escape").empty().text(content).html();
     },
-    checkFormat:function(){
-        var result={};
-        var command=controlView.getCommadValue();
-        switch(command){
+    checkFormat:function () {
+        var result = {};
+        var command = controlView.getCommadValue();
+        switch (command) {
             case "say":
-                var sayNotEmpty=controlView.checkSayNotEmpty();
-                if(sayNotEmpty){
-                    result.code=0;
-                }else{
-                    result.code=-1;
-                    result.message=sayHint.empty;
+                var sayNotEmpty = controlView.checkSayNotEmpty();
+                if (sayNotEmpty) {
+                    result.code = 0;
+                } else {
+                    result.code = -1;
+                    result.message = sayHint.empty;
                 }
-                 break;
+                break;
             default:
                 //other command such as ,kick ,vote,kill,must have object
-                var object=controlView.getObjectValue();
-                if(object==null||object==""){
-                    result.code=-2;
-                    result.message=sayHint.select;
-                }else{
-                    result.code==0;
+                var object = controlView.getObjectValue();
+                if (object == null || object == "") {
+                    result.code = -2;
+                    result.message = sayHint.select;
+                } else {
+                    result.code == 0;
                 }
-                 break;
+                break;
 
         }
 
         return result;
 
     },
-    getExpressionValue:function(){
-             return $("#expression").attr("data-default");
-         },
-    getObjectValue:function(){
-         return $("#object").attr("data-default");
-     },
-    getCommadValue:function(){
-        var command=$("#command").attr("data-default");
-        if(command==""||command==undefined){
-            return "say"
-        }else{
-            return command;
-        }
+    getColorValue:function(){
+        var color = $("#color").attr("data-default");
+         return  color == "" || color == undefined ? color = "" : color;
+    },
+    getExpressionValue:function () {
+        var expression = $("#expression").attr("data-default");
+        return  expression == "" || expression == undefined ? expression = 0 : expression;
+    },
+    getObjectValue:function () {
+        var object = $("#object").attr("data-default");
+        return  object == "" || object == undefined ? object = -500 : object;
+    },
+    getCommadValue:function () {
+        var command = $("#command").attr("data-default");
+        return  command == "" || command == undefined ? command = "say" : command;
 
     },
     resetCommand:function () {
@@ -509,35 +510,32 @@ var controlView = {
         var expressionStr = "  <li><a href='#'>神态</a></li> <li class='divider'></li>";
 
         for (var key in expression) {
-            expressionStr +=  "<li data-default='"+key+"'><a href=''#'>"+expression[key]+"</a></li>";
+            expressionStr += "<li data-default='" + key + "'><a href=''#'>" + expression[key] + "</a></li>";
 
         }
 
 
         for (var key in userExpression) {
-            expressionStr +=  "<li data-default='"+key+"'><a href=''#'>"+userExpression[key]+"</a></li>";
+            expressionStr += "<li data-default='" + key + "'><a href=''#'>" + userExpression[key] + "</a></li>";
         }
 
 
-       $("#expression").empty().append(expressionStr);
-      /*  console.log(selects.$expression);
-       selects.$expression.empty().append(expressionStr);*/
+        $("#expression").empty().append(expressionStr);
+        /*  console.log(selects.$expression);
+         selects.$expression.empty().append(expressionStr);*/
     },
 
 
     initColor:function () {
 
 
-
-
         var colorStr = "  <li data-default='#000'><a href='#'>color</a></li><li class='divider'></li>";
         for (var key in color) {
-            colorStr += "<li data-default='"+key+"'> <div class='color-block' style='background:"+key+"'></div><a href='#' class='color-font'>"+color[key]+"</a></li>";
+            colorStr += "<li data-default='" + key + "'> <div class='color-block' style='background:" + key + "'></div><a href='#' class='color-font'>" + color[key] + "</a></li>";
 
 
         }
         $("#color").empty().append(colorStr);
-
 
 
     },
@@ -595,7 +593,7 @@ var controlView = {
     },
     checkSayNotEmpty:function () {
 
-        if ($("#sayInput").val() == "" ||$("#sayInput") == undefined) {
+        if ($("#sayInput").val() == "" || $("#sayInput") == undefined) {
             return false;
         } else {
             return true;
@@ -615,7 +613,7 @@ var controlView = {
     getAutoRoll:function () {
         return $("#autoroll_checkbox").attr("checked");
     },
-    getSayInput:function(){
+    getSayInput:function () {
         return $("#sayInput").val();
     }
 
