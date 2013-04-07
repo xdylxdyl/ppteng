@@ -458,5 +458,8 @@ var cometService = {
     comet:function (id, parse) {
         var url = "http://42.121.113.70:8000/channel/" + id;
         cometUtil.polling(url, parse);
-    }
+    },
+    sendMessage:function(message){
+        lastMessageSendAt= jQuery.now();
+        return ajaxJson("/message/accept2.do", "POST", message, controlView.showDelay, 5000, "json");    }
 }

@@ -12,7 +12,7 @@
             <!--act-->
             <ul class="toolbar">
                 <li class="dropup">
-                    <a href="#" id="selectExpression" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                    <a href="#" id="select_expression" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
                         &nbsp;
                         <span>神态</span>
                         &nbsp;
@@ -22,7 +22,7 @@
                     </ul>
                 </li>
                 <li class="dropup">
-                    <a href="#" id="selectColor" data-default="#000" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                    <a href="#" id="select_color" data-default="#000" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
                         &nbsp;
                         <span>color</span>
                         &nbsp;
@@ -33,18 +33,18 @@
                     </ul>
                 </li>
                 <li class="dropup">
-                    <a href="#" id="selectOrder" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                    <a href="#" id="select_command" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
                         &nbsp;
                         <span>指令</span>
                         &nbsp;
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu" id="commend">
+                    <ul class="dropdown-menu" id="command">
                         
                     </ul>
                 </li>
                 <li class="dropup">
-                    <a href="#" id="selectObject" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                    <a href="#" id="select_object" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
                         &nbsp;
                         <span>对象</span>
                         &nbsp;
@@ -88,7 +88,7 @@
                         <div class="row-fluid">
                             <div class="span10"><input type="text" class="span12" id="sayInput"></div>
                             <div class="span2">
-                                <a href="#" class="btn medium btn-primary" id-"sayButtion">发送</a>
+                                <a href="#" class="btn medium btn-primary" id="sayButton">发送</a>
                             </div>
                         </div>
                     </div>

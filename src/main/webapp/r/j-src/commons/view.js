@@ -6,33 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-selects={
-    $gameArea:$("#gameArea"),
-    $dieArea:$("#dieArea"),
-    $killerArea:$("#killerArea"),
-    $settingArea:$("#settingArea"),
-    $playerList:$("#playerList"),
-    $game_nav:$("#game_nav"),
-    $die_nav:$("#die_nav"),
-    $killer_nav:$("#killer_nav"),
-    $setting_nav:$("#setting_nav"),
-    $music_nav:$("#music_nav"),
-    $submitSetting:$("#submitSetting"),
-    $sayInput:$("#sayInput"),
-    $sayButton:$("#sayButtion"),
-    $readyButton:$("#readyButton"),
-    $startButton:$("#startButton"),
-    $recordButton:$("#recordButton"),
-    $exitButton:$("#exitButton"),
-    $command:$("#command"),
-    $expression:$("#expression"),
-    $color:$("#color"),
-    $netSpeedHint:$("#netSpeedHint"),
-    $countDown:$("#countDown")
 
-
-
-}
 
 var commandText = {
         kick :"果断一脚",
@@ -41,6 +15,10 @@ var commandText = {
 };
 
 
+var sayHint={
+    empty:"不能为空啊",
+    select:"先选个人啊"
+}
 
 var settingView = {
 
@@ -285,9 +263,9 @@ var rightView = {
         selects.$startButton.css("display", "inline");
     },
     commandRight:function (right) {
-        selects.$command.empty();
+        $("#command").empty();
         var content="<li data-default=''><a href=''#'>指令</a></li><li class='divider'></li>";
-        selects.$command.append(content+ "<li data-default='"+right+"'><a href='#'>"+commandText[right] +"</a></li>");
+        $("#command").append(content+ "<li data-default='"+right+"'><a href='#'>"+commandText[right] +"</a></li>");
     },
     noRight:function () {
 
@@ -403,7 +381,76 @@ var viewUtil = {
 
 
 var controlView = {
+    showDelay:function(){
+        $("#netspeed").text(jQuery.now() - lastMessageSendAt);
+    },
+    getMessage:function(){
 
+     var content = controlView.getSayInput();
+     content=   controlView.escape(content);
+      var  object =controlView.getExpressionValue()
+      object == ""||object==undefined ? object = -500 : object;
+
+     var message = {
+         subject:$("#uid").val(),
+         predict:controlView.getCommadValue(),
+         object:object,
+         where:$("#rid").val(),
+         color:$("#color").val(),
+         expression:object,
+         "content":content,
+         "isDrools":"true",
+         "version":$("#version").val()
+     };
+     return message;
+    },
+    escape:function(content){
+        return  $("#escape").empty().text(content).html();
+    },
+    checkFormat:function(){
+        var result={};
+        var command=controlView.getCommadValue();
+        switch(command){
+            case "say":
+                var sayNotEmpty=controlView.checkSayNotEmpty();
+                if(sayNotEmpty){
+                    result.code=0;
+                }else{
+                    result.code=-1;
+                    result.message=sayHint.empty;
+                }
+                 break;
+            default:
+                //other command such as ,kick ,vote,kill,must have object
+                var object=controlView.getObjectValue();
+                if(object==null||object==""){
+                    result.code=-2;
+                    result.message=sayHint.select;
+                }else{
+                    result.code==0;
+                }
+                 break;
+
+        }
+
+        return result;
+
+    },
+    getExpressionValue:function(){
+             return $("#expression").attr("data-default");
+         },
+    getObjectValue:function(){
+         return $("#object").attr("data-default");
+     },
+    getCommadValue:function(){
+        var command=$("#command").attr("data-default");
+        if(command==""||command==undefined){
+            return "say"
+        }else{
+            return command;
+        }
+
+    },
     resetCommand:function () {
 
         selects.$command.remove();
@@ -472,8 +519,9 @@ var controlView = {
         }
 
 
-
-       selects.$expression.empty().append(expressionStr);
+       $("#expression").empty().append(expressionStr);
+      /*  console.log(selects.$expression);
+       selects.$expression.empty().append(expressionStr);*/
     },
 
 
@@ -484,11 +532,11 @@ var controlView = {
 
         var colorStr = "  <li data-default='#000'><a href='#'>color</a></li><li class='divider'></li>";
         for (var key in color) {
-            colorStr += "<li data-default='"+key+"'> <div class='color-block' data-theme='black'></div><a href='#' class='color-font'>"+color[key]+"</a></li>";
+            colorStr += "<li data-default='"+key+"'> <div class='color-block' style='background:"+key+"'></div><a href='#' class='color-font'>"+color[key]+"</a></li>";
 
 
         }
-        selects.$color.empty().append(colorStr);
+        $("#color").empty().append(colorStr);
 
 
 
@@ -543,10 +591,11 @@ var controlView = {
         }
     },
     clearSayInput:function () {
-        selects.$sayInput.val("");
+        $("#sayInput").val("");
     },
     checkSayNotEmpty:function () {
-        if (selects.$sayInput.val() == "" || selects.$sayInput.val() == undefined) {
+
+        if ($("#sayInput").val() == "" ||$("#sayInput") == undefined) {
             return false;
         } else {
             return true;
@@ -554,7 +603,7 @@ var controlView = {
         }
     },
     hintSay:function (text) {
-        selects.$sayInput.val(text);
+        $("#sayInput").val(text);
     },
     sayHint:function () {
         alert("内容不能为空！请输入内容重新发送");
@@ -565,6 +614,9 @@ var controlView = {
     },
     getAutoRoll:function () {
         return $("#autoroll_checkbox").attr("checked");
+    },
+    getSayInput:function(){
+        return $("#sayInput").val();
     }
 
 

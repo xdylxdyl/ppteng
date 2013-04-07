@@ -149,6 +149,9 @@ var settingGetParameter = function (rid, version) {
 
 }
 
+
+
+
 var expressionParameter = function (rid, exp) {
     return{
         rid:rid,
@@ -172,5 +175,30 @@ var recordSecondTime = null;
 var msg_interval = null;
 var recordReplayStartAt = null;
 var record_timer = null;
+var lastMessageSendAt=null;
 
+var selects={
+    $gameArea:$("#gameArea"),
+    $dieArea:$("#dieArea"),
+    $killerArea:$("#killerArea"),
+    $settingArea:$("#settingArea"),
+    $playerList:$("#playerList"),
+    $game_nav:$("#game_nav"),
+    $die_nav:$("#die_nav"),
+    $killer_nav:$("#killer_nav"),
+    $setting_nav:$("#setting_nav"),
+    $music_nav:$("#music_nav"),
+    $submitSetting:$("#submitSetting"),
+    $sayInput:$("#sayInput"),
+    $sayButton:$("#sayButtion"),
+    $readyButton:$("#readyButton"),
+    $startButton:$("#startButton"),
+    $recordButton:$("#recordButton"),
+    $exitButton:$("#exitButton"),
+    $command:$("#command"),
+    $expression:$("#expression"),
+    $color:$("#color"),
+    $netSpeedHint:$("#netSpeedHint"),
+    $countDown:$("#countDown")
 
+}

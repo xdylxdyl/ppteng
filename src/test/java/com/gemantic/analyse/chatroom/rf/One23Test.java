@@ -157,13 +157,18 @@ public class One23Test {
 	@Test
 	public void testPoliceRule() throws ServiceException, ServiceDaoException {
 
-		Room room = new Room("sss", 3L, "killer_police_1.0");
+		String policeVersion="killer_police_1.0";
+		String simpleVersion="simple_1.0";
+		String currentVersion=policeVersion;
+		Room room = new Room("sss", 3L, currentVersion);
 		// TODO 我判断不出来用Int还是用String好
 		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
-				"78", "4", "", "killer_police_1.0");
+				"78", "4", "", room.getVersion());
 		List<Message> messages = this.droolsGameMessageService.generate(
 				loginMessage, room);
 		log.info(messages);
+		
+		
 
 	}
 

@@ -116,94 +116,11 @@
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
 
+<script
+	src="<%=request.getContextPath() %>/r/j-src/foot/foot.js?v=${frontVersion}"></script>
+	
+	<script
+	src="<%=request.getContextPath() %>/r/j-src/music/music.js?v=${frontVersion}"></script>
 
 
-<script>
-    /*音乐播放器*/
-    $(function() {
-        // Setup the player to autoplay the next track
-        var a = audiojs.createAll({
-            trackEnded: function() {
-                var next = $('ol li.playing').next();
-                if (!next.length) next = $('ol li').first();
-                next.addClass('playing').siblings().removeClass('playing');
-                audio.load($('a', next).attr('data-src'));
-                audio.play();
-            }
-        });
-
-        // Load in the first track
-        var audio = a[0];
-        first = $('ol a').attr('data-src');
-        $('ol li').first().addClass('playing');
-        audio.load(first);
-
-        // Load in a track on click
-        $('ol li').click(function(e) {
-            e.preventDefault();
-            $(this).addClass('playing').siblings().removeClass('playing');
-            audio.load($('a', this).attr('data-src'));
-            audio.play();
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    /*小提示*/
-    $('#exitRoom').tooltip();
-    /*键盘快捷控制，还未想好如何设置*/
-    var key = new Kibo();
-    $('#inputText').focus(function() {
-        key.down(['alt 1'], function() {
-            $("#selectExpression").click();
-        })
-    });
-    /*宽度min-width: 600px时页面高度控制*/
-    function controlHeight() {
-        var winH = $(window).height();
-        var headH = $('.navbar').outerHeight();
-        var footH = $('.foot').outerHeight();
-        var mainH = winH - headH - footH - 20;
-        var contentH = mainH - $('ul.nav-tabs').outerHeight();
-        $('.sidebar-nav').css({
-            maxHeight: mainH,
-            minHeight: mainH
-        });
-        $('.tab-pane').css({
-            maxHeight: contentH,
-            minHeight: contentH
-        });
-
-    }
-    controlHeight();
-    $(window).resize(controlHeight);
-
-
-    /*
-    * 动作栏下拉框
-    * @elem 传入选择器ID
-    * 选择器的文本变为所选项文本
-    * 选择器的data-default属性变为所选项data-default属性
-    * 所选项如果为color，则选择器文本颜色也改为相应颜色*/
-    function selectors(elem) {
-        var $elem = $('#' + elem);
-        var $menu = $elem.siblings('ul.dropdown-menu');
-        $menu.children('li').click(function() {
-            var txt = $(this).text();
-            var val = $(this).attr('data-default');
-            $elem.find('span').text(txt);
-            $elem.attr('data-default', val);
-            if (val.indexOf('#') == '0') {
-                $elem.find('span').css({
-                    color: val
-                })
-            }
-        })
-    }
-    selectors('selectExpression');
-    selectors('selectColor');
-    selectors('selectOrder');
-    selectors('selectObject');
-
-</script>
 	
