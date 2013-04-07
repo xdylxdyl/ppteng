@@ -47,23 +47,24 @@
         <div class="row-fluid">
             <div class="tabbable">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="game_nav" data-toggle="tab">游戏</a></li>
-                    <li><a href="die_nav" data-toggle="tab">亡灵</a></li>
-                    <li><a href="killer_nav" data-toggle="tab">杀手</a></li>
-                    <li><a href="setting_nav" data-toggle="tab">设置</a></li>
-                    <li><a href="music_nav" data-toggle="tab">音乐</a></li>
+                    <li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
+                    <li><a href="#die_area" data-toggle="tab">亡灵</a></li>
+                    <li><a href="#killer_area" data-toggle="tab">杀手</a></li>
+                    <li><a href="#setting_area" data-toggle="tab">设置</a></li>
+                    <li><a href="#music_area" data-toggle="tab">音乐</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="game_area">
+    1
                      </div>
                     <div class="tab-pane" id="die_area">
-                       
+                       2
                     </div>
                     <div class="tab-pane" id="killer_area">
-                       
+                       3
                     </div>
                     <div class="tab-pane" id="setting_area">
-                       
+                       4
                     </div>                    
                     <div class="tab-pane" id="music_area">
                         <div id="wrapper">
