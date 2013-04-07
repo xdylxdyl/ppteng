@@ -25,33 +25,33 @@ var settingView = {
     displaySetting:function () {
         if (globalView.getCurrentID() == globalView.getCreaterId()) {
             if ("over" == globalView.getGameStatus()) {//游戏结束后才能看到设置按钮
-                selects.$submitSetting.show();
+                $("#"+selects.$submitSetting).show();
 
             } else {
-                selects.$submitSetting.hide();
+                $("#"+selects.$submitSetting).hide();
 
             }
         } else {
-            selects.$submitSetting.hide();
+            $("#"+selects.$submitSetting).hide();
 
         }
 
     },
 
     showSetting:function (info) {
-        selects.$settingArea.html(info);
+       $("#"+ selects.$settingArea).html(info);
         //管理员才能看到设置按钮
 
         if (globalView.getCurrentID() == globalView.getCreaterId()) {
             if ("over" == globalView.getGameStatus()) {//游戏结束后才能看到设置按钮
-                selects.$submitSetting.show();
+                $("#"+ selects.$submitSetting).show();
 
             } else {
-                selects.$submitSetting.hide();
+                $("#"+ selects.$submitSetting).hide();
 
             }
         } else {
-            selects.$submitSetting.hide();
+            $("#"+ selects.$submitSetting).hide();
 
         }
 
@@ -60,7 +60,7 @@ var settingView = {
         }
 
 
-        selects.$submitSetting.bind("click", function () {
+        $("#"+ selects.$submitSetting).bind("click", function () {
             var s = versionFunction["getSettingParameter"]();
             var settingHtml = settingService.saveSetting(s);
             alert("设置已更改~~");
@@ -76,11 +76,11 @@ var settingView = {
     },
 
     hideSettingButton:function () {
-        selects.$submitSetting.hide();
+        $("#"+selects.$submitSetting).hide();
 
     },
     showSettingButton:function () {
-        selects.$submitSetting.show();
+        $("#"+selects.$submitSetting).show();
     },
     getSettingParameter:function (fun) {
         return fun;
@@ -178,7 +178,7 @@ var playerListView = {
 
         var sortPlayers = playerService.getAll();
 
-        selects.$playerList.empty();
+        $("#"+selects.$playerList).empty();
         //清空列表
 
         for (var index in sortPlayers) {
@@ -194,11 +194,11 @@ var playerListView = {
 
             var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span></a></li>";
             console.log(item);
-            selects.$playerList.append(item);
+            $("#"+selects.$playerList).append(item);
         } else {
             var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote'>+" + player.count + "</span></span></a></li>";
             console.log(item);
-            selects.$playerList.append(item);
+            $("#"+selects.$playerList).append(item);
 
 
         }
@@ -251,15 +251,15 @@ var rightView = {
     },
 //各种权利
     sayRight:function (right) {
-        selects.$sayButton.prop("disabled", false);
+        $("#"+selects.$sayButton).prop("disabled", false);
     },
     readyRight:function () {
-        selects.$readyButton.css("display", "inline");
-        selects.$readyButton.prop("disabled", false);
+        $("#"+selects.$readyButton).css("display", "inline");
+        $("#"+selects.$readyButton).prop("disabled", false);
 
     },
     startRight:function () {
-        selects.$startButton.css("display", "inline");
+        $("#"+selects.$startButton).css("display", "inline");
     },
     commandRight:function (right) {
         $("#command").empty();
@@ -268,9 +268,9 @@ var rightView = {
     },
     noRight:function () {
 
-        selects.$sayButton.prop("disabled", true);
-        selects.$readyButton.prop("disabled", true);
-        selects.$command.remove();
+        $("#"+selects.$sayButton).prop("disabled", true);
+        $("#"+selects.$readyButton).prop("disabled", true);
+        $("#"+selects.$command).remove();
     },
     getContentByRight:function (right) {
         var c = commandCommonSetting[right];
@@ -321,16 +321,16 @@ var gameAreaView = {
             }
         }
         if (isDisplay) {
-            game_area.append("<p style='color:#F00'>【系统消息】[" + name + "] 坚决的退出了房间。</p>");
-            viewUtil.autoBottom($("#game_area"));
+            $("#"+selects.$gameArea) .append("<p style='color:#F00'>【系统消息】[" + name + "] 坚决的退出了房间。</p>");
+            viewUtil.autoBottom( $("#"+selects.$gameArea));
         }
 
 
     },
     kick:function (player) {
         var name = player.name;
-        game_area.append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
-        viewUtil.autoBottom($("#game_area"));
+        $("#"+selects.$gameArea).append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
+        viewUtil.autoBottom( $("#"+selects.$gameArea));
     },
     say:function (id, name, content, exp, color, subject, subjectName) {
         var express = controlView.showExpression(exp);
@@ -343,14 +343,14 @@ var gameAreaView = {
         var player = playerService.getPlayer(id);
 
 
-        $("#game_area").append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
-        viewUtil.autoBottom($("#game_area"));
+        $("#"+selects.$gameArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+        viewUtil.autoBottom( $("#"+selects.$gameArea));
 
 
     },
     systemMessage:function (content) {
-        $("#game_area").append("<p style='color:#F00'>" + content + "</p>");
-        viewUtil.autoBottom($("#game_area"));
+        $("#"+selects.$gameArea).append("<p style='color:#F00'>" + content + "</p>");
+        viewUtil.autoBottom( $("#"+selects.$gameArea));
     },
     getContent:function () {
 
@@ -380,6 +380,9 @@ var viewUtil = {
 
 
 var controlView = {
+    isMute:function () {
+        return  $("#sayButton").prop("disabled");
+    },
     showDelay:function () {
         $("#netSpeedHint").text("延迟:" + (jQuery.now() - lastMessageSendAt) + "毫秒");
     },
@@ -454,14 +457,14 @@ var controlView = {
     },
     resetCommand:function () {
 
-        selects.$command.remove();
+        $("#"+selects.$command).empty();
         selects.$command.val("command");
 
     },
     ready:function (id) {
 
         if ($("#uid").val() == id) {
-            selects.$readyButton.hide();
+            $("#"+selects.$readyButton) .hide();
         }
     },
 

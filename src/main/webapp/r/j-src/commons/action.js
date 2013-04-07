@@ -12,68 +12,59 @@ $(document).ready(function () {
 
 
 
+        //玩家动作：say, ready, start, kick, vote, kill
+        $("#" + selects.$sayInput).bind("keydown", function (event) {
 
-    //玩家动作：say, ready, start, kick, vote, kill
-    $("#sayInput").bind("keydown", function (event) {
+            //发送内容违禁词过滤检查函数
+            //TODO
 
-        //发送内容违禁词过滤检查函数
-        //TODO
+            //回车就发送消息
+            if (event.keyCode == "13") {
 
-        //回车就发送消息
-        if (event.keyCode == "13") {
+                if (controlView.isMute()) {
+                    alert("嘘.现在不能说话.");
+                }
+                else {
+                    say();
+                }
 
-            if ($("#sendSay").prop("disabled")) {
-                alert("嘘.现在不能说话.");
+
+            } else {
+
             }
-            else {
-                say();
+
+
+        });
+
+        function say() {
+            var formatResult = controlView.checkFormat();
+            if (formatResult.code == 0) {
+                //success
+                var message = controlView.getMessage();
+
+                //filter lastword ---not commons
+                var player = playerService.getPlayer(globalView.getCurrentID());
+                if (player.status == playerStatus.lastword && "lastword" == globalView.getGameStatus()) {
+                    message.predict = globalView.getGameStatus();
+                }
+
+                cometService.sendMessage(message);
+            } else {
+                //error
+                alert(formatResult.message);
             }
-
-
-        } else {
+            controlView.clearSayInput();
 
         }
 
-
-    });
-
-    function say() {
-        var formatResult = controlView.checkFormat();
-        if (formatResult.code == 0) {
-            //success
-            var message = controlView.getMessage();
-
-            //filter lastword ---not commons
-            var player = playerService.getPlayer(globalView.getCurrentID());
-            if (player.status == playerStatus.lastword && "lastword" == globalView.getGameStatus()) {
-                message.predict = globalView.getGameStatus();
-            }
-
-            cometService.sendMessage(message);
-        } else {
-            //error
-            alert(formatResult.message);
-        }
-        controlView.clearSayInput();
-
-        }
-
-        $("#sayButton").bind("click", function () {
+        $("#" + selects.$sayButton).bind("click", function () {
             say();
 
 
         });
 
-        function setScroll(id) {
-            var height = $(id)[0].scrollHeight;
-            console.log(height);
-            $(id).scrollTop(height);
-        }
 
-        ;
-
-
-        $("#startButton").click(function () {
+        $("#" + selects.$startButton).click(function () {
             //检查准备人数是否合规则，否则return
 
             var count = versionFunction["readyCount"];
@@ -87,22 +78,24 @@ $(document).ready(function () {
 
 
             if (isReady) {
-                //TODO
-                information.sendInfo("start", null, information.info);
 
+                var message = controlView.getMessage();
+                message.predict = "start";
+                cometService.sendMessage(message);
                 $("#start").hide();
             } else {
                 alert("超过" + count + "人再开游戏好不好啊~~~~~");
             }
 
         });
-        $("#readyButton").click(function () {
+        $("#" + selects.$readyButton).click(function () {
             //检查准备人数是否合规则，否则return
-            //TODO
-            information.sendInfo("ready", null, information.info);
+            var message = controlView.getMessage();
+            message.predict = "ready";
+            cometService.sendMessage(message);
 
         });
-        $("#exitButton").click(function () {
+        $("#" + selects.$exitButton).click(function () {
             var type = globalView.getRoomType();
             var url;
             var r = confirm("确定退出？");
@@ -122,7 +115,7 @@ $(document).ready(function () {
 
         });
 
-        $("#replayButton").click(function () {
+        $("#" + selects.$replayButton).click(function () {
             recordFirstTime = null;
             recordSecondTime = null;
             msg_interval = null;
@@ -132,7 +125,7 @@ $(document).ready(function () {
             var text = $("#contents").text();
             var messages = eval(text);
             showRecord(messages, 1);
-            $("#replayButton").val("播放中..");
+            $("#" + selects.$replayButton).val("播放中..");
             controlView.showRecordCurrentTime(0, globalView.getRecordTime());
 
 
@@ -184,31 +177,7 @@ $(document).ready(function () {
         }
 
 
-        /*   //点击玩家名字，改变说话对象
-         $("nav b").click(function() {
-         $("#send b").val("-500").text("");
-         });
-         */
-        $("nav li a").click(function () {
-
-
-        });
-
-
-        if ($("#time").val() == "over") {
-            $("#battle").css("display", "inline").click(function () {
-                var mask = $("<div>", {"id":"mask"});
-                mask
-                    .css({position:"absolute", left:"10px", top:"10px", marginTop:"5px", width:"915px", height:"1px", backgroundColor:"#FFFFEE", zindex:2})
-
-                    .animate({height:"96px"}, 1000)
-                    .appendTo("footer");
-                $("#battle").appendTo($("#mask"));
-            });
-        }
-
-
     }
 
-    )
-    ;
+)
+;

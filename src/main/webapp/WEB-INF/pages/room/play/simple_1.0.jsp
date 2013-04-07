@@ -55,16 +55,16 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="game_area">
-    1
+    
                      </div>
                     <div class="tab-pane" id="die_area">
-                       2
+                       
                     </div>
                     <div class="tab-pane" id="killer_area">
-                       3
+                       
                     </div>
                     <div class="tab-pane" id="setting_area">
-                       4
+                       
                     </div>                    
                     <div class="tab-pane" id="music_area">
                         <div id="wrapper">

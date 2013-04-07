@@ -73,7 +73,7 @@
                     <button class="btn btn-info" id="recordButton">播放战例</button>
                 </li>
                 <li class="pull-right">
-                    <span class="help-inline" id="netSpeedHint">延迟：120毫秒</span>
+                    <span class="help-inline" id="netSpeedHint">延迟：0 毫秒</span>
                 </li>
             </ul>
             <!--input-->
