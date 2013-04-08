@@ -193,7 +193,6 @@ var selects={
     $sayButton:"sayButton",
     $readyButton:"readyButton",
     $startButton:"startButton",
-    $recordButton:"recordButton",
     $replayButton:"replayButton",
     $exitButton:"exitButton",
     $command:"command",
