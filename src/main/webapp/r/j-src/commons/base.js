@@ -332,19 +332,18 @@ var initRoom = function () {
 
 
     if ("game" == type) {
-        //init expression
-        exp = settingService.getExpress(globalView.getRoomID());
-        settingHtml = settingService.getSetting(new settingGetParameter(globalView.getRoomID(), globalView.getVersion()))
-        console.log(exp)
 
-        //init expression
+
+        //1.init expression
+        exp = settingService.getExpress(globalView.getRoomID());
         controlView.initExpression(exp);
-        //init color
+        //2.init color
         controlView.initColor();
-        //init setting
+        //3 init setting
+        settingHtml = settingService.getSetting(new settingGetParameter(globalView.getRoomID(), globalView.getVersion()))
         settingView.showSetting(settingHtml);
 
-        //1.init game players/setting
+        //4.init game status every has self setting.expect playlist etc
         var param = {
             uid:uid,
             rid:rid
@@ -367,15 +366,14 @@ var initRoom = function () {
         }
 
 
-        //start comet
+        //5 start comet
         cometService.comet(uid, messageQ);
 
-        //initControllview
+        //6.initControllview
         controlView.initButtonOfGame();
 
-        //判断是否有音乐盒,默认不显示
-        //  musicUtil.displayMusic();
 
+        //7.set staging show
         var player = playerService.getPlayer(uid);
         var message = {};
         message.content = globalView.getLoginShow();
@@ -383,6 +381,7 @@ var initRoom = function () {
             gameAreaView.login(player, message);
         }
 
+        //8 version self dependency
         if (versionFunction["init"]) {
             versionFunction["init"]();
         }

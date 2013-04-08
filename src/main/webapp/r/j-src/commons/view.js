@@ -255,12 +255,12 @@ var rightView = {
         $("#"+selects.$sayButton).prop("disabled", false);
     },
     readyRight:function () {
-        $("#"+selects.$readyButton).css("display", "inline");
-        $("#"+selects.$readyButton).prop("disabled", false);
+        $("#"+selects.$readyButton).show();
+
 
     },
     startRight:function () {
-        $("#"+selects.$startButton).css("display", "inline");
+        $("#"+selects.$startButton).show();
     },
     commandRight:function (right) {
         $("#command").empty();
@@ -270,8 +270,9 @@ var rightView = {
     noRight:function () {
 
         $("#"+selects.$sayButton).prop("disabled", true);
-        $("#"+selects.$readyButton).prop("disabled", true);
-        $("#"+selects.$command).remove();
+        $("#"+selects.$readyButton).hide();
+        $("#"+selects.$startButton).hide();
+        $("#"+selects.$command).empty();
     },
     getContentByRight:function (right) {
         var c = commandCommonSetting[right];
@@ -568,9 +569,9 @@ var controlView = {
         }
     },
     initButtonOfGame:function () {
-        $("#replay").hide();
-        $("#replay_time_hint").hide();
-        $("#replay_role").hide();
+        $("#"+selects.$replayButton).hide();
+    /*    $("#replay_time_hint").hide();
+        $("#replay_role").hide();*/
     },
     initButtonOfRecord:function () {
         $("#ready").hide();

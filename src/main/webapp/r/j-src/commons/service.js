@@ -298,6 +298,8 @@ var roomService = {
     },
     parseRight:function (data) {
         var uid = globalView.getCurrentID();
+        //clear allright
+        rightView.noRight();
         //每个right下的信息有：id，isNotify, right[]
 
         if (data != null && data.isNotify && data.id == uid) {

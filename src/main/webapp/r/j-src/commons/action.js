@@ -25,7 +25,7 @@ $(document).ready(function () {
                     alert("嘘.现在不能说话.");
                 }
                 else {
-                    say();
+                   return say();
                 }
 
 
@@ -52,6 +52,7 @@ $(document).ready(function () {
             } else {
                 //error
                 alert(formatResult.message);
+                return false;
             }
             controlView.clearSayInput();
 
@@ -103,8 +104,12 @@ $(document).ready(function () {
             if ("game" == type) {
                 url = "/m/list.do";
                 if (r == true) {
-                    information.sendInfo("logout", null, information.info, redirect(url), false);
-                    console.log("logout ");
+
+                    var message = controlView.getMessage();
+                    message.predict = "logout";
+                    cometService.sendMessage(message);
+                    redirect(url);
+
 
                 }
             } else {
