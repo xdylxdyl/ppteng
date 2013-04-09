@@ -51,7 +51,10 @@ $(document).ready(function () {
             } else {
                 //error
                 alert(formatResult.message);
-                
+                if(event){
+                              event.preventDefault();
+                          }
+
             }
             controlView.clearSayInput();
             //return false;

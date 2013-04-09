@@ -95,7 +95,7 @@ var globalView = {
         return   $("#time").val();
     },
     setGameStatus:function (status) {
-        $("#time").val(status);
+        $("#"+selects.$gamePhase).empty().html(status);
     },
     isStop:function () {
         if ($("#time").val() == "over") {
@@ -170,11 +170,17 @@ var playerListView = {
     },
     displayCreater:function (player) {
 
-        var tip = $("<span class='brand'><small><a href='/player/detail.do?uid="+player.id+"'>管理员:"+player.name+"</a></small> </span>");
-        tip.insertAfter("#" + selects.$roomName);
+        $("#" + selects.$createName).empty().html("管理员:"+player.name);
+
+    },
+
+    displayRole:function (role) {
+
+     $("#" + selects.$playerRole).empty().html(role);
 
 
     },
+
     sortPlayer:function () {
 
         var sortPlayers = playerService.getAll();
@@ -474,7 +480,7 @@ var controlView = {
         m < 10 ? m = "0" + m : m;
         s < 10 ? s = "0" + s : s;
         var result = m + ":" + s;
-        selects.$countDown.empty().html(result);
+        $("#"+selects.$countDown).empty().html(result);
         time = time + 1000;
 
         timer = setTimeout("controlView.startCountTime(" + time + ")", 1000);
@@ -488,7 +494,7 @@ var controlView = {
         m < 10 ? m = "0" + m : m;
         s < 10 ? s = "0" + s : s;
         var result = m + ":" + s;
-        selects.$countDown.empty().html(result);
+        $("#"+selects.$countDown).empty().html(result);
         time = time - 1000;
         if (time >= 0) {
             timer = setTimeout("controlView.setCountDownTime(" + time + ")", 1000);

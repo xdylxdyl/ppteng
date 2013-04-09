@@ -260,41 +260,9 @@ var roomService = {
         }
 
         playerListView.sortPlayer();
-    },
+    }
+    ,parseRoom:function (data) {
 
-
-    parseRole:function (data) {
-        if (data == null) {
-            return;
-        }
-
-        if ("killer" == data.role) {
-            var p = playerService.getPlayer(data.id)
-            var str = p.name + " ";
-            gameAreaView.showContentForRoleArea(gameAreaView.Hint.killerList + str);
-            p.role = "killer";
-            playerService.updatePlayer(p);
-
-        }
-
-    },
-    parseGame:function (data) {
-        if (data == null) {
-            return;
-        }
-
-        globalView.setGameStatus(data.status);
-        controlView.setCountDownTime(data.remainTime);
-        var player = playerService.getPlayer(globalView.getCurrentID());
-        if (playerStatus.die == player.status) {
-            gameAreaView.swithTopArea("deadArea");
-        } else {
-
-        }
-    },
-    parseRoom:function (data) {
-        var creater = data.creater;
-        // playerListView.displayCreater(creater);
     },
     parseRight:function (data) {
         var uid = globalView.getCurrentID();

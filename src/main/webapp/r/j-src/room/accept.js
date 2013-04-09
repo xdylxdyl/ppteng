@@ -76,7 +76,7 @@ killController.role = function(message) {
     }
 
 
-    $("section article").append("<p style='color:#F00;'>【系统消息】 [" + name + "] 的身份为 " + role + "</p>");
+    $("#"+selects.$playerRole).empty().html("身份:" + role );
 
 
 };
@@ -85,9 +85,9 @@ killController.decryption = function(message) {
     var name = playerService.getName(message.subject);
     if ("killer" == message.object) {
 
-        $("section article").append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是杀手</p>");
+        $("#"+selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是杀手</p>");
     }else{
-        $("section article").append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是水民</p>");
+        $("#"+selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是水民</p>");
     }
 
 };
@@ -118,12 +118,10 @@ killController.timeChange = function(message) {
 
     var status = message.subject;
     var p = playerService.getPlayer(globalView.getCurrentID());
-    if (playerStatus.die != p.status) {
-        killGameAreaView.swithTopArea("killerArea");
-    }
+
     killGameAreaView.showContentForGameArea(killGameAreaView.Hint[status]);
     killGameAreaView.showConentForGamePhase(killGameAreaView.Phase[status]);
-    viewUtil.autoBottom("section article");
+    viewUtil.autoBottom( $("#"+selects.$gameArea));
     controlView.clearCountDownTime();
     controlView.setCountDownTime(message.object);
 };
@@ -144,7 +142,7 @@ killController.status = function(message) {
     var name = idFindName(message.subject);
     if (message.object == "lastword") {
 
-        $("section article").append("<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听 [" + name + "] 的最后一句话。</p>");
+        $("#"+selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听 [" + name + "] 的最后一句话。</p>");
     }
     playerService.setStatus(message.subject, message.object);
     playerListView.setStatus(message.subject, message.object);
