@@ -327,6 +327,7 @@ var initRoom = function () {
     var type = globalView.getRoomType();
     var uid = globalView.getCurrentID();
     var rid = globalView.getRoomID();
+    var createrID = globalView.getCreaterId();
     var settingHtml;
     var exp;
 
@@ -372,6 +373,10 @@ var initRoom = function () {
         //6.initControllview
         controlView.initButtonOfGame();
 
+        //7 init room creater
+
+        var creater=playerService.getPlayer(createrID);
+       playerListView.displayCreater(creater);
 
         //7.set staging show
         var player = playerService.getPlayer(uid);

@@ -199,6 +199,10 @@ var selects={
     $expression:"expression",
     $color:"color",
     $netSpeedHint:"netSpeedHint",
-    $countDown:"countDown"
+    $countDown:"countDown",
+    $createName:"createName",
+    $gamePhase:"gamePhase",
+    $playerRole:"playerRole",
+    $checkBox:"$checkBox"
 
 }

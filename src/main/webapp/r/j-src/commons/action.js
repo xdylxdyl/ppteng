@@ -162,7 +162,7 @@ $(document).ready(function () {
         });
 
 
-        $("section article p").live("dblclick", function () {
+        $("#" + selects.$gameArea).live("dblclick", function () {
 
             getContent.call(this);
             return false;
@@ -171,7 +171,7 @@ $(document).ready(function () {
 
         function getContent() {
             var content = $(this).html();
-            controlView.hintSay(content);
+            controlView.appendSay(content);
         }
 
 

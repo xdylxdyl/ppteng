@@ -127,18 +127,14 @@ var killGameAreaView = {
 
 
         }
-        if ($("#uid").val() == id) {
-            this.swithTopArea( $("#"+selects.$dieArea));
-        }
+
     },
     kill:function(killerName, objName, exp, content) {
 
         $("section .killer_area").show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
         viewUtil.autoBottom($("#"+selects.$dieArea));
     },
-    swithTopArea:function(area) {
 
-    },
     showContentForRoleArea:function(content) {
 
     },
@@ -151,16 +147,16 @@ var killGameAreaView = {
 
     },
     showConentForGamePhase:function(content) {
-        $("#phase_area").html(content);
+        $("#"+selects. $gamePhase).empty().html(content);
     },
     clearStatusArea:function() {
-        $("#phase_area").empty();
+        $("#"+selects. $gamePhase).empty();
     },
     clearGameArea:function() {
-        selects.$gameAreay.empty();
+        $("#"+selects.$gameArea).empty();
     },
     clearRoleArea:function() {
-        $("#role_area").empty();
+        $("#"+selects. $playerRole).empty();
     },
     showOver:function(recordID, obj) {
 
@@ -189,7 +185,6 @@ var killGameAreaView = {
         viewUtil.autoBottom( $("#"+selects.$gameArea));
 
 
-        jiathis_config.title = share;
 
 
     }
@@ -253,8 +248,8 @@ var gameView = {
     start:function() {
 
 
-        $("#start").hide();
-        $(".nobg").val("");
+        $("#"+selects.$startButton).hide();
+
         $("section article, section .killer_area, section .dead_area,#role_area").empty();
         $("section .killer_area, section .dead_area").hide();
         $("#"+selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始,白天时间~</p>");

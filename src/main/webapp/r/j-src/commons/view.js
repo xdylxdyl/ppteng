@@ -169,10 +169,11 @@ var playerListView = {
             $("#" + id).children("i").text(" +" + count);
         }
     },
-    displayCreater:function (id) {
+    displayCreater:function (player) {
 
-        var tip = $("<em>(房主)</em>");
-        tip.insertAfter("#" + id + " i");
+        var tip = $("<span class='brand'><small><a href='/player/detail.do?uid="+player.id+"'>管理员:"+player.name+"</a></small> </span>");
+        tip.insertAfter("#" + selects.$roomName);
+
 
     },
     sortPlayer:function () {
@@ -300,8 +301,8 @@ var gameAreaView = {
         var name = player.name;
         if (globalView.isStop()) {
             //只有房间是处在结束状态下才在游戏区显示消息
-            $("#game_area").append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
-            viewUtil.autoBottom($("#game_area"));
+            $("#"+selects.$gameArea).append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
+            viewUtil.autoBottom($("#"+selects.$gameArea));
         } else {
             //不显示
 
@@ -608,6 +609,10 @@ var controlView = {
     hintSay:function (text) {
         $("#sayInput").val(text);
     },
+    appendSay:function(text){
+      var   content=$("#sayInput").val()+text;
+        $("#sayInput").val(content);
+    },
     sayHint:function () {
         alert("内容不能为空！请输入内容重新发送");
     },
@@ -616,7 +621,7 @@ var controlView = {
 
     },
     getAutoRoll:function () {
-        return $("#autoroll_checkbox").attr("checked");
+        return $("#"+selects.$checkBox).attr("checked");
     },
     getSayInput:function () {
         return $("#sayInput").val();
