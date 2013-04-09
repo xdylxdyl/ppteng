@@ -56,7 +56,7 @@
                 </li>
                 <li>
                     <label for="scroll" class="checkbox">
-                        <input type="checkbox" checked="checked" value="scroll" id="scroll">
+                        <input type="checkbox" checked="checked" value="scroll" id="checkBox">
                         滚屏
                     </label>
                 </li>

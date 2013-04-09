@@ -203,6 +203,7 @@ var selects={
     $createName:"createName",
     $gamePhase:"gamePhase",
     $playerRole:"playerRole",
-    $checkBox:"$checkBox"
+    $checkBox:"checkBox",
+    $countDown:"countDown"
 
 }

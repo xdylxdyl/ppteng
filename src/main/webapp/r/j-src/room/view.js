@@ -131,8 +131,8 @@ var killGameAreaView = {
     },
     kill:function(killerName, objName, exp, content) {
 
-        $("section .killer_area").show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
-        viewUtil.autoBottom($("#"+selects.$dieArea));
+        $("#"+selects.$killerArea).show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
+        viewUtil.autoBottom( $("#"+selects.$killerArea));
     },
 
     showContentForRoleArea:function(content) {
@@ -176,12 +176,11 @@ var killGameAreaView = {
                 $("#"+selects.$gameArea).append("<p style='color:#F00'>" + obj + "</p>");
         }
 
-        //楼上展示位重置
-        $("section .killer_area, section .dead_area").hide();
+
         //时间清空
         clearTimeout(timer);
         timer = null;
-        $(".nobg").val("00:00");
+        $("#"+selects.$countDown).val("00:00");
         viewUtil.autoBottom( $("#"+selects.$gameArea));
 
 
@@ -249,9 +248,11 @@ var gameView = {
 
 
         $("#"+selects.$startButton).hide();
+        $("#"+selects.$gameArea).empty();
+        $("#"+selects.$killerArea).empty();
+        $("#"+selects.$dieArea).empty();
+        $("#"+selects.$playerRole).empty();
 
-        $("section article, section .killer_area, section .dead_area,#role_area").empty();
-        $("section .killer_area, section .dead_area").hide();
         $("#"+selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始,白天时间~</p>");
 
         playerListView.sortPlayer();

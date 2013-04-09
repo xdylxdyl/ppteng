@@ -51,11 +51,14 @@ $(document).ready(function () {
             } else {
                 //error
                 alert(formatResult.message);
-                return false;
+                
             }
             controlView.clearSayInput();
             //return false;
-            event.preventDefault();
+            if(event){
+                event.preventDefault();
+            }
+
         }
 
         $("#" + selects.$sayButton).bind("click", function () {

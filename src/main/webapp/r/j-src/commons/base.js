@@ -20,8 +20,7 @@ function parseMessage(message) {
         resolvePredict.branch(message[i]);
     }
     $(document).dequeue("messages");
-    //if something happend in the night.this will be still run autobottom.
-    viewUtil.autoBottom("section article");
+
 
 }
 
