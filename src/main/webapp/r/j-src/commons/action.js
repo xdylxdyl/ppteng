@@ -25,7 +25,7 @@ $(document).ready(function () {
                     alert("嘘.现在不能说话.");
                 }
                 else {
-                   return say();
+                   return say(event);
                 }
 
 
@@ -33,10 +33,9 @@ $(document).ready(function () {
 
             }
 
-
         });
 
-        function say() {
+        function say(event) {
             var formatResult = controlView.checkFormat();
             if (formatResult.code == 0) {
                 //success
@@ -55,7 +54,8 @@ $(document).ready(function () {
                 return false;
             }
             controlView.clearSayInput();
-
+            //return false;
+            event.preventDefault();
         }
 
         $("#" + selects.$sayButton).bind("click", function () {

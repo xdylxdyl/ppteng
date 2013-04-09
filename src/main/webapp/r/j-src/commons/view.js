@@ -39,7 +39,6 @@ var settingView = {
     },
 
     showSetting:function (info) {
-        console.log(info)
        $("#"+ selects.$settingArea).html(info);
         //管理员才能看到设置按钮
 
@@ -191,15 +190,12 @@ var playerListView = {
 
     },
     appendPlayerItem:function (player) {
-        console.log(player);
         if (player.count == 0) {
 
             var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span></a></li>";
-            console.log(item);
             $("#"+selects.$playerList).append(item);
         } else {
             var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote'>+" + player.count + "</span></span></a></li>";
-            console.log(item);
             $("#"+selects.$playerList).append(item);
 
 
