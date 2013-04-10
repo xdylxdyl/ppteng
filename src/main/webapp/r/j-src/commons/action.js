@@ -57,6 +57,7 @@ $(document).ready(function () {
 
             }
             controlView.clearSayInput();
+            controlView.resetCommand();
             //return false;
             if(event){
                 event.preventDefault();
@@ -168,7 +169,7 @@ $(document).ready(function () {
         });
 
 
-        $("#" + selects.$gameArea).live("dblclick", function () {
+        $("#" + selects.$gameArea+" p").live("dblclick", function () {
 
             getContent.call(this);
             return false;

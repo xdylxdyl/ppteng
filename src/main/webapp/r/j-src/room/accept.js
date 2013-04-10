@@ -96,16 +96,16 @@ killController.decryption = function(message) {
 killController.assign = function(message) {
     //本地存入自己身份
     //杀手栏展示杀手名单
-    $("#assign").val(message.subject);
+    var p = playerService.getPlayer(message.object);
     if (message.subject == "killer") {
-        var p = playerService.getPlayer(message.object);
         var name = p.name;
         p.role = "killer";
         playerService.updatePlayer(p);
-        killGameAreaView.showContentForRoleArea(killGameAreaView.Hint.killerList + name);
+
 
 
     }
+    playerListView.displayRole(killGameAreaView.Role[p.role]);
 };
 
 
@@ -124,6 +124,8 @@ killController.timeChange = function(message) {
     viewUtil.autoBottom( $("#"+selects.$gameArea));
     controlView.clearCountDownTime();
     controlView.setCountDownTime(message.object);
+
+
 };
 
 killController.say = function(message) {
@@ -147,6 +149,7 @@ killController.status = function(message) {
     playerService.setStatus(message.subject, message.object);
     playerListView.setStatus(message.subject, message.object);
 
+
 };
 killController.kill = function(message) {
 
@@ -163,8 +166,11 @@ killController.die = function(message) {
 
 killController.vote = function(message) {
 
-    killGameAreaView.vote(playerService.getPlayer(message.subject).name,
+    if("day"==globalView.getGameStatus()){
+        killGameAreaView.vote(playerService.getPlayer(message.subject).name,
         playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
+
+    }
 
 };
 killController.setVote = function(message) {
@@ -176,20 +182,7 @@ killController.clearVote = function() {
     $("nav li img").text("");
 };
 
-killController.assign = function(message) {
-    //本地存入自己身份
-    //杀手栏展示杀手名单
-    $("#assign").val(message.subject);
-    if (message.subject == "killer") {
-        var p = playerService.getPlayer(message.object);
-        var name=p.name;
-        p.role="killer";
-        playerService.updatePlayer(p);
-        killGameAreaView.showContentForRoleArea(killGameAreaView.Hint.killerList + name);
 
-
-    }
-};
 
 //ID转为名字
 function idGetName(num, returnName) {

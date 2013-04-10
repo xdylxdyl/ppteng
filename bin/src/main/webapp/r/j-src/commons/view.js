@@ -120,7 +120,7 @@ var globalView = {
     getGameStatus:function() {
         return   $("#time").val();
     },
-    setGameStatus:function(status) {
+    setGameStatusHint:function(status) {
         $("#time").val(status);
     },
     isStop:function() {

@@ -349,7 +349,7 @@ roomService.info = function () {
             return;
         }
 
-        globalView.setGameStatus(data.status);
+        globalView.setGameStatusHint(data.status);
         controlView.setCountDownTime(data.remainTime);
         var player = playerService.getPlayer(globalView.getCurrentID());
         if (playerStatus.die == player.status) {

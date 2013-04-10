@@ -20,6 +20,11 @@ var sayHint = {
     select:"先选个人啊"
 }
 
+var defaultHint={
+    command:"<li data-default=''><a href=''#'>指令</a></li><li class='divider'></li>",
+   object:"<li data-default=''><a href=''#'>对象</a></li><li class='divider'></li>"
+}
+
 var settingView = {
 
     displaySetting:function () {
@@ -94,8 +99,12 @@ var globalView = {
     getGameStatus:function () {
         return   $("#time").val();
     },
-    setGameStatus:function (status) {
+    setGameStatus:function(status){
+        $("#time").val(status);
+    },
+    setGameStatusHint:function (status) {
         $("#"+selects.$gamePhase).empty().html(status);
+
     },
     isStop:function () {
         if ($("#time").val() == "over") {
@@ -163,9 +172,10 @@ var playerListView = {
     },
     setVote:function (id, count) {
         if (count == 0) {
-            $("#" + id).children("i").text("");
+            $("#" + id+"_vote").text("");
+
         } else {
-            $("#" + id).children("i").text(" +" + count);
+            $("#" + id+"_vote").text(" +" + count);
         }
     },
     displayCreater:function (player) {
@@ -196,12 +206,13 @@ var playerListView = {
 
     },
     appendPlayerItem:function (player) {
+        var voteID=player.id+"_vote";
         if (player.count == 0) {
 
-            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span></a></li>";
+            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span><span class='vote' id='"+voteID+"'></span></a></li>";
             $("#"+selects.$playerList).append(item);
         } else {
-            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote'>+" + player.count + "</span></span></a></li>";
+            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote' id='"+voteID+"'>+" + player.count + "</span></a></span></a></li>";
             $("#"+selects.$playerList).append(item);
 
 
@@ -265,17 +276,21 @@ var rightView = {
     startRight:function () {
         $("#"+selects.$startButton).show();
     },
-    commandRight:function (right) {
-        $("#command").empty();
-        var content = "<li data-default=''><a href=''#'>指令</a></li><li class='divider'></li>";
-        $("#command").append(content + "<li data-default='" + right + "'><a href='#'>" + commandText[right] + "</a></li>");
+    commandRight:function (right) {      ;
+
+        $("#command").append("<li data-default='" + right + "'><a href='#'>" + commandText[right] + "</a></li>");
     },
     noRight:function () {
 
         $("#"+selects.$sayButton).prop("disabled", true);
         $("#"+selects.$readyButton).hide();
         $("#"+selects.$startButton).hide();
-        $("#"+selects.$command).empty();
+        controlView.resetCommand();
+        controlView.emptyCommand();
+        controlView.resetObject();
+        controlView.emptyObject();
+
+
     },
     getContentByRight:function (right) {
         var c = commandCommonSetting[right];
@@ -339,12 +354,8 @@ var gameAreaView = {
     },
     say:function (id, name, content, exp, color, subject, subjectName) {
         var express = controlView.showExpression(exp);
-        var obj;
-        if (subjectName != null) {
-            obj = " 对 [" + subjectName + " ]";
-        } else {
-            obj = "";
-        }
+        var obj="";
+
         var player = playerService.getPlayer(id);
 
 
@@ -409,6 +420,9 @@ var controlView = {
             "isDrools":"true",
             "version":$("#version").val()
         };
+
+
+
         return message;
     },
     escape:function (content) {
@@ -462,9 +476,22 @@ var controlView = {
     },
     resetCommand:function () {
 
-        $("#"+selects.$command).empty();
-        selects.$command.val("command");
+        $("#"+selects.$select_command).find('span').text("指令");
 
+        controlView.resetObject();
+
+    },
+    emptyCommand:function(){
+      $("#"+selects.$command).empty().append(defaultHint.command);
+      $("#"+selects.$command).attr("data-default","");
+    },
+    resetObject:function(){
+        $("#"+selects.$select_object).find('span').text("对象");
+
+    },
+    emptyObject:function(){
+        $("#"+selects.$object).empty().append(defaultHint.object);
+        $("#"+selects.$object).attr("data-default","");
     },
     ready:function (id) {
 

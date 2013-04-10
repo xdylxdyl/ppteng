@@ -438,6 +438,7 @@ when
     $oldPlayer:Player(id==$oldVoted,status=="living")
     $oldPlayerVote:Vote(id==$oldVoted)
     eval($oldVoted!=$object)
+    $game:Game(status=="day")
 then
     LogUtil.log("change vote  start  ================="); 
     
@@ -468,6 +469,7 @@ when
     $right:Right(id==$subject,right contains "vote")
     $newVoted:Player(id==$object,status=="living")
     $newPlayerVoter:Vote(id==$object)
+     $game:Game(status=="day")
     
 then
     LogUtil.log("first vote start  ================="); 

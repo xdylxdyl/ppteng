@@ -346,7 +346,7 @@ $(document).ready(function () {
             var recordID = message.subject;
             var userTime = parseInt(message.content) / 1000;
             //标明游戏结束
-            globalView.setGameStatus("over");
+            globalView.setGameStatusHint("over");
             playerService.setUnreadyStatus();
             //只重新显示.不用重新计算
             settingView.displaySetting();

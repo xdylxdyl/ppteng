@@ -339,11 +339,8 @@ var initRoom = function () {
         controlView.initExpression(exp);
         //2.init color
         controlView.initColor();
-        //3 init setting
-        settingHtml = settingService.getSetting(new settingGetParameter(globalView.getRoomID(), globalView.getVersion()))
-        settingView.showSetting(settingHtml);
 
-        //4.init game status every has self setting.expect playlist etc
+        //2.init game status every has self setting.expect playlist etc
         var param = {
             uid:uid,
             rid:rid
@@ -364,6 +361,9 @@ var initRoom = function () {
         } else {
 
         }
+        //4 init setting
+        settingHtml = settingService.getSetting(new settingGetParameter(globalView.getRoomID(), globalView.getVersion()))
+        settingView.showSetting(settingHtml);
 
 
         //5 start comet
@@ -374,8 +374,8 @@ var initRoom = function () {
 
         //7 init room creater
 
-        var creater=playerService.getPlayer(createrID);
-       playerListView.displayCreater(creater);
+        var creater = playerService.getPlayer(createrID);
+        playerListView.displayCreater(creater);
 
         //7.set staging show
         var player = playerService.getPlayer(uid);

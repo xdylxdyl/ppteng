@@ -76,26 +76,9 @@ var killGameAreaView = {
                 //没有结束
                 place = "deadArea";
 
-
             }
         } else {
-            switch ($("#time").val()) {
-                case "night":
-                    if (playerStatus.living == player.status) {
-                        //是杀手才能说话
-                        if ("killer" == player.role) {
-                            place = "killArea";
-                        } else {
-                            place = "discard";
-                        }
-                    }
-                    ;
-                    break;
-                case "lastword":
-                    break;
-                default:
-                    break;
-            }
+
 
         }
         switch (place) {
@@ -106,10 +89,6 @@ var killGameAreaView = {
             case "deadArea":
                 $("#" + selects.$dieArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
                 viewUtil.autoBottom($("#" + selects.$dieArea));
-                break;
-            case "killArea":
-                $("#" + selects.$killerArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
-                viewUtil.autoBottom($("#" + selects.$killerArea));
                 break;
             default:
         }
@@ -137,8 +116,8 @@ var killGameAreaView = {
     },
     kill:function (killerName, objName, exp, content) {
 
-        $("#" + selects.$killerArea).show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
-        viewUtil.autoBottom($("#" + selects.$killerArea));
+        $("#" + selects.$gameArea).show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
+        viewUtil.autoBottom($("#" + selects.$gameArea));
     },
 
     showContentForRoleArea:function (content) {
@@ -266,7 +245,9 @@ var gameView = {
         var obj = message.object;
         var recordID = message.subject;
         //标明游戏结束
-        globalView.setGameStatus("over");
+        globalView.setGameStatusHint("游戏结束");
+        globalView.setGameStatus("1");
+
         playerService.setUnreadyStatus();
         //只重新显示.不用重新计算
         settingView.displaySetting();
@@ -308,7 +289,8 @@ var simpleService = {
                 return;
             }
 
-            globalView.setGameStatus(killGameAreaView.Phase[data.status]);
+            globalView.setGameStatusHint(killGameAreaView.Phase[data.status]);
+            globalView.setGameStatus(data.status);
             controlView.setCountDownTime(data.remainTime);
 
         }

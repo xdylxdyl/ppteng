@@ -198,7 +198,7 @@ $(document).ready(function() {
             var obj = message.object;
             var recordID = message.subject;
             //标明游戏结束
-            globalView.setGameStatus("over");
+            globalView.setGameStatusHint("over");
             playerService.setUnreadyStatus();
             //只重新显示.不用重新计算
             settingView.displaySetting();

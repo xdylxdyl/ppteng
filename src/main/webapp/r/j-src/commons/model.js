@@ -1,5 +1,5 @@
 var expression = {
-    "0":"神态",
+
     "1":"温柔的",
     "2":"笑着",
     "3":"同情的",
@@ -196,6 +196,7 @@ var selects={
     $replayButton:"replayButton",
     $exitButton:"exitButton",
     $command:"command",
+    $object:"object",
     $expression:"expression",
     $color:"color",
     $netSpeedHint:"netSpeedHint",
@@ -204,6 +205,8 @@ var selects={
     $gamePhase:"gamePhase",
     $playerRole:"playerRole",
     $checkBox:"checkBox",
-    $countDown:"countDown"
+    $countDown:"countDown",
+    $select_command:"select_command",
+    $select_object:"select_object"
 
 }
