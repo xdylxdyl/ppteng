@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -49,7 +51,7 @@ public class RoleUtil {
 		String r = RoleUtil.setRole(RoleUtil.Role_Water, "3K4W1K");
 		log.info(r);
 		
-		Integer maxCount=RoleUtil.getMaxContinueRole(RoleUtil.Role_Water,r);
+		Integer maxCount=RoleUtil.getMaxContinueRole(RoleUtil.Role_Killer,"13W7K10W1K1W1K2W");
 		log.info(maxCount);
 
 	}
@@ -59,8 +61,31 @@ public class RoleUtil {
 	public static Integer getMaxContinueRole(String role, String content) {
 		///List<String> roles=RunLengthEncodingUtil.decode2List(content,"[0-9]+|[WK]");
 		
+		
 		int max=0;
 		
+		
+		   String regex = "([0-9]*)"+role;
+	       
+	        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+	        Matcher m = p.matcher(content);
+
+	        while (m.find()) {
+	        	
+	        	int count=Integer.valueOf(m.group(1));
+				if(count>max){
+					max=count;
+				}
+	        }
+		
+		
+		
+		/*
+		String[] lines=content.split(role);
+		for(String line:lines){
+			log.info(line);
+			
+		}
 		for(int i=0;i<content.length();i++){
 			String str=String.valueOf(content.charAt(i));
 			if(str.equals(role)){
@@ -71,7 +96,8 @@ public class RoleUtil {
 				
 			}
 			
-		}
+		}*/
+	        log.info(content+" get max "+max);   
 		return max;
 	}
 
