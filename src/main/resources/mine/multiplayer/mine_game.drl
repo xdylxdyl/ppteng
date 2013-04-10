@@ -262,7 +262,7 @@ then
     if("*".equals(userTag)){
     $right=$right+1;    
     }
-    Message tagMessage=new Message($object,"mine","//");
+    Message tagMessage=new Message($object,"mine","#");
     tagMessage.setContent($subject);
     insert(tagMessage);     
     $bomb=$bomb+1;    

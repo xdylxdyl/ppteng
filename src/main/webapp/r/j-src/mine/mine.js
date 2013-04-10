@@ -17,7 +17,7 @@ $(document).ready(function () {
     });
 
 
-    ;
+
 
 
     $("#restart").live("click", function () {
