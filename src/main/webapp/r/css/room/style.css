@@ -58,6 +58,8 @@ body {
 .video .video-player {
     width: 640px;
     height: 520px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .death.tabbable {
