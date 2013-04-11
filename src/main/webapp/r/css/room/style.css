@@ -49,6 +49,24 @@ body {
     overflow-y: auto;
     word-break:break-all;
 }
+.video {
+    position: relative;
+    overflow: hidden;
+    zoom: 1;
+    color: #999;
+}
+.video .video-player {
+    width: 640px;
+    height: 520px;
+}
+
+.death.tabbable {
+    box-shadow: -1px 0 5px #eee;
+}
+.death .nav-tabs > .active > a {
+    border: none;
+    background: transparent;
+}
 /*foot*/
 .foot {
     background: #f9f9f9;
