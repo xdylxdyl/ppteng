@@ -71,7 +71,7 @@
 			
 				<td>${statistics.killerWin}</td>
 				<td><c:choose>
-						<c:when test="${statistics.all==0}">0</c:when>
+						<c:when test="${statistics.killer==0}">0</c:when>
 						<c:otherwise>
 							<fmt:formatNumber pattern="0.00"
 								value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber>
