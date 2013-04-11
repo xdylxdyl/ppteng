@@ -77,7 +77,7 @@
                 </li>
             </ul>
             <!--input-->
-            <form action="" class="form-horizontal">
+            <div class="form-horizontal">
                 <div class="control-group">
                     <label for="" class="control-label">说:</label>
                     <div class="controls">
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@
 	<datasources>
 		 <ds name="labsKiller"
 			driverClassName="com.mysql.jdbc.Driver"
-			url="jdbc:mysql://xdylxdyl.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000&amp;characterEncoding=utf8"
+			url="jdbc:mysql://xdylxdyl.mysql.rds.aliyuncs.com:3307/game?defaultBatchValue=1000&amp;characterEncoding=utf8"
 			username="game"
 			password="xdyl1314"
 			maxActive="8"
@@ -47,7 +47,7 @@
 		
 		 <ds name="idCenterDS"
 			driverClassName="com.mysql.jdbc.Driver"
-			url="jdbc:mysql://xdylxdyl.mysql.rds.aliyuncs.com:3306/game?defaultBatchValue=1000"
+			url="jdbc:mysql://xdylxdyl.mysql.rds.aliyuncs.com:3307/game?defaultBatchValue=1000"
 			username="game"
 			password="xdyl1314"
 			maxActive=""

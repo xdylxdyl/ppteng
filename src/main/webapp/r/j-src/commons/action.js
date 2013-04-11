@@ -17,20 +17,16 @@ $(document).ready(function () {
 
             //发送内容违禁词过滤检查函数
             //TODO
-
+            var key = event.keyCode || event.which;
             //回车就发送消息
-            if (event.keyCode == "13") {
-
+            if (key === "13") {
+                event.preventDefault();
                 if (controlView.isMute()) {
                     alert("嘘.现在不能说话.");
                 }
                 else {
-                   return say(event);
+                    say(event);
                 }
-
-
-            } else {
-
             }
 
         });
@@ -51,24 +47,15 @@ $(document).ready(function () {
             } else {
                 //error
                 alert(formatResult.message);
-                if(event){
-                              event.preventDefault();
-                          }
-
             }
             controlView.clearSayInput();
             controlView.resetCommand();
-            //return false;
-            if(event){
-                event.preventDefault();
-            }
+            event.preventDefault();
 
         }
 
-        $("#" + selects.$sayButton).bind("click", function () {
-            say();
-
-
+        $("#" + selects.$sayButton).bind("click", function (event) {
+            say(event);
         });
 
 
@@ -169,7 +156,7 @@ $(document).ready(function () {
         });
 
 
-        $("#" + selects.$gameArea+" p").live("dblclick", function () {
+        $("#" + selects.$gameArea + " p").live("dblclick", function () {
 
             getContent.call(this);
             return false;

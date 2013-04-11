@@ -11,9 +11,9 @@
 <div class="navbar">
     <div class="navbar-inner">
         <a href="#" class="brand">PTT</a>
-        <span class="brand">
-            <small>fjdkslajfsdkla</small>
-        </span>
+        <div class="brand">
+            <small>乃就是杀手，别逃了，逃不掉的！</small>
+        </div>
         <ul class="nav pull-right">
             <li><a href="#setRoomBlock" data-toggle="modal" id="setRoom" rel="tooltip" title="点此设置房间" data-original-title="点此设置房间" data-placement="bottom">Settings</a></li>
             <li class="dropdown">
@@ -41,7 +41,6 @@
                     <label class="control-label" for="">TIME:</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="">
-                        <p class="help-block">how to set TIME...</p>
                     </div>
                 </div>
                 <div class="control-group">
@@ -55,7 +54,6 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">关闭</a>
         <a href="#" class="btn btn-primary">保存更新</a>
     </div>
 </div>
@@ -302,8 +300,8 @@
         var $elem = $('#' + elem);
         var $menu = $elem.siblings('ul.dropdown-menu');
         $menu.children('li').click(function() {
-            var txt = $(this).text();
-            var val = $(this).attr('data-default');
+            var txt = $(this).text();//获取到li的文本值
+            var val = $(this).attr('data-default');//获取到li的自定义属性
             $elem.find('span').text(txt);
             $elem.attr('data-default', val);
             if (val.indexOf('#') == '0') {
