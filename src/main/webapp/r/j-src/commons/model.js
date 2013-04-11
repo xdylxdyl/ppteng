@@ -209,6 +209,8 @@ var selects={
     $select_command:"select_command",
     $select_object:"select_object",
     $mainArea:"mainArea",
-    $secondArea:"secondArea"
+    $secondArea:"secondArea",
+    $content: "content",
+    $sidebarNav: "sidebar-nav"
 
 }

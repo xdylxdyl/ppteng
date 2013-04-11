@@ -67,10 +67,10 @@
         <li><a href="#"><i class="icon-living"></i>list item</a></li>
         <li><a href="#"><i class="icon-die"></i>list item</a></li>
         <li><a href="#"><i class="icon-lastword"></i>list item</a></li>
-
-
-
     </ul>
+    <div class="sidebar-toggle" id="sidebar-toggle">
+        -
+    </div>
 </div>
 
 <!--main-->
@@ -93,7 +93,6 @@
                                 </blockquote>
                                 <div class="video-player">
                                     <!--从网页中找到的部分-->
-                                    <embed src="http://player.youku.com/player.php/sid/XNTI2NjI3MTY4/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
                                 </div>
                             </div>
                             <!--新添视频部分结束-->
@@ -340,4 +339,24 @@
     selectors('selectOrder');
     selectors('selectObject');
 
+</script>
+
+<script type="text/javascript">
+
+    $('#sidebar-toggle').toggle(function() {
+        var $leftBlock = $('.sidebar-nav');
+        var $rightBlock = $('.content');
+
+        $(this).text('+');
+        $leftBlock.animate({left: -180});
+        $rightBlock.animate({marginLeft: 20})
+
+    }, function() {
+        var $leftBlock = $('.sidebar-nav');
+        var $rightBlock = $('.content');
+
+        $(this).text('-');
+        $leftBlock.animate({left: 0});
+        $rightBlock.animate({marginLeft: 200})
+    })
 </script>

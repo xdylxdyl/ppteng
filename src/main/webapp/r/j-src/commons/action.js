@@ -163,6 +163,12 @@ $(document).ready(function () {
 
         });
 
+        $('#sidebar-toggle').toggle(function() {
+            globalView.hidePlayerList('#sidebar-toggle');
+        }, function() {
+            globalView.showPlayerList('#sidebar-toggle');
+        })
+
         function getContent() {
             var content = $(this).html();
             controlView.appendSay(content);
