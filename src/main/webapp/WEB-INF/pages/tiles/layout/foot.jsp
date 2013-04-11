@@ -24,7 +24,7 @@
                 <li class="dropup">
                     <a href="#" id="select_color" data-default="#000" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
                         &nbsp;
-                        <span>color</span>
+                        <span>颜色</span>
                         &nbsp;
                         <b class="caret"></b>
                     </a>
@@ -55,7 +55,7 @@
                     </ul>
                 </li>
                 <li>
-                    <label for="scroll" class="checkbox">
+                    <label for="checkBox" class="checkbox">
                         <input type="checkbox" checked="checked" value="scroll" id="checkBox">
                         滚屏
                     </label>
@@ -63,13 +63,13 @@
                 <li>
                     <span class="help-inline" id="countDown">04:00</span>
                 </li>
-                 <li class="pull-right">
+                 <li>
                     <button class="btn btn-info" id="readyButton">准备</button>
                 </li>
-                 <li class="pull-right">
+                 <li>
                     <button class="btn btn-info" id="startButton">开始游戏</button>
                 </li>
-                 <li class="pull-right">
+                 <li>
                     <button class="btn btn-info" id="replayButton">播放战例</button>
                 </li>
                 <li class="pull-right">
