@@ -92,7 +92,7 @@
            
              <div id="secondArea" class="hide">
              
-                <div class="tabbable">
+                <div class="tabbable death">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#die_area" data-toggle="tab">亡灵</a></li>
                     </ul>
