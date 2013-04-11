@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/r/css/bootstrap.css">
     <link rel="stylesheet" href="/r/css/room/style.css">
 
-
+<title>${room.name}-简化-葡萄藤轻游戏</title>
 
 <input type="hidden" id="uid" value="${uid}">
 <!-- 玩家ID -->
