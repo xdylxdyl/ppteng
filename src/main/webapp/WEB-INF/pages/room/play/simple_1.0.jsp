@@ -54,10 +54,12 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row-fluid">
+            <div class="span12" id="mainArea">
+            
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
-                    <li><a href="#die_area" data-toggle="tab">亡灵</a></li>               
+                               
                     <li><a href="#setting_area" data-toggle="tab">设置</a></li>
                     <li><a href="#music_area" data-toggle="tab">音乐</a></li>
                 </ul>
@@ -65,9 +67,7 @@
                     <div class="tab-pane active" id="game_area">
 
                      </div>
-                    <div class="tab-pane" id="die_area">
-                       
-                    </div>
+                    
                     <div class="tab-pane" id="killer_area">
                        
                     </div>
@@ -88,6 +88,22 @@
                     
                 </div>
             </div>
+           </div>
+           
+             <div id="secondArea" class="hide">
+             
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#die_area" data-toggle="tab">亡灵</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="die_area">
+                       
+                        </div>
+                    </div>
+                </div>
+          
+             </div>
         </div>
     </div>
 </div>

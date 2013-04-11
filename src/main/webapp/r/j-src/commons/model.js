@@ -207,6 +207,8 @@ var selects={
     $checkBox:"checkBox",
     $countDown:"countDown",
     $select_command:"select_command",
-    $select_object:"select_object"
+    $select_object:"select_object",
+    $mainArea:"mainArea",
+    $secondArea:"secondArea"
 
 }

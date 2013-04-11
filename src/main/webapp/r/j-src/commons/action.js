@@ -19,7 +19,7 @@ $(document).ready(function () {
             //TODO
             var key = event.keyCode || event.which;
             //回车就发送消息
-            if (key === "13") {
+            if (key == "13") {
                 event.preventDefault();
                 if (controlView.isMute()) {
                     alert("嘘.现在不能说话.");

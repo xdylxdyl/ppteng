@@ -162,6 +162,13 @@ killController.die = function(message) {
     playerListView.die();
     killGameAreaView.die(message.subject, playerService.getPlayer(message.subject).name, message.object);
 
+    var selfID=globalView.getCreaterId();
+    if(selfID==message.subject){
+        var p=playerService.getPlayer(message.subject)
+        gameView.showSecondArea(p);
+    }
+
+
 };
 
 killController.vote = function(message) {

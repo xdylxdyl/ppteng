@@ -195,7 +195,7 @@ var simpleRightView = {
         rightView.commandRight(right);
     },
     sayRight:function (right) {
-        $("#"+selects.$sayButton).prop("disabled", false);
+        $("#" + selects.$sayButton).prop("disabled", false);
 
     }
 
@@ -239,6 +239,7 @@ var gameView = {
         playerListView.sortPlayer();
         killGameAreaView.clearStatusArea();
         settingView.hideSettingButton();
+        gameView.hideDieArea();
 
     },
     over:function (message) {
@@ -255,6 +256,23 @@ var gameView = {
 
         killGameAreaView.showOver(recordID, obj);
         killGameAreaView.showConentForGamePhase(killGameAreaView.Phase["over"]);
+        gameView.showDieArea();
+    },
+    showDieArea:function () {
+        $("#" + selects.$secondArea).show();
+        $("#" + selects.$secondArea).removeClass().addClass("span2");
+        $("#" + selects.$mainArea).removeClass().addClass("span10");
+    },
+    hideDieArea:function () {
+        $("#" + selects.$secondArea).hide();
+        $("#" + selects.$mainArea).removeClass().addClass("span12");
+    },
+    showSecondArea:function (p) {
+        if (playerStatus.die == p.status ||playerStatus.unready == p.status) {
+            gameView.showDieArea();
+        } else {
+            gameView.hideDieArea();
+        }
     }
 
 
@@ -268,32 +286,35 @@ var simpleService = {
         roomService.parseRight(data.right);
         roomService.parseCount(data.votes);
         simpleService.parseRole(data.role)
-    }
-    ,
+    },
 
 
-        parseRole:function (data) {
-            if (data == null) {
-                return;
-            }
-
-            var p = playerService.getPlayer(data.id)
-            p.role =data.role;
-            playerService.updatePlayer(p);
-            playerListView.displayRole(killGameAreaView.Role[data.role]);
-
-
-        },
-        parseGame:function (data) {
-            if (data == null) {
-                return;
-            }
-
-            globalView.setGameStatusHint(killGameAreaView.Phase[data.status]);
-            globalView.setGameStatus(data.status);
-            controlView.setCountDownTime(data.remainTime);
-
+    parseRole:function (data) {
+        if (data == null) {
+            return;
         }
+
+        var p = playerService.getPlayer(data.id)
+        p.role = data.role;
+        playerService.updatePlayer(p);
+        playerListView.displayRole(killGameAreaView.Role[data.role]);
+
+
+    },
+    parseGame:function (data) {
+        if (data == null) {
+            return;
+        }
+
+        globalView.setGameStatusHint(killGameAreaView.Phase[data.status]);
+        globalView.setGameStatus(data.status);
+        controlView.setCountDownTime(data.remainTime);
+        var uid = globalView.getCurrentID();
+        var p = playerService.getPlayer(uid);
+        gameView.showSecondArea(p);
+
+
+    }
 }
 
 versionFunction = {

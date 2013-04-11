@@ -6,7 +6,7 @@
 	</cache>
 	<regions>
 
-		<!--<region name="com.gemantic.labs.killer.model.Users"
+		<region name="com.gemantic.labs.killer.model.Users"
 			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
 			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
 			<keyPattern value="[0-9]$" datasource="default" />
@@ -84,7 +84,6 @@
 			<keyPattern value="[0-9]$" datasource="default" />
 		</region>
 
--->
 
 
 
