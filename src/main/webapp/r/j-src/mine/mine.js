@@ -17,9 +17,6 @@ $(document).ready(function () {
     });
 
 
-
-
-
     $("#restart").live("click", function () {
         mineView.initMine();
         return false;
@@ -101,10 +98,10 @@ $(document).ready(function () {
 
             var html = "<select id='mineSelect'><option value ='0' selected='selected'>级别</option><option value ='1'>低级</option><option value ='2'>中级</option><option value='3'>高级</option><option value='4'>神级</option>" +
                 "<option value='5'>自定义</option>" +
-                "</select> <span>*提交生效</span>";
-            $("#versionDefined").empty().html(html);
+                "</select> <small class='text-error'>提交生效</small>";
+            $("#" + selects.$settingArea).prepend(html);
             //default mineSelect is 1.
-           mineSettingView.updateSettingParameter(null, null, null, true);
+            mineSettingView.updateSettingParameter(null, null, null, true);
 
             $("#mineSelect").live("change", function () {
                 var level = $(this).children('option:selected').val();
@@ -222,7 +219,7 @@ $(document).ready(function () {
             }
 
             var player = playerService.getPlayer(uid);
-            $("section article").append("<p style='color:#F00'>【系统消息】 [" + player.name + "] " + action + "了 [" + place + "] </p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] " + action + "了 [" + place + "] </p>");
 
         },
         showMineOperater:function (mo) {
@@ -310,13 +307,12 @@ $(document).ready(function () {
         start:function () {
 
 
-            $("#start").hide();
-            $(".nobg").show();
-            $("section article, section .killer_area, section .dead_area,#role_area").empty();
-            $("section .killer_area, section .dead_area").hide();
-            $("section article").append("<p style='color:#F00'>【系统消息】 游戏开始~~赶紧的扫扫扫扫扫扫雷吧</p>");
-            $('section article').scrollTop($('section article')[0].scrollHeight);
+            controlView.hideButton($("#" + selects.$startButton));
 
+            $("#" + selects.$startButton).hide();
+            $("#" + selects.$gameArea).empty();
+            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始,扫扫扫扫扫扫雷吧~</p>");
+            $('section article').scrollTop($('section article')[0].scrollHeight);
 
             playerListView.sortPlayer();
             settingView.hideSettingButton();
@@ -339,7 +335,7 @@ $(document).ready(function () {
             var place = message.object;
             var player = playerService.getPlayer(uid);
 
-            $("section article").append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 同学我早知道你不靠谱了,你在 [" + place + "] 点到雷了 </p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 同学我早知道你不靠谱了,你在 [" + place + "] 点到雷了 </p>");
         },
         over:function (message) {
             var obj = message.object;
@@ -352,9 +348,9 @@ $(document).ready(function () {
             settingView.displaySetting();
             mineService.parseBomb(bombStr.system, "mine");
             if ("win" == obj) {
-                $("section article").append("<p style='color:#F00'>【系统消息】 居然赢了.~~赶紧的开始下一局,用时 [" + userTime + "]秒</p>");
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 居然赢了.~~赶紧的开始下一局,用时 [" + userTime + "]秒</p>");
             } else {
-                $("section article").append("<p style='color:#F00'>【系统消息】 果然输了,~~赶紧的开始下一局</p>");
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 果然输了,~~赶紧的开始下一局</p>");
                 mineView.showMineOperater(wrongMine);
 
             }
@@ -369,7 +365,7 @@ $(document).ready(function () {
         },
         initMine:function () {
             $("#inner").empty();
-            $("#inner2").empty();
+
             var row = mineView.getSettingRow();
             var column = mineView.getSettingColumn();
             var maxCount = mineView.getSettingMineCount();
@@ -422,6 +418,14 @@ $(document).ready(function () {
     }
 
     var mineService = {
+        parseGame:function (data) {
+
+            if (data == null) {
+                return;
+            }
+
+            globalView.setGameStatus(data.status);
+        },
 
         parseCount:function (counts) {
             for (var key in counts) {
@@ -494,9 +498,9 @@ $(document).ready(function () {
         },
         parseDetail:function (data) {
             roomService.parsePerson(data.person);
-            roomService.parseGame(data.game);
             roomService.parseRoom(data.room);
             roomService.parseRight(data.right);
+            mineService.parseGame(data.game);
             mineService.parseCount(data.votes);
             //  var start=new Date().getTime();
             if ("run" == globalView.getGameStatus()) {

@@ -43,15 +43,19 @@
 </div>
 
 <!--left list-->
-<div class="sidebar-nav">
+<div class="sidebar-nav" id="sidebar-nav">
     <ul class="nav nav-list" id="playerList">
 
 
     </ul>
+    
+     <div class="sidebar-toggle" id="sidebar-toggle">
+    -
+    </div>
 </div>
 
 <!--main-->
-<div class="content">
+<div class="content" id="content">
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span10">

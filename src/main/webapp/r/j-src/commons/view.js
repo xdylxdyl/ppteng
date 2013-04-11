@@ -138,12 +138,12 @@ var globalView = {
         return $("#stageShow").text();
     },
     showPlayerList: function(elem) {
-        $(elem).text('+');
+        $(elem).text('-');
         $('#' + selects.$sidebarNav).animate({left: 0});
         $('#' + selects.$content).animate({marginLeft: 200});
     },
     hidePlayerList: function(elem) {
-        $(elem).text('-');
+        $(elem).text('+');
         $('#' + selects.$sidebarNav).animate({left: -180});
         $('#' + selects.$content).animate({marginLeft: 20});
     }
