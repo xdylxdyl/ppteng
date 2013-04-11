@@ -718,6 +718,9 @@ var controlView = {
         var objectStr = " <li data-default='" + player.id + "'><a href='#'>" + player.name + "</a></li>";
         $("#object").append(objectStr);
 
+    },
+    hideButton:function(id){
+        $("#"+id).hide();
     }
 
 

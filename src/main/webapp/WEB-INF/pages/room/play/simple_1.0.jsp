@@ -86,6 +86,9 @@
                                 <li><a href="#" data-src="http://www.time.ac.cn/timebbs/uploadfile/mp3/hktk.mp3">想你的夜</a></li>
                             </ol>
                         </div>
+                        
+                        <embed src="${music}" type='application/x-shockwave-flash' class='music_player' wmode='opaque'></embed>
+                        
                     </div>
                     
                     

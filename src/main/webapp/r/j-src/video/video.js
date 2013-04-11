@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    videoUtil.drag("outer");
-    $("#music_container").hide();
+
     var videoView = {
         setVideo:function (address) {
             var html = "<embed src='" + address + "' type='application/x-shockwave-flash' allowscriptaccess='always' allowfullscreen='true' wmode='opaque' width='480' height='400'></embed>";
@@ -44,7 +43,7 @@ $(document).ready(function () {
 
         parseDetail:function (data) {
             roomService.parsePerson(data.person);
-            roomService.parseGame(data.game);
+
             roomService.parseRoom(data.room);
             roomService.parseRight(data.right);
 
@@ -72,6 +71,8 @@ $(document).ready(function () {
                 ",请保持安静,电影结束时,带好您的手机钱包和男朋友~" );
             videoService.updateSetting(true);
 
+            controlView.hideButton(selects.$readyButton);
+            controlView.hideButton(selects.$countDown);
         }
 
 
@@ -81,7 +82,6 @@ $(document).ready(function () {
     }
 
 
-    defaultShareTitle = "我在[葡萄藤]看视频~~来跟我一起看吧~~~";
 
     versionFunction = {
         //"rightView":simpleRightView.branchRight,
