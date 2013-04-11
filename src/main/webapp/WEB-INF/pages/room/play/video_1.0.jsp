@@ -1,38 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-
-
-
-
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/r/css/common/room.css?v=${frontVersion}">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/r/css/video/video.css?v=${frontVersion}">
-<link rel="stylesheet"
-	href="<%=request.getContextPath() %>/r/css/music.css?v=${frontVersion}">
-
-<script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-
-
-<script
-	src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
-
-<script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil.js"></script>
-<script
-	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath()%>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
-
-	<script src="/r/j-src/video/videoUtil.js?v=${frontVersion}"></script>
-<script src="/r/j-src/video/video.js?v=${frontVersion}"></script>
-<script src="/r/j-src/commons/model.js?v=${frontVersion}"></script>
-<script src="/r/j-src/commons/view.js?v=${frontVersion}"></script>
-<script src="/r/j-src/commons/service.js?v=${frontVersion}"></script>
-<script src="/r/j-src/commons/base.js?v=${frontVersion}"></script>
-<script src="/r/j-src/commons/action.js?v=${frontVersion}"></script>
-
-
+    <link rel="stylesheet" href="/r/css/bootstrap.css">
+    <link rel="stylesheet" href="/r/css/room/style.css">
 
 
 
@@ -46,31 +16,136 @@
 <input type="hidden" id="time" value="over">
 <!-- 游戏时间白天黑夜 -->
 <input type="hidden" id="createrID" value="${room.createrID}">
-<input type="hidden" id="type" value="game">
+<input type="hidden" id="type" value="${type}">
 <input type="hidden" id="recordID" value="${record.id}">
 <input type="hidden" id="recordTime" value="${record.time}">
-<div id="contents" class="hidden">${contents}</div>
-<div id="stageShow" class=hidden>${stageShow}</div>
+<div id="stageShow" class="hide">${stageShow}</div>
+<div id="contents" class="hide">${contents}</div>
+<div id="escape" class="hide"></div>
 
 
-  
-     
-     
-    
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" id="roomName">房间名:${room.name}</a>
+        <span class="brand">
+            <small><a href="/player/detail.do?uid=${room.createrID}" id="createName"></a></small>
+        </span>
+         <span class="brand">
+            <small id="gamePhase"></small>
+        </span>
+        <span class="brand">
+            <small id="playerRole"></small>
+        </span>
+        <ul class="nav pull-right">           
+            <li><a href="#" id="exitButton" rel="tooltip" title="点此离开房间" data-original-title="点此离开房间" data-placement="bottom">退出房间 <i class="icon-off"></i></a></li>
+        </ul>
+    </div>
+</div>
 
-	<div id="outer" class="outer">
-		
-		<embed src="http://www.tudou.com/a/B2wm4t-ogxA/&resourceId=0_05_05_99&iid=130772196&bid=05/v.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="480" height="400"></embed>
-			
-		</div>
+<!--left list-->
+<div class="sidebar-nav">
+    <ul class="nav nav-list" id="playerList">
 
 
-<section>
-	<article></article>
-  </section>
- 
+    </ul>
+</div>
+
+<!--main-->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span10">
+            
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#video_area" data-toggle="tab">电影</a></li>
+                               
+                    <li><a href="#setting_area" data-toggle="tab">设置</a></li>
+                 
+                </ul>
+                <div class="tab-content">
+                   
+                    
+                    <div class="tab-pane active" id="video_area">
+                        <!--新添视频部分-->
+                            <div class="video">
+                                <blockquote>
+                                    <p>葡萄藤虚拟电影院</p>
+                                    <small>这样的一个夜晚.有你有我.</small>
+                                 
+                                </blockquote>
+                                <div class="video-player">
+                                    <!--从网页中找到的部分-->
+                                    <embed src="http://player.youku.com/player.php/sid/XNTI2NjI3MTY4/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+                                </div>
+                            </div>
+                            <!--新添视频部分结束-->
+                    </div>
+                    <div class="tab-pane" id="setting_area">
+                       
+                    </div>                    
+                   
+                    
+                    
+                </div>
+            </div>
+           </div>
+           
+             <div  class="span2">
+             
+                <div class="tabbable death">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#game_area" data-toggle="tab">小树林</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="game_area">
+                       
+                        </div>
+                    </div>
+                </div>
+          
+             </div>
+        </div>
+    </div>
+</div>
+	
+	
+	
+	
+	
+<script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tab.js"></script>
+<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-modal.js"></script>
+<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="/r/j-src/kibo/kibo.js"></script><!--侦测键盘-->
+<script type="text/javascript" src="/r/j-src/music/audio.min.js"></script>
+
+<script src="/r/j-src/video/video.js?v=${frontVersion}"></script>
+
+<script
+	src="<%=request.getContextPath() %>/r/j-src/commons/model.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/commons/service.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/commons/base.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/commons/action.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/room/accept.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/room/view.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/commons/view.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
+
+<script
+	src="<%=request.getContextPath() %>/r/j-src/foot/foot.js?v=${frontVersion}"></script>
 
 
-
-
-
+	
