@@ -7,7 +7,7 @@
  */
 
 
-var settingPostParameter = function(rid, version, killCount, dayTime, nightTime, lastwordTime) {
+var settingPostParameter = function (rid, version, killCount, dayTime, nightTime, lastwordTime) {
     return{
         rid:rid,
         version:version,
@@ -22,8 +22,8 @@ var settingPostParameter = function(rid, version, killCount, dayTime, nightTime,
 
 
 var commandSimpleSetting = {
-    vote : "投他一票",
-    kill : "杀人灭口"
+    vote:"投他一票",
+    kill:"杀人灭口"
 
 }
 
@@ -33,7 +33,7 @@ var commandSimpleSetting = {
  */
 var killGameAreaView = {
 
-  getCommandHint:function(command){
+    getCommandHint:function (command) {
         return killGameAreaView.Hint[command];
     },
     Hint:{
@@ -51,8 +51,13 @@ var killGameAreaView = {
         lastword:"【当前状态】遗言 "
     },
 
+    Role:{
+        water:"【身份】水民 ",
+        killer:"【身份】杀手 "
+    },
 
-    say:function(id, name, content, exp, color, subject, subjectName) {
+
+    say:function (id, name, content, exp, color, subject, subjectName) {
         var express = controlView.showExpression(exp);
         var obj;
         if (subject != "-500") {
@@ -71,125 +76,97 @@ var killGameAreaView = {
                 //没有结束
                 place = "deadArea";
 
-
             }
         } else {
-            switch ($("#time").val()) {
-                case "night":
-                    if (playerStatus.living == player.status) {
-                        //是杀手才能说话
-                        if ("killer" == player.role) {
-                            place = "killArea";
-                        } else {
-                            place = "discard";
-                        }
-                    } ;
-                    break;
-                case "lastword":
-                    break;
-                default:
-                    break;
-            }
+
 
         }
         switch (place) {
             case "normal":
-                $("#"+selects.$gameArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
-                viewUtil.autoBottom(  $("#"+selects.$gameArea));
+                $("#" + selects.$gameArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+                viewUtil.autoBottom($("#" + selects.$gameArea));
                 break;
             case "deadArea":
-                $("#"+selects.$dieArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
-                viewUtil.autoBottom(  $("#"+selects.$dieArea));
-                break;
-            case "killArea":
-                $("#"+selects.$killerArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
-                viewUtil.autoBottom( $("#"+selects.$killerArea));
+                $("#" + selects.$dieArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+                viewUtil.autoBottom($("#" + selects.$dieArea));
                 break;
             default:
         }
 
 
     },
-    vote:function(subjectName, objectName, color, exp, content) {
+    vote:function (subjectName, objectName, color, exp, content) {
 
 
-        $("#"+selects.$gameArea).append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
-        viewUtil.autoBottom( $("#"+selects.$gameArea));
+        $("#" + selects.$gameArea).append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
+        viewUtil.autoBottom($("#" + selects.$gameArea));
     },
 
-    die:function(id, name, action) {
+    die:function (id, name, action) {
         $("#" + id).children("a").removeClass().addClass("die");
         if (action == "vote") {
-            $("#"+selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 积毁销骨，众口铄金，[" + name + "]你就认命吧！</p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 积毁销骨，众口铄金，[" + name + "]你就认命吧！</p>");
         } else if (action == "kill") {
 
-            $("#"+selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 [" + name + "] 被杀了。</p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 [" + name + "] 被杀了。</p>");
 
 
         }
-        if ($("#uid").val() == id) {
-            this.swithTopArea( $("#"+selects.$dieArea));
-        }
-    },
-    kill:function(killerName, objName, exp, content) {
-
-        $("section .killer_area").show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
-        viewUtil.autoBottom($("#"+selects.$dieArea));
-    },
-    swithTopArea:function(area) {
 
     },
-    showContentForRoleArea:function(content) {
+    kill:function (killerName, objName, exp, content) {
+
+        $("#" + selects.$gameArea).show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
+        viewUtil.autoBottom($("#" + selects.$gameArea));
+    },
+
+    showContentForRoleArea:function (content) {
 
     },
-    showContentForGameArea:function(content) {
+    showContentForGameArea:function (content) {
         if (content == "" || content == undefined) {
 
         } else {
-            $("#"+selects.$gameArea).append("<p><span style='color: #F00'>" + content + "</span></p>");
+            $("#" + selects.$gameArea).append("<p><span style='color: #F00'>" + content + "</span></p>");
         }
 
     },
-    showConentForGamePhase:function(content) {
-        $("#phase_area").html(content);
+    showConentForGamePhase:function (content) {
+        $("#" + selects.$gamePhase).empty().html(content);
     },
-    clearStatusArea:function() {
-        $("#phase_area").empty();
+    clearStatusArea:function () {
+        $("#" + selects.$gamePhase).empty();
     },
-    clearGameArea:function() {
-        selects.$gameAreay.empty();
+    clearGameArea:function () {
+        $("#" + selects.$gameArea).empty();
     },
-    clearRoleArea:function() {
-        $("#role_area").empty();
+    clearRoleArea:function () {
+        $("#" + selects.$playerRole).empty();
     },
-    showOver:function(recordID, obj) {
+    showOver:function (recordID, obj) {
 
         var recordLink = "<a href='/record/enter.do?recordID=" + recordID + "' target='_blank'>查看战例</a>";
         var shareLink = "http://42.121.113.70/record/enter.do?recordID=" + recordID;
         var share;
         switch (obj) {
             case "killer win" :
-                $("#"+selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink);
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink);
                 share = "这局杀人游戏[简化]中,杀手又赢了~,抢走了2000金币~点此链接回放场景,重现杀人现场: " + shareLink + ";";
                 break;
             case "water win" :
-                $("#"+selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！</p> " + recordLink);
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！</p> " + recordLink);
                 share = "这局杀人游戏[简化]中,水民又赢了~,赢回了2000金币~点此链接回放场景,重现水民分析实况:" + shareLink + ";";
                 break;
             default :
-                $("#"+selects.$gameArea).append("<p style='color:#F00'>" + obj + "</p>");
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>" + obj + "</p>");
         }
 
-        //楼上展示位重置
-        $("section .killer_area, section .dead_area").hide();
+
         //时间清空
         clearTimeout(timer);
         timer = null;
-        $(".nobg").val("00:00");
-        viewUtil.autoBottom( $("#"+selects.$gameArea));
-
-
-        jiathis_config.title = share;
+        $("#" + selects.$countDown).val("00:00");
+        viewUtil.autoBottom($("#" + selects.$gameArea));
 
 
     }
@@ -198,7 +175,7 @@ var killGameAreaView = {
 
 
 var simpleRightView = {
-    branchRight:function(right) {
+    branchRight:function (right) {
         switch (right) {
             case "vote" :
                 simpleRightView.commandRight(right);
@@ -214,14 +191,12 @@ var simpleRightView = {
         }
     },
 
-    commandRight : function(right) {
-        $("#command option:gt(0)").remove();
-        var content = rightView.getContentByRight(right);
-        $("#command").append("<option value='" + right + "'>" + content + "</option>");
+    commandRight:function (right) {
+        rightView.commandRight(right);
     },
-     sayRight : function(right) {
-        $("#sendSay").prop("disabled", false);
-        $("#say").attr("name", right);//? 这个有什么用处
+    sayRight:function (right) {
+        $("#"+selects.$sayButton).prop("disabled", false);
+
     }
 
 
@@ -229,7 +204,7 @@ var simpleRightView = {
 }
 
 var simpleSettingView = {
-    initSetting:function() {
+    initSetting:function () {
 
         $("#dayTime").val($("#dayTime").val() / 60000);
         $("#nightTime").val($("#nightTime").val() / 60000);
@@ -239,7 +214,7 @@ var simpleSettingView = {
         $("<span>分</span>").insertAfter("#nightTime");
         $("<span>分</span>").insertAfter("#lastwordTime");
     },
-    getSettingParameter:function() {
+    getSettingParameter:function () {
         $("#dayTime").val($("#dayTime").val() * 60000);
         $("#nightTime").val($("#nightTime").val() * 60000);
         $("#lastwordTime").val($("#lastwordTime").val() * 60000);
@@ -250,25 +225,29 @@ var simpleSettingView = {
 
 
 var gameView = {
-    start:function() {
+    start:function () {
 
 
-        $("#start").hide();
-        $(".nobg").val("");
-        $("section article, section .killer_area, section .dead_area,#role_area").empty();
-        $("section .killer_area, section .dead_area").hide();
-        $("#"+selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始,白天时间~</p>");
+        $("#" + selects.$startButton).hide();
+        $("#" + selects.$gameArea).empty();
+        $("#" + selects.$killerArea).empty();
+        $("#" + selects.$dieArea).empty();
+        $("#" + selects.$playerRole).empty();
+
+        $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始,白天时间~</p>");
 
         playerListView.sortPlayer();
         killGameAreaView.clearStatusArea();
         settingView.hideSettingButton();
 
     },
-    over:function(message) {
+    over:function (message) {
         var obj = message.object;
         var recordID = message.subject;
         //标明游戏结束
-        globalView.setGameStatus("over");
+        globalView.setGameStatusHint("游戏结束");
+        globalView.setGameStatus("1");
+
         playerService.setUnreadyStatus();
         //只重新显示.不用重新计算
         settingView.displaySetting();
@@ -282,13 +261,39 @@ var gameView = {
 }
 
 var simpleService = {
-    parseDetail:function(data) {
+    parseDetail:function (data) {
         roomService.parsePerson(data.person);
-        roomService.parseGame(data.game);
+        simpleService.parseGame(data.game);
         roomService.parseRoom(data.room);
         roomService.parseRight(data.right);
-        roomService.parseCount(data.votes)
+        roomService.parseCount(data.votes);
+        simpleService.parseRole(data.role)
     }
+    ,
+
+
+        parseRole:function (data) {
+            if (data == null) {
+                return;
+            }
+
+            var p = playerService.getPlayer(data.id)
+            p.role =data.role;
+            playerService.updatePlayer(p);
+            playerListView.displayRole(killGameAreaView.Role[data.role]);
+
+
+        },
+        parseGame:function (data) {
+            if (data == null) {
+                return;
+            }
+
+            globalView.setGameStatusHint(killGameAreaView.Phase[data.status]);
+            globalView.setGameStatus(data.status);
+            controlView.setCountDownTime(data.remainTime);
+
+        }
 }
 
 versionFunction = {
@@ -309,9 +314,9 @@ versionFunction = {
     //游戏中发言
     "say":killController.say,
     //游戏中开始游戏的限制
-    "readyCount":3,
-     //Command Hint
-    "commandHint":  killGameAreaView.getCommandHint
+    "readyCount":2,
+    //Command Hint
+    "commandHint":killGameAreaView.getCommandHint
 
 
 }

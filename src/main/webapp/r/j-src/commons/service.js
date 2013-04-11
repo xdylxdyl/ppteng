@@ -260,44 +260,14 @@ var roomService = {
         }
 
         playerListView.sortPlayer();
-    },
+    }
+    ,parseRoom:function (data) {
 
-
-    parseRole:function (data) {
-        if (data == null) {
-            return;
-        }
-
-        if ("killer" == data.role) {
-            var p = playerService.getPlayer(data.id)
-            var str = p.name + " ";
-            gameAreaView.showContentForRoleArea(gameAreaView.Hint.killerList + str);
-            p.role = "killer";
-            playerService.updatePlayer(p);
-
-        }
-
-    },
-    parseGame:function (data) {
-        if (data == null) {
-            return;
-        }
-
-        globalView.setGameStatus(data.status);
-        controlView.setCountDownTime(data.remainTime);
-        var player = playerService.getPlayer(globalView.getCurrentID());
-        if (playerStatus.die == player.status) {
-            gameAreaView.swithTopArea("deadArea");
-        } else {
-
-        }
-    },
-    parseRoom:function (data) {
-        var creater = data.creater;
-        // playerListView.displayCreater(creater);
     },
     parseRight:function (data) {
         var uid = globalView.getCurrentID();
+        //clear allright
+        rightView.noRight();
         //每个right下的信息有：id，isNotify, right[]
 
         if (data != null && data.isNotify && data.id == uid) {
@@ -379,7 +349,7 @@ roomService.info = function () {
             return;
         }
 
-        globalView.setGameStatus(data.status);
+        globalView.setGameStatusHint(data.status);
         controlView.setCountDownTime(data.remainTime);
         var player = playerService.getPlayer(globalView.getCurrentID());
         if (playerStatus.die == player.status) {

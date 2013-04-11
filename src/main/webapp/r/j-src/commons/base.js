@@ -20,8 +20,7 @@ function parseMessage(message) {
         resolvePredict.branch(message[i]);
     }
     $(document).dequeue("messages");
-    //if something happend in the night.this will be still run autobottom.
-    viewUtil.autoBottom("section article");
+
 
 }
 
@@ -327,24 +326,21 @@ var initRoom = function () {
     var type = globalView.getRoomType();
     var uid = globalView.getCurrentID();
     var rid = globalView.getRoomID();
+    var createrID = globalView.getCreaterId();
     var settingHtml;
     var exp;
 
 
     if ("game" == type) {
-        //init expression
+
+
+        //1.init expression
         exp = settingService.getExpress(globalView.getRoomID());
-        settingHtml = settingService.getSetting(new settingGetParameter(globalView.getRoomID(), globalView.getVersion()))
-        console.log(exp)
-
-        //init expression
         controlView.initExpression(exp);
-        //init color
+        //2.init color
         controlView.initColor();
-        //init setting
-        settingView.showSetting(settingHtml);
 
-        //1.init game players/setting
+        //2.init game status every has self setting.expect playlist etc
         var param = {
             uid:uid,
             rid:rid
@@ -365,17 +361,23 @@ var initRoom = function () {
         } else {
 
         }
+        //4 init setting
+        settingHtml = settingService.getSetting(new settingGetParameter(globalView.getRoomID(), globalView.getVersion()))
+        settingView.showSetting(settingHtml);
 
 
-        //start comet
+        //5 start comet
         cometService.comet(uid, messageQ);
 
-        //initControllview
+        //6.initControllview
         controlView.initButtonOfGame();
 
-        //判断是否有音乐盒,默认不显示
-        //  musicUtil.displayMusic();
+        //7 init room creater
 
+        var creater = playerService.getPlayer(createrID);
+        playerListView.displayCreater(creater);
+
+        //7.set staging show
         var player = playerService.getPlayer(uid);
         var message = {};
         message.content = globalView.getLoginShow();
@@ -383,6 +385,7 @@ var initRoom = function () {
             gameAreaView.login(player, message);
         }
 
+        //8 version self dependency
         if (versionFunction["init"]) {
             versionFunction["init"]();
         }

@@ -76,7 +76,7 @@ killController.role = function(message) {
     }
 
 
-    $("section article").append("<p style='color:#F00;'>【系统消息】 [" + name + "] 的身份为 " + role + "</p>");
+    $("#"+selects.$playerRole).empty().html("身份:" + role );
 
 
 };
@@ -85,9 +85,9 @@ killController.decryption = function(message) {
     var name = playerService.getName(message.subject);
     if ("killer" == message.object) {
 
-        $("section article").append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是杀手</p>");
+        $("#"+selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是杀手</p>");
     }else{
-        $("section article").append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是水民</p>");
+        $("#"+selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是水民</p>");
     }
 
 };
@@ -96,16 +96,16 @@ killController.decryption = function(message) {
 killController.assign = function(message) {
     //本地存入自己身份
     //杀手栏展示杀手名单
-    $("#assign").val(message.subject);
+    var p = playerService.getPlayer(message.object);
     if (message.subject == "killer") {
-        var p = playerService.getPlayer(message.object);
         var name = p.name;
         p.role = "killer";
         playerService.updatePlayer(p);
-        killGameAreaView.showContentForRoleArea(killGameAreaView.Hint.killerList + name);
+
 
 
     }
+    playerListView.displayRole(killGameAreaView.Role[p.role]);
 };
 
 
@@ -118,14 +118,14 @@ killController.timeChange = function(message) {
 
     var status = message.subject;
     var p = playerService.getPlayer(globalView.getCurrentID());
-    if (playerStatus.die != p.status) {
-        killGameAreaView.swithTopArea("killerArea");
-    }
+
     killGameAreaView.showContentForGameArea(killGameAreaView.Hint[status]);
     killGameAreaView.showConentForGamePhase(killGameAreaView.Phase[status]);
-    viewUtil.autoBottom("section article");
+    viewUtil.autoBottom( $("#"+selects.$gameArea));
     controlView.clearCountDownTime();
     controlView.setCountDownTime(message.object);
+
+
 };
 
 killController.say = function(message) {
@@ -144,10 +144,11 @@ killController.status = function(message) {
     var name = idFindName(message.subject);
     if (message.object == "lastword") {
 
-        $("section article").append("<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听 [" + name + "] 的最后一句话。</p>");
+        $("#"+selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听 [" + name + "] 的最后一句话。</p>");
     }
     playerService.setStatus(message.subject, message.object);
     playerListView.setStatus(message.subject, message.object);
+
 
 };
 killController.kill = function(message) {
@@ -165,8 +166,11 @@ killController.die = function(message) {
 
 killController.vote = function(message) {
 
-    killGameAreaView.vote(playerService.getPlayer(message.subject).name,
+    if("day"==globalView.getGameStatus()){
+        killGameAreaView.vote(playerService.getPlayer(message.subject).name,
         playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
+
+    }
 
 };
 killController.setVote = function(message) {
@@ -178,20 +182,7 @@ killController.clearVote = function() {
     $("nav li img").text("");
 };
 
-killController.assign = function(message) {
-    //本地存入自己身份
-    //杀手栏展示杀手名单
-    $("#assign").val(message.subject);
-    if (message.subject == "killer") {
-        var p = playerService.getPlayer(message.object);
-        var name=p.name;
-        p.role="killer";
-        playerService.updatePlayer(p);
-        killGameAreaView.showContentForRoleArea(killGameAreaView.Hint.killerList + name);
 
-
-    }
-};
 
 //ID转为名字
 function idGetName(num, returnName) {

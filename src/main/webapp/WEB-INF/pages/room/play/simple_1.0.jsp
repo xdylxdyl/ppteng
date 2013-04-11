@@ -26,7 +26,16 @@
 
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand">${room.name}</a>
+        <a class="brand" id="roomName">房间名:${room.name}</a>
+        <span class="brand">
+            <small><a href="/player/detail.do?uid=${room.createrID}" id="createName"></a></small>
+        </span>
+         <span class="brand">
+            <small id="gamePhase"></small>
+        </span>
+        <span class="brand">
+            <small id="playerRole"></small>
+        </span>
         <ul class="nav pull-right">           
             <li><a href="#" id="exitButton" rel="tooltip" title="点此离开房间" data-original-title="点此离开房间" data-placement="bottom">退出房间 <i class="icon-off"></i></a></li>
         </ul>
@@ -48,8 +57,7 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
-                    <li><a href="#die_area" data-toggle="tab">亡灵</a></li>
-                    <li><a href="#killer_area" data-toggle="tab">杀手</a></li>
+                    <li><a href="#die_area" data-toggle="tab">亡灵</a></li>               
                     <li><a href="#setting_area" data-toggle="tab">设置</a></li>
                     <li><a href="#music_area" data-toggle="tab">音乐</a></li>
                 </ul>

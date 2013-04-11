@@ -56,7 +56,7 @@
                 </li>
                 <li>
                     <label for="scroll" class="checkbox">
-                        <input type="checkbox" checked="checked" value="scroll" id="scroll">
+                        <input type="checkbox" checked="checked" value="scroll" id="checkBox">
                         滚屏
                     </label>
                 </li>
@@ -70,7 +70,7 @@
                     <button class="btn btn-info" id="startButton">开始游戏</button>
                 </li>
                  <li class="pull-right">
-                    <button class="btn btn-info" id="recordButton">播放战例</button>
+                    <button class="btn btn-info" id="replayButton">播放战例</button>
                 </li>
                 <li class="pull-right">
                     <span class="help-inline" id="netSpeedHint">延迟：0 毫秒</span>

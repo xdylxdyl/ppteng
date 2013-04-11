@@ -236,6 +236,12 @@
 					<p>
 						<a href="http://www.joywi.com/" target="_blank">乐唯网</a>
 					<p>
+					<p>
+						<a href="http://www.baimeiba.com/" target="_blank">性感MM</a>
+					<p>
+					<p>
+						<a href="http://www.neihan8.com/yj/list_3_1.html" target="_blank">色系军团</a>
+					<p>
 				</div>
 			</div>
 		</div>

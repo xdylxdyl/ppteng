@@ -110,7 +110,7 @@ killController.timeChange = function(message) {
 
     var status=message.subject;
 
-    globalView.setGameStatus(status);
+    globalView.setGameStatusHint(status);
     killGameAreaView.showConentForGamePhase(killGameAreaView.Phase[status]);
 
     var status = message.subject;

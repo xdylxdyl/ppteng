@@ -25,7 +25,7 @@ $(document).ready(function () {
                     alert("嘘.现在不能说话.");
                 }
                 else {
-                    say();
+                   return say(event);
                 }
 
 
@@ -33,10 +33,9 @@ $(document).ready(function () {
 
             }
 
-
         });
 
-        function say() {
+        function say(event) {
             var formatResult = controlView.checkFormat();
             if (formatResult.code == 0) {
                 //success
@@ -52,8 +51,17 @@ $(document).ready(function () {
             } else {
                 //error
                 alert(formatResult.message);
+                if(event){
+                              event.preventDefault();
+                          }
+
             }
             controlView.clearSayInput();
+            controlView.resetCommand();
+            //return false;
+            if(event){
+                event.preventDefault();
+            }
 
         }
 
@@ -103,8 +111,12 @@ $(document).ready(function () {
             if ("game" == type) {
                 url = "/m/list.do";
                 if (r == true) {
-                    information.sendInfo("logout", null, information.info, redirect(url), false);
-                    console.log("logout ");
+
+                    var message = controlView.getMessage();
+                    message.predict = "logout";
+                    cometService.sendMessage(message);
+                    redirect(url);
+
 
                 }
             } else {
@@ -157,7 +169,7 @@ $(document).ready(function () {
         });
 
 
-        $("section article p").live("dblclick", function () {
+        $("#" + selects.$gameArea+" p").live("dblclick", function () {
 
             getContent.call(this);
             return false;
@@ -166,7 +178,7 @@ $(document).ready(function () {
 
         function getContent() {
             var content = $(this).html();
-            controlView.hintSay(content);
+            controlView.appendSay(content);
         }
 
 

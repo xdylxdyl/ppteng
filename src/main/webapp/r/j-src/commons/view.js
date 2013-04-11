@@ -20,6 +20,11 @@ var sayHint = {
     select:"先选个人啊"
 }
 
+var defaultHint={
+    command:"<li data-default=''><a href=''#'>指令</a></li><li class='divider'></li>",
+   object:"<li data-default=''><a href=''#'>对象</a></li><li class='divider'></li>"
+}
+
 var settingView = {
 
     displaySetting:function () {
@@ -39,7 +44,6 @@ var settingView = {
     },
 
     showSetting:function (info) {
-        console.log(info)
        $("#"+ selects.$settingArea).html(info);
         //管理员才能看到设置按钮
 
@@ -95,8 +99,12 @@ var globalView = {
     getGameStatus:function () {
         return   $("#time").val();
     },
-    setGameStatus:function (status) {
+    setGameStatus:function(status){
         $("#time").val(status);
+    },
+    setGameStatusHint:function (status) {
+        $("#"+selects.$gamePhase).empty().html(status);
+
     },
     isStop:function () {
         if ($("#time").val() == "over") {
@@ -164,17 +172,25 @@ var playerListView = {
     },
     setVote:function (id, count) {
         if (count == 0) {
-            $("#" + id).children("i").text("");
+            $("#" + id+"_vote").text("");
+
         } else {
-            $("#" + id).children("i").text(" +" + count);
+            $("#" + id+"_vote").text(" +" + count);
         }
     },
-    displayCreater:function (id) {
+    displayCreater:function (player) {
 
-        var tip = $("<em>(房主)</em>");
-        tip.insertAfter("#" + id + " i");
+        $("#" + selects.$createName).empty().html("管理员:"+player.name);
 
     },
+
+    displayRole:function (role) {
+
+     $("#" + selects.$playerRole).empty().html(role);
+
+
+    },
+
     sortPlayer:function () {
 
         var sortPlayers = playerService.getAll();
@@ -190,15 +206,13 @@ var playerListView = {
 
     },
     appendPlayerItem:function (player) {
-        console.log(player);
+        var voteID=player.id+"_vote";
         if (player.count == 0) {
 
-            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span></a></li>";
-            console.log(item);
+            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span><span class='vote' id='"+voteID+"'></span></a></li>";
             $("#"+selects.$playerList).append(item);
         } else {
-            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote'>+" + player.count + "</span></span></a></li>";
-            console.log(item);
+            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote' id='"+voteID+"'>+" + player.count + "</span></a></span></a></li>";
             $("#"+selects.$playerList).append(item);
 
 
@@ -255,23 +269,28 @@ var rightView = {
         $("#"+selects.$sayButton).prop("disabled", false);
     },
     readyRight:function () {
-        $("#"+selects.$readyButton).css("display", "inline");
-        $("#"+selects.$readyButton).prop("disabled", false);
+        $("#"+selects.$readyButton).show();
+
 
     },
     startRight:function () {
-        $("#"+selects.$startButton).css("display", "inline");
+        $("#"+selects.$startButton).show();
     },
-    commandRight:function (right) {
-        $("#command").empty();
-        var content = "<li data-default=''><a href=''#'>指令</a></li><li class='divider'></li>";
-        $("#command").append(content + "<li data-default='" + right + "'><a href='#'>" + commandText[right] + "</a></li>");
+    commandRight:function (right) {      ;
+
+        $("#command").append("<li data-default='" + right + "'><a href='#'>" + commandText[right] + "</a></li>");
     },
     noRight:function () {
 
         $("#"+selects.$sayButton).prop("disabled", true);
-        $("#"+selects.$readyButton).prop("disabled", true);
-        $("#"+selects.$command).remove();
+        $("#"+selects.$readyButton).hide();
+        $("#"+selects.$startButton).hide();
+        controlView.resetCommand();
+        controlView.emptyCommand();
+        controlView.resetObject();
+        controlView.emptyObject();
+
+
     },
     getContentByRight:function (right) {
         var c = commandCommonSetting[right];
@@ -299,8 +318,8 @@ var gameAreaView = {
         var name = player.name;
         if (globalView.isStop()) {
             //只有房间是处在结束状态下才在游戏区显示消息
-            $("#game_area").append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
-            viewUtil.autoBottom($("#game_area"));
+            $("#"+selects.$gameArea).append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
+            viewUtil.autoBottom($("#"+selects.$gameArea));
         } else {
             //不显示
 
@@ -335,12 +354,8 @@ var gameAreaView = {
     },
     say:function (id, name, content, exp, color, subject, subjectName) {
         var express = controlView.showExpression(exp);
-        var obj;
-        if (subjectName != null) {
-            obj = " 对 [" + subjectName + " ]";
-        } else {
-            obj = "";
-        }
+        var obj="";
+
         var player = playerService.getPlayer(id);
 
 
@@ -405,6 +420,9 @@ var controlView = {
             "isDrools":"true",
             "version":$("#version").val()
         };
+
+
+
         return message;
     },
     escape:function (content) {
@@ -458,9 +476,22 @@ var controlView = {
     },
     resetCommand:function () {
 
-        $("#"+selects.$command).empty();
-        selects.$command.val("command");
+        $("#"+selects.$select_command).find('span').text("指令");
 
+        controlView.resetObject();
+
+    },
+    emptyCommand:function(){
+      $("#"+selects.$command).empty().append(defaultHint.command);
+      $("#"+selects.$command).attr("data-default","");
+    },
+    resetObject:function(){
+        $("#"+selects.$select_object).find('span').text("对象");
+
+    },
+    emptyObject:function(){
+        $("#"+selects.$object).empty().append(defaultHint.object);
+        $("#"+selects.$object).attr("data-default","");
     },
     ready:function (id) {
 
@@ -476,7 +507,7 @@ var controlView = {
         m < 10 ? m = "0" + m : m;
         s < 10 ? s = "0" + s : s;
         var result = m + ":" + s;
-        selects.$countDown.empty().html(result);
+        $("#"+selects.$countDown).empty().html(result);
         time = time + 1000;
 
         timer = setTimeout("controlView.startCountTime(" + time + ")", 1000);
@@ -490,7 +521,7 @@ var controlView = {
         m < 10 ? m = "0" + m : m;
         s < 10 ? s = "0" + s : s;
         var result = m + ":" + s;
-        selects.$countDown.empty().html(result);
+        $("#"+selects.$countDown).empty().html(result);
         time = time - 1000;
         if (time >= 0) {
             timer = setTimeout("controlView.setCountDownTime(" + time + ")", 1000);
@@ -568,9 +599,9 @@ var controlView = {
         }
     },
     initButtonOfGame:function () {
-        $("#replay").hide();
-        $("#replay_time_hint").hide();
-        $("#replay_role").hide();
+        $("#"+selects.$replayButton).hide();
+    /*    $("#replay_time_hint").hide();
+        $("#replay_role").hide();*/
     },
     initButtonOfRecord:function () {
         $("#ready").hide();
@@ -607,6 +638,10 @@ var controlView = {
     hintSay:function (text) {
         $("#sayInput").val(text);
     },
+    appendSay:function(text){
+      var   content=$("#sayInput").val()+text;
+        $("#sayInput").val(content);
+    },
     sayHint:function () {
         alert("内容不能为空！请输入内容重新发送");
     },
@@ -615,7 +650,7 @@ var controlView = {
 
     },
     getAutoRoll:function () {
-        return $("#autoroll_checkbox").attr("checked");
+        return $("#"+selects.$checkBox).attr("checked");
     },
     getSayInput:function () {
         return $("#sayInput").val();
