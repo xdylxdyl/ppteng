@@ -260,8 +260,8 @@ var gameView = {
     },
     showDieArea:function () {
         $("#" + selects.$secondArea).show();
-        $("#" + selects.$secondArea).removeClass().addClass("span2");
-        $("#" + selects.$mainArea).removeClass().addClass("span10");
+        $("#" + selects.$secondArea).removeClass().addClass("span3");
+        $("#" + selects.$mainArea).removeClass().addClass("span9");
     },
     hideDieArea:function () {
         $("#" + selects.$secondArea).hide();

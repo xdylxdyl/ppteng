@@ -58,7 +58,7 @@
 <div class="content" id="content">
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span10">
+            <div class="span7">
             
             <div class="tabbable">
                 <ul class="nav nav-tabs">
@@ -95,7 +95,7 @@
             </div>
            </div>
            
-             <div  class="span2">
+             <div  class="span5">
              
                 <div class="tabbable death">
                     <ul class="nav nav-tabs">
