@@ -29,10 +29,11 @@
 
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand" id="roomName">房间名:${room.name}</a>
+
         <span class="brand">
             <small><a href="/player/detail.do?uid=${room.createrID}" id="createName"></a></small>
         </span>
+     <span  class="brand">  当前雷数 <span id="count"></span> </span>
          <span class="brand">
             <small id="gamePhase"></small>
         </span>

@@ -102,9 +102,9 @@ $(document).ready(function () {
             $("#" + selects.$settingArea).prepend(html);
             //default mineSelect is 1.
             mineSettingView.updateSettingParameter(null, null, null, true);
-            var row = $("rowCount").val();
-            var column = $("columnCount").val();
-            var mine = $("mineCount").val();
+            var row = $("#rowCount").val();
+            var column = $("#columnCount").val();
+            var mine = $("#mineCount").val();
 
             mineView.updateSetting(row, column, mine);
 
@@ -356,11 +356,12 @@ $(document).ready(function () {
             $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 同学我早知道你不靠谱了,你在 [" + place + "] 点到雷了 </p>");
         },
         over:function (message) {
+
             var obj = message.object;
             var recordID = message.subject;
             var userTime = parseInt(message.content) / 1000;
             //标明游戏结束
-            globalView.setGameStatusHint("over");
+            globalView.setGameStatus("over");
             playerService.setUnreadyStatus();
             //只重新显示.不用重新计算
             settingView.displaySetting();
