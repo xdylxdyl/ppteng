@@ -114,7 +114,7 @@ $(document).ready(function () {
 
         });
 
-        $("#" + selects.$replayButton).click(function () {
+        $("#replayButton" ).live("click",function () {
             recordFirstTime = null;
             recordSecondTime = null;
             msg_interval = null;
@@ -131,27 +131,17 @@ $(document).ready(function () {
         });
 
 
-        $("#replay_role_checkbox").bind("click", function () {
+        $("#displayRole").live("click", function () {
 
             if (controlView.isShow()) {
-                $("#role_area").hide();
-                $("#dead_area").hide();
-                $("#killer_area").hide();
+                $("#" + selects.$playerRole).show();
+                gameView.showDieArea();
             }
             else {
-                $("#role_area").show();
-                $("#dead_area").show();
-                $("#killer_area").show();
+                $("#" + selects.$playerRole).hide();
+                gameView.hideDieArea();
             }
 
-
-        });
-
-        $("#music_controller").bind("click", function () {
-
-            var isHide = $("#music_controller").attr("isHide");
-            musicUtil.hideMusic(isHide);
-            return false;
 
         });
 
@@ -163,9 +153,9 @@ $(document).ready(function () {
 
         });
 
-        $('#sidebar-toggle').toggle(function() {
+        $('#sidebar-toggle').toggle(function () {
             globalView.hidePlayerList('#sidebar-toggle');
-        }, function() {
+        }, function () {
             globalView.showPlayerList('#sidebar-toggle');
         })
 

@@ -59,10 +59,19 @@
                         <input type="checkbox" checked="checked" value="scroll" id="checkBox">
                         滚屏
                     </label>
+                     
                 </li>
+                
+                 <li id="displayRoleGroup" class="hide">
+                 <label for="displayRole" class="checkbox">
+                        <input type="checkbox" checked="checked" value="scroll" id="displayRole">
+                        隐藏角色
+                    </label>
+                      </li>
                 <li>
                     <span class="help-inline" id="countDown">04:00</span>
                 </li>
+                
                  <li>
                     <button class="btn btn-info" id="readyButton">准备</button>
                 </li>
@@ -79,7 +88,7 @@
             <!--input-->
             <div class="form-horizontal">
                 <div class="control-group">
-                    <label for="" class="control-label">说:</label>
+                    <label for="" class="control-label" id="sayLabel">说:</label>
                     <div class="controls">
                         <div class="row-fluid">
                             <div class="span10"><input type="text" class="span12" id="sayInput"></div>

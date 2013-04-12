@@ -204,7 +204,8 @@ var selects={
     $createName:"createName",
     $gamePhase:"gamePhase",
     $playerRole:"playerRole",
-    $checkBox:"checkBox",
+    $checkBox:"checkBox",//auto roll
+    $displayRole:"displayRole",
     $countDown:"countDown",
     $select_command:"select_command",
     $select_object:"select_object",

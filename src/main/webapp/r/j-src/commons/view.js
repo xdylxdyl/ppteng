@@ -657,7 +657,7 @@ var controlView = {
         alert("内容不能为空！请输入内容重新发送");
     },
     isShow:function () {
-        return $("#replay_role_checkbox").attr("checked");
+        return $("#displayRole").attr("checked");
 
     },
     getAutoRoll:function () {

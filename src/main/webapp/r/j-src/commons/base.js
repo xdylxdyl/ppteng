@@ -393,10 +393,19 @@ var initRoom = function () {
 
     } else {
 
+        //record
+
         //默认隐藏
-        $("#role_area").hide();
-        $("#dead_area").hide();
-        $("#killeer_area").hide();
+        $("#"+selects.$playerRole).hide();
+        gameView.hideDieArea();
+        $("#displayRoleGroup").show();
+        controlView.hideButton("select_expression");
+        controlView.hideButton("select_color");
+        controlView.hideButton("select_command");
+        controlView.hideButton("select_object");
+        controlView.hideButton("sayButton");
+        controlView.hideButton("sayInput");
+        controlView.hideButton("sayLabel");
 
         //Record
         var recordID = globalView.getRecordId();
@@ -450,7 +459,7 @@ var initRoom = function () {
         var messages = eval(text);
         //应该是倒序
         showRecord(messages, 0);
-        viewUtil.autoBottom("section article");
+        viewUtil.autoBottom($("#"+selects.$gameArea));
 
 
     }
