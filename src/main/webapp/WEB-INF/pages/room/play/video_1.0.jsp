@@ -78,7 +78,7 @@
                                     <small>这样的一个夜晚.有你有我.</small>
                                  
                                 </blockquote>
-                                <div class="video-player">
+                                <div class="video-player" id="outer">
                                     <!--从网页中找到的部分-->
                                     <embed src="http://player.youku.com/player.php/sid/XNTI2NjI3MTY4/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
                                 </div>

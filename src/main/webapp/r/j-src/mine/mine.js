@@ -102,6 +102,12 @@ $(document).ready(function () {
             $("#" + selects.$settingArea).prepend(html);
             //default mineSelect is 1.
             mineSettingView.updateSettingParameter(null, null, null, true);
+            var row = $("rowCount").val();
+            var column = $("columnCount").val();
+            var mine = $("mineCount").val();
+
+            mineView.updateSetting(row, column, mine);
+
 
             $("#mineSelect").live("change", function () {
                 var level = $(this).children('option:selected').val();
@@ -186,6 +192,18 @@ $(document).ready(function () {
 
 
     var mineView = {
+
+        updateSetting:function (row, column, mine) {
+            mineView.setting.row = row;
+            mineView.setting.column = column;
+            mineView.setting.mine = mine;
+        },
+        setting:{
+            row:0,
+            column:0,
+            mine:0
+
+        },
 
         getMineOperater:function (div, action) {
 
@@ -281,13 +299,13 @@ $(document).ready(function () {
 
         },
         getSettingRow:function () {
-            return $("#rowCount").attr("old");
+            return mineView.setting.row;
         },
         getSettingColumn:function () {
-            return $("#columnCount").attr("old");
+            return mineView.setting.column;
         },
         getSettingMineCount:function () {
-            return $("#mineCount").attr("old");
+            return mineView.setting.mine;
         },
 
         tagMine:function () {
@@ -307,12 +325,12 @@ $(document).ready(function () {
         start:function () {
 
 
-            controlView.hideButton($("#" + selects.$startButton));
-
-            $("#" + selects.$startButton).hide();
+            controlView.hideButton(selects.$startButton);
             $("#" + selects.$gameArea).empty();
             $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始,扫扫扫扫扫扫雷吧~</p>");
-            $('section article').scrollTop($('section article')[0].scrollHeight);
+
+            viewUtil.autoBottom($("#" + selects.$gameArea));
+
 
             playerListView.sortPlayer();
             settingView.hideSettingButton();
@@ -418,6 +436,14 @@ $(document).ready(function () {
     }
 
     var mineService = {
+        parseRoom:function (data) {
+            var row = data.setting.rowCount;
+            var column = data.setting.columnCount;
+            var mine = data.setting.mineCount;
+
+            mineView.updateSetting(row, column, mine);
+
+        },
         parseGame:function (data) {
 
             if (data == null) {
@@ -498,10 +524,11 @@ $(document).ready(function () {
         },
         parseDetail:function (data) {
             roomService.parsePerson(data.person);
-            roomService.parseRoom(data.room);
+            mineService.parseRoom(data.room);
             roomService.parseRight(data.right);
             mineService.parseGame(data.game);
             mineService.parseCount(data.votes);
+
             //  var start=new Date().getTime();
             if ("run" == globalView.getGameStatus()) {
                 mineView.initMine();

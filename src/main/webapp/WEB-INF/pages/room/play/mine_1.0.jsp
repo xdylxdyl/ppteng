@@ -73,7 +73,7 @@
                    
                     
                     <div class="tab-pane active" id="mine_area">
-                    <div class="inner"></div>
+                    <div class="inner" id="inner"></div>
                        
                     </div>
                     <div class="tab-pane" id="setting_area">

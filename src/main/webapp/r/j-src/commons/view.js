@@ -325,8 +325,9 @@ var gameAreaView = {
             action = message.content;
         }
 
+        var sid=globalView.getCurrentID();
         var name = player.name;
-        if (globalView.isStop()) {
+        if (globalView.isStop()&&sid!=player.id) {
             //只有房间是处在结束状态下才在游戏区显示消息
             $("#"+selects.$gameArea).append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
             viewUtil.autoBottom($("#"+selects.$gameArea));
