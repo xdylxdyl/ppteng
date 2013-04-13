@@ -23,21 +23,7 @@ import com.gemantic.killer.util.*;
 
 //========== 
 
-rule 'clear prev game right '
-ruleflow-group "game clear"
-no-loop true
-when
-	//conditions    
-    $message:Message($subject:subject,predict=="start")   
-    $right:Right()    //clear source    
-    
-then      
-	//actions
-     LogUtil.log("clear prev game right start================= ");      
-     retract ($right);
-     LogUtil.log("clear prev game right over ================="); 
-    
-end
+
 
 rule 'clear prev game role '
 ruleflow-group "game clear"
@@ -257,7 +243,7 @@ then
    //actions
      LogUtil.log("phase clear vote start================= "); 
     
-     modify($voteStatus){setVoteMe(new ArrayList()),setType=""};	
+     modify($voteStatus){setVoteMe(new ArrayList()),setType("")};	
      LogUtil.log("phase clear vote over =================");   
 end
 
@@ -290,11 +276,10 @@ end
 //===========phase prepare============start 
 
 rule 'day phase prepare '
-ruleflow-group "phase prepare"
+ruleflow-group "phase init"
 no-loop true
 when
 	//conditions    
-    $vote:Vote()
     $room:Room(status=="run")
     $game:Game(status!="day") 
     $message:Message($subject:subject,predict=="time",subject=="day")  
@@ -302,7 +287,7 @@ when
     
 then      
 	//actions 
-     LogUtil.log("day phase prepare  start================= "); 
+     LogUtil.log("day phase init  start================= "); 
      //1.set game phase,set last time,
           
      modify($game){setStatus("day"),setLastTime(System.currentTimeMillis())};
@@ -310,7 +295,7 @@ then
 	Message nightDelay=createDelayNight($room);
     insert(nightDelay); 
           
-     LogUtil.log("day phase prepare  over =================");   
+     LogUtil.log("day phase init  over =================");   
 end
 
 
@@ -319,16 +304,17 @@ rule 'day phase prepare right'
 ruleflow-group "phase prepare"
 no-loop true
 when
-	//conditions    
-    $vote:Vote()
-    
-    $room:Room(status=="run")
-    $game:Game(status=="day") 
-    $message:Message($subject:subject,predict=="time",subject=="day")  
-    $player:Player(status=="living",$uid:id)    
+	//conditions
+	$player:Player(status=="living",$uid:id)
+	Message($subject:subject,predict=="time",subject=="day")
+	 
+    Room(status=="run")
+    Game(status=="day")
+    not Right(id==$uid)
+    not VoteStatus(id==$uid)    
 then      
 	//actions 
-     LogUtil.log("day phase prepare  right start================= "); 
+     LogUtil.log("day phase prepare  start================= "); 
      // set right ,use query
      Right right= new Right($uid,convertString2Set("say,vote"),false);		
 	 insert(right);	
@@ -341,7 +327,7 @@ then
      insert(voteStatus);	
 		            
           
-     LogUtil.log("day phase prepare right over =================");   
+     LogUtil.log("day phase prepare  over =================");   
 end
 
 //===========phase prepare============over 
@@ -354,11 +340,13 @@ ruleflow-group "phase action"
 no-loop true 
 when
     $message:Message($subject:subject,$object:object,predict=="vote")
-    $right:Right(id==$subject,right contains "vote")
-    not Vote(id==$subject)
     $voteStatus:VoteStatus(id==$object,$voteMe:voteMe)
-    $votedPlayer:Vote(id==$object)
-    $game:Game(status=="day")
+    
+    Player(id==$subject,status=="living")
+    Player(id==$object,status=="living")
+    Game(status=="day")
+    not Vote(id==$subject,type=="water")
+    Right(id==$subject,right contains "vote")
     
 then
     LogUtil.log("first vote start  ================="); 
@@ -380,7 +368,7 @@ no-loop true
 when
     $message:Message($subject:subject,$object:object,predict=="vote")
     $right:Right(id==$subject,right contains "vote")
-    not Vote(id==$subject,vote==$object)
+    not Vote(id==$subject,vote==$object,type=="water")
     $oldVote:Vote(id==$subject,$old:vote)
     $newVoteStatus:VoteStatus(id==$object,$newVoteMe:voteMe)
     $oldVoteStatus:VoteStatus(id==$old,$oldVoteMe:voteMe)
@@ -411,6 +399,36 @@ end
 
 
 //===========phase action============over
+
+
+
+//==person status==start
+
+
+rule 'person die'
+ruleflow-group "person status"
+
+when
+ 
+  
+  $game:Game(status=="day",$liverCount:liverCount,$waterCount:waterCount,$killerCount:killerCount,$policeCount:policeCount);
+  $person:Player($id:id,status=="living");
+  $voteStatus:VoteStatus(id==$id)     
+  eval(($voteStatus.getVoteMe().size() * 2) > $liverCount )  
+ 
+  Role(id==$id,$role:role)
+then
+     LogUtil.log("water die  start==============");   
+    modify($game){setLiverCount($liverCount-1)};
+   LogUtil.log("water die  start==============");   
+
+ 
+end
+
+
+//==person status ===over 
+
+
 
 
 
