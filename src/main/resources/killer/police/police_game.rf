@@ -15,19 +15,27 @@
     <ruleSet id="68" name="game result" x="498" y="461" width="80" height="48" ruleFlowGroup="game init" />
     <start id="1" name="Start" x="123" y="7" width="49" height="49" />
     <ruleSet id="70" name="game phase person" x="811" y="407" width="172" height="48" ruleFlowGroup="clear vote at start" />
+    <ruleSet id="80" name="phase action" x="695" y="223" width="80" height="48" ruleFlowGroup="phase action" />
     <end id="5" name="End" x="88" y="806" width="49" height="49" />
     <ruleSet id="67" name="person status" x="1006" y="225" width="153" height="48" ruleFlowGroup="clear role" />
-    <ruleSet id="76" name="game prepare" x="368" y="22" width="191" height="48" ruleFlowGroup="retract unlimit message" />
-    <ruleSet id="61" name="game phase time" x="677" y="118" width="129" height="48" ruleFlowGroup="create snapshot" />
+    <ruleSet id="76" name="game clear" x="227" y="76" width="191" height="48" ruleFlowGroup="game clear" />
+    <ruleSet id="77" name="phase prepare" x="524" y="225" width="80" height="48" ruleFlowGroup="phase prepare" />
+    <ruleSet id="78" name="game prepare" x="249" y="187" width="80" height="48" ruleFlowGroup="game prepare" />
+    <ruleSet id="79" name="phase clear" x="403" y="212" width="80" height="48" ruleFlowGroup="phase clear" />
+    <ruleSet id="61" name="game phase time" x="755" y="170" width="129" height="48" ruleFlowGroup="create snapshot" />
   </nodes>
 
   <connections>
     <connection from="70" to="68" />
     <connection from="67" to="70" />
+    <connection from="77" to="80" />
     <connection from="68" to="5" />
     <connection from="61" to="67" />
     <connection from="1" to="76" />
-    <connection from="76" to="61" />
+    <connection from="79" to="77" />
+    <connection from="76" to="78" />
+    <connection from="78" to="79" />
+    <connection from="80" to="61" />
   </connections>
 
 </process>

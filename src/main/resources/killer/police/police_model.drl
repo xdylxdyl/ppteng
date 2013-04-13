@@ -20,10 +20,16 @@ declare Game
 end
 
 declare Vote
-	id: String	
-	voters: Set
+	id: String		
 	vote:String
 	type:String
+end
+
+declare VoteStatus
+      id:String
+      voteMe:List
+      // water/kill/check
+      type:String
 end
 
 

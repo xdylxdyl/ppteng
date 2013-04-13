@@ -19,7 +19,7 @@ public class JobLogger {
 	private static final Log log = LogFactory.getLog(JobLogger.class);
 
 	public static synchronized void logMessage(String jobName, Message message) {
-		log.info(jobName+" : "+message);
+		//log.info(jobName+" : "+message);
 
 		String json = MessageUtil.convert2String(message);
 		Logger l = getJobLogger(jobName);
@@ -27,7 +27,7 @@ public class JobLogger {
 	}
 
 	public static synchronized void log(String jobName, String message) {
-		log.info(jobName+" : "+message);
+		//log.info(jobName+" : "+message);
 		Logger l = getJobLogger(jobName);
 		l.info(message);
 	}

@@ -553,7 +553,7 @@ var controlView = {
         }
 
 
-        var expressionStr = "  <li><a href='#'>神态</a></li> <li class='divider'></li>";
+        var expressionStr = "  <li data-default='0'><a href='#'>神态</a></li> <li class='divider'></li>";
 
         for (var key in expression) {
             expressionStr += "<li data-default='" + key + "'><a href=''#'>" + expression[key] + "</a></li>";
