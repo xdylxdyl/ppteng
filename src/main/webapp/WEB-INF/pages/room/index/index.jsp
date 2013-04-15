@@ -215,6 +215,9 @@
 					<p>
 						<a href="http://www.15tiance.com/" target="_blank">天策策划</a>
 					<p>
+					<p>
+						<a href="http://niceipa.com/" target="_blank">最好玩的游戏</a>
+					<p>
 				</div>
 				<div class="span3">
 					<p>

@@ -31,8 +31,12 @@ resolvePredict.branch = function (message) {
     var rid = globalView.getRoomID();
     var type = globalView.getRoomType();
     if (rid != message.where && "game" == type) {
-        console.log(message.where + " not my room messae " + rid);
+
+        gameAreaView.updateRubbishText();
+
         return;
+    }else{
+        gameAreaView.completeRubbishText();
     }
 
     var start = jQuery.now();
@@ -381,9 +385,9 @@ var initRoom = function () {
         var player = playerService.getPlayer(uid);
         var message = {};
         message.content = globalView.getLoginShow();
-        if (message.content) {
-            gameAreaView.login(player, message);
-        }
+        var first=globalView.getFirst();
+        gameAreaView.login(player, message,first);
+
 
         //8 version self dependency
         if (versionFunction["init"]) {

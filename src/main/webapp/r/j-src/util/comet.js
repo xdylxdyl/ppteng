@@ -14,7 +14,7 @@ var cometUtil = {
             timeout: 100500,
             jsonp: "callback",
             // test repeat data
-            // jsonpCallback: "callBack",
+            jsonpCallback: "cometCallback",
 
             success: function(data) {
 

@@ -194,8 +194,11 @@ public class RoomController {
 		model.addAttribute("users", users);
 		model.addAttribute("type", "game");
 		model.addAttribute("uid", uid);
+		model.addAttribute("stageShow", stageShow);	
 		if(first){
-			model.addAttribute("stageShow", stageShow);	
+			model.addAttribute("first", "first");	
+		}else{
+			model.addAttribute("first", "notFirst");	
 		}
 	
 		return "/room/play/" + version;

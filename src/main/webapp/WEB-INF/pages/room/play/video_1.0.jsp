@@ -19,6 +19,7 @@
 <input type="hidden" id="type" value="${type}">
 <input type="hidden" id="recordID" value="${record.id}">
 <input type="hidden" id="recordTime" value="${record.time}">
+<input type="hidden" id="first" value="${first}">
 <div id="stageShow" class="hide">${stageShow}</div>
 <div id="contents" class="hide">${contents}</div>
 <div id="escape" class="hide"></div>
