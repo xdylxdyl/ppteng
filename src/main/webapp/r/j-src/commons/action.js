@@ -44,12 +44,13 @@ $(document).ready(function () {
                 }
 
                 cometService.sendMessage(message);
+                controlView.clearSayInput();
+                controlView.resetCommand();
             } else {
                 //error
                 alert(formatResult.message);
             }
-            controlView.clearSayInput();
-            controlView.resetCommand();
+
             event.preventDefault();
 
         }

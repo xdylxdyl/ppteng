@@ -97,14 +97,8 @@ killController.assign = function(message) {
     //本地存入自己身份
     //杀手栏展示杀手名单
     var p = playerService.getPlayer(message.object);
-    if (message.subject == "killer") {
-        var name = p.name;
-        p.role = "killer";
-        playerService.updatePlayer(p);
-
-
-
-    }
+    p.role=message.subject;
+    playerService.updatePlayer(p);
     playerListView.displayRole(killGameAreaView.Role[p.role]);
 };
 

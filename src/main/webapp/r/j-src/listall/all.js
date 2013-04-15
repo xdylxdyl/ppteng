@@ -27,7 +27,7 @@ $(document).ready(function() {
             alert(" 已经在一个房间 ["+oldRoom.name+"] 里了,怎么可以再进另一个,你当我写的程序是假的啊亲..");
             return false;
         }
-        redirect("/m/play/enter.do?rid=" + rid +"&uid ="+uid);
+        redirect("/m/play/enter.do?rid=" + rid +"&uid="+uid);
 
         return false;
 

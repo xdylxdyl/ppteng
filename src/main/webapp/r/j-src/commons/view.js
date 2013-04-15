@@ -455,7 +455,7 @@ var controlView = {
             default:
                 //other command such as ,kick ,vote,kill,must have object
                 var object = controlView.getObjectValue();
-                if (object == null || object == "") {
+                if (object == null || object == ""||object==-500) {
                     result.code = -2;
                     result.message = sayHint.select;
                 } else {
@@ -488,16 +488,19 @@ var controlView = {
     resetCommand:function () {
 
         $("#"+selects.$select_command).find('span').text("指令");
-
+        $("#"+selects.$command).attr("data-default","");
         controlView.resetObject();
 
+
     },
+
     emptyCommand:function(){
       $("#"+selects.$command).empty().append(defaultHint.command);
       $("#"+selects.$command).attr("data-default","");
     },
     resetObject:function(){
         $("#"+selects.$select_object).find('span').text("对象");
+        $("#"+selects.$object).attr("data-default","");
 
     },
     emptyObject:function(){
@@ -611,8 +614,8 @@ var controlView = {
     },
     initButtonOfGame:function () {
         $("#"+selects.$replayButton).hide();
-    /*    $("#replay_time_hint").hide();
-        $("#replay_role").hide();*/
+        $("#displayRoleGroup").hide();
+
     },
     initButtonOfRecord:function () {
         $("#ready").hide();
