@@ -29,7 +29,7 @@ var settingView = {
 
     displaySetting:function () {
         if (globalView.getCurrentID() == globalView.getCreaterId()) {
-            if ("over" == globalView.getGameStatus()) {//游戏结束后才能看到设置按钮
+            if (gameGlobalStatus.over == globalView.getGameStatus()) {//游戏结束后才能看到设置按钮
                 $("#" + selects.$submitSetting).show();
 
             } else {
@@ -48,7 +48,7 @@ var settingView = {
         //管理员才能看到设置按钮
 
         if (globalView.getCurrentID() == globalView.getCreaterId()) {
-            if ("over" == globalView.getGameStatus()) {//游戏结束后才能看到设置按钮
+            if (gameGlobalStatus.over == globalView.getGameStatus()) {//游戏结束后才能看到设置按钮
                 $("#" + selects.$submitSetting).show();
 
             } else {
@@ -429,7 +429,7 @@ var gameAreaView = {
         $("#" + selects.$gameArea).append("<p style='color:#F00'>" + content + "</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
-    getContent:function () {
+    appendContent:function () {
 
         alert("click me");
         return  $(this).html();

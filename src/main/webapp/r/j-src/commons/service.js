@@ -192,6 +192,10 @@ var settingService = {
 }
 
 var roomService = {
+    appendContent:function () {
+        var content = $(this).html();
+        controlView.appendSay(content);
+    },
 
     getRoomDetail:function (baseParam) {
 
@@ -260,8 +264,7 @@ var roomService = {
         }
 
         playerListView.sortPlayer();
-    }
-    ,parseRoom:function (data) {
+    }, parseRoom:function (data) {
 
     },
     parseRight:function (data) {
@@ -287,7 +290,7 @@ var roomService = {
         } else {
             param = {rid:rid, uids:uids};
         }
-        return ajaxJson("/player/info, "GET", param, this.parsePersonDetail, 5000, "json");
+        return ajaxJson("/player/info", "GET", param, this.parsePersonDetail, 5000, "json");
 
     },
     getRecordPerson:function (rid, uids) {
@@ -297,7 +300,7 @@ var roomService = {
         } else {
             param = {rid:rid, uids:uids};
         }
-        return ajaxJson("/player/record, "GET", param, this.parsePersonDetail, 5000, "json");
+        return ajaxJson("/player/record", "GET", param, this.parsePersonDetail, 5000, "json");
 
     },
 
@@ -441,5 +444,229 @@ var cometService = {
     sendMessage:function (message) {
         lastMessageSendAt = jQuery.now();
         return ajaxJson("/message/accept2", "POST", message, controlView.showDelay, 5000, "json");
+    },
+    messageQ:function (msgObj) {
+        $(document).queue("messages", parseMessage(msgObj.message));
+
+    },
+
+    parseMessage:function (message) {
+
+        var msgLength = message.length; //msg数组长度
+        for (var i = msgLength - 1; i >= 0; i--) {
+            roomParseService.branch(message[i]);
+        }
+        $(document).dequeue("messages");
+
+
     }
 }
+
+
+var roomParseService = {
+
+
+    branch:function (message) {
+        console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
+        var rid = globalView.getRoomID();
+        var type = globalView.getRoomType();
+        if (rid != message.where && "game" == type) {
+
+            gameAreaView.updateRubbishText();
+
+            return;
+        } else {
+            gameAreaView.completeRubbishText();
+        }
+
+        var start = jQuery.now();
+        var predict = message.predict;
+
+        switch (predict) {
+            case "say" :
+                this.say(message);
+                break;
+            case "ready" :
+                this.ready(message);
+                break;
+
+            case "login" :
+                this.log(message);
+                break;
+            case "logout" :
+                this.log(message);
+                break;
+            case "kick" :
+                this.kick(message);
+                break;
+            case "expression" :
+                this.updateExpression(message);
+                break;
+
+            //以下这些内容都是和游戏版本相关的,但是也有公共的部分
+            case "right" :
+                this.right(message);
+                break;
+            case "setting" :
+                this.setting(message);
+                break;
+
+            default:
+                console.log("room parse over,start version parse");
+                versionFunction["parseMessage"](message);
+        }
+
+
+    },
+
+
+    updateExpression:function (message) {
+
+        var exp = eval(message.object);
+
+        controlView.initExpression(exp);
+
+    },
+
+
+    setting:function (message) {
+
+
+        if (message.subject != globalView.getCurrentID()) {
+
+            var version = globalView.getVersion();
+            var rid = globalView.getRoomID();
+            var param = {"version":version, "rid":rid};
+
+            var s = settingService.getSetting(param);
+            settingView.showSetting(s);
+            if (versionFunction["settingCallback"]) {
+                versionFunction["settingCallback"]();
+            }
+
+
+        }
+
+    },
+    say:function (message) {
+
+
+        var status = globalView.getGameStatus();
+        if ("over" == status) {
+            var name;
+            if (message.object != -500) {
+                name = playerService.getPlayer(message.object).name;
+            }
+            gameAreaView.say(message.subject, playerService.getPlayer(message.subject).name, message.content, message.expression,
+                message.color, message.object, name);
+        } else {
+
+            versionFunction["say"](message);
+
+
+        }
+
+
+    },
+    ready:function (message) {
+
+
+        playerService.setStatus(message.subject, playerStatus.ready)
+        controlView.ready(message.subject);
+        playerListView.setStatus(message.subject, playerStatus.ready);
+
+
+    },
+
+
+    start:function (message) {
+        //  console.log(message);
+        playerService.setStartStatus();
+        gameView.start();
+    },
+
+
+    log:function (message) {
+        //进入退出游戏，1、需要通报全场；2、加减玩家列表响应的玩家信息。
+        var id = message.subject;
+        if (message.predict == "login") {
+
+            var type = globalView.getRoomType();
+            if ("game" == type) {
+                var rid = $("#rid").val();
+                $.ajax({
+                    type:"GET",
+                    dataType:'json',
+                    url:"/player/info?rid=" + rid + "&uids=" + message.subject,
+                    success:function (data) {
+                        console.log(data);
+                        var name = data.infos[0].name;
+                        var p = new player(id, name, playerStatus.unready, 0);
+                        playerService.addPlayer(p.id, p);
+                        gameAreaView.login(p, message);
+                        playerListView.login(p);
+
+                    },
+                    error:function (data) {
+                        console.log("此人名字获取失败");
+                    }
+                })
+            } else {
+
+                var p = playerService.getPlayer(id);
+                gameAreaView.login(p);
+
+            }
+
+        } else {
+
+            console.log(message);
+            var p = playerService.getPlayer(id);
+            gameAreaView.logout(p);
+            playerListView.logout(p.id);
+            playerService.deletePlayer(id);
+
+
+        }
+
+    },
+    kick:function (message) {
+        var kickID = message.object;
+        if (globalView.getCreaterId() == kickID || globalView.getCurrentID() == kickID) {
+            document.location.href = "/m/list";
+        } else {
+
+
+            var p = playerService.getPlayer(kickID);
+            gameAreaView.kick(p);
+            playerListView.logout(p.id);
+            playerService.deletePlayer(p.id);
+
+
+        }
+    },
+
+
+    right:function (message) {
+
+        var type = globalView.getRoomType();
+        if ("game" == type) {
+            // console.log(message.subject + " has right " + message.object);
+            var arr = message.object.split(",");
+            rightView.noRight();//先禁用所有的权限,再打开.
+
+            $.each(arr, function (i, val) {
+                //console.log(("process data " + arr[img]));
+                rightView.branch(jQuery.trim(arr[i]));
+            });
+
+        } else {
+            //record no any right
+
+        }
+
+
+    }
+
+
+};

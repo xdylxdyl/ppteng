@@ -156,7 +156,7 @@ killController.die = function(message) {
     playerListView.die();
     killGameAreaView.die(message.subject, playerService.getPlayer(message.subject).name, message.object);
 
-    var selfID=globalView.getCreaterId();
+    var selfID=globalView.getCurrentID();
     if(selfID==message.subject){
         var p=playerService.getPlayer(message.subject)
         gameView.showSecondArea(p);

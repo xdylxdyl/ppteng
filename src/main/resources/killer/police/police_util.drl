@@ -65,9 +65,26 @@ function Message createDelayNight(Room room) {
   
 }
 
- 
+function Message createDelayDayOfLastword(Room room) {
 
+    String  timeSetting=getRoomSetting(room,"dayTime","30000");//1*60*1000 
+    Message night=new Message("day","send time",timeSetting);
+    String  time=getRoomSetting(room,"lastwordTime","15000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(time));
+    
+    return night;
+  
+}
+function Message createDelayDayOfNight(Room room) {
 
+    String  timeSetting=getRoomSetting(room,"dayTime","30000");//1*60*1000 
+    Message night=new Message("day","send time",timeSetting);
+    String  time=getRoomSetting(room,"nightTime","15000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(time));
+    
+    return night;
+  
+}
 
 function Message createDay(Room room) {
     String  dayTime=getRoomSetting(room,"dayTime","30000");//1*60*1000

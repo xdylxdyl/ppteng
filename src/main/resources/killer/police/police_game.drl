@@ -288,6 +288,9 @@ when
 then      
 	//actions 
      LogUtil.log("day phase init  start================= "); 
+     
+     StatusChange sc=new StatusChange("day");
+     insert(sc);
      //1.set game phase,set last time,
           
      modify($game){setStatus("day"),setLastTime(System.currentTimeMillis())};
@@ -299,38 +302,6 @@ then
 end
 
 
-
-rule 'day phase prepare right'
-ruleflow-group "phase prepare"
-no-loop true
-when
-	//conditions
-	$player:Player(status=="living",$uid:id)
-	Message($subject:subject,predict=="time",subject=="day")
-	 
-    Room(status=="run")
-    Game(status=="day")
-    not Right(id==$uid)
-    not VoteStatus(id==$uid)    
-then      
-	//actions 
-     LogUtil.log("day phase prepare  start================= "); 
-     // set right ,use query
-     Right right= new Right($uid,convertString2Set("say,vote"),false);		
-	 insert(right);	
-	
-	 // send right mesage
-	 Message rightMessage=new Message($uid,"right","say,vote"); 
-     insert(rightMessage);
-     
-    VoteStatus voteStatus=new VoteStatus($uid,new ArrayList(),"water");
-     insert(voteStatus);	
-		            
-          
-     LogUtil.log("day phase prepare  over =================");   
-end
-
-//===========phase prepare============over 
 
 //===========phase action============start 
 
@@ -405,9 +376,9 @@ end
 //==person status==start
 
 
-rule 'person die'
+rule 'person die by vote'
 ruleflow-group "person status"
-
+no-loop true
 when
  
   
@@ -418,8 +389,9 @@ when
  
   Role(id==$id,$role:role)
 then
-     LogUtil.log("water die  start==============");   
-    modify($game){setLiverCount($liverCount-1)};
+   LogUtil.log("water die  start==============");
+   Die die=new Die($id,"vote",$role);   
+   insert(die);
    LogUtil.log("water die  start==============");   
 
  
@@ -431,11 +403,149 @@ end
 
 
 
+//==die process==
+
+
+rule 'die process'
+ruleflow-group "die process"
+
+when
+ 
+  $die:Die($id:id,$type:type,$role:role)
+  $game:Game($liverCount:liverCount,$waterCount:waterCount,$killerCount:killerCount,$policeCount:policeCount,$status:status);
+  $person:Player($id:id,status=="living");   
+ then
+   LogUtil.log(" die  start=============");
+   
+   if("day".equals($status)){
+   
+     
+   }else{
+   
+    if("lastword".equals($status)){
+      
+    }
+   
+   }
+   
+   //if water die
+    if("water".equals($role)){
+        modify($game){setLiverCount($liverCount-1),setWaterCount($waterCount-1)};
+    
+    }else{
+     //if police die
+       if("police".equals($role)){
+       
+         modify($game){setLiverCount($liverCount-1),setPoliceCount($policeCount-1)};
+    
+       }else{
+          //if killer die
+          modify($game){setLiverCount($liverCount-1),setKillerCount($killerCount-1)};
+          
+       
+       }    
+    } 
+    
+    
+    
+
+ 
+end
+
+
+//==person status ===over 
 
 
 
+//===========switch ============start 
+
+rule 'phase switch '
+ruleflow-group "phase switch"
+no-loop true
+when
+	//conditions    
+	$statusChange:StatusChange($change:change)
+    $room:Room(status=="run")
+    $game:Game(status!="day") 
+   
+    
+then      
+	//actions 
+     LogUtil.log("day phase init  start================= "); 
+     
+    
+    if("day".equals($change)){
+    
+      //1.set game phase,set last time,
+          
+    modify($game){setStatus("day"),setLastTime(System.currentTimeMillis())};
+     //2.send timer of night    
+	Message nightDelay=createDelayNight($room);
+    insert(nightDelay); 
+    
+    }else{
+       if("lastwords".equals($change)){
+       
+       
+      //1.set game phase,set last time,
+          
+    modify($game){setStatus("lastword"),setLastTime(System.currentTimeMillis())};
+     //2.send timer of night    
+	Message dayDelay=createDelayDayOfLastword($room);
+    insert(dayDelay); 
+       
+       }else{
+       //night 
+       
+         modify($game){setStatus("night"),setLastTime(System.currentTimeMillis())};
+     //2.send timer of night    
+	Message dayDelay=createDelayDayOfNight($room);
+    insert(dayDelay); 
+       
+       
+       }
+    
+    }
+   
+          
+     LogUtil.log("day phase init  over =================");   
+end
 
 
 
+//===========switch ============over 
 
+//===========phase prepare ============start  
+
+rule 'day phase prepare right'
+ruleflow-group "phase prepare"
+no-loop true
+when
+	//conditions
+	$player:Player(status=="living",$uid:id)
+	Message($subject:subject,predict=="time",subject=="day")
+	 
+    Room(status=="run")
+    Game(status=="day")
+    not Right(id==$uid)
+    not VoteStatus(id==$uid)    
+then      
+	//actions 
+     LogUtil.log("day phase prepare  start================= "); 
+     // set right ,use query
+     Right right= new Right($uid,convertString2Set("say,vote"),false);		
+	 insert(right);	
+	
+	 // send right mesage
+	 Message rightMessage=new Message($uid,"right","say,vote"); 
+     insert(rightMessage);
+     
+    VoteStatus voteStatus=new VoteStatus($uid,new ArrayList(),"water");
+     insert(voteStatus);	
+		            
+          
+     LogUtil.log("day phase prepare  over =================");   
+end
+
+//===========phase prepare============over 
   

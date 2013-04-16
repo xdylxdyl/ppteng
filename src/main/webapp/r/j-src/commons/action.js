@@ -115,7 +115,7 @@ $(document).ready(function () {
 
         });
 
-        $("#replayButton" ).live("click",function () {
+        $("#replayButton").live("click", function () {
             recordFirstTime = null;
             recordSecondTime = null;
             msg_interval = null;
@@ -149,7 +149,7 @@ $(document).ready(function () {
 
         $("#" + selects.$gameArea + " p").live("dblclick", function () {
 
-            getContent.call(this);
+            roomService.appendContent.call(this);
             return false;
 
         });
@@ -159,18 +159,6 @@ $(document).ready(function () {
         }, function () {
             globalView.showPlayerList('#sidebar-toggle');
         })
-
-        function getContent() {
-            var content = $(this).html();
-            controlView.appendSay(content);
-        }
-
-
-        function showMessage(index, messages, delay) {
-
-            setTimeout(showMessage(index), delay);
-
-        }
 
 
     }

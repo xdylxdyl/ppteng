@@ -28,6 +28,11 @@ var commandCommonSetting = {
     kick:"果断一脚"
 }
 
+var gameGlobalStatus={
+       over:"over",
+       run:"run"
+
+}
 
 var userExpression = {
 };
