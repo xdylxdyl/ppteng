@@ -74,7 +74,7 @@ if (loginView.isLogin()) {
 }
 
 var login = function (type, openID, name) {
-    ajaxJson("/player/openID.do?", "post", {type:type, openID:openID, name:name}, null, 5000, "json");
+    ajaxJson("/player/openID?", "post", {type:type, openID:openID, name:name}, null, 5000, "json");
     window.location.href = "/";
 }
 
@@ -86,7 +86,7 @@ var login = function (type, openID, name) {
         var uid = $("#uid").val();
 
         $.ajax({
-            url:"/player/punch.do",
+            url:"/player/punch",
             data:{},
             type:"post",
             dataType:"json",

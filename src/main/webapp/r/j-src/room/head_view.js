@@ -35,19 +35,19 @@ var headService = {
         headView.showSelf(hl);
     },
     ajaInitSelf:function(){
-        ajaxJson("/player/self.do?", "post", {}, headService.showAjaxResult, 5000, "json",true);
+        ajaxJson("/player/self?", "post", {}, headService.showAjaxResult, 5000, "json",true);
     },
     getLink:function () {
         var name = headService.getSelf();
         if (name == null) {
             return new headLink("/", "登录");
         } else {
-            return new headLink("/player/detail.do", name);
+            return new headLink("/player/detail", name);
         }
     },
     getSelf:function () {
 
-        return ajaxJson("/player/self.do?", "post", {}, this.parseName, 5000, "json");
+        return ajaxJson("/player/self?", "post", {}, this.parseName, 5000, "json");
 
     },
     parseName:function (result) {
@@ -59,7 +59,7 @@ var headService = {
         if (result.code != 0) {
             hl = new headLink("/", "登录");
         } else {
-            hl = new headLink("/player/detail.do", result.name);
+            hl = new headLink("/player/detail", result.name);
         }
         headView.showSelf(hl);
 

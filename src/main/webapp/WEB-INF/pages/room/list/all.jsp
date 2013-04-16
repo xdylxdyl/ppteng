@@ -75,7 +75,7 @@
                         </h4>
                         <blockquote>
                         <small> 纪元： <date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 " value="${room.createAt}"></date:date>
-                        房主：<a href="/player/detail.do?uid=${room.createrID}"
+                        房主：<a href="/player/detail?uid=${room.createrID}"
                         target="_blank">${users[room.createrID].name}</a>
                         </small> <small> 版本[<span style="color: #4B0082"><%@ include
                             file="../version/show.jsp"%></span>],有玩家 [<span

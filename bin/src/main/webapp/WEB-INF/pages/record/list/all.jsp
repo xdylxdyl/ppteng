@@ -28,13 +28,13 @@
 							id="portrait_img">
 						<h2>
 							<a
-								href="/record/enter.do?recordID=${record.id}">${record.room.name}</a>
+								href="/record/enter?recordID=${record.id}">${record.room.name}</a>
 						</h2>
 						<p class="data">
 							纪元：
 							<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
 								value="${record.createAt}"></date:date>
-							房主：<a href="/player/detail.do?uid=${record.room.createrID}"
+							房主：<a href="/player/detail?uid=${record.room.createrID}"
 								target="_blank">${users[record.room.createrID].name}</a>
 						</p>
 						<c:set var="version" value="${record.room.version}"></c:set>

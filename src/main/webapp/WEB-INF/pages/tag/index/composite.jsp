@@ -21,7 +21,7 @@
 
 <div class="board">
 	<div class="menu">
-	    <a href="/tag/index.do">全部</a>
+	    <a href="/tag/index ">全部</a>
          <div class="menuInputContainer">
             <input class="menuInput" id="stockInput" value="输入股票代码...."><button id="queryStock" class="tagButton" >查询股票</button>
             <div id="dropdown">

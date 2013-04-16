@@ -72,7 +72,7 @@ var tradeView = {
 }
 var tradeService = {
     trade:function (trade) {
-        return ajaxJson("/money/trade.do?", "post",
+        return ajaxJson("/money/trade?", "post",
             trade, tradeService.parse, 5000, "json");
     }
 }

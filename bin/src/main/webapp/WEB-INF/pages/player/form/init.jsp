@@ -12,7 +12,7 @@
 <body>
 
 
-	<form:form modelAttribute="user" action="/player/regedit.do"
+	<form:form modelAttribute="user" action="/player/regedit"
 		method="post">
 		<spring:bind path="user.id">
 			<input name="id" value="${user.id}" id="id" type="hidden" readonly />

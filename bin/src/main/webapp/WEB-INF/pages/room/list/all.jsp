@@ -38,13 +38,13 @@
 				<div id="create">
 					<p>
 
-						<a href="/player/detail.do?uid=${uid}" target="_blank">${uname}</a>
+						<a href="/player/detail?uid=${uid}" target="_blank">${uname}</a>
 						葡萄币 <span id="money">${user.money}</span>, 总注册用户:[<span
 							style="color: #4B0082">${count}</span>]人
 					</p>
 					<p>
 						您是要进入一个房间呢呢还是创建一个房间呢还是什么都不想干呢 ,或者直接 ~~~ <a
-							href="/player/offline.do">走你~~~ </a>
+							href="/player/offline ">走你~~~ </a>
 					</p>
 					<p class="right">
 						<a href="" class="button blue serif glossy skew" data-icon="♛">Create
@@ -66,7 +66,7 @@
 							纪元：
 							<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
 								value="${room.createAt}"></date:date>
-							房主：<a href="/player/detail.do?uid=${room.createrID}"
+							房主：<a href="/player/detail?uid=${room.createrID}"
 								target="_blank">${users[room.createrID].name}</a>
 						</p>
 						

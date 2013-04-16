@@ -9,9 +9,9 @@
 			
 			<li class="nav-header">简化统计</li>
 			<li id="leftNav_statistics"><a
-				href="/player/statistics.do?uid=${current.id}&version=simple">胜负</a></li>
+				href="/player/statistics?uid=${current.id}&version=simple">胜负</a></li>
 			<li class="nav-header">简化战例</li>			
-			<li id="leftNav_record"><a href="/player/regedit.do?type=email">找回密码</a></li>
+			<li id="leftNav_record"><a href="/player/regedit?type=email">找回密码</a></li>
 		</ul>
 	</div>
 	<!--/.well -->

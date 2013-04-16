@@ -28,7 +28,7 @@ var searchView = {
     },
     showUser:function(data){
 
-         var link="<a href='/player/detail.do?uid=" +data.id + "'>" + data.name + "</a>"
+         var link="<a href='/player/detail?uid=" +data.id + "'>" + data.name + "</a>"
         $("#uname").empty().append(link);
 
         $("#icon").attr("src",data.icon);
@@ -40,7 +40,7 @@ var searchView = {
 
 var searchService={
     search:function(uid){
-        ajaxJson("/player/search.do?", "post", {uid:uid}, searchService.showAjaxResult, 5000, "json");
+        ajaxJson("/player/search?", "post", {uid:uid}, searchService.showAjaxResult, 5000, "json");
     },
     showAjaxResult:function(data){
         if(data.code==0){

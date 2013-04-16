@@ -10,11 +10,11 @@
 
 			<li class="nav-header">财务</li>
 			<li id="leftNav_moneyFlow_in">
-				<a href="/money/flow.do?uid=${current.id}&type=in">现金流入</a></li>
+				<a href="/money/flow?uid=${current.id}&type=in">现金流入</a></li>
 			<li id="leftNav_moneyFlow_out"><a
-				href="/money/flow.do?uid=${current.id}&type=out">现金流出</a></li>
+				href="/money/flow?uid=${current.id}&type=out">现金流出</a></li>
 				<li id="leftNav_trade"><a
-				href="/money/trade.do">转账</a></li> 
+				href="/money/trade ">转账</a></li> 
 			
 		</ul>
 	</div>

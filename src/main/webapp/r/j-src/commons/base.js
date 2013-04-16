@@ -157,7 +157,7 @@ resolvePredict.log = function (message) {
             $.ajax({
                 type:"GET",
                 dataType:'json',
-                url:"/player/info.do?rid=" + rid + "&uids=" + message.subject,
+                url:"/player/info?rid=" + rid + "&uids=" + message.subject,
                 success:function (data) {
                     console.log(data);
                     var name = data.infos[0].name;
@@ -193,7 +193,7 @@ resolvePredict.log = function (message) {
 resolvePredict.kick = function (message) {
     var kickID = message.object;
     if (globalView.getCreaterId() == kickID || globalView.getCurrentID() == kickID) {
-        document.location.href = "/m/list.do";
+        document.location.href = "/m/list";
     } else {
 
 
@@ -230,10 +230,10 @@ resolvePredict.right = function (message) {
 
 
 /*
- * /room/detail.do?	房间信息接口
+ * /room/detail?	房间信息接口
  * uid, rid			Param参数
  * 
- * /player/info.do?	用户名接口地址
+ * /player/info?	用户名接口地址
  * uids, rid			Param参数
  * 
  * */

@@ -14,7 +14,7 @@
 <body>
 <h2>编辑昵称</h2>
 
- <form action="/player/login.do" method="post">
+ <form action="/player/login " method="post">
   <p>name: <input type="text" name="name" /></p>
   <input type="submit" value="登录" />
 </form>

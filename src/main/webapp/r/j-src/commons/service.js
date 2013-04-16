@@ -23,7 +23,7 @@ var playerService = {
         var p = id_name[id];
         if (p == null) {
 
-            return  ajaxJson("/player/detail/show.do?", "get", {"uid":id}, playerService.parseDetail, 5000, "json");
+            return  ajaxJson("/player/detail/show?", "get", {"uid":id}, playerService.parseDetail, 5000, "json");
         } else {
             return p.name;
         }
@@ -131,16 +131,16 @@ var playerService = {
 
     },
     updateUserInfo:function (userInfo) {
-        return ajaxJson("/player/update.do?", "post", userInfo, null, 5000, "html");
+        return ajaxJson("/player/update?", "post", userInfo, null, 5000, "html");
 
     },
 
     updateShow:function (show) {
-        return  ajaxJson("/player/update/stage.do?", "post", {"show":show}, null, 5000, "json");
+        return  ajaxJson("/player/update/stage?", "post", {"show":show}, null, 5000, "json");
     },
     getRoomOfPerson:function (uid) {
         var room = {}
-        var data = ajaxJson("/player/info.do?", "post", {uids:uid}, null, 5000, "json")
+        var data = ajaxJson("/player/info?", "post", {uids:uid}, null, 5000, "json")
         var users = data.infos;
         for (var key in users) {
             var u = users[key];
@@ -162,31 +162,31 @@ var playerService = {
 
 var settingService = {
     getSetting:function (parameter) {
-        return ajaxJson("/m/form/setting.do?", "get", parameter, null, 5000, "html")
+        return ajaxJson("/m/form/setting", "get", parameter, null, 5000, "html")
 
     },
 
     saveSetting:function (s) {
 
 
-        return ajaxJson("/m/form/setting.do?", "post", s, null, 5000, "html");
+        return ajaxJson("/m/form/setting", "post", s, null, 5000, "html");
     },
     saveExpress:function (exp) {
-        return ajaxJson("/m/expression/update.do?", "post", exp, null, 5000, "html");
+        return ajaxJson("/m/expression/update", "post", exp, null, 5000, "html");
     },
     getExpress:function (rid) {
 
-        return ajaxJson("/m/expression/show.do?", "get", {rid:rid}, this.parseExpress, 5000, "json");
+        return ajaxJson("/m/expression/show", "get", {rid:rid}, this.parseExpress, 5000, "json");
     },
     parseExpress:function (data) {
         return data.expression;
     },
     getExpressFromRecord:function (recordID) {
-        return ajaxJson("/record/expression/show.do?", "get", {recordID:recordID}, this.parseExpress, 5000, "json");
+        return ajaxJson("/record/expression/show", "get", {recordID:recordID}, this.parseExpress, 5000, "json");
     },
 
     getSettingFromRecord:function (recordID) {
-        return ajaxJson("/record/setting.do?", "get", {recordID:recordID}, null, 5000, "html")
+        return ajaxJson("/record/setting", "get", {recordID:recordID}, null, 5000, "html")
     }
 
 }
@@ -196,13 +196,13 @@ var roomService = {
     getRoomDetail:function (baseParam) {
 
 
-        return  ajaxJson("/room/detail.do?", "POST", baseParam, null, 5000, "json");
+        return  ajaxJson("/room/detail", "POST", baseParam, null, 5000, "json");
 
 
     },
     getRecordDetail:function (param) {
 
-        return  ajaxJson("/record/detail.do?", "get", param, null, 5000, "json");
+        return  ajaxJson("/record/detail", "get", param, null, 5000, "json");
     },
 
     parseCount:function (counts) {
@@ -287,7 +287,7 @@ var roomService = {
         } else {
             param = {rid:rid, uids:uids};
         }
-        return ajaxJson("/player/info.do", "GET", param, this.parsePersonDetail, 5000, "json");
+        return ajaxJson("/player/info, "GET", param, this.parsePersonDetail, 5000, "json");
 
     },
     getRecordPerson:function (rid, uids) {
@@ -297,7 +297,7 @@ var roomService = {
         } else {
             param = {rid:rid, uids:uids};
         }
-        return ajaxJson("/player/record.do", "GET", param, this.parsePersonDetail, 5000, "json");
+        return ajaxJson("/player/record, "GET", param, this.parsePersonDetail, 5000, "json");
 
     },
 
@@ -393,7 +393,7 @@ roomService.info = function () {
             type:"GET",
             dataType:"json",
             async:false,
-            url:"/player/info.do?rid=" + option.rid + uids,
+            url:"/player/info?rid=" + option.rid + uids,
             success:function (data) {
                 names = data.infos;
             }
@@ -440,6 +440,6 @@ var cometService = {
     },
     sendMessage:function (message) {
         lastMessageSendAt = jQuery.now();
-        return ajaxJson("/message/accept2.do", "POST", message, controlView.showDelay, 5000, "json");
+        return ajaxJson("/message/accept2", "POST", message, controlView.showDelay, 5000, "json");
     }
 }

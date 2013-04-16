@@ -469,7 +469,7 @@ $(document).ready(function () {
                 version:version
             }
 
-            return ajaxJson("/message/accept2.do?", "post", message, null, 5000, "html")
+            return ajaxJson("/message/accept2?", "post", message, null, 5000, "html")
 
         },
         parseMessage:function (message) {

@@ -24,11 +24,11 @@
 		<div class="nav" id="nav">
 			<ul>
 				<li><a href="/">首页</a></li>
-				<li><a href="/m/list.do">游戏</a></li>
-				<li><a href="/record/list.do">战例</a></li>
-				<li><a href="/player/detail.do">个人</a></li>
+				<li><a href="/m/list ">游戏</a></li>
+				<li><a href="/record/list ">战例</a></li>
+				<li><a href="/player/detail ">个人</a></li>
 				<li><a href="http://xdylxdyl.diandian.com/" target="_blank">官博</a></li>
-				<li><a href="/player/offline.do">退出</a></li>
+				<li><a href="/player/offline ">退出</a></li>
 			</ul>
 		</div>
 	</div>

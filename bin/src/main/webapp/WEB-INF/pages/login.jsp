@@ -22,7 +22,7 @@ $(document).ready(function() {
 		$("#btn_userLogin_submit").attr("disabled","disabled");
 		$.ajax({ 
 			type: 'POST',
-			url: "/user/checkout.do",
+			url: "/user/checkout ",
 			dataType: "json",
 			data: {
 				name: $("#userName").val(),
@@ -32,7 +32,7 @@ $(document).ready(function() {
 				//redirect to chatroom page
 				if (loginSuccess(data.message.code)) {
 					user = data.user;
-					$(location).attr('href', '/xroom/main.do?name=' + user.name);
+					$(location).attr('href', '/xroom/main?name=' + user.name);
 				}
 				else {
 					displayMsg("Login error : name or password error, try again please.");
@@ -87,7 +87,7 @@ $(document).ready(function() {
 		</div>
 
 		<div>
-			<a href="/player/regedit.do">注册:</a>
+			<a href="/player/regedit ">注册:</a>
 
 		</div>
 

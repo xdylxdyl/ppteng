@@ -97,7 +97,7 @@ $(document).ready(function () {
             var r = confirm("确定退出？");
 
             if ("game" == type) {
-                url = "/m/list.do";
+                url = "/m/list";
                 if (r == true) {
 
                     var message = controlView.getMessage();
@@ -108,7 +108,7 @@ $(document).ready(function () {
 
                 }
             } else {
-                url = "/record/list.do";
+                url = "/record/list";
                 redirect(url);
             }
 

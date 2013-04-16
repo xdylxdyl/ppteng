@@ -37,7 +37,7 @@
 <!-- container over  -->
 
 <div class="pagination pagination-centered">
-	<c:set var="link" value="/rank/list.do?type=punch"></c:set>
+	<c:set var="link" value="/rank/list?type=punch"></c:set>
 	<ul>
 		<li><a href="${link}&page=${page-1}&size=${size}" id="pagePrev">Prev</a></li>
 		<li class="active"><a href="${link}&page=${page}&size=${size}">${page}</a></li>

@@ -192,7 +192,7 @@ function idGetName(num, returnName) {
     $.ajax({
         type : "GET",
         dataType : 'json',
-        url : "/player/info.do?rid=" + rid + "&uids=" + num,
+        url : "/player/info?rid=" + rid + "&uids=" + num,
         success : function(data) {
             name = data.infos.name;
         },

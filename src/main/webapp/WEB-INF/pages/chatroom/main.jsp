@@ -68,7 +68,7 @@ $(document).ready(function() {
 	//loading all login user list
 	$.ajax({ 
 		type: 'POST',
-		url: "/user/list.do",
+		url: "/user/list ",
 		dataType: "json",
 		success : function(data){
 			//format user list selection
@@ -88,7 +88,7 @@ $(document).ready(function() {
 	$("#btn_logout").click(function(){
 		$.ajax({ 
 			type: 'POST',
-			url: "/user/logout.do",
+			url: "/user/logout ",
 			dataType: "json",
 			data: {
 				name: name
@@ -96,7 +96,7 @@ $(document).ready(function() {
 			success : function(data){
 				//redirect to login page
 				if (logoutSuccess(data.message.code)) {
-					$(location).attr('href', '/login.do');
+					$(location).attr('href', '/login ');
 				}
 				else {
 					displayMsg("Logout error : can not logout.");
@@ -110,7 +110,7 @@ $(document).ready(function() {
 	$("#btn_send_msg").click(function(){
 		$.ajax({ 
 			type: 'POST',
-			url: "/xroom/send.do",
+			url: "/xroom/send ",
 			dataType: "json",
 			data: {
 				from: name,

@@ -74,7 +74,7 @@ var regeditView = {
 var regeditService = {
 
     getIdByEmail:function (email) {
-        return ajaxJson("/player/email.do?", "get", {email:email}, this.parseEmail, 5000, "json");
+        return ajaxJson("/player/email?", "get", {email:email}, this.parseEmail, 5000, "json");
     },
     parseEmail:function (data) {
         return data.id;

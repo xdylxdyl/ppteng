@@ -138,7 +138,7 @@ $(document).ready(function(){
 	 console.log("document ready");
 	//初始化，获取房间所有信息
 	var data = {'uid' : $("#uid").val() , 'rid' : $("#rid").val()};
-	var url = "/room/detail.do?";
+	var url = "/room/detail?";
 	var dataType = 'json';
 	roomInfo._ajax(url, data, dataType, roomInfo.success, roomInfo.error);
 	

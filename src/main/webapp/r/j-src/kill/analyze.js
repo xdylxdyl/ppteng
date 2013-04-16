@@ -52,7 +52,7 @@ var sendServer = function(act) {
 	var action = new infomation(act);
 	$.ajax({
 		type : "POST",
-		url : "/message/accept.do",
+		url : "/message/accept",
 		data : action.info
 	})
 }

@@ -52,7 +52,7 @@
 									<c:set var="user" value="${id_users[statistics.id]}"></c:set>
 									<c:set var="index" value="${(page-1)*size+status.index}"></c:set>
 									<c:set var="personLink"
-										value="/player/statistics.do?uid=${user.id}&version=statistics_third"></c:set>
+										value="/player/statistics?uid=${user.id}&version=statistics_third"></c:set>
 									<c:choose>
 										<c:when test="${index<=2}">
 											<c:set var="trClass" value="success"></c:set>
@@ -90,12 +90,12 @@
 						<div class="pagination pagination-centered">
 							<ul>
 								<li><a
-									href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page-1}&size=${size}"
+									href="/rank/statistics?type=simple&query=${query}&desc=${desc}&page=${page-1}&size=${size}"
 									id="pagePrev">Prev</a></li>
 								<li class="active"><a
-									href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page}&size=${size}">${page}</a></li>
+									href="/rank/statistics?type=simple&query=${query}&desc=${desc}&page=${page}&size=${size}">${page}</a></li>
 								<li><a
-									href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page+1}&size=${size}"
+									href="/rank/statistics?type=simple&query=${query}&desc=${desc}&page=${page+1}&size=${size}"
 									id="pageNext">Next</a></li>
 							</ul>
 						</div>

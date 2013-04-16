@@ -5,6 +5,20 @@
 <urlrewrite default-match-type="wildcard">
   <rule>
     <from>/</from>
-    <to>/index.do</to>
+    <to>/app/index</to>
   </rule>   
+  
+   <rule>
+    <from>/r/**</from>
+    <to>/r/$1</to>
+  </rule>
+  
+  <rule>
+    <from>/**</from>
+    <to>/app/$1</to>
+  </rule>
+  <outbound-rule>
+    <from>/app/**</from>
+    <to>/$1</to>
+  </outbound-rule>  
 </urlrewrite>

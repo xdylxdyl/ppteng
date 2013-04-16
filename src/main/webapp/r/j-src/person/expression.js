@@ -72,7 +72,7 @@ var expressionView = {
 }
 var stageShowService = {
     updateShow:function (show) {
-        return ajaxJson("/player/setting.do?", "post", {type:"expression", value:show}, null, 5000, "json");
+        return ajaxJson("/player/setting?", "post", {type:"expression", value:show}, null, 5000, "json");
     }
 }
 

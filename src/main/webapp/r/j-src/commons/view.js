@@ -222,10 +222,10 @@ var playerListView = {
         var voteID = player.id + "_vote";
         if (player.count == 0) {
 
-            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span><span class='vote' id='" + voteID + "'></span></a></li>";
+            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span><span class='vote' id='" + voteID + "'></span></a></li>";
             $("#" + selects.$playerList).append(item);
         } else {
-            var item = "<li id='" + player.id + "'><a href='/player/detail.do?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote' id='" + voteID + "'>+" + player.count + "</span></a></span></a></li>";
+            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote' id='" + voteID + "'>+" + player.count + "</span></a></span></a></li>";
             $("#" + selects.$playerList).append(item);
 
 

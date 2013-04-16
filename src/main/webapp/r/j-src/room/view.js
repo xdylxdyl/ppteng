@@ -145,8 +145,8 @@ var killGameAreaView = {
     },
     showOver:function (recordID, obj) {
 
-        var recordLink = "<a href='/record/enter.do?recordID=" + recordID + "' target='_blank'>查看战例</a>";
-        var shareLink = "http://42.121.113.70/record/enter.do?recordID=" + recordID;
+        var recordLink = "<a href='/record/enter?recordID=" + recordID + "' target='_blank'>查看战例</a>";
+        var shareLink = "http://42.121.113.70/record/enter?recordID=" + recordID;
         var share;
         switch (obj) {
             case "killer win" :

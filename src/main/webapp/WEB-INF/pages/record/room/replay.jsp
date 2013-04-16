@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 <head>
-<script type="text/javascript">document.domain='gemantic.com';</script>
+<script type="text/javascript">document main='gemantic.com';</script>
 <title>${room.name}</title>
 <meta charset="utf-8">
 <!--[if IE]>

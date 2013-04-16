@@ -30,8 +30,8 @@ jQuery.ajax = (function(_ajax){
             o.data = {
                 q: query.replace(
                     '{URL}',
-                    url + (o.data ?
-                        (/\?/.test(url) ? '&' : '?') + jQuery.param(o.data)
+                    url + (o.data?
+                        (/\?/.test(url)? '&' : '?') + jQuery.param(o.data)
                     : '')
                 ),
                 format: 'xml'

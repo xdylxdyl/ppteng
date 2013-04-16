@@ -26,7 +26,7 @@
 					<ul>
 				</c:when>
 			</c:choose>
-			<li class="columnLI" tagID="${tag.id}"><a href="/tag/remove.do?name=${tag.name}&symbol=${symbol}"><span>${tag.name}</span><strong>X</strong></a>
+			<li class="columnLI" tagID="${tag.id}"><a href="/tag/remove?name=${tag.name}&symbol=${symbol}"><span>${tag.name}</span><strong>X</strong></a>
 			</li>
 			<c:choose>
 				<c:when test="${rowCounter.count % 3 == 0||rowCounter.last==true}">

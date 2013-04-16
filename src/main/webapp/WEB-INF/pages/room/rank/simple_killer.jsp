@@ -57,7 +57,7 @@
 									<tr class="${trClass}">
 										<td>${index+1}</td>
 										<td><a
-											href="/player/statistics.do?uid=${user.id}&version=statistics">${user.name}</a></td>
+											href="/player/statistics?uid=${user.id}&version=statistics">${user.name}</a></td>
 
 
 
@@ -76,12 +76,12 @@
 						<div class="pagination pagination-centered">
 							<ul>
 								<li><a
-									href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page-1}&size=${size}"
+									href="/rank/statistics?type=simple&query=${query}&desc=${desc}&page=${page-1}&size=${size}"
 									id="pagePrev">Prev</a></li>
 								<li class="active"><a
-									href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page}&size=${size}">${page}</a></li>
+									href="/rank/statistics?type=simple&query=${query}&desc=${desc}&page=${page}&size=${size}">${page}</a></li>
 								<li><a
-									href="/rank/statistics.do?type=simple&query=${query}&desc=${desc}&page=${page+1}&size=${size}"
+									href="/rank/statistics?type=simple&query=${query}&desc=${desc}&page=${page+1}&size=${size}"
 									id="pageNext">Next</a></li>
 							</ul>
 						</div>

@@ -34,7 +34,7 @@
 
 			<c:choose>
 				<c:when test="${'edit'==type}">
-					<form:form modelAttribute="user" action="/player/regedit.do"
+					<form:form modelAttribute="user" action="/player/regedit "
 						method="post">
 
 
@@ -70,7 +70,7 @@
 						<div id="escape"></div>
 
 
-						<a href="/player/detail.do" class="return">取消</a>
+						<a href="/player/detail" class="return">取消</a>
 		</div>
 		<div class="regedit_hint">
 			<label class="hint" id="reg_hint"><spring:message
@@ -81,7 +81,7 @@
 		</c:when>
 
 		<c:when test="${'forget'==type}">
-			<form:form modelAttribute="user" action="/player/regedit.do"
+			<form:form modelAttribute="user" action="/player/regedit "
 				method="post">
 
 
@@ -128,7 +128,7 @@
 
 
 	<c:when test="${'email'==type}">
-		<form action="/player/forget.do" method="post">
+		<form action="/player/forget " method="post">
 
 
 			<h1>找回密码</h1>
@@ -154,7 +154,7 @@
 
 
 	<c:otherwise>
-		<form:form modelAttribute="user" action="/player/regedit.do"
+		<form:form modelAttribute="user" action="/player/regedit "
 			method="post">
 
 

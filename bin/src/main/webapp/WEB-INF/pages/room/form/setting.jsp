@@ -31,7 +31,7 @@ input.submit {
 </head>
 
 <body>
- <%--action="/m/form/setting.do"--%>
+ <%--action="/m/form/setting "--%>
 <form:form modelAttribute="setting">
     <spring:bind path="setting.version">
         <input name="version" value="${setting.version}" type="hidden" readonly />

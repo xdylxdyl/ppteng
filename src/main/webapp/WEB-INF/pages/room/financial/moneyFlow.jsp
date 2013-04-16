@@ -6,11 +6,11 @@
 <script src="/r/j-src/person/moneyFlow.js"></script>
 <c:set var="current" value="${id_users[uid]}"></c:set>
 <c:set var="prevPageLink"
-	value="/money/flow.do?uid=${uid}&type=${type}&page=${page-1}&size=${size}"></c:set>
+	value="/money/flow?uid=${uid}&type=${type}&page=${page-1}&size=${size}"></c:set>
 <c:set var="nextPageLink"
-	value="/money/flow.do?uid=${uid}&type=${type}&page=${page+1}&size=${size}"></c:set>
+	value="/money/flow?uid=${uid}&type=${type}&page=${page+1}&size=${size}"></c:set>
 <c:set var="curPageLink"
-	value="/money/flow.do?uid=${uid}&type=${type}&page=${page}&size=${size}"></c:set>
+	value="/money/flow?uid=${uid}&type=${type}&page=${page}&size=${size}"></c:set>
 <input type="hidden" id="type" value="${type}">
 <c:choose>
 	<c:when test="${'in'==type}">
@@ -54,11 +54,11 @@
 					<c:when test="${'in'==type}">
 						<c:set var="user" value="${id_users[mf.fid]}"></c:set>
 						<c:set var="userLink"
-							value="/money/flow.do?uid=${user.id}&type=out"></c:set>
+							value="/money/flow?uid=${user.id}&type=out"></c:set>
 					</c:when>
 					<c:otherwise>
 						<c:set var="user" value="${id_users[mf.uid]}"></c:set>
-						<c:set var="userLink" value="/money/flow.do?uid=${user.id}&type=in"></c:set>
+						<c:set var="userLink" value="/money/flow?uid=${user.id}&type=in"></c:set>
 					</c:otherwise>
 				</c:choose>
 

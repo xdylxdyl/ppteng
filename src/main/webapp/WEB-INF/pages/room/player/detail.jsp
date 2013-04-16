@@ -92,10 +92,10 @@
 
 		
 			<P>
-				<a href="/money/flow.do?uid=${current.id}">查看财务</a>
+				<a href="/money/flow?uid=${current.id}">查看财务</a>
 			</p>
 			<P>
-				<a href="/player/statistics.do?uid=${current.id}">查看统计</a>
+				<a href="/player/statistics?uid=${current.id}">查看统计</a>
 			</p>
 
 

@@ -69,7 +69,7 @@ $(document).ready(function() {
 
 
 
-	<form action="/player/login.do" method="post">
+	<form action="/player/login " method="post">
 		<h1>Log In</h1>
 
 		<fieldset class="email">
@@ -95,7 +95,7 @@ $(document).ready(function() {
 
 
 	<div class="regedit">
-		<a href="/player/regedit.do">一分钟注册</a>
+		<a href="/player/regedit ">一分钟注册</a>
 
 	</div>
 

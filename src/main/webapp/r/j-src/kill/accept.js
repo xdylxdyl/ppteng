@@ -172,7 +172,7 @@ function ready(log) {
 function login(log) {
 	$.ajax({
 		type : 'POST',
-		url : "/player/info.do",
+		url : "/player/info",
 		data : "uids=" + log.subject,
 		success : function(data){
 			var info =  eval('(' + data + ')');
@@ -191,7 +191,7 @@ function logout(log) {
 	$("#" + log.subject).remove();
 	var uid = $("#uid").val();
 	if (log.subject == uid) {
-		window.location.href='http://chat.gemantic.com:9090/m/list.do?uid=' + uid;
+		window.location.href='http://chat.gemantic.com:9090/m/list?uid=' + uid;
 	}
 }
 function day(log) {
@@ -224,7 +224,7 @@ function kick(log) {
 	$(".listitem li[id="+log.object+"]").remove();
 	//该玩家退出房间返回上一级页面；
 	if (log.object == $("#uid").val()) {
-		window.location.href='http://chat.gemantic.com:9090/m/list.do?uid=' + $("#uid").val();
+		window.location.href='http://chat.gemantic.com:9090/m/list?uid=' + $("#uid").val();
 	}
 }
 function assign(log) {

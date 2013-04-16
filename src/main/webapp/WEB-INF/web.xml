@@ -76,7 +76,7 @@
 
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

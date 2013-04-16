@@ -35,7 +35,7 @@
 				<c:choose>
 					<c:when test="${empty user}">
 						<div class="span4">
-							<form action="/player/login.do" method="post" class="login-box">
+							<form action="/player/login " method="post" class="login-box">
 								<h2>Login 总用户${count}人</h2>
 
 
@@ -54,13 +54,13 @@
 
 								<div class="login-action">
 									<span class="login-checkbox"><a
-										href="/player/regedit.do?type=email">忘记密码</a></span>
+										href="/player/regedit?type=email">忘记密码</a></span>
 									<button class="btn btn-primary btn-large pull-right">登录</button>
 								</div>
 
 								<div class="login-social">
 									<p>
-										使用以下方式登录，或者 <a href="/player/regedit.do">一分钟注册</a>
+										使用以下方式登录，或者 <a href="/player/regedit ">一分钟注册</a>
 									</p>
 									<span id="qqLoginBtn"></span> <span id="wb_connect_btn"></span>
 								</div>
@@ -94,7 +94,7 @@
 								</c:choose>
 							</blockquote>
 
-							<a class="btn btn-primary" href="/m/list.do">进入游戏</a> <input
+							<a class="btn btn-primary" href="/m/list ">进入游戏</a> <input
 								type="hidden" id="uid" value="${user.id}" /> <input
 								type="hidden" id="type" value="" />
 
@@ -175,7 +175,7 @@
 				<div class="span4">
 					<h3>
 						<a
-							href="/rank/statistics.do?type=simple&query=killerWin&desc=desc&page=1&size=20&secondQuery=killer">金牌杀手榜</a>
+							href="/rank/statistics?type=simple&query=killerWin&desc=desc&page=1&size=20&secondQuery=killer">金牌杀手榜</a>
 					</h3>
 					<table class="table ranking">
 						<thead>
@@ -191,7 +191,7 @@
 									<td class="score"><fmt:formatNumber pattern="0.00"
 											value="${statistics.killerWin/statistics.killer}"></fmt:formatNumber></td>
 									<td class="name"><a
-										href="player/statistics.do?uid=${user.id}">${user.name}</a></td>
+										href="player/statistics?uid=${user.id}">${user.name}</a></td>
 								</tr>
 							</c:forEach>
 

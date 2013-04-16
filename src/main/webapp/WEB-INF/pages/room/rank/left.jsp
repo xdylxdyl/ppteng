@@ -7,16 +7,16 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <li class="nav-header">社区榜单</li>
-                    <li id="leftNav_money"><a href="/rank/list.do?type=money">炫富榜</a></li>
-                      <li id="leftNav_punch"><a href="/rank/list.do?type=punch">勤奋打卡榜</a></li>
+                    <li id="leftNav_money"><a href="/rank/list?type=money">炫富榜</a></li>
+                      <li id="leftNav_punch"><a href="/rank/list?type=punch">勤奋打卡榜</a></li>
                <li class="nav-header">简化榜单</li>
-               <li id="leftNav_simple"><a href="/rank/statistics.do?type=simple&query=win&secondQuery=all">胜负总榜</a></li>
-                   <li id="leftNav_simple_water"><a href="/rank/statistics.do?type=simple_water&query=waterWin&secondQuery=water">全部水王</a></li>
-                       <li id="leftNav_simple_killer"><a href="/rank/statistics.do?type=simple_killer&query=killerWin&secondQuery=killer">全部杀王</a></li>
-                               <li id="leftNav_simple_role"><a href="/rank/statistics.do?type=simple_role&query=killer&secondQuery=all">身份榜</a></li>
-               <li id="leftNav_simple_water_third"><a href="/rank/statistics.do?type=simple_water_third&query=waterThirdWin&secondQuery=waterThird">三人水王</a></li>
-                <li id="leftNav_simple_killer_third"><a href="/rank/statistics.do?type=simple_killer_third&query=killerThirdWin&secondQuery=killerThird">三人杀王</a></li>
-                 <li id="leftNav_simple_third"><a href="/rank/statistics.do?type=simple_third&query=thirdWin&secondQuery=third">三人总榜</a></li>
+               <li id="leftNav_simple"><a href="/rank/statistics?type=simple&query=win&secondQuery=all">胜负总榜</a></li>
+                   <li id="leftNav_simple_water"><a href="/rank/statistics?type=simple_water&query=waterWin&secondQuery=water">全部水王</a></li>
+                       <li id="leftNav_simple_killer"><a href="/rank/statistics?type=simple_killer&query=killerWin&secondQuery=killer">全部杀王</a></li>
+                               <li id="leftNav_simple_role"><a href="/rank/statistics?type=simple_role&query=killer&secondQuery=all">身份榜</a></li>
+               <li id="leftNav_simple_water_third"><a href="/rank/statistics?type=simple_water_third&query=waterThirdWin&secondQuery=waterThird">三人水王</a></li>
+                <li id="leftNav_simple_killer_third"><a href="/rank/statistics?type=simple_killer_third&query=killerThirdWin&secondQuery=killerThird">三人杀王</a></li>
+                 <li id="leftNav_simple_third"><a href="/rank/statistics?type=simple_third&query=thirdWin&secondQuery=third">三人总榜</a></li>
                 </ul>
             </div>
             <!--/.well -->

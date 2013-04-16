@@ -21,7 +21,7 @@
 	<c:forEach items="${users}" var="user" begin="0" step="1"
 		varStatus="status">
 
-		<c:set var="userLink" value="/player/detail.do?uid=${user.id}"></c:set>
+		<c:set var="userLink" value="/player/detail?uid=${user.id}"></c:set>
 		<c:set var="allIndex" value="${(page-1)*size+status.index+1}"></c:set>
 	
 			<c:if test="${((page-1)*size+status.index+1)> 3}">
@@ -45,12 +45,12 @@
 <div class="pagination pagination-centered">
 	<ul>
 		<li><a
-			href="/rank/list.do?type=money&page=${page-1}&size=${size}"
+			href="/rank/list?type=money&page=${page-1}&size=${size}"
 			id="pagePrev">Prev</a></li>
 		<li class="active"><a
-			href="/rank/list.do?type=money&page=${page}&size=${size}">${page}</a></li>
+			href="/rank/list?type=money&page=${page}&size=${size}">${page}</a></li>
 		<li><a
-			href="/rank/list.do?type=money&page=${page+1}&size=${size}"
+			href="/rank/list?type=money&page=${page+1}&size=${size}"
 			id="pageNext">Next</a></li>
 	</ul>
 </div>

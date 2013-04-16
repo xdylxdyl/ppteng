@@ -10,7 +10,7 @@ var tableRankView = {
     makeLink:function (query,secondQuery) {
         var type=tableRankView.getType();
 
-        var url = "/rank/statistics.do?type="+type;
+        var url = "/rank/statistics?type="+type;
 
         var desc = tableRankView.getNextDesc(query,secondQuery);
         var page = tableRankView.getPage();

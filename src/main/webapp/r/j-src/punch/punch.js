@@ -12,7 +12,7 @@ var punchService = {
     punch:function () {
         var data;
         $.ajax({
-            url:"/player/punch.do",
+            url:"/player/punch",
             data:{},
             async:false,
             type:"post",

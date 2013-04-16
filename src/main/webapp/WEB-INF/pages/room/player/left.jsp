@@ -10,21 +10,21 @@
 		<ul class="nav nav-list">
 			<li class="nav-header">个人资料</li>
 			<li id="leftNav_basic"><a
-				href="/player/detail.do?uid=${current.id}">基本信息</a></li>
+				href="/player/detail?uid=${current.id}">基本信息</a></li>
 			<li class="nav-header">个性设置</li>
 			<li id="leftNav_stageShow"><a
-				href="/player/setting.do?type=stageShow&uid=${current.id}">拉风出场秀</a></li>
+				href="/player/setting?type=stageShow&uid=${current.id}">拉风出场秀</a></li>
 			<li id="leftNav_expression"><a
-				href="/player/setting.do?type=expression&uid=${current.id}">神态随心变</a></li>
+				href="/player/setting?type=expression&uid=${current.id}">神态随心变</a></li>
 			<li id="leftNav_music"><a
-				href="/player/setting.do?type=music&uid=${current.id}">音乐伴我行</a></li>
+				href="/player/setting?type=music&uid=${current.id}">音乐伴我行</a></li>
 			<c:if test="${current.id==selfID}">
 				<li class="nav-header">安全中心</li>
-				<li id="leftNav_edit"><a href="/player/regedit.do?type=edit">修改密码</a></li>
-				<li id="leftNav_email"><a href="/player/regedit.do?type=email">找回密码</a></li>
+				<li id="leftNav_edit"><a href="/player/regedit?type=edit">修改密码</a></li>
+				<li id="leftNav_email"><a href="/player/regedit?type=email">找回密码</a></li>
 			</c:if>
 			<li class="nav-header">查找用户</li>
-			<li id="leftNav_search"><a href="/player/search.do">查找用户</a></li>
+			<li id="leftNav_search"><a href="/player/search ">查找用户</a></li>
 		</ul>
 	</div>
 	<!--/.well -->

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<form:form modelAttribute="room" action="/m/form/init.do" method="post">
+	<form:form modelAttribute="room" action="/m/form/init " method="post">
 		<spring:bind path="room.id">
 			<input name="id" value="${room.id}" type="hidden" readonly />
 		</spring:bind>
