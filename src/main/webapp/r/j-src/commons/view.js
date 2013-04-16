@@ -319,29 +319,30 @@ var rightView = {
 
 var gameAreaView = {
 
-    updateRubbishText:function(){
+    updateRubbishText:function () {
 
-        var countStr=$("#rubbish").attr("count");
-        if(countStr==undefined||countStr==""){
-            countStr=0;
+        var countStr = $("#rubbish").attr("count");
+        if (countStr == undefined || countStr == "") {
+            countStr = 0;
         }
-        var count=parseInt(countStr)+1;
-        $("#" + selects.$gameArea).empty().append("<p style='color:#F00'id='rubbish' count='"+count+"'>" +
-            "【系统消息】您曾在上一个房间里挂过尸,目前正在为您处理第["+count+"[条过期消息,请耐心等待,上个房间挂尸期间较长,处理过期消息时间就越长" +
+        var count = parseInt(countStr) + 1;
+        $("#" + selects.$gameArea).empty().append("<p style='color:#F00'id='rubbish' count='" + count + "'>" +
+            "【系统消息】您曾在上一个房间里挂过尸,目前正在为您处理第[" + count + "]条过期消息,请耐心等待,上个房间挂尸期间较长,处理过期消息时间就越长" +
             "</p>");
 
     },
-    completeRubbishText:function(){
-        var countStr=$("#rubbish").attr("count");
-        if(countStr==undefined||countStr==""){
-                 return;
-        }else{
-            $("#" + selects.$gameArea).append("<p style='color:#F00'id='rubbish'>" +
-            "【系统消息】共"+count+"条过期消息处理完成,您现在可以正常游戏,如果不想接收上个房间的过期消息,离开房间时请点右上角[退出]按钮,正常离开房间~~" +
-            "</p>");
+    completeRubbishText:function () {
+        var countStr = $("#rubbish").attr("count");
+        if (countStr == undefined || countStr == "") {
+            return;
+        } else {
+            var count = parseInt(countStr);
+            $("#" + selects.$gameArea).empty().append("<p style='color:#F00'id='rubbish'>" +
+                "【系统消息】共" + count + "条过期消息处理完成,您现在可以正常游戏,如果不想接收上个房间的过期消息,离开房间时请点右上角[退出]>按钮,正常离开房间~~" +
+                "</p>");
         }
     },
-    login:function (player, message,first) {
+    login:function (player, message, first) {
 
         var action;
         if (message == null || message.content == "") {
@@ -352,7 +353,7 @@ var gameAreaView = {
 
 
         var name = player.name;
-        var isDisplay=gameAreaView.isDisplayStage(player,first);
+        var isDisplay = gameAreaView.isDisplayStage(player, first);
         if (isDisplay) {
             //只有房间是处在结束状态下才在游戏区显示消息
             $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
@@ -363,26 +364,26 @@ var gameAreaView = {
         }
 
     },
-    isDisplayStage:function(player,first){
-        if(globalView.isStop()){
+    isDisplayStage:function (player, first) {
+        if (globalView.isStop()) {
             // game must stop
             var sid = globalView.getCurrentID();
-            if(player.id!=sid){
+            if (player.id != sid) {
                 // if not self .display
                 return true;
-            }else{
+            } else {
 
-                if("notFirst"==first||first==undefined||first==""){
-                     //not first ,means refresh.not display.or come from login message
+                if ("notFirst" == first || first == undefined || first == "") {
+                    //not first ,means refresh.not display.or come from login message
                     return false;
 
-                }else{
-                   // is self,if first ,display
+                } else {
+                    // is self,if first ,display
                     return true;
                 }
             }
 
-        }else{
+        } else {
             return false;
         }
     },

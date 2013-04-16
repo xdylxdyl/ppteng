@@ -7,23 +7,23 @@
  */
 
 var cometUtil = {
-    polling:function(url, successCB) {
+    polling:function (url, successCB) {
         $.ajax({
-            dataType: "jsonp",
-            url: url,
-            timeout: 100500,
-            jsonp: "callback",
+            dataType:"jsonp",
+            url:url,
+            timeout:100500,
+            jsonp:"callback",
             // test repeat data
-            jsonpCallback: "cometCallback",
+            jsonpCallback:"cometCallback",
 
-            success: function(data) {
+            success:function (data) {
 
                 //console.log(data);
                 successCB(data);
                 console.log("success");
                 cometUtil.polling(url, successCB);
             },
-            error: function(XMLHttpRequest, textStatus) {
+            error:function (XMLHttpRequest, textStatus) {
                 if (textStatus == "timeout") {
                     console.log("timeout");
                     cometUtil.polling(url, successCB);
@@ -39,4 +39,3 @@ var cometUtil = {
     }
 }
 
-//实时流
