@@ -11,6 +11,9 @@
 <!-- container start  -->
 <div class="span9">
 	<div class="well">
+	  <div class="row">
+	
+	<div class="span5">
 		<h2>
 			${current.name}当前有资金<span id="currentMoney">${current.money}<span></span>
 		</h2>
@@ -29,9 +32,18 @@
 		<p class="text-info">用户等级越高,手续费收取比例越低</p>
 
 
+
+
 		<div class="form-actions">
 			<button class="btn btn-primary pull-left" id="completeBtn">提交</button>
 		</div>
+</div>
+     <div class="span3">
+            <h4 id="uname" class="text-info"></h4>
+            <img src="" alt="" id="icon" class="img-polaroid">
+        </div>
+</div>
+  
 
 
 	</div>

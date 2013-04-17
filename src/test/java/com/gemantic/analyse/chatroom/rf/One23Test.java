@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -24,21 +22,19 @@ import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.gemantic.analyse.chatroom.test.City;
-import com.gemantic.analyse.chatroom.test.Districts;
-import com.gemantic.analyse.chatroom.test.Privance;
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.FileUtil;
 import com.gemantic.killer.common.model.Message;
+import com.gemantic.killer.common.model.Setting;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.RoomService;
+import com.gemantic.killer.service.SettingService;
 import com.gemantic.killer.util.MessageUtil;
 
 public class One23Test {
@@ -50,6 +46,8 @@ public class One23Test {
 
 	private RoomService roomService;
 	private ConfigurableApplicationContext context;
+	
+	private SettingService settingService;
 
 	@Before
 	public void init() throws ServiceException, ServiceDaoException {
@@ -58,6 +56,8 @@ public class One23Test {
 		droolsGameMessageService = (MessageService) context
 				.getBean("messageServiceSingleDroolsImpl");
 		roomService = (RoomService) context.getBean("roomServiceImpl");
+		settingService = (SettingService) context.getBean("settingServiceImpl");
+		
 	}
 
 	@After
@@ -162,9 +162,16 @@ public class One23Test {
 		String simpleVersion = "simple_1.0";
 		String currentVersion = policeVersion;
 		Room room = new Room("sss", 3L, currentVersion);
+		Setting s=settingService.getSetting(currentVersion);
+		log.info(s);
+		room.setSetting(s);
+		room.setId(5000L);
+		this.droolsGameMessageService.createRoom(room);
+		
+		
 		// TODO 我判断不出来用Int还是用String好
 		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
-				"78", "4", "", room.getVersion());
+				"78", String.valueOf(room.getId()), "", room.getVersion());
 		
 		List<String> messages = FileUtil
 				.readFileAsList("src/test/resources/killer_police.txt");

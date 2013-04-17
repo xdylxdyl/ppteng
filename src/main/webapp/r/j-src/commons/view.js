@@ -199,7 +199,12 @@ var playerListView = {
 
     displayRole:function (role) {
 
-        $("#" + selects.$playerRole).empty().html(role);
+     var hint=   killGameAreaView.RoleHint[role];
+        $("#" + selects.$playerRole).removeClass().empty().html(hint);
+        if(killGameAreaView.Role.killer==role){
+            $("#" + selects.$playerRole).addClass("text-error");
+        }
+
 
 
     },

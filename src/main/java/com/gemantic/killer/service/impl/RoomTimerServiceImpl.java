@@ -79,9 +79,7 @@ public class RoomTimerServiceImpl implements RoomTimerService {
 				log.info("remove old timer");
 				old.cancel();
 			}
-
 		}
-
 		SendMessageTask sm = new SendMessageTask(pushClient, m, droolsGameMessageService,roomService);
 		sm.start();
 		this.roomID_Message.put(Long.valueOf(m.getWhere()), sm);

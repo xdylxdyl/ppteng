@@ -187,8 +187,7 @@ public class RecordController {
 		log.debug("HI");
 		// 先创建一个假房间?那房间里的Query怎么办.
 
-		Records record = this.recordService.getObjectById(recordID);
-
+		Records record = this.recordService.getObjectById(recordID);	
 		model.addAttribute("record", record);
 		model.addAttribute("room", record.getRoom());
 		model.addAttribute("setting", record.getRoom().getSetting());

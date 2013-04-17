@@ -51,9 +51,13 @@ var killGameAreaView = {
         lastword:"【当前状态】遗言 "
     },
 
-    Role:{
+    RoleHint:{
         water:"【身份】水民 ",
         killer:"【身份】杀手 "
+    },
+    Role:{
+        water:"water",
+        killer:"killer"
     },
 
 
@@ -69,18 +73,31 @@ var killGameAreaView = {
         //1、死人（dead_area）——a、游戏结束后；b、游戏未结束时。 2、活人——a、白天； b、遗言时； css、晚上（killer_area）。
         var player = playerService.getPlayer(id);
         var place = "normal";
-        if (playerStatus.die == player.status) {
-            if ($("#time").val() == "over") {
 
-            } else {
-                //没有结束
-                place = "deadArea";
 
-            }
-        } else {
+        switch (player.status){
+            case playerStatus.die:
+                if ($("#time").val() == "over") {
+
+                           } else {
+                               //没有结束
+
+                               place = "deadArea";
+
+                           }
+                break;
+            case playerStatus.lastword:
+                break;
+             case playerStatus.living:
+                //delay message
+                   if("day"!=globalView.getGameStatus()){
+                       place="discard";
+                    }
+            default :
 
 
         }
+
         switch (place) {
             case "normal":
                 $("#" + selects.$gameArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
@@ -247,7 +264,7 @@ var gameView = {
         var recordID = message.subject;
         //标明游戏结束
         globalView.setGameStatusHint("游戏结束");
-        globalView.setGameStatus("1");
+        globalView.setGameStatus(gameGlobalStatus.over);
 
         playerService.setUnreadyStatus();
         //只重新显示.不用重新计算
@@ -297,7 +314,7 @@ var simpleService = {
         var p = playerService.getPlayer(data.id)
         p.role = data.role;
         playerService.updatePlayer(p);
-        playerListView.displayRole(killGameAreaView.Role[data.role]);
+        playerListView.displayRole(data.role);
 
 
     },
@@ -307,6 +324,7 @@ var simpleService = {
         }
 
         globalView.setGameStatusHint(killGameAreaView.Phase[data.status]);
+
         globalView.setGameStatus(data.status);
         controlView.setCountDownTime(data.remainTime);
         var uid = globalView.getCurrentID();

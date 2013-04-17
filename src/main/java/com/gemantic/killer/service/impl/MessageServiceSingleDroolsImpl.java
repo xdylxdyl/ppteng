@@ -87,6 +87,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		// 怎么对顺序排序
 		log.info(message.getId()+" user time is "+(System.currentTimeMillis()-start));
 
+		log.info(operater.getNextMessages());
 		return operater.getNextMessages();
 
 	}

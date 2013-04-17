@@ -52,5 +52,9 @@ declare StatusChange
 end
 
 
-
+declare TimerMesasage
+	phase: String
+	time: Long
+	schedule:Long
+end
 

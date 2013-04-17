@@ -48,8 +48,8 @@
 				<div class="info-text">
 					<p id="editSignature">${current.sign}</p>
 					<div class="clearfix" id="editImg">
-						输入图片地址,网页图片右键选择复制图片地址,本地图片需要临时上传,推荐使用:<a
-							href="http://tu.58task.com/" target="_blank">58广告任务网</a>
+						输入图片地址,网页图片右键选择复制图片地址;暂不支持本地图片直接上传,可以将图片先上传到论坛:<a
+							href="http://bbs.ptteng.com/forum.php?mod=forumdisplay&fid=49&page=1" target="_blank">葡萄藤论坛贴图区</a>
 						<p contenteditable="true" id="imgUrl"></p>
 						<a href="#" class="btn" id="preview">预览(若预览不成功,无法保存头像)</a>
 					</div>

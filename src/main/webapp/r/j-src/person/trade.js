@@ -49,10 +49,12 @@ var tradeView = {
         if (code == 0) {
             message = "转帐成功~";
             tradeView.showMoney(result.money);
+
         } else {
             message = result.message;
         }
         tradeView.showHint(message);
+        alert(message);
 
     },
     showMoney:function (money) {
@@ -67,14 +69,33 @@ var tradeView = {
     },
     enableCommit:function () {
         $("completeBtn").attr("disabled", false);
-    }
+    },
+    showUser:function(data){
+
+          var link="<a href='/player/detail?uid=" +data.id + "'>" + data.name + "</a>"
+         $("#uname").empty().append(link);
+
+         $("#icon").attr("src",data.icon);
+         $("#icon").attr("alt",data.name);
+     }
 
 }
 var tradeService = {
     trade:function (trade) {
         return ajaxJson("/money/trade?", "post",
             trade, tradeService.parse, 5000, "json");
-    }
+    },
+    search:function(uid){
+          ajaxJson("/player/search?", "post", {uid:uid}, tradeService.showAjaxResult, 5000, "json");
+      },
+      showAjaxResult:function(data){
+          if(data.code==0){
+              tradeView.showUser(data);
+          }else{
+              tradeView.showHint("不存在的用户啊");
+          }
+
+      }
 }
 
 $(document).ready(function () {
@@ -102,6 +123,8 @@ $(document).ready(function () {
             tradeView.disableCommit();
             tradeView.showHint("葡萄号只能是数字");
         }
+         var result = tradeService.search(value);
+
 
     });
 

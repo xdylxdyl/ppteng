@@ -53,7 +53,7 @@ then
 	//actions
      LogUtil.log("clear prev game vote start================= ");      
      retract ($vote);
-     LogUtil.log("clear prev game vote over ================="); 
+     LogUtil.log("clear prev game vote over ================="+$vote); 
     
 end
 
@@ -67,9 +67,9 @@ when
     
 then      
 	//actions
-     LogUtil.log("clear prev game vote start================= ");      
+     LogUtil.log("clear prev game VoteStatus start================= ");      
      retract ($voteStatus);
-     LogUtil.log("clear prev game vote over ================="); 
+     LogUtil.log("clear prev game VoteStatus over ================="); 
     
 end
 
@@ -174,10 +174,11 @@ then
 	
 	
 	
-     Message day=createDay($room);
-     insert(day); 
+ 
      
-	
+	 
+     StatusChange sc=new StatusChange("day");
+     insert(sc);
 	//6.update game phase	
    
     insert(game);
@@ -207,11 +208,11 @@ when
 	//conditions    
     $vote:Vote()
     $room:Room(status=="run")
-    (Game(status!="day") and Message($subject:subject,predict=="time",subject=="day"))   
+    (Game(status=="day") and Message($subject:subject,predict=="time",subject=="day"))   
     or 
-    (Game(status!="night") and Message($subject:subject,predict=="time",subject=="night"))  
+    (Game(status=="night") and Message($subject:subject,predict=="time",subject=="night"))  
 	 or 
-    (Game(status!="lastword") and Message($subject:subject,predict=="time",subject=="lastword"))   
+    (Game(status=="lastword") and Message($subject:subject,predict=="time",subject=="lastword"))   
     
 then      
 	//actions
@@ -232,11 +233,11 @@ when
     $voteStatus:VoteStatus($voteMe:voteMe)
     eval($voteMe.size() > 0)
     $room:Room(status=="run")
-    (Game(status!="day") and Message($subject:subject,predict=="time",subject=="day"))   
+    (Game(status=="day") and Message($subject:subject,predict=="time",subject=="day"))   
     or 
-    (Game(status!="night") and Message($subject:subject,predict=="time",subject=="night"))  
+    (Game(status=="night") and Message($subject:subject,predict=="time",subject=="night"))  
 	 or 
-    (Game(status!="lastword") and Message($subject:subject,predict=="time",subject=="lastword"))   
+    (Game(status=="lastword") and Message($subject:subject,predict=="time",subject=="lastword"))   
     
 then      
 	//actions
@@ -254,11 +255,11 @@ when
 	//conditions    
     $right:Right()
     $room:Room(status=="run")
-    (Game(status!="day") and Message($subject:subject,predict=="time",subject=="day"))   
+    (Game(status=="day") and Message($subject:subject,predict=="time",subject=="day"))   
     or 
-    (Game(status!="night") and Message($subject:subject,predict=="time",subject=="night"))  
+    (Game(status=="night") and Message($subject:subject,predict=="time",subject=="night"))  
 	 or 
-    (Game(status!="lastword") and Message($subject:subject,predict=="time",subject=="lastword"))   
+    (Game(status=="lastword") and Message($subject:subject,predict=="time",subject=="lastword"))   
     
 then      
 	//actions
@@ -273,34 +274,6 @@ end
 
 
 
-//===========phase prepare============start 
-
-rule 'day phase prepare '
-ruleflow-group "phase init"
-no-loop true
-when
-	//conditions    
-    $room:Room(status=="run")
-    $game:Game(status!="day") 
-    $message:Message($subject:subject,predict=="time",subject=="day")  
-   
-    
-then      
-	//actions 
-     LogUtil.log("day phase init  start================= "); 
-     
-     StatusChange sc=new StatusChange("day");
-     insert(sc);
-     //1.set game phase,set last time,
-          
-     modify($game){setStatus("day"),setLastTime(System.currentTimeMillis())};
-     //2.send timer of night    
-	Message nightDelay=createDelayNight($room);
-    insert(nightDelay); 
-          
-     LogUtil.log("day phase init  over =================");   
-end
-
 
 
 //===========phase action============start 
@@ -308,25 +281,41 @@ end
 
 rule 'first vote'
 ruleflow-group "phase action"
-no-loop true 
+no-loop true
 when
     $message:Message($subject:subject,$object:object,predict=="vote")
-    $voteStatus:VoteStatus(id==$object,$voteMe:voteMe)
-    
+    $voteStatus:VoteStatus(id==$object,$voteMe:voteMe)    
     Player(id==$subject,status=="living")
     Player(id==$object,status=="living")
-    Game(status=="day")
-    not Vote(id==$subject,type=="water")
+    Game($status:status,$liverCount:liverCount)
+    not Vote(id==$subject)
     Right(id==$subject,right contains "vote")
+    Role(id==$subject,$role:Role)
     
 then
     LogUtil.log("first vote start  ================="); 
-    
-     Vote vote=new Vote($subject,$object,"water");
+     String voteType="wate";   
+     if("day".equals($status)){
+     
+     }else{
+     
+       if("night".equals($status)){
+         if("police".equals($role)){
+            voteType="check";
+         }else{
+           if("killer".equals($role)){
+             voteType="kill";
+           }
+            
+         }
+       }
+     }
+     Vote vote=new Vote($subject,$object,voteType);
      insert(vote);		
                    
     $voteMe.add($subject);
      modify($voteStatus){setVoteMe($voteMe)};
+          LogUtil.log($liverCount+"change vote "+$voteStatus); 
     
      Message setVoteMessage=new Message($object,"set vote",String.valueOf($voteMe.size()));
      insert(setVoteMessage);      
@@ -339,19 +328,37 @@ no-loop true
 when
     $message:Message($subject:subject,$object:object,predict=="vote")
     $right:Right(id==$subject,right contains "vote")
-    not Vote(id==$subject,vote==$object,type=="water")
+    Vote(id==$subject)
     $oldVote:Vote(id==$subject,$old:vote)
     $newVoteStatus:VoteStatus(id==$object,$newVoteMe:voteMe)
     $oldVoteStatus:VoteStatus(id==$old,$oldVoteMe:voteMe)
     Player(id==$subject,status=="living")
     Player(id==$object,status=="living")
-    $game:Game(status=="day")
-    
+    $game:Game($status:status)
+    Role(id==$subject,$role:Role)
+    eval($old!=$object)
 then
     LogUtil.log("change vote start  ================="); 
     retract($oldVote);
-        
-     Vote vote=new Vote($subject,$object,"water");
+    
+     
+     String voteType="wate";   
+     if("day".equals($status)){
+     
+     }else{
+     
+       if("night".equals($status)){
+         if("police".equals($role)){
+            voteType="check";
+         }else{
+           if("killer".equals($role)){
+             voteType="kill";
+           }
+            
+         }
+       }
+     }
+     Vote vote=new Vote($subject,$object,voteType);
      insert(vote);
      
      $oldVoteMe.remove($subject);
@@ -359,6 +366,8 @@ then
                    
      $newVoteMe.add($subject);
      modify($newVoteStatus){setVoteMe($newVoteMe)};
+         LogUtil.log("change vote "+$newVoteStatus); 
+     
     
      Message addSetVoteMessage=new Message($object,"set vote",String.valueOf($newVoteMe.size()));
      insert(addSetVoteMessage);     
@@ -366,6 +375,7 @@ then
      insert(subractSetVoteMessage);
       LogUtil.log("change vote over  ================="); 
 end
+
 
 
 
@@ -382,17 +392,16 @@ no-loop true
 when
  
   
-  $game:Game(status=="day",$liverCount:liverCount,$waterCount:waterCount,$killerCount:killerCount,$policeCount:policeCount);
+  $game:Game(status=="day",$liverCount:liverCount);
   $person:Player($id:id,status=="living");
   $voteStatus:VoteStatus(id==$id)     
-  eval(($voteStatus.getVoteMe().size() * 2) > $liverCount )  
- 
+  eval(($voteStatus.getVoteMe().size() * 2) > $liverCount )   
   Role(id==$id,$role:role)
 then
-   LogUtil.log("water die  start==============");
+   LogUtil.log("person die  start==============");
    Die die=new Die($id,"vote",$role);   
    insert(die);
-   LogUtil.log("water die  start==============");   
+   LogUtil.log("person die  start==============");   
 
  
 end
@@ -408,25 +417,14 @@ end
 
 rule 'die process'
 ruleflow-group "die process"
-
+no-loop true
 when
  
   $die:Die($id:id,$type:type,$role:role)
   $game:Game($liverCount:liverCount,$waterCount:waterCount,$killerCount:killerCount,$policeCount:policeCount,$status:status);
-  $person:Player($id:id,status=="living");   
+  $person:Player(status=="living");   
  then
    LogUtil.log(" die  start=============");
-   
-   if("day".equals($status)){
-   
-     
-   }else{
-   
-    if("lastword".equals($status)){
-      
-    }
-   
-   }
    
    //if water die
     if("water".equals($role)){
@@ -445,7 +443,15 @@ when
        
        }    
     } 
+    if("vote".equals($type)){
     
+     //if die of vote 
+     Message decryption=new Message($id,"decryption",$role);  
+     insert(decryption);
+    }
+    	
+    
+    retract($die);
     
     
 
@@ -455,7 +461,161 @@ end
 
 //==person status ===over 
 
+//==game status===start 
 
+
+rule 'game over of  killer win'
+ruleflow-group "game status"
+when
+   
+     $game:Game($killerCount:killerCount,$waterCount:waterCount,$policeCount:policeCount,$recordName:recordName);
+    ( eval($killerCount >= $waterCount+$policeCount))     
+     or
+    ( eval($policeCount==0))
+     
+     $room:Room(status=="run")
+  
+	      
+      
+then 
+     LogUtil.log("game over kill win start  ================="); 
+
+    
+    Message gameOver=new Message($recordName,"over","killer win");   
+    insert(gameOver);
+  
+   
+  
+    
+      
+      
+      LogUtil.log("game over kill win over  ================="); 
+end
+
+rule 'game over of water win'
+
+ruleflow-group "game status"
+when
+     //$operater:Operater()  
+     $game:Game($killerCount:killerCount,$waterCount:waterCount,$recordName:recordName);
+     eval($killerCount == 0 )  
+     $room:Room(status=="run")
+      
+then 
+     LogUtil.log("game over water start  ================="); 
+  
+    Message gameOver=new Message($recordName,"over","water win");   
+    insert(gameOver);    
+  
+      LogUtil.log("game over water over  ================="); 
+end
+
+//===========game status ============over 
+
+rule 'game over process '
+
+ruleflow-group "game status"
+no-loop true
+when
+     //$operater:Operater()  
+     Message(predict=="over",$object:object)
+     $game:Game();
+     $room:Room(status=="run")     
+     $all_login_ids:HashSet()
+	      from accumulate(
+	      Player($id:id)	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	 );
+	 $all_role:HashMap()
+	      from accumulate(
+	      $role:Role($id:id)	     
+	      init(Map map=new HashMap();),
+	      action(map.put($id,$role);),
+	      result(map)
+	      );
+	      
+	 
+	 	 $all_right:HashMap()
+	      from accumulate(
+	      $right:Right($id:id)	     
+	      init(Map map=new HashMap();),
+	      action(map.put($id,$right);),
+	      result(map)
+	      );
+	 $operater:Operater()  
+      
+then 
+     LogUtil.log("game over process  start  ================="); 
+     String rightContent="say,ready";
+     for(Object o:$all_login_ids){
+            String uid=(String)o;
+            Role role =(Role)$all_role.get(uid);
+            if(role==null){
+            
+            
+            }else{
+            
+             if("water".equals(role)){
+             
+             
+             }else{
+               //decryption or money or other 
+                
+              Message decryption=new Message(uid,"decryption",role.getRole());  
+               insert(decryption);
+                
+             }
+            
+            retract(role)
+            
+            }
+            
+            
+            
+            Right right =(Right)$all_right.get(uid);
+            
+            if(right==null){
+               right= new Right(uid,convertString2Set(rightContent),false);
+               insert(right);	
+            }else{
+               Set rights=convertString2Set(rightContent);
+            
+               modify(right){setRight(rights)};
+            
+            
+            }            
+            
+            
+	        Message rightMessage=new Message(uid,"right",rightContent); 
+            insert(rightMessage);		
+	  
+            
+        
+	
+	
+     
+     
+     }
+      
+   
+      modify($room){setStatus("unrun")};
+      modify($operater){setGameOver(true)};
+      retract($game);   
+    
+      LogUtil.log("game over process  over  ================="); 
+end
+
+
+
+
+//============game over = ============start 
+
+
+
+
+//============game over =============over 
 
 //===========switch ============start 
 
@@ -466,49 +626,67 @@ when
 	//conditions    
 	$statusChange:StatusChange($change:change)
     $room:Room(status=="run")
-    $game:Game(status!="day") 
-   
+    $game:Game() 
+    $operater:Operater()
     
 then      
 	//actions 
-     LogUtil.log("day phase init  start================= "); 
-     
+     LogUtil.log("phase switch start================= "); 
+     List tms=$operater.getTimerMessages();
     
     if("day".equals($change)){
     
       //1.set game phase,set last time,
           
     modify($game){setStatus("day"),setLastTime(System.currentTimeMillis())};
-     //2.send timer of night    
-	Message nightDelay=createDelayNight($room);
-    insert(nightDelay); 
+    
+    
+    
+     //2.send delay timer of night    
+	Message nightDelay=createDelayNight($room);	
+	tms.add(nightDelay);      
+  
+
+
+    
+    //3.insert day come 
+    insert(createDay($room)); 
     
     }else{
+    
        if("lastwords".equals($change)){
        
        
-      //1.set game phase,set last time,
+           //1.set game phase,set last time,
           
-    modify($game){setStatus("lastword"),setLastTime(System.currentTimeMillis())};
-     //2.send timer of night    
-	Message dayDelay=createDelayDayOfLastword($room);
-    insert(dayDelay); 
+          modify($game){setStatus("lastword"),setLastTime(System.currentTimeMillis())};
+          //2.send timer of night    
+	     Message dayDelay=createDelayDayOfLastword($room);
+         tms.add(dayDelay); 
+    
+           //3.insert day come 
+          insert(createLastword($room)); 
        
        }else{
-       //night 
+          //night 
        
-         modify($game){setStatus("night"),setLastTime(System.currentTimeMillis())};
-     //2.send timer of night    
-	Message dayDelay=createDelayDayOfNight($room);
-    insert(dayDelay); 
+          modify($game){setStatus("night"),setLastTime(System.currentTimeMillis())};
+           //2.send timer of night    
+	      Message dayDelay=createDelayDayOfNight($room);
+          tms.add(dayDelay);  
+    
+          //3.insert day come 
+          insert(createNight($room)); 
        
        
        }
     
     }
+    
+      modify($operater){setTimerMessages(tms)};
    
           
-     LogUtil.log("day phase init  over =================");   
+     LogUtil.log("phase switch  over =================");   
 end
 
 
@@ -536,7 +714,7 @@ then
      Right right= new Right($uid,convertString2Set("say,vote"),false);		
 	 insert(right);	
 	
-	 // send right mesage
+	 // send right message
 	 Message rightMessage=new Message($uid,"right","say,vote"); 
      insert(rightMessage);
      
@@ -547,5 +725,173 @@ then
      LogUtil.log("day phase prepare  over =================");   
 end
 
+rule 'night phase prepare right'
+ruleflow-group "phase prepare"
+no-loop true
+when
+	//conditions
+	$player:Player(status=="living",$uid:id)
+	Message($subject:subject,predict=="time",subject=="night")
+	 
+    Room(status=="run")
+    Game(status=="day")
+    not Right(id==$uid)
+    not VoteStatus(id==$uid)    
+    Role(id==$uid,$role:role)
+then      
+	//actions 
+     LogUtil.log("night phase prepare  start================= ");
+     String rightContent=""; 
+     String voteType="";
+     // set right ,use query
+     if("killer".equals($role)){
+         rightContent="say,kill";
+              
+         Right right= new Right($uid,convertString2Set(rightContent),false);		
+	      insert(right);		
+	      // send right message
+	     Message rightMessage=new Message($uid,"right",rightContent); 
+          insert(rightMessage);
+              
+           VoteStatus voteStatus=new VoteStatus($uid,new ArrayList(),"kill");
+           insert(voteStatus);
+           
+     }else{
+       if("police".equals($role)){       
+          rightContent="say,check";
+           
+         Right right= new Right($uid,convertString2Set(rightContent),false);		
+	      insert(right);	
+	
+	    // send right message
+	     Message rightMessage=new Message($uid,"right",rightContent); 
+         insert(rightMessage);
+	
+               
+         VoteStatus voteStatus=new VoteStatus($uid,new ArrayList(),"check");
+         insert(voteStatus);
+       }else{
+        
+         
+         
+       }
+     
+    }
+		            
+          
+     LogUtil.log("night phase prepare  over =================");   
+end
+
+
+rule 'lastword phase prepare right'
+ruleflow-group "phase prepare"
+no-loop true
+when
+	//conditions
+	$player:Player(status=="lastword",$uid:id)
+	Message($subject:subject,predict=="time",subject=="lastword")
+	 
+    Room(status=="run")
+    Game(status=="lastword")
+    not Right(id==$uid)
+   
+then      
+	//actions 
+     LogUtil.log("lastword phase prepare  start================= "); 
+     // set right ,use query
+     Right right= new Right($uid,convertString2Set("lastword"),false);		
+	 insert(right);	
+	
+	 // send right message
+	 Message rightMessage=new Message($uid,"right","lastword"); 
+     insert(rightMessage);
+
+		            
+          
+     LogUtil.log("lastword phase prepare  over =================");   
+end
+
+
 //===========phase prepare============over 
+
+//===========message accept============start 
+
+
+
+rule 'single accept of assign'
+ruleflow-group "message accept"
+salience 100
+no-loop true 
+when
+     $message:Message($subject:subject,predict=="assign",$object:object,$accepts:accepts)   
+	 
+	 
+then
+     LogUtil.log(" single accept of assign start  ============="+$message);        
+     $accepts.add($object); 
+     modify($message){setAccepts($accepts)};    
+    LogUtil.log("single accept of assign over =============");
+    
+end
   
+rule 'single accept of right'
+ruleflow-group "message accept"
+salience 100
+no-loop true 
+when
+     $message:Message($subject:subject,predict=="right",$object:object,$accepts:accepts)   
+	 
+	 
+then
+     LogUtil.log(" single accept of right start  ============="+$message); 
+     $accepts.add($subject);        
+     modify($message){setAccepts($accepts)};    
+    LogUtil.log(" single accept of right over =============");
+    
+end
+
+
+rule 'group accept of say'
+ruleflow-group "message accept"
+salience 50
+no-loop true 
+when
+     $message:Message($subject:subject,predict=="say"||predict=="vote",object=="-500",$accepts:accepts)   
+	 Role(id==$subject,$role:role)
+	 $otherRole:Role($oid:id,role==$role)
+	 Game(status=="night")
+	 
+then
+     LogUtil.log(" group say start  ============="+$message);   
+     $accepts.add($oid);
+     modify($message){setAccepts($accepts)};    
+    LogUtil.log("group say over =============");
+    
+end
+
+
+
+rule 'all accept of all'
+ruleflow-group "message accept"
+salience 0
+no-loop true 
+when
+    $message:Message($accepts:accepts)   
+	eval($message.getAccepts().size()==0)
+   $all_login_ids:HashSet()
+	      from accumulate(
+	      Player($id:id)	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+	 
+then
+     LogUtil.log(" all accept start  ============="+$message);         
+     modify($message){setAccepts(new ArrayList($all_login_ids))};    
+    LogUtil.log("all accept over =============");
+    
+end
+
+
+//===========message accept============over 

@@ -67,7 +67,8 @@ killController.parseMessage = function(message) {
 killController.role = function(message) {
 
 
-    var name = idFindName(message.subject);
+    var player=playerService.getPlayer(message.subject);
+    var name = player.name;
     var role = "";
     if ("killer" == message.object) {
         role = "杀手";
@@ -99,7 +100,7 @@ killController.assign = function(message) {
     var p = playerService.getPlayer(message.object);
     p.role=message.subject;
     playerService.updatePlayer(p);
-    playerListView.displayRole(killGameAreaView.Role[p.role]);
+    playerListView.displayRole( p.role);
 };
 
 
@@ -184,33 +185,6 @@ killController.clearVote = function() {
 };
 
 
-
-//ID转为名字
-function idGetName(num, returnName) {
-    var rid = $("#rid").val();
-    var name;
-    $.ajax({
-        type : "GET",
-        dataType : 'json',
-        url : "/player/info?rid=" + rid + "&uids=" + num,
-        success : function(data) {
-            name = data.infos.name;
-        },
-        error : function(data) {
-            console.log("此人名字获取失败");
-        }
-    });
-    return returnName();
-}
-function idFindName(id, pre) {
-    var name = playerService.getPlayer(id).name;
-    if (pre) {
-        return pre + name;
-    } else {
-        return name;
-    }
-}
-//倒计时
 
 
 function comet(id, parse) {

@@ -57,10 +57,10 @@ function List<String>  getIDFromPlayer(List players) {
 function Message createDelayNight(Room room) {
 
     String  timeSetting=getRoomSetting(room,"nightTime","30000");//1*60*1000 
-    Message night=new Message("night","send time",timeSetting);
+    Message night=new Message("night","time",timeSetting);
     String  time=getRoomSetting(room,"dayTime","15000");//1*60*1000
     night.setScheduledTime(Long.valueOf(time));
-    
+    night.setWhere(room.getId());
     return night;
   
 }
@@ -68,19 +68,20 @@ function Message createDelayNight(Room room) {
 function Message createDelayDayOfLastword(Room room) {
 
     String  timeSetting=getRoomSetting(room,"dayTime","30000");//1*60*1000 
-    Message night=new Message("day","send time",timeSetting);
+    Message night=new Message("day","time",timeSetting);
     String  time=getRoomSetting(room,"lastwordTime","15000");//1*60*1000
     night.setScheduledTime(Long.valueOf(time));
-    
+    night.setWhere(room.getId());
     return night;
   
 }
 function Message createDelayDayOfNight(Room room) {
 
-    String  timeSetting=getRoomSetting(room,"dayTime","30000");//1*60*1000 
-    Message night=new Message("day","send time",timeSetting);
-    String  time=getRoomSetting(room,"nightTime","15000");//1*60*1000
-    night.setScheduledTime(Long.valueOf(time));
+    String  time=getRoomSetting(room,"dayTime","30000");//1*60*1000 
+    Message night=new Message("day","time",time);
+    String  schedule=getRoomSetting(room,"nightTime","15000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(time));    
+     night.setWhere(room.getId());
     
     return night;
   
@@ -97,6 +98,23 @@ function Message createDay(Room room) {
 
 
     
+    function Message createNight(Room room) {
+    String  dayTime=getRoomSetting(room,"nightTime","30000");//1*60*1000
+    Message day=new Message("night","time",dayTime);
+ 
+     return day;
+   
+  
+}
+    
+    function Message createLastword(Room room) {
+    String  dayTime=getRoomSetting(room,"lastwordTime","30000");//1*60*1000
+    Message day=new Message("lastword","time",dayTime);
+ 
+     return day;
+   
+  
+}
     
    
 

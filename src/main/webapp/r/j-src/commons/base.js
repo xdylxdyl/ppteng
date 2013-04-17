@@ -95,7 +95,7 @@ var initGame = function () {
 var initRecord = function () {
 
     //1.判断是房间还是记录,这个功能是放在哪里呢.是合到Service里,还是在Controller里控制
-    var type = globalView.getRoomType();
+
     var uid = globalView.getCurrentID();
     var rid = globalView.getRoomID();
     var createrID = globalView.getCreaterId();
@@ -169,7 +169,8 @@ var initRecord = function () {
 $(document).ready(function () {
     $.ajaxSettings.traditional = true;
     //初始化，获取房间所有信息,有可能是玩的房间,有可能是战例播放
-    if ("game" == type) {
+
+    if ("game" == globalView.getRoomType()) {
 
         initGame();
     } else {

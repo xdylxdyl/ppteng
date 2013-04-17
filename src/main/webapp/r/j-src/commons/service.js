@@ -446,7 +446,7 @@ var cometService = {
         return ajaxJson("/message/accept2", "POST", message, controlView.showDelay, 5000, "json");
     },
     messageQ:function (msgObj) {
-        $(document).queue("messages", parseMessage(msgObj.message));
+        $(document).queue("messages", cometService.parseMessage(msgObj.message));
 
     },
 

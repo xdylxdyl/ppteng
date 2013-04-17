@@ -12,29 +12,35 @@
   </header>
 
   <nodes>
-    <ruleSet id="68" name="game status" x="664" y="268" width="80" height="48" ruleFlowGroup="game init" />
-    <start id="1" name="Start" x="123" y="7" width="49" height="49" />
-    <ruleSet id="70" name="die process" x="651" y="174" width="101" height="48" ruleFlowGroup="die process" />
-    <end id="5" name="End" x="797" y="788" width="49" height="49" />
-    <ruleSet id="67" name="person status" x="463" y="171" width="117" height="48" ruleFlowGroup="clear role" />
-    <ruleSet id="76" name="game clear" x="77" y="81" width="124" height="48" ruleFlowGroup="game clear" />
-    <ruleSet id="77" name="phase prepare" x="781" y="386" width="80" height="48" ruleFlowGroup="phase prepare" />
-    <ruleSet id="78" name="game prepare" x="83" y="176" width="103" height="48" ruleFlowGroup="game prepare" />
-    <ruleSet id="79" name="phase clear" x="613" y="395" width="80" height="48" ruleFlowGroup="phase clear" />
-    <ruleSet id="80" name="phase action" x="280" y="166" width="98" height="60" ruleFlowGroup="phase action" />
-    <ruleSet id="83" name="game over" x="466" y="269" width="80" height="48" ruleFlowGroup="game over" />
-    <ruleSet id="82" name="phase switch" x="468" y="394" width="80" height="48" ruleFlowGroup="phase switch" />
+    <ruleSet id="68" name="game status" x="679" y="275" width="80" height="48" ruleFlowGroup="game status" />
+    <start id="1" name="Start" x="18" y="25" width="49" height="49" />
+    <ruleSet id="70" name="die process" x="653" y="164" width="101" height="48" ruleFlowGroup="die process" />
+    <end id="5" name="End" x="456" y="671" width="19" height="48" />
+    <ruleSet id="67" name="person status" x="461" y="164" width="117" height="48" ruleFlowGroup="person status" />
+    <ruleSet id="76" name="game clear" x="128" y="24" width="124" height="48" ruleFlowGroup="game clear" />
+    <ruleSet id="77" name="phase prepare" x="794" y="383" width="90" height="48" ruleFlowGroup="phase prepare" />
+    <ruleSet id="78" name="game prepare" x="286" y="23" width="103" height="48" ruleFlowGroup="game prepare" />
+    <ruleSet id="79" name="phase clear" x="636" y="388" width="80" height="48" ruleFlowGroup="phase clear" />
+    <ruleSet id="85" name="message accept" x="783" y="501" width="122" height="48" ruleFlowGroup="message accept" />
+    <ruleSet id="84" name="next of operater" x="592" y="508" width="108" height="48" ruleFlowGroup="next of operater" />
+    <ruleSet id="86" name="action" x="457" y="518" width="80" height="48" ruleFlowGroup="action" />
+    <ruleSet id="80" name="phase action" x="280" y="158" width="98" height="60" ruleFlowGroup="phase action" />
+    <ruleSet id="83" name="game over" x="459" y="277" width="80" height="48" ruleFlowGroup="game over" />
+    <ruleSet id="82" name="phase switch" x="457" y="388" width="80" height="48" ruleFlowGroup="phase switch" />
   </nodes>
 
   <connections>
     <connection from="70" to="68" />
     <connection from="67" to="70" />
-    <connection from="77" to="5" />
+    <connection from="86" to="5" />
     <connection from="80" to="67" />
     <connection from="1" to="76" />
     <connection from="79" to="77" />
     <connection from="76" to="78" />
     <connection from="82" to="79" />
+    <connection from="77" to="85" />
+    <connection from="85" to="84" />
+    <connection from="84" to="86" />
     <connection from="78" to="80" />
     <connection from="68" to="83" />
     <connection from="83" to="82" />
