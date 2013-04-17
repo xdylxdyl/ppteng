@@ -124,7 +124,7 @@ $(document).ready(function () {
 
             var text = $("#contents").text();
             var messages = eval(text);
-            showRecord(messages, 1);
+            recordService.showRecord(messages, 1);
             $("#" + selects.$replayButton).val("播放中..");
             controlView.showRecordCurrentTime(0, globalView.getRecordTime());
 
