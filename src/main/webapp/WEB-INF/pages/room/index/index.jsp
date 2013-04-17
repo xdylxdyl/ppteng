@@ -72,7 +72,7 @@
 							<h4>
 								<small>总用户${count}人 欢迎你:</small> ${user.name}
 							</h4>
-							<img src="http://www.ptteng.com/${user.icon}" class="portrait"
+							<img src="http://www.ptteng.com${user.icon}" class="portrait"
 								id="portrait_img" style="max-width: 16em; height: 8em"> <br>
 							<br>
 							<blockquote>

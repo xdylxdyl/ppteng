@@ -28,7 +28,7 @@
                 <h4>
                 <small>欢迎你</small>,${uname}
                 </h4>
-                <img src="http://www.ptteng.com/${user.icon}" class="portrait"
+                <img src="http://www.ptteng.com${user.icon}" class="portrait"
                 id="portrait_img" style="max-width: 16em; height: 8em">
                 <br><br>
                 <blockquote>
@@ -67,7 +67,7 @@
                 <c:set var="version" value="${room.version}"></c:set>
 
                     <div class="span2">
-                    <img src="http://www.ptteng.com/${users[room.createrID].icon}" alt="${users[room.createrID].name}" class="img-polaroid">
+                    <img src="http://www.ptteng.com${users[room.createrID].icon}" alt="${users[room.createrID].name}" class="img-polaroid">
                     </div>
                     <div class="span7">
                         <h4>
