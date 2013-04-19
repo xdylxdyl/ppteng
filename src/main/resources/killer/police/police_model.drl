@@ -19,6 +19,13 @@ declare Game
 	recordName:String	
 end
 
+declare VoteConvert
+	id: String		
+	vote:String
+	type:String
+end
+
+
 declare Vote
 	id: String		
 	vote:String
@@ -28,7 +35,7 @@ end
 declare VoteStatus
       id:String
       voteMe:List
-      // water/kill/check
+      // vote/kill/check
       type:String
 end
 

@@ -17,14 +17,15 @@
     <ruleSet id="70" name="die process" x="653" y="164" width="101" height="48" ruleFlowGroup="die process" />
     <end id="5" name="End" x="456" y="671" width="19" height="48" />
     <ruleSet id="67" name="person status" x="461" y="164" width="117" height="48" ruleFlowGroup="person status" />
-    <ruleSet id="76" name="game clear" x="128" y="24" width="124" height="48" ruleFlowGroup="game clear" />
-    <ruleSet id="77" name="phase prepare" x="794" y="383" width="90" height="48" ruleFlowGroup="phase prepare" />
-    <ruleSet id="78" name="game prepare" x="286" y="23" width="103" height="48" ruleFlowGroup="game prepare" />
-    <ruleSet id="79" name="phase clear" x="636" y="388" width="80" height="48" ruleFlowGroup="phase clear" />
+    <ruleSet id="76" name="game clear" x="110" y="8" width="124" height="48" ruleFlowGroup="game clear" />
+    <ruleSet id="77" name="phase prepare" x="801" y="376" width="90" height="48" ruleFlowGroup="phase prepare" />
+    <ruleSet id="78" name="game prepare" x="272" y="28" width="103" height="48" ruleFlowGroup="game prepare" />
+    <ruleSet id="79" name="phase clear" x="623" y="382" width="80" height="48" ruleFlowGroup="phase clear" />
     <ruleSet id="85" name="message accept" x="783" y="501" width="122" height="48" ruleFlowGroup="message accept" />
     <ruleSet id="84" name="next of operater" x="592" y="508" width="108" height="48" ruleFlowGroup="next of operater" />
+    <ruleSet id="87" name="phase convert" x="134" y="160" width="80" height="48" ruleFlowGroup="phase convert" />
     <ruleSet id="86" name="action" x="457" y="518" width="80" height="48" ruleFlowGroup="action" />
-    <ruleSet id="80" name="phase action" x="280" y="158" width="98" height="60" ruleFlowGroup="phase action" />
+    <ruleSet id="80" name="phase action" x="315" y="162" width="98" height="60" ruleFlowGroup="phase action" />
     <ruleSet id="83" name="game over" x="459" y="277" width="80" height="48" ruleFlowGroup="game over" />
     <ruleSet id="82" name="phase switch" x="457" y="388" width="80" height="48" ruleFlowGroup="phase switch" />
   </nodes>
@@ -40,8 +41,9 @@
     <connection from="82" to="79" />
     <connection from="77" to="85" />
     <connection from="85" to="84" />
+    <connection from="78" to="87" />
     <connection from="84" to="86" />
-    <connection from="78" to="80" />
+    <connection from="87" to="80" />
     <connection from="68" to="83" />
     <connection from="83" to="82" />
   </connections>
