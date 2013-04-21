@@ -1,9 +1,6 @@
+var recordService = {
 
-
-
-var recordService={
-
-    showRecord:function(messages, speed) {
+    showRecord:function (messages, speed) {
 
         var mq = [];
         for (var index in messages) {
@@ -25,7 +22,7 @@ var recordService={
         recordService.showMessage(0, mq, speed)
     },
 
-    showMessage:function(index, messages, speed) {
+    showMessage:function (index, messages, speed) {
 
         if (index >= messages.length) {
             return;
@@ -272,7 +269,23 @@ var roomService = {
     parseCount:function (counts) {
         for (var key in counts) {
             var c = counts[key];
-            playerListView.setVote(c.id, c.voters.length);
+            var role = playerService.getPlayer(globalView.getCurrentID());
+            switch (role) {
+                case  killGameAreaView.Role.water:
+                    playerListView.setVote(c.id, c.voters.length)
+
+                    break;
+                case  killGameAreaView.Role.killer:
+                    playerListView.setVote(c.id, c.killerVoters.length);
+                    break;
+                case  killGameAreaView.Role.police:
+                    playerListView.setVote(c.id, c.policeVoters.length);
+                    break;
+                default :
+                    break;
+            }
+
+
         }
 
     },
@@ -333,7 +346,7 @@ var roomService = {
         rightView.noRight();
         //每个right下的信息有：id，isNotify, right[]
 
-        if (data != null && data.isNotify && data.id == uid) {
+        if (data != null && data.id == uid) {
             for (var i = 0; i < data.right.length; i++) {
                 var right = data.right[i];
                 // console.log("process right " + right);

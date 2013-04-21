@@ -8,12 +8,18 @@ var timer = null;
 
 var killController = {};
 
-killController.parseMessage = function(message) {
+killController.parseMessage = function (message) {
     switch (message.predict) {
         case "vote" :
             killController.vote(message);
             break;
         case "set vote" :
+            killController.setVote(message);
+            break;
+        case "set kill" :
+            killController.setVote(message);
+            break;
+        case "set check" :
             killController.setVote(message);
             break;
         case "clear vote" :
@@ -24,6 +30,9 @@ killController.parseMessage = function(message) {
             break;
         case "kill" :
             killController.kill(message);
+            break;
+        case "check" :
+            killController.check(message);
             break;
         case "die" :
             killController.die(message);
@@ -53,7 +62,7 @@ killController.parseMessage = function(message) {
             gameView.over(message);
             break;
         case "say":
-              killController.say(message);
+            killController.say(message);
             break;
 
         default :
@@ -63,50 +72,39 @@ killController.parseMessage = function(message) {
 }
 
 
+killController.role = function (message) {
 
-killController.role = function(message) {
 
-
-    var player=playerService.getPlayer(message.subject);
+    var player = playerService.getPlayer(message.subject);
     var name = player.name;
-    var role = "";
-    if ("killer" == message.object) {
-        role = "杀手";
-    } else {
-        role = "水民";
-    }
 
-
-    $("#"+selects.$playerRole).empty().html("身份:" + role );
+    $("#" + selects.$playerRole).empty().html("身份:" + killGameAreaView.RoleName[message.subject]);
 
 
 };
 
-killController.decryption = function(message) {
+killController.decryption = function (message) {
     var name = playerService.getName(message.subject);
-    if ("killer" == message.object) {
 
-        $("#"+selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是杀手</p>");
-    }else{
-        $("#"+selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是水民</p>");
-    }
+    $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + killGameAreaView.RoleName[message.object] + "</p>");
+
 
 };
 
 
-killController.assign = function(message) {
+killController.assign = function (message) {
     //本地存入自己身份
     //杀手栏展示杀手名单
     var p = playerService.getPlayer(message.object);
-    p.role=message.subject;
+    p.role = message.subject;
     playerService.updatePlayer(p);
-    playerListView.displayRole( p.role);
+    playerListView.displayRole(p.role);
 };
 
 
-killController.timeChange = function(message) {
+killController.timeChange = function (message) {
 
-    var status=message.subject;
+    var status = message.subject;
 
     globalView.setGameStatus(status);
     killGameAreaView.showConentForGamePhase(killGameAreaView.Phase[status]);
@@ -116,82 +114,90 @@ killController.timeChange = function(message) {
 
     killGameAreaView.showContentForGameArea(killGameAreaView.Hint[status]);
     killGameAreaView.showConentForGamePhase(killGameAreaView.Phase[status]);
-    viewUtil.autoBottom( $("#"+selects.$gameArea));
+    viewUtil.autoBottom($("#" + selects.$gameArea));
     controlView.clearCountDownTime();
     controlView.setCountDownTime(message.object);
 
 
 };
 
-killController.say = function(message) {
+killController.say = function (message) {
 
-    var p=playerService.getPlayer(message.subject);
-    killGameAreaView.say(message.subject,p.name,message.content,message.expression,message.color,message.object,"");
+    var p = playerService.getPlayer(message.subject);
+    killGameAreaView.say(message.subject, p.name, message.content, message.expression, message.color, message.object, "");
 
 
 };
 
-killController.living = function(message) {
-     playerService.setStatus(message.subject, playerStatus.living);
+killController.living = function (message) {
+    playerService.setStatus(message.subject, playerStatus.living);
     $("#" + message.subject).children("a").removeClass().addClass("living");
 };
-killController.status = function(message) {
-    var name = idFindName(message.subject);
+killController.status = function (message) {
+    var id=message.subject;
+    var player=playerService.getPlayer(id);
+    var name = player.name;
     if (message.object == "lastword") {
 
-        $("#"+selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听 [" + name + "] 的最后一句话。</p>");
+        $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听 [" + name + "] 的最后一句话。</p>");
     }
     playerService.setStatus(message.subject, message.object);
     playerListView.setStatus(message.subject, message.object);
 
 
 };
-killController.kill = function(message) {
+killController.kill = function (message) {
 
     playerListView.kill(message.subject);
     killGameAreaView.kill(playerService.getPlayer(message.subject).name, playerService.getPlayer(message.object).name, message.expression, message.content);
 };
-killController.die = function(message) {
+
+killController.check = function (message) {
+
+
+    killGameAreaView.check(playerService.getPlayer(message.subject).name, playerService.getPlayer(message.object).name, message.expression, message.content);
+};
+
+
+killController.die = function (message) {
 
     playerService.setStatus(message.subject, playerStatus.die)
     playerListView.die();
     killGameAreaView.die(message.subject, playerService.getPlayer(message.subject).name, message.object);
 
-    var selfID=globalView.getCurrentID();
-    if(selfID==message.subject){
-        var p=playerService.getPlayer(message.subject)
+    var selfID = globalView.getCurrentID();
+    if (selfID == message.subject) {
+        var p = playerService.getPlayer(message.subject)
         gameView.showSecondArea(p);
     }
 
 
 };
 
-killController.vote = function(message) {
+killController.vote = function (message) {
 
-    if("day"==globalView.getGameStatus()){
+    if ("day" == globalView.getGameStatus()) {
         killGameAreaView.vote(playerService.getPlayer(message.subject).name,
-        playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
+            playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
 
     }
 
 };
-killController.setVote = function(message) {
+killController.setVote = function (message) {
 
     playerListView.setVote(message.subject, message.object);
 
 };
-killController.clearVote = function() {
+killController.clearVote = function () {
     $("nav li img").text("");
 };
-
-
 
 
 function comet(id, parse) {
     var url = "http://42.121.113.70:8000/channel/" + id;
     try {
         cometUtil.polling(url, parse);
-    } catch  (e) {
+    } catch (e) {
         console.log("comet error ,retry " + e);
         cometUtil.polling(url, parse);
     }

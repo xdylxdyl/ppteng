@@ -75,9 +75,9 @@
 				</entry>
 				<entry key="policeCount" value="1">
 				</entry>
-				<entry key="dayTime" value="240000">
+				<entry key="dayTime" value="180000">
 				</entry>
-				<entry key="nightTime" value="60000">
+				<entry key="nightTime" value="120000">
 				</entry>
 				<entry key="lastwordTime" value="60000">
 				</entry>

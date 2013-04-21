@@ -42,7 +42,8 @@ var killGameAreaView = {
         night:"【系统消息】 月黑风高杀人夜，大家各自保重",
         day:"【系统消息】 天光大亮，大家集中精力找出凶手",
         killerList:"【系统消息】 绝密杀手名单： ",
-        kick:"你好,再见"
+        kick:"你好,再见",
+        check:"贼眉鼠眼必有隐情"
     },
 
     Phase:{
@@ -53,11 +54,18 @@ var killGameAreaView = {
 
     RoleHint:{
         water:"【身份】水民 ",
-        killer:"【身份】杀手 "
+        killer:"【身份】杀手 ",
+        police:"【身份】警察 "
+    },
+    RoleName:{
+        water:"水民 ",
+        killer:"杀手 ",
+        police:"警察 "
     },
     Role:{
         water:"water",
-        killer:"killer"
+        killer:"killer",
+        police:"police"
     },
 
 
@@ -75,24 +83,35 @@ var killGameAreaView = {
         var place = "normal";
 
 
-        switch (player.status){
+        switch (player.status) {
             case playerStatus.die:
                 if ($("#time").val() == "over") {
 
-                           } else {
-                               //没有结束
+                } else {
+                    //没有结束
 
-                               place = "deadArea";
+                    place = "deadArea";
 
-                           }
+                }
                 break;
             case playerStatus.lastword:
                 break;
-             case playerStatus.living:
+            case playerStatus.living:
                 //delay message
-                   if("day"!=globalView.getGameStatus()){
-                       place="discard";
+                if ("day" != globalView.getGameStatus()) {
+                    switch (player.role) {
+                        case gameAreaView.Role.water:
+                            place = "discard";
+                            break;
+                        case gameAreaView.Role.killer:
+
+                            break;
+                        case gameAreaView.Role.police:
+
+                            break;
                     }
+
+                }
             default :
 
 
@@ -136,6 +155,12 @@ var killGameAreaView = {
         $("#" + selects.$gameArea).show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
+    check:function (killerName, objName, exp, content) {
+
+        $("#" + selects.$gameArea).show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "查证 [" + objName + "] 说 : " + content + " </p>");
+        viewUtil.autoBottom($("#" + selects.$gameArea));
+    },
+
 
     showContentForRoleArea:function (content) {
 
@@ -202,6 +227,9 @@ var simpleRightView = {
                 break;
             case "lastword" :
                 simpleRightView.sayRight(right);
+                break;
+            case "check":
+                simpleRightView.commandRight(right);
                 break;
             default :
                 console.log("version view not process right: " + right);
@@ -285,7 +313,7 @@ var gameView = {
         $("#" + selects.$mainArea).removeClass().addClass("span12");
     },
     showSecondArea:function (p) {
-        if (playerStatus.die == p.status ||playerStatus.unready == p.status) {
+        if (playerStatus.die == p.status || playerStatus.unready == p.status) {
             gameView.showDieArea();
         } else {
             gameView.hideDieArea();
@@ -299,7 +327,6 @@ var simpleService = {
     parseDetail:function (data) {
         roomService.parsePerson(data.person);
         simpleService.parseGame(data.game);
-        roomService.parseRoom(data.room);
         roomService.parseRight(data.right);
         roomService.parseCount(data.votes);
         simpleService.parseRole(data.role)

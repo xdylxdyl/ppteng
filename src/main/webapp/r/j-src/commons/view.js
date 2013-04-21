@@ -11,7 +11,8 @@
 var commandText = {
     kick:"果断一脚",
     vote:"投他一票",
-    kill:"杀人灭口"
+    kill:"杀人灭口",
+    check:"查证身份"
 };
 
 
@@ -199,12 +200,11 @@ var playerListView = {
 
     displayRole:function (role) {
 
-     var hint=   killGameAreaView.RoleHint[role];
+        var hint = "【身份】" + killGameAreaView.RoleName[role];
         $("#" + selects.$playerRole).removeClass().empty().html(hint);
-        if(killGameAreaView.Role.killer==role){
+        if (killGameAreaView.Role.killer == role || killGameAreaView.Role.police == role) {
             $("#" + selects.$playerRole).addClass("text-error");
         }
-
 
 
     },
@@ -729,6 +729,9 @@ var controlView = {
                 controlView.filterSingleObject("all", playerList);
                 break;
             case "kill" :
+                controlView.filterSingleObject("living", playerList);
+                break;
+            case "check" :
                 controlView.filterSingleObject("living", playerList);
                 break;
             case "vote" :

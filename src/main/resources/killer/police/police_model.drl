@@ -34,9 +34,9 @@ end
 
 declare VoteStatus
       id:String
-      voteMe:List
-      // vote/kill/check
-      type:String
+      voters:List
+      killerVoters:List
+      policeVoters:List    
 end
 
 
@@ -52,6 +52,13 @@ declare Die
 	id: String
 	type: String
 	role:String
+end
+
+declare KillConfirm
+	id: String	
+end
+declare CheckConfirm
+	id: String	
 end
 
 declare StatusChange

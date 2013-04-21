@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -497,7 +498,7 @@ public class RoomController {
 		List<String> ls = new ArrayList();
 		if (r.getCreaterID().longValue() == uid) {
 			// 从用户中取
-			if (r.getExpressions().size() == 0) {
+			if (CollectionUtils.isEmpty(r.getExpressions())) {
 				User u = this.userService.getObjectById(uid);
 				r.setExpressions(u.getExpression());
 				this.roomService.updateRoom(r);

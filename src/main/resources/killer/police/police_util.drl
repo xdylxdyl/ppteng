@@ -56,10 +56,10 @@ function List<String>  getIDFromPlayer(List players) {
 
 function Message createDelayNight(Room room) {
 
-    String  timeSetting=getRoomSetting(room,"nightTime","30000");//1*60*1000 
-    Message night=new Message("night","switch",timeSetting);
-    String  time=getRoomSetting(room,"dayTime","15000");//1*60*1000
-    night.setScheduledTime(Long.valueOf(time));
+    String  time=getRoomSetting(room,"nightTime","30000");//1*60*1000 
+    Message night=new Message("night","switch",time);
+    String  schedule=getRoomSetting(room,"dayTime","15000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(schedule));
     night.setWhere(room.getId());
     return night;
   
@@ -67,10 +67,10 @@ function Message createDelayNight(Room room) {
 
 function Message createDelayDayOfLastword(Room room) {
 
-    String  timeSetting=getRoomSetting(room,"dayTime","30000");//1*60*1000 
-    Message night=new Message("day","switch",timeSetting);
-    String  time=getRoomSetting(room,"lastwordTime","15000");//1*60*1000
-    night.setScheduledTime(Long.valueOf(time));
+    String  time=getRoomSetting(room,"dayTime","30000");//1*60*1000 
+    Message night=new Message("day","switch",time);
+    String  schedule=getRoomSetting(room,"lastwordTime","15000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(schedule));
     night.setWhere(room.getId());
     return night;
   
@@ -80,7 +80,7 @@ function Message createDelayDayOfNight(Room room) {
     String  time=getRoomSetting(room,"dayTime","30000");//1*60*1000 
     Message night=new Message("day","switch",time);
     String  schedule=getRoomSetting(room,"nightTime","15000");//1*60*1000
-    night.setScheduledTime(Long.valueOf(time));    
+    night.setScheduledTime(Long.valueOf(schedule));    
      night.setWhere(room.getId());
     
     return night;
