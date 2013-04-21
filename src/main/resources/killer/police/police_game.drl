@@ -487,7 +487,7 @@ then
      insert(vote);		
                    
     $voters.add($id);
-     modify($voteStatus){setVoters($voters)};
+     modify($voteStatus){setKillerVoters($voters)};
           LogUtil.log($liverCount+"change vote "+$voteStatus); 
     
      Message setVoteMessage=new Message($vote,"set kill",String.valueOf($voters.size()));
@@ -521,10 +521,10 @@ then
      insert(vote);
      
      $oldVoteMe.remove($id);
-     modify($oldVoteStatus){setVoters( $oldVoteMe)};	
+     modify($oldVoteStatus){setKillerVoters( $oldVoteMe)};	
                    
      $newVoteMe.add($id);
-     modify($newVoteStatus){setVoters($newVoteMe)};
+     modify($newVoteStatus){setKillerVoters($newVoteMe)};
          LogUtil.log("change kill "+$newVoteStatus); 
      
     
@@ -557,7 +557,7 @@ then
      insert(vote);		
                    
     $voters.add($id);
-     modify($voteStatus){setVoters($voters)};
+     modify($voteStatus){setPoliceVoters($voters)};
           LogUtil.log($liverCount+"change vote "+$voteStatus); 
     
      Message setVoteMessage=new Message($vote,"set check",String.valueOf($voters.size()));
@@ -591,10 +591,10 @@ then
      insert(vote);
      
      $oldVoteMe.remove($id);
-     modify($oldVoteStatus){setVoters( $oldVoteMe)};	
+     modify($oldVoteStatus){setPoliceVoters( $oldVoteMe)};	
                    
      $newVoteMe.add($id);
-     modify($newVoteStatus){setVoters($newVoteMe)};
+     modify($newVoteStatus){setPoliceVoters($newVoteMe)};
          LogUtil.log("change check "+$newVoteStatus); 
      
     
@@ -761,7 +761,7 @@ rule 'person die by kill'
 ruleflow-group "person status"
 no-loop true
 when 
-  Player($id:id,status=="lastword")
+  $player:Player($id:id,status=="lastword")
   Role($role:role)
   (
     Game(status=="lastword") and  Message(subject==$id,predict=="lastword")   
@@ -770,13 +770,14 @@ when
   (
     Message(subject=="day",predict=="time")  
    )
+   not Die()
 
   
 then
-   LogUtil.log("person lastword  by kill start=============="); 
+   LogUtil.log("person die  by kill start=============="+$player); 
    Die die=new Die($id,"kill",$role);   
    insert(die);
-   LogUtil.log("person lastword by kill over==============");   
+   LogUtil.log("person die by kill over==============");   
   
  
 end
@@ -794,6 +795,7 @@ when
   $voteStatus:VoteStatus(id==$id)     
   eval(($voteStatus.getVoters().size() * 2) > $liverCount )   
   Role(id==$id,$role:role)
+  not Die()
 then
    LogUtil.log("person die  start==============");
    Die die=new Die($id,"vote",$role);   
@@ -844,7 +846,7 @@ when
   $person:Player(status!="die");   
   $room:Room(status=="run")
  then
-   LogUtil.log(" die  start=============");
+   LogUtil.log(" die  start============="+$die);
    
    //if water die
     if("water".equals($role)){
@@ -873,7 +875,7 @@ when
     
     modify($person){setStatus("die")};
     retract($die);
-    
+       LogUtil.log(" die  over=============");
     
 
  
@@ -901,7 +903,7 @@ when
 then 
      LogUtil.log("game over kill win start  ================="); 
 
-    
+     LogUtil.log("game detail "+$game); 
     Message gameOver=new Message($recordName,"over","killer win");   
     insert(gameOver);
   
@@ -924,7 +926,7 @@ when
       
 then 
      LogUtil.log("game over water start  ================="); 
-  
+    LogUtil.log("game detail "+$game); 
     Message gameOver=new Message($recordName,"over","water win");   
     insert(gameOver);    
   
