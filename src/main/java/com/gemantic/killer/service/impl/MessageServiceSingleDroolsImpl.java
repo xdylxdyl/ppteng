@@ -151,6 +151,21 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			this.roomService.updateRoom(r);
 			// 从哪知道游戏里的玩家呢
 
+			if(r.getVersion().equals("killer_police_1.0")){
+				
+				for (Message m : messages) {
+					if ("decryption" == m.getPredict()) {
+						Long uid = Long.valueOf(m.getSubject());
+						User u = this.userService.getObjectById(uid);
+						u.setMoney(u.getMoney() + 2000);//
+						this.userService.update(u);
+					}
+
+				}
+				
+			}
+			
+			
 			if(r.getPlayers().size()>=6&&time>3*60*1000){
 				//六人局才发钱和超过三分钟才给钱存战例
 				for (Message m : messages) {
