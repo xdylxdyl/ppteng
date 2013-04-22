@@ -536,6 +536,15 @@ var controlView = {
 
         }
 
+        if(result.code==0){
+            if(versionFunction["commandCheck"])
+                      return versionFunction["commandCheck"]();
+        }else{
+
+            return result;
+        }
+
+
         return result;
 
     },

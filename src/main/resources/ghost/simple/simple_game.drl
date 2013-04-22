@@ -154,7 +154,7 @@ then
 	 Map	ids_role=RoleUtil.assingRole(role_count,ls);
 	 
 	 //2. creae game
-	Game game=new Game("ready",$allReadys.size(),kingCount,waterCount,ghostCount,System.currentTimeMillis(),0L,$time,rname);
+	Game game=new Game("ready",$allReadys.size()-kingCount,kingCount,waterCount,ghostCount,System.currentTimeMillis(),0L,$time,rname);
 	
 	 List readyIDS=new ArrayList();
 	 //3.create Role/status/vote record message create log ,how to update all unready players status;
@@ -176,15 +176,14 @@ then
 				  if("king".equals(role)){
 				  		  Message assignMessage=new Message(role,"assign",uid); 
 				          insert(assignMessage);				          
-				          modify(p){setStatus("system")};
-				            Message livingMessage=new Message(uid,"system",""); 
-				             insert(livingMessage);
+				          modify(p){setStatus("king")};
+				            Message statusMessage=new Message(uid,"status","king"); 
+				             insert(statusMessage);
 				  
 				  }else{
-				          modify(p){setStatus("living")};
-				            Message livingMessage=new Message(uid,"living",""); 
-				             insert(livingMessage);
-				  
+				        modify(p){setStatus("living")};				       
+				       Message statusMessage=new Message(uid,"status","living"); 
+				        insert(statusMessage);
 				   
 				   }
 			  
@@ -218,12 +217,12 @@ then
 	
 	
 	
-	LogUtil.log("game init process over  =================");
+	
 	
 	//7. update operater 
 	$operater.setGameStart(true);
 	$operater.setPlayers(readyIDS);
-        
+        LogUtil.log("game init process over  ================="+game);
    
 end
 //===========game prepare will process clear info,role assing ,right assign============over 
@@ -352,10 +351,21 @@ then
     LogUtil.log("topic createstart  ================="); 
   
     String waterCard=parseTopic($content,"water");
-    String ghostCard=parseTopic($content,"ghost");
+    if(StringUtils.isBlank(waterCard)){
+   
+      Message wrongMessage=new Message("-500","wrong topic","");
+      wrongMessage.setContent($content);
+      insert(wrongMessage);
+      retract($message);
+   
+    }else{
+     String ghostCard=parseTopic($content,"ghost");
   
        Card  card=new Card(waterCard,ghostCard); 
 	   insert(card);
+    
+    }
+    
     LogUtil.log("topic create over  ================="); 
 end
 
@@ -370,22 +380,20 @@ when
     Game(status=="topic")   
     Right(id==$id,right contains "topic")
     $r:Role($uid:id,$role:role,role!="king")
+    Card($waterCard:waterCard,$ghostCard:ghostCard)
        
 then
     LogUtil.log("topic assign start  ================="); 
-    
-  String waterCard=parseTopic($content,"water");
-    String ghostCard=parseTopic($content,"ghost");
-    
+  
     if("water".equals($role)){
     
-       Message assignMessage=new Message(waterCard,"topic assign",$uid); 
+       Message assignMessage=new Message($waterCard,"topic assign",$uid); 
 				  insert(assignMessage);
-		 modify($r){setCard(waterCard)};
+		 modify($r){setCard($waterCard)};
     }else{
-         Message assignMessage=new Message(ghostCard,"topic assign",$uid); 
+         Message assignMessage=new Message($ghostCard,"topic assign",$uid); 
 				  insert(assignMessage);
-         modify($r){setCard(ghostCard)};
+         modify($r){setCard($ghostCard)};
     }
     
   
@@ -906,19 +914,43 @@ then
 	
 	 Message rightMessage=new Message($uid,"right","say,vote"); 
      insert(rightMessage);
-     
-	
-		            
           
      LogUtil.log("day phase prepare  over =================");   
 end
+
+rule 'day phase prepare right of king'
+ruleflow-group "phase prepare"
+no-loop true
+when
+	//conditions
+	$player:Player(status=="king",$uid:id)
+	Message($subject:subject,predict=="time",subject=="day")
+	 
+    Room(status=="run")
+    Game(status=="day")
+    $right:Right(id==$uid)
+    Role(role=="king")
+then      
+	//actions 
+     LogUtil.log("day phase prepare of king start================= "); 
+  
+  
+     modify($right){setRight(convertString2Set("say"))};    	
+	
+	
+	 Message rightMessage=new Message($uid,"right","say"); 
+     insert(rightMessage);
+          
+     LogUtil.log("day phase prepare of king over =================");   
+end
+
 
 rule 'topic phase prepare right'
 ruleflow-group "phase prepare"
 no-loop true
 when
 	//conditions
-	$player:Player(status=="system",$uid:id)
+	$player:Player(status=="king"||status=="living",$uid:id)
 	Message(predict=="time",subject=="topic")
 	 
     Room(status=="run")
@@ -933,7 +965,7 @@ then
      String voteType="";
     
      if("king".equals($role)){
-         rightContent="topic";
+         rightContent="topic,say";
               
            modify($right){setRight(convertString2Set(rightContent))};   	
 	    

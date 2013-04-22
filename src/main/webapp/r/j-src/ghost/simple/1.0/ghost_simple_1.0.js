@@ -13,7 +13,8 @@ var ghostSimpleModel = {
     topicHint:"格式不正确,第一个词为水民卡,第二个词为幽灵卡,中间以空格隔开",
     playerStatus:{
         die:"die",
-        living:"living"
+        living:"living",
+        system:"system"
 
     },
     role:{
@@ -22,8 +23,8 @@ var ghostSimpleModel = {
         king:"king"
     },
     hint:{
-        topic:"【系统消息】请耐心等英明的国王出题",
-        day:"【系统消息】 国王在上,请再给你的子民们一次找出幽灵的机会"
+        topic:"【系统消息】请耐心等英明的国王出题,出题时间,其他玩家不能说话.卡片格式:第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开",
+        day:"【系统消息】 国王在上,感谢您给了你的子民们又一次找出幽灵的机会,我们一定不负重望~"
     },
     commandHint:{
         vote:"向国王效忠的时候到了",
@@ -73,6 +74,7 @@ var ghostSimpleController = {
 
     commandCheck:function () {
         var result = {};
+        result.code = 0;
         var command = controlView.getCommandValue();
         switch (command) {
             case "topic":
@@ -113,12 +115,6 @@ var ghostSimpleController = {
             case "topic assign" :
                 ghostSimpleController.topicAssign(message);
                 break;
-            case "living" :
-                ghostSimpleController.living(message);
-                break;
-            case "system" :
-                           ghostSimpleController.system(message);
-                           break;
             case "topic" :
                 ghostSimpleController.say(message);
                 break;
@@ -134,12 +130,16 @@ var ghostSimpleController = {
             case "decryption ghostCard" :
                 ghostSimpleController.decryptionGhostCard(message);
                 break;
+            case "wrong topic":
+                          ghostSimpleController.wrongTopic(message);
+                          break;
             case "status" :
                 ghostSimpleController.status(message);
                 break;
             case "start" :
                 gameView.start(message);
                 break;
+
             case "over" :
                 gameView.over(message);
                 break;
@@ -154,6 +154,12 @@ var ghostSimpleController = {
     },
 
 
+    wrongTopic:function (message) {
+
+            $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + message.content + "]不符合规范,第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开</p>");
+
+
+        },
     decryption:function (message) {
         var name = playerService.getName(message.subject);
 
@@ -185,6 +191,9 @@ var ghostSimpleController = {
         p.role = message.subject;
         playerService.updatePlayer(p);
         ghostView.displayRole(ghostSimpleModel.roleName[message.subject]);
+        gameView.showSecondArea(p);
+
+
     },
     topicAssign:function (message) {
 
@@ -224,10 +233,9 @@ var ghostSimpleController = {
     },
 
     system:function (message) {
-          playerService.setStatus(message.subject, playerStatus.system);
-          $("#" + message.subject).children("a").removeClass().addClass("system");
-      },
-
+        playerService.setStatus(message.subject, playerStatus.system);
+        $("#" + message.subject).children("a").removeClass().addClass("system");
+    },
 
 
     status:function (message) {
@@ -335,6 +343,16 @@ var ghostView = {
         switch (player.status) {
             case ghostSimpleModel.playerStatus.die:
                 if ($("#time").val() == "over") {
+
+                } else {
+                    //没有结束
+
+                    place = "deadArea";
+
+                }
+                break;
+            case ghostSimpleModel.playerStatus.king:
+                if ($("#time").val() == "over"||$("#time").val()=="topic") {
 
                 } else {
                     //没有结束
@@ -532,7 +550,7 @@ var gameView = {
         $("#" + selects.$mainArea).removeClass().addClass("span12");
     },
     showSecondArea:function (p) {
-        if (playerStatus.die == p.status || playerStatus.unready == p.status) {
+        if (playerStatus.die == p.status || playerStatus.unready == p.status||playerStatus.king== p.status) {
             gameView.showDieArea();
         } else {
             gameView.hideDieArea();

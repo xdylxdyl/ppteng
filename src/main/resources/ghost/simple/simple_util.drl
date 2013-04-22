@@ -98,6 +98,10 @@ function Message createDay(Room room) {
    
     function String parseTopic(String topic, String role) {
      String[] contents=topic.split(" ");
+     if(contents.length<2){
+         return null; 
+     
+     }
      if("water".equals(role)){
         return contents[0]; 
      

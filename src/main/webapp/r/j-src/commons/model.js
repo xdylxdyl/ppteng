@@ -137,7 +137,7 @@ var playerStatus = {
     die:"die",
     ready:"ready",
     lastword:"lastword",
-    system:"system"
+    king:"king"
 
 }
 

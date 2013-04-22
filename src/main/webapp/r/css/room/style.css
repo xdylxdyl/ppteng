@@ -171,7 +171,7 @@ li label.checkbox, li .help-inline {
 #wrapper li.playing:before { content: '♬'; width: 14px; height: 14px; padding: 3px; line-height: 14px; margin: 0px; position: absolute; left: -24px; top: 9px; color: #000; font-size: 13px; text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2); }
 
 /*icon*/
-.icon-ready, .icon-unready, .icon-living, .icon-die, .icon-lastword {
+.icon-ready, .icon-unready, .icon-living, .icon-die, .icon-lastword ,.icon-king{
     background-image: url("../../img/user-status.png");
 }
 .icon-ready {
