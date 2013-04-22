@@ -23,6 +23,8 @@
 				</entry>
 				<entry key="killer_police_1.0" value-ref="killer_police_1.0_setting">
 				</entry>
+				<entry key="ghost_simple_1.0" value-ref="ghost_simple_1.0_setting">
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
@@ -84,6 +86,20 @@
 			</map>
 		</constructor-arg>
 	</bean>
+	
+	<bean id="ghost_simple_1.0_setting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="ghostCount" value="1">
+				</entry>				
+				<entry key="dayTime" value="240000">
+				</entry>
+				<entry key="topicTime" value="60000">
+				</entry>			
+			</map>
+		</constructor-arg>
+	</bean>
+	
 
 		<bean id="settingDisplay" class="java.util.HashMap">
 			<constructor-arg>
@@ -104,6 +120,10 @@
 					<entry key="columnCount" value="列数">
 					</entry>
 					<entry key="mineCount" value="雷数">
+					</entry>
+					<entry key="ghostCount" value="鬼数">
+					</entry>
+					<entry key="topicTime" value="出题时间">
 					</entry>
 
 				</map>

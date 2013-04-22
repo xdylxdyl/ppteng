@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <c:choose>
 <c:when test="${'simple_1.0'==version}">
-简化
+杀人游戏[简化]
 </c:when>
 
 <c:when test="${'killer_police_1.0'==version}">
-警版[测试版]
+杀人游戏[警版][测试版]
 </c:when>
 
 <c:when test="${'mine_1.0'==version}">
@@ -14,6 +14,12 @@
 <c:when test="${'video_1.0'==version}">
 一起看视频
 </c:when>
+
+
+<c:when test="${'ghost_simple_1.0'==version}">
+捉鬼[简化][测试版]
+</c:when>
+
 <c:otherwise>
 </c:otherwise>
 </c:choose>

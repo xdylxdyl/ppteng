@@ -13,6 +13,7 @@ var commandText = {
     vote:"投他一票",
     kill:"杀人灭口",
     check:"查证身份"
+
 };
 
 
@@ -299,6 +300,12 @@ var rightView = {
 
         $("#command").append("<li data-default='" + right + "'><a href='#'>" + commandText[right] + "</a></li>");
     },
+    showCommandRight:function (right, name) {
+
+
+        $("#command").append("<li data-default='" + right + "'><a href='#'>" + name + "</a></li>");
+    },
+
     noRight:function () {
 
         $("#" + selects.$sayButton).prop("disabled", true);
@@ -506,6 +513,16 @@ var controlView = {
                     result.message = sayHint.empty;
                 }
                 break;
+            case "topic":
+                var sayNotEmpty = controlView.checkSayNotEmpty();
+                if (sayNotEmpty) {
+                    result.code = 0;
+                } else {
+                    result.code = -1;
+                    result.message = sayHint.empty;
+                }
+                break;
+
             default:
                 //other command such as ,kick ,vote,kill,must have object
                 var object = controlView.getObjectValue();

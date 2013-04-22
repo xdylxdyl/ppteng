@@ -136,7 +136,8 @@ var playerStatus = {
     living:"living",
     die:"die",
     ready:"ready",
-    lastword:"lastword"
+    lastword:"lastword",
+    system:"system"
 
 }
 

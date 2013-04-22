@@ -226,6 +226,9 @@
 					<p>
 						<a href="http://womenaikan.com/" target="_blank">我们爱看</a>
 					<p>
+					<p>
+						<a href="http://www.wargamechina.com/" target="_blank">中国兵棋网</a>
+					<p>
 				</div>
 				<div class="span3">
 					<p>

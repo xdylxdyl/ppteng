@@ -114,6 +114,16 @@
 					<list>						
 					</list>
 				</entry>
+				
+				<entry key="ghost_simple_1.0">
+					<list>
+						<value>ghost/simple/simple_model.drl</value>
+						<value>ghost/simple/simple_query.drl</value>
+						<value>ghost/simple/simple_util.drl</value>
+						<value>ghost/simple/simple_game.drl</value>
+						<value>ghost/simple/simple_game.rf</value>
+					</list>
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
