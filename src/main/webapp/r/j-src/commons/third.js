@@ -75,7 +75,7 @@ if (loginView.isLogin()) {
 
 var login = function (type, openID, name) {
     ajaxJson("/player/openID?", "post", {type:type, openID:openID, name:name}, null, 5000, "json");
-    window.location.href = "/";
+    window.location.href = "/m/list";
 }
 
 

@@ -98,6 +98,8 @@
           <p></p>     
 <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=1931" class="text-warning" target="_blank">1.捉鬼[简化版]术语表 &raquo;</a></p>
   <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=1933" class="text-warning" target="_blank">2.捉鬼[简化版]规则 &raquo;</a></p>
+      <p><a href="http://www.wandianba.com/" class="text-warning" target="_blank">3.感谢玩点吧首创捉鬼规则 &raquo;</a></p>   
+       
        
             </div>
                         
