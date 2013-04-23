@@ -88,9 +88,8 @@ var restService = {
 var app = angular.module('myApp', []);
 app.run(function ($rootScope, $timeout, ngRestAgentService) {
     console.log('starting run');
-    $timeout(function () {
-        console.log("1111");
-
+    var timer = setInterval(function(){
+        console.log("Update Once");
         ngRestAgentService.updateFeed();
     }, 6000);
 });
@@ -98,6 +97,7 @@ app.service('ngRestAgentService', function (ngRestService, $timeout) {
     this.updateFeed = function () {
         var feeds = restService.getPublicFeed();
         ngRestService.publicFeed = feeds;
+        console.log("NEWS:");
         console.log(feeds);
     };
 

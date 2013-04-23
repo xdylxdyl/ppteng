@@ -86,9 +86,8 @@
                                 
                                         <div class="span9">
             
-    
-              <div class="row" style="margin-bottom: 30px;" ng-repeat="pfeed in publicFeed">
 
+              <div class="row" style="margin-bottom: 30px;" ng-repeat="pfeed in publicFeed">
                     <div class="span7">
                         <h4>
                             <a href="{{pfeed.link}}" target="_blank">{{pfeed.title}}</a>
