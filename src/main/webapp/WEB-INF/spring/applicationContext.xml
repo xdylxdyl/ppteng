@@ -124,6 +124,13 @@
 						<value>ghost/simple/simple_game.rf</value>
 					</list>
 				</entry>
+				
+					<entry key="rest_1.0">
+					<list>
+						
+					</list>
+				</entry>
+				
 			</map>
 		</constructor-arg>
 	</bean>

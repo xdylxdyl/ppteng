@@ -25,6 +25,8 @@
 				</entry>
 				<entry key="ghost_simple_1.0" value-ref="ghost_simple_1.0_setting">
 				</entry>
+				<entry key="rest_1.0" value-ref="rest_1.0_setting">
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
@@ -86,6 +88,10 @@
 			</map>
 		</constructor-arg>
 	</bean>
+		<bean id="rest_1.0_setting" class="java.util.HashMap">	
+	</bean>
+	
+	
 	
 	<bean id="ghost_simple_1.0_setting" class="java.util.HashMap">
 		<constructor-arg>

@@ -19,7 +19,9 @@
 <c:when test="${'ghost_simple_1.0'==version}">
 捉鬼[简化][测试版]
 </c:when>
-
+<c:when test="${'rest_1.0'==version}">
+茶座休息室
+</c:when>
 <c:otherwise>
 </c:otherwise>
 </c:choose>
