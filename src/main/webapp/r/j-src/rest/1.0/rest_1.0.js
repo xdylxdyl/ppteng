@@ -97,7 +97,7 @@ app.run(function ($rootScope, $timeout, ngRestAgentService) {
     //使用timeout重复执行
     var refresh = $timeout(function myFunction() {
         console.log("123");
-        refresh = $timeout(myFunction, 6000);
+        refresh = $timeout(myFunction, 60000);
     });
 
     /*销毁之前定义的重复执行事件

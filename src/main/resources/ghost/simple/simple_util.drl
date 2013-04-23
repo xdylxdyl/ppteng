@@ -59,6 +59,7 @@ function Message createDelayDay(Room room) {
     String  schedule=getRoomSetting(room,"dayTime","30000");//1*60*1000
     night.setScheduledTime(Long.valueOf(schedule));
     night.setWhere(room.getId());
+    
     return night;
   
 }

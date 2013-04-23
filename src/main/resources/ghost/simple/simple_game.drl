@@ -152,9 +152,12 @@ then
 	 //get uid id List
 	 List ls=getIDFromPlayer($allReadys);
 	 Map	ids_role=RoleUtil.assingRole(role_count,ls);
-	 
+	 int dayCount=ghostCount+1;
+	 if(dayCount<2){
+	      dayCount=2;
+	 }
 	 //2. creae game
-	Game game=new Game("ready",$allReadys.size()-kingCount,kingCount,waterCount,ghostCount,System.currentTimeMillis(),0L,$time,rname);
+	Game game=new Game("ready",$allReadys.size()-kingCount,kingCount,waterCount,ghostCount,dayCount,System.currentTimeMillis(),0L,$time,rname);
 	
 	 List readyIDS=new ArrayList();
 	 //3.create Role/status/vote record message create log ,how to update all unready players status;
@@ -594,12 +597,16 @@ end
 //==game status===start 
 
 
-rule 'game over of  killer win'
+rule 'game over of  ghost win'
 ruleflow-group "game status"
 when
    
-     $game:Game($kingCount:kingCount,$waterCount:waterCount,$ghostCount:ghostCount,$recordName:recordName);
-     eval($ghostCount >= $waterCount)    
+     $game:Game($kingCount:kingCount,$waterCount:waterCount,$ghostCount:ghostCount,$dayCount:dayCount,$recordName:recordName);
+     (eval($ghostCount >= $waterCount)) or
+     (
+       eval($dayCount==0 && $ghostCount!=0) and
+      Message($phase:subject,predict=="switch")
+     )    
     $room:Room(status=="run")
   
 	      
@@ -815,7 +822,7 @@ when
 	//conditions    
 	$message:Message($phase:subject,predict=="switch")
     $room:Room(status=="run")
-    $game:Game(status!=$phase) 
+    $game:Game() 
     $operater:Operater()
     
 then     
@@ -835,7 +842,7 @@ when
 	//conditions    
 	$statusChange:StatusChange($change:change)
     $room:Room(status=="run")
-    $game:Game() 
+    $game:Game($dayCount:dayCount) 
     $operater:Operater()
     
 then      
@@ -847,19 +854,20 @@ then
     
       //1.set game phase,set last time,
           
-    modify($game){setStatus("day"),setLastTime(System.currentTimeMillis())};
+    modify($game){setStatus("day"),setLastTime(System.currentTimeMillis()),setDayCount($dayCount-1)};
     
     
     
      //2.send delay timer of night    
 	Message dayDelay=createDelayDay($room);	
-	tms.add(dayDelay);      
-  
-
-
+	
+	tms.add(dayDelay); 
+	    
+    Message currentDay=createDay($room);
+    currentDay.setContent(String.valueOf($game.getDayCount()));
     
     //3.insert day come 
-    insert(createDay($room)); 
+    insert(currentDay); 
     
     }else{
         //"topic"

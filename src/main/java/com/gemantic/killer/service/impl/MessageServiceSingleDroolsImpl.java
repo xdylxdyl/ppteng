@@ -151,7 +151,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			this.roomService.updateRoom(r);
 			// 从哪知道游戏里的玩家呢
 
-			if(r.getVersion().equals("killer_police_1.0")){
+			if(r.getVersion().equals("killer_police_1.0")||r.getVersion().equals("ghost_simple_1.0")){
 				
 				for (Message m : messages) {
 					if ("decryption" == m.getPredict()) {

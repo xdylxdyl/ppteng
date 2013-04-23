@@ -13,6 +13,7 @@ declare Game
 	kingCount:int	
 	waterCount:int
 	ghostCount:int		
+	dayCount:int
 	lastTime:Long
 	remainTime:Long
 	startAt:Long
