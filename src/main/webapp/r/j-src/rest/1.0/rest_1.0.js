@@ -1,6 +1,4 @@
-
-
-var restModel={
+var restModel = {
     publicFeed:[],
     privateFeed:[],
     feedUrl:{
@@ -13,14 +11,14 @@ var restModel={
 
 var restView = {
 
-    updatePublicFeed:function(feed){
-        restModel.publicFeed=feed;
+    updatePublicFeed:function (feed) {
+        restModel.publicFeed = feed;
 
         for (var f in feed) {
 
-          console.log(feed[f].title);
+            console.log(feed[f].title);
 
-       }
+        }
     }
 
 }
@@ -55,30 +53,30 @@ var restService = {
     updateSetting:function (init) {
 
     },
-    init:function(){
+    init:function () {
         gameAreaView.systemMessage("【系统消息】足不出户.知晓天下.亲爱的朋友,欢迎您来到" +
             "<a href='http://bbs.ptteng.com/forum.php?mod=viewthread&tid=2008' target='_blank''>葡萄藤茶座</a>" +
-            ",每隔一分钟,资讯会自动刷新一次~" );
+            ",每隔一分钟,资讯会自动刷新一次~");
 
         controlView.hideButton(selects.$readyButton);
         controlView.hideButton(selects.$countDown);
-        restService.showFeed();
+        //restService.showFeed();
 
     },
-    getPublicFeed:function(){
+    getPublicFeed:function () {
 
         return  ajaxJson(restModel.feedUrl.public, "get", {}, restService.parsePublicFeed, 5000, "json");
 
     },
-    parsePublicFeed:function(feed){
-          console.log(feed.count);
-          return feed.value.items;
+    parsePublicFeed:function (feed) {
+        console.log(feed.count);
+        return feed.value.items;
     },
 
 
     showFeed:function () {
         console.log("start get feed ");
-        var feeds=  restService.getPublicFeed();
+        var feeds = restService.getPublicFeed();
         restView.updatePublicFeed(feeds);
         setTimeout(restService.showFeed, 6000);
     }
@@ -87,24 +85,35 @@ var restService = {
 }
 
 
+var app = angular.module('myApp', []);
+app.run(function ($rootScope, $timeout, ngRestAgentService) {
+    console.log('starting run');
+    $timeout(function () {
+        console.log("1111");
+
+        ngRestAgentService.updateFeed();
+    }, 6000);
+});
+app.service('ngRestAgentService', function (ngRestService, $timeout) {
+    this.updateFeed = function () {
+        var feeds = restService.getPublicFeed();
+        ngRestService.publicFeed = feeds;
+        console.log(feeds);
+    };
+
+});
+app.service('ngRestService', function ($rootScope) {
+    //object example
+    this.publicFeed = restService.getPublicFeed();
+
+});
 
 
+function publicCtrl($scope, ngRestService) {
+    $scope.publicFeed = ngRestService.publicFeed;
 
 
-
-
-    function publicCtrl($scope) {
-      $scope.publicFeed =restModel.publicFeed;
-
-
-
-
-
-
-
-
-     };
-
+};
 
 
 var versionFunction = {

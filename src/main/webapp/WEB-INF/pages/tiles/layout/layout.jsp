@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <!doctype html>
-<html ng-app>
+<html ng-app="myApp">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
