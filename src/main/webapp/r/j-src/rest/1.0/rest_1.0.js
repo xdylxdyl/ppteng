@@ -129,6 +129,10 @@ app.service('ngRestService', function ($rootScope) {
 
 function publicCtrl($scope, ngRestService) {
     $scope.publicFeed = ngRestService.publicFeed;
+    $scope.refresh = function() {
+           $scope.publicFeed = restService.getPublicFeed();
+       };
+
 
 
 };

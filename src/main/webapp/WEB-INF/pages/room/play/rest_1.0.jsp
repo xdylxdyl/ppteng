@@ -83,6 +83,7 @@
                                  
                                 </blockquote>
                                 <div class="" id="news_public">
+                                <button ng-click="refresh()">刷新</button>
                                 
                                         <div class="span9">
             
