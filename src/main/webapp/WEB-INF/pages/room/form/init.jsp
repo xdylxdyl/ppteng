@@ -37,7 +37,7 @@
 					<c:if test="${room.version=='video_1.0'}">selected="selected"</c:if>>虚拟电影院</option>
 					<option value="ghost_simple_1.0"
 					<c:if test="${room.version=='ghost_simple_1.0'}">selected="selected"</c:if>>捉鬼[简化][测试版]</option>
-					<option value="ghost_simple_1.0"
+					<option value="ghost_question_1.0"
 					<c:if test="${room.version=='ghost_question_1.0'}">selected="selected"</c:if>>捉鬼[猜词][测试版]</option>
 				<option value="rest_1.0"
 					<c:if test="${room.version=='rest_1.0'}">selected="selected"</c:if>>茶座休息室</option>	

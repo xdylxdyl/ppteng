@@ -28,7 +28,7 @@
     <ruleSet id="80" name="phase action" x="330" y="169" width="98" height="60" ruleFlowGroup="phase action" />
     <ruleSet id="83" name="game over" x="187" y="282" width="80" height="48" ruleFlowGroup="game over" />
     <ruleSet id="82" name="phase switch" x="471" y="387" width="80" height="48" ruleFlowGroup="phase switch" />
-    <ruleSet id="89" name="refresh" x="27" y="187" width="80" height="48" ruleFlowGroup="refresh" />
+    <ruleSet id="89" name="query" x="27" y="187" width="80" height="48" ruleFlowGroup="query" />
     <ruleSet id="88" name="phase switch prepare" x="136" y="401" width="185" height="48" ruleFlowGroup="phase switch prepare" />
   </nodes>
 

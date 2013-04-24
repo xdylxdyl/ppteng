@@ -111,7 +111,7 @@
 				<entry key="topicTime" value="60000">
 				</entry>
 				<entry key="questionTime" value="60000">
-				</entry			
+				</entry>		
 			</map>
 		</constructor-arg>
 	</bean>

@@ -767,7 +767,11 @@ var controlView = {
                 controlView.filterSingleObject("none", playerList);
                 break;
             default :
-                console.log("亲，这个指令你还没写嘛.");
+                console.log("亲，这个指令你还没写嘛.,start version commandFilter");
+                if (versionFunction["commandFilter"]) {
+                      versionFunction["commandFilter"](command);
+                  }
+
         }
     },
     filterSingleObject:function (keyword, playerList) {
@@ -804,6 +808,13 @@ var controlView = {
 
         var objectStr = " <li data-default='" + player.id + "'><a href='#'>" + player.name + "</a></li>";
         $("#object").append(objectStr);
+
+    },
+    appendObjectContent:function(data,display){
+
+        var objectStr = " <li data-default='" + data + "'><a href='#'>" +display + "</a></li>";
+        $("#object").append(objectStr);
+
 
     },
     hideButton:function (id) {

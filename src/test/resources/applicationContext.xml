@@ -127,7 +127,7 @@
 				</entry>
 					<entry key="ghost_question_1.0">
 					<list>
-						<value>ghost/quetion/question_model.drl</value>
+						<value>ghost/question/question_model.drl</value>
 						<value>ghost/question/question_query.drl</value>
 						<value>ghost/question/question_util.drl</value>
 						<value>ghost/question/question_game.drl</value>

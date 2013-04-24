@@ -210,6 +210,7 @@ var selects={
     $createName:"createName",
     $gamePhase:"gamePhase",
     $playerRole:"playerRole",
+    $playerCard:"playerCard",
     $checkBox:"checkBox",//auto roll
     $displayRole:"displayRole",
     $countDown:"countDown",

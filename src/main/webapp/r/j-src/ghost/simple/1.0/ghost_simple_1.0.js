@@ -649,7 +649,7 @@ versionFunction = {
     //游戏中发言
     "say":ghostSimpleController.say,
     //游戏中开始游戏的限制
-    "readyCount":4,
+    "readyCount":3,
     //Command Hint
     "commandHint":ghostView.getCommandHint,
     commandCheck:ghostSimpleController.commandCheck

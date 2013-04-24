@@ -9,12 +9,12 @@
 
 var timer = null;
 
-var ghostSimpleModel = {
+var ghostQuestionModel = {
     topicHint:"格式不正确,第一个词为水民卡,第二个词为幽灵卡,中间以空格隔开",
     playerStatus:{
         die:"die",
         living:"living",
-        system:"system"
+        king:"king"
 
     },
     role:{
@@ -23,26 +23,30 @@ var ghostSimpleModel = {
         king:"king"
     },
     hint:{
-        topic:"【系统消息】请耐心等英明的国王出题,出题时间,其他玩家不能说话.卡片格式:第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开,国王请在指令里选择出题",
+        topic:"【系统消息】请耐心等英明的国王出题,出题时间,其他玩家不能说话.卡片格式:第一个词是水民卡(如苹果),第二个词是幽灵卡(如食物),中间以空格隔开,国王请在指令里选择[出题]",
         day:"【系统消息】 国王在上,感谢您给了你的子民们又一次找出幽灵的机会,我们一定不负重望~",
+        question:"【系统消息】提问时间到了~国王回答完幽灵一定数量的问题后,请在指定里选择[公告],并在对象里选择[水民]/[幽灵],超过时间默认为水民获胜~",
         assignTopic:"【系统消息】国王分给您的卡片是: ",
+
         dayCount:function(count){
-          return  "【系统消息】幽灵还剩下 ["+count+"]天就可获胜,并会成功盗走皇冠~";
+          return  "【系统消息】幽灵还剩下["+count+"]天就可获胜,并会成功盗走皇冠~";
+        },
+        questionCount:function(count){
+            return "【系统消息】幽灵可以向国王提出["+count+"]个问题~";
         }
     },
     commandHint:{
         vote:"向国王效忠的时候到了",
-        kick:"你好,再见"
+        kick:"你好,再见",
+        announce:"国王的权势永不可侵犯"
     },
-    command:{
-        vote:"投他一票",
-        topic:"出题"
 
-    },
-    phase:{
-        topic:"【当前状态】国王出题 ",
-        day:"【当前状态】白天 ",
-        over:"【当前状态】游戏结束 "
+   phase:{
+        topic:"【当前状态】国王出题",
+        day:"【当前状态】白天",
+        over:"【当前状态】游戏结束 ",
+        question:"【当前状态】提问时间 "
+
 
     },
 
@@ -54,16 +58,18 @@ var ghostSimpleModel = {
 
     rightName:{
         vote:"指证",
-        topic:"出题"
+        topic:"出题",
+        announce:"公告"
     },
-    settingPostParameter:function (rid, version, ghostCount, dayTime, topicTime) {
+    settingPostParameter:function (rid, version, ghostCount, dayTime, topicTime,questionTime) {
         return{
             rid:rid,
             version:version,
             setting:[
                 {"ghostCount":ghostCount},
                 {"dayTime":dayTime},
-                {"topicTime":topicTime}
+                {"topicTime":topicTime},
+                {"questionTime":questionTime}
             ]
         }
     }
@@ -74,7 +80,7 @@ var ghostSimpleModel = {
 }
 
 
-var ghostSimpleController = {
+var ghostQuestionController = {
 
     commandCheck:function () {
         var result = {};
@@ -86,7 +92,7 @@ var ghostSimpleController = {
                 var contents = content.split(" ");
                 if (contents.length < 2) {
                     result.code = -1;
-                    result.message = ghostSimpleModel.topicHint;
+                    result.message = ghostQuestionModel.topicHint;
                 }
 
                 break;
@@ -99,46 +105,43 @@ var ghostSimpleController = {
     parseMessage:function (message) {
         switch (message.predict) {
             case "vote" :
-                ghostSimpleController.vote(message);
+                ghostQuestionController.vote(message);
                 break;
             case "set vote" :
-                ghostSimpleController.setVote(message);
+                ghostQuestionController.setVote(message);
                 break;
             case "clear vote" :
-                ghostSimpleController.clearVote(message);
+                ghostQuestionController.clearVote(message);
                 break;
             case "time" :
-                ghostSimpleController.timeChange(message);
+                ghostQuestionController.timeChange(message);
                 break;
             case "die" :
-                ghostSimpleController.die(message);
+                ghostQuestionController.die(message);
                 break;
             case "assign" :
-                ghostSimpleController.assign(message);
+                ghostQuestionController.assign(message);
                 break;
             case "topic assign" :
-                ghostSimpleController.topicAssign(message);
+                ghostQuestionController.topicAssign(message);
                 break;
             case "topic" :
-                ghostSimpleController.say(message);
-                break;
-            case "role" :
-                ghostSimpleController.role(message);
+                ghostQuestionController.say(message);
                 break;
             case "decryption" :
-                ghostSimpleController.decryption(message);
+                ghostQuestionController.decryption(message);
                 break;
             case "decryption waterCard" :
-                ghostSimpleController.decryptionWaterCard(message);
+                ghostQuestionController.decryptionWaterCard(message);
                 break;
             case "decryption ghostCard" :
-                ghostSimpleController.decryptionGhostCard(message);
+                ghostQuestionController.decryptionGhostCard(message);
                 break;
             case "wrong topic":
-                          ghostSimpleController.wrongTopic(message);
+                          ghostQuestionController.wrongTopic(message);
                           break;
             case "status" :
-                ghostSimpleController.status(message);
+                ghostQuestionController.status(message);
                 break;
             case "start" :
                 gameView.start(message);
@@ -148,7 +151,7 @@ var ghostSimpleController = {
                 gameView.over(message);
                 break;
             case "say":
-                ghostSimpleController.say(message);
+                ghostQuestionController.say(message);
                 break;
 
             default :
@@ -167,11 +170,11 @@ var ghostSimpleController = {
     decryption:function (message) {
 
         var role=message.object;
-        if(ghostSimpleModel.role.water==role||ghostSimpleModel.role.king==role){
+        if(ghostQuestionModel.role.water==role||ghostQuestionModel.role.king==role){
             return;
         }else{
             var name = playerService.getName(message.subject);
-             $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + ghostSimpleModel.roleName[message.object] + "</p>");
+             $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + ghostQuestionModel.roleName[message.object] + "</p>");
 
         }
 
@@ -201,7 +204,7 @@ var ghostSimpleController = {
         var p = playerService.getPlayer(message.object);
         p.role = message.subject;
         playerService.updatePlayer(p);
-        ghostView.displayRole(ghostSimpleModel.roleName[message.subject]);
+        ghostView.displayRole(ghostQuestionModel.roleName[message.subject]);
         gameView.showSecondArea(p);
 
 
@@ -209,7 +212,7 @@ var ghostSimpleController = {
     topicAssign:function (message) {
 
         ghostView.displayCard(message.subject);
-        ghostView.showContentForGameArea(ghostSimpleModel.hint.assignTopic+message.subject);
+        ghostView.showContentForGameArea(ghostQuestionModel.hint.assignTopic+message.subject);
 
     },
 
@@ -223,12 +226,23 @@ var ghostSimpleController = {
         var status = message.subject;
         var p = playerService.getPlayer(globalView.getCurrentID());
 
-        ghostView.showContentForGameArea(ghostSimpleModel.hint[status]);
-        if("day"==status){
-            ghostView.showContentForGameArea(ghostSimpleModel.hint.dayCount(message.content));
+        ghostView.showContentForGameArea(ghostQuestionModel.hint[status]);
+
+
+        switch(status){
+            case "day":
+                ghostView.showContentForGameArea(ghostQuestionModel.hint.dayCount(message.content));
+                break;
+            case "question":
+                ghostView.showContentForGameArea(ghostQuestionModel.hint.questionCount(message.content));
+                break;
+            default:
+                break;
+
         }
 
-        ghostView.showConentForGamePhase(ghostSimpleModel.phase[status]);
+
+        ghostView.showConentForGamePhase(ghostQuestionModel.phase[status]);
         viewUtil.autoBottom($("#" + selects.$gameArea));
         controlView.clearCountDownTime();
         controlView.setCountDownTime(message.object);
@@ -242,16 +256,6 @@ var ghostSimpleController = {
         ghostView.say(message.subject, p.name, message.content, message.expression, message.color, message.object, "");
 
 
-    },
-
-    living:function (message) {
-        playerService.setStatus(message.subject, playerStatus.living);
-        $("#" + message.subject).children("a").removeClass().addClass("living");
-    },
-
-    system:function (message) {
-        playerService.setStatus(message.subject, playerStatus.system);
-        $("#" + message.subject).children("a").removeClass().addClass("system");
     },
 
 
@@ -318,15 +322,32 @@ function comet(id, parse) {
  * 游戏区域
  */
 var ghostView = {
+    clearHeadArea:function(){
+
+        ghostView.emptyCard();
+        ghostView.emptyRole();
+    },
+    emptyCard:function (card) {
+
+            $("#" + selects.$playerCard).empty();
 
 
+        },
+
+    emptyRole:function (card) {
+
+
+            $("#" + selects.$playerRole).empty();
+
+
+        },
     displayCard:function (card) {
 
         if (card == "" || card == undefined) {
             return;
         }
         var hint = "【卡牌】" + card;
-        $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
+        $("#" + selects.$playerCard).removeClass().addClass("text-error").empty().html(hint);
 
 
     },
@@ -339,7 +360,7 @@ var ghostView = {
     },
 
     getCommandHint:function (command) {
-        return ghostSimpleModel.commandHint[command];
+        return ghostQuestionModel.commandHint[command];
     },
 
 
@@ -358,8 +379,8 @@ var ghostView = {
 
 
         switch (player.status) {
-            case ghostSimpleModel.playerStatus.die:
-                if ($("#time").val() == "over") {
+            case ghostQuestionModel.playerStatus.die:
+                if ($("#time").val() == "over"||$("#time").val() == "question") {
 
                 } else {
                     //没有结束
@@ -368,8 +389,8 @@ var ghostView = {
 
                 }
                 break;
-            case ghostSimpleModel.playerStatus.king:
-                if ($("#time").val() == "over"||$("#time").val()=="topic") {
+            case ghostQuestionModel.playerStatus.king:
+                if ($("#time").val() == "over"||$("#time").val()=="topic"||$("#time").val() == "question") {
 
                 } else {
                     //没有结束
@@ -378,17 +399,17 @@ var ghostView = {
 
                 }
                 break;
-            case ghostSimpleModel.playerStatus.living:
+            case ghostQuestionModel.playerStatus.living:
                 //delay message
                 if ("topic" == globalView.getGameStatus()) {
                     switch (player.role) {
-                        case ghostSimpleModel.role.water:
+                        case ghostQuestionModel.role.water:
                             place = "discard";
                             break;
-                        case ghostSimpleModel.role.king:
+                        case ghostQuestionModel.role.king:
 
                             break;
-                        case ghostSimpleModel.role.ghost:
+                        case ghostQuestionModel.role.ghost:
                             place = "discard";
                             break;
                     }
@@ -477,26 +498,47 @@ var ghostView = {
 }
 
 
-var simpleRightView = {
+var ghostQuestionRightView = {
     branchRight:function (right) {
         switch (right) {
             case "vote" :
-                simpleRightView.commandRight(right);
+                ghostQuestionRightView.commandRight(right);
                 break;
             case "topic" :
-                simpleRightView.commandRight(right);
+                ghostQuestionRightView.commandRight(right);
                 break;
+            case "announce" :
+              ghostQuestionRightView.commandRight(right);
+                break;
+
             default :
                 console.log("version view not process right: " + right);
         }
     },
 
     commandRight:function (right) {
-        rightView.showCommandRight(right, ghostSimpleModel.rightName[right]);
+        rightView.showCommandRight(right, ghostQuestionModel.rightName[right]);
         $("#" + selects.$sayButton).prop("disabled", false);
     },
     sayRight:function (right) {
         $("#" + selects.$sayButton).prop("disabled", false);
+
+    },
+    commandFilter:function(right){
+        var objectStr = "<li data-default=''><a href='#'>对象</a></li> <li class='divider'></li>";
+              $("#object").empty().append(objectStr);
+
+
+              switch (right) {
+                  case "announce":
+
+                      controlView.appendObjectContent("ghost","幽灵胜");
+                      controlView.appendObjectContent("wateer","水民胜");
+                      break;
+                  default:
+                      console.log(right +"not my version command ");
+                      break;
+              }
 
     }
 
@@ -504,19 +546,21 @@ var simpleRightView = {
 
 }
 
-var ghostSimpleSettingView = {
+var ghostQuestionSettingView = {
     initSetting:function () {
 
         $("#dayTime").val($("#dayTime").val() / 60000);
         $("#topicTime").val($("#topicTime").val() / 60000);
+        $("#questionTime").val($("#questionTime").val() / 60000);
 
         $("<span>分</span>").insertAfter("#dayTime");
         $("<span>分</span>").insertAfter("#topicTime");
-
+        $("<span>分</span>").insertAfter("#questionTime");
     },
     getSettingParameter:function () {
         $("#dayTime").val($("#dayTime").val() * 60000);
         $("#topicTime").val($("#topicTime").val() * 60000);
+        $("#questionTime").val($("#questionTime").val() * 60000);
         var params = jQuery("#setting").serialize();
         return params;
     }
@@ -554,7 +598,8 @@ var gameView = {
 
 
         ghostView.showOver(recordID, obj);
-        ghostView.showConentForGamePhase(ghostSimpleModel.phase["over"]);
+        ghostView.showConentForGamePhase(ghostQuestionModel.phase["over"]);
+        ghostView.clearHeadArea();
         gameView.showDieArea();
     },
     showDieArea:function () {
@@ -610,7 +655,7 @@ var ghostSimpleService = {
         var p = playerService.getPlayer(data.id)
         p.role = data.role;
         playerService.updatePlayer(p);
-        ghostView.displayRole(ghostSimpleModel.roleName[data.role]);
+        ghostView.displayRole(ghostQuestionModel.roleName[data.role]);
 
 
     },
@@ -619,7 +664,7 @@ var ghostSimpleService = {
             return;
         }
 
-        globalView.setGameStatusHint(ghostSimpleModel.phase[data.status]);
+        globalView.setGameStatusHint(ghostQuestionModel.phase[data.status]);
 
         globalView.setGameStatus(data.status);
         controlView.setCountDownTime(data.remainTime);
@@ -633,26 +678,27 @@ var ghostSimpleService = {
 
 versionFunction = {
     //处理权限的展示
-    "rightView":simpleRightView.branchRight,
+    "rightView":ghostQuestionRightView.branchRight,
     //处理权限对应的数据
-    "rightContent":ghostSimpleModel.command,
+    "rightContent":ghostQuestionModel.rightName,
     //初始化设置
-    "initSetting":ghostSimpleSettingView.initSetting,
+    "initSetting":ghostQuestionSettingView.initSetting,
     //获取初始化参数
-    "getSettingParameter":ghostSimpleSettingView.getSettingParameter,
+    "getSettingParameter":ghostQuestionSettingView.getSettingParameter,
     //解析消息
-    "parseMessage":ghostSimpleController.parseMessage,
+    "parseMessage":ghostQuestionController.parseMessage,
     //解析房间Detail,用于页面刷新及进入房间
     "parseDetail":ghostSimpleService.parseDetail,
     //设置参数
-    "settingPostParameter":ghostSimpleModel.settingPostParameter,
+    "settingPostParameter":ghostQuestionModel.settingPostParameter,
     //游戏中发言
-    "say":ghostSimpleController.say,
+    "say":ghostQuestionController.say,
     //游戏中开始游戏的限制
-    "readyCount":4,
+    "readyCount":3,
     //Command Hint
     "commandHint":ghostView.getCommandHint,
-    commandCheck:ghostSimpleController.commandCheck
+    commandCheck:ghostQuestionController.commandCheck,
+    commandFilter:ghostQuestionRightView.commandFilter
 
 
 }
