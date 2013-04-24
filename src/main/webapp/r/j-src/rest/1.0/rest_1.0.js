@@ -82,7 +82,7 @@ var restService = {
         console.log("start get feed ");
         var feeds = restService.getPublicFeed();
         restView.updatePublicFeed(feeds);
-        setTimeout(restService.showFeed, 6000);
+        setTimeout(restService.showFeed, 20000);
     }
 
 
