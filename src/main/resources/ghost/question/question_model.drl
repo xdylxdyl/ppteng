@@ -1,0 +1,72 @@
+package drools.common
+
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import org.apache.commons.lang.StringUtils;
+
+
+declare Game
+	status: String
+	liverCount:int	
+	kingCount:int	
+	waterCount:int
+	ghostCount:int		
+	dayCount:int
+	lastTime:Long
+	remainTime:Long
+	startAt:Long
+	recordName:String	
+end
+
+declare VoteConvert
+	id: String		
+	vote:String
+	type:String
+end
+
+
+declare Vote
+	id: String		
+	vote:String
+	type:String
+end
+
+declare VoteStatus
+      id:String
+      voters:List      
+end
+
+declare Card
+       waterCard:String 
+       ghostCard:String 
+end
+
+
+declare Role
+       id:String
+       role:String    
+       card:String  
+end
+
+
+declare Die
+	id: String
+	type: String
+	role:String
+end
+
+
+
+declare StatusChange
+     change:String
+end
+
+
+declare TimerMesasage
+	phase: String
+	time: Long
+	schedule:Long
+end
+

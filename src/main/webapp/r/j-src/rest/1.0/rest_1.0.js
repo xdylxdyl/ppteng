@@ -96,7 +96,8 @@ app.run(function ($rootScope, $timeout, ngRestAgentService) {
 
     //使用timeout重复执行
     var refresh = $timeout(function myFunction() {
-        console.log("123");
+        console.log("time run");
+        ngRestAgentService.updateFeed();
         refresh = $timeout(myFunction, 60000);
     });
 
@@ -107,6 +108,7 @@ app.run(function ($rootScope, $timeout, ngRestAgentService) {
 });
 app.service('ngRestAgentService', function (ngRestService, $timeout) {
     this.updateFeed = function () {
+        console.log('starting update');
         var feeds = restService.getPublicFeed();
         ngRestService.publicFeed = feeds;
         console.log("NEWS:");

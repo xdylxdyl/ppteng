@@ -125,6 +125,16 @@
 						<value>ghost/simple/simple_game.rf</value>
 					</list>
 				</entry>
+					<entry key="ghost_question_1.0">
+					<list>
+						<value>ghost/quetion/question_model.drl</value>
+						<value>ghost/question/question_query.drl</value>
+						<value>ghost/question/question_util.drl</value>
+						<value>ghost/question/question_game.drl</value>
+						<value>ghost/question/question_game.rf</value>
+					</list>
+				</entry>
+				
 			</map>
 		</constructor-arg>
 	</bean>
