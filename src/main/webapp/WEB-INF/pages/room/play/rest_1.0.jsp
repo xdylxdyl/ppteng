@@ -73,20 +73,22 @@
                 </ul>
                 <div class="tab-content" ng-controller="publicCtrl" >
                    
-                    
+                    <!--<button ng-click="refresh()">刷新</button>-->
                     <div class="tab-pane active" id="rest_public">
-                        
-                            <div class="">
+
                                 <blockquote>
+                                    <div class="pull-right">
+                                        <button ng-click="refresh()" class="btn">刷新</button>
+                                    </div>
                                     <p>茶座休息室</p>
                                     <small>葡萄藤精选的内容</small>
-                                 
+
                                 </blockquote>
+
+
                                 <div class="" id="news_public">
-                                <button ng-click="refresh()">刷新</button>
-                                
+
                                         <div class="span12">
-            
 
               <div ng-repeat="pfeed in publicFeed">
 
@@ -111,8 +113,7 @@
                                 
                                 
                                 </div>
-                            </div>
-                        
+
                     </div>
                     <div class="tab-pane" id="rest_private">
                       
