@@ -95,7 +95,7 @@
                         </h4>
                         <blockquote>
                        
-                        <small> {{pfeed.pubDate}}</small> 
+                        <small> {{pfeed.pubDate|timeConvert}}</small> 
                         </blockquote>
 
 

@@ -126,12 +126,23 @@ app.service('ngRestService', function ($rootScope) {
 
 });
 
+app.filter('timeConvert', function() {
+    return function(value) {
+      return  new Date(value).toLocaleTimeString();
+
+
+
+    }
+  });
+
+
 
 function publicCtrl($scope, ngRestService) {
     $scope.publicFeed = ngRestService.publicFeed;
     $scope.refresh = function() {
            $scope.publicFeed = restService.getPublicFeed();
        };
+
 
 
 
