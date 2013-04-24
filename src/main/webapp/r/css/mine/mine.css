@@ -5,7 +5,9 @@
     height: auto;
     background: #C0C0C0;
     float: left;
-    margin: 2em;
+    border: 2px solid #6A78C3;
+    box-shadow: 0 0 4px #545A94;
+    margin: 3px;
 }
 
 .outer .right {
