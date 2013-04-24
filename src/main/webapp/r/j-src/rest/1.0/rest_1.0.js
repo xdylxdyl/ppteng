@@ -70,6 +70,10 @@ var restService = {
     },
     parsePublicFeed:function (feed) {
         console.log(feed.count);
+
+       /* var feeds =JSON.stringify(feed.value.items);
+        var decodeContents=  htmlDecode(feeds);
+        return $.parseJSON(decodeContents);*/
         return feed.value.items;
     },
 
@@ -98,7 +102,7 @@ app.run(function ($rootScope, $timeout, ngRestAgentService) {
     var refresh = $timeout(function myFunction() {
         console.log("time run");
         ngRestAgentService.updateFeed();
-        refresh = $timeout(myFunction, 60000);
+        refresh = $timeout(myFunction, 10000);
     });
 
     /*销毁之前定义的重复执行事件
@@ -109,10 +113,10 @@ app.run(function ($rootScope, $timeout, ngRestAgentService) {
 app.service('ngRestAgentService', function (ngRestService, $timeout) {
     this.updateFeed = function () {
         console.log('starting update');
-        var feeds = restService.getPublicFeed();
-        ngRestService.publicFeed = feeds;
-        console.log("NEWS:");
-        console.log(feeds);
+
+        ngRestService.publicFeed =  restService.getPublicFeed();
+
+
     };
 
 });

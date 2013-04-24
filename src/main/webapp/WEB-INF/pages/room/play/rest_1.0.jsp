@@ -65,7 +65,7 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#rest_public" data-toggle="tab">精选</a></li>
-                    <li><a href="#rest_private" data-toggle="tab">房主偏爱</a></li>
+                    <li><a href="#rest_private" data-toggle="tab">偏爱</a></li>
                     <li><a href="#music_area" data-toggle="tab">音乐</a></li>          
                     <li><a href="#setting_area" data-toggle="tab">设置</a></li>
                       <li><a href="#help_area" data-toggle="tab">帮助</a></li>
@@ -93,7 +93,7 @@
                             <a href="{{pfeed.link}}" target="_blank">{{pfeed.title}}</a>
                         </h4>
                         <blockquote>
-                        <small> {{pfeed.description}}</small> 
+                       
                         <small> {{pfeed.pubDate}}</small> 
                         </blockquote>
                     </div>
@@ -199,7 +199,8 @@
 <script type="text/javascript" src="/r/j-src/music/audio.min.js"></script>
 
 <script src="/r/j-src/rest/1.0/rest_1.0.js?v=${frontVersion}"></script>
-
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/commons/model.js?v=${frontVersion}"></script>
 <script
