@@ -85,11 +85,11 @@
                                 <div class="" id="news_public">
                                 <button ng-click="refresh()">刷新</button>
                                 
-                                        <div class="span9">
+                                        <div class="span12">
             
 
-              <div class="row" style="margin-bottom: 30px;" ng-repeat="pfeed in publicFeed">
-                    <div class="span7">
+              <div ng-repeat="pfeed in publicFeed">
+
                         <h4>
                             <a href="{{pfeed.link}}" target="_blank">{{pfeed.title}}</a>
                         </h4>
@@ -97,7 +97,7 @@
                        
                         <small> {{pfeed.pubDate}}</small> 
                         </blockquote>
-                    </div>
+
 
 
             </div>
