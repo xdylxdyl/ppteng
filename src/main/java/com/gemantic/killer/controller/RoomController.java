@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.MyListUtil;
+import com.gemantic.common.util.MyMapUtil;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.kill.thread.RoomThread;
@@ -106,11 +107,15 @@ public class RoomController {
 		List<Room> rooms = roomService.getList();
 		log.info("get rooms " + rooms.toString());
 		List<Long> userIDS = new ArrayList();
+		Map<String,List<Room>> version_rooms=new HashMap();
 		for (Room r : rooms) {
 			userIDS.add(r.getCreaterID());
 		
 			List<Long> counts = this.memberService.getMembers(r.getId());
 			room_count.put(r.getId(), counts.size());
+			
+			MyMapUtil.fillMapCollection(version_rooms, r.getVersion(), r);
+			
 
 		}
 		List<User> users = this.userService.getObjectsByIds(userIDS);
@@ -124,7 +129,7 @@ public class RoomController {
 
 		Integer count = userService.getTotalCount();
 		model.addAttribute("count", count);
-		model.addAttribute("rooms", rooms);
+		model.addAttribute("rooms", version_rooms);
 		model.addAttribute("uid", uid);
 		model.addAttribute("uname", uname);
 		model.addAttribute("users", id_user);

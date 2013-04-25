@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <head>
 <meta charset=utf-8">
@@ -12,6 +13,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/r/j-src/punch/punch.js?version=${frontVersion}"></script>
 
 <input type="hidden" value="${oldRoom}" id="oldRoom">
+
 </head>
 
 <body>
@@ -54,42 +56,66 @@
 
 
         <div class="span9">
-            <c:if test="${rooms== null || fn:length(rooms) == 0}">
-                <h1>现在么有房间</h1>
-                <h1>但是你可以创建"简化/多人扫雷/虚拟电影院"~~</h1>             
-                 <P>管理员可以自定义房间背景乐~~</p>
-                 <P>管理员可以自定义神态~~</p>
-                 <P>管理员在游戏结束可获取更多金币~~~</p>
-            </c:if>
-    <c:forEach items="${rooms}" var="room" begin="0" step="1" varStatus="status">
-            <div class="row" style="margin-bottom: 30px;">
+        
+       
 
-                <c:set var="version" value="${room.version}"></c:set>
-
-                    <div class="span2">
-                    <img src="http://www.ptteng.com${users[room.createrID].icon}" alt="${users[room.createrID].name}" class="img-polaroid">
-                    </div>
-                    <div class="span7">
-                        <h4>
-                        <small>房间名:</small> ${status.index+1}.<a href="" rid="${room.id}" uid="${uid}">${room.name}[进入房间]</a>
-                        </h4>
-                        <blockquote>
-                        <small> 纪元： <date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 " value="${room.createAt}"></date:date>
-                        房主：<a href="/player/detail?uid=${room.createrID}"
-                        target="_blank">${users[room.createrID].name}</a>
-                        </small> <small> 版本[<span style="color: #4B0082"><%@ include
-                            file="../version/show.jsp"%></span>],有玩家 [<span
-                        style="color: #4B0082">${room_count[room.id]}</span>] 人 <c:if
-                        test="${my_room.id==room.id}">,你在这里</c:if>
-                        </small>
-                        </blockquote>
-                        <p class="text-success">签名: ${users[room.createrID].sign}</p>
-                    </div>
-
-
-            </div>
-    </c:forEach>
-
+     <!--杀人游戏-->
+     
+     <c:set var="categoryTitle" value="杀人游戏" scope="session"></c:set>   
+     <c:set var="categoryDescription" value="一种分析和推理的游戏" scope="session"></c:set>  
+     <tiles:insertDefinition name="versionSnapshot" />
+            <!--简化-->
+         <c:set var="versionTitle" value="简化版" scope="session"></c:set>
+         <c:set var="versionDescription" value="杀人游戏中最具分析和推理空间版本" scope="session"></c:set>
+         <c:set var="version" value="simple_1.0"  scope="session"></c:set>      
+         <tiles:insertDefinition name="roomSnapshot" />
+         <!--警版-->
+         <c:set var="versionTitle" value="警版" scope="session"></c:set>
+         <c:set var="versionDescription" value="杀手和警察的较量" scope="session"></c:set>
+         <c:set var="version" value="killer_police_1.0" scope="session"></c:set>      
+         <tiles:insertDefinition name="roomSnapshot" />
+	 
+    <!--捉鬼游戏-->
+     <c:set var="categoryTitle" value="捉鬼游戏" scope="session"></c:set>
+     <c:set var="categoryDescription" value="一种通过词汇寻找幽灵的游戏" scope="session"></c:set>
+     <tiles:insertDefinition name="versionSnapshot" />
+     <!--简化版-->
+     <c:set var="versionTitle" value="简化版" scope="session"></c:set>
+     <c:set var="versionDescription" value="规则简洁" scope="session"></c:set>
+      <c:set var="version" value="ghost_simple_1.0" scope="session"></c:set>      
+       <tiles:insertDefinition name="roomSnapshot" />
+        <!--猜词版-->
+     <c:set var="versionTitle" value="猜词版" scope="session"></c:set>
+     <c:set var="versionDescription" value="即便幽灵被推出局.也未必没有获胜的机会" scope="session"></c:set>
+      <c:set var="version" value="ghost_question_1.0" scope="session"></c:set>      
+       <tiles:insertDefinition name="roomSnapshot" />
+       
+    
+    <!--虚拟电影院-->
+     <c:set var="categoryTitle" value="虚拟电影院" scope="session"></c:set>
+     <c:set var="categoryDescription" value="和喜欢的人一起看喜欢的电影" scope="session"></c:set>
+     <tiles:insertDefinition name="versionSnapshot" />    
+      <c:set var="version" value="video_1.0" scope="session"></c:set>      
+       <tiles:insertDefinition name="roomSnapshot" />
+ 
+    <!--扫雷游戏-->
+     <c:set var="categoryTitle" value="扫雷游戏" scope="session"></c:set>
+     <c:set var="categoryDescription" value="经典的游戏,新鲜的版本" scope="session"></c:set>
+     <tiles:insertDefinition name="versionSnapshot" />
+     <c:set var="versionTitle" value="多人协作版" scope="session"></c:set>
+     <c:set var="versionDescription" value="一起用更快速度清除更大的雷区" scope="session"></c:set>
+      <c:set var="version" value="mine_1.0" scope="session"></c:set>      
+       <tiles:insertDefinition name="roomSnapshot" />
+      
+    <!--休息室-->
+     <c:set var="categoryTitle" value="休息室" scope="session"></c:set>
+     <c:set var="categoryDescription" value="看新闻,听音乐,闲聊天" scope="session"></c:set>
+     <tiles:insertDefinition name="versionSnapshot" />
+      <c:set var="version" value="rest_1.0" scope="session"></c:set>      
+       <tiles:insertDefinition name="roomSnapshot" />
+     
+     
+   
 
         </div>
     </div>

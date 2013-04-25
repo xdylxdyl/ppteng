@@ -156,8 +156,10 @@
 	</definition>
 	
 	
-	
-	
+		<!--versionSnapshot -->
+	<definition name="versionSnapshot" template="/WEB-INF/pages/room/list/snapshot2.jsp" />
+		<!--roomSnapshot -->
+	<definition name="roomSnapshot" template="/WEB-INF/pages/room/list/snapshot.jsp" />
 	
 		<!--personCard -->
 	<definition name="personCard" template="/WEB-INF/pages/player/detail/show.jsp" />

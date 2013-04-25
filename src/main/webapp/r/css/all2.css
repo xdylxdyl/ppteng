@@ -40,3 +40,8 @@
 /*字体颜色*/
 .c-green {color: #008000;}
 
+.separator {
+color: #FF8040;
+background-color: #ffc075;
+height: 3px;
+}

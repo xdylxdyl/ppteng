@@ -71,7 +71,7 @@
 				<value>*/room/player/*</value>
 				<value>*/room/statistics/*</value>
 				<value>*/room/financial/*</value>
-				<value>*/room/about/*</value>
+				<value>*/room/about/*</value>	
 			</list>
 		</property>
 	</bean>

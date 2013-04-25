@@ -12,6 +12,10 @@
     <from>/r/**</from>
     <to>/r/$1</to>
   </rule>
+   <rule>
+    <from>/qc_callback.html</from>
+    <to>/qc_callback.html</to>
+  </rule>  
   
   <rule>
     <from>/**</from>

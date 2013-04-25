@@ -583,7 +583,6 @@ var roomParseService = {
             case "setting" :
                 this.setting(message);
                 break;
-
             default:
                 console.log("room parse over,start version parse");
                 versionFunction["parseMessage"](message);
