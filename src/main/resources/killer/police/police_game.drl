@@ -1376,7 +1376,7 @@ end
 
 
 rule 'game player query'
-ruleflow-group "refresh"
+ruleflow-group "query"
 when
 	//conditions
     $message:Message($subject:subject,predict=="query")
@@ -1422,7 +1422,7 @@ end
 
 
 rule 'game unplayer query'
-ruleflow-group "refresh"
+ruleflow-group "query"
 when
 	//conditions
     $message:Message($subject:subject,predict=="query")

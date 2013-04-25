@@ -90,13 +90,13 @@ var restService = {
 
 
 var app = angular.module('myApp', []);
-app.run(function ($rootScope, $timeout, ngRestAgentService) {
+/*app.run(function ($rootScope, $timeout, ngRestAgentService) {
     console.log('starting run');
-    /* 使用setInterval重复执行
+    *//* 使用setInterval重复执行
     var timer = setInterval(function(){
         console.log("Update Once");
         ngRestAgentService.updateFeed();
-    }, 6000);*/
+    }, 6000);*//*
 
     //使用timeout重复执行
     var refresh = $timeout(function myFunction() {
@@ -105,10 +105,10 @@ app.run(function ($rootScope, $timeout, ngRestAgentService) {
         refresh = $timeout(myFunction, 10000);
     });
 
-    /*销毁之前定义的重复执行事件
+    *//*销毁之前定义的重复执行事件
     $scope.$on('$destroy', function(e) {
         $timeout.cancel(refresh);
-    });*/
+    });*//*
 });
 app.service('ngRestAgentService', function (ngRestService, $timeout) {
     this.updateFeed = function () {
@@ -124,7 +124,7 @@ app.service('ngRestService', function ($rootScope) {
     //object example
     this.publicFeed = restService.getPublicFeed();
 
-});
+});*/
 
 app.filter('timeConvert', function() {
     return function(value) {
@@ -137,11 +137,16 @@ app.filter('timeConvert', function() {
 
 
 
-function publicCtrl($scope, ngRestService) {
-    $scope.publicFeed = ngRestService.publicFeed;
+function publicCtrl($scope, $timeout) {
+    $scope.publicFeed = restService.getPublicFeed();
     $scope.refresh = function() {
            $scope.publicFeed = restService.getPublicFeed();
        };
+    $scope.onTimeout = function(){
+            $scope.publicFeed = restService.getPublicFeed()
+            mytimeout = $timeout($scope.onTimeout,1000);
+        }
+      var mytimeout = $timeout($scope.onTimeout,1000);
 
 
 
