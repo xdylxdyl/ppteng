@@ -401,20 +401,7 @@ var ghostView = {
                 break;
             case ghostQuestionModel.playerStatus.living:
                 //delay message
-                if ("topic" == globalView.getGameStatus()) {
-                    switch (player.role) {
-                        case ghostQuestionModel.role.water:
-                            place = "discard";
-                            break;
-                        case ghostQuestionModel.role.king:
-
-                            break;
-                        case ghostQuestionModel.role.ghost:
-                            place = "discard";
-                            break;
-                    }
-
-                }
+                break;
             default :
 
 
@@ -533,7 +520,7 @@ var ghostQuestionRightView = {
                   case "announce":
 
                       controlView.appendObjectContent("ghost","幽灵胜");
-                      controlView.appendObjectContent("wateer","水民胜");
+                      controlView.appendObjectContent("water","水民胜");
                       break;
                   default:
                       console.log(right +"not my version command ");

@@ -141,25 +141,31 @@ then
      String	rname=String.valueOf(RandomUtils.nextLong());
      //1.assign role	
 	 int  ghostCount=Integer.valueOf(getRoomSetting($room,"ghostCount","1")); 
-	  int kingCount=1;  
-	 int  waterCount= $allReadys.size()-ghostCount-kingCount;
+	 int kingCount=1;  
+	 int soulCount=1;
+	 int questionCount=1;
+	 int  waterCount= $allReadys.size()-ghostCount-kingCount-soulCount;
+	
+	
 	 
 	 Map role_count=new HashMap();
 		role_count.put("ghost", ghostCount);
 	    role_count.put("king", kingCount);
 		role_count.put("water", waterCount);
+		role_count.put("soul", soulCount);
 
 	 //get uid id List
 	 List ls=getIDFromPlayer($allReadys);
 	 Map	ids_role=RoleUtil.assingRole(role_count,ls);
 	 int dayCount=ghostCount+1;
-	 if(dayCount<2){
-	      dayCount=2;
+	 if(dayCount<3){
+	      dayCount=3;
 	 }
-	 //2. creae game
-	Game game=new Game("ready",$allReadys.size()-kingCount,kingCount,waterCount,ghostCount,dayCount,System.currentTimeMillis(),0L,$time,rname);
 	
-	 List readyIDS=new ArrayList();
+	 //2. creae game
+	Game game=new Game("ready",$allReadys.size()-kingCount,kingCount,waterCount,ghostCount,soulCount,dayCount,questionCount,System.currentTimeMillis(),0L,$time,rname);
+	List readyIDS=new ArrayList();
+	
 	 //3.create Role/status/vote record message create log ,how to update all unready players status;
 	 
 		LogUtil.log("============================ role is "+ids_role);
@@ -176,21 +182,25 @@ then
 				  insert(vs);
 				  
 				  LogUtil.log(role);
-				  if("king".equals(role)){
-				  		  Message assignMessage=new Message(role,"assign",uid); 
-				          insert(assignMessage);				          
-				          modify(p){setStatus("king")};
-				            Message statusMessage=new Message(uid,"status","king"); 
-				             insert(statusMessage);
 				  
+				  if("soul".equals(role)){
+				     Message assignMessage=new Message("water","assign",uid); 
+				     insert(assignMessage);		
 				  }else{
-				        modify(p){setStatus("living")};				       
-				       Message statusMessage=new Message(uid,"status","living"); 
-				        insert(statusMessage);
-				   
-				   }
-			  
+				     Message assignMessage=new Message(role,"assign",uid); 
+				     insert(assignMessage);		
 				  
+				  }
+						          
+				
+				  String status="living";
+				  if("king".equals(role)){
+				     status="king";
+				  }
+				  Message statusMessage=new Message(uid,"status",status); 
+				  insert(statusMessage);      
+				 
+				  modify(p){setStatus(status)};
 				 
 				  
 		            
@@ -347,7 +357,7 @@ no-loop true
 when
    
     $message:Message($id:subject,predict=="topic",$content:content)
-    Game(status=="topic")   
+    Game(status=="topic",$waterCount:waterCount)   
     not Card()
        
 then
@@ -362,9 +372,11 @@ then
       retract($message);
    
     }else{
-     String ghostCard=parseTopic($content,"ghost");
+    
+     String soulCard=parseTopic($content,"soul");  
+     String  ghostCard=String.valueOf($waterCount);
   
-       Card  card=new Card(waterCard,ghostCard); 
+       Card  card=new Card(waterCard,ghostCard,soulCard); 
 	   insert(card);
     
     }
@@ -383,7 +395,7 @@ when
     Game(status=="topic")   
     Right(id==$id,right contains "topic")
     $r:Role($uid:id,$role:role,role!="king")
-    Card($waterCard:waterCard,$ghostCard:ghostCard)
+    Card($waterCard:waterCard,$ghostCard:ghostCard,$soulCard:soulCard)
        
 then
     LogUtil.log("topic assign start  ================="); 
@@ -393,10 +405,21 @@ then
        Message assignMessage=new Message($waterCard,"topic assign",$uid); 
 				  insert(assignMessage);
 		 modify($r){setCard($waterCard)};
-    }else{
-         Message assignMessage=new Message($ghostCard,"topic assign",$uid); 
+    }
+    
+    if("ghost".equals($role)){
+    
+      Message assignMessage=new Message($ghostCard,"topic assign",$uid); 
 				  insert(assignMessage);
          modify($r){setCard($ghostCard)};
+    }
+    
+        
+      if("soul".equals($role)){
+    
+      Message assignMessage=new Message($soulCard,"topic assign",$uid); 
+				  insert(assignMessage);
+         modify($r){setCard($soulCard)};
     }
     
   
@@ -507,10 +530,10 @@ when
   Role(id==$id,$role:role)
   not Die()
 then
-   LogUtil.log("person die  start==============");
+   LogUtil.log("person die by vote start==============");
    Die die=new Die($id,"vote",$role);   
    insert(die);
-   LogUtil.log("person die  start==============");   
+   LogUtil.log("person die  by vote start==============");   
 
  
 end
@@ -552,7 +575,7 @@ no-loop true
 when
  
   $die:Die($id:id,$type:type,$role:role)
-  $game:Game($liverCount:liverCount,$waterCount:waterCount,$kingCount:kingCount,$ghostCount:ghostCount,$status:status);
+  $game:Game($liverCount:liverCount,$waterCount:waterCount,$kingCount:kingCount,$ghostCount:ghostCount,$soulCount:soulCount,$questionCount:questionCount,$status:status);
   $person:Player(id==$id,status!="die");   
   $room:Room(status=="run")
  then
@@ -562,19 +585,25 @@ when
     if("water".equals($role)){
         modify($game){setLiverCount($liverCount-1),setWaterCount($waterCount-1)};
     
-    }else{
-     //if police die
-       if("ghost".equals($role)){
-       
-         modify($game){setLiverCount($liverCount-1),setGhostCount($ghostCount-1)};
+    }
+    if("ghost".equals($role)){
+      
+         modify($game){setLiverCount($liverCount-1),setGhostCount($ghostCount-1),setQuestionCount($questionCount+1)};
+    }
     
-       }else{
-          //if king die
+    if("soul".equals($role)){
+      
+         modify($game){setLiverCount($liverCount-1),setSoulCount($soulCount-1),setQuestionCount($questionCount+1)};
+    }
+     if("king".equals($role)){
+      
+       //if king die
           modify($game){setKingCount($kingCount-1)};
-          
-       
-       }    
-    } 
+    }
+    
+    
+    
+    
     if("vote".equals($type)||"logout".equals($type)){
     
      //if die of vote 
@@ -584,9 +613,7 @@ when
     	
     
     modify($person){setStatus("die")};
-    
-    
-         //if die of vote 
+     //if die of vote 
      Message dieMessage=new Message($id,"die",$type);  
      insert(dieMessage);
      
@@ -607,18 +634,24 @@ rule 'game over of  ghost win'
 ruleflow-group "game status"
 when
    
-     $game:Game($kingCount:kingCount,$waterCount:waterCount,$ghostCount:ghostCount,$dayCount:dayCount,$recordName:recordName);
-     (eval($ghostCount >= $waterCount)) or
+     $game:Game($kingCount:kingCount,$waterCount:waterCount,$ghostCount:ghostCount,$soulCount:soulCount,$dayCount:dayCount,$recordName:recordName);
+     (eval($ghostCount >= $waterCount+$soulCount)) 
+     or
      (
-       eval($dayCount==0 && $ghostCount!=0) and
-      Message($phase:subject,predict=="switch")
-     )    
+       eval($dayCount<=1 && $ghostCount!=0)
+       and
+       Message($phase:subject,predict=="switch")
+     )   
+      or
+     (
+       Message(predict=="announce",object=="ghost")
+     )
     $room:Room(status=="run")
   
 	      
       
 then 
-     LogUtil.log("game over kill win start  ================="); 
+     LogUtil.log("game over ghost win start  ================="); 
 
      LogUtil.log("game detail "+$game); 
     Message gameOver=new Message($recordName,"over","ghost win");   
@@ -637,8 +670,8 @@ rule 'game over of water win'
 ruleflow-group "game status"
 when
      //$operater:Operater()  
-     $game:Game($kingCount:kingCount,$ghostCount:ghostCount,$recordName:recordName);
-     eval($ghostCount == 0 )  
+     $game:Game($kingCount:kingCount,$ghostCount:ghostCount,$recordName:recordName)
+     Message(subject=="king",predict=="announce",object=="water")     
      $room:Room(status=="run")
       
 then 
@@ -680,7 +713,7 @@ when
      //$operater:Operater()  
   
       Message(predict=="over",$object:object)  
-      $card:Card($waterCard:waterCard,$ghostCard:ghostCard)
+      $card:Card($waterCard:waterCard,$ghostCard:ghostCard,$soulCard:soulCard)
 then 
      LogUtil.log("game status decryption card start  ================="); 
    
@@ -688,6 +721,9 @@ then
      insert(decryptionWaterCardMessage);	
      Message decryptionGhostCardMessage=new Message("-500","decryption ghostCard",$ghostCard); 
      insert(decryptionGhostCardMessage); 
+     
+     Message decryptionSoulCardMessage=new Message("-500","decryption soulCard",$soulCard); 
+     insert(decryptionSoulCardMessage); 
   
       LogUtil.log("game status decryption card over  ================="); 
 end
@@ -819,6 +855,22 @@ then
     LogUtil.log("phase switch prepare over================= "); 
 end
 
+rule 'question phase switch prepare '
+ruleflow-group "phase switch prepare"
+no-loop true
+when	
+	
+    $room:Room(status=="run")
+    $game:Game($kingCount:kingCount,$ghostCount:ghostCount,status=="day");
+    eval($ghostCount == 0 )
+    
+then     
+    LogUtil.log("phase switch prepare start================= "); 
+    StatusChange sc=new StatusChange("question");
+    insert(sc);
+    LogUtil.log("phase switch prepare over================= "); 
+end
+     
 rule 'day phase switch prepare '
 ruleflow-group "phase switch prepare"
 no-loop true
@@ -835,6 +887,7 @@ then
     insert(sc);
     LogUtil.log("phase switch prepare over================= "); 
 end
+     
 
 rule 'phase switch prepare '
 ruleflow-group "phase switch prepare"
@@ -863,7 +916,7 @@ when
 	//conditions    
 	$statusChange:StatusChange($change:change)
     $room:Room(status=="run")
-    $game:Game($dayCount:dayCount) 
+    $game:Game($dayCount:dayCount,$questionCount:questionCount) 
     $operater:Operater()
     
 then      
@@ -875,22 +928,27 @@ then
     
       //1.set game phase,set last time,
           
-    modify($game){setStatus("day"),setLastTime(System.currentTimeMillis()),setDayCount($dayCount-1)};
+       modify($game){setStatus("day"),setLastTime(System.currentTimeMillis()),setDayCount($dayCount-1)};
     
     
     
      //2.send delay timer of night    
-	Message dayDelay=createDelayDay($room);	
+	  Message dayDelay=createDelayDay($room);	
 	
-	tms.add(dayDelay); 
+    	tms.add(dayDelay); 
 	    
-    Message currentDay=createDay($room);
-    currentDay.setContent(String.valueOf($game.getDayCount()));
+      Message currentDay=createDay($room);
+      currentDay.setContent(String.valueOf($game.getDayCount()));
     
-    //3.insert day come 
-    insert(currentDay); 
+       //3.insert day come 
+      insert(currentDay); 
     
-    }else{
+    }
+    
+    if("topic".equals($change)){
+  
+    
+         
         //"topic"
     
    
@@ -908,6 +966,35 @@ then
     
     
     }
+    
+        if("question".equals($change)){
+  
+    
+         
+        //"topic"
+    
+   
+       
+       
+           //1.set game phase,set last time,
+          
+          modify($game){setStatus("question"),setLastTime(System.currentTimeMillis())};
+          //2.send timer of day    
+	     Message dayDelay=createDelayAnnounceOfQuestion($room);
+         tms.add(dayDelay); 
+    
+           //3.insert question come 
+        
+          
+       Message currentDay=createQuestion($room);
+       currentDay.setContent(String.valueOf($questionCount));
+    
+       //3.insert day come 
+      insert(currentDay);  
+    
+    
+    }
+    
     
       modify($operater){setTimerMessages(tms)};
    
@@ -947,6 +1034,34 @@ then
      LogUtil.log("day phase prepare  over =================");   
 end
 
+
+rule 'day phase prepare right of die'
+ruleflow-group "phase prepare"
+no-loop true
+when
+	//conditions
+	$player:Player(status=="die",$uid:id)
+	Message($subject:subject,predict=="time",subject=="day")
+	 
+    Room(status=="run")
+    Game(status=="day")
+    $right:Right(id==$uid)
+    Role(id==$uid)
+then      
+	//actions 
+     LogUtil.log("day phase prepare of die start================= "); 
+  
+  
+     modify($right){setRight(convertString2Set("say"))};    	
+	
+	
+	 Message rightMessage=new Message($uid,"right","say"); 
+     insert(rightMessage);
+          
+     LogUtil.log("day phase prepare of die over =================");   
+end
+
+
 rule 'day phase prepare right of king'
 ruleflow-group "phase prepare"
 no-loop true
@@ -958,7 +1073,7 @@ when
     Room(status=="run")
     Game(status=="day")
     $right:Right(id==$uid)
-    Role(role=="king")
+    Role(id==$uid,role=="king")
 then      
 	//actions 
      LogUtil.log("day phase prepare of king start================= "); 
@@ -1020,6 +1135,48 @@ end
 
 
 
+rule 'question phase prepare right'
+ruleflow-group "phase prepare"
+no-loop true
+when
+	//conditions
+	$player:Player(status=="king"||status=="living"||status=="die",$uid:id)
+	Message(predict=="time",subject=="question")
+	 
+    Room(status=="run")
+    Game(status=="question")
+    $right:Right(id==$uid)
+    
+    Role(id==$uid,$role:role)
+then      
+	//actions 
+     LogUtil.log("topic phase prepare  start================= ");
+     String rightContent=""; 
+     String voteType="";
+    
+     if("king".equals($role)){
+         rightContent="announce,say";
+              
+           modify($right){setRight(convertString2Set(rightContent))};   	
+	    
+	     Message rightMessage=new Message($uid,"right",rightContent); 
+          insert(rightMessage);
+        
+           
+     }else{      
+          //water 
+          rightContent="say";
+          modify($right){setRight(convertString2Set(rightContent))}; 	
+	
+	    // send right message
+	     Message rightMessage=new Message($uid,"right",rightContent); 
+         insert(rightMessage);
+    }
+		            
+          
+     LogUtil.log("topic phase prepare  over =================");   
+end
+
 
 //===========phase prepare============over 
 
@@ -1049,6 +1206,7 @@ salience 100
 no-loop true 
 when
      $message:Message($subject:subject,predict=="right",$object:object,$accepts:accepts)   
+     eval($accepts.size()==0)
 	 
 	 
 then
@@ -1126,10 +1284,9 @@ then
       m.put("person",$allLogins);
       m.put("right",$right);
       setRemainTime($status,$game,$room) ; 
-      m.put("game",$game);
-      if("king".equals($r)){
-         m.put("role",$role); 
-      }      
+      m.put("game",$game);     
+      m.put("role",$role); 
+         
    
        m.put("votes",$votes);  
           

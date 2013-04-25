@@ -100,7 +100,7 @@
 						<value>killer/police/police_game.rf</value>
 					</list>
 				</entry>
-				
+
 				<entry key="mine_1.0">
 					<list>
 						<value>mine/multiplayer/mine_model.drl</value>
@@ -111,10 +111,10 @@
 					</list>
 				</entry>
 				<entry key="video_1.0">
-					<list>						
+					<list>
 					</list>
 				</entry>
-				
+
 				<entry key="ghost_simple_1.0">
 					<list>
 						<value>ghost/simple/simple_model.drl</value>
@@ -124,7 +124,7 @@
 						<value>ghost/simple/simple_game.rf</value>
 					</list>
 				</entry>
-				
+
 				<entry key="ghost_question_1.0">
 					<list>
 						<value>ghost/question/question_model.drl</value>
@@ -134,13 +134,23 @@
 						<value>ghost/question/question_game.rf</value>
 					</list>
 				</entry>
-				
-					<entry key="rest_1.0">
+
+				<entry key="ghost_soul_1.0">
 					<list>
-						
+						<value>ghost/soul/soul_model.drl</value>
+						<value>ghost/soul/soul_query.drl</value>
+						<value>ghost/soul/soul_util.drl</value>
+						<value>ghost/soul/soul_game.drl</value>
+						<value>ghost/soul/soul_game.rf</value>
 					</list>
 				</entry>
-				
+
+				<entry key="rest_1.0">
+					<list>
+
+					</list>
+				</entry>
+
 			</map>
 		</constructor-arg>
 	</bean>

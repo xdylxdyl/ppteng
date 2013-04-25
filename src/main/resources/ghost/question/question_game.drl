@@ -551,7 +551,7 @@ when
  
   $die:Die($id:id,$type:type,$role:role)
   $game:Game($liverCount:liverCount,$waterCount:waterCount,$kingCount:kingCount,$ghostCount:ghostCount,$questionCount:questionCount,$status:status);
-  $person:Player(status!="die");   
+  $person:Player(id==$id,status!="die");   
   $room:Room(status=="run")
  then
    LogUtil.log(" die  start============="+$die);
@@ -582,6 +582,11 @@ when
     	
     
     modify($person){setStatus("die")};
+    
+         //if die of vote 
+     Message dieMessage=new Message($id,"die",$type);  
+     insert(dieMessage);
+     
     retract($die);
        LogUtil.log(" die  over=============");
     
@@ -1037,7 +1042,7 @@ then
            
      }else{      
           //water 
-          rightContent="";
+          rightContent="say";
           modify($right){setRight(convertString2Set(rightContent))}; 	
 	
 	    // send right message

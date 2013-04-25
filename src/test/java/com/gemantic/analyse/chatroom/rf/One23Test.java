@@ -300,6 +300,57 @@ public class One23Test {
 
 	}
 	
+	
+	
+	@Test
+	public void testGhostSoulRule() throws ServiceException, ServiceDaoException, IOException {
+
+		String policeVersion = "ghost_soul_1.0";
+		String simpleVersion = "simple_1.0";
+		String currentVersion = policeVersion;
+		Room room = new Room("sss", 3L, currentVersion);
+		Setting s=settingService.getSetting(currentVersion);
+		log.info(s);
+		room.setSetting(s);
+		room.setId(5000L);
+		this.droolsGameMessageService.createRoom(room);
+		
+		
+		// TODO 我判断不出来用Int还是用String好
+		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
+				"78", String.valueOf(room.getId()), "", room.getVersion());
+		
+		List<String> messages = FileUtil
+				.readFileAsList("src/test/resources/ghost_soul.txt");
+		List<Message> ms = new ArrayList();
+
+		Long rid = null;
+	
+		for (String message : messages) {
+			if (message.startsWith("#")) {
+				continue;
+			}
+			
+			Message m = MessageUtil.parse(policeVersion, message);
+		    log.info("message start=========================== "+m);
+			List<Message> ms2 = this.droolsGameMessageService.generate(
+					m, room);
+			log.info(ms2);
+			log.info("message over =============================");
+		}
+
+
+
+		
+
+		
+		
+		
+	
+
+	}
+	
+	
 
 	// @Test
 	public void testSimpleRF() throws InterruptedException {

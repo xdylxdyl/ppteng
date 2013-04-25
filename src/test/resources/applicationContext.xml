@@ -134,6 +134,15 @@
 						<value>ghost/question/question_game.rf</value>
 					</list>
 				</entry>
+				<entry key="ghost_soul_1.0">
+					<list>
+						<value>ghost/soul/soul_model.drl</value>
+						<value>ghost/soul/soul_query.drl</value>
+						<value>ghost/soul/soul_util.drl</value>
+						<value>ghost/soul/soul_game.drl</value>
+						<value>ghost/soul/soul_game.rf</value>
+					</list>
+				</entry>
 				
 			</map>
 		</constructor-arg>

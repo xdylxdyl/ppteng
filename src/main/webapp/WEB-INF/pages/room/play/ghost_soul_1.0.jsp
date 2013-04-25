@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/r/css/bootstrap.css">
     <link rel="stylesheet" href="/r/css/room/style.css">
 
-<title>${room.name}-猜词-捉鬼-葡萄藤轻游戏</title>
+<title>${room.name}-魂-捉鬼-葡萄藤轻游戏</title>
 
 <input type="hidden" id="uid" value="${uid}">
 <!-- 玩家ID -->
@@ -100,7 +100,7 @@
      
           <p></p>     
   <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=1931" class="text-warning" target="_blank">1.捉鬼[简化版]术语表 &raquo;</a></p>
-  <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=2058&fromuid=4" class="text-warning" target="_blank">2.[捉鬼-猜词版]规则 &raquo;</a></p>
+  <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=2327" class="text-warning" target="_blank">2.[捉鬼-魂版]规则 &raquo;</a></p>
   
 
   
@@ -109,10 +109,11 @@
         <p class="text-error">特别提示,游戏还在公测中.如果发现问题,可以先尝试刷新,如果能记录发生问题的情形并反馈给我,会更加感谢</p>  
         
          <p class="text-success">简要帮助:</p>  
-         <p class="text-success">1.国王出题需要在指令里选择"出题"</p>  
+         <p class="text-success">1.国王出题需要在指令里选择"出题",第一个词为水民卡如(梨),第二个词为魂卡(如苹果),水民卡和魂卡是两个相近的词</p>  
          <p class="text-success">2.一定天数后未能全部推出幽灵,幽灵获胜</p>  
          <p class="text-success">3.提问阶段.国王自行判断幽灵提问的个数,系统仅提示幽灵允许提出问题的个数.</p>
-         <p class="text-success">4.提问阶段.国王需要宣布游戏的胜负</p>   
+         <p class="text-success">4.同样的.国王自行判断幽灵猜词的个数,允许猜词的个数和幽灵的数量相等.</p>
+         <p class="text-success">5.提问阶段.国王需要宣布游戏的胜负</p>   
             </div>
                         
                   
@@ -166,7 +167,7 @@
 <script
 	src="<%=request.getContextPath() %>/r/j-src/commons/action.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/ghost/question/1.0/ghost_question_1.0.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/ghost/soul/1.0/ghost_soul_1.0.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/commons/view.js?v=${frontVersion}"></script>
 <script

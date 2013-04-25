@@ -22,6 +22,10 @@
 <c:when test="${'ghost_question_1.0'==version}">
 捉鬼[猜词版][测试版]
 </c:when>
+<c:when test="${'ghost_soul_1.0'==version}">
+捉鬼[魂版][测试版]
+</c:when>
+
 <c:when test="${'rest_1.0'==version}">
 茶座休息室
 </c:when>

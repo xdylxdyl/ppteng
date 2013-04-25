@@ -89,12 +89,16 @@
      <c:set var="versionDescription" value="即便幽灵被推出局.也未必没有获胜的机会" scope="session"></c:set>
       <c:set var="version" value="ghost_question_1.0" scope="session"></c:set>      
        <tiles:insertDefinition name="roomSnapshot" />
-       
+        <!--魂版-->
+     <c:set var="versionTitle" value="魂版" scope="session"></c:set>    
+      <c:set var="version" value="ghost_soul_1.0" scope="session"></c:set>      
+       <tiles:insertDefinition name="roomSnapshot" /> 
     
     <!--虚拟电影院-->
      <c:set var="categoryTitle" value="虚拟电影院" scope="session"></c:set>
      <c:set var="categoryDescription" value="和喜欢的人一起看喜欢的电影" scope="session"></c:set>
      <tiles:insertDefinition name="versionSnapshot" />    
+      <c:set var="versionTitle" value="电影院" scope="session"></c:set>
       <c:set var="version" value="video_1.0" scope="session"></c:set>      
        <tiles:insertDefinition name="roomSnapshot" />
  

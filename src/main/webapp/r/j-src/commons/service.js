@@ -113,6 +113,7 @@ var playerService = {
         var die = playerStatus.die;
         var unready = playerStatus.unready;
         var sortList = {
+            king:[],
             ready:[],
             living:[],
             die:[],
@@ -124,6 +125,9 @@ var playerService = {
             var player = this.getPlayer(key);
             var status = player.status;
             switch (status) {
+                case playerStatus.king :
+                    sortList.king.push(key);
+                    break;
                 case playerStatus.living :
                     sortList.living.push(key);
                     break;
