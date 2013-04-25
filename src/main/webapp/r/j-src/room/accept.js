@@ -83,10 +83,33 @@ killController.role = function (message) {
 
 };
 
-killController.decryption = function (message) {
-    var name = playerService.getName(message.subject);
 
-    $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + killGameAreaView.RoleName[message.object] + "</p>");
+
+killController.isDisplayDecryption = function () {
+
+     if("killer_police_secret_1.0"==globalView.getVersion()){
+         if(gameGlobalStatus.over==gameView.getGameStatus()){
+             return true;
+         }else{
+             return false;
+         }
+
+     }else{
+
+         return true;
+     }
+
+
+
+};
+killController.decryption = function (message) {
+
+    var isDisplay=killController.isDisplayDecryption();
+    if(isDisplay){
+        var name = playerService.getName(message.subject);
+        $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + killGameAreaView.RoleName[message.object] + "</p>");
+
+    }
 
 
 };

@@ -10,7 +10,7 @@
  
              <div class="row" style="margin-bottom: 30px;">
 
-               
+            
 
                     <div class="span2">
                     <img src="/r/img/room/wait.jpg" alt="暂无房间" class="img-polaroid">

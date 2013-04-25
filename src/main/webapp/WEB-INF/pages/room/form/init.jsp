@@ -30,7 +30,8 @@
 					<c:if test="${room.version=='simple_1.0'}">selected="selected"</c:if>>杀人游戏[简化]</option>
 				<option value="killer_police_1.0"
 					<c:if test="${room.version=='killer_police_1.0'}">selected="selected"</c:if>>杀人游戏[警版][测试版]</option>
-			
+			   <option value="killer_police_secret_1.0"
+					<c:if test="${room.version=='killer_police_secret_1.0'}">selected="selected"</c:if>>杀人游戏[警版不翻牌][测试版]</option>
 				<option value="mine_1.0"
 					<c:if test="${room.version=='mine_1.0'}">selected="selected"</c:if>>多人扫雷</option>
 				<option value="video_1.0"

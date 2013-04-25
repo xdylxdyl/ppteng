@@ -1067,7 +1067,7 @@ end
 
 
 
-rule 'phase switch prepare '
+rule 'switch message switch prepare '
 ruleflow-group "phase switch prepare"
 no-loop true
 when
@@ -1084,6 +1084,50 @@ then
     retract($message);
     LogUtil.log("phase switch prepare over================= "); 
 end
+
+
+rule 'vote die  switch prepare '
+ruleflow-group "phase switch prepare"
+no-loop true
+when
+	//conditions    
+	$message:Message(predict=="die",object=="vote")
+    $room:Room(status=="run")
+    $game:Game(status=="day") 
+    $operater:Operater()
+    
+then     
+    LogUtil.log("phase switch prepare start================= "); 
+    StatusChange sc=new StatusChange("night");
+    insert(sc);
+    
+    LogUtil.log("phase switch prepare over================= "); 
+end
+
+
+
+rule 'check/kill confirm lastword switch prepare '
+ruleflow-group "phase switch prepare"
+no-loop true
+when
+	//conditions    
+	KillConfirm()
+	CheckConfirm()
+    $room:Room(status=="run")
+    $game:Game(status=="night") 
+    $operater:Operater()
+    Player(status=="lastword")
+then     
+    LogUtil.log("phase switch prepare start================= "); 
+    StatusChange sc=new StatusChange("lastword");
+    insert(sc);
+
+    LogUtil.log("phase switch prepare over================= "); 
+end
+
+
+
+
 
 
 

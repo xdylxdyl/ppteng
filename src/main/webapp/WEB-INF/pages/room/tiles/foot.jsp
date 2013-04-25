@@ -51,14 +51,21 @@
 				</div>
 				<div class="span3">
 					<p>联系我们</p>
-					<p>邮箱 xdylxdyl@163.com</p>
+					<p>xdylxdyl@163.com</p>
+				    <p>
+					<!--QQ邮件列表订阅嵌入代码-->
+					<a target="_blank" href="http://list.qq.com/cgi-bin/qf_invite?id=7c386592ccb3f0eef0cba4de0b960b11797ec3cf7d79daef">
+					<img alt="填写您的邮件地址，订阅我们的精彩内容：" border="0" src="http://rescdn.list.qq.com/zh_CN/htmledition/images/qunfa/manage/picMode_light_s.png"/>
+					</a>
+					</p>
 					<p>
 						<a target="_blank"
 							href="http://sighttp.qq.com/authd?IDKEY=8971a9b0581ad8da3c8686766f8f9c69b8f587e5fa00eb0f"><img
 							border="0"
 							src="http://wpa.qq.com/imgd?IDKEY=8971a9b0581ad8da3c8686766f8f9c69b8f587e5fa00eb0f&pic=41"
 							alt="给葡萄藤发消息" title="联系站长"></a>
-					</p>					
+					</p>
+									
 				</div>
                 <div class="span3">
                     <p>扫下二维码记住我们</p>

@@ -3,11 +3,11 @@
 <%@page contentType="text/html;charset=utf-8"%> 
 
     <div class="alert alert-info fade in">
-          <h3>
+          <h4>
             <strong>
                 ${categoryTitle}
             </strong>
-          </h3>
+          </h4>
      
 
      </div>

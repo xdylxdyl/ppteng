@@ -74,6 +74,13 @@
          <c:set var="versionDescription" value="杀手和警察的较量" scope="session"></c:set>
          <c:set var="version" value="killer_police_1.0" scope="session"></c:set>      
          <tiles:insertDefinition name="roomSnapshot" />
+         
+           <!--警版不翻牌-->
+         <c:set var="versionTitle" value="警版不翻牌" scope="session"></c:set>
+         <c:set var="versionDescription" value="杀手和警察的较量" scope="session"></c:set>
+         <c:set var="version" value="killer_police_secret_1.0" scope="session"></c:set>      
+         <tiles:insertDefinition name="roomSnapshot" />
+         
 	 
     <!--捉鬼游戏-->
      <c:set var="categoryTitle" value="捉鬼游戏" scope="session"></c:set>
@@ -115,6 +122,7 @@
      <c:set var="categoryTitle" value="休息室" scope="session"></c:set>
      <c:set var="categoryDescription" value="看新闻,听音乐,闲聊天" scope="session"></c:set>
      <tiles:insertDefinition name="versionSnapshot" />
+      <c:set var="versionTitle" value="茶座" scope="session"></c:set>
       <c:set var="version" value="rest_1.0" scope="session"></c:set>      
        <tiles:insertDefinition name="roomSnapshot" />
      
