@@ -79,10 +79,10 @@ var restService = {
 
 
     showFeed:function () {
-        console.log("start get feed ");
+     /*   console.log("start get feed ");
         var feeds = restService.getPublicFeed();
         restView.updatePublicFeed(feeds);
-        setTimeout(restService.showFeed, 20000);
+        setTimeout(restService.showFeed, 30000);*/
     }
 
 
@@ -144,9 +144,9 @@ function publicCtrl($scope, $timeout) {
        };
     $scope.onTimeout = function(){
             $scope.publicFeed = restService.getPublicFeed()
-            mytimeout = $timeout($scope.onTimeout,1000);
+            mytimeout = $timeout($scope.onTimeout,120000);
         }
-      var mytimeout = $timeout($scope.onTimeout,1000);
+      var mytimeout = $timeout($scope.onTimeout,120000);
 
 
 
