@@ -79,7 +79,7 @@
                                 <blockquote>
                                     <div class="pull-right">
                                         <button ng-click="refresh()" class="btn">刷新</button>
-                                    </div>
+                                    </div> 
                                     <p>茶座休息室</p>
                                     <small>葡萄藤精选的内容</small>
 
