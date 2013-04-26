@@ -67,10 +67,10 @@
                         </div>
                        <div class="tab-pane active" id="roomCreate" ng-controller="VersionConfigCtrl">
    
-                    <div class="row-fluid span9">
+                    <div class="row">
      
     
-                   <div class="span4" ng-repeat="config in versionConfig">
+                   <div class="span3" ng-repeat="config in versionConfig">
                     <a href="" class=".createCategory"  version="{{config.version}}"> <img class="marketing-img" ng-src="{{config.img}}"></a>
                      
                      
@@ -105,14 +105,9 @@
 </body>
 </html>
 
-<script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-
-
-
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-dropdown.js"></script>
+<script src="/r/j-src/jquery/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tab.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-modal.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tooltip.js"></script>
+
 
 
 <script src="/r/j-src/listall/all.js?v=${frontVersion}"></script>
