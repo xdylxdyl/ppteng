@@ -66,6 +66,8 @@
                     <li class="active"><a href="#video_area" data-toggle="tab">电影</a></li>
                                
                     <li><a href="#setting_area" data-toggle="tab">设置</a></li>
+                        <tiles:insertDefinition name="navAdvertiseNormal" /> 
+                     
                  
                 </ul>
                 <div class="tab-content">
@@ -88,7 +90,14 @@
                     </div>
                     <div class="tab-pane" id="setting_area">
                        
-                    </div>                    
+                    </div>    
+                    
+                      <!-- advertise -->
+                      <tiles:insertDefinition name="advertiseNormal" /> 
+                    
+                    
+                    
+                    <!-- end of tab-content -->                
                    
                     
                     

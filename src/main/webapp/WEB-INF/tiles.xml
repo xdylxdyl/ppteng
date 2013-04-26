@@ -156,6 +156,12 @@
 	</definition>
 	
 	
+	
+		<!--versionSnapshot -->
+	<definition name="navAdvertiseNormal" template="/WEB-INF/pages/advertise/taobao/nav.jsp" />
+		<!--versionSnapshot -->
+	<definition name="advertiseNormal" template="/WEB-INF/pages/advertise/taobao/normal.jsp" />
+	
 		<!--versionSnapshot -->
 	<definition name="versionSnapshot" template="/WEB-INF/pages/room/list/snapshot2.jsp" />
 		<!--roomSnapshot -->

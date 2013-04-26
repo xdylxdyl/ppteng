@@ -70,6 +70,7 @@
                     <li class="active"><a href="#mine_area" data-toggle="tab">多人扫雷</a></li>
                                
                     <li><a href="#setting_area" data-toggle="tab">设置</a></li>
+                   <tiles:insertDefinition name="navAdvertiseNormal" /> 
                  
                 </ul>
                 <div class="tab-content">
@@ -83,7 +84,14 @@
                     <div class="tab-pane" id="setting_area">
                     
                        
-                    </div>                    
+                    </div>   
+                    
+                      <!-- advertise -->
+                      <tiles:insertDefinition name="advertiseNormal" /> 
+                    
+                    
+                    
+                    <!-- end of tab-content -->                 
                    
                     
                     

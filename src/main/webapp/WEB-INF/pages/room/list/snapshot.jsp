@@ -17,7 +17,7 @@
                     </div>
                     <div class="span7">
                         <h4>
-                                                                                  暂无房间,创建一个么
+                                                                                  暂无房间,<a href="" class="createCategory" version="${version}">创建一个</a>么
                         </h4>                      
                     </div>
 
@@ -37,7 +37,7 @@
                     </div>
                     <div class="span7">
                         <h4>
-                        <small>房间名:</small> ${status.index+1}.<a href="" rid="${room.id}" uid="${uid}">${room.name}[进入房间]</a>
+                        <small>房间名:</small> ${status.index+1}.<a href="" rid="${room.id}" uid="${uid}" class="enterRoom">${room.name}[进入房间]</a>
                         </h4>
                         <blockquote>
                         <small> 纪元： <date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 " value="${room.createAt}"></date:date>

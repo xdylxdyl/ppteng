@@ -1,5 +1,19 @@
 $(document).ready(function() {
     $("#name").focus();
+
+  console.log("==="+version);
+    function initVersion(){
+                     if(version==""){
+                         return;
+                     }else{
+
+                         $("#versionSelect").val(version);
+                     }
+     }
+
+    initVersion();
+
+
     $("#roomSubmit").click(function(e) {
         if ($("#name").val() == "") {
             $("#name").val("Hello~~~~");
@@ -14,4 +28,5 @@ $(document).ready(function() {
 
         }
     })
+
 });

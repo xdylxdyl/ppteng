@@ -25,7 +25,7 @@
 		<br />
 		<label>游戏版本：</label>
 		<spring:bind path="room.version">
-			<select name="version">
+			<select name="version" id="versionSelect">
 				<option value="simple_1.0"
 					<c:if test="${room.version=='simple_1.0'}">selected="selected"</c:if>>杀人游戏[简化]</option>
 				<option value="killer_police_1.0"
