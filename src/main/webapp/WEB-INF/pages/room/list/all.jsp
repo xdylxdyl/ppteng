@@ -57,24 +57,25 @@
           <!-- start of tabbale-->
          <div class="tabbable">
                     <ul class="nav nav-tabs">
-                        <li><a href="#roomList" data-toggle="tab">房间列表</a></li>
-                        <li class="active" ><a href="#roomCreate" data-toggle="tab">创建房间</a></li>
+                        <li class="active"><a href="#roomList" data-toggle="tab">房间列表</a></li>
+                        <li class="" ><a href="#roomCreate" data-toggle="tab">创建房间</a></li>
                       
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane" id="roomList">                             
-                            
+                        <div class="tab-pane active" id="roomList">                             
+                              <!-- advertise -->
+                             <tiles:insertDefinition name="roomList" /> 
                         </div>
-                       <div class="tab-pane active" id="roomCreate" ng-controller="VersionConfigCtrl">
+                       <div class="tab-pane" id="roomCreate" ng-controller="VersionConfigCtrl">
    
                     <div class="row">
      
     
                    <div class="span3" ng-repeat="config in versionConfig">
-                    <a href="" class=".createCategory"  version="{{config.version}}"> <img class="marketing-img" ng-src="{{config.img}}"></a>
+                    <a href="" class="createCategory"  version="{{config.version}}"> <img class="marketing-img" ng-src="{{config.img}}"></a>
                      
                      
-                           <h4><a href="" class=".createCategory" version="{{config.version}}">{{config.title}}</a></h4>
+                           <h4><a href="" class="createCategory" version="{{config.version}}">{{config.title}}</a></h4>
                         
                       
                       </div> 
@@ -105,7 +106,7 @@
 </body>
 </html>
 
-<script src="/r/j-src/jquery/jquery-1.7.1.js"></script>
+<script src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tab.js"></script>
 
 

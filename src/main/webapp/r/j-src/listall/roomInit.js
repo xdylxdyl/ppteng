@@ -29,4 +29,9 @@ $(document).ready(function() {
         }
     })
 
+    $("#modal-close").click(function(e) {
+        modal.close();
+        return false;
+      })
+
 });
