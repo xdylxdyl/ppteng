@@ -2,8 +2,8 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@page contentType="text/html;charset=utf-8"%> 
 
-    <div class="alert alert-info fade in">
-          <h4>
+    <div class="alert alert-success fade in">
+          <h4 class="pull-center">
             <strong>
                 ${categoryTitle}
             </strong>

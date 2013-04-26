@@ -155,7 +155,14 @@
 			value="statistics{1}" />
 	</definition>
 	
-	
+
+			<!--roomList -->
+	<definition name="roomList" template="/WEB-INF/pages/room/list/list.jsp" />
+		<!--roomCreate -->
+	<definition name="roomCreate" template="/WEB-INF/pages/room/list/create.jsp" />
+
+
+
 	
 		<!--versionSnapshot -->
 	<definition name="navAdvertiseNormal" template="/WEB-INF/pages/advertise/taobao/nav.jsp" />

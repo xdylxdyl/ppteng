@@ -2,30 +2,20 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@page contentType="text/html;charset=utf-8"%> 
- <h4 class="text-error">${versionTitle}</h4>
+
+
+
  
+  <c:if test="${fn:length(rooms[version])!=0}">
+
+ <h4 class="text-info">${versionTitle}  </h4>
+
+    
   <hr>  
  
- <c:if test="${fn:length(rooms[version])==0}">
+
  
-             <div class="row" style="margin-bottom: 30px;">
 
-            
-
-                    <div class="span2">
-                    <img src="/r/img/room/wait.jpg" alt="暂无房间" class="img-polaroid">
-                    </div>
-                    <div class="span7">
-                        <h4>
-                                                                                  暂无房间,<a href="" class="createCategory" version="${version}">创建一个</a>么
-                        </h4>                      
-                    </div>
-
-
-            </div>
- 
- 
- </c:if>
   
   
  <c:forEach items="${rooms[version]}" var="room" begin="0" step="1" varStatus="status">
@@ -37,17 +27,25 @@
                     </div>
                     <div class="span7">
                         <h4>
-                        <small>房间名:</small> ${status.index+1}.<a href="" rid="${room.id}" uid="${uid}" class="enterRoom">${room.name}[进入房间]</a>
+                         ${room.name}<a href="" rid="${room.id}" uid="${uid}" class="enterRoom pull-right ">进入</a>
                         </h4>
                         <blockquote>
-                        <small> 纪元： <date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 " value="${room.createAt}"></date:date>
-                        房主：<a href="/player/detail?uid=${room.createrID}"
-                        target="_blank">${users[room.createrID].name}</a>
-                        </small> <small> 版本[<span style="color: #4B0082"><%@ include
-                            file="../version/show.jsp"%></span>],有玩家 [<span
-                        style="color: #4B0082">${room_count[room.id]}</span>] 人 <c:if
-                        test="${my_room.id==room.id}">,你在这里</c:if>
+                        <small> 
+                              <date:date pattern="HH时mm分 " value="${room.createAt}"></date:date>     有玩家 [<span style="color: #4B0082">${room_count[room.id]}</span>] 人                      
+                         </small> 
+                        
+                         <small> 
+                           <c:if test="${my_room.id==room.id}">你在这里</c:if> 
+                            <c:if test="${room.status==0}">游戏中</c:if>   
+                            <c:if test="${room.status==1}">未开始</c:if>             
                         </small>
+                         <small> 
+                                                                           房主：<a href="/player/detail?uid=${room.createrID}" target="_blank">${users[room.createrID].name}</a>             
+                        </small>
+                      
+                        
+     
+                        
                         </blockquote>
                         <p class="text-success">签名: ${users[room.createrID].sign}</p>
                     </div>
@@ -55,3 +53,6 @@
 
             </div>
     </c:forEach>
+    
+  </c:if>
+ 
