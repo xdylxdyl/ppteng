@@ -3,7 +3,15 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@page contentType="text/html;charset=utf-8"%> 
 
+<c:if test="${size<=0}">
 
+                <h1>现在么有房间</h1>
+                <P>但是你可以创建"简化/多人扫雷/虚拟电影院/休息室/捉鬼"~~</P>             
+                 <P>管理员可以自定义房间背景乐~~</p>
+                 <P>管理员可以自定义神态~~</p>
+
+
+</c:if>
                         
                          <!--杀人游戏-->
      
@@ -11,18 +19,18 @@
      <c:set var="categoryDescription" value="一种分析和推理的游戏" scope="session"></c:set>  
      <tiles:insertDefinition name="versionSnapshot" />
             <!--简化-->
-         <c:set var="versionTitle" value="简化版" scope="session"></c:set>
+         <c:set var="versionTitle" value="[杀人游戏]简化版" scope="session"></c:set>
          <c:set var="versionDescription" value="杀人游戏中最具分析和推理空间版本" scope="session"></c:set>
          <c:set var="version" value="simple_1.0"  scope="session"></c:set>      
          <tiles:insertDefinition name="roomSnapshot" />
          <!--警版-->
-         <c:set var="versionTitle" value="警版" scope="session"></c:set>
+         <c:set var="versionTitle" value="[杀人游戏]警版" scope="session"></c:set>
          <c:set var="versionDescription" value="杀手和警察的较量" scope="session"></c:set>
          <c:set var="version" value="killer_police_1.0" scope="session"></c:set>      
          <tiles:insertDefinition name="roomSnapshot" />
          
            <!--警版不翻牌-->
-         <c:set var="versionTitle" value="警版不翻牌" scope="session"></c:set>
+         <c:set var="versionTitle" value="[杀人游戏]警版不翻牌" scope="session"></c:set>
          <c:set var="versionDescription" value="杀手和警察的较量" scope="session"></c:set>
          <c:set var="version" value="killer_police_secret_1.0" scope="session"></c:set>      
          <tiles:insertDefinition name="roomSnapshot" />
@@ -33,17 +41,17 @@
      <c:set var="categoryDescription" value="一种通过词汇寻找幽灵的游戏" scope="session"></c:set>
      <tiles:insertDefinition name="versionSnapshot" />
      <!--简化版-->
-     <c:set var="versionTitle" value="简化版" scope="session"></c:set>
+     <c:set var="versionTitle" value="[捉鬼游戏 ]简化版" scope="session"></c:set>
      <c:set var="versionDescription" value="规则简洁" scope="session"></c:set>
       <c:set var="version" value="ghost_simple_1.0" scope="session"></c:set>      
        <tiles:insertDefinition name="roomSnapshot" />
         <!--猜词版-->
-     <c:set var="versionTitle" value="猜词版" scope="session"></c:set>
+     <c:set var="versionTitle" value="[捉鬼游戏]猜词版" scope="session"></c:set>
      <c:set var="versionDescription" value="即便幽灵被推出局.也未必没有获胜的机会" scope="session"></c:set>
       <c:set var="version" value="ghost_question_1.0" scope="session"></c:set>      
        <tiles:insertDefinition name="roomSnapshot" />
         <!--魂版-->
-     <c:set var="versionTitle" value="魂版" scope="session"></c:set>    
+     <c:set var="versionTitle" value="[捉鬼游戏]魂版" scope="session"></c:set>    
       <c:set var="version" value="ghost_soul_1.0" scope="session"></c:set>      
        <tiles:insertDefinition name="roomSnapshot" /> 
     
@@ -59,7 +67,7 @@
      <c:set var="categoryTitle" value="扫雷游戏" scope="session"></c:set>
      <c:set var="categoryDescription" value="经典的游戏,新鲜的版本" scope="session"></c:set>
      <tiles:insertDefinition name="versionSnapshot" />
-     <c:set var="versionTitle" value="多人协作版" scope="session"></c:set>
+     <c:set var="versionTitle" value="[扫雷游戏]多人协作版" scope="session"></c:set>
      <c:set var="versionDescription" value="一起用更快速度清除更大的雷区" scope="session"></c:set>
       <c:set var="version" value="mine_1.0" scope="session"></c:set>      
        <tiles:insertDefinition name="roomSnapshot" />

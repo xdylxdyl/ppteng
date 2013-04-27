@@ -130,6 +130,7 @@ public class RoomController {
 		Integer count = userService.getTotalCount();
 		model.addAttribute("count", count);
 		model.addAttribute("rooms", version_rooms);
+		model.addAttribute("size", rooms.size());
 		model.addAttribute("uid", uid);
 		model.addAttribute("uname", uname);
 		model.addAttribute("users", id_user);

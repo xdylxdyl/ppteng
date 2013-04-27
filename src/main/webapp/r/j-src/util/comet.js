@@ -11,7 +11,7 @@ var cometUtil = {
         $.ajax({
             dataType:"jsonp",
             url:url,
-            timeout:100500,
+            timeout:24*3600*1000,
             jsonp:"callback",
             // test repeat data
             jsonpCallback:"cometCallback",
