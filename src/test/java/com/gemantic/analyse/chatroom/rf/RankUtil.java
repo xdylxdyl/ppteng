@@ -1,6 +1,7 @@
 package com.gemantic.analyse.chatroom.rf;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
+import com.gemantic.common.util.MyTimeUtil;
 import com.gemantic.killer.util.RoleUtil;
 
 public class RankUtil {
@@ -125,6 +127,17 @@ public class RankUtil {
 		Map<String, String> s = RoleUtil.assingRole(role_count, ls);
 
 		log.info(s);
+	}
+	
+	@Test
+	public void testTime() throws ParseException{
+		String format="yyyy-mm-dd";
+		Long time=MyTimeUtil.convertString2Long("9222-01-01", format);
+		log.info(time +" of long ");
+	String content=	MyTimeUtil.convertLong2String(time, format);
+		log.info(content +" of string ");
+		
+		
 	}
 
 }
