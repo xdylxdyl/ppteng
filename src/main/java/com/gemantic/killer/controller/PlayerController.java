@@ -599,7 +599,7 @@ public class PlayerController {
 
 		user.setPunch(str);
 		user.setPunchAt(System.currentTimeMillis());
-		int m = 500;
+		int m = 200;
 		
 	/*	if(isBeautiful){
 			m=500*10;			
