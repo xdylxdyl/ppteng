@@ -11,8 +11,7 @@ declare Game
 	status: String
 	liverCount:int	
 	waterCount:int
-	killerCount:int
-	policeCount:int
+	killerCount:int	
 	lastTime:Long
 	remainTime:Long
 	startAt:Long
@@ -36,13 +35,13 @@ declare VoteStatus
       id:String
       voters:List
       killerVoters:List
-      policeVoters:List    
 end
 
 declare VoteCommonStatus
       id:String
       voters:List
 end
+
 
 declare Role
        id:String
@@ -60,9 +59,7 @@ end
 declare KillConfirm
 	id: String	
 end
-declare CheckConfirm
-	id: String	
-end
+
 
 declare StatusChange
      change:String

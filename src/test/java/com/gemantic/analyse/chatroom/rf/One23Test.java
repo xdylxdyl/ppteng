@@ -46,7 +46,7 @@ public class One23Test {
 
 	private RoomService roomService;
 	private ConfigurableApplicationContext context;
-	
+
 	private SettingService settingService;
 
 	@Before
@@ -57,7 +57,7 @@ public class One23Test {
 				.getBean("messageServiceSingleDroolsImpl");
 		roomService = (RoomService) context.getBean("roomServiceImpl");
 		settingService = (SettingService) context.getBean("settingServiceImpl");
-		
+
 	}
 
 	@After
@@ -111,7 +111,7 @@ public class One23Test {
 		return results;
 	}
 
-	//@Test
+	// @Test
 	public void testRF() throws InterruptedException {
 		StringUtils.isBlank("");
 		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
@@ -154,203 +154,194 @@ public class One23Test {
 
 	}
 
-
 	@Test
-	public void testPoliceRule() throws ServiceException, ServiceDaoException, IOException {
+	public void testSimpleRule() throws ServiceException, ServiceDaoException,
+			IOException {
 
-		String policeVersion = "killer_police_1.0";
 		String simpleVersion = "simple_1.0";
-		String currentVersion = policeVersion;
+		String currentVersion = simpleVersion;
 		Room room = new Room("sss", 3L, currentVersion);
-		Setting s=settingService.getSetting(currentVersion);
+		Setting s = settingService.getSetting(currentVersion);
 		log.info(s);
 		room.setSetting(s);
 		room.setId(5000L);
 		this.droolsGameMessageService.createRoom(room);
-		
-		
+
 		// TODO 我判断不出来用Int还是用String好
 		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
 				"78", String.valueOf(room.getId()), "", room.getVersion());
-		
+
 		List<String> messages = FileUtil
 				.readFileAsList("src/test/resources/killer_police.txt");
 		List<Message> ms = new ArrayList();
 
 		Long rid = null;
-	
+
 		for (String message : messages) {
 			if (message.startsWith("#")) {
 				continue;
 			}
-			
-			Message m = MessageUtil.parse(policeVersion, message);
-		    log.info("message start=========================== "+m);
-			List<Message> ms2 = this.droolsGameMessageService.generate(
-					m, room);
+
+			Message m = MessageUtil.parse(currentVersion, message);
+			log.info("message start=========================== " + m);
+			List<Message> ms2 = this.droolsGameMessageService.generate(m, room);
 			log.info(ms2);
 			log.info("message over =============================");
 		}
 
-
-
-		
-
-		
-		
-		
-	
-
 	}
-	
 
 	@Test
-	public void testGhostSimpleRule() throws ServiceException, ServiceDaoException, IOException {
+	public void testPoliceRule() throws ServiceException, ServiceDaoException,
+			IOException {
+
+		String policeVersion = "killer_police_1.0";
+		String simpleVersion = "simple_1.0";
+		String currentVersion = policeVersion;
+		Room room = new Room("sss", 3L, currentVersion);
+		Setting s = settingService.getSetting(currentVersion);
+		log.info(s);
+		room.setSetting(s);
+		room.setId(5000L);
+		this.droolsGameMessageService.createRoom(room);
+
+		// TODO 我判断不出来用Int还是用String好
+		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
+				"78", String.valueOf(room.getId()), "", room.getVersion());
+
+		List<String> messages = FileUtil
+				.readFileAsList("src/test/resources/killer_police.txt");
+		List<Message> ms = new ArrayList();
+
+		Long rid = null;
+
+		for (String message : messages) {
+			if (message.startsWith("#")) {
+				continue;
+			}
+
+			Message m = MessageUtil.parse(policeVersion, message);
+			log.info("message start=========================== " + m);
+			List<Message> ms2 = this.droolsGameMessageService.generate(m, room);
+			log.info(ms2);
+			log.info("message over =============================");
+		}
+
+	}
+
+	@Test
+	public void testGhostSimpleRule() throws ServiceException,
+			ServiceDaoException, IOException {
 
 		String policeVersion = "ghost_simple_1.0";
 		String simpleVersion = "simple_1.0";
 		String currentVersion = policeVersion;
 		Room room = new Room("sss", 3L, currentVersion);
-		Setting s=settingService.getSetting(currentVersion);
+		Setting s = settingService.getSetting(currentVersion);
 		log.info(s);
 		room.setSetting(s);
 		room.setId(5000L);
 		this.droolsGameMessageService.createRoom(room);
-		
-		
+
 		// TODO 我判断不出来用Int还是用String好
 		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
 				"78", String.valueOf(room.getId()), "", room.getVersion());
-		
+
 		List<String> messages = FileUtil
 				.readFileAsList("src/test/resources/ghost_simple.txt");
 		List<Message> ms = new ArrayList();
 
 		Long rid = null;
-	
+
 		for (String message : messages) {
 			if (message.startsWith("#")) {
 				continue;
 			}
-			
+
 			Message m = MessageUtil.parse(policeVersion, message);
-		    log.info("message start=========================== "+m);
-			List<Message> ms2 = this.droolsGameMessageService.generate(
-					m, room);
+			log.info("message start=========================== " + m);
+			List<Message> ms2 = this.droolsGameMessageService.generate(m, room);
 			log.info(ms2);
 			log.info("message over =============================");
 		}
 
-
-
-		
-
-		
-		
-		
-	
-
 	}
-	
+
 	@Test
-	public void testGhostQuestionRule() throws ServiceException, ServiceDaoException, IOException {
+	public void testGhostQuestionRule() throws ServiceException,
+			ServiceDaoException, IOException {
 
 		String policeVersion = "ghost_question_1.0";
 		String simpleVersion = "simple_1.0";
 		String currentVersion = policeVersion;
 		Room room = new Room("sss", 3L, currentVersion);
-		Setting s=settingService.getSetting(currentVersion);
+		Setting s = settingService.getSetting(currentVersion);
 		log.info(s);
 		room.setSetting(s);
 		room.setId(5000L);
 		this.droolsGameMessageService.createRoom(room);
-		
-		
+
 		// TODO 我判断不出来用Int还是用String好
 		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
 				"78", String.valueOf(room.getId()), "", room.getVersion());
-		
+
 		List<String> messages = FileUtil
 				.readFileAsList("src/test/resources/ghost_question.txt");
 		List<Message> ms = new ArrayList();
 
 		Long rid = null;
-	
+
 		for (String message : messages) {
 			if (message.startsWith("#")) {
 				continue;
 			}
-			
+
 			Message m = MessageUtil.parse(policeVersion, message);
-		    log.info("message start=========================== "+m);
-			List<Message> ms2 = this.droolsGameMessageService.generate(
-					m, room);
+			log.info("message start=========================== " + m);
+			List<Message> ms2 = this.droolsGameMessageService.generate(m, room);
 			log.info(ms2);
 			log.info("message over =============================");
 		}
 
-
-
-		
-
-		
-		
-		
-	
-
 	}
-	
-	
-	
+
 	@Test
-	public void testGhostSoulRule() throws ServiceException, ServiceDaoException, IOException {
+	public void testGhostSoulRule() throws ServiceException,
+			ServiceDaoException, IOException {
 
 		String policeVersion = "ghost_soul_1.0";
 		String simpleVersion = "simple_1.0";
 		String currentVersion = policeVersion;
 		Room room = new Room("sss", 3L, currentVersion);
-		Setting s=settingService.getSetting(currentVersion);
+		Setting s = settingService.getSetting(currentVersion);
 		log.info(s);
 		room.setSetting(s);
 		room.setId(5000L);
 		this.droolsGameMessageService.createRoom(room);
-		
-		
+
 		// TODO 我判断不出来用Int还是用String好
 		Message loginMessage = new Message("3", "login", "-500", "#0000FF",
 				"78", String.valueOf(room.getId()), "", room.getVersion());
-		
+
 		List<String> messages = FileUtil
 				.readFileAsList("src/test/resources/ghost_soul.txt");
 		List<Message> ms = new ArrayList();
 
 		Long rid = null;
-	
+
 		for (String message : messages) {
 			if (message.startsWith("#")) {
 				continue;
 			}
-			
+
 			Message m = MessageUtil.parse(policeVersion, message);
-		    log.info("message start=========================== "+m);
-			List<Message> ms2 = this.droolsGameMessageService.generate(
-					m, room);
+			log.info("message start=========================== " + m);
+			List<Message> ms2 = this.droolsGameMessageService.generate(m, room);
 			log.info(ms2);
 			log.info("message over =============================");
 		}
 
-
-
-		
-
-		
-		
-		
-	
-
 	}
-	
-	
 
 	// @Test
 	public void testSimpleRF() throws InterruptedException {
@@ -601,10 +592,43 @@ public class One23Test {
 		ksession.dispose();
 
 	}
-	
+
 	@Test
-	public void testNull(){
-		
+	public void testNull() {
+
+	}
+
+	List getVoteStatus(String status, String personStatus, String role, List vss) {
+
+		List ls = new ArrayList();
+
+		for (Object vs : vss) {
+
+			List l = new ArrayList();
+
+			if ("day".equals(status)) {
+
+			} else {
+
+			}
+			if ("night".equals(status) && "living".equals(personStatus)) {
+
+				if ("water".equals(role)) {
+
+				}
+				if ("killer".equals(role)) {
+					{
+
+					}
+
+				}
+
+			}
+
+			
+
+		}
+		return ls;
 	}
 
 }

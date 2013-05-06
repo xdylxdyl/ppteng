@@ -88,7 +88,7 @@
             <!--input-->
             <div class="form-horizontal">
                 <div class="control-group">
-                    <label for="" class="control-label" id="sayLabel">说:</label>
+                    <label for="" class="control-label" id="sayLabel"><span id="playerName"></span>说:</label>
                     <div class="controls">
                         <div class="row-fluid">
                             <div class="span10"><input type="text" class="span12" id="sayInput"></div>

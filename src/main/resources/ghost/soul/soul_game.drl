@@ -638,9 +638,8 @@ when
      (eval($ghostCount >= $waterCount+$soulCount)) 
      or
      (
-       eval($dayCount<=1 && $ghostCount!=0)
-       and
-       Message($phase:subject,predict=="switch")
+      eval($dayCount==1 && $ghostCount!=0) and
+      Message(predict=="switch")
      )   
       or
      (

@@ -228,7 +228,7 @@ when
 then      
 	//actions
      LogUtil.log("login init right ================="); 
-     Right r=new Right($id,convertString2Set(""),false);
+     Right r=new Right($id,convertString2Set("say"),false);
      insert(r);
          
     //  LogUtil.log(person); 

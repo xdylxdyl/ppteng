@@ -407,14 +407,6 @@ var ghostView = {
                 }
                 break;
             case ghostQuestionModel.playerStatus.king:
-                if ($("#time").val() == "over" || $("#time").val() == "topic" || $("#time").val() == "question") {
-
-                } else {
-                    //没有结束
-
-                    place = "deadArea";
-
-                }
                 break;
             case ghostQuestionModel.playerStatus.living:
                 //delay message

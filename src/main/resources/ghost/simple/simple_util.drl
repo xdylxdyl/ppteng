@@ -97,7 +97,7 @@ function Message createDay(Room room) {
 }
    
    
-    function String parseTopic(String topic, String role) {
+function String parseTopic(String topic, String role) {
      String[] contents=topic.split(" ");
      if(contents.length<2){
          return null; 
@@ -114,10 +114,6 @@ function Message createDay(Room room) {
    
   
 }  
-   
-
-
-
 
 
 

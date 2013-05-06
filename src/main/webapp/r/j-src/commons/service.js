@@ -271,26 +271,18 @@ var roomService = {
     },
 
     parseCount:function (counts) {
+
+        var status=globalView.getGameStatus();
+
+
         for (var key in counts) {
             var c = counts[key];
-            var role = playerService.getPlayer(globalView.getCurrentID());
-            switch (role) {
-                case  killGameAreaView.Role.water:
-                    playerListView.setVote(c.id, c.voters.length)
+           playerListView.setVote(c.id, c.voters.length);
 
-                    break;
-                case  killGameAreaView.Role.killer:
-                    playerListView.setVote(c.id, c.killerVoters.length);
-                    break;
-                case  killGameAreaView.Role.police:
-                    playerListView.setVote(c.id, c.policeVoters.length);
-                    break;
-                default :
-                    break;
-            }
+          }
 
 
-        }
+
 
     },
 
@@ -317,6 +309,7 @@ var roomService = {
         }
 
         playerListView.sortPlayer();
+        globalView.showSelf(playerService.getPlayer(globalView.getCurrentID()));
     },
 
     parseRecord:function (data) {

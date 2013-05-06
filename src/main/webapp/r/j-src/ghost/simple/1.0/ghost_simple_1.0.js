@@ -369,14 +369,7 @@ var ghostView = {
                 }
                 break;
             case ghostSimpleModel.playerStatus.king:
-                if ($("#time").val() == "over"||$("#time").val()=="topic") {
 
-                } else {
-                    //没有结束
-
-                    place = "deadArea";
-
-                }
                 break;
             case ghostSimpleModel.playerStatus.living:
                break;

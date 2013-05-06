@@ -1547,27 +1547,6 @@ end
 
 
 
-
-
-rule 'say to on person message when night message'
-ruleflow-group "part accepts message"
-when
-	//conditions	
-    $message:Message($subject:subject,predict=="say",object!="-500")   
-	 Game(status=="night")
-	 eval($message.getAccepts().size()==0)
-    $operater:Operater()
-then      
-    LogUtil.log(" say to one person message when night message start  =============");   
-    $message.getAccepts().add($message.getObject());
-    $message.getAccepts().add($subject);
-    update($message);
-    LogUtil.log("say to one person message when night message over =============");
-  
-end
-
-
-
 rule 'assign water role message'
 ruleflow-group "part accepts message"
 when

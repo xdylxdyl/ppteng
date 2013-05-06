@@ -117,8 +117,6 @@ function Message createDay(Room room) {
 }
     
    
-
-   
 function List getVoteStatus(String status,String personStatus,String role,List vss){
 
      List ls=new ArrayList();
@@ -143,10 +141,6 @@ function List getVoteStatus(String status,String personStatus,String role,List v
                    if("killer".equals(role)){
                       l=vs.getKillerVoters();
                    };
-                     if("police".equals(role)){
-                      l=vs.getPoliceVoters();
-                   };
-                   
       
                  
          };
@@ -186,7 +180,6 @@ function List getVoteStatus(String status,String personStatus,String role,List v
         
      
 }
-
 
 
 

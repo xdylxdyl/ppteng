@@ -845,6 +845,7 @@ when
   $game:Game($liverCount:liverCount,$waterCount:waterCount,$killerCount:killerCount,$policeCount:policeCount,$status:status);
   $person:Player(id==$id,status!="die");   
   $room:Room(status=="run")
+  $right:Right()
  then
    LogUtil.log(" die  start============="+$die);
    
@@ -878,6 +879,14 @@ when
          //if die of vote 
      Message dieMessage=new Message($id,"die",$type);  
      insert(dieMessage);
+     
+     
+          
+     modify($right){setRight(convertString2Set("say"))};    	
+	
+	
+	 Message rightMessage=new Message($id,"right","say"); 
+     insert(rightMessage);
      
     retract($die);
        LogUtil.log(" die  over=============");
@@ -985,7 +994,7 @@ then
             
             }else{
             
-               if("water".equals(role)){
+               if("water".equals(role.getRole())){
              
              
               }else{
@@ -1438,7 +1447,7 @@ when
 	      result(ls)
 	      );
 	      
-	 $votes:ArrayList()
+	 $votes:List()
 	      from accumulate(
 	      $voteStatus:VoteStatus()	     
 	      init(List ls=new ArrayList();),
@@ -1449,7 +1458,7 @@ when
     $operater:Operater()
     $right:Right(id==$subject)
     $role:Role(id==$subject)
-    
+     $player:Player(id==$subject,$personStatus:status)
     
 then      
 
@@ -1461,7 +1470,8 @@ then
       setRemainTime($status,$game,$room) ; 
       m.put("game",$game);      
       m.put("role",$role); 
-       m.put("votes",$votes);  
+         List vcs=getVoteStatus($status,$personStatus,$role.getRole(),$votes);
+        m.put("votes",vcs);   
           
       $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);   
@@ -1484,7 +1494,7 @@ when
 	      result(ls)
 	      );
 	      
-	 $votes:ArrayList()
+	 $votes:List()
 	      from accumulate(
 	      $voteStatus:VoteStatus()	    
 	      init(List ls=new ArrayList();),
@@ -1505,7 +1515,8 @@ then
       
      setRemainTime($status,$game,$room) ;
       m.put("game",$game);   
-       m.put("votes",$votes);  
+          List vcs=getUnplayerVoteStatus($status,$votes);
+        m.put("votes",vcs);    
         m.put("right",$right);    
         
 

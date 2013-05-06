@@ -97,6 +97,9 @@ var settingView = {
 
 
 var globalView = {
+    showSelf:function(player){
+      $("#playerName").empty().text(player.name);
+    },
 
     getGameStatus:function () {
         return   $("#time").val();

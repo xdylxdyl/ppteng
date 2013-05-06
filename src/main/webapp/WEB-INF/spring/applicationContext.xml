@@ -84,11 +84,11 @@
 			<map>
 				<entry key="simple_1.0">
 					<list>
-						<value>killer/simple/simple_model.drl</value>
-						<value>killer/simple/simple_query.drl</value>
-						<value>killer/simple/simple_util.drl</value>
-						<value>killer/simple/simple_game.drl</value>
-						<value>killer/simple/simple_game.rf</value>
+						<value>killer/simple2/simple_model.drl</value>
+						<value>killer/simple2/simple_query.drl</value>
+						<value>killer/simple2/simple_util.drl</value>
+						<value>killer/simple2/simple_game.drl</value>
+						<value>killer/simple2/simple_game.rf</value>
 					</list>
 				</entry>
 				<entry key="killer_police_1.0">

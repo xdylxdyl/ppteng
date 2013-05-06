@@ -100,19 +100,21 @@ var killGameAreaView = {
                 //delay message
                 if ("day" != globalView.getGameStatus()) {
                     switch (player.role) {
-                        case gameAreaView.Role.water:
+                        case killGameAreaView.Role.water:
                             place = "discard";
                             break;
-                        case gameAreaView.Role.killer:
+                        case killGameAreaView.Role.killer:
 
                             break;
-                        case gameAreaView.Role.police:
+                        case killGameAreaView.Role.police:
 
                             break;
                     }
 
                 }
+                break;
             default :
+                place = "deadArea";
 
 
         }
@@ -284,7 +286,11 @@ var gameView = {
         playerListView.sortPlayer();
         killGameAreaView.clearStatusArea();
         settingView.hideSettingButton();
-        gameView.hideDieArea();
+        var p=playerService.getPlayer(globalView.getCurrentID());
+
+        gameView.showSecondArea(p);
+
+
 
     },
     over:function (message) {
