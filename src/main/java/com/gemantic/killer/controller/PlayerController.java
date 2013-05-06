@@ -601,13 +601,6 @@ public class PlayerController {
 		user.setPunchAt(System.currentTimeMillis());
 		int m = 200;
 		
-	/*	if(isBeautiful){
-			m=500*10;			
-		}else{
-			m=500*2;
-		}*/
-	
-		
 		int punchCount = PunchUtil.getLatestContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, user.getPunch());
 
 		//500的基本金额+打卡连续天数*1用户级别对应权重*连续打卡奖励 
