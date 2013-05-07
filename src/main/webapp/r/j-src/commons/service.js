@@ -91,7 +91,10 @@ var playerService = {
         return data.user.name;
     },
     setStatus:function (id, status) {
-        id_name[id].status = status;
+        if( id_name[id]){
+            id_name[id].status = status;
+        }
+
     },
     setName:function (id, name) {
         id_name[id].name = name;

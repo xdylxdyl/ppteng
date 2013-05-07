@@ -251,6 +251,9 @@ var playerListView = {
     kill:function (id) {
 
         //this.setStatus(id, playerStatus.die);
+    },
+    living:function(){
+        this.sortPlayer();
     }
 
 

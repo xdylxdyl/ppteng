@@ -209,9 +209,7 @@
 			<p>友情链接</p>
 			<div class="row">
 				<div class="span3">
-					<p>
-						<a href="http://www.pickupstudio.org/" target="_blank">皮卡工作室</a>
-					<p>
+				
 					<p>
 						<a href="http://www.15tiance.com/" target="_blank">天策策划</a>
 					<p>

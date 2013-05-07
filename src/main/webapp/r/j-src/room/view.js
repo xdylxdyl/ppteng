@@ -96,6 +96,16 @@ var killGameAreaView = {
                 break;
             case playerStatus.lastword:
                 break;
+            case playerStatus.unready:
+                if ($("#time").val() == "over") {
+
+                } else {
+                    //没有结束
+
+                    place = "deadArea";
+
+                }
+                break;
             case playerStatus.living:
                 //delay message
                 if ("day" != globalView.getGameStatus()) {
@@ -276,6 +286,7 @@ var gameView = {
 
 
         $("#" + selects.$startButton).hide();
+        $("#" + selects.$readyButton).hide();
         $("#" + selects.$gameArea).empty();
         $("#" + selects.$killerArea).empty();
         $("#" + selects.$dieArea).empty();
@@ -283,13 +294,13 @@ var gameView = {
 
         $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始,白天时间~</p>");
 
+
         playerListView.sortPlayer();
         killGameAreaView.clearStatusArea();
         settingView.hideSettingButton();
-        var p=playerService.getPlayer(globalView.getCurrentID());
+        var p = playerService.getPlayer(globalView.getCurrentID());
 
         gameView.showSecondArea(p);
-
 
 
     },

@@ -154,7 +154,7 @@ killController.say = function (message) {
 
 killController.living = function (message) {
     playerService.setStatus(message.subject, playerStatus.living);
-    $("#" + message.subject).children("a").removeClass().addClass("living");
+    playerListView.living()
 };
 killController.status = function (message) {
     var id=message.subject;

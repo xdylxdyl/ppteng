@@ -74,6 +74,61 @@ then
 end
 
 
+
+
+rule 'clear prev game person status '
+ruleflow-group "game clear"
+no-loop true
+when
+	//conditions    
+    $message:Message($subject:subject,predict=="start")   
+    $player:Player(status!="ready")    //clear source    
+    
+then      
+	//actions
+     LogUtil.log("clear prev game VoteStatus start================= ");      
+     modify($player){setStatus("unready")};
+     LogUtil.log("clear prev game VoteStatus over ================="); 
+    
+end
+
+rule 'clear except message '
+ruleflow-group "game clear"
+no-loop true
+when
+	//conditions    
+    $message:Message($subject:subject,predict=="ready"||predict=="start")   
+    Game()   //clear source    
+    
+then      
+	//actions
+     LogUtil.log("clear except message '================= ");      
+     retract($message)
+     LogUtil.log("clear except message ' ================="); 
+    
+end
+
+
+rule 'reset right '
+ruleflow-group "game reset"
+no-loop true
+when
+	//conditions    
+    $message:Message($subject:subject,predict=="ready"||predict=="start")   
+    Player($id:id,status=="unready")   //clear source    
+    $right:Right(id==$id)
+then      
+	//actions
+     LogUtil.log("reset right start '================= ");
+     modify($right){setRight(convertString2Set("say"))}; 
+      // send right message
+	 Message rightMessage=new Message($id,"right","say"); 
+     insert(rightMessage);	
+     
+     LogUtil.log("reset right over' ================="); 
+    
+end
+
 //===================clear game over 
 
 
@@ -245,6 +300,27 @@ then
      LogUtil.log("phase clear vote over =================");   
 end
 
+rule 'phase reset vote message  '
+ruleflow-group "phase clear"
+no-loop true
+when
+	//conditions    
+    $player:Player($id:id,status=="living")
+    $room:Room(status=="run")
+    (Game(status=="day") and Message($subject:subject,predict=="time",subject=="day"))   
+    or 
+    (Game(status=="night") and Message($subject:subject,predict=="time",subject=="night"))  
+	 or 
+    (Game(status=="lastword") and Message($subject:subject,predict=="time",subject=="lastword"))   
+    
+then      
+	//actions
+   //actions
+     LogUtil.log("phase reset vote message   start================= "); 
+      Message setVoteMessage=new Message($id,"set vote","0");
+     insert(setVoteMessage);    
+     LogUtil.log("phase reset vote message  over =================");   
+end
 
 
 
@@ -290,6 +366,11 @@ then
    //actions
      LogUtil.log("phase clear right start================= ");
      modify($right){setRight(new HashSet())}; 
+     
+     
+       // send right message
+	 Message rightMessage=new Message($id,"right",""); 
+     insert(rightMessage);	
      LogUtil.log("phase clear phase over =================");   
 end
 
@@ -325,6 +406,39 @@ then
      retract($confirm);
      LogUtil.log("phase clear kill confirm  over =================");   
 end
+
+rule 'phase clear kill message '
+ruleflow-group "phase clear"
+no-loop true
+when
+	//conditions    
+    $message:Message(predict=="kill")
+    $room:Room(status=="run")
+    Game(status!="night") 
+then      
+	//actions
+   //actions
+     LogUtil.log("phase clear kill confirm  start================= "); 
+     retract($message);
+     LogUtil.log("phase clear kill confirm  over =================");   
+end
+
+rule 'phase clear check message '
+ruleflow-group "phase clear"
+no-loop true
+when
+	//conditions    
+    $message:Message(predict=="check")
+    $room:Room(status=="run")
+    Game(status!="night") 
+then      
+	//actions
+   //actions
+     LogUtil.log("phase clear check confirm  start================= "); 
+     retract($message);
+     LogUtil.log("phase clear check confirm  over =================");   
+end
+
 //===========phase clear============over 
 
 
@@ -812,10 +926,10 @@ no-loop true
 when
  
   
-  $game:Game(status=="run")
+  $game:Game()
   Message($subject:subject,predict=="logout")
-  $person:Player()
-  Role($role:role)
+  $person:Player(id==$subject,status=="living"||status=="lastword")
+  Role($role:role,id==$subject)
 then
    LogUtil.log("person die logout start==============");
    Die die=new Die($subject,"logout",$role);   

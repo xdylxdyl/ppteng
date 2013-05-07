@@ -172,7 +172,7 @@ public class One23Test {
 				"78", String.valueOf(room.getId()), "", room.getVersion());
 
 		List<String> messages = FileUtil
-				.readFileAsList("src/test/resources/killer_police.txt");
+				.readFileAsList("src/test/resources/simple_killer.txt");
 		List<Message> ms = new ArrayList();
 
 		Long rid = null;
