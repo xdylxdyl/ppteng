@@ -876,7 +876,7 @@ ruleflow-group "person status"
 no-loop true
 when 
   $player:Player($id:id,status=="lastword")
-  Role($role:role)
+  Role($role:role,id==$id)
   (
     Game(status=="lastword") and  Message(subject==$id,predict=="lastword")   
   )  

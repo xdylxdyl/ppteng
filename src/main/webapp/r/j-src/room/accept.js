@@ -208,11 +208,15 @@ killController.vote = function (message) {
 };
 killController.setVote = function (message) {
 
+    var p=playerService.getPlayer(message.subject);
+    p.count=message.object;
     playerListView.setVote(message.subject, message.object);
+
+
 
 };
 killController.clearVote = function () {
-    $("nav li img").text("");
+
 };
 
 
