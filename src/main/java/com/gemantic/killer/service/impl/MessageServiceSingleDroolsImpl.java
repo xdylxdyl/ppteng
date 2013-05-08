@@ -228,7 +228,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		if(r.getPlayers().size()>=6&&time>3*60*1000){
 			return true;
 		}
-		return true;
+		return false;
 	}
 
 	private boolean IsRoomMessage(Message message, Room r) {
