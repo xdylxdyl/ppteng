@@ -54,8 +54,18 @@ var killGameAreaView = {
 
     RoleHint:{
         water:"【身份】水民 ",
-        killer:"【身份】杀手 ",
-        police:"【身份】警察 "
+        killer:function(names){
+           return "【杀手名单】 "+JSON.stringify(names);
+        },
+        appendKiller:function(name){
+            return "【杀手名单】 "+name;
+        },
+        police:function(names){
+                  return "【警察名单】 "+JSON.stringify(names);
+        },
+        appendPolice:function(name){
+                  return "【警察名单】 "+name;
+          }
     },
     RoleName:{
         water:"水民 ",
@@ -346,9 +356,20 @@ var simpleService = {
         simpleService.parseGame(data.game);
         roomService.parseRight(data.right);
         roomService.parseCount(data.votes);
-        simpleService.parseRole(data.role)
+        simpleService.parseRole(data.role);
+        simpleService.parseGroup(data.group);
     },
 
+    parseGroup:function(group){
+        var p=playerService.getPlayer(globalView.getCurrentID());
+        if(killGameAreaView.Role.water==p.role){
+
+        }else{
+            playerListView.displayRole(p.role,group);
+
+        }
+
+    },
 
     parseRole:function (data) {
         if (data == null) {

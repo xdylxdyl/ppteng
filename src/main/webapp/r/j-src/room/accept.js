@@ -72,17 +72,6 @@ killController.parseMessage = function (message) {
 }
 
 
-killController.role = function (message) {
-
-
-    var player = playerService.getPlayer(message.subject);
-    var name = player.name;
-
-    $("#" + selects.$playerRole).empty().html("身份:" + killGameAreaView.RoleName[message.subject]);
-
-
-};
-
 
 
 killController.isDisplayDecryption = function () {
@@ -121,7 +110,8 @@ killController.assign = function (message) {
     var p = playerService.getPlayer(message.object);
     p.role = message.subject;
     playerService.updatePlayer(p);
-    playerListView.displayRole(p.role);
+    playerListView.appendRole(p);
+
 };
 
 
@@ -134,6 +124,8 @@ killController.timeChange = function (message) {
 
     var status = message.subject;
     var p = playerService.getPlayer(globalView.getCurrentID());
+    playerService.clearCount(status);
+    playerListView.sortPlayer();
 
     killGameAreaView.showContentForGameArea(killGameAreaView.Hint[status]);
     killGameAreaView.showConentForGamePhase(killGameAreaView.Phase[status]);
@@ -199,11 +191,9 @@ killController.die = function (message) {
 
 killController.vote = function (message) {
 
-    if ("day" == globalView.getGameStatus()) {
         killGameAreaView.vote(playerService.getPlayer(message.subject).name,
-            playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
+        playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
 
-    }
 
 };
 killController.setVote = function (message) {

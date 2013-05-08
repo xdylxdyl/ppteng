@@ -97,8 +97,8 @@ var settingView = {
 
 
 var globalView = {
-    showSelf:function(player){
-      $("#playerName").empty().text(player.name);
+    showSelf:function (player) {
+        $("#playerName").empty().text(player.name);
     },
 
     getGameStatus:function () {
@@ -202,9 +202,24 @@ var playerListView = {
 
     },
 
-    displayRole:function (role) {
+    displayRole:function (role, group) {
+        var hint = "";
+        switch (role) {
+            case killGameAreaView.Role.water:
+                break;
+            case killGameAreaView.Role.killer:
+                var names = playerService.getGroupNames(group);
+                hint = killGameAreaView.RoleHint.killer(names);
+                break;
+            case killGameAreaView.Role.police:
+                var names = playerService.getGroupNames(group);
+                hint = killGameAreaView.RoleHint.police(names);
+                break;
+            default:
+                break;
+        }
 
-        var hint = "【身份】" + killGameAreaView.RoleName[role];
+
         $("#" + selects.$playerRole).removeClass().empty().html(hint);
         if (killGameAreaView.Role.killer == role || killGameAreaView.Role.police == role) {
             $("#" + selects.$playerRole).addClass("text-error");
@@ -212,7 +227,40 @@ var playerListView = {
 
 
     },
+    appendRole:function (player) {
+        var role = player.role;
+        var hint = $("#" + selects.$playerRole).text();
+        switch (role) {
+            case killGameAreaView.Role.water:
+                hint = killGameAreaView.RoleHint.water;
+                break;
+            case killGameAreaView.Role.killer:
+                if (hint == "") {
+                    hint = killGameAreaView.RoleHint.appendKiller(player.name);
+                } else {
+                    hint = hint + "," + player.name;
+                }
 
+                break;
+            case killGameAreaView.Role.police:
+                if (hint == "") {
+                    hint = killGameAreaView.RoleHint.appendPolice(player.name);
+                } else {
+                    hint = hint + "," + player.name;
+                }
+                break;
+            default:
+                break;
+        }
+
+
+        $("#" + selects.$playerRole).removeClass().empty().html(hint);
+        if (killGameAreaView.Role.killer == role || killGameAreaView.Role.police == role) {
+            $("#" + selects.$playerRole).addClass("text-error");
+        }
+
+
+    },
     sortPlayer:function () {
 
         var sortPlayers = playerService.getAll();
@@ -252,7 +300,7 @@ var playerListView = {
 
         //this.setStatus(id, playerStatus.die);
     },
-    living:function(){
+    living:function () {
         this.sortPlayer();
     }
 
@@ -542,10 +590,10 @@ var controlView = {
 
         }
 
-        if(result.code==0){
-            if(versionFunction["commandCheck"])
-                      return versionFunction["commandCheck"]();
-        }else{
+        if (result.code == 0) {
+            if (versionFunction["commandCheck"])
+                return versionFunction["commandCheck"]();
+        } else {
 
             return result;
         }
@@ -775,8 +823,8 @@ var controlView = {
             default :
                 console.log("亲，这个指令你还没写嘛.,start version commandFilter");
                 if (versionFunction["commandFilter"]) {
-                      versionFunction["commandFilter"](command);
-                  }
+                    versionFunction["commandFilter"](command);
+                }
 
         }
     },
@@ -816,9 +864,9 @@ var controlView = {
         $("#object").append(objectStr);
 
     },
-    appendObjectContent:function(data,display){
+    appendObjectContent:function (data, display) {
 
-        var objectStr = " <li data-default='" + data + "'><a href='#'>" +display + "</a></li>";
+        var objectStr = " <li data-default='" + data + "'><a href='#'>" + display + "</a></li>";
         $("#object").append(objectStr);
 
 

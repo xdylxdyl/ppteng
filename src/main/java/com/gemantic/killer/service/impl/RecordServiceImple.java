@@ -222,7 +222,7 @@ public class RecordServiceImple implements RecordService {
 			if(r==null){
 				return new ArrayList();
 			}
-			List<String> lines = FileUtil.readFileAsList(r.getPath());
+			List<String> lines = FileUtil.readFileAsList(r.getPath(),"utf-8");
 			return lines;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -165,8 +165,8 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 				
 			}
 			
-			
-			if(r.getPlayers().size()>=6&&time>3*60*1000){
+			boolean isSaveRecord=this.isSaveRecord(r,time);
+			if(isSaveRecord){
 				//六人局才发钱和超过三分钟才给钱存战例
 				for (Message m : messages) {
 					if ("decryption" == m.getPredict()) {
@@ -222,6 +222,13 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		}
 
 		return operater;
+	}
+
+	private boolean isSaveRecord(Room r, Long time) {
+		if(r.getPlayers().size()>=6&&time>3*60*1000){
+			return true;
+		}
+		return true;
 	}
 
 	private boolean IsRoomMessage(Message message, Room r) {

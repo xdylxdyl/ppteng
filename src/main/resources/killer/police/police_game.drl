@@ -727,16 +727,26 @@ no-loop true
 when
  
   
-  $game:Game(status=="night");    
-  $players:ArrayList()
+  $game:Game(status=="night",$policeCount:policeCount);   
+  
+   $living_ids:HashSet()
 	      from accumulate(
-	      $role:Role($id:id,role=="police")	     
+	      Player($id:id,status=="living")	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	 ); 
+
+   $same_role_ids:ArrayList()
+	      from accumulate(
+	      Role(role=="police",$id:id,$living_ids contains $id)	     
 	      init(List ls=new ArrayList();),
 	      action(ls.add($id);),
 	      result(ls)
-	      );  
+	 );
+
   $voteStatus:VoteStatus($id:id,$voters:policeVoters)  
-  eval($voters.size()== $players.size() )   
+  eval($voters.size()== $policeCount )   
   Role(id==$id,$role:Role)
   $player:Player(id==$id)
   not CheckConfirm()
@@ -745,7 +755,7 @@ then
    LogUtil.log("person  by check start==============");
   Message decryption=new Message($id,"decryption",$role);
   //here set accepts 
-  decryption.setAccepts($players);
+  decryption.setAccepts($same_role_ids);
   insert(decryption);
   CheckConfirm cc=new CheckConfirm($id);
   insert(cc);
@@ -760,17 +770,10 @@ no-loop true
 when
  
   
-  $game:Game(status=="night");    
-   //get all readys
-   $players:ArrayList()
-	      from accumulate(
-	      $role:Role($id:id,role=="killer")	     
-	      init(List ls=new ArrayList();),
-	      action(ls.add($id);),
-	      result(ls)
-	      );  
+  $game:Game(status=="night",$killerCount:killerCount);    
+   
   $voteStatus:VoteStatus($id:id,$voters:killerVoters)  
-  eval($voters.size()  == $players.size() ) 
+  eval($voters.size()  ==$killerCount ) 
   not KillConfirm()
 then
    LogUtil.log("kill confirm start==============");
@@ -1499,9 +1502,19 @@ no-loop true
 when
      $message:Message($subject:subject,predict=="say"||predict=="vote"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)   
 	 Role(id==$subject,$role:role)
+	 
+	 $living_ids:HashSet()
+	      from accumulate(
+	      Player($id:id,status=="living")	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	 );
+
+	 
 	 $all_group_ids:ArrayList()
 	      from accumulate(
-	      Role($id:id,role==$role)	     
+	      Role($id:id,role==$role,$living_ids contains $id)	     
 	      init(List ls=new ArrayList();),
 	      action(ls.add($id);),
 	      result(ls)
@@ -1516,6 +1529,30 @@ then
     
 end
 
+
+rule 'group accept of assign'
+ruleflow-group "message accept"
+salience 50
+no-loop true 
+when
+     $message:Message($subject:subject,predict=="assign",$accepts:accepts)   
+	 Role(id==$subject,$role:role)
+	 $all_group_ids:ArrayList()
+	      from accumulate(
+	      Role($id:id,role==$role)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+	 Game()	
+	 
+then
+     LogUtil.log(" group say start  ============="+$message); 
+    
+     modify($message){setAccepts($all_group_ids)};    
+    LogUtil.log("group say over =============");
+    
+end
 
 
 rule 'all accept of all'
@@ -1571,8 +1608,15 @@ when
 	$game:Game($status:status);  
     $operater:Operater()
     $right:Right(id==$subject)
-    $role:Role(id==$subject)
+    $role:Role(id==$subject,$prole:role)
      $player:Player(id==$subject,$personStatus:status)
+         $group:List()
+	      from accumulate(
+	      $r:Role($pid:id,role==$prole)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($pid);),
+	      result(ls)
+	      );
     
 then      
 
@@ -1584,8 +1628,10 @@ then
       setRemainTime($status,$game,$room) ; 
       m.put("game",$game);      
       m.put("role",$role); 
+       m.put("group",$group);
          List vcs=getVoteStatus($status,$personStatus,$role.getRole(),$votes);
         m.put("votes",vcs);   
+         
           
       $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);   

@@ -56,6 +56,42 @@ var recordService = {
 }
 
 var playerService = {
+    clearCount:function (status) {
+        if ("night" == status || "lastword" == status) {
+            for (var key in id_name) {
+                var player = this.getPlayer(key);
+                player.count = 0;
+
+
+            }
+        }
+
+    },
+
+    getGroupNames:function (group) {
+        var result = [];
+
+        for (var key in group) {
+            var player = this.getPlayer(group[key]);
+            result.push(player.name);
+        }
+        return result;
+    },
+
+    getRoleGroupNames:function (role) {
+        var result = [];
+
+        for (var key in id_name) {
+            var player = this.getPlayer(id_name[key]);
+            if(role==player.role){
+                result.push(player.name);
+            }
+
+        }
+        return result;
+    },
+
+
 
     updatePlayer:function (p) {
         id_name[p.id] = p;
@@ -91,7 +127,7 @@ var playerService = {
         return data.user.name;
     },
     setStatus:function (id, status) {
-        if( id_name[id]){
+        if (id_name[id]) {
             id_name[id].status = status;
         }
 
@@ -275,16 +311,14 @@ var roomService = {
 
     parseCount:function (counts) {
 
-        var status=globalView.getGameStatus();
+        var status = globalView.getGameStatus();
 
 
         for (var key in counts) {
             var c = counts[key];
-           playerListView.setVote(c.id, c.voters.length);
+            playerListView.setVote(c.id, c.voters.length);
 
-          }
-
-
+        }
 
 
     },

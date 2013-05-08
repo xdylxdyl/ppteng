@@ -616,17 +616,9 @@ no-loop true
 when
  
   
-  $game:Game(status=="night");    
-   //get all readys
-   $players:ArrayList()
-	      from accumulate(
-	      $role:Role($id:id,role=="killer")	     
-	      init(List ls=new ArrayList();),
-	      action(ls.add($id);),
-	      result(ls)
-	      );  
+  $game:Game(status=="night",$killerCount:killerCount); 
   $voteStatus:VoteStatus($id:id,$voters:killerVoters)  
-  eval($voters.size()  == $players.size() ) 
+  eval($voters.size()  == $killerCount ) 
   not KillConfirm()
 then
    LogUtil.log("kill confirm start==============");
@@ -979,7 +971,7 @@ then
    
       modify($room){setStatus("unrun")};
       modify($operater){setGameOver(true),setRecordID(Long.valueOf($recordName))};
-      retract($game);   
+      
     
       LogUtil.log("game over process  over  ================="); 
 end
@@ -1280,7 +1272,7 @@ ruleflow-group "message accept"
 salience 100
 no-loop true 
 when
-     $message:Message($subject:subject,predict=="assign",$object:object,$accepts:accepts)   
+     $message:Message($subject:subject,$subject=="water",predict=="assign",$object:object,$accepts:accepts)   
 	 
 	 
 then
@@ -1315,9 +1307,20 @@ no-loop true
 when
      $message:Message($subject:subject,predict=="say"||predict=="vote"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)   
 	 Role(id==$subject,$role:role)
+	 
+	 
+	$living_ids:HashSet()
+	      from accumulate(
+	      Player($id:id,status=="living")	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($id);),
+	      result(ls)
+	 );
+
+	 
 	 $all_group_ids:ArrayList()
 	      from accumulate(
-	      Role($id:id,role==$role)	     
+	      Role($id:id,role==$role,$living_ids contains $id)	     
 	      init(List ls=new ArrayList();),
 	      action(ls.add($id);),
 	      result(ls)
@@ -1333,6 +1336,29 @@ then
     
 end
 
+rule 'group accept of assign'
+ruleflow-group "message accept"
+salience 50
+no-loop true 
+when
+     $message:Message($subject:subject,$subject!="water",predict=="assign",$object:object,$accepts:accepts)   
+	 Role(id==$object,$role:role)
+	 $all_group_ids:ArrayList()
+	      from accumulate(
+	      Role($id:id,role==$role)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+	 Game()	
+	 
+then
+     LogUtil.log(" group accept of assign  ============="+$message); 
+    
+     modify($message){setAccepts($all_group_ids)};    
+    LogUtil.log("group accept of assign over =============");
+    
+end
 
 
 rule 'all accept of all'
@@ -1388,8 +1414,15 @@ when
 	$game:Game($status:status);  
     $operater:Operater()
     $right:Right(id==$subject)
-    $role:Role(id==$subject)
+    $role:Role(id==$subject,$prole:role)
     $player:Player(id==$subject,$personStatus:status)
+    $group:List()
+	      from accumulate(
+	      $r:Role($pid:id,role==$prole)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($pid);),
+	      result(ls)
+	      );
     
 then      
 
@@ -1401,6 +1434,7 @@ then
       setRemainTime($status,$game,$room) ; 
       m.put("game",$game);      
       m.put("role",$role);
+      m.put("group",$group);
       
       List vcs=getVoteStatus($status,$personStatus,$role.getRole(),$votes);
         m.put("votes",vcs);  
@@ -1462,10 +1496,33 @@ end
 
 
 
+rule 'record'
+ruleflow-group "record"
+when
+	//conditions
+	$game:Game(); 
+    $operater:Operater()     
+then      
+	 LogUtil.log("record start=================");       
+
+      JobLogger.logMessages($game.getRecordName(), $operater.getNextMessages());
+	LogUtil.log("record over =================");
+end
 
 
 
-
-
+rule 'retract game'
+ruleflow-group "retract game"
+when
+	//conditions
+	$room:Room(status=="unrun") 
+	$game:Game()
+then      
+	//actions
+     LogUtil.log("retract game start================= ");  
+     retract($game);
+     LogUtil.log("retract game over ================="); 
+    
+end
 
 //===========message accept============over 

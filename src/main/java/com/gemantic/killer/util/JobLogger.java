@@ -1,6 +1,8 @@
 package com.gemantic.killer.util;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
+import com.gemantic.common.util.FileUtil;
 import com.gemantic.killer.common.model.Message;
 
 public class JobLogger {
@@ -48,6 +51,7 @@ public class JobLogger {
 				file.mkdirs();
 				file = new File(m_filename + "/" + jobName+".txt");
 				FileAppender appender = new FileAppender(layout, file.getAbsolutePath(), true);
+				appender.setEncoding("utf-8");
 				logger.removeAllAppenders();
 				logger.addAppender(appender);
 			} catch (Exception e) {
@@ -57,9 +61,20 @@ public class JobLogger {
 		return logger;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
-		JobLogger.log("test", "hello world");
+		JobLogger.log("test", "中文是乱码不");
+
+		List<String> messages = FileUtil
+				.readFileAsList("src/test/resources/killer_police.txt");
+		String policeVersion = "killer_police_1.0";
+		List<Message> ls=new ArrayList<Message>();
+		for(String line:messages){
+			Message m = MessageUtil.parse(policeVersion, line);
+			ls.add(m);
+		}
+		
+		JobLogger.logMessages("test",ls);
 
 	}
 
@@ -67,6 +82,7 @@ public class JobLogger {
 		//log.info(jobName+" : "+messages);
 		String json = MessageUtil.convertMessages2String(messages);
 		Logger l = getJobLogger(jobName);
+		log.info(json);
 		l.info(json);
 		
 	}
