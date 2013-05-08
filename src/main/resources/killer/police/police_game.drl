@@ -882,7 +882,7 @@ when
   )  
    or
   (
-    Message(subject=="day",predict=="time")  
+    Message(subject=="day",predict=="switch")  
    )
    not Die()
 
@@ -1070,7 +1070,7 @@ no-loop true
 when
      //$operater:Operater()  
      Message(predict=="over",$object:object)
-     $game:Game();
+     $game:Game($recordName:recordName);
      $room:Room(status=="run")     
      $all_login_ids:HashSet()
 	      from accumulate(
@@ -1152,7 +1152,7 @@ then
       
    
       modify($room){setStatus("unrun")};
-      modify($operater){setGameOver(true)};
+      modify($operater){setGameOver(true),setRecordID(Long.valueOf($recordName))};
       retract($game);   
     
       LogUtil.log("game over process  over  ================="); 

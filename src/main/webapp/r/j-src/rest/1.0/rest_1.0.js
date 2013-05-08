@@ -103,7 +103,7 @@ app.filter('timeConvert', function() {
 
 
 function publicCtrl($scope, $timeout) {
-    $scope.publicFeed = restService.getPublicFeed();
+    $scope.publicFeed = [];
     $scope.refresh = function() {
            $scope.publicFeed = restService.getPublicFeed();
        };
@@ -112,6 +112,8 @@ function publicCtrl($scope, $timeout) {
             mytimeout = $timeout($scope.onTimeout,120000);
         }
       var mytimeout = $timeout($scope.onTimeout,120000);
+
+    $scope.refresh();
 
 
 };
