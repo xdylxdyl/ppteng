@@ -140,7 +140,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		
 		if (operater.getGameOver()) {
 
-		//	log.info("game over");// 主要是在Session里.愁死我了.Gameover的时候不能把Session给Remove了.
+			log.info("game over "+operater.getRecordID());// 主要是在Session里.愁死我了.Gameover的时候不能把Session给Remove了.
 
 			this.roomTimerSevice.removeRoomTimer(Long.valueOf(operater.getMessage().getWhere()));
 			operater.getTimerMessages().clear();
