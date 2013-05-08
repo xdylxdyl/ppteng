@@ -1500,7 +1500,7 @@ ruleflow-group "message accept"
 salience 50
 no-loop true 
 when
-     $message:Message($subject:subject,predict=="say"||predict=="vote"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)   
+     $message:Message($subject:subject,predict=="say"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)   
 	 Role(id==$subject,$role:role)
 	 
 	 $living_ids:HashSet()
