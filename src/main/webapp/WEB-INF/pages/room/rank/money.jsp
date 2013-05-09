@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<script src="/r/j-src/rank/money.js"></script>
+
 
 
 <link href="/r/css/user_detail.css" rel="stylesheet" />
@@ -54,3 +54,4 @@
 			id="pageNext">Next</a></li>
 	</ul>
 </div>
+<script src="/r/j-src/web/rank/money.js"></script>

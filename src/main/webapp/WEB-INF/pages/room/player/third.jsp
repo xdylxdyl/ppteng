@@ -1,16 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-<script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script
-	src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 
-<script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil.js"></script>
-<script
-	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-	
-<script type="text/javascript"
-src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
 
 
 
@@ -28,3 +19,13 @@ src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data
 
 	<div id="push"></div>
 </div>
+<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
+<script
+	src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
+
+<script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil.js"></script>
+<script
+	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+	
+<script type="text/javascript"
+src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>

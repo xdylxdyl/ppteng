@@ -96,7 +96,8 @@ killController.decryption = function (message) {
     var isDisplay=killController.isDisplayDecryption();
     if(isDisplay){
         var name = playerService.getName(message.subject);
-        $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + killGameAreaView.RoleName[message.object] + "</p>");
+
+        $("#" + selects.$gameArea).append(killGameAreaView.hint.say(name,message.object));
 
     }
 
@@ -154,7 +155,7 @@ killController.status = function (message) {
     var name = player.name;
     if (message.object == "lastword") {
 
-        $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听 [" + name + "] 的最后一句话。</p>");
+        $("#" + selects.$gameArea).append(killGameAreaView.hint.lastword(name));
     }
     playerService.setStatus(message.subject, message.object);
     playerListView.setStatus(message.subject, message.object);

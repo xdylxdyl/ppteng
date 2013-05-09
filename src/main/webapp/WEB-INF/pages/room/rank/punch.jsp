@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-<script src="/r/j-src/rank/punch.js"></script>
+
 
 <link href="/r/css/user_detail.css" rel="stylesheet" />
 <link href="/r/css/button.css" rel="stylesheet" />
@@ -44,3 +44,5 @@
 		<li><a href="${link}&page=${page+1}&size=${size}" id="pageNext">Next</a></li>
 	</ul>
 </div>
+
+<script src="/r/j-src/web/rank/punch.js"></script>

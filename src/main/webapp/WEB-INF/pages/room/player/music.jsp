@@ -6,10 +6,7 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/r/css/music.css?v=${frontVersion}">
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script src="/r/j-src/util/musicUtil.js?v=20.5"></script>
-<script src="/r/j-src/person/music.js"></script>
+
 <input id="uid" type="hidden" value="${current.id}" />
 <input id="name" type="hidden" value="${current.name}" />
 
@@ -56,4 +53,9 @@
 	</c:choose>
 
     </div>
+    
+    <script
+	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+<script src="/r/j-src/util/musicUtil.js?v=20.5"></script>
+<script src="/r/j-src/web/person/music.js"></script>
 </div>

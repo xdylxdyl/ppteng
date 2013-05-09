@@ -70,6 +70,8 @@
                     <li class="active"><a href="#mine_area" data-toggle="tab">多人扫雷</a></li>
                                
                     <li><a href="#setting_area" data-toggle="tab">设置</a></li>
+                          <li><a href="#music_area" data-toggle="tab">音乐</a></li>
+                    <li><a href="#help_area" data-toggle="tab">帮助</a></li>
                    <tiles:insertDefinition name="navAdvertiseNormal" /> 
                  
                 </ul>
@@ -85,6 +87,35 @@
                     
                        
                     </div>   
+                    
+                    <div class="tab-pane" id="music_area">
+							<div id="wrapper">
+								<audio preload></audio>
+								<ol>
+									<li><a href="#"
+										data-src="http://imade.118100.cn/library/music/1307949575730.mp3">你的歌声里</a></li>
+									<li><a href="#"
+										data-src="http://lianzidi.com/COFFdD0xMzY1MDg3MTM3Jmk9MTE4LjExNC4xNzAuMTk5JnU9U29uZ3MvdjEvZmFpbnRRQy9iYi8zMDU5NWUwOWY3MWU2ZWIyNWIyYzFhYjE0ZGZiZmFiYi5tcDMmbT00MTE1Y2MwOWJlMWIwYmFlNDM4NjQ4YjhkZjdjMmNjNiZ2PWxpc3RlbiZuPdChx+m46CUyMG1peCZzPcvVtPLCzCZwPXM=.mp3">小情歌</a></li>
+									<li><a href="#"
+										data-src="http://www.time.ac.cn/timebbs/uploadfile/mp3/hktk.mp3">想你的夜</a></li>
+								</ol>
+							</div>
+
+
+
+						</div>
+
+						<div class="tab-pane" id="help_area">
+							<div class="hero-unit">
+
+								<p>多人扫雷协作版</p>
+								
+
+							</div>
+
+
+						</div>
+                    
                     
                       <!-- advertise -->
                       <tiles:insertDefinition name="advertiseNormal" /> 
@@ -121,30 +152,28 @@
 	
 	
 	
-<script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-dropdown.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tab.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-modal.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tooltip.js"></script>
-<script type="text/javascript" src="/r/j-src/kibo/kibo.js"></script><!--侦测键盘-->
-<script type="text/javascript" src="/r/j-src/music/audio.min.js"></script>
+	
+<script type="text/javascript" src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-tab.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-modal.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script><!--侦测键盘-->
 
+<script type="text/javascript" src="/r/j-src/framework/audio/audio.min.js"></script>
 
-<script src="/r/j-src/mine/mine.js?v=${frontVersion}"></script>
+<script src="/r/j-src/game/mine/mine.js?v=${frontVersion}"></script>
+
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/model.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/service.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/base.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/base.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/action.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/action.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/room/accept.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/room/view.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/commons/view.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/view.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 <script
@@ -153,7 +182,7 @@
 	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
 
 <script
-	src="<%=request.getContextPath() %>/r/j-src/foot/foot.js?v=${frontVersion}"></script>
-
-
+	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
+	<script
+	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
 

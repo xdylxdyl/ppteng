@@ -12,16 +12,6 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<script
-	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-
-<!-- <script src="/r/j-src/angular/angular.js"></script>
- <script
-	src="/r/j-src/angular/angular-resource.js"></script> -->
-	 <script
-	src="/r/j-src/index/index.js?v=${frontVersion}"></script>
-	 <script
-	type="text/javascript" src="/r/j-src/bootstrap/carousel.js"></script>
 </head>
 
 
@@ -259,9 +249,18 @@
 			src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1999911523"
 			type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript"
-			src="/r/j-src/commons/third.js?version=${frontVersion}"></script>
+			src="/r/j-src/game/commons/third.js?version=${frontVersion}"></script>
 		<script type="text/javascript"
-			src="/r/j-src/punch/punch.js?version=${frontVersion}"></script>
+			src="/r/j-src/web/punch/punch.js?version=${frontVersion}"></script>
+			
+			
+<script
+	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+
+	 <script
+	src="/r/j-src/web/index/index.js?v=${frontVersion}"></script>
+	 <script
+	type="text/javascript" src="/r/j-src/framework/bootstrap/carousel.js"></script>
 </body>
 </html>
 

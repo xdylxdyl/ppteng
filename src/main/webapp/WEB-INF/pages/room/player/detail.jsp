@@ -9,15 +9,6 @@
 
 
 
-<script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script src="/r/j-src/commons/model.js?v=${frontVersion}"></script>
-<script src="/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
-<script src="/r/j-src/commons/service.js?v=${frontVersion}"></script>
-
-<script src="/r/j-src/person/detail.js?v=${frontVersion}"></script>
-<script src="/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/musicUtil.js?v=${frontVersion}"></script>
 
 </head>
 <input type="hidden" id="uid" value="${current.id}">
@@ -104,5 +95,16 @@
 
 		</div>
 	</div>
+	
+	
+<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
+<script src="/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
+<script src="/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
+<script src="/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
+
+<script src="/r/j-src/web/person/detail.js?v=${frontVersion}"></script>
+<script src="/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/musicUtil.js?v=${frontVersion}"></script>
 </body>
 </html>

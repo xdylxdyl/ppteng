@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<script src="/r/j-src/statistics/statistics.js"></script>
+
 
 
 <!-- container start  -->
@@ -106,3 +106,4 @@
 
 </div>
 <!-- container over  -->
+<script src="/r/j-src/web/statistics/statistics.js"></script>

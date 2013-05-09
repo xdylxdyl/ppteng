@@ -44,34 +44,6 @@ $(function() {
 
 
 
-/*
- * 动作栏下拉框
- * @elem 传入选择器ID
- * 选择器的文本变为所选项文本
- * 选择器的data-default属性变为所选项data-default属性
- * 所选项如果为color，则选择器文本颜色也改为相应颜色*/
-/*
-function selectors(elem) {
-    var $elem = $('#' + elem);
-    var $menu = $elem.siblings('ul.dropdown-menu');
-    $menu.children('li').live("click", function () {
-        var txt = $(this).text();
-        var val = $(this).attr('data-default');
-        $elem.find('span').text(txt);
-        $elem.attr('data-default', val);
-        if (val.indexOf('#') == '0') {
-            $elem.find('span').css({
-                color:val
-            })
-        }
-    })
-}
-selectors('selectExpression');
-selectors('selectColor');
-selectors('selectOrder');
-selectors('selectObject');
-*/
-
 
 $("#expression li").live("click", function () {
     extracted.call(this,"select_"+$(this).parent().attr("id"),$(this).parent().attr("id"));

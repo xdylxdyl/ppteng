@@ -18,13 +18,7 @@
 </c:choose>
 <input type="hidden" value="${type}" id="type" />
 
-<script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script src="/r/j-src/listall/init.js"></script>
-<script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js"></script>
-<!-- Le styles -->
 
-<link href="/r/css/reboot.css" rel="stylesheet">
-<link href="/r/css/theme.css" rel="stylesheet">
 </head>
 
 <body>
@@ -220,4 +214,12 @@
 
 
 </body>
+
+<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
+<script src="/r/j-src/web/listall/init.js"></script>
+<script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js"></script>
+<!-- Le styles -->
+
+<link href="/r/css/reboot.css" rel="stylesheet">
+<link href="/r/css/theme.css" rel="stylesheet">
 </html>

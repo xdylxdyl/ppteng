@@ -3,11 +3,7 @@
 <!DOCTYPE HTML>
 <head>
 
-<script src="/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script type="text/javascript"
-src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
-<script src="/r/j-src/commons/third.js?v=${frontVersion}"></script>
-<script src="/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+
 
 
 </head>
@@ -27,7 +23,11 @@ src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data
 		</div>
 		
 	</div>
-
+<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
+<script type="text/javascript"
+src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
+<script src="/r/j-src/game/commons/third.js?v=${frontVersion}"></script>
+<script src="/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 
 </body>
 </html>

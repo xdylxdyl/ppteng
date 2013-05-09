@@ -5,8 +5,6 @@
 <head>
 <meta charset=utf-8">
 <title>LogIn</title>
-<link href="/r/css/all2.css" rel="stylesheet" type="text/css" />
- <script src="/r/j-src/angular/angular.js"></script>
 
 
 <input type="hidden" value="${oldRoom}" id="oldRoom">
@@ -105,13 +103,15 @@
     </div>
 </body>
 </html>
+<link href="/r/css/all2.css" rel="stylesheet" type="text/css" />
+ <script src="/r/j-src/framework/angular/angular.js"></script>
 
-<script src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tab.js"></script>
+<script src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-tab.js"></script>
 
 
 
-<script src="/r/j-src/listall/all.js?v=${frontVersion}"></script>
-<script src="<%=request.getContextPath()%>/r/j-src/commons/service.js?v=${frontVersion}"></script>
+<script src="/r/j-src/web/listall/all.js?v=${frontVersion}"></script>
+<script src="<%=request.getContextPath()%>/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
 <script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/r/j-src/punch/punch.js?version=${frontVersion}"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/r/j-src/web/punch/punch.js?version=${frontVersion}"></script>

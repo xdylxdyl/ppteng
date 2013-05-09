@@ -9,23 +9,7 @@
 <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/r/c/room.css">
-<script
-	src="<%=request.getContextPath()%>/r/j-src/jquery/jquery-1.6.1.js"></script>
-<script
-	src="<%=request.getContextPath()%>/r/j-src/record/controller.js"></script>
-	
-	<script src="<%=request.getContextPath() %>/r/j-src/room/model.js?v=0.6"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/room/service.js?v=0.8"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/room/base.js?v=0.8"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/room/accept.js?v=1.0"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/room/action.js?v=1.1"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/room/view.js?v=0.7"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=0.4"></script>
 
-<script src="<%=request.getContextPath() %>/r/j-src/util/httpUtil.js"></script>
-<script src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js"></script>
 
 </head>
 
@@ -58,6 +42,22 @@
 
 	</div>
 
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/r/c/room.css">
+<script
+	src="<%=request.getContextPath()%>/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
+<script
+	src="<%=request.getContextPath()%>/r/j-src/web/record/controller.js"></script>
+	
+	<script src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=0.6"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/game/commonsservice.js?v=0.8"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/game/commons/base.js?v=0.8"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/game/commons/accept.js?v=1.0"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/game/commons/action.js?v=1.1"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/game/commons/view.js?v=0.7"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=0.4"></script>
 
+<script src="<%=request.getContextPath() %>/r/j-src/util/httpUtil.js"></script>
+<script src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js"></script>
 </body>
 </html>

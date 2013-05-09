@@ -30,4 +30,4 @@
 	<!--/.well -->
 </div>
 <!--/span-->
-<script src="/r/j-src/commons/left.js"></script>
+<script src="/r/j-src/game/commons/left.js"></script>

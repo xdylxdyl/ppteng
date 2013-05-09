@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-    <link rel="stylesheet" href="/r/css/bootstrap.css">
-    <link rel="stylesheet" href="/r/css/room/style.css">
+<link rel="stylesheet" href="/r/css/bootstrap.css">
+<link rel="stylesheet" href="/r/css/room/style.css">
 
 <title>${room.name}-警版不翻牌-葡萄藤轻游戏</title>
 
@@ -26,139 +26,147 @@
 
 
 <div class="navbar">
-    <div class="navbar-inner">        
-        <span class="brand">
-            <small><a href="/player/detail?uid=${room.createrID}" id="createName"></a></small>
-        </span>
-         <span class="brand">
-            <small id="gamePhase"></small>
-        </span>
-        <span class="brand">
-            <small id="playerRole"></small>
-        </span>
-        <ul class="nav pull-right">           
-            <li><a href="#" id="exitButton" rel="tooltip" title="点此离开房间" data-original-title="点此离开房间" data-placement="bottom">退出房间 <i class="icon-off"></i></a></li>
-        </ul>
-    </div>
+	<div class="navbar-inner">
+		<span class="brand"> <small><a
+				href="/player/detail?uid=${room.createrID}" id="createName"></a></small>
+		</span> <span class="brand"> <small id="gamePhase"></small>
+		</span> <span class="brand"> <small id="playerRole"></small>
+		</span>
+		<ul class="nav pull-right">
+			<li><a href="#" id="exitButton" rel="tooltip" title="点此离开房间"
+				data-original-title="点此离开房间" data-placement="bottom">退出房间 <i
+					class="icon-off"></i></a></li>
+		</ul>
+	</div>
 </div>
 
 <!--left list-->
 <div class="sidebar-nav" id="sidebar-nav">
-    <ul class="nav nav-list" id="playerList">
+	<ul class="nav nav-list" id="playerList">
 
 
-    </ul>
-    <div class="sidebar-toggle" id="sidebar-toggle">
-    -
-    </div>
+	</ul>
+	<div class="sidebar-toggle" id="sidebar-toggle">-</div>
 </div>
 
 <!--main-->
 <div class="content" id="content">
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span12" id="mainArea">
-            
-            <div class="tabbable">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
-                               
-                    <li><a href="#setting_area" data-toggle="tab">设置</a></li>
-                    <li><a href="#music_area" data-toggle="tab">音乐</a></li>
-                    <li><a href="#help_area" data-toggle="tab">帮助</a></li>
-                   <tiles:insertDefinition name="navAdvertiseNormal" /> 
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="game_area">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12" id="mainArea">
 
-                     </div>
-                    
-                   
-                    <div class="tab-pane" id="setting_area">
-                       
-                    </div>                    
-                    <div class="tab-pane" id="music_area">
-                        <div id="wrapper">
-                            <audio preload></audio>
-                            <ol>
-                                <li><a href="#" data-src="http://imade.118100.cn/library/music/1307949575730.mp3">你的歌声里</a></li>
-                                <li><a href="#" data-src="http://lianzidi.com/COFFdD0xMzY1MDg3MTM3Jmk9MTE4LjExNC4xNzAuMTk5JnU9U29uZ3MvdjEvZmFpbnRRQy9iYi8zMDU5NWUwOWY3MWU2ZWIyNWIyYzFhYjE0ZGZiZmFiYi5tcDMmbT00MTE1Y2MwOWJlMWIwYmFlNDM4NjQ4YjhkZjdjMmNjNiZ2PWxpc3RlbiZuPdChx+m46CUyMG1peCZzPcvVtPLCzCZwPXM=.mp3">小情歌</a></li>
-                                <li><a href="#" data-src="http://www.time.ac.cn/timebbs/uploadfile/mp3/hktk.mp3">想你的夜</a></li>
-                            </ol>
-                        </div>
-                        
-                       
-                        
-                    </div>
-                    
-                     <div class="tab-pane" id="help_area">
-                         <div class="hero-unit">
-     
-          <p></p>     
-<p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=15" class="text-warning" target="_blank">1.简化术语表 &raquo;</a></p>
-  <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=125&fromuid=4" class="text-warning" target="_blank">2.[二六八活动]索引贴 &raquo;</a></p>
-       
-            </div>
-                        
-                           
-                    </div>
-                    
-                      <!-- advertise -->
-                      <tiles:insertDefinition name="advertiseNormal" /> 
-                    
-                    
-                    
-                    <!-- end of tab-content -->
-                    
-                    
-                </div>
-            </div>
-           </div>
-           
-             <div id="secondArea" class="hide">
-             
-                <div class="tabbable death">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#die_area" data-toggle="tab">亡灵</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="die_area">
-                       
-                        </div>
-                    </div>
-                </div>
-          
-             </div>
-        </div>
-    </div>
+				<div class="tabbable">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
+
+						<li><a href="#setting_area" data-toggle="tab">设置</a></li>
+						<li><a href="#music_area" data-toggle="tab">音乐</a></li>
+						<li><a href="#help_area" data-toggle="tab">帮助</a></li>
+						<tiles:insertDefinition name="navAdvertiseNormal" />
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="game_area"></div>
+
+
+						<div class="tab-pane" id="setting_area"></div>
+						<div class="tab-pane" id="music_area">
+							<div id="wrapper">
+								<audio preload></audio>
+								<ol>
+									<li><a href="#"
+										data-src="http://imade.118100.cn/library/music/1307949575730.mp3">你的歌声里</a></li>
+									<li><a href="#"
+										data-src="http://lianzidi.com/COFFdD0xMzY1MDg3MTM3Jmk9MTE4LjExNC4xNzAuMTk5JnU9U29uZ3MvdjEvZmFpbnRRQy9iYi8zMDU5NWUwOWY3MWU2ZWIyNWIyYzFhYjE0ZGZiZmFiYi5tcDMmbT00MTE1Y2MwOWJlMWIwYmFlNDM4NjQ4YjhkZjdjMmNjNiZ2PWxpc3RlbiZuPdChx+m46CUyMG1peCZzPcvVtPLCzCZwPXM=.mp3">小情歌</a></li>
+									<li><a href="#"
+										data-src="http://www.time.ac.cn/timebbs/uploadfile/mp3/hktk.mp3">想你的夜</a></li>
+								</ol>
+							</div>
+
+
+
+						</div>
+
+						<div class="tab-pane" id="help_area">
+							<div class="hero-unit">
+
+								<p></p>
+								<p>
+									<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=15"
+										class="text-warning" target="_blank">1.简化术语表 &raquo;</a>
+								</p>
+								<p>
+									<a
+										href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=125&fromuid=4"
+										class="text-warning" target="_blank">2.[二六八活动]索引贴 &raquo;</a>
+								</p>
+
+							</div>
+
+
+						</div>
+
+						<!-- advertise -->
+						<tiles:insertDefinition name="advertiseNormal" />
+
+
+
+						<!-- end of tab-content -->
+
+
+					</div>
+				</div>
+			</div>
+
+			<div id="secondArea" class="hide">
+
+				<div class="tabbable death">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#die_area" data-toggle="tab">亡灵</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="die_area"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>
-	
-	
-	
-	
-	
-<script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-dropdown.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tab.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-modal.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tooltip.js"></script>
-<script type="text/javascript" src="/r/j-src/kibo/kibo.js"></script><!--侦测键盘-->
-<script type="text/javascript" src="/r/j-src/music/audio.min.js"></script>
+
+
+
+
+
+
+<script type="text/javascript"
+	src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript"
+	src="/r/j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript"
+	src="/r/j-src/framework/bootstrap/bootstrap-tab.js"></script>
+<script type="text/javascript"
+	src="/r/j-src/framework/bootstrap/bootstrap-modal.js"></script>
+<script type="text/javascript"
+	src="/r/j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script>
+<!--侦测键盘-->
+<script type="text/javascript"
+	src="/r/j-src/framework/audio/audio.min.js"></script>
 
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/model.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/service.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/base.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/base.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/action.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/action.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/room/accept.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/kill/accept.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/room/view.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/kill/view.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/view.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/view.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 <script
@@ -167,10 +175,6 @@
 	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
 
 <script
-	src="<%=request.getContextPath() %>/r/j-src/foot/foot.js?v=${frontVersion}"></script>
-	
-	<script
-	src="<%=request.getContextPath() %>/r/j-src/music/music.js?v=${frontVersion}"></script>
-
-
-	
+	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>

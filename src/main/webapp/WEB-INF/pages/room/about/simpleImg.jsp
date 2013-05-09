@@ -3,8 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<script src="/r/j-src/about/simpleImg.js"></script>
-<html xmlns="http://www.w3.org/1999/xhtml">
+
 <div class="span9">
 
 
@@ -18,3 +17,5 @@
 	</div>
 </div>
 <!--/row-->
+
+<script src="/r/j-src/web/about/simpleImg.js"></script>

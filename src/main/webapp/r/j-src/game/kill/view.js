@@ -31,41 +31,82 @@ var commandSimpleSetting = {
 /**
  * 游戏区域
  */
-var killGameAreaView = {
+var killGameAreaView;
+killGameAreaView = {
 
     getCommandHint:function (command) {
         return killGameAreaView.Hint[command];
     },
     Hint:{
+        start:"<p style='color:#F00'>【系统消息】 游戏开始,白天时间~</p>",
         vote:"人生就是这样,何必挣扎说自己不是杀手呢",
         kill:"杀谁都一样,你只是太闪亮了",
         night:"【系统消息】 月黑风高杀人夜，大家各自保重",
         day:"【系统消息】 天光大亮，大家集中精力找出凶手",
         killerList:"【系统消息】 绝密杀手名单： ",
         kick:"你好,再见",
-        check:"贼眉鼠眼必有隐情"
+        check:"贼眉鼠眼必有隐情",
+        voteDie:function (name) {
+            return " <p style='color:#F00;'>【系统消息】 积毁销骨，众口铄金，[" + name + "]你就认命吧！</p>";
+        },
+        killDie:function (name) {
+            return " <p style='color:#F00;'>【系统消息】 [" + name + "] 被杀了。</p>";
+        },
+        votePerson:function (color, subjectName, exp, objectName, objectName, content) {
+            return "<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>";
+        },
+        killPerson:function (name) {
+            return "<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>";
+        },
+        checkPerson:function (name) {
+           return  "<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "查证 [" + objName + "] 说 : " + content + " </p>";
+        },
+        say:function (color, name, express, content) {
+            return  "<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>"
+        },
+        killerWin:function(recordLink){
+          return "<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink;
+        },
+        waterWin:function(recordLink){
+           return "<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！</p> " + recordLink;
+
+        },
+
+        recordLink:function(recordID){
+         return   "<a href='/record/enter?recordID=" + recordID + "' target='_blank'>查看战例</a>";
+        },
+        decryption:function(name,role){
+         return   "<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + killGameAreaView.RoleName[role] + "</p>"
+        },
+        lastword:function(name){
+           return "<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听 [" + name + "] 的最后一句话。</p>";
+        }
+
+
+
     },
 
     Phase:{
         night:"【当前状态】晚上 ",
         day:"【当前状态】白天 ",
-        lastword:"【当前状态】遗言 "
+        lastword:"【当前状态】遗言 ",
+        end:"游戏结束"
     },
 
     RoleHint:{
         water:"【身份】水民 ",
-        killer:function(names){
-           return "【杀手名单】 "+JSON.stringify(names);
+        killer:function (names) {
+            return "【杀手名单】 " + JSON.stringify(names);
         },
-        appendKiller:function(name){
-            return "【杀手名单】 "+name;
+        appendKiller:function (name) {
+            return "【杀手名单】 " + name;
         },
-        police:function(names){
-                  return "【警察名单】 "+JSON.stringify(names);
+        police:function (names) {
+            return "【警察名单】 " + JSON.stringify(names);
         },
-        appendPolice:function(name){
-                  return "【警察名单】 "+name;
-          }
+        appendPolice:function (name) {
+            return "【警察名单】 " + name;
+        }
     },
     RoleName:{
         water:"水民 ",
@@ -141,11 +182,11 @@ var killGameAreaView = {
 
         switch (place) {
             case "normal":
-                $("#" + selects.$gameArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+                $("#" + selects.$gameArea).append(killGameAreaView.hint.say(color, name, express, content));
                 viewUtil.autoBottom($("#" + selects.$gameArea));
                 break;
             case "deadArea":
-                $("#" + selects.$dieArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+                $("#" + selects.$dieArea).append(killGameAreaView.hint.say(color, name, express, content));
                 viewUtil.autoBottom($("#" + selects.$dieArea));
                 break;
             default:
@@ -156,30 +197,28 @@ var killGameAreaView = {
     vote:function (subjectName, objectName, color, exp, content) {
 
 
-        $("#" + selects.$gameArea).append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
+        $("#" + selects.$gameArea).append(killGameAreaView.hint.votePerson(color, subjectName, exp, objectName, objectName, content));
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
 
     die:function (id, name, action) {
         $("#" + id).children("a").removeClass().addClass("die");
         if (action == "vote") {
-            $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 积毁销骨，众口铄金，[" + name + "]你就认命吧！</p>");
+
+            $("#" + selects.$gameArea).append(killGameAreaView.hint.voteDie(name));
         } else if (action == "kill") {
 
-            $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 [" + name + "] 被杀了。</p>");
-
-
+            $("#" + selects.$gameArea).append(killGameAreaView.hint.killDie(name));
         }
 
     },
     kill:function (killerName, objName, exp, content) {
-
-        $("#" + selects.$gameArea).show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>");
+        $("#" + selects.$gameArea).append(killGameAreaView.hint.killPerson(killerName, exp, objName, content));
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
     check:function (killerName, objName, exp, content) {
+        $("#" + selects.$gameArea).append(killGameAreaView.hint.checkPerson(killerName, exp, objName, content));
 
-        $("#" + selects.$gameArea).show().append("<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "查证 [" + objName + "] 说 : " + content + " </p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
 
@@ -209,22 +248,20 @@ var killGameAreaView = {
     },
     showOver:function (recordID, obj) {
 
-        var recordLink = "<a href='/record/enter?recordID=" + recordID + "' target='_blank'>查看战例</a>";
-        var shareLink = "http://42.121.113.70/record/enter?recordID=" + recordID;
-        var share;
+        var recordLink = killGameAreaView.hint.recordLink(recordID);
+
         switch (obj) {
             case "killer win" :
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink);
-                share = "这局杀人游戏[简化]中,杀手又赢了~,抢走了2000金币~点此链接回放场景,重现杀人现场: " + shareLink + ";";
+                $("#" + selects.$gameArea).append(killGameAreaView.hint.killerWin(recordLink));
+
                 break;
             case "water win" :
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！</p> " + recordLink);
-                share = "这局杀人游戏[简化]中,水民又赢了~,赢回了2000金币~点此链接回放场景,重现水民分析实况:" + shareLink + ";";
+                $("#" + selects.$gameArea).append(killGameAreaView.hint.waterWin(recordLink));
+
                 break;
             default :
                 $("#" + selects.$gameArea).append("<p style='color:#F00'>" + obj + "</p>");
         }
-
 
         //时间清空
         clearTimeout(timer);
@@ -235,7 +272,7 @@ var killGameAreaView = {
 
     }
 
-}
+};
 
 
 var simpleRightView = {
@@ -302,7 +339,7 @@ var gameView = {
         $("#" + selects.$dieArea).empty();
         $("#" + selects.$playerRole).empty();
 
-        $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始,白天时间~</p>");
+        $("#" + selects.$gameArea).append(killGameAreaView.hint.start);
 
 
         playerListView.sortPlayer();
@@ -318,7 +355,7 @@ var gameView = {
         var obj = message.object;
         var recordID = message.subject;
         //标明游戏结束
-        globalView.setGameStatusHint("游戏结束");
+        globalView.setGameStatusHint(killGameAreaView.Phase.end);
         globalView.setGameStatus(gameGlobalStatus.over);
 
         playerService.setUnreadyStatus();

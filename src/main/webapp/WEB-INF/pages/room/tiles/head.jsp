@@ -24,13 +24,7 @@
 <link href="/r/css/reboot.css" rel="stylesheet">
 <link href="/r/css/theme.css" rel="stylesheet">
 <link href="/r/css/layout/header.css" rel="stylesheet">
-<script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 
-<script src="/r/j-src/room/head_view.js"></script> <script
-	type="text/javascript"
-	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script>
 </head>
 
 
@@ -68,7 +62,13 @@
 </div>
 
 
+<script type="text/javascript" src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 
+<script src="/r/j-src/web/foot/head_view.js"></script> <script
+	type="text/javascript"
+	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script>
 
 </body>
 </html>

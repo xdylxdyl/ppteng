@@ -4,7 +4,6 @@
 <head>
 <title>Room</title>
 
-<script src="/r/j-src/listall/roomInit.js?v=${frontVersion}"></script>
 </head>
 
 <body>
@@ -66,5 +65,8 @@
 		</P>
 	</form:form>
 	<div id="mask"></div>
+	
+	
+<script src="/r/j-src/web/listall/roomInit.js?v=${frontVersion}"></script>
 </body>
 </html>

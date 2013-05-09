@@ -138,28 +138,28 @@
 	
 	
 	
-<script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-dropdown.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tab.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-modal.js"></script>
-<script type="text/javascript" src="/r/j-src/bootstrap/bootstrap-tooltip.js"></script>
-<script type="text/javascript" src="/r/j-src/kibo/kibo.js"></script><!--侦测键盘-->
-<script type="text/javascript" src="/r/j-src/music/audio.min.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-tab.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-modal.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script><!--侦测键盘-->
+<script type="text/javascript" src="/r/j-src/framework/audio/audio.min.js"></script>
 
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/model.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/service.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/base.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/base.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/action.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/action.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/room/accept.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/kill/accept.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/room/view.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/kill/view.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/commons/view.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/commons/view.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 <script
@@ -168,10 +168,10 @@
 	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
 
 <script
-	src="<%=request.getContextPath() %>/r/j-src/foot/foot.js?v=${frontVersion}"></script>
-	
-	<script
-	src="<%=request.getContextPath() %>/r/j-src/music/music.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
+		<script
+	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
+
 
 
 	

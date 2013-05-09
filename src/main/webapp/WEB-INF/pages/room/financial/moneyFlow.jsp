@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<script src="/r/j-src/person/moneyFlow.js"></script>
+
 <c:set var="current" value="${id_users[uid]}"></c:set>
 <c:set var="prevPageLink"
 	value="/money/flow?uid=${uid}&type=${type}&page=${page-1}&size=${size}"></c:set>
@@ -96,3 +96,4 @@
 		</ul>
 	</div>
 </div>
+<script src="/r/j-src/web/person/moneyFlow.js"></script>

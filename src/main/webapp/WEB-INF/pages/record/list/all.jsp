@@ -46,4 +46,4 @@
 
 	
 	<input type="hidden" id="uid" value="${uid}" />
-<script src="/r/j-src/listall/record_list.js"></script>
+<script src="/r/j-src/web/listall/record_list.js"></script>

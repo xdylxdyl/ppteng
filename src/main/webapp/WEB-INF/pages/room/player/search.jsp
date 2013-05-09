@@ -3,8 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js"></script>
-<script src="/r/j-src/person/search.js"></script>
+
 
 
 
@@ -28,3 +27,5 @@
     </div>
 
 </div>
+<script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js"></script>
+<script src="/r/j-src/web/person/search.js"></script>

@@ -5,12 +5,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <link rel="stylesheet" href="/r/css/tagit/jquery.tagit.css">
 <link rel="stylesheet" href="/r/css/tagit/tagit.ui-zendesk.css">
-<script type="text/javascript" src="/r/j-src/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="/r/j-src/jquery/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/r/j-src/tagit/tag-it.js"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script src="/r/j-src/person/expression.js?v=${frontVersion}"></script>
+
 
 <input id="uid" type="hidden" value="${current.id}" />
 <input id="name" type="hidden" value="${current.name}" />
@@ -57,4 +52,11 @@
 		</c:otherwise>
 	</c:choose>
     </div>
+    
+    <script type="text/javascript" src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/r/j-src/framework/tagit/tag-it.js"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+<script src="/r/j-src/web/person/expression.js?v=${frontVersion}"></script>
 </div>

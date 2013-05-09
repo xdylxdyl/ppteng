@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<script src="/r/j-src/about/about.js"></script>
+
 
  <div class="span9">
             <div class="hero-unit">
@@ -79,3 +79,4 @@
         <!--/span-->
     </div>
     <!--/row-->
+    <script src="/r/j-src/web/about/about.js"></script>
