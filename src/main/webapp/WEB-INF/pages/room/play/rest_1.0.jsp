@@ -205,7 +205,7 @@
 <script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script><!--侦测键盘-->
 <script type="text/javascript" src="/r/j-src/framework/audio/audio.min.js"></script>
- <script src="/r/j-src/framework/angular/angular.js"></script>
+ <script src="/r/j-src/framework/angular/angular.min.js"></script>
 
 
 <script src="/r/j-src/game/rest/1.0/rest_1.0.js?v=${frontVersion}"></script>

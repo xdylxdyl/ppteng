@@ -137,7 +137,7 @@ end
 
 
 rule 'change admin'
-ruleflow-group "action"
+ruleflow-group "change admin"
 when
 	//conditions
 	    $room:Room($creater:creater,$rid:id)

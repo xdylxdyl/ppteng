@@ -14,7 +14,7 @@
   <nodes>
     <start id="1" name="Start" x="144" y="16" width="48" height="48" />
     <end id="5" name="End" x="398" y="782" width="48" height="48" />
-    <ruleSet id="15" name="part accepts" x="64" y="513" width="260" height="48" ruleFlowGroup="part accepts message" />
+    <ruleSet id="15" name="part accepts" x="45" y="505" width="260" height="48" ruleFlowGroup="part accepts message" />
     <split id="16" name="Gateway" x="144" y="96" width="49" height="49" type="3" >
       <constraints>
         <constraint toNodeId="23" toType="DROOLS_DEFAULT" name="action" priority="1" type="rule" dialect="mvel" >Message(predict!="login"&amp;&amp;predict!="query")</constraint>
@@ -28,9 +28,9 @@
     <ruleSet id="21" name="query" x="2" y="220" width="80" height="48" ruleFlowGroup="query" />
     <ruleSet id="20" name="login action" x="298" y="211" width="80" height="48" ruleFlowGroup="login action" />
     <ruleSet id="23" name="action" x="794" y="226" width="80" height="48" ruleFlowGroup="action" />
-    <ruleSet id="25" name="all accepts" x="89" y="576" width="242" height="48" ruleFlowGroup="all accepts message" />
-    <ruleSet id="24" name="generate message" x="109" y="406" width="301" height="48" ruleFlowGroup="generate message" />
-    <ruleSet id="27" name="snapshot" x="413" y="620" width="157" height="48" ruleFlowGroup="snapshot" />
+    <ruleSet id="25" name="all accepts" x="56" y="579" width="242" height="48" ruleFlowGroup="all accepts message" />
+    <ruleSet id="24" name="generate message" x="30" y="433" width="301" height="48" ruleFlowGroup="generate message" />
+    <ruleSet id="27" name="snapshot" x="129" y="647" width="157" height="48" ruleFlowGroup="snapshot" />
     <ruleSet id="26" name="next operator" x="168" y="731" width="176" height="48" ruleFlowGroup="next of operater" />
     <ruleSet id="29" name="action" x="185" y="261" width="80" height="48" ruleFlowGroup="action" />
     <ruleSet id="28" name="logout action" x="439" y="290" width="80" height="48" ruleFlowGroup="logout action" />
