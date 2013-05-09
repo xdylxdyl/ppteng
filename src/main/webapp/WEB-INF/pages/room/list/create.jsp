@@ -9,7 +9,7 @@
      
     
      <div class="span4">
-        <img class="marketing-img" ng-src="{{config.img}}">
+        <img class="img-polaroid" ng-src="{{config.img}}">
         <h2>{{config.title}}</h2>
           <c:if test="${empty my_room}">
                 <a href="" class="btn btn-primary" id="createRoom" version="{{config.version}}">创建房间</a>

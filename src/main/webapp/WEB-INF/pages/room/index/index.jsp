@@ -206,6 +206,11 @@
 					<p>
 						<a href="http://niceipa.com/" target="_blank">最好玩的游戏</a>
 					<p>
+					
+					<p>
+						<a href="http://www.neiht.com/" target="_blank">内涵图</a>
+					<p>
+					
 				</div>
 				<div class="span3">
 					<p>

@@ -70,7 +70,7 @@
      
     
                    <div class="span3" ng-repeat="config in versionConfig">
-                    <a href="" class="createCategory"  version="{{config.version}}"> <img class="marketing-img" ng-src="{{config.img}}"></a>
+                    <a href="" class="createCategory"  version="{{config.version}}"> <img class="img-polaroid fix-img" ng-src="{{config.img}}"></a>
                      
                      
                            <h4><a href="" class="createCategory" version="{{config.version}}">{{config.title}}</a></h4>

@@ -1,16 +1,20 @@
-.box{
+.box {
     background: #fff;
     box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
 }
+
 .left-box {
     box-shadow: 4px 0 10px #ccc, -4px 0 10px #ccc, 0 38px 36px -24px #aaa;
 }
+
 .left-box-in {
     padding: 20px;
 }
+
 .section {
     padding: 30px 0;
 }
+
 /*弹出层*/
 #overlay {
     position: fixed;
@@ -20,8 +24,9 @@
     height: 100%;
     background: #000000;
     opacity: 0.5;
-    filter: alpha(opacity=50);
+    filter: alpha(opacity = 50);
 }
+
 #modal {
     position: absolute;
     left: 0;
@@ -30,18 +35,31 @@
     border-radius: 5px;
     padding: 5px;
 }
+
 #modal-content {
     border-radius: 5px;
     background: #fff;
     padding: 10px;
 }
-#modal-close {}
+
+#modal-close {
+}
 
 /*字体颜色*/
-.c-green {color: #008000;}
+.c-green {
+    color: #008000;
+}
 
 .separator {
-color: #FF8040;
-background-color: #ffc075;
-height: 3px;
+    color: #FF8040;
+    background-color: #ffc075;
+    height: 3px;
+}
+
+.full-max-height {
+    max-height: 100%;;
+}
+.fix-img{
+    height:150px;
+    width:220px;
 }

@@ -88,47 +88,47 @@ function VersionConfigCtrl($scope) {
     $scope.test="xx";
     $scope.versionConfig = [
         {
-            img:defaultImg,
+            img:"http://img.ledanji.com/other/news/Article/UploadFiles/201011/20101109121212479.jpg",
             version:"simple_1.0",
             title:"杀人游戏 简化版"
         },
         {
-            img:defaultImg,
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLXF6E6G1GAACEG0z0luM458.jpg",
             version:"killer_police_1.0",
             title:"杀人游戏 警版"
         },
         {
-            img:defaultImg,
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLXW7eYTF8AADQpV55QZo010.jpg",
             version:"killer_police_secret_1.0",
             title:"杀人游戏 警版不翻牌"
         },
         {
-            img:defaultImg,
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLflqyXbUoAAeYwgwpoqQ586.jpg",
             version:"ghost_simple_1.0",
             title:"捉鬼游戏 简化版"
         },
         {
-            img:defaultImg,
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLc4ProN5QAAEtdgKHwiA797.jpg",
             version:"ghost_question_1.0",
             title:"捉鬼游戏 猜词版"
         },
         {
-            img:defaultImg,
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLfr7O0rCtAAIoXr_bQgo287.jpg",
             version:"ghost_soul_1.0",
             title:"捉鬼游戏 魂版"
         },
         {
-            img:defaultImg,
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLd-qckytpAAMnWr-oy7g440.jpg",
             version:"mine_1.0",
             title:"多人扫雷"
         },
         {
-            img:defaultImg,
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLZ6CNywCaAAM3d8V9NxE730.jpg",
             version:"video_1.0",
             title:"虚拟电影院"
         },
         {
-            img:defaultImg,
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLYvKiTYQ_AAC3jLeuXzk8284.sh",
             version:"rest_1.0",
             title:"茶座"
         }
