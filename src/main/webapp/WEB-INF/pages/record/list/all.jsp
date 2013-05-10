@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-
-
+<input type="hidden" id="version" value="${version}"></input>
+ <div class="span9">
 <div class="container" >
 	<c:forEach items="${records}" var="record" begin="0" step="1"
 		varStatus="status">
@@ -43,7 +43,8 @@
     <li><a href="/record/list?page=${page+1}&size=${size}" id="pageNext">Next</a></li>
   </ul>
 </div>
-
+</div>
 	
 	<input type="hidden" id="uid" value="${uid}" />
-<script src="/r/j-src/web/listall/record_list.js"></script>
+
+<script src="/r/j-src/web/record/list.js"></script>

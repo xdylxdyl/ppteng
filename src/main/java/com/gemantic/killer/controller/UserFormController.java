@@ -143,6 +143,8 @@ public class UserFormController {
 
 		model.addAttribute("type", type);
 		model.addAttribute("user", user);
+		model.addAttribute("current", user);
+		model.addAttribute("selfID",user.getId());
 		return "/player/form/init";
 
 	}

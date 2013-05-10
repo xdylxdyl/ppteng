@@ -15,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gemantic.common.util.MyListUtil;
@@ -61,12 +62,11 @@ public class RecordController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/record/list")
-	public String list(HttpServletRequest request, HttpServletResponse response, ModelMap model,String version,Integer page,Integer size) throws Exception {
-		log.debug("start get room list ");
+	public String list(HttpServletRequest request, HttpServletResponse response, ModelMap model, String version,Integer page,Integer size,Long uid) throws Exception {
+		log.info("start get room list "+version);
 		
-		if(StringUtils.isBlank(version)){
-			version="simple_1.0";
-		}
+		
+		
 		if(page==null){
 			page=1;
 		}
@@ -77,10 +77,24 @@ public class RecordController {
 			size=20;
 		}
 		Integer start=(page-1)*size;
+		List<Long> ids;
+		
+		if(StringUtils.isBlank(version)||"all".equals(version)){
+			version="all";
+			//考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
+		    ids = recordService.getList( start,size);
+			
+		}else{
+			//考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
+			 
+			 ids = recordService.getRecordIdsByVersion(version+".0", start,size);
+			
+			
+		}
+		
+	
 		
 
-		//考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
-		List<Long> ids = recordService.getRecordIdsByVersion(version, start,size);
 		List<Records> records=recordService.getObjectsByIds(ids);
 		log.info("get record size " + records.size());
 		model.addAttribute("records", records);
@@ -98,6 +112,8 @@ public class RecordController {
 		model.addAttribute("users", id_user);
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
+		model.addAttribute("version", version);
+		
 		return "/record/list/all";
 	}
 

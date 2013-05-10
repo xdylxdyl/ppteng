@@ -46,7 +46,7 @@ killController.parseMessage = function (message) {
         case "lastword" :
             killController.say(message);
             break;
- 
+
             break;
         case "decryption" :
             killController.decryption(message);

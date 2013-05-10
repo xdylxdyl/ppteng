@@ -7,14 +7,24 @@
 	<div class="well sidebar-nav">
 		<ul class="nav nav-list">
 			
-			<li class="nav-header">简化统计</li>
-			<li id="leftNav_statistics"><a
-				href="/player/statistics?uid=${current.id}&version=simple">胜负</a></li>
-			<li class="nav-header">简化战例</li>			
-			<li id="leftNav_record"><a href="/player/regedit?type=email">找回密码</a></li>
+			<li class="nav-header">全部</li>
+			<li id="nav_all"><a
+				href="/record/list?version=all">全部</a></li>		
+			<li class="nav-header">杀人游戏</li>			
+			<li id="nav_simple_1"><a href="/record/list?version=simple_1">简化</a></li>
+			<li id="nav_killer_police_1"><a href="/record/list?version=killer_police_1">警版</a></li>
+			<li id="nav_killer_police_secret_1"><a href="/record/list?version=killer_police_secret_1">警版不翻牌</a></li>
+			<li class="nav-header">捉鬼游戏</li>		
+			<li id="nav_ghost_simple_1"><a href="/record/list?version=ghost_simple_1">简版</a></li>
+			<li id="nav_ghost_question_1"><a href="/record/list?version=ghost_question_1">猜词版</a></li>
+			<li id="nav_ghost_soul_1"><a href="/record/list?version=ghost_soul_1">魂版</a></li>
+			<li class="nav-header">扫雷</li>		
+			<li id="nav_mine_1"><a href="/record/list?version=mine_1">多人扫雷</a></li>
+		
 		</ul>
 	</div>
 	<!--/.well -->
 </div>
 <!--/span-->
 <script src="/r/j-src/game/commons/left.js"></script>
+

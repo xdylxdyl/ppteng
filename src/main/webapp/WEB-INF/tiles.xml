@@ -46,23 +46,27 @@
 	</definition>
 
 
-	<definition name="/record/list/*" extends="ptt">
-		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
-		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-战例" type="string" />
+
+	
+	
+
+	<definition name="record*"
+		template="/WEB-INF/pages/record/layout/layout.jsp">
+		<put-attribute name="left"
+			value="/WEB-INF/pages/record/layout/left.jsp" />
+		<put-attribute name="right"
+			value="/WEB-INF/pages/record/list/{1}.jsp" />
 	</definition>
-
 	
-	
-
-	
-	
-	
-	
+     <definition name="/record/list/*" extends="ptt">			
+		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-战例" type="string" />
+		<put-attribute name="body" value="record{1}"></put-attribute>
+	</definition>
 	
 	
 	
 	<definition name="about*"
-		template="/WEB-INF/pages/room//about/layout.jsp">
+		template="/WEB-INF/pages/room/about/layout.jsp">
 		<put-attribute name="left"
 			value="/WEB-INF/pages/room/about/left.jsp" />
 		<put-attribute name="right"

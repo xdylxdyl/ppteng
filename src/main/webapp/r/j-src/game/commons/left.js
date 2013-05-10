@@ -9,7 +9,8 @@
 
 var leftView = {
     highLight:function (id) {
-        $("#" + id).addClass("active");
+
+        $("#"+id).addClass("active");
     }
 
 }
