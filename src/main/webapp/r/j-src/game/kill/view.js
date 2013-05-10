@@ -55,14 +55,14 @@ killGameAreaView = {
         votePerson:function (color, subjectName, exp, objectName, objectName, content) {
             return "<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>";
         },
-        killPerson:function (name) {
+        killPerson:function (killerName,exp,objName,content) {
             return "<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>";
         },
-        checkPerson:function (name) {
+        checkPerson:function (killerName,exp,objName,content) {
            return  "<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "查证 [" + objName + "] 说 : " + content + " </p>";
         },
         say:function (color, name, express, content) {
-            return  "<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>"
+            return  "<p style='color:" + color + "'>[" + name + "] " + express  + " 说：" + content + "</p>"
         },
         killerWin:function(recordLink){
           return "<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink;
@@ -78,8 +78,8 @@ killGameAreaView = {
         decryption:function(name,role){
          return   "<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + killGameAreaView.RoleName[role] + "</p>"
         },
-        lastword:function(name){
-           return "<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听 [" + name + "] 的最后一句话。</p>";
+        lastwordHint:function(name){
+           return "<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听==== [" + name + "] 的最后一句话。</p>";
         }
 
 
@@ -182,11 +182,11 @@ killGameAreaView = {
 
         switch (place) {
             case "normal":
-                $("#" + selects.$gameArea).append(killGameAreaView.hint.say(color, name, express, content));
+                $("#" + selects.$gameArea).append(killGameAreaView.Hint.say(color, name, express, content));
                 viewUtil.autoBottom($("#" + selects.$gameArea));
                 break;
             case "deadArea":
-                $("#" + selects.$dieArea).append(killGameAreaView.hint.say(color, name, express, content));
+                $("#" + selects.$dieArea).append(killGameAreaView.Hint.say(color, name, express, content));
                 viewUtil.autoBottom($("#" + selects.$dieArea));
                 break;
             default:
@@ -197,7 +197,7 @@ killGameAreaView = {
     vote:function (subjectName, objectName, color, exp, content) {
 
 
-        $("#" + selects.$gameArea).append(killGameAreaView.hint.votePerson(color, subjectName, exp, objectName, objectName, content));
+        $("#" + selects.$gameArea).append(killGameAreaView.Hint.votePerson(color, subjectName, exp, objectName, objectName, content));
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
 
@@ -205,19 +205,19 @@ killGameAreaView = {
         $("#" + id).children("a").removeClass().addClass("die");
         if (action == "vote") {
 
-            $("#" + selects.$gameArea).append(killGameAreaView.hint.voteDie(name));
+            $("#" + selects.$gameArea).append(killGameAreaView.Hint.voteDie(name));
         } else if (action == "kill") {
 
-            $("#" + selects.$gameArea).append(killGameAreaView.hint.killDie(name));
+            $("#" + selects.$gameArea).append(killGameAreaView.Hint.killDie(name));
         }
 
     },
     kill:function (killerName, objName, exp, content) {
-        $("#" + selects.$gameArea).append(killGameAreaView.hint.killPerson(killerName, exp, objName, content));
+        $("#" + selects.$gameArea).append(killGameAreaView.Hint.killPerson(killerName, exp, objName, content));
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
     check:function (killerName, objName, exp, content) {
-        $("#" + selects.$gameArea).append(killGameAreaView.hint.checkPerson(killerName, exp, objName, content));
+        $("#" + selects.$gameArea).append(killGameAreaView.Hint.checkPerson(killerName, exp, objName, content));
 
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
@@ -248,15 +248,15 @@ killGameAreaView = {
     },
     showOver:function (recordID, obj) {
 
-        var recordLink = killGameAreaView.hint.recordLink(recordID);
+        var recordLink = killGameAreaView.Hint.recordLink(recordID);
 
         switch (obj) {
             case "killer win" :
-                $("#" + selects.$gameArea).append(killGameAreaView.hint.killerWin(recordLink));
+                $("#" + selects.$gameArea).append(killGameAreaView.Hint.killerWin(recordLink));
 
                 break;
             case "water win" :
-                $("#" + selects.$gameArea).append(killGameAreaView.hint.waterWin(recordLink));
+                $("#" + selects.$gameArea).append(killGameAreaView.Hint.waterWin(recordLink));
 
                 break;
             default :
@@ -339,7 +339,7 @@ var gameView = {
         $("#" + selects.$dieArea).empty();
         $("#" + selects.$playerRole).empty();
 
-        $("#" + selects.$gameArea).append(killGameAreaView.hint.start);
+        $("#" + selects.$gameArea).append(killGameAreaView.Hint.start);
 
 
         playerListView.sortPlayer();

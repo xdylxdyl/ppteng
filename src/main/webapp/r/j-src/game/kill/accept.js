@@ -46,8 +46,7 @@ killController.parseMessage = function (message) {
         case "lastword" :
             killController.say(message);
             break;
-        case "role" :
-            killController.role(message);
+ 
             break;
         case "decryption" :
             killController.decryption(message);
@@ -97,7 +96,7 @@ killController.decryption = function (message) {
     if(isDisplay){
         var name = playerService.getName(message.subject);
 
-        $("#" + selects.$gameArea).append(killGameAreaView.hint.say(name,message.object));
+        $("#" + selects.$gameArea).append(killGameAreaView.Hint.decryption(name,message.object));
 
     }
 
@@ -155,7 +154,7 @@ killController.status = function (message) {
     var name = player.name;
     if (message.object == "lastword") {
 
-        $("#" + selects.$gameArea).append(killGameAreaView.hint.lastword(name));
+        $("#" + selects.$gameArea).append(killGameAreaView.Hint.lastwordHint(name));
     }
     playerService.setStatus(message.subject, message.object);
     playerListView.setStatus(message.subject, message.object);
