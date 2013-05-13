@@ -309,7 +309,7 @@ when
 	//conditions
 	    
     $right:Right($id:id)
-    $player:Player(id==$id,status=="living"||status=="system")
+    $player:Player(id==$id,status=="living"||status=="king")
     $room:Room(status=="run")
     (Game(status=="day") and   Message($subject:subject,predict=="time",subject=="day"))
     or
@@ -545,10 +545,10 @@ no-loop true
 when
  
   
-  $game:Game(status=="run")
+  $game:Game()
   Message($subject:subject,predict=="logout")
-  $person:Player()
-  Role($role:role)
+  $person:Player(id==$subject,status=="living"||status=="king")
+  Role($role:role,id==$subject)
 then
    LogUtil.log("person die logout start==============");
    Die die=new Die($subject,"logout",$role);   
@@ -638,9 +638,14 @@ when
      (eval($ghostCount >= $waterCount+$soulCount)) 
      or
      (
-      eval($dayCount==1 && $ghostCount!=0) and
-      Message(predict=="switch")
-     )   
+       eval($dayCount<=1 && $ghostCount!=0) and
+       Message(predict=="switch")
+     ) or
+     (
+       eval($dayCount<=1 && $ghostCount!=0) and
+       Message(predict=="die",object=="vote")
+     
+     )
       or
      (
        Message(predict=="announce",object=="ghost")
@@ -875,7 +880,7 @@ ruleflow-group "phase switch prepare"
 no-loop true
 when
 	//conditions    
-	$message:Message($phase:subject,predict=="die")
+	$message:Message($phase:subject,predict=="die",object=="vote")
     $room:Room(status=="run")
     $game:Game(status=="day") 
     $operater:Operater()

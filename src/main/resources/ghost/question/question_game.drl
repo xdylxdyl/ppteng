@@ -297,7 +297,7 @@ when
 	//conditions
 	    
     $right:Right($id:id)
-    $player:Player(id==$id,status=="living"||status=="system")
+    $player:Player(id==$id,status=="living"||status=="king")
     $room:Room(status=="run")
     (Game(status=="day") and   Message($subject:subject,predict=="time",subject=="day"))
     or
@@ -520,10 +520,10 @@ no-loop true
 when
  
   
-  $game:Game(status=="run")
+  $game:Game()
   Message($subject:subject,predict=="logout")
-  $person:Player()
-  Role($role:role)
+  $person:Player(id==$subject,status=="living"||status=="king")
+  Role($role:role,id==$subject)
 then
    LogUtil.log("person die logout start==============");
    Die die=new Die($subject,"logout",$role);   
@@ -608,9 +608,14 @@ when
      (eval($ghostCount >= $waterCount)) 
      or
      (
-        eval($dayCount==1 && $ghostCount!=0) and
-        Message(predict=="switch")
-     )   
+       eval($dayCount<=1 && $ghostCount!=0) and
+       Message(predict=="switch")
+     ) or
+     (
+       eval($dayCount<=1 && $ghostCount!=0) and
+       Message(predict=="die",object=="vote")
+     
+     )
       or
      (
        Message(predict=="announce",object=="ghost")
@@ -815,11 +820,31 @@ when
     $operater:Operater()
     
 then     
-    LogUtil.log("phase switch prepare start================= "); 
+    LogUtil.log("topic phase switch prepare start================= "); 
     StatusChange sc=new StatusChange("day");
     insert(sc);
-    LogUtil.log("phase switch prepare over================= "); 
+    LogUtil.log("topic phase switch prepare over================= "); 
 end
+
+
+rule 'day phase switch prepare '
+ruleflow-group "phase switch prepare"
+no-loop true
+when
+	//conditions    
+	$message:Message($phase:subject,predict=="die",subject=="vote")
+    $room:Room(status=="run")
+    $game:Game(status=="day") 
+    $operater:Operater()
+    
+then     
+    LogUtil.log("day phase switch prepare start================= "); 
+    StatusChange sc=new StatusChange("day");
+    insert(sc);
+    LogUtil.log("day phase switch prepare over================= "); 
+end
+
+
 
 rule 'question phase switch prepare '
 ruleflow-group "phase switch prepare"
@@ -831,10 +856,10 @@ when
     eval($ghostCount == 0 )
     
 then     
-    LogUtil.log("phase switch prepare start================= "); 
+    LogUtil.log("question phase switch prepare start================= "); 
     StatusChange sc=new StatusChange("question");
     insert(sc);
-    LogUtil.log("phase switch prepare over================= "); 
+    LogUtil.log("question phase switch prepare over================= "); 
 end
      
      

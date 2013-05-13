@@ -121,13 +121,7 @@ when
 	      result(ls)
 	      );
 	      
-	$unReadys:ArrayList()
-      from accumulate(
-	      $person:Player(status=="unready")	     
-	      init(List ls=new ArrayList();),
-	      action(ls.add($person);),
-	      result(ls)
-	      );
+	
      //get operater
      $operater:Operater()
     
@@ -160,7 +154,7 @@ then
 	Game game=new Game("ready",$allReadys.size()-kingCount,kingCount,waterCount,ghostCount,dayCount,System.currentTimeMillis(),0L,$time,rname);
 	
 	 List readyIDS=new ArrayList();
-	 //3.create Role/status/vote record message create log ,how to update all unready players status;
+	 //3.create Role/status/vote record message create log 
 	 
 		LogUtil.log("============================ role is "+ids_role);
 		for(Object o: $allReadys){
@@ -299,7 +293,7 @@ when
 	//conditions
 	    
     $right:Right($id:id)
-    $player:Player(id==$id,status=="living"||status=="system")
+    $player:Player(id==$id,status=="living"||status=="king")
     $room:Room(status=="run")
     (Game(status=="day") and   Message($subject:subject,predict=="time",subject=="day"))
     or
@@ -351,7 +345,7 @@ when
     not Card()
        
 then
-    LogUtil.log("topic createstart  ================="); 
+    LogUtil.log("topic create start  ================="); 
   
     String waterCard=parseTopic($content,"water");
     if(StringUtils.isBlank(waterCard)){
@@ -522,10 +516,10 @@ no-loop true
 when
  
   
-  $game:Game(status=="run")
+  $game:Game()
   Message($subject:subject,predict=="logout")
-  $person:Player()
-  Role($role:role)
+ $person:Player(id==$subject,status=="living"||status=="king")
+  Role($role:role,id==$subject)
 then
    LogUtil.log("person die logout start==============");
    Die die=new Die($subject,"logout",$role);   
@@ -612,7 +606,12 @@ when
      (
        eval($dayCount<=1 && $ghostCount!=0) and
        Message(predict=="switch")
-     ) 
+     ) or
+     (
+       eval($dayCount<=1 && $ghostCount!=0) and
+       Message(predict=="die",object=="vote")
+     
+     )
     $room:Room(status=="run")
   
 	      
@@ -824,7 +823,7 @@ ruleflow-group "phase switch prepare"
 no-loop true
 when
 	//conditions    
-	$message:Message($phase:subject,predict=="die")
+	$message:Message($phase:subject,predict=="die",object=="vote")
     $room:Room(status=="run")
     $game:Game(status=="day") 
     $operater:Operater()

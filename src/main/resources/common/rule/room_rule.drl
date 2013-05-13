@@ -30,12 +30,36 @@ import  com.gemantic.common.util.json.GsonUtil;
 
 //========================game reset start =========================
 
+
+rule 'reset player status '
+ruleflow-group "game reset"
+no-loop true
+salience 100
+when
+	//conditions    
+    $message:Message($subject:subject,predict=="start")   
+    $player:Player($id:id,status!="ready")   //clear source    
+    
+then      
+	//actions
+     LogUtil.log("reset player status  start '================= ");
+     modify($player){setStatus("unready")}; 
+      // send right message
+	 Message message=new Message($id,"status","unready"); 
+     insert(message);	
+     
+     LogUtil.log("reset player status  over' ================="); 
+    
+end
+
+
 rule 'reset right '
 ruleflow-group "game reset"
 no-loop true
+salience 50
 when
 	//conditions    
-    $message:Message($subject:subject,predict=="ready"||predict=="start")   
+    $message:Message($subject:subject,predict=="start")   
     Player($id:id,status=="unready")   //clear source    
     $right:Right(id==$id)
 then      
@@ -49,6 +73,9 @@ then
      LogUtil.log("reset right over' ================="); 
     
 end
+
+
+
 
 //========================game reset over =========================
 

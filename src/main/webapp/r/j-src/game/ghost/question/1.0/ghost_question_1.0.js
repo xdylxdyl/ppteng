@@ -574,6 +574,8 @@ var gameView = {
         ghostView.clearStatusArea();
         settingView.hideSettingButton();
         gameView.hideDieArea();
+        var p = playerService.getPlayer(globalView.getCurrentID());
+         gameView.showSecondArea(p);
 
     },
     over:function (message) {

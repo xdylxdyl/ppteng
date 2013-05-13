@@ -413,15 +413,15 @@ var ghostView = {
                 break;
 
             case playerStatus.unready:
-                                     if ($("#time").val() == "over") {
+                if ($("#time").val() == "over") {
 
-                                     } else {
-                                         //没有结束
+                } else {
+                    //没有结束
 
-                                         place = "deadArea";
+                    place = "deadArea";
 
-                                     }
-                                     break;
+                }
+                break;
 
             default :
 
@@ -590,6 +590,8 @@ var gameView = {
         ghostView.clearStatusArea();
         settingView.hideSettingButton();
         gameView.hideDieArea();
+        var p = playerService.getPlayer(globalView.getCurrentID());
+        gameView.showSecondArea(p);
 
     },
     over:function (message) {
