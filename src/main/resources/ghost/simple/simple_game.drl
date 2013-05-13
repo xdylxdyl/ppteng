@@ -610,9 +610,9 @@ when
      $game:Game($kingCount:kingCount,$waterCount:waterCount,$ghostCount:ghostCount,$dayCount:dayCount,$recordName:recordName);
      (eval($ghostCount >= $waterCount)) or
      (
-       eval($dayCount==1 && $ghostCount!=0) and
-      Message(predict=="switch")
-     )    
+       eval($dayCount<=1 && $ghostCount!=0) and
+       Message(predict=="switch")
+     ) 
     $room:Room(status=="run")
   
 	      
@@ -1145,7 +1145,7 @@ ruleflow-group "query"
 when
 	//conditions
     $message:Message($subject:subject,predict=="query")
-   $room:Room()
+    $room:Room()
     $allLogins:ArrayList()
 	      from accumulate(
 	      $person:Player()	     
@@ -1175,8 +1175,8 @@ then
       
      setRemainTime($status,$game,$room) ;
       m.put("game",$game);   
-       m.put("votes",$votes);  
-        m.put("right",$right);    
+      m.put("votes",$votes);  
+      m.put("right",$right);    
         
 
       $operater.setSnapshots(GsonUtil.toJson(m));     
@@ -1194,3 +1194,45 @@ end
 
 
 //===========message accept============over 
+
+
+
+
+//========================retract game start =========================
+
+
+rule 'retract game'
+ruleflow-group "retract game"
+when
+	//conditions
+	$room:Room(status=="unrun") 
+	$game:Game()
+then      
+	//actions
+     LogUtil.log("retract game start================= ");  
+     retract($game);
+     LogUtil.log("retract game over ================="); 
+    
+end
+
+
+
+//========================retract game over =========================
+
+//========================game record start =========================
+
+rule 'record'
+ruleflow-group "record"
+when
+	//conditions
+	$game:Game(); 
+    $operater:Operater()     
+then      
+	 LogUtil.log("record start=================");       
+
+      JobLogger.logMessages($game.getRecordName(), $operater.getNextMessages());
+	LogUtil.log("record over =================");
+end
+
+
+//========================game record over =========================

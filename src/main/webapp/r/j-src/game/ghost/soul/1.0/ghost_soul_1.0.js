@@ -411,6 +411,18 @@ var ghostView = {
             case ghostQuestionModel.playerStatus.living:
                 //delay message
                 break;
+
+            case playerStatus.unready:
+                                     if ($("#time").val() == "over") {
+
+                                     } else {
+                                         //没有结束
+
+                                         place = "deadArea";
+
+                                     }
+                                     break;
+
             default :
 
 

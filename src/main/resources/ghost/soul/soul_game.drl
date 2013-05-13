@@ -1350,3 +1350,44 @@ end
 
 
 //===========message accept============over 
+
+
+
+//========================retract game start =========================
+
+
+rule 'retract game'
+ruleflow-group "retract game"
+when
+	//conditions
+	$room:Room(status=="unrun") 
+	$game:Game()
+then      
+	//actions
+     LogUtil.log("retract game start================= ");  
+     retract($game);
+     LogUtil.log("retract game over ================="); 
+    
+end
+
+
+
+//========================retract game over =========================
+
+//========================game record start =========================
+
+rule 'record'
+ruleflow-group "record"
+when
+	//conditions
+	$game:Game(); 
+    $operater:Operater()     
+then      
+	 LogUtil.log("record start=================");       
+
+      JobLogger.logMessages($game.getRecordName(), $operater.getNextMessages());
+	LogUtil.log("record over =================");
+end
+
+
+//========================game record over =========================

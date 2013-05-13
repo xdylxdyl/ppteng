@@ -373,7 +373,18 @@ var ghostView = {
                 break;
             case ghostSimpleModel.playerStatus.living:
                break;
+            case playerStatus.unready:
+                                     if ($("#time").val() == "over") {
+
+                                     } else {
+                                         //没有结束
+
+                                         place = "deadArea";
+
+                                     }
+                                     break;
             default :
+
 
 
         }

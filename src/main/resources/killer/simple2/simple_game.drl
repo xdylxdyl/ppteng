@@ -88,7 +88,7 @@ then
     
 end
 
-rule 'clear except message '
+rule 'clear exception message '
 ruleflow-group "game clear"
 no-loop true
 when
@@ -98,32 +98,13 @@ when
     
 then      
 	//actions
-     LogUtil.log("clear except message '================= ");      
+     LogUtil.log("clear exception message '================= ");      
      retract($message)
-     LogUtil.log("clear except message ' ================="); 
+     LogUtil.log("clear exception message ' ================="); 
     
 end
 
 
-rule 'reset right '
-ruleflow-group "game reset"
-no-loop true
-when
-	//conditions    
-    $message:Message($subject:subject,predict=="ready"||predict=="start")   
-    Player($id:id,status=="unready")   //clear source    
-    $right:Right(id==$id)
-then      
-	//actions
-     LogUtil.log("reset right start '================= ");
-     modify($right){setRight(convertString2Set("say"))}; 
-      // send right message
-	 Message rightMessage=new Message($id,"right","say"); 
-     insert(rightMessage);	
-     
-     LogUtil.log("reset right over' ================="); 
-    
-end
 //===================clear game over 
 
 
@@ -1496,19 +1477,13 @@ end
 
 
 
-rule 'record'
-ruleflow-group "record"
-when
-	//conditions
-	$game:Game(); 
-    $operater:Operater()     
-then      
-	 LogUtil.log("record start=================");       
 
-      JobLogger.logMessages($game.getRecordName(), $operater.getNextMessages());
-	LogUtil.log("record over =================");
-end
+//===========message accept============over 
 
+
+
+
+//========================retract game start =========================
 
 
 rule 'retract game'
@@ -1525,4 +1500,24 @@ then
     
 end
 
-//===========message accept============over 
+
+
+//========================retract game over =========================
+
+//========================game record start =========================
+
+rule 'record'
+ruleflow-group "record"
+when
+	//conditions
+	$game:Game(); 
+    $operater:Operater()     
+then      
+	 LogUtil.log("record start=================");       
+
+      JobLogger.logMessages($game.getRecordName(), $operater.getNextMessages());
+	LogUtil.log("record over =================");
+end
+
+
+//========================game record over =========================

@@ -18,6 +18,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gemantic.common.exception.ServiceDaoException;
+import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.MyListUtil;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
@@ -42,13 +44,13 @@ public class RecordController {
 	private PushClient pushClient;
 
 	@Autowired
-	private RecordService recordService; 
-	
+	private RecordService recordService;
+
 	@Autowired
 	private UsersService userSevice;
 	@Autowired
 	private RecordStastisticsEtl recordStastisticsEtl;
-	
+
 	@Autowired
 	private CookieUtil cookieUtil;
 
@@ -62,40 +64,24 @@ public class RecordController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/record/list")
-	public String list(HttpServletRequest request, HttpServletResponse response, ModelMap model, String version,Integer page,Integer size,Long uid) throws Exception {
-		log.info("start get room list "+version);
-		
-		
-		
-		if(page==null){
-			page=1;
-		}
-		if(page<1){
-			page=1;
-		}
-		if(size==null){
-			size=20;
-		}
-		Integer start=(page-1)*size;
-		List<Long> ids;
-		
-		if(StringUtils.isBlank(version)||"all".equals(version)){
-			version="all";
-			//考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
-		    ids = recordService.getList( start,size);
-			
-		}else{
-			//考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
-			 
-			 ids = recordService.getRecordIdsByVersion(version+".0", start,size);
-			
-			
-		}
-		
-	
-		
+	public String list(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, String version,
+			Integer page, Integer size, Long uid) throws Exception {
+		log.info("start get room list " + version);
 
-		List<Records> records=recordService.getObjectsByIds(ids);
+		if (page == null) {
+			page = 1;
+		}
+		if (page < 1) {
+			page = 1;
+		}
+		if (size == null) {
+			size = 20;
+		}
+		Integer start = (page - 1) * size;
+
+		List<Records> records = this.getRecords(version, uid, start, size);
+
 		log.info("get record size " + records.size());
 		model.addAttribute("records", records);
 
@@ -106,15 +92,46 @@ public class RecordController {
 
 		}
 		List<User> users = this.userSevice.getObjectsByIds(userIDS);
-		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);
+		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"),
+				users);
 
 		model.addAttribute("records", records);
 		model.addAttribute("users", id_user);
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
 		model.addAttribute("version", version);
-		
+
 		return "/record/list/all";
+	}
+
+	private List<Records> getRecords(String version, Long uid, Integer start,
+			Integer size) throws ServiceException, ServiceDaoException {
+		List<Long> ids = new ArrayList();
+		
+		if(uid==null){
+			//get all
+			
+			if (StringUtils.isBlank(version) || "all".equals(version)) {
+				version = "all";
+				// 考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
+				ids = recordService.getList(start, size);
+
+			}else{
+				ids = recordService.getRecordIdsByVersion(version + ".0", start,
+						size);
+			}
+		}else{
+		   //get persion	
+			
+		
+			
+		}
+
+		
+
+
+		List<Records> records = recordService.getObjectsByIds(ids);
+		return records;
 	}
 
 	/**
@@ -125,20 +142,19 @@ public class RecordController {
 	 * @param model
 	 * @return
 	 * @throws Exception
-	 *//*
-	@RequestMapping(value = "/record/replay")
-	public String createRoom(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long recordID, String version, Long rid, Long uid)
-			throws Exception {
-		log.debug("HI");
-		// 先创建一个假房间?那房间里的Query怎么办.
-
-		this.recordService.play(recordID, rid);
-
-		// MessageUtil.sendMessage(version,messages,this.pushClient);
-		model.addAttribute("uid", uid);
-		model.addAttribute("rid", rid);
-		return "/common/success";
-	}*/
+	 */
+	/*
+	 * @RequestMapping(value = "/record/replay") public String
+	 * createRoom(HttpServletRequest request, HttpServletResponse response,
+	 * ModelMap model, Long recordID, String version, Long rid, Long uid) throws
+	 * Exception { log.debug("HI"); // 先创建一个假房间?那房间里的Query怎么办.
+	 * 
+	 * this.recordService.play(recordID, rid);
+	 * 
+	 * // MessageUtil.sendMessage(version,messages,this.pushClient);
+	 * model.addAttribute("uid", uid); model.addAttribute("rid", rid); return
+	 * "/common/success"; }
+	 */
 
 	/**
 	 * 游戏开始
@@ -150,12 +166,13 @@ public class RecordController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/record/enter")
-	public String enter(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long recordID) throws Exception {
+	public String enter(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, Long recordID)
+			throws Exception {
 		log.debug("HI");
 		// 先创建一个假房间?那房间里的Query怎么办.
 
 		Records record = this.recordService.getObjectById(recordID);
-	
 
 		List<String> contents = this.recordService.getContent(recordID);
 
@@ -177,7 +194,9 @@ public class RecordController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/record/detail")
-	public String getRecordDetail(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long recordID) throws Exception {
+	public String getRecordDetail(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, Long recordID)
+			throws Exception {
 		log.debug("HI");
 		// 先创建一个假房间?那房间里的Query怎么办.
 
@@ -199,11 +218,13 @@ public class RecordController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/record/setting")
-	public String getRecordSetting(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long recordID) throws Exception {
+	public String getRecordSetting(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, Long recordID)
+			throws Exception {
 		log.debug("HI");
 		// 先创建一个假房间?那房间里的Query怎么办.
 
-		Records record = this.recordService.getObjectById(recordID);	
+		Records record = this.recordService.getObjectById(recordID);
 		model.addAttribute("record", record);
 		model.addAttribute("room", record.getRoom());
 		model.addAttribute("setting", record.getRoom().getSetting());
@@ -220,7 +241,9 @@ public class RecordController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/record/expression/show")
-	public String getRecordExpression(HttpServletRequest request, HttpServletResponse response, ModelMap model, Long recordID) throws Exception {
+	public String getRecordExpression(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, Long recordID)
+			throws Exception {
 		log.debug("HI");
 		// 先创建一个假房间?那房间里的Query怎么办.
 
@@ -235,7 +258,6 @@ public class RecordController {
 		model.addAttribute("express", ls);
 		return "/room/express/show";
 	}
-	
 
 	/**
 	 * 游戏开始
@@ -247,31 +269,32 @@ public class RecordController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/record/calculate")
-	public String calculate(HttpServletRequest request, HttpServletResponse response, ModelMap model,String version,String type,String[] functionTypes) throws Exception {
-		
+	public String calculate(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, String version,
+			String type, String[] functionTypes) throws Exception {
+
 		// 先创建一个假房间?那房间里的Query怎么办.
 		// 没有Email再判断是否是cookie
 		Long uid = cookieUtil.getID(request, response);
-		if(uid!=256L&&uid!=245L){
-			log.info("not limt "+uid);
-		}else{
-			
-			Set<String> ftSet=null;
-			if(functionTypes==null){
-				
-			}else{
-				ftSet=new HashSet();
-				for(String ft:functionTypes){
+		if (uid != 256L && uid != 245L) {
+			log.info("not limt " + uid);
+		} else {
+
+			Set<String> ftSet = null;
+			if (functionTypes == null) {
+
+			} else {
+				ftSet = new HashSet();
+				for (String ft : functionTypes) {
 					ftSet.add(ft);
 				}
 			}
-			log.info("start calculate "+type+" function type "+ftSet);
-			recordStastisticsEtl.calculateProcess(type,ftSet);
+			log.info("start calculate " + type + " function type " + ftSet);
+			recordStastisticsEtl.calculateProcess(type, ftSet);
 		}
 
-		
 		model.addAttribute("code", "0");
-	
+
 		return "/common/success";
 	}
 

@@ -132,7 +132,7 @@
 				</entry>				
 				<entry key="dayTime" value="240000">
 				</entry>
-				<entry key="topicTime" value="60000">
+				<entry key="topicTime" value="120000">
 				</entry>			
 			</map>
 		</constructor-arg>
@@ -146,9 +146,9 @@
 				</entry>				
 				<entry key="dayTime" value="240000">
 				</entry>
-				<entry key="topicTime" value="60000">
+				<entry key="topicTime" value="120000">
 				</entry>
-				<entry key="questionTime" value="60000">
+				<entry key="questionTime" value="120000">
 				</entry>		
 			</map>
 		</constructor-arg>
@@ -162,9 +162,9 @@
 				</entry>				
 				<entry key="dayTime" value="240000">
 				</entry>
-				<entry key="topicTime" value="60000">
+				<entry key="topicTime" value="120000">
 				</entry>
-				<entry key="questionTime" value="60000">
+				<entry key="questionTime" value="120000">
 				</entry>		
 			</map>
 		</constructor-arg>

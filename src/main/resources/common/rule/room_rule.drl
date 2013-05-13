@@ -21,6 +21,38 @@ import  com.gemantic.common.util.json.GsonUtil;
 
 
 
+
+
+
+
+
+
+
+//========================game reset start =========================
+
+rule 'reset right '
+ruleflow-group "game reset"
+no-loop true
+when
+	//conditions    
+    $message:Message($subject:subject,predict=="ready"||predict=="start")   
+    Player($id:id,status=="unready")   //clear source    
+    $right:Right(id==$id)
+then      
+	//actions
+     LogUtil.log("reset right start '================= ");
+     modify($right){setRight(convertString2Set("say"))}; 
+      // send right message
+	 Message rightMessage=new Message($id,"right","say"); 
+     insert(rightMessage);	
+     
+     LogUtil.log("reset right over' ================="); 
+    
+end
+
+//========================game reset over =========================
+
+
 //========================action group start =========================
 
 

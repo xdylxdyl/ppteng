@@ -79,7 +79,7 @@ killGameAreaView = {
          return   "<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + killGameAreaView.RoleName[role] + "</p>"
         },
         lastwordHint:function(name){
-           return "<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听==== [" + name + "] 的最后一句话。</p>";
+           return "<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听[" + name + "] 的最后一句话。</p>";
         }
 
 
