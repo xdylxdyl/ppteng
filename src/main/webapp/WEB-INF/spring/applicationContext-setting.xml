@@ -130,7 +130,7 @@
 			<map>
 				<entry key="ghostCount" value="1">
 				</entry>				
-				<entry key="dayTime" value="240000">
+				<entry key="dayTime" value="300000">
 				</entry>
 				<entry key="topicTime" value="120000">
 				</entry>			
@@ -144,7 +144,7 @@
 			<map>
 				<entry key="ghostCount" value="1">
 				</entry>				
-				<entry key="dayTime" value="240000">
+				<entry key="dayTime" value="300000">
 				</entry>
 				<entry key="topicTime" value="120000">
 				</entry>
@@ -160,7 +160,7 @@
 			<map>
 				<entry key="ghostCount" value="1">
 				</entry>				
-				<entry key="dayTime" value="240000">
+				<entry key="dayTime" value="300000">
 				</entry>
 				<entry key="topicTime" value="120000">
 				</entry>
