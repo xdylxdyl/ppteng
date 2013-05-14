@@ -161,7 +161,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			// 从哪知道游戏里的玩家呢
 
 			
-			boolean isSaveRecord = this.isSaveRecord(r, time);
+			boolean isSaveRecord = this.isSaveRecord(r, time,messages);
 			if (isSaveRecord) {
 				// 六人局才发钱和超过三分钟才给钱存战例
 				for (Message m : messages) {
@@ -211,7 +211,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		return operater;
 	}
 
-	private boolean isSaveRecord(Room r, Long time) {
+	private boolean isSaveRecord(Room r, Long time, List<Message> messages) {
 		String version=r.getVersion();
 		
 		if(version.contains("kill")){
@@ -229,6 +229,16 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			}
 			
 		}		
+		
+		
+		if(version.contains("mine")){
+			for(Message m:messages){
+				if(("over".equals(m.getPredict()))&&("win".equals(m.getObject()))){
+					return true;
+				}
+			}
+			
+		}
 		
 		
 		

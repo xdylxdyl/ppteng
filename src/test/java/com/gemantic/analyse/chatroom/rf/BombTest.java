@@ -123,7 +123,7 @@ public class BombTest {
 
 	}
 
-	// @Test
+	 @Test
 	public void testSweepMine() throws Exception {
 
 		List<String> messages = FileUtil

@@ -1,3 +1,10 @@
+
+var gameView={
+    hideDieArea:function(){
+
+    }
+}
+
 $(document).ready(function () {
     timer = null;
     //左键

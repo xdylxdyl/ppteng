@@ -69,13 +69,20 @@ then
      BombPic bombPic=new BombPic(systemBombPic,"");
      insert(bombPic);
      
+    String	rname=String.valueOf(RandomUtils.nextLong());
+    
+     List readyIDS=new ArrayList();
+     
+     
+
+     
      //init user bomb count
      
      for(Object o: $allReadys){
      
         Player p=(Player)o;
           String uid=p.getId();
-			
+		readyIDS.add(Long.valueOf(uid));
 				  
 				  UserCount uc=new UserCount(uid,0);
 				  insert(uc);	  
@@ -84,11 +91,14 @@ then
 				  
 	    p.setStatus("living");	  
 		 update(p);  
+		 
+		
+		 JobLogger.logMessages(rname,Arrays.asList(new Message[]{new Message(uid,"ready",""),new Message(uid,"login","")}));	
      
      }
      
 	
-	String	rname=String.valueOf(RandomUtils.nextLong());	
+
 	
 	
 	Game game=new Game("run",System.currentTimeMillis(),0L,$time,rname, $allReadys.size(),$time);
@@ -102,6 +112,7 @@ then
 	$room.setStatus("run");	
 	update($room);
 	$operater.setGameStart(true);
+	$operater.setPlayers(readyIDS);
 	Message initMessage=new Message("","init",systemBombPic);
 	insert(initMessage); 
 	
@@ -175,9 +186,8 @@ ruleflow-group "game right"
 no-loop true
 when
 	
-	$message:Message(predict=="over")
-	not Game()
-	$room:Room($creater:creater)
+	$message:Message(predict=="over")	
+	$room:Room($creater:creater,status=="unrun")
     $person:Player($id:id)
     $right:Right(id==$id)
 
@@ -667,7 +677,7 @@ when
 then
     LogUtil.log("game over processstart  ================="); 
     
-     retract($game);
+   
      retract($count);
      retract($bombPic);   
      
@@ -713,8 +723,23 @@ end
 
 //========================game status group over =========================
 
+//========================retract game start =========================
+rule 'retract game'
+ruleflow-group "retract game"
+when
+	//conditions
+	$room:Room(status=="unrun") 
+	$game:Game()
+then      
+	//actions
+     LogUtil.log("retract game start================= ");  
+     retract($game);
+     LogUtil.log("retract game over ================="); 
+    
+end
 
 
+//========================retract game over =========================
 
 
 
@@ -813,17 +838,34 @@ then
 end
 
 
-
-
-
-
-
-
-
-
-
-
 //========================message group over =========================
+
+
+//========================game record start =========================
+
+rule 'record'
+ruleflow-group "record"
+when
+	//conditions
+	$game:Game(); 
+    $operater:Operater()     
+then      
+	 LogUtil.log("record start=================");       
+
+      JobLogger.logMessages($game.getRecordName(), $operater.getNextMessages());
+	LogUtil.log("record over =================");
+end
+
+
+//========================game record over =========================
+
+
+
+
+
+
+
+
 
 
   

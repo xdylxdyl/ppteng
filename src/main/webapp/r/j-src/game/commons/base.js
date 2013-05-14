@@ -99,6 +99,7 @@ var initRecord = function () {
     var uid = globalView.getCurrentID();
     var rid = globalView.getRoomID();
     var createrID = globalView.getCreaterId();
+    var version = globalView.getVersion();
     var settingHtml;
     var exp;
 
@@ -107,7 +108,10 @@ var initRecord = function () {
 
     //默认隐藏
     $("#" + selects.$playerRole).hide();
+
     gameView.hideDieArea();
+
+
     $("#displayRoleGroup").show();
     controlView.hideButton("select_expression");
     controlView.hideButton("select_color");
