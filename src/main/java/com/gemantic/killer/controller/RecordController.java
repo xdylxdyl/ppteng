@@ -25,6 +25,7 @@ import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
+import com.gemantic.killer.service.SettingService;
 import com.gemantic.labs.killer.etl.RecordStastisticsEtl;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.service.RecordService;
@@ -45,6 +46,9 @@ public class RecordController {
 
 	@Autowired
 	private RecordService recordService;
+	
+	@Autowired
+	private SettingService settingService;
 
 	@Autowired
 	private UsersService userSevice;
@@ -228,6 +232,10 @@ public class RecordController {
 		model.addAttribute("record", record);
 		model.addAttribute("room", record.getRoom());
 		model.addAttribute("setting", record.getRoom().getSetting());
+
+		Map<String,String> settingDisplay=this.settingService.getSettingDisplay();
+		
+		model.addAttribute("settingDisplay", settingDisplay);
 		return "/room/form/setting";
 	}
 
