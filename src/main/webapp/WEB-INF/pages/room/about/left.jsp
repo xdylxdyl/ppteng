@@ -9,6 +9,7 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">葡萄藤</li>
                     <li id="about"><a href="/about?type=about">简介</a></li>
+                     <li id="master"><a href="/about?type=master">站长</a></li>
                    <li class="nav-header">杀人游戏</li>
                     <li id="simple"><a href="/about?type=simple">简化版规则</a></li>
                     <li id="simpleImg"><a href="/about?type=simpleImg">简化版图示</a></li>
