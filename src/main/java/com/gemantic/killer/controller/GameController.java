@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -144,6 +145,21 @@ public class GameController {
 	public String about(HttpServletRequest request, HttpServletResponse response, ModelMap model, String type) throws Exception {
 
 		return "/room/about/" + type;
+	}
+
+	/**
+	 * 游戏开始
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/tool/{type}")
+	public String tool(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable String type) throws Exception {
+
+		return "/room/tool/" + type;
 	}
 
 }

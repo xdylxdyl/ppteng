@@ -62,7 +62,7 @@ killGameAreaView = {
            return  "<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "查证 [" + objName + "] 说 : " + content + " </p>";
         },
         say:function (color, name, express, content) {
-            return  "<p style='color:" + color + "'>[" + name + "] " + express  + " 说：" + content + "</p>"
+            return  "<p  style='color:" + color + "'>[" + name + "] " + express  + " 说：" + content + "</p>"
         },
         killerWin:function(recordLink){
           return "<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink;

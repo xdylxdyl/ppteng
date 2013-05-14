@@ -9,9 +9,8 @@
 			
 			<li class="nav-header">全部</li>
 			<li id="nav_all"><a
-				href="/record/list?version=all&uid=${uid}">全部版本</a></li>		
-					<li id="nav_persion"><a
-				href="/record/list?version=persion&uid=${uid}">个人</a></li>
+				href="/record/list?version=all&uid=${uid}">全部版本</a></li>	
+	
 			<li class="nav-header">杀人游戏</li>			
 			<li id="nav_simple_1"><a href="/record/list?version=simple_1&uid=${uid}">简化</a></li>
 			<li id="nav_killer_police_1"><a href="/record/list?version=killer_police_1&uid=${uid}">警版</a></li>

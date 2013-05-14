@@ -85,6 +85,26 @@
 	</definition>
 	
 	
+		<definition name="tool*"
+		template="/WEB-INF/pages/room/tool/layout.jsp">
+		<put-attribute name="left"
+			value="/WEB-INF/pages/room/tool/left.jsp" />
+		<put-attribute name="right"
+			value="/WEB-INF/pages/room/tool/{1}.jsp" />
+	</definition>
+	
+	
+
+	<definition name="/room/tool/*" extends="ptt">
+		<put-attribute name="title" value="工具-葡萄藤" type="string" />
+		<put-attribute name="body" value="tool{1}">
+
+		</put-attribute>
+
+
+	</definition>
+	
+	
 	
 	<definition name="rank*"
 		template="/WEB-INF/pages/room/rank/layout.jsp">

@@ -293,7 +293,7 @@ var settingService = {
 
 var roomService = {
     appendContent:function () {
-        var content = $(this).html();
+        var content = $(this).text();
         controlView.appendSay(content);
     },
 
@@ -664,7 +664,7 @@ var roomParseService = {
                 name = playerService.getPlayer(message.object).name;
             }
             gameAreaView.say(message.subject, playerService.getPlayer(message.subject).name, message.content, message.expression,
-                message.color, message.object, name);
+                message.color, message.object, name,message.time);
         } else {
 
             versionFunction["say"](message);

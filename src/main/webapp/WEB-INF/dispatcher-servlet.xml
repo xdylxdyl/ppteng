@@ -72,6 +72,7 @@
 				<value>*/room/statistics/*</value>
 				<value>*/room/financial/*</value>
 				<value>*/room/about/*</value>	
+			    <value>*/room/tool/*</value>	
 			</list>
 		</property>
 	</bean>

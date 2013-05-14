@@ -52,6 +52,7 @@
 				<li id="nav_case"><a href="/record/list">战例</a></li>
 				<li id="nav_person"><a href="/player/detail">设置</a></li>				
 				<li id="nav_financial"><a href="/money/flow ">财务</a></li>
+				<li id="nav_tool"><a href="/tool/weather">工具</a></li>
 				<li id="nav_about"><a href="/about?type=about">帮助</a></li>
 			</ul>
 		</div>
