@@ -49,7 +49,7 @@
 				<li id="nav_game"><a href="/m/list ">游戏</a></li>
 				<li id="nav_rank"><a href="/rank/list?type=money">排行</a></li>
 				<li id="nav_statistics"><a href="/player/statistics ">统计</a></li>
-				<li id="nav_case"><a href="/record/list">战例</a></li>
+				<li id="nav_case"><a href="/record/list?version=all">战例</a></li>
 				<li id="nav_person"><a href="/player/detail">设置</a></li>				
 				<li id="nav_financial"><a href="/money/flow ">财务</a></li>
 				<li id="nav_tool"><a href="/tool/weather">工具</a></li>

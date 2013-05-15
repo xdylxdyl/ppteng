@@ -486,7 +486,7 @@ var gameAreaView = {
         var player = playerService.getPlayer(id);
 
 
-        $("#" + selects.$gameArea).append("<p data-toggle='tooltip' title='"+timeUtil.time2String(time)+"' style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+        $("#" + selects.$gameArea).append("<p  title='"+timeUtil.time2String(time)+"' style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
 
 

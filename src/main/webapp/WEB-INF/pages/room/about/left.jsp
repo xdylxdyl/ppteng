@@ -13,6 +13,8 @@
                    <li class="nav-header">杀人游戏</li>
                     <li id="simple"><a href="/about?type=simple">简化版规则</a></li>
                     <li id="simpleImg"><a href="/about?type=simpleImg">简化版图示</a></li>
+                    <li class="nav-header">虚拟电影院</li>
+                      <li id="film"><a href="/about?type=film">电影院</a></li>
                    <!--  <li class="nav-header">扫雷</li>
                     <li><a href="#">多人扫雷</a></li>
                     <li class="nav-header">在一起</li>
