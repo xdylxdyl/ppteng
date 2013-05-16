@@ -107,19 +107,19 @@ $(document).ready(function () {
 
 
     var filmDate = new Date();
-    var week=filmDate.getDay();
+    var week = filmDate.getDay();
 
     filmDate.setHours(20);
     filmDate.setMinutes(30);
 
 
-    var w=0;
-    if(week<4){
-        w=4-week;
-    }else{
-        w=11-week;
+    var w = 0;
+    if (week <= 4) {
+        w = 4 - week;
+    } else {
+        w = 11 - week;
     }
-    ts = filmDate.getTime()+w*24*60*60*1000;
+    ts = filmDate.getTime() + w * 24 * 60 * 60 * 1000;
 
     stopCountDown = true;
 

@@ -88,6 +88,10 @@
 			<P>
 				<a href="/player/statistics?uid=${current.id}">查看统计</a>
 			</p>
+			
+			<P>
+				<a href="/record/list?uid=${current.id}&version=all">查看战例</a>
+			</p>
 
 
 

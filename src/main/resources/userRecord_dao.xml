@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dal>
+	<route>
+		<object name="com.gemantic.labs.killer.model.UserRecord"
+			listenerClass="" strategyProperty="">
+			
+			
+			
+					<list name="getUserRecordIdsByVersionAndUidOrderByRecordAt"
+				sqlitem="select rid from user_record where version = ? and uid = ? order by record_at desc"
+				keyProperty="version,uid" valueProperty="id" keyColumn="version,uid" />
+					<list name="getUserRecordIdsByUidOrderByRecordAt"
+				sqlitem="select rid from user_record where  uid = ? order by record_at desc"
+				keyProperty="uid" valueProperty="id" keyColumn="uid" />
+						
+			
+						
+			<dbStrategy name="mutiDS"
+                clasz="com.gemantic.dal.route.strategy.DefaultStrategy">  <pattern value="[0-9]$" group="labsKiller" />
+            </dbStrategy>
+			
+		</object>
+	</route>
+</dal>

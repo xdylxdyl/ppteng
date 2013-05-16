@@ -26,9 +26,12 @@ import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.SettingService;
+import com.gemantic.killer.util.PunchUtil;
 import com.gemantic.labs.killer.etl.RecordStastisticsEtl;
 import com.gemantic.labs.killer.model.Records;
+import com.gemantic.labs.killer.model.UserRecord;
 import com.gemantic.labs.killer.service.RecordService;
+import com.gemantic.labs.killer.service.UserRecordService;
 import com.gemantic.labs.killer.service.UsersService;
 
 /**
@@ -46,6 +49,9 @@ public class RecordController {
 
 	@Autowired
 	private RecordService recordService;
+	
+	@Autowired
+	private UserRecordService userRecordService;
 	
 	@Autowired
 	private SettingService settingService;
@@ -71,7 +77,11 @@ public class RecordController {
 	public String list(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model, String version,
 			Integer page, Integer size, Long uid) throws Exception {
+		
+		
+		
 		log.info("start get room list " + version);
+		Long selfID = cookieUtil.getID(request, response);
 
 		if (page == null) {
 			page = 1;
@@ -95,15 +105,23 @@ public class RecordController {
 			userIDS.add(r.getCreaterID());
 
 		}
+	
 		List<User> users = this.userSevice.getObjectsByIds(userIDS);
 		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"),
 				users);
+		
+		
+		User u=this.userSevice.getObjectById(uid);
+	    model.addAttribute("current", u);	
+		model.addAttribute("selfID", selfID);
+		model.addAttribute("uid", uid);
 
 		model.addAttribute("records", records);
 		model.addAttribute("users", id_user);
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
 		model.addAttribute("version", version);
+		
 
 		return "/record/list/all";
 	}
@@ -111,6 +129,7 @@ public class RecordController {
 	private List<Records> getRecords(String version, Long uid, Integer start,
 			Integer size) throws ServiceException, ServiceDaoException {
 		List<Long> ids = new ArrayList();
+		
 		
 		if(uid==null){
 			//get all
@@ -127,6 +146,14 @@ public class RecordController {
 		}else{
 		   //get persion	
 			
+			if (StringUtils.isBlank(version) || "all".equals(version)) {
+				version = "all";
+				// 考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
+				ids = this.userRecordService.getUserRecordIdsByUidOrderByRecordAt(uid, start, size);
+
+			}else{
+				ids = userRecordService.getUserRecordIdsByVersionAndUidOrderByRecordAt(version + ".0", uid,start,size);
+			}
 		
 			
 		}
@@ -299,6 +326,53 @@ public class RecordController {
 			}
 			log.info("start calculate " + type + " function type " + ftSet);
 			recordStastisticsEtl.calculateProcess(type, ftSet);
+		}
+
+		model.addAttribute("code", "0");
+
+		return "/common/success";
+	}
+	
+	
+
+	/**
+	 * 游戏开始
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/record/calculate/user")
+	public String calculateUser(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) throws Exception {
+
+		// 先创建一个假房间?那房间里的Query怎么办.
+		// 没有Email再判断是否是cookie
+		Long uid = cookieUtil.getID(request, response);
+		if (uid != 256L && uid != 245L) {
+			log.info("not limt " + uid);
+		} else {
+
+			List<Long> rids=this.recordService.getList(0, Integer.MAX_VALUE);
+			List<Records> records=this.recordService.getObjectsByIds(rids);
+			for(Records r:records){
+				List<Long> uids=r.getRoom().getPlayers();
+
+				for (Long id : uids) {
+
+					UserRecord ur = new UserRecord();
+					ur.setRid(r.getId());
+					ur.setRecordAt(System.currentTimeMillis());
+					ur.setUid(id);
+					ur.setVersion(r.getVersion());
+					this.userRecordService.insert(ur);
+
+				}
+				
+				
+			}
 		}
 
 		model.addAttribute("code", "0");

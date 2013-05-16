@@ -15,12 +15,18 @@
 		<config>
 			<path>simpleStatistics_dao.xml</path>
 		</config>
-		
-		
+
+
 		<config>
 			<path>moneyFlow_dao.xml</path>
 		</config>
-				
+
+
+		<config>
+			<path>userRecord_dao.xml</path>
+		</config>
+
+
 
 	</list>
 

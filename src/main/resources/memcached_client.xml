@@ -30,6 +30,12 @@
 			<keyPattern value="[0-9]$" datasource="default" />
 		</region>
 
+		<region name="com.gemantic.labs.killer.model.UserRecord"
+			listenerClass="com.gemantic.dal.cache.listener.DefaultListenerImpl"
+			strategyClass="com.gemantic.memcached.route.strategy.DefaultStrategy">
+			<keyPattern value="[0-9]$" datasource="default" />
+		</region>
+
 
 
 

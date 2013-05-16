@@ -29,7 +29,9 @@ import com.gemantic.killer.service.RoomTimerService;
 import com.gemantic.killer.service.SessionService;
 import com.gemantic.killer.util.MessageUtil;
 import com.gemantic.labs.killer.model.Records;
+import com.gemantic.labs.killer.model.UserRecord;
 import com.gemantic.labs.killer.service.RecordService;
+import com.gemantic.labs.killer.service.UserRecordService;
 import com.gemantic.labs.killer.service.UsersService;
 
 //这段代码有点乱.有时间整理一下.
@@ -56,6 +58,10 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 	@Autowired
 	private RecordService recordService;
+	
+	@Autowired
+	private UserRecordService userRecordService;
+	
 
 	@Resource(name = "roomAction")
 	private Set<String> roomAction = new HashSet();
@@ -160,17 +166,15 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			this.roomService.updateRoom(r);
 			// 从哪知道游戏里的玩家呢
 
-			
-			boolean isSaveRecord = this.isSaveRecord(r, time,messages);
+			boolean isSaveRecord = this.isSaveRecord(r, time, messages);
 			if (isSaveRecord) {
 				// 六人局才发钱和超过三分钟才给钱存战例
-				for (Message m : messages) {
-					if ("decryption" == m.getPredict()) {
-						Long uid = Long.valueOf(m.getSubject());
-						User u = this.userService.getObjectById(uid);
-						u.setMoney(u.getMoney() + 1000);//
-						this.userService.update(u);
-					}
+
+				for (Long uid : r.getPlayers()) {
+
+					User u = this.userService.getObjectById(uid);
+					u.setMoney(u.getMoney() + 1000);//
+					this.userService.update(u);
 
 				}
 
@@ -189,7 +193,20 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 					uid_names.put(user.getId(), user.getName());
 				}
 				record.setUid_names(uid_names);
-				this.recordService.insert(record);
+				Long rid = this.recordService.insert(record);
+
+				// 更新玩家的战例记录
+
+				for (Long uid : r.getPlayers()) {
+
+					UserRecord ur = new UserRecord();
+					ur.setRid(rid);
+					ur.setRecordAt(System.currentTimeMillis());
+					ur.setUid(uid);
+					ur.setVersion(r.getVersion());
+					this.userRecordService.insert(ur);
+
+				}
 
 			}
 
@@ -212,36 +229,34 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 	}
 
 	private boolean isSaveRecord(Room r, Long time, List<Message> messages) {
-		String version=r.getVersion();
-		
-		if(version.contains("kill")){
-			//杀人游戏6人三分钟
-			if (r.getPlayers().size() >= 6 && time > 3 * 60 * 1000){
+		String version = r.getVersion();
+
+		if (version.contains("kill")) {
+			// 杀人游戏6人三分钟
+			if (r.getPlayers().size() >= 6 && time > 3 * 60 * 1000) {
 				return true;
 			}
-			
+
 		}
-		
-		if(version.contains("ghost")){
-			//捉鬼游戏 四人 三分钟
-			if (r.getPlayers().size() >= 4 && time > 3 * 60 * 1000){
+
+		if (version.contains("ghost")) {
+			// 捉鬼游戏 四人 三分钟
+			if (r.getPlayers().size() >= 4 && time > 3 * 60 * 1000) {
 				return true;
 			}
-			
-		}		
-		
-		
-		if(version.contains("mine")){
-			for(Message m:messages){
-				if(("over".equals(m.getPredict()))&&("win".equals(m.getObject()))){
+
+		}
+
+		if (version.contains("mine")) {
+			for (Message m : messages) {
+				if (("over".equals(m.getPredict()))
+						&& ("win".equals(m.getObject()))) {
 					return true;
 				}
 			}
-			
+
 		}
-		
-		
-		
+
 		return false;
 	}
 
