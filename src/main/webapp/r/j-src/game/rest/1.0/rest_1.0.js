@@ -89,18 +89,9 @@ var restService = {
 }
 
 
-var musicService={
-    getMusics:function(){
 
-        return  ajaxJson( "/music/list", "get", {}, musicService.parseMusic, 5000, "json");
 
-    },
-    parseMusic:function(result){
-        return result.data;
-    }
-}
 
-var app = angular.module('myApp', []);
 
 app.filter('timeConvert', function() {
     return function(value) {
@@ -133,11 +124,7 @@ function publicCtrl($scope, $timeout) {
 
 
 
-function MusicCtrl($scope, $timeout) {
-    $scope.musics = musicService.getMusics();
 
-
-};
 
 
 

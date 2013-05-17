@@ -50,6 +50,11 @@ public class MusicController {
 	@RequestMapping(value = "/music/list")
 	public String list(HttpServletRequest request, HttpServletResponse response, ModelMap model, Integer page, Integer size, Long uid, String type) throws Exception {
 
+		
+		
+		//http://www.duole.com/api/scene/get_all
+	   // http://www.duole.com/api/mood/get_all?client=pc
+		
 
 		HttpUrl url=new HttpUrl();
 		HashMap<Object, Object> params=new HashMap();	
