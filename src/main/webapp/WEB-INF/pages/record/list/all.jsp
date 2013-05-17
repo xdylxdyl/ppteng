@@ -12,7 +12,7 @@
             <img src="http://www.ptteng.com${users[record.room.createrID].icon}" alt="${users[record.room.createrID].name}" class="img-polaroid" style="max-width:8em;height:8em" >
         </div>
         <div class="span10">
-            <h3 class="text-error"><a href="/record/enter?recordID=${record.id}"> ${status.index+1}.${record.room.name}</a></h2>
+            <h3 class="text-error"><a href="/record/enter?recordID=${record.id}"> ${(page-1)*size+status.index+1}.${record.room.name}</a></h2>
             <blockquote>
                 <p>纪元：
 						<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
@@ -38,9 +38,9 @@
 
 <div class="pagination pagination-centered">
   <ul>
-    <li><a href="/record/list?page=${page-1}&size=${size}" id="pagePrev">Prev</a></li>   
-      <li class="active"><a href="/record/list?page=${page}&size=${size}">${page}</a></li>
-    <li><a href="/record/list?page=${page+1}&size=${size}" id="pageNext">Next</a></li>
+    <li><a href="/record/list?page=${page-1}&size=${size}&uid=${uid}" id="pagePrev">Prev</a></li>   
+      <li class="active"><a href="/record/list?page=${page}&size=${size}&uid=${uid}">${page}</a></li>
+    <li><a href="/record/list?page=${page+1}&size=${size}&uid=${uid}" id="pageNext">Next</a></li>
   </ul>
 </div>
 </div>

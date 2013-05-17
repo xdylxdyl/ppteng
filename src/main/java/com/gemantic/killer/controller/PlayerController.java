@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.DESUtil;
 import com.gemantic.common.util.FileUtil;
+import com.gemantic.common.util.PasswordUtils;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.common.util.zip.RunLengthEncoding;
 import com.gemantic.killer.common.model.Message;
@@ -416,7 +418,7 @@ public class PlayerController {
 		log.info(mail + " forget password ");
 		Long uid = userService.getUsersIdByEmail(mail);
 		String token = DESUtil.encrypt((String.valueOf(uid) + "," + String.valueOf(System.currentTimeMillis())).getBytes());
-		String link = "http://www.ptteng.com/player/regedit.do?type=forget&token=" + URLEncoder.encode(token, "utf8");
+		String link = "http://www.ptteng.com/player/regedit?type=forget&token=" + URLEncoder.encode(token, "utf8");
 		// 邮件内容，注意加参数true，表示启用html格式
 		String content = "此邮件为葡萄藤轻游戏系统自动发送,无须回复.点此链接找回密码,此链接在五分钟之内有效,如果不是您发起的,请直接忽视" + link;
 		MailUtil.send(sender, mail, content);
@@ -910,12 +912,9 @@ public class PlayerController {
 				model.addAttribute("code", 0);
 				model.addAttribute("user", user);	
 			}
+		
 			
 		}
-		
-		
-	
-		
 
 		return "/room/person/search";
 
@@ -933,8 +932,63 @@ public class PlayerController {
 	@RequestMapping(value = "/player/search")
 	public String search(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 		
+		
+		Long self = cookieUtil.getID(request, response);
+		log.info(self);
+		if (self != 256L && self != 245L) {
+	
+			
+		}else{
+			
+			model.addAttribute("admin",true);
+			
+		}
 
 		return "/room/player/search";
+
+	}
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/reset", method = RequestMethod.POST)	
+	public String reset(HttpServletRequest request, HttpServletResponse response, ModelMap model,  Long uid) throws Exception {
+		Long self = cookieUtil.getID(request, response);
+		String code="0";
+		if (self != 256L && self != 245L) {
+			log.info("not admin "+self);
+			
+			code="-7000";
+		}else{
+			
+			if(uid==null){
+				log.info("not uid "+uid);
+				code="-7001";
+			}else{
+				User u=this.userService.getObjectById(uid);
+				if(u==null){
+					code="-7002";
+					model.addAttribute("code", "-7002");
+				}else{
+					u.setPassword(PasswordUtils.encode("ptteng"));
+					this.userService.update(u);
+					log.info("update success ptteng "+u);
+				}
+				
+			}
+			
+		}
+		
+
+		model.addAttribute("code", code);
+		
+		return "common/success";
 
 	}
 

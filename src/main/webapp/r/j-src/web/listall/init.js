@@ -40,6 +40,8 @@ var regeditView = {
     },
 
     dedupEmailFormat:function () {
+
+
         $("#reg_hint").html("晚了已经被人用了");
         $("#submit").attr("disabled", true);
 
@@ -135,13 +137,19 @@ $(document).ready(function () {
         ;
 
         var id = regeditService.getIdByEmail(r);
-        if (id == "" || id == undefined) {
-            regeditView.noDedupEmailFormat();
 
-        } else {
-            regeditView.dedupEmailFormat();
-            return;
+        if( regeditView.getType()=="edit"){
+
+        }else{
+            if (id == "" || id == undefined) {
+                    regeditView.noDedupEmailFormat();
+
+                } else {
+                    regeditView.dedupEmailFormat();
+                    return;
+                }
         }
+
 
         if (verifyUtil.lengthLimit(r, 20)) {
             regeditView.rightNameFormat();

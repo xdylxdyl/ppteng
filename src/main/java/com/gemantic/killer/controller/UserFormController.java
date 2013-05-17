@@ -185,8 +185,12 @@ public class UserFormController {
 			} else {
 				update = true;
 				
+				if(user.getPassword().equals(u.getPassword())){
+					
+				}else{
+					u.setPassword(PasswordUtils.encode(user.getPassword()));
+				}
 				
-				u.setPassword(PasswordUtils.encode(u.getPassword()));
 				u.setName(user.getName());
 			}
 

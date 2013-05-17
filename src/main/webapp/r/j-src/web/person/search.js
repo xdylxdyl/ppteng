@@ -42,14 +42,28 @@ var searchService={
     search:function(uid){
         ajaxJson("/player/search?", "post", {uid:uid}, searchService.showAjaxResult, 5000, "json");
     },
+    reset:function(uid){
+           ajaxJson("/player/reset?", "post", {uid:uid}, searchService.showRestResult, 5000, "json");
+       },
     showAjaxResult:function(data){
         if(data.code==0){
             searchView.showUser(data);
         }else{
+            console.log(data.message);
             searchView.showHint("不存在的用户啊");
         }
 
-    }
+    },
+    showRestResult:function(data){
+           if(data.code==0){
+               searchView.showHint("密码已重置为ptteng");
+           }else{
+               console.log(data.code);
+               searchView.showHint(data.code+"无权限/不存在的用户");
+           }
+
+       }
+
 }
 $(document).ready(function () {
 
@@ -76,6 +90,16 @@ $(document).ready(function () {
          return false;
 
      });
+
+
+    $("#resetBtn").click(function () {
+         var value = searchView.getUid();
+          var result = searchService.reset(value);
+       //  searchView.showResult(result);
+
+          return false;
+
+      });
 
 })
 

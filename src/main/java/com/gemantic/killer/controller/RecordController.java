@@ -49,10 +49,10 @@ public class RecordController {
 
 	@Autowired
 	private RecordService recordService;
-	
+
 	@Autowired
 	private UserRecordService userRecordService;
-	
+
 	@Autowired
 	private SettingService settingService;
 
@@ -77,9 +77,7 @@ public class RecordController {
 	public String list(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model, String version,
 			Integer page, Integer size, Long uid) throws Exception {
-		
-		
-		
+
 		log.info("start get room list " + version);
 		Long selfID = cookieUtil.getID(request, response);
 
@@ -105,14 +103,18 @@ public class RecordController {
 			userIDS.add(r.getCreaterID());
 
 		}
-	
+
 		List<User> users = this.userSevice.getObjectsByIds(userIDS);
 		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"),
 				users);
-		
-		
-		User u=this.userSevice.getObjectById(uid);
-	    model.addAttribute("current", u);	
+
+		User u = this.userSevice.getObjectById(uid);
+		if (u == null) {
+
+		} else {
+			model.addAttribute("current", u);
+		}
+
 		model.addAttribute("selfID", selfID);
 		model.addAttribute("uid", uid);
 
@@ -121,7 +123,6 @@ public class RecordController {
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
 		model.addAttribute("version", version);
-		
 
 		return "/record/list/all";
 	}
@@ -129,37 +130,35 @@ public class RecordController {
 	private List<Records> getRecords(String version, Long uid, Integer start,
 			Integer size) throws ServiceException, ServiceDaoException {
 		List<Long> ids = new ArrayList();
-		
-		
-		if(uid==null){
-			//get all
-			
+
+		if (uid == null) {
+			// get all
+
 			if (StringUtils.isBlank(version) || "all".equals(version)) {
 				version = "all";
 				// 考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
 				ids = recordService.getList(start, size);
 
-			}else{
-				ids = recordService.getRecordIdsByVersion(version + ".0", start,
-						size);
+			} else {
+				ids = recordService.getRecordIdsByVersion(version + ".0",
+						start, size);
 			}
-		}else{
-		   //get persion	
-			
+		} else {
+			// get persion
+
 			if (StringUtils.isBlank(version) || "all".equals(version)) {
 				version = "all";
 				// 考虑分页问题.分页暂时不做.先切数据库.看看数据库对不对.
-				ids = this.userRecordService.getUserRecordIdsByUidOrderByRecordAt(uid, start, size);
+				ids = this.userRecordService
+						.getUserRecordIdsByUidOrderByRecordAt(uid, start, size);
 
-			}else{
-				ids = userRecordService.getUserRecordIdsByVersionAndUidOrderByRecordAt(version + ".0", uid,start,size);
+			} else {
+				ids = userRecordService
+						.getUserRecordIdsByVersionAndUidOrderByRecordAt(version
+								+ ".0", uid, start, size);
 			}
-		
-			
+
 		}
-
-		
-
 
 		List<Records> records = recordService.getObjectsByIds(ids);
 		return records;
@@ -260,8 +259,9 @@ public class RecordController {
 		model.addAttribute("room", record.getRoom());
 		model.addAttribute("setting", record.getRoom().getSetting());
 
-		Map<String,String> settingDisplay=this.settingService.getSettingDisplay();
-		
+		Map<String, String> settingDisplay = this.settingService
+				.getSettingDisplay();
+
 		model.addAttribute("settingDisplay", settingDisplay);
 		return "/room/form/setting";
 	}
@@ -332,8 +332,6 @@ public class RecordController {
 
 		return "/common/success";
 	}
-	
-	
 
 	/**
 	 * 游戏开始
@@ -355,10 +353,10 @@ public class RecordController {
 			log.info("not limt " + uid);
 		} else {
 
-			List<Long> rids=this.recordService.getList(0, Integer.MAX_VALUE);
-			List<Records> records=this.recordService.getObjectsByIds(rids);
-			for(Records r:records){
-				List<Long> uids=r.getRoom().getPlayers();
+			List<Long> rids = this.recordService.getList(0, Integer.MAX_VALUE);
+			List<Records> records = this.recordService.getObjectsByIds(rids);
+			for (Records r : records) {
+				List<Long> uids = r.getRoom().getPlayers();
 
 				for (Long id : uids) {
 
@@ -370,8 +368,7 @@ public class RecordController {
 					this.userRecordService.insert(ur);
 
 				}
-				
-				
+
 			}
 		}
 
