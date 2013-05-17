@@ -108,12 +108,17 @@ public class RecordController {
 		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"),
 				users);
 
-		User u = this.userSevice.getObjectById(uid);
-		if (u == null) {
+		
+		if(uid!=null){
+			User u = this.userSevice.getObjectById(uid);
+			if (u == null) {
 
-		} else {
-			model.addAttribute("current", u);
+			} else {
+				log.info(uid+"get user "+u);
+				model.addAttribute("current", u);
+			}
 		}
+	
 
 		model.addAttribute("selfID", selfID);
 		model.addAttribute("uid", uid);

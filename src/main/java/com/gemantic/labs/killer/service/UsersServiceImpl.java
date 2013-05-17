@@ -185,9 +185,8 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public User getObjectById(Long id) throws ServiceException, ServiceDaoException {
 
-		if (log.isInfoEnabled()) {
 			log.info(" get data : " + id);
-		}
+		
 		User users = null;
 
 		if (id == null) {
@@ -211,9 +210,9 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public List<User> getObjectsByIds(List<Long> ids) throws ServiceException, ServiceDaoException {
 
-		if (log.isInfoEnabled()) {
+	
 			log.info(" get lists : " + (ids == null ? "null" : ids));
-		}
+	
 		List<User> users = null;
 
 		if (CollectionUtils.isEmpty(ids)) {
