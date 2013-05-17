@@ -31,6 +31,7 @@ public class UserRecord implements Serializable {
 
 	private String version;
 
+
 	private Long uid;
 
 	private Long recordAt;
@@ -85,6 +86,10 @@ public class UserRecord implements Serializable {
 	public void setRecordAt(Long recordAt) {
 		this.recordAt = recordAt;
 	}
+	
+	
+	
+
 
 	@Column(name = "update_at")
 	public Long getUpdateAt() {

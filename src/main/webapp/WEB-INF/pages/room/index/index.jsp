@@ -11,7 +11,6 @@
 	="description"  content="葡萄藤是一个集杀人游戏,多人在线扫雷等多种休闲娱乐在一起的轻游戏网站,支持房主自定义神态,自定义背景音乐,和朋友或者是自己一起相处着这静静的时光">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
 </head>
 
 
@@ -92,18 +91,19 @@
 					</c:otherwise>
 				</c:choose>
 
-				
+
 
 				<div class="span8 banner-screen">
-				
-					 <div id="indexCarousel" class="carousel ng-scope" interval="500" ng-controller="ImgCtrl">
-						<div class="carousel-inner"   >
+
+					<div id="indexCarousel" class="carousel ng-scope" interval="500"
+						ng-controller="ImgCtrl">
+						<div class="carousel-inner">
 							<tiles:insertDefinition name="carousel" />
 						</div>
 						<a class="carousel-control left" href="#indexCarousel"
 							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
 							href="#indexCarousel" data-slide="next">&rsaquo;</a>
-					</div> 
+					</div>
 				</div>
 			</div>
 		</div>
@@ -199,18 +199,16 @@
 			<p>友情链接</p>
 			<div class="row">
 				<div class="span3">
-				
+
 					<p>
 						<a href="http://www.15tiance.com/" target="_blank">天策策划</a>
 					<p>
 					<p>
 						<a href="http://niceipa.com/" target="_blank">最好玩的游戏</a>
 					<p>
-					
 					<p>
 						<a href="http://www.neiht.com/" target="_blank">内涵图</a>
 					<p>
-					
 				</div>
 				<div class="span3">
 					<p>
@@ -229,6 +227,9 @@
 					<p>
 					<p>
 						<a href="http://zhujiusanguo.5d6d.net/" target="_blank">煮酒三国文史论坛</a>
+					<p>
+					<p>
+						<a href="http://www.duole.com/" target="_blank">多乐音乐电台</a>
 					<p>
 				</div>
 				<div class="span">
@@ -257,15 +258,14 @@
 			src="/r/j-src/game/commons/third.js?version=${frontVersion}"></script>
 		<script type="text/javascript"
 			src="/r/j-src/web/punch/punch.js?version=${frontVersion}"></script>
-			
-			
-<script
-	src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 
-	 <script
-	src="/r/j-src/web/index/index.js?v=${frontVersion}"></script>
-	 <script
-	type="text/javascript" src="/r/j-src/framework/bootstrap/carousel.js"></script>
+
+		<script
+			src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+
+		<script src="/r/j-src/web/index/index.js?v=${frontVersion}"></script>
+		<script type="text/javascript"
+			src="/r/j-src/framework/bootstrap/carousel.js"></script>
 </body>
 </html>
 

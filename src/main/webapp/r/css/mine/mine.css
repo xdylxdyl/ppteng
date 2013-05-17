@@ -43,6 +43,7 @@
     vertical-align: middle;
     line-height: 12px;
     background: #C0C0C0;
+    cursor:default
 }
 
 .inner .square {

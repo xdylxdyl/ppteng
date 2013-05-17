@@ -204,6 +204,16 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 					ur.setRecordAt(System.currentTimeMillis());
 					ur.setUid(uid);
 					ur.setVersion(r.getVersion());
+					/*if("mine_1.0".equals(r.getVersion())){
+						Map setting=r.getSetting().getSetting();
+						String settingVersion=setting.get("rowCount")+"_"+setting.get("columnCount")+"_"+setting.get("mineCount");
+						if(settingVersion.equals("16_16_40")||settingVersion.equals("16_16_40")||settingVersion.equals("40_40_500")||settingVersion.equals("100_100_2000")){
+							
+						}else{
+							
+						}
+						
+					}*/
 					this.userRecordService.insert(ur);
 
 				}
