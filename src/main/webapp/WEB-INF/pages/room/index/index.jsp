@@ -28,10 +28,10 @@
 								<h2>Login 总用户${count}人</h2>
 
 
-								<p>使用您的注册邮箱登录:</p>
+								<p>使用您的注册邮箱/葡萄号登录:</p>
 								<label for="email">email</label> <input type="text" id="email"
-									name="email" placeholder="Please enter your e-mail here"
-									class="login email-input"> <label for="password">password</label>
+									name="email" placeholder="邮箱/葡萄号"
+									class="login email-input"> <label for="password">密码</label>
 								<input type="password" id="password" name="password"
 									placeholder="Please enter your password here"
 									class="login password-input">
@@ -203,9 +203,7 @@
 					<p>
 						<a href="http://www.15tiance.com/" target="_blank">天策策划</a>
 					<p>
-					<p>
-						<a href="http://niceipa.com/" target="_blank">最好玩的游戏</a>
-					<p>
+					
 					<p>
 						<a href="http://www.neiht.com/" target="_blank">内涵图</a>
 					<p>

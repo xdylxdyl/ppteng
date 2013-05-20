@@ -59,8 +59,12 @@ public class MusicController {
 		HttpUrl url=new HttpUrl();
 		HashMap<Object, Object> params=new HashMap();	
 		params.put("scene_id", "10");		
-		params.put("limit", "10");	
-		params.put("mood_id", "6");
+		params.put("limit", "25");	
+		params.put("mood_id", "0");
+		params.put("style", "0");
+		params.put("gender", "0");
+		params.put("lang", "0");
+		
 		
 		url.setHost("www.duole.com");
 		url.setParams(params);

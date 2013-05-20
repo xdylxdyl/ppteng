@@ -19,8 +19,12 @@ var musicService = {
         return result.data;
     }
 }
-function MusicCtrl($scope, $timeout) {
+function MusicCtrl($scope) {
     $scope.musics = musicService.getMusics();
+    $scope.refreshMusic = function() {
+           $scope.musics = musicService.getMusics();
+       };
+
 
 
 };

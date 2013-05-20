@@ -158,6 +158,8 @@
 <script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script><!--侦测键盘-->
 <script type="text/javascript" src="/r/j-src/framework/audio/audio.min.js"></script>
  <script src="/r/j-src/framework/angular/angular.min.js"></script>
+ 	<script
+	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
 
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
@@ -181,7 +183,6 @@
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
 
-	<script
-	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
+
 
 	

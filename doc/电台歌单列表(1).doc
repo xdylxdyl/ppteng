@@ -1,0 +1,210 @@
+Message-ID: <1952382529.49.1368772256136.JavaMail.root@test.server>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_48_1407154299.1368772256135"
+
+------=_Part_48_1407154299.1368772256135
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html>
+    <head>
+        <!-- MS Word on Windows doesn't realise the encoding is UTF-8 unles=
+s this meta tag is present -->
+        <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Du=
+tf-8">
+        <title>=E7=94=B5=E5=8F=B0=E6=AD=8C=E5=8D=95=E5=88=97=E8=A1=A8</titl=
+e>
+        <style>
+            body, p, td, table, tr, .bodytext, .stepfield {
+=09            font-family: Arial, Helvetica, FreeSans, sans-serif;
+            }
+            .panel {
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #999;
+                background-color: #f0f0f0;
+            }
+            .noteMacro { border-style: solid; border-width: 1px; border-col=
+or: #F0C000; background-color: #FFFFCE; text-align:left;}
+            .warningMacro { border-style: solid; border-width: 1px; border-=
+color: #c00; background-color: #fcc; text-align:left;}
+            .infoMacro { border-style: solid; border-width: 1px; border-col=
+or: #69c; background-color: #D8E4F1; text-align:left;}
+            .tipMacro { border-style: solid; border-width: 1px; border-colo=
+r: #090; background-color: #dfd; text-align:left;}
+            .informationMacroPadding { padding: 5px 0 0 5px; }
+
+            table.infoMacro td, table.warningMacro td, table.tipMacro td, t=
+able.noteMacro td, table.sectionMacro td {
+                border: none;
+            }
+
+            .grid {
+                margin: 2px 0px 5px 0px;
+                border-collapse: collapse;
+            }
+            .grid th  {
+                border: 1px solid #ccc;
+                padding: 2px 4px 2px 4px;
+                background: #f0f0f0;
+                text-align: center;
+            }
+            .grid td  {
+                border: 1px solid #ccc;
+                padding: 3px 4px 3px 4px;
+            }           =20
+        </style>
+    </head>
+
+    <body style=3D"background-color: white; padding: 10px;">
+        <h1>=E7=94=B5=E5=8F=B0=E6=AD=8C=E5=8D=95=E5=88=97=E8=A1=A8</h1>
+        <h5 id=3D"id-=E7=94=B5=E5=8F=B0=E6=AD=8C=E5=8D=95=E5=88=97=E8=A1=A8=
+-=E6=8E=A5=E5=8F=A3=E5=90=8D=E7=A7=B0">=E6=8E=A5=E5=8F=A3=E5=90=8D=E7=A7=B0=
+</h5><p style=3D"margin-left: 30.0px;">=E8=8E=B7=E5=8F=96=E7=94=B5=E5=8F=B0=
+=E6=AD=8C=E5=8D=95</p><h5 id=3D"id-=E7=94=B5=E5=8F=B0=E6=AD=8C=E5=8D=95=E5=
+=88=97=E8=A1=A8-URL">URL</h5><p style=3D"margin-left: 30.0px;"><a href=3D"h=
+ttp://www.duole.com/api/song/get_song_play_list" class=3D"external-link" re=
+l=3D"nofollow">http://www.duole.com/api/song/get_song_play_list</a></p><h5 =
+id=3D"id-=E7=94=B5=E5=8F=B0=E6=AD=8C=E5=8D=95=E5=88=97=E8=A1=A8-=E6=94=AF=
+=E6=8C=81=E6=A0=BC=E5=BC=8F">=E6=94=AF=E6=8C=81=E6=A0=BC=E5=BC=8F</h5><p st=
+yle=3D"margin-left: 30.0px;">JSON</p><h5 id=3D"id-=E7=94=B5=E5=8F=B0=E6=AD=
+=8C=E5=8D=95=E5=88=97=E8=A1=A8-HTTP=E8=AF=B7=E6=B1=82=E6=96=B9=E5=BC=8F">HT=
+TP=E8=AF=B7=E6=B1=82=E6=96=B9=E5=BC=8F</h5><p style=3D"margin-left: 30.0px;=
+">GET</p><h5 id=3D"id-=E7=94=B5=E5=8F=B0=E6=AD=8C=E5=8D=95=E5=88=97=E8=A1=
+=A8-=E8=AF=B7=E6=B1=82=E5=8F=82=E6=95=B0">=E8=AF=B7=E6=B1=82=E5=8F=82=E6=95=
+=B0</h5><div class=3D"table-wrap"><table class=3D"confluenceTable"><tbody><=
+tr><th class=3D"confluenceTh">=E5=AD=97=E6=AE=B5</th><th class=3D"confluenc=
+eTh">=E5=BF=85=E9=80=89</th><th colspan=3D"1" class=3D"confluenceTh">=E5=8F=
+=96=E5=80=BC=E8=8C=83=E5=9B=B4</th><th class=3D"confluenceTh">=E7=B1=BB=E5=
+=9E=8B</th><th class=3D"confluenceTh">=E8=AF=B4=E6=98=8E</th></tr><tr><td c=
+lass=3D"confluenceTd">scene_id</td><td class=3D"confluenceTd">true</td><td =
+colspan=3D"1" class=3D"confluenceTd">1-9=E4=BD=8D=E6=95=B0=E5=AD=97</td><td=
+ class=3D"confluenceTd">int</td><td class=3D"confluenceTd">=E5=9C=BA=E6=99=
+=AFid=EF=BC=8C=E5=9C=A8=E5=9C=BA=E6=99=AF=E5=88=97=E8=A1=A8=E4=B8=AD=E8=8E=
+=B7=E5=8F=96</td></tr><tr><td colspan=3D"1" class=3D"confluenceTd">mood_id<=
+/td><td colspan=3D"1" class=3D"confluenceTd">false</td><td colspan=3D"1" cl=
+ass=3D"confluenceTd">1-9=E4=BD=8D=E6=95=B0=E5=AD=97</td><td colspan=3D"1" c=
+lass=3D"confluenceTd">int</td><td colspan=3D"1" class=3D"confluenceTd">=E5=
+=BF=83=E6=83=85id=EF=BC=8C=E5=9C=A8=E5=BF=83=E6=83=85=E5=88=97=E8=A1=A8=E4=
+=B8=AD=E8=8E=B7=E5=BE=97</td></tr><tr><td colspan=3D"1" class=3D"confluence=
+Td">style</td><td colspan=3D"1" class=3D"confluenceTd">false</td><td colspa=
+n=3D"1" class=3D"confluenceTd">1-9=E4=BD=8D=E6=95=B0=E5=AD=97</td><td colsp=
+an=3D"1" class=3D"confluenceTd">int</td><td colspan=3D"1" class=3D"confluen=
+ceTd"><p>=E6=9B=B2=E9=A3=8Eid=EF=BC=9A0=E4=B8=8D=E9=99=90 1=E6=B5=81=E8=A1=
+=8C</p><p>2=E6=91=87=E6=BB=9A 3=E6=B0=91=E8=B0=A3 4=E8=BD=BB=E9=9F=B3=E4=B9=
+=90</p><p>5=E5=B0=8F=E6=B8=85=E6=96=B0 6=E4=B8=AD=E5=9B=BD=E9=A3=8E 7=E5=BD=
+=B1=E8=A7=86=E9=87=91=E6=9B=B2</p></td></tr><tr><td colspan=3D"1" class=3D"=
+confluenceTd">gender</td><td colspan=3D"1" class=3D"confluenceTd">false</td=
+><td colspan=3D"1" class=3D"confluenceTd">1-9=E4=BD=8D=E6=95=B0=E5=AD=97</t=
+d><td colspan=3D"1" class=3D"confluenceTd">int</td><td colspan=3D"1" class=
+=3D"confluenceTd"><p>=E6=80=A7=E5=88=AB=EF=BC=9A</p><p>0=E4=B8=8D=E9=99=90 =
+1=E7=94=B7 2=E5=A5=B3 3=E5=85=B6=E5=AE=83</p></td></tr><tr><td colspan=3D"1=
+" class=3D"confluenceTd">lang</td><td colspan=3D"1" class=3D"confluenceTd">=
+false</td><td colspan=3D"1" class=3D"confluenceTd">1-9=E4=BD=8D=E6=95=B0=E5=
+=AD=97</td><td colspan=3D"1" class=3D"confluenceTd">int</td><td colspan=3D"=
+1" class=3D"confluenceTd"><p>=E8=AF=AD=E7=A7=8D=EF=BC=9A</p><p>0=E4=B8=8D=
+=E9=99=90 1=E5=9B=BD=E8=AF=AD 2=E7=B2=A4=E8=AF=AD 3=E6=97=A5=E8=AF=AD 4=E9=
+=9F=A9=E8=AF=AD 5=E6=AC=A7=E7=BE=8E 6=E5=85=B6=E4=BB=96</p></td></tr><tr><t=
+d colspan=3D"1" class=3D"confluenceTd">limit</td><td colspan=3D"1" class=3D=
+"confluenceTd">false</td><td colspan=3D"1" class=3D"confluenceTd">1-500</td=
+><td colspan=3D"1" class=3D"confluenceTd">int</td><td colspan=3D"1" class=
+=3D"confluenceTd">=E6=AF=8F=E6=AC=A1=E8=8E=B7=E5=8F=96=E7=9A=84=E6=9D=A1=E6=
+=95=B0=EF=BC=8C=E9=BB=98=E8=AE=A4100</td></tr></tbody></table></div><h5 id=
+=3D"id-=E7=94=B5=E5=8F=B0=E6=AD=8C=E5=8D=95=E5=88=97=E8=A1=A8-=E8=AF=B7=E6=
+=B1=82=E7=A4=BA=E4=BE=8B">=E8=AF=B7=E6=B1=82=E7=A4=BA=E4=BE=8B</h5><p><span=
+ style=3D"color: rgb(0,0,0);">curl=C2=A0 =E2=80=9C<a href=3D"http://local.d=
+uole.com/api/song/get_song_play_list?scence_id=3D10&amp;limit=3D100&amp;moo=
+d_id=3D6" class=3D"external-link" rel=3D"nofollow">http://www.duole.com/api=
+/song/get_song_play_list?scene_id=3D10&amp;limit=3D100&amp;mood_id=3D6</a>=
+=E2=80=9D</span></p><div><p>=C2=A0</p><p>=C2=A0</p><div class=3D"code panel=
+" style=3D"border-width: 1px;"><div class=3D"codeHeader panelHeader" style=
+=3D"border-bottom-width: 1px;"><b>=E8=BF=94=E5=9B=9E=E7=BB=93=E6=9E=9C</b><=
+/div><div class=3D"codeContent panelContent">
+<pre class=3D"theme: Confluence; brush: plain; gutter: false" style=3D"font=
+-size:12px;">{
+
+    &quot;code&quot;: 200,
+    &quot;msg&quot;: &quot;ok&quot;,
+    &quot;current_time&quot;: &quot;2013-03-07 14:14:43&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;song_name&quot;: &quot;=E4=BA=B2=E7=88=B1=E7=9A=84=E6=98=
+=AF=E6=88=91&quot;,
+            &quot;album_name&quot;: &quot;=E7=88=B1,=E4=B8=80=E7=9B=B4=E5=
+=AD=98=E5=9C=A8&quot;,
+            &quot;album_id&quot;: &quot;0&quot;,
+            &quot;singer_name&quot;: &quot;=E6=A2=81=E6=96=87=E9=9F=B3&quot=
+;,
+            &quot;resource_id&quot;: &quot;39366&quot;,
+            &quot;is_recommand&quot;: 1,
+            &quot;source&quot;: &quot;duole&quot;,
+            &quot;is_favorite&quot;: 0,
+            &quot;song_file&quot;: &quot;http://stream.duole.com/62/66/0000=
+99c6.mp3&quot;,
+            &quot;album_logo&quot;: &quot;http://img.duole.com/album/100/cf=
+/cd/00000000.jpg&quot;,
+            &quot;album_url&quot;: &quot;&quot;
+        },
+        {
+            &quot;song_name&quot;: &quot;=E6=83=85=E8=BF=B7&quot;,
+            &quot;album_name&quot;: &quot;=E4=B8=80=E4=B8=AA=E5=B0=8F=E5=BF=
+=83=E6=84=BF&quot;,
+            &quot;album_id&quot;: &quot;0&quot;,
+            &quot;singer_name&quot;: &quot;=E9=82=93=E4=B8=BD=E5=90=9B&quot=
+;,
+            &quot;resource_id&quot;: &quot;39369&quot;,
+            &quot;is_recommand&quot;: 1,
+            &quot;source&quot;: &quot;duole&quot;,
+            &quot;is_favorite&quot;: 1,
+            &quot;song_file&quot;: &quot;http://stream.duole.com/3f/6a/0000=
+99c9.mp3&quot;,
+            &quot;album_logo&quot;: &quot;http://img.duole.com/album/100/cf=
+/cd/00000000.jpg&quot;,
+            &quot;album_url&quot;: &quot;&quot;
+        },
+        {
+            &quot;song_name&quot;: &quot;=E5=A6=82=E6=9E=9C=E4=B8=96=E7=95=
+=8C=E5=8F=AA=E5=89=A9=E4=B8=80=E9=A6=96=E6=AD=8C&quot;,
+            &quot;album_name&quot;: &quot;=E4=BD=A0=E4=B8=8D=E6=87=82&quot;=
+,
+            &quot;album_id&quot;: &quot;0&quot;,
+            &quot;singer_name&quot;: &quot;=E8=B7=AF=E5=98=89=E6=AC=A3&quot=
+;,
+            &quot;resource_id&quot;: &quot;39360&quot;,
+            &quot;is_recommand&quot;: 1,
+            &quot;source&quot;: &quot;duole&quot;,
+            &quot;is_favorite&quot;: 0,
+            &quot;song_file&quot;: &quot;http://stream.duole.com/e1/40/0000=
+99c0.mp3&quot;,
+            &quot;album_logo&quot;: &quot;http://img.duole.com/album/100/cf=
+/cd/00000000.jpg&quot;,
+            &quot;album_url&quot;: &quot;&quot;
+        },
+        {
+            &quot;song_name&quot;: &quot;=E8=BD=BD=E6=88=91=E8=B5=B0&quot;,
+            &quot;album_name&quot;: &quot;Slowness&quot;,
+            &quot;album_id&quot;: &quot;13169&quot;,
+            &quot;singer_name&quot;: &quot;=E8=B0=A2=E5=AE=89=E7=90=AA&quot=
+;,
+            &quot;resource_id&quot;: &quot;39367&quot;,
+            &quot;is_recommand&quot;: 0,
+            &quot;is_favorite&quot;: 0,
+            &quot;source&quot;: &quot;duole&quot;,
+            &quot;song_file&quot;: &quot;http://stream.duole.com/77/ab/0000=
+99c7.mp3&quot;,
+            &quot;album_logo&quot;: &quot;http://img.duole.com/album/100/2b=
+/fd/00003371.jpg&quot;,
+            &quot;album_url&quot;: &quot;&quot;
+        }
+    ]
+
+}
+
+</pre>
+</div></div><p>=C2=A0</p></div>
+    </body>
+</html>
+------=_Part_48_1407154299.1368772256135--

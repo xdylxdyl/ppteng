@@ -40,8 +40,9 @@
 					<p id="editSignature">${current.sign}</p>
 					<div class="clearfix" id="editImg">
 						输入图片地址,网页图片右键选择复制图片地址;暂不支持本地图片直接上传,可以将图片先上传到论坛:<a
-							href="http://bbs.ptteng.com/forum.php?mod=forumdisplay&fid=49&page=1" target="_blank">葡萄藤论坛贴图区</a>
-						<p contenteditable="true" id="imgUrl"></p>
+							href="http://bbs.ptteng.com/forum.php?mod=forumdisplay&fid=49&page=1"
+							target="_blank">葡萄藤论坛贴图区</a>
+						<p contenteditable="true" id="imgUrl" class="imgUrl"></p>
 						<a href="#" class="btn" id="preview">预览(若预览不成功,无法保存头像)</a>
 					</div>
 				</div>
@@ -68,7 +69,9 @@
 						<button class="btn btn-primary pull-right" id="editBtn">编辑</button>
 
 
-					</div>
+					</div>			
+
+
 				</c:when>
 				<c:otherwise>
 				</c:otherwise>
@@ -81,14 +84,14 @@
 
 
 
-		
+
 			<P>
 				<a href="/money/flow?uid=${current.id}">查看财务</a>
 			</p>
 			<P>
 				<a href="/player/statistics?uid=${current.id}">查看统计</a>
 			</p>
-			
+
 			<P>
 				<a href="/record/list?uid=${current.id}&version=all">查看战例</a>
 			</p>
@@ -99,16 +102,16 @@
 
 		</div>
 	</div>
-	
-	
-<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
-<script src="/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
-<script src="/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
-<script src="/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
 
-<script src="/r/j-src/web/person/detail.js?v=${frontVersion}"></script>
-<script src="/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/musicUtil.js?v=${frontVersion}"></script>
+
+	<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
+	<script src="/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
+	<script src="/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
+	<script src="/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
+
+	<script src="/r/j-src/web/person/detail.js?v=${frontVersion}"></script>
+	<script src="/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
+	<script
+		src="<%=request.getContextPath() %>/r/j-src/util/musicUtil.js?v=${frontVersion}"></script>
 </body>
 </html>

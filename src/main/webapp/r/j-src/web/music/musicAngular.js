@@ -12,4 +12,5 @@ function MusicCtrl($scope, $timeout) {
     $scope.musics = musicService.getMusics();
 
 
+
 };

@@ -28,19 +28,19 @@
 				<option value="simple_1.0"
 					<c:if test="${room.version=='simple_1.0'}">selected="selected"</c:if>>杀人游戏[简化]</option>
 				<option value="killer_police_1.0"
-					<c:if test="${room.version=='killer_police_1.0'}">selected="selected"</c:if>>杀人游戏[警版][测试版]</option>
+					<c:if test="${room.version=='killer_police_1.0'}">selected="selected"</c:if>>杀人游戏[警版]</option>
 			   <option value="killer_police_secret_1.0"
-					<c:if test="${room.version=='killer_police_secret_1.0'}">selected="selected"</c:if>>杀人游戏[警版不翻牌][测试版]</option>
+					<c:if test="${room.version=='killer_police_secret_1.0'}">selected="selected"</c:if>>杀人游戏[警版不翻牌]</option>
 				<option value="mine_1.0"
 					<c:if test="${room.version=='mine_1.0'}">selected="selected"</c:if>>多人扫雷</option>
 				<option value="video_1.0"
 					<c:if test="${room.version=='video_1.0'}">selected="selected"</c:if>>虚拟电影院</option>
 					<option value="ghost_simple_1.0"
-					<c:if test="${room.version=='ghost_simple_1.0'}">selected="selected"</c:if>>捉鬼[简化][测试版]</option>
+					<c:if test="${room.version=='ghost_simple_1.0'}">selected="selected"</c:if>>捉鬼[简化]</option>
 					<option value="ghost_question_1.0"
-					<c:if test="${room.version=='ghost_question_1.0'}">selected="selected"</c:if>>捉鬼[猜词][测试版]</option>
+					<c:if test="${room.version=='ghost_question_1.0'}">selected="selected"</c:if>>捉鬼[猜词]</option>
 					<option value="ghost_soul_1.0"
-					<c:if test="${room.version=='ghost_soul_1.0'}">selected="selected"</c:if>>捉鬼[魂版][测试版]</option>
+					<c:if test="${room.version=='ghost_soul_1.0'}">selected="selected"</c:if>>捉鬼[魂版]测试版</option>
 					
 				<option value="rest_1.0"
 					<c:if test="${room.version=='rest_1.0'}">selected="selected"</c:if>>茶座休息室</option>	

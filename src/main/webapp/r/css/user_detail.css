@@ -372,3 +372,6 @@ h1 {
 .background-first{
     background-color: rgba(193, 186, 73, 0.20);
 }
+.imgUrl{
+    height: 1.5em;
+}
