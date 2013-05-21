@@ -112,11 +112,11 @@ function VersionConfigCtrl($scope) {
             version:"ghost_question_1.0",
             title:"捉鬼游戏 猜词版"
         },
-        {
+       /* {
             img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLfr7O0rCtAAIoXr_bQgo287.jpg",
             version:"ghost_soul_1.0",
             title:"捉鬼游戏 魂版"
-        },
+        },*/
         {
             img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLd-qckytpAAMnWr-oy7g440.jpg",
             version:"mine_1.0",

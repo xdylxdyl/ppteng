@@ -479,14 +479,14 @@ var gameAreaView = {
         $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
-    say:function (id, name, content, exp, color, subject, subjectName,time) {
+    say:function (id, name, content, exp, color, subject, subjectName, time) {
         var express = controlView.showExpression(exp);
         var obj = "";
 
         var player = playerService.getPlayer(id);
 
 
-        $("#" + selects.$gameArea).append("<p  title='"+timeUtil.time2String(time)+"' style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+        $("#" + selects.$gameArea).append("<p  title='" + timeUtil.time2String(time) + "' style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
 
 
@@ -576,6 +576,17 @@ var controlView = {
                     result.message = sayHint.empty;
                 }
                 break;
+
+            case "answer":
+                var sayNotEmpty = controlView.checkSayNotEmpty();
+                if (sayNotEmpty) {
+                    result.code = 0;
+                } else {
+                    result.code = -1;
+                    result.message = sayHint.empty;
+                }
+                break;
+
 
             default:
                 //other command such as ,kick ,vote,kill,must have object

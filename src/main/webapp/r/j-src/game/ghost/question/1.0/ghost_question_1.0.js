@@ -28,20 +28,20 @@ var ghostQuestionModel = {
         question:"【系统消息】提问时间到了~国王回答完幽灵一定数量的问题后,请在指定里选择[公告],并在对象里选择[水民]/[幽灵],超过时间默认为水民获胜~",
         assignTopic:"【系统消息】国王分给您的卡片是: ",
 
-        dayCount:function(count){
-          return  "【系统消息】幽灵还剩下["+count+"]天就可获胜,并会成功盗走皇冠~";
+        dayCount:function (count) {
+            return  "【系统消息】幽灵还剩下[" + count + "]天就可获胜,并会成功盗走皇冠~";
         },
-        questionCount:function(count){
-            return "【系统消息】幽灵可以向国王提出["+count+"]个问题~";
+        questionCount:function (count) {
+            return "【系统消息】幽灵可以向国王提出[" + count + "]个问题~";
         }
     },
     commandHint:{
         vote:"向国王效忠的时候到了",
-        kick:"你好,再见",
-        announce:"国王的权势永不可侵犯"
+        kick:"你好,再见"
+
     },
 
-   phase:{
+    phase:{
         topic:"【当前状态】国王出题",
         day:"【当前状态】白天",
         over:"【当前状态】游戏结束 ",
@@ -59,9 +59,9 @@ var ghostQuestionModel = {
     rightName:{
         vote:"指证",
         topic:"出题",
-        announce:"公告"
+        answer:"回答"
     },
-    settingPostParameter:function (rid, version, ghostCount, dayTime, topicTime,questionTime) {
+    settingPostParameter:function (rid, version, ghostCount, dayTime, topicTime, questionTime) {
         return{
             rid:rid,
             version:version,
@@ -107,6 +107,10 @@ var ghostQuestionController = {
             case "vote" :
                 ghostQuestionController.vote(message);
                 break;
+            case "answer" :
+                ghostQuestionController.answer(message);
+                break;
+
             case "set vote" :
                 ghostQuestionController.setVote(message);
                 break;
@@ -138,8 +142,8 @@ var ghostQuestionController = {
                 ghostQuestionController.decryptionGhostCard(message);
                 break;
             case "wrong topic":
-                          ghostQuestionController.wrongTopic(message);
-                          break;
+                ghostQuestionController.wrongTopic(message);
+                break;
             case "status" :
                 ghostQuestionController.status(message);
                 break;
@@ -163,21 +167,20 @@ var ghostQuestionController = {
 
     wrongTopic:function (message) {
 
-            $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + message.content + "]不符合规范,第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开</p>");
+        $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + message.content + "]不符合规范,第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开</p>");
 
 
-        },
+    },
     decryption:function (message) {
 
-        var role=message.object;
-        if(ghostQuestionModel.role.water==role||ghostQuestionModel.role.king==role){
+        var role = message.object;
+        if (ghostQuestionModel.role.water == role || ghostQuestionModel.role.king == role) {
             return;
-        }else{
+        } else {
             var name = playerService.getName(message.subject);
-             $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + ghostQuestionModel.roleName[message.object] + "</p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + ghostQuestionModel.roleName[message.object] + "</p>");
 
         }
-
 
 
     },
@@ -212,7 +215,7 @@ var ghostQuestionController = {
     topicAssign:function (message) {
 
         ghostView.displayCard(message.subject);
-        ghostView.showContentForGameArea(ghostQuestionModel.hint.assignTopic+message.subject);
+        ghostView.showContentForGameArea(ghostQuestionModel.hint.assignTopic + message.subject);
 
     },
 
@@ -229,7 +232,7 @@ var ghostQuestionController = {
         ghostView.showContentForGameArea(ghostQuestionModel.hint[status]);
 
 
-        switch(status){
+        switch (status) {
             case "day":
                 ghostView.showContentForGameArea(ghostQuestionModel.hint.dayCount(message.content));
                 break;
@@ -292,6 +295,17 @@ var ghostQuestionController = {
         }
 
     },
+    answer:function (message) {
+
+
+            ghostView.answer(playerService.getPlayer(message.subject).name,
+                playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
+
+
+
+    },
+
+
     setVote:function (message) {
 
         playerListView.setVote(message.subject, message.object);
@@ -322,25 +336,25 @@ function comet(id, parse) {
  * 游戏区域
  */
 var ghostView = {
-    clearHeadArea:function(){
+    clearHeadArea:function () {
 
         ghostView.emptyCard();
         ghostView.emptyRole();
     },
     emptyCard:function (card) {
 
-            $("#" + selects.$playerCard).empty();
+        $("#" + selects.$playerCard).empty();
 
 
-        },
+    },
 
     emptyRole:function (card) {
 
 
-            $("#" + selects.$playerRole).empty();
+        $("#" + selects.$playerRole).empty();
 
 
-        },
+    },
     displayCard:function (card) {
 
         if (card == "" || card == undefined) {
@@ -380,7 +394,7 @@ var ghostView = {
 
         switch (player.status) {
             case ghostQuestionModel.playerStatus.die:
-                if ($("#time").val() == "over"||$("#time").val() == "question") {
+                if ($("#time").val() == "over" || $("#time").val() == "question") {
 
                 } else {
                     //没有结束
@@ -396,15 +410,15 @@ var ghostView = {
                 //delay message
                 break;
             case playerStatus.unready:
-                                     if ($("#time").val() == "over") {
+                if ($("#time").val() == "over") {
 
-                                     } else {
-                                         //没有结束
+                } else {
+                    //没有结束
 
-                                         place = "deadArea";
+                    place = "deadArea";
 
-                                     }
-                                     break;
+                }
+                break;
 
             default :
 
@@ -431,6 +445,15 @@ var ghostView = {
         $("#" + selects.$gameArea).append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
+
+    answer:function (subjectName, objectName, color, exp, content) {
+
+
+        $("#" + selects.$gameArea).append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 回答 : " + content + " </p>");
+        viewUtil.autoBottom($("#" + selects.$gameArea));
+    },
+
+
 
     die:function (id, name, action) {
         $("#" + id).children("a").removeClass().addClass("die");
@@ -465,11 +488,11 @@ var ghostView = {
         var share;
         switch (obj) {
             case "ghost win" :
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，幽灵胜利！成功盗取皇冠~卖出后可获得2000金币~</p> " );
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，幽灵胜利！成功盗取皇冠~卖出后可获得2000金币~</p> ");
                 share = "这局杀人游戏[简化]中,杀手又赢了~,抢走了2000金币~点此链接回放场景,重现杀人现场: " + shareLink + ";";
                 break;
             case "water win" :
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！保卫皇冠成功,将获得国王400金币的奖励~</p> " );
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！保卫皇冠成功,将获得国王400金币的奖励~</p> ");
                 share = "这局杀人游戏[简化]中,水民又赢了~,赢回了2000金币~点此链接回放场景,重现水民分析实况:" + shareLink + ";";
                 break;
             default :
@@ -498,8 +521,8 @@ var ghostQuestionRightView = {
             case "topic" :
                 ghostQuestionRightView.commandRight(right);
                 break;
-            case "announce" :
-              ghostQuestionRightView.commandRight(right);
+            case "answer" :
+                ghostQuestionRightView.commandRight(right);
                 break;
 
             default :
@@ -515,21 +538,10 @@ var ghostQuestionRightView = {
         $("#" + selects.$sayButton).prop("disabled", false);
 
     },
-    commandFilter:function(right){
+    commandFilter:function (right) {
         var objectStr = "<li data-default=''><a href='#'>对象</a></li> <li class='divider'></li>";
-              $("#object").empty().append(objectStr);
+        $("#object").empty().append(objectStr);
 
-
-              switch (right) {
-                  case "announce":
-
-                      controlView.appendObjectContent("ghost","幽灵胜");
-                      controlView.appendObjectContent("water","水民胜");
-                      break;
-                  default:
-                      console.log(right +"not my version command ");
-                      break;
-              }
 
     }
 
@@ -575,7 +587,7 @@ var gameView = {
         settingView.hideSettingButton();
         gameView.hideDieArea();
         var p = playerService.getPlayer(globalView.getCurrentID());
-         gameView.showSecondArea(p);
+        gameView.showSecondArea(p);
 
     },
     over:function (message) {
@@ -605,7 +617,7 @@ var gameView = {
         $("#" + selects.$mainArea).removeClass().addClass("span12");
     },
     showSecondArea:function (p) {
-        if (playerStatus.die == p.status || playerStatus.unready == p.status||playerStatus.king== p.status) {
+        if (playerStatus.die == p.status || playerStatus.unready == p.status || playerStatus.king == p.status) {
             gameView.showDieArea();
         } else {
             gameView.hideDieArea();

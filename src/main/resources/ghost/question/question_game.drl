@@ -152,7 +152,7 @@ then
 	 //get uid id List
 	 List ls=getIDFromPlayer($allReadys);
 	 Map	ids_role=RoleUtil.assingRole(role_count,ls);
-	 int dayCount=ghostCount+1;
+		  int dayCount=$allReadys.size()-2*ghostCount-2;
 	 if(dayCount<2){
 	      dayCount=2;
 	 }
@@ -604,6 +604,7 @@ rule 'game over of  ghost win'
 ruleflow-group "game status"
 when
    
+     Card($waterCard:waterCard)
      $game:Game($kingCount:kingCount,$waterCount:waterCount,$ghostCount:ghostCount,$dayCount:dayCount,$recordName:recordName);
      (eval($ghostCount >= $waterCount)) 
      or
@@ -618,7 +619,7 @@ when
      )
       or
      (
-       Message(predict=="announce",object=="ghost")
+       Message(predict=="answer",object==$waterCard)
      )
     $room:Room(status=="run")
   
@@ -645,9 +646,15 @@ ruleflow-group "game status"
 when
      //$operater:Operater()  
      $game:Game($kingCount:kingCount,$ghostCount:ghostCount,$recordName:recordName)
-     Message(subject=="king",predict=="announce",object=="water")     
+  
+     (
+     Card($waterCard:waterCard) and  
+     Message(predict=="answer",object!=$waterCard)
+     )or
+     (
+      Message(predict=="announce",object=="water")
+     )    
      $room:Room(status=="run")
-      
 then 
      LogUtil.log("game over water win start  ================="); 
     LogUtil.log("game detail "+$game); 
@@ -1102,7 +1109,7 @@ then
      String voteType="";
     
      if("king".equals($role)){
-         rightContent="announce,say";
+         rightContent="say";
               
            modify($right){setRight(convertString2Set(rightContent))};   	
 	    
@@ -1111,13 +1118,28 @@ then
         
            
      }else{      
-          //water 
-          rightContent="say";
+     
+       if("ghost".equals($role)){
+       //ghost
+         rightContent="answer,say";
           modify($right){setRight(convertString2Set(rightContent))}; 	
 	
 	    // send right message
 	     Message rightMessage=new Message($uid,"right",rightContent); 
          insert(rightMessage);
+       
+       }else{
+        //water 
+        rightContent="say";
+          modify($right){setRight(convertString2Set(rightContent))}; 	
+	
+	    // send right message
+	     Message rightMessage=new Message($uid,"right",rightContent); 
+         insert(rightMessage);
+       
+       }
+         
+         
     }
 		            
           
@@ -1290,17 +1312,6 @@ end
 
 
 
-
-
-
-
-
-
-//===========message accept============over 
-
-
-
-
 //========================retract game start =========================
 
 
@@ -1318,9 +1329,8 @@ then
     
 end
 
-
-
 //========================retract game over =========================
+
 
 //========================game record start =========================
 
@@ -1337,5 +1347,11 @@ then
 	LogUtil.log("record over =================");
 end
 
-
 //========================game record over =========================
+
+
+
+
+
+
+

@@ -146,7 +146,7 @@ then
 	 //get uid id List
 	 List ls=getIDFromPlayer($allReadys);
 	 Map	ids_role=RoleUtil.assingRole(role_count,ls);
-	 int dayCount=ghostCount+1;
+	  int dayCount=$allReadys.size()-2*ghostCount-2;
 	 if(dayCount<2){
 	      dayCount=2;
 	 }

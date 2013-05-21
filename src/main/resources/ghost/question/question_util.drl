@@ -24,6 +24,11 @@ function void setRemainTime(String status,Game game,Room room) {
        status="topicTime";
      };
      
+    if("question"==status){
+       status="questionTime";
+     };
+     
+     
      
      Long setting=Long.valueOf(getRoomSetting(room,status,"-1"));
       Long lastTime=game.getLastTime();
