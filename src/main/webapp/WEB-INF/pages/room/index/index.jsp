@@ -30,9 +30,9 @@
 
 								<p>使用您的注册邮箱/葡萄号登录:</p>
 								<label for="email">email</label> <input type="text" id="email"
-									name="email" placeholder="邮箱/葡萄号"
-									class="login email-input"> <label for="password">密码</label>
-								<input type="password" id="password" name="password"
+									name="email" placeholder="邮箱/葡萄号" class="login email-input">
+								<label for="password">密码</label> <input type="password"
+									id="password" name="password"
 									placeholder="Please enter your password here"
 									class="login password-input">
 								<c:if test="${code!=0}">
@@ -119,8 +119,8 @@
 						<div class="span6">
 							<div class="chapter">
 								<div class="chapter-body">
-									<a href="#" class="pull-left"><img
-										src="/r/img/icon_movie.png" alt="电影院" width="64" height="64"></a>
+									<span class="pull-left"><img src="/r/img/icon_movie.png"
+										alt="电影院" width="64" height="64"></span>
 									<h4>虚拟电影院</h4>
 									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
 									<p>
@@ -131,33 +131,44 @@
 								</div>
 							</div>
 							<div class="chapter">
-								<a href="#" class="pull-left"><img
-									src="/r/img/icon_killer.png" alt="杀人游戏简化版" width="64"
-									height="64"></a>
+								<span class="pull-left"><img src="/r/img/icon_killer.png"
+									alt="杀人游戏简化版" width="64" height="64"></span>
 								<div class="chapter-body">
 									<h4>杀人游戏[简化版]</h4>
 									<p>高雅的简化,妙趣横生的对话,风格迥异的人物,知性漂亮的姑娘</p>
+									<p>
+										<a class="btn"
+											href="http://www.ptteng.com/record/list?version=simple_1"
+											target="_blank">查看战例&raquo;</a>
+									</p>
 
 								</div>
 							</div>
 						</div>
 						<div class="span6">
 							<div class="chapter">
-								<a href="#" class="pull-left"><img
+								<span class="pull-left"><img
 									src="/r/img/icon_clearance.png" alt="多人扫雷" width="64"
-									height="64"></a>
+									height="64"></span>
 								<div class="chapter-body">
 									<h4>扫雷[多人版]</h4>
 									<p>玩过单机扫雷,有没有和朋友一起玩过联机扫雷?</p>
+									<p>
+										<a class="btn"
+											href="http://www.ptteng.com/record/list?version=mine_1"
+											target="_blank">查看战例&raquo;</a>
+									</p>
 								</div>
+
 							</div>
 							<div class="chapter">
-								<a href="#" class="pull-left"><img
-									src="/r/img/icon_design.png" alt="多人扫雷" width="64" height="64"></a>
+								<span class="pull-left"><img src="/r/img/icon_design.png"
+									alt="多人扫雷" width="64" height="64"></span>
 								<div class="chapter-body">
 									<h4>这些游戏都不喜欢?</h4>
 									<p>设计一个自己喜欢的游戏吧?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以~</p>
 								</div>
+
 							</div>
 						</div>
 					</div>
@@ -203,7 +214,6 @@
 					<p>
 						<a href="http://www.15tiance.com/" target="_blank">天策策划</a>
 					<p>
-					
 					<p>
 						<a href="http://www.neiht.com/" target="_blank">内涵图</a>
 					<p>

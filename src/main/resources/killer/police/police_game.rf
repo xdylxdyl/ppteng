@@ -12,72 +12,54 @@
   </header>
 
   <nodes>
-    <ruleSet id="68" name="game init" x="351" y="162" width="80" height="48" ruleFlowGroup="game init" />
-    <start id="1" name="Start" x="123" y="7" width="49" height="49" />
-    <ruleSet id="69" name="action" x="1193" y="319" width="95" height="48" ruleFlowGroup="action" />
-    <ruleSet id="70" name="clear vote at start" x="108" y="171" width="172" height="48" ruleFlowGroup="clear vote at start" />
-    <ruleSet id="71" name="logout action" x="1043" y="83" width="80" height="48" ruleFlowGroup="logout action" />
-    <ruleSet id="64" name="log snapshot" x="687" y="556" width="80" height="48" ruleFlowGroup="log snapshot" />
-    <end id="5" name="End" x="88" y="806" width="49" height="49" />
-    <ruleSet id="65" name="game live count" x="804" y="35" width="176" height="48" ruleFlowGroup="game live count" />
-    <ruleSet id="66" name="game phase status" x="1237" y="140" width="169" height="48" ruleFlowGroup="game phase status" />
-    <ruleSet id="67" name="clear role" x="49" y="78" width="80" height="48" ruleFlowGroup="clear role" />
-    <ruleSet id="76" name="retract unlimit message" x="262" y="25" width="191" height="48" ruleFlowGroup="retract unlimit message" />
-    <ruleSet id="77" name="login action" x="654" y="320" width="80" height="48" ruleFlowGroup="login action" />
-    <ruleSet id="78" name="refresh" x="620" y="192" width="80" height="48" ruleFlowGroup="refresh" />
-    <ruleSet id="72" name="clear role action" x="704" y="447" width="189" height="48" ruleFlowGroup="clear role action" />
-    <ruleSet id="73" name="decryption" x="937" y="297" width="185" height="48" ruleFlowGroup="decryption" />
-    <ruleSet id="74" name="log" x="568" y="652" width="80" height="48" ruleFlowGroup="log" />
-    <ruleSet id="75" name="clear player status" x="1031" y="412" width="122" height="48" ruleFlowGroup="clear player status" />
-    <ruleSet id="47" name="game right" x="1181" y="218" width="80" height="48" ruleFlowGroup="game right" />
-    <ruleSet id="44" name="query" x="522" y="311" width="80" height="48" ruleFlowGroup="query" />
-    <ruleSet id="51" name="generate message" x="449" y="407" width="224" height="48" ruleFlowGroup="generate message" />
-    <ruleSet id="55" name="time operator" x="165" y="473" width="80" height="48" ruleFlowGroup="time of operater" />
-    <ruleSet id="54" name="next operator" x="282" y="542" width="122" height="48" ruleFlowGroup="next of operater" />
-    <ruleSet id="53" name="all accepts" x="92" y="348" width="80" height="48" ruleFlowGroup="all accepts message" />
-    <ruleSet id="52" name="part accepts" x="278" y="345" width="80" height="48" ruleFlowGroup="part accepts message" />
-    <ruleSet id="59" name="clear vote" x="940" y="489" width="80" height="48" ruleFlowGroup="clear vote" />
-    <ruleSet id="58" name="game status" x="968" y="223" width="80" height="48" ruleFlowGroup="game status" />
-    <ruleSet id="57" name="player status" x="747" y="225" width="150" height="48" ruleFlowGroup="player status" />
-    <ruleSet id="56" name="vote" x="641" y="73" width="149" height="48" ruleFlowGroup="vote" />
-    <ruleSet id="63" name="game over" x="230" y="788" width="80" height="48" ruleFlowGroup="game over" />
-    <ruleSet id="62" name="remove snapshot" x="203" y="727" width="271" height="48" ruleFlowGroup="remove snapshot" />
-    <ruleSet id="61" name="create snapshot" x="427" y="103" width="129" height="48" ruleFlowGroup="create snapshot" />
-    <ruleSet id="60" name="snapshot" x="523" y="502" width="80" height="48" ruleFlowGroup="snapshot" />
+    <ruleSet id="68" name="game status" x="679" y="291" width="86" height="48" ruleFlowGroup="game status" />
+    <start id="1" name="Start" x="31" y="706" width="49" height="49" />
+    <ruleSet id="70" name="die process" x="669" y="172" width="101" height="48" ruleFlowGroup="die process" />
+    <end id="5" name="End" x="208" y="701" width="19" height="48" />
+    <ruleSet id="67" name="person status" x="486" y="174" width="117" height="48" ruleFlowGroup="person status" />
+    <ruleSet id="76" name="game clear" x="6" y="174" width="124" height="48" ruleFlowGroup="game clear" />
+    <ruleSet id="77" name="phase prepare" x="831" y="387" width="90" height="48" ruleFlowGroup="phase prepare" />
+    <ruleSet id="78" name="game prepare" x="169" y="27" width="103" height="48" ruleFlowGroup="game prepare" />
+    <ruleSet id="79" name="phase clear" x="626" y="390" width="93" height="48" ruleFlowGroup="phase clear" />
+    <ruleSet id="85" name="message accept" x="818" y="514" width="122" height="48" ruleFlowGroup="message accept" />
+    <ruleSet id="84" name="next of operater" x="433" y="513" width="108" height="48" ruleFlowGroup="next of operater" />
+    <ruleSet id="87" name="phase convert" x="177" y="177" width="87" height="48" ruleFlowGroup="phase convert" />
+    <ruleSet id="86" name="action" x="332" y="522" width="80" height="48" ruleFlowGroup="action" />
+    <ruleSet id="80" name="phase action" x="330" y="169" width="98" height="60" ruleFlowGroup="phase action" />
+    <ruleSet id="83" name="game over" x="187" y="295" width="80" height="48" ruleFlowGroup="game over" />
+    <ruleSet id="82" name="phase switch" x="455" y="396" width="80" height="48" ruleFlowGroup="phase switch" />
+    <ruleSet id="93" name="record" x="188" y="528" width="80" height="48" ruleFlowGroup="record" />
+    <ruleSet id="92" name="logout action" x="609" y="520" width="80" height="46" ruleFlowGroup="logout action" />
+    <ruleSet id="94" name="retract game" x="190" y="620" width="80" height="48" ruleFlowGroup="retract game" />
+    <ruleSet id="89" name="query" x="18" y="508" width="80" height="48" ruleFlowGroup="query" />
+    <ruleSet id="88" name="phase switch prepare" x="136" y="401" width="185" height="48" ruleFlowGroup="phase switch prepare" />
+    <ruleSet id="91" name="login action" x="22" y="296" width="80" height="48" ruleFlowGroup="login action" />
+    <ruleSet id="90" name="game reset" x="18" y="22" width="88" height="48" ruleFlowGroup="game reset" />
   </nodes>
 
   <connections>
     <connection from="70" to="68" />
-    <connection from="47" to="69" />
     <connection from="67" to="70" />
-    <connection from="65" to="71" />
-    <connection from="60" to="64" />
-    <connection from="63" to="5" />
-    <connection from="57" to="65" />
-    <connection from="58" to="66" />
-    <connection from="61" to="67" />
-    <connection from="1" to="76" />
-    <connection from="44" to="77" />
-    <connection from="77" to="78" />
-    <connection from="59" to="72" />
-    <connection from="69" to="73" />
-    <connection from="64" to="74" />
-    <connection from="73" to="75" />
-    <connection from="66" to="47" />
-    <connection from="68" to="44" />
-    <connection from="72" to="51" />
-    <connection from="53" to="55" />
-    <connection from="55" to="54" />
-    <connection from="52" to="53" />
-    <connection from="51" to="52" />
-    <connection from="75" to="59" />
-    <connection from="71" to="58" />
-    <connection from="56" to="57" />
-    <connection from="78" to="56" />
-    <connection from="62" to="63" />
-    <connection from="74" to="62" />
-    <connection from="76" to="61" />
-    <connection from="54" to="60" />
+    <connection from="94" to="5" />
+    <connection from="80" to="67" />
+    <connection from="91" to="76" />
+    <connection from="79" to="77" />
+    <connection from="90" to="78" />
+    <connection from="82" to="79" />
+    <connection from="77" to="85" />
+    <connection from="92" to="84" />
+    <connection from="78" to="87" />
+    <connection from="84" to="86" />
+    <connection from="87" to="80" />
+    <connection from="68" to="83" />
+    <connection from="88" to="82" />
+    <connection from="86" to="93" />
+    <connection from="85" to="92" />
+    <connection from="93" to="94" />
+    <connection from="1" to="89" />
+    <connection from="83" to="88" />
+    <connection from="89" to="91" />
+    <connection from="76" to="90" />
   </connections>
 
 </process>

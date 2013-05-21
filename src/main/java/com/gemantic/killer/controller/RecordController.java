@@ -78,6 +78,9 @@ public class RecordController {
 			HttpServletResponse response, ModelMap model, String version,
 			Integer page, Integer size, Long uid) throws Exception {
 
+		if(StringUtils.isBlank(version)){
+			version="all";
+		}
 		log.info("start get room list " + version);
 		Long selfID = cookieUtil.getID(request, response);
 

@@ -31,7 +31,7 @@
 
                     </p>
 
-                    <p><a class="btn" href="/record/enter?recordID=7533652308250795008" target="_blank">&raquo;</a></p>
+                    <p><a class="btn" href="/record/list?version=all" target="_blank">查看战例&raquo;</a></p>
 
                 </div>
                 <!--/span-->

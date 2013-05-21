@@ -42,6 +42,8 @@ import com.gemantic.labs.killer.model.SimpleStatistics;
 import com.gemantic.labs.killer.service.RecordService;
 import com.gemantic.labs.killer.service.SimpleStatisticsService;
 import com.gemantic.labs.killer.service.UsersService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * 提供游戏房间的创建,删除,玩家列表等功能
@@ -192,7 +194,7 @@ public class PlayerController {
 		Long uid = null;
 		String uname = null;
 		boolean success = false;
-		Long loginUID=null;
+		Long loginUID = null;
 		// 首先判断email
 		if (email == null) {
 			// 没有Email再判断是否是cookie
@@ -210,19 +212,19 @@ public class PlayerController {
 
 		} else {
 			if (email.contains("@")) {
-				log.info(email+" login use email");
+				log.info(email + " login use email");
 				uid = this.userService.getUsersIdByEmail(email);
 				if (uid == null) {
 					model.addAttribute("code", "-6003");
 					return "redirect:/";
 				}
 				success = this.userService.verify(uid, password);
-				loginUID=uid;
+				loginUID = uid;
 			} else {
 
 				try {
-					log.info(email+" login use ppt id ");
-					loginUID= Long.valueOf(email);
+					log.info(email + " login use ppt id ");
+					loginUID = Long.valueOf(email);
 					success = this.userService.verify(loginUID, password);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -230,8 +232,6 @@ public class PlayerController {
 					model.addAttribute("code", "-6003");
 					return "redirect:/";
 				}
-			
-				
 
 			}
 
@@ -885,6 +885,32 @@ public class PlayerController {
 
 		} else if ("expression".equals(type)) {
 			user.setExpressionContent(value);
+
+			Room r = this.memberService.getRoomOfUser(uid);
+			boolean updateExpress = isUpdateRoomExpress(r, uid);
+			if (updateExpress) {
+				// 从用户中取
+
+				// 1.更新房间的表情
+				r.setExpressions(user.getExpression());
+				// 2.发送消息给所有的成员
+				Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+				String json = gson.toJson(r.getExpressions());
+				Message m = new Message(uid.toString(), "expression", json, "#0000FF",
+						"", r.getId().toString(), "", r.getVersion());
+				r.getMessages().offer(m);			
+				
+				this.roomService.updateRoom(r);
+
+				log.info(uid + " is admin so update express from use "
+						+ r.getExpressions() + " of room " + r.getId());
+				
+				
+				
+			} else {
+				log.info(uid + " is not admin so get express from room ");
+			}
+
 		} else if ("music".equals(type)) {
 			user.setMusic(value);
 		} else {
@@ -895,6 +921,21 @@ public class PlayerController {
 
 		return "/common/success";
 
+	}
+
+	private boolean isUpdateRoomExpress(Room r, Long uid) {
+		if (r != null) {
+			if (r.getCreaterID().longValue() == uid) {
+				return true;
+
+			} else {
+
+			}
+
+		} else {
+
+		}
+		return false;
 	}
 
 	/**
