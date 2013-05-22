@@ -1286,7 +1286,8 @@ ruleflow-group "message accept"
 salience 50
 no-loop true 
 when
-     $message:Message($subject:subject,predict=="say"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)   
+     $message:Message($subject:subject,predict=="say"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)
+      eval($message.getAccepts().size()==0)   
 	 Role(id==$subject,$role:role)
 	 
 	 
@@ -1323,6 +1324,7 @@ salience 50
 no-loop true 
 when
      $message:Message($subject:subject,$subject!="water",predict=="assign",$object:object,$accepts:accepts)   
+      eval($message.getAccepts().size()==0)
 	 Role(id==$object,$role:role)
 	 $all_group_ids:ArrayList()
 	      from accumulate(

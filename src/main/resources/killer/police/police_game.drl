@@ -86,9 +86,9 @@ when
     
 then      
 	//actions
-     LogUtil.log("clear prev game VoteStatus start================= ");      
+     LogUtil.log("clear prev game person start================= ");      
      modify($player){setStatus("unready")};
-     LogUtil.log("clear prev game VoteStatus over ================="); 
+     LogUtil.log("clear prev game person over ================="); 
     
 end
 
@@ -124,9 +124,9 @@ when
     //get all players
     $all_login_ids:HashSet()
 	      from accumulate(
-	      Player($id:id)	     
+	      Player($pid:id)	     
 	      init(Set ls=new HashSet();),
-	      action(ls.add($id);),
+	      action(ls.add($pid);),
 	      result(ls)
 	      );
 	      
@@ -188,9 +188,7 @@ then
 				  Role r=new Role(uid,role,"living");
 				  insert(r);	  
 				  VoteStatus vs=new VoteStatus(uid,new ArrayList(),new ArrayList(),new ArrayList());
-				  insert(vs);
-				  
-				  LogUtil.log(role);
+				  insert(vs);				
 				  Message assignMessage=new Message(role,"assign",uid); 
 				  insert(assignMessage);	  
 				  
@@ -252,9 +250,9 @@ when
 then      
 	//actions
    //actions
-     LogUtil.log("phase clear vote start================= "); 
+     LogUtil.log("phase clear vote message start================= "); 
      retract($message);
-     LogUtil.log("phase clear vote over =================");   
+     LogUtil.log("phase clear vote message over =================");   
 end
 
 
@@ -320,10 +318,10 @@ when
 then      
 	//actions
    //actions
-     LogUtil.log("phase clear vote start================= "); 
+     LogUtil.log("phase clear voteStatus start================= "); 
     
      modify($voteStatus){setVoters(new ArrayList()),setKillerVoters(new ArrayList()),setPoliceVoters(new ArrayList())};	
-     LogUtil.log("phase clear vote over =================");   
+     LogUtil.log("phase clear voteStatus over =================");   
 end
 
 rule 'phase clear right '
@@ -502,7 +500,7 @@ when
     Game($status:status,$liverCount:liverCount)
     not Vote(id==$id,type=="vote")
     Right(id==$id,right contains "vote")
-    Role(id==$id,$role:Role)
+  
     
 then
     LogUtil.log("first vote start  ================="); 
@@ -512,7 +510,7 @@ then
                    
     $voters.add($id);
      modify($voteStatus){setVoters($voters)};
-          LogUtil.log($liverCount+"change vote "+$voteStatus); 
+    LogUtil.log($liverCount+" change vote "+$voteStatus); 
     
      Message setVoteMessage=new Message($vote,"set vote",String.valueOf($voters.size()));
      insert(setVoteMessage);      
@@ -533,7 +531,7 @@ when
     Player(id==$id,status=="living")
     Player(id==$vote,status=="living")
     $game:Game($status:status)
-    Role(id==$id,$role:Role)
+   
     eval($old!=$vote)
 then
     LogUtil.log("change vote start  ================="); 
@@ -711,17 +709,17 @@ when
   
    $living_ids:HashSet()
 	      from accumulate(
-	      Player($id:id,status=="living")	     
+	      Player($pid:id,status=="living")	     
 	      init(Set ls=new HashSet();),
-	      action(ls.add($id);),
+	      action(ls.add($pid);),
 	      result(ls)
 	 ); 
 
    $same_role_ids:ArrayList()
 	      from accumulate(
-	      Role(role=="police",$id:id,$living_ids contains $id)	     
+	      Role(role=="police",$rid:id,$living_ids contains $rid)	     
 	      init(List ls=new ArrayList();),
-	      action(ls.add($id);),
+	      action(ls.add($rid);),
 	      result(ls)
 	 );
 
@@ -897,7 +895,7 @@ then
    LogUtil.log("person die  start==============");
    Die die=new Die($id,"vote",$role);   
    insert(die);
-   LogUtil.log("person die  start==============");   
+   LogUtil.log("person die  over==============");   
 
  
 end
@@ -1057,25 +1055,25 @@ when
      $room:Room(status=="run")     
      $all_login_ids:HashSet()
 	      from accumulate(
-	      Player($id:id)	     
+	      Player($pid:id)	     
 	      init(Set ls=new HashSet();),
-	      action(ls.add($id);),
+	      action(ls.add($pid);),
 	      result(ls)
 	 );
 	 $all_role:HashMap()
 	      from accumulate(
-	      $role:Role($id:id)	     
+	      $role:Role($rid:id)	     
 	      init(Map map=new HashMap();),
-	      action(map.put($id,$role);),
+	      action(map.put($rid,$role);),
 	      result(map)
 	      );
 	      
 	 
 	 	 $all_right:HashMap()
 	      from accumulate(
-	      $right:Right($id:id)	     
+	      $right:Right($rtid:id)	     
 	      init(Map map=new HashMap();),
-	      action(map.put($id,$right);),
+	      action(map.put($rtid,$right);),
 	      result(map)
 	      );
 	 $operater:Operater()  
@@ -1164,10 +1162,10 @@ when
     $operater:Operater()
     
 then     
-    LogUtil.log("phase switch prepare start================= "); 
+    LogUtil.log("lastword phase switch prepare start================= "); 
     StatusChange sc=new StatusChange("day");
     insert(sc);
-    LogUtil.log("phase switch prepare over================= "); 
+    LogUtil.log("lastword phase switch prepare over================= "); 
 end
 
 
@@ -1183,11 +1181,11 @@ when
     $operater:Operater()
     
 then     
-    LogUtil.log("phase switch prepare start================= "); 
+    LogUtil.log("switch message switch prepare start================= "); 
     StatusChange sc=new StatusChange($phase);
     insert(sc);
     retract($message);
-    LogUtil.log("phase switch prepare over================= "); 
+    LogUtil.log("switch message switch prepare over================= "); 
 end
 
 
@@ -1202,11 +1200,11 @@ when
     $operater:Operater()
     
 then     
-    LogUtil.log("phase switch prepare start================= "); 
+    LogUtil.log("vote die  switch prepare  start================= "); 
     StatusChange sc=new StatusChange("night");
     insert(sc);
     
-    LogUtil.log("phase switch prepare over================= "); 
+    LogUtil.log("vote die  switch prepare  over================= "); 
 end
 
 
@@ -1223,11 +1221,11 @@ when
     $operater:Operater()
     Player(status=="lastword")
 then     
-    LogUtil.log("phase switch prepare start================= "); 
+    LogUtil.log("check/kill confirm lastword switch prepare start================= "); 
     StatusChange sc=new StatusChange("lastword");
     insert(sc);
 
-    LogUtil.log("phase switch prepare over================= "); 
+    LogUtil.log("check/kill confirm lastword switch prepare  over================= "); 
 end
 
 
@@ -1248,11 +1246,11 @@ when
     
 then      
 	//actions 
-     LogUtil.log("phase switch start================= "); 
+     LogUtil.log("phase switch start 1 ================= "); 
      List tms=$operater.getTimerMessages();
-    
+     LogUtil.log("phase switch start 2================= "); 
     if("day".equals($change)){
-    
+     LogUtil.log("phase switch start 3================= "); 
       //1.set game phase,set last time,
           
     modify($game){setStatus("day"),setLastTime(System.currentTimeMillis())};
@@ -1273,7 +1271,7 @@ then
     
        if("lastword".equals($change)){
        
-       
+        LogUtil.log("phase switch start lastword ================= "); 
            //1.set game phase,set last time,
           
           modify($game){setStatus("lastword"),setLastTime(System.currentTimeMillis())};
@@ -1286,9 +1284,9 @@ then
        
        }else{
           //night 
-       
+        LogUtil.log("phase switch night start  ================= "+$game); 
           modify($game){setStatus("night"),setLastTime(System.currentTimeMillis())};
-          LogUtil.log("phase switch  night =================");   
+          LogUtil.log("phase switch  night  over =================");   
            //2.send timer of night    
 	      Message dayDelay=createDelayDayOfNight($room);
           tms.add(dayDelay);  
@@ -1479,23 +1477,24 @@ ruleflow-group "message accept"
 salience 50
 no-loop true 
 when
-     $message:Message($subject:subject,predict=="say"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)   
+     $message:Message($subject:subject,predict=="say"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)
+        eval($message.getAccepts().size()==0)     
 	 Role(id==$subject,$role:role)
 	 
 	 $living_ids:HashSet()
 	      from accumulate(
-	      Player($id:id,status=="living")	     
+	      Player($pid:id,status=="living")	     
 	      init(Set ls=new HashSet();),
-	      action(ls.add($id);),
+	      action(ls.add($pid);),
 	      result(ls)
 	 );
 
 	 
 	 $all_group_ids:ArrayList()
 	      from accumulate(
-	      Role($id:id,role==$role,$living_ids contains $id)	     
+	      Role($rid:id,role==$role,$living_ids contains $rid)	     
 	      init(List ls=new ArrayList();),
-	      action(ls.add($id);),
+	      action(ls.add($rid);),
 	      result(ls)
 	      );
 	 Game(status=="night"||status=="lastword")
@@ -1515,6 +1514,7 @@ salience 50
 no-loop true 
 when
      $message:Message($subject:subject,predict=="assign",$accepts:accepts)   
+        eval($message.getAccepts().size()==0)  
 	 Role(id==$subject,$role:role)
 	 $all_group_ids:ArrayList()
 	      from accumulate(

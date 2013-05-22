@@ -27,16 +27,16 @@
 				</entry>
 				<entry key="ghost_simple_1.0" value-ref="ghost_simple_1.0_setting">
 				</entry>
-			    <entry key="ghost_question_1.0" value-ref="ghost_question_1.0_setting">
+				<entry key="ghost_question_1.0" value-ref="ghost_question_1.0_setting">
 				</entry>
-				 <entry key="ghost_soul_1.0" value-ref="ghost_soul_1.0_setting">
+				<entry key="ghost_soul_1.0" value-ref="ghost_soul_1.0_setting">
 				</entry>
 				<entry key="rest_1.0" value-ref="rest_1.0_setting">
 				</entry>
-				
-				
-				
-				
+
+
+
+
 			</map>
 		</constructor-arg>
 	</bean>
@@ -53,6 +53,8 @@
 				</entry>
 				<entry key="lastwordTime" value="60000">
 				</entry>
+				<entry key="autoSetting" value="true">
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
@@ -63,6 +65,8 @@
 		<constructor-arg>
 			<map>
 				<entry key="视频地址" value="">
+				</entry>
+				<entry key="autoSetting" value="true">
 				</entry>
 			</map>
 		</constructor-arg>
@@ -76,6 +80,8 @@
 				<entry key="columnCount" value="9">
 				</entry>
 				<entry key="mineCount" value="10">
+				</entry>
+				<entry key="autoSetting" value="true">
 				</entry>
 
 			</map>
@@ -95,11 +101,13 @@
 				</entry>
 				<entry key="lastwordTime" value="60000">
 				</entry>
+				<entry key="autoSetting" value="true">
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
-	
-	
+
+
 	<bean id="killer_police_secret_1.0_setting" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
@@ -113,94 +121,105 @@
 				</entry>
 				<entry key="lastwordTime" value="60000">
 				</entry>
+				<entry key="autoSetting" value="true">
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
-	
-	
-	
-	
-		<bean id="rest_1.0_setting" class="java.util.HashMap">	
+
+
+
+
+	<bean id="rest_1.0_setting" class="java.util.HashMap">
 	</bean>
-	
-	
-	
+
+
+
 	<bean id="ghost_simple_1.0_setting" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
 				<entry key="ghostCount" value="1">
-				</entry>				
+				</entry>
 				<entry key="dayTime" value="300000">
 				</entry>
 				<entry key="topicTime" value="120000">
-				</entry>			
+				</entry>
+				<entry key="autoSetting" value="true">
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
-	
-	
-	  <bean id="ghost_question_1.0_setting" class="java.util.HashMap">
+
+
+	<bean id="ghost_question_1.0_setting" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
 				<entry key="ghostCount" value="1">
-				</entry>				
+				</entry>
 				<entry key="dayTime" value="300000">
 				</entry>
 				<entry key="topicTime" value="120000">
 				</entry>
 				<entry key="questionTime" value="120000">
-				</entry>		
+				</entry>
+				<entry key="autoSetting" value="true">
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
-	
-	
-	  <bean id="ghost_soul_1.0_setting" class="java.util.HashMap">
+
+
+	<bean id="ghost_soul_1.0_setting" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
 				<entry key="ghostCount" value="1">
-				</entry>				
+				</entry>
 				<entry key="dayTime" value="300000">
 				</entry>
 				<entry key="topicTime" value="120000">
 				</entry>
 				<entry key="questionTime" value="120000">
-				</entry>		
+				</entry>
+				<entry key="autoSetting" value="true">
+				</entry>
+				
 			</map>
 		</constructor-arg>
 	</bean>
 
-		<bean id="settingDisplay" class="java.util.HashMap">
-			<constructor-arg>
-				<map>
-					<!-- simple-version -->
-					<entry key="killerCount" value="杀手人数">
-					</entry>
-					<entry key="policeCount" value="警察人数">
-					</entry>
-					<entry key="dayTime" value="白天时间">
-					</entry>
-					<entry key="nightTime" value="晚上时间">
-					</entry>
-					<entry key="lastwordTime" value="遗言时间">
-					</entry>
-					<entry key="rowCount" value="行数">
-					</entry>
-					<entry key="columnCount" value="列数">
-					</entry>
-					<entry key="mineCount" value="雷数">
-					</entry>
-					<entry key="ghostCount" value="鬼数">
-					</entry>
-					<entry key="topicTime" value="出题时间">
-					</entry>
-					   <entry key="questionTime" value="提问时间">
-					</entry>
-					
+	<bean id="settingDisplay" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<!-- simple-version -->
+				<entry key="killerCount" value="杀手人数">
+				</entry>
+				<entry key="policeCount" value="警察人数">
+				</entry>
+				<entry key="dayTime" value="白天时间">
+				</entry>
+				<entry key="nightTime" value="晚上时间">
+				</entry>
+				<entry key="lastwordTime" value="遗言时间">
+				</entry>
+				<entry key="rowCount" value="行数">
+				</entry>
+				<entry key="columnCount" value="列数">
+				</entry>
+				<entry key="mineCount" value="雷数">
+				</entry>
+				<entry key="ghostCount" value="鬼数">
+				</entry>
+				<entry key="topicTime" value="出题时间">
+				</entry>
+				<entry key="questionTime" value="提问时间">
+				</entry>
+				<entry key="autoSetting" value="自动设置">
+				</entry>
 
-				</map>
-			</constructor-arg>
-		</bean>
+
+			</map>
+		</constructor-arg>
+	</bean>
 
 
 </beans>

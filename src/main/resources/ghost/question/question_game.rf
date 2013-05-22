@@ -22,7 +22,7 @@
     <ruleSet id="78" name="game prepare" x="169" y="27" width="103" height="48" ruleFlowGroup="game prepare" />
     <ruleSet id="79" name="phase clear" x="626" y="390" width="93" height="48" ruleFlowGroup="phase clear" />
     <ruleSet id="85" name="message accept" x="818" y="514" width="122" height="48" ruleFlowGroup="message accept" />
-    <ruleSet id="84" name="next of operater" x="433" y="513" width="108" height="48" ruleFlowGroup="next of operater" />
+    <ruleSet id="84" name="next of operater" x="445" y="520" width="108" height="48" ruleFlowGroup="next of operater" />
     <ruleSet id="87" name="phase convert" x="177" y="177" width="87" height="48" ruleFlowGroup="phase convert" />
     <ruleSet id="86" name="action" x="332" y="522" width="80" height="48" ruleFlowGroup="action" />
     <ruleSet id="80" name="phase action" x="330" y="169" width="98" height="60" ruleFlowGroup="phase action" />

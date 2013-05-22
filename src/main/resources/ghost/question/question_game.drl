@@ -527,6 +527,8 @@ when
 then
    LogUtil.log("person die logout start==============");
    Die die=new Die($subject,"logout",$role);   
+   
+   
    insert(die);
    LogUtil.log("person die logout start==============");   
 
@@ -619,7 +621,7 @@ when
      )
       or
      (
-       Message(predict=="answer",object==$waterCard)
+       Message(predict=="answer",content==$waterCard)
      )
     $room:Room(status=="run")
   
@@ -649,7 +651,7 @@ when
   
      (
      Card($waterCard:waterCard) and  
-     Message(predict=="answer",object!=$waterCard)
+     Message(predict=="answer",content!=$waterCard)
      )or
      (
       Message(predict=="announce",object=="water")
@@ -839,7 +841,7 @@ ruleflow-group "phase switch prepare"
 no-loop true
 when
 	//conditions    
-	$message:Message($phase:subject,predict=="die",subject=="vote")
+	$message:Message($phase:subject,predict=="die",object=="vote")
     $room:Room(status=="run")
     $game:Game(status=="day") 
     $operater:Operater()

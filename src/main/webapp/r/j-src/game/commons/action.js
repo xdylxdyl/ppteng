@@ -78,7 +78,7 @@ $(document).ready(function () {
                 var message = controlView.getMessage();
                 message.predict = "start";
                 cometService.sendMessage(message);
-                $("#start").hide();
+                $("#" + selects.$startButton).hide();
             } else {
                 alert("超过" + count + "人再开游戏好不好啊~~~~~");
             }
@@ -89,6 +89,7 @@ $(document).ready(function () {
             var message = controlView.getMessage();
             message.predict = "ready";
             cometService.sendMessage(message);
+            $("#" + selects.$readyButton).hide();
 
         });
         $("#" + selects.$exitButton).click(function () {
