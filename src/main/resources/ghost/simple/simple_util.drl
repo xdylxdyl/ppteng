@@ -120,6 +120,24 @@ function String parseTopic(String topic, String role) {
 
 
 
+function int getGhostCount(Map map, int totalCount) {
+		// TODO Auto-generated method stub
+		String isAutoSet = (String) map.get("autoSetting");
+		String ghostCount = (String) map.get("ghostCount");
+		
+		int part = 6;
+		
+		if ("true".equals(isAutoSet)) {
+			return (totalCount - 1) / part + 1;
+		} else {
+			int count=Integer.valueOf(ghostCount);
+			return count;
+		}
+
+
+	}
+
+
 
 
 

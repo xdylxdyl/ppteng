@@ -134,7 +134,7 @@ then
      //0 setGameName 
      String	rname=String.valueOf(RandomUtils.nextLong());
      //1.assign role	
-	 int  ghostCount=Integer.valueOf(getRoomSetting($room,"ghostCount","1")); 
+	int  ghostCount=getGhostCount($room.getSetting(),$allReadys.size());
 	  int kingCount=1;  
 	 int  waterCount= $allReadys.size()-ghostCount-kingCount;
 	 
