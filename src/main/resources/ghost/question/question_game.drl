@@ -617,7 +617,8 @@ when
      ) or
      (
        eval($dayCount<=1 && $ghostCount!=0) and
-       Message(predict=="die",object=="vote")
+       Message($subject:subject,predict=="die",object=="vote") and
+       Role(id==$subject,role=="water")
      
      )
       or

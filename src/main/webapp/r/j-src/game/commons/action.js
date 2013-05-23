@@ -56,7 +56,13 @@ $(document).ready(function () {
         }
 
         $("#" + selects.$sayButton).bind("click", function (event) {
-            say(event);
+            if (controlView.isMute()) {
+                alert("嘘.现在不能说话.");
+            }
+            else {
+                say(event);
+            }
+
         });
 
 
@@ -160,8 +166,6 @@ $(document).ready(function () {
         }, function () {
             globalView.showPlayerList('#sidebar-toggle');
         })
-
-
 
 
     }

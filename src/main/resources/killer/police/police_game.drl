@@ -834,7 +834,10 @@ when
   
   $game:Game(status=="night") 
   KillConfirm($id:id)
-  CheckConfirm()
+  (CheckConfirm()  
+   or
+    Message(subject=="day",predict=="dayTime")    
+   )
   $player:Player(id==$id,status!="lastword")
 then
    LogUtil.log("person lastword  by kill start=============="); 
@@ -1215,7 +1218,6 @@ no-loop true
 when
 	//conditions    
 	KillConfirm()
-	CheckConfirm()
     $room:Room(status=="run")
     $game:Game(status=="night") 
     $operater:Operater()
@@ -1506,6 +1508,79 @@ then
     LogUtil.log("group say over =============");
     
 end
+
+
+
+rule 'group accept of set kill'
+ruleflow-group "message accept"
+salience 50
+no-loop true 
+when
+     $message:Message(predict=="set kill",$accepts:accepts)
+        eval($message.getAccepts().size()==0)     
+	 Role(id==$subject,$role:role)
+	 
+	 $living_ids:HashSet()
+	      from accumulate(
+	      Player($pid:id,status=="living")	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($pid);),
+	      result(ls)
+	 );
+
+	 
+	 $all_group_ids:ArrayList()
+	      from accumulate(
+	      Role($rid:id,role=="killer",$living_ids contains $rid)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($rid);),
+	      result(ls)
+	      );
+	 Game(status=="night"||status=="lastword")
+	 
+then
+     LogUtil.log(" group set kill start  ============="+$message); 
+    
+     modify($message){setAccepts($all_group_ids)};    
+    LogUtil.log("group set kill over =============");
+    
+end
+
+rule 'group accept of set check'
+ruleflow-group "message accept"
+salience 50
+no-loop true 
+when
+     $message:Message(predict=="set check",$accepts:accepts)
+        eval($message.getAccepts().size()==0)     
+	
+	 
+	 $living_ids:HashSet()
+	      from accumulate(
+	      Player($pid:id,status=="living")	     
+	      init(Set ls=new HashSet();),
+	      action(ls.add($pid);),
+	      result(ls)
+	 );
+
+	 
+	 $all_group_ids:ArrayList()
+	      from accumulate(
+	      Role($rid:id,role=="police",$living_ids contains $rid)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($rid);),
+	      result(ls)
+	      );
+	 Game(status=="night"||status=="lastword")
+	 
+then
+     LogUtil.log(" group set check start  ============="); 
+    
+     modify($message){setAccepts($all_group_ids)};    
+    LogUtil.log("group set check over ============="+$message);
+    
+end
+
 
 
 rule 'group accept of assign'
