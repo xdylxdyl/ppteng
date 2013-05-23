@@ -836,7 +836,7 @@ when
   KillConfirm($id:id)
   (CheckConfirm()  
    or
-    Message(subject=="day",predict=="dayTime")    
+    Message(subject=="day",predict=="switch")    
    )
   $player:Player(id==$id,status!="lastword")
 then
