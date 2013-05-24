@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dal>
+	<route>
+		<object name="com.gemantic.labs.killer.model.MineStatistics"
+			listenerClass="" strategyProperty="">
+			
+			
+			
+					<list name="getMineStatisticsIdsBySettingAndUidOrderByTime"
+				sqlitem="select id from mine_statistics where setting = ? and uid = ? order by time "
+				keyProperty="setting,uid" valueProperty="id" keyColumn="setting,uid" />
+					<list name="getMineStatisticsIdsBySettingOrderByTime"
+				sqlitem="select id from mine_statistics where setting = ? order by time "
+				keyProperty="setting" valueProperty="id" keyColumn="setting" />
+						
+			
+						
+			<dbStrategy name="mutiDS"
+                clasz="com.gemantic.dal.route.strategy.DefaultStrategy">  <pattern value="[0-9]$" group="labsKiller" />
+            </dbStrategy>
+			
+		</object>
+	</route>
+</dal>

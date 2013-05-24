@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
@@ -24,10 +25,13 @@ import com.gemantic.killer.common.model.Operater;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MessageService;
+import com.gemantic.killer.service.MineStatisticsService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.service.RoomTimerService;
 import com.gemantic.killer.service.SessionService;
 import com.gemantic.killer.util.MessageUtil;
+import com.gemantic.killer.util.RoomUtil;
+import com.gemantic.labs.killer.model.MineStatistics;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.model.UserRecord;
 import com.gemantic.labs.killer.service.RecordService;
@@ -58,10 +62,12 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 	@Autowired
 	private RecordService recordService;
-	
+
 	@Autowired
 	private UserRecordService userRecordService;
-	
+
+	@Autowired
+	private MineStatisticsService mineStatisticService;
 
 	@Resource(name = "roomAction")
 	private Set<String> roomAction = new HashSet();
@@ -144,6 +150,8 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 			r.setStatus(Room.status_start);
 			r.setPlayers(operater.getPlayers());
+			User u = this.userService.getObjectById(r.getCreaterID());
+			r.setExpressions(u.getExpression());
 			this.roomService.updateRoom(r);
 
 		}
@@ -204,16 +212,19 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 					ur.setRecordAt(System.currentTimeMillis());
 					ur.setUid(uid);
 					ur.setVersion(r.getVersion());
-					/*if("mine_1.0".equals(r.getVersion())){
-						Map setting=r.getSetting().getSetting();
-						String settingVersion=setting.get("rowCount")+"_"+setting.get("columnCount")+"_"+setting.get("mineCount");
-						if(settingVersion.equals("16_16_40")||settingVersion.equals("16_16_40")||settingVersion.equals("40_40_500")||settingVersion.equals("100_100_2000")){
-							
-						}else{
-							
-						}
-						
-					}*/
+					String settingVersion = RoomUtil.getMIneSettingVersion(r);
+					if (StringUtils.isNotBlank(settingVersion)) {
+
+						MineStatistics mineStatistics = new MineStatistics();
+						mineStatistics.setId(rid);
+						mineStatistics.setUid(uid);
+
+						mineStatistics.setSetting(settingVersion);
+						mineStatistics.setTime(time);
+						this.mineStatisticService.insert(mineStatistics);
+					} else {
+
+					}
 					this.userRecordService.insert(ur);
 
 				}
@@ -237,6 +248,8 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 		return operater;
 	}
+
+	
 
 	private boolean isSaveRecord(Room r, Long time, List<Message> messages) {
 		String version = r.getVersion();

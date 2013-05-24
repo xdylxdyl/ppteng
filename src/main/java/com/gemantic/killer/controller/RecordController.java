@@ -25,9 +25,12 @@ import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
+import com.gemantic.killer.service.MineStatisticsService;
 import com.gemantic.killer.service.SettingService;
 import com.gemantic.killer.util.PunchUtil;
+import com.gemantic.killer.util.RoomUtil;
 import com.gemantic.labs.killer.etl.RecordStastisticsEtl;
+import com.gemantic.labs.killer.model.MineStatistics;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.model.UserRecord;
 import com.gemantic.labs.killer.service.RecordService;
@@ -60,6 +63,9 @@ public class RecordController {
 	private UsersService userSevice;
 	@Autowired
 	private RecordStastisticsEtl recordStastisticsEtl;
+	
+	@Autowired
+	private MineStatisticsService mineStatisticService;
 
 	@Autowired
 	private CookieUtil cookieUtil;
@@ -78,8 +84,8 @@ public class RecordController {
 			HttpServletResponse response, ModelMap model, String version,
 			Integer page, Integer size, Long uid) throws Exception {
 
-		if(StringUtils.isBlank(version)){
-			version="all";
+		if (StringUtils.isBlank(version)) {
+			version = "all";
 		}
 		log.info("start get room list " + version);
 		Long selfID = cookieUtil.getID(request, response);
@@ -111,17 +117,15 @@ public class RecordController {
 		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"),
 				users);
 
-		
-		if(uid!=null){
+		if (uid != null) {
 			User u = this.userSevice.getObjectById(uid);
 			if (u == null) {
 
 			} else {
-				log.info(uid+"get user "+u);
+				log.info(uid + "get user " + u);
 				model.addAttribute("current", u);
 			}
 		}
-	
 
 		model.addAttribute("selfID", selfID);
 		model.addAttribute("uid", uid);
@@ -374,6 +378,60 @@ public class RecordController {
 					ur.setUid(id);
 					ur.setVersion(r.getVersion());
 					this.userRecordService.insert(ur);
+
+				}
+
+			}
+		}
+
+		model.addAttribute("code", "0");
+
+		return "/common/success";
+	}
+
+	/**
+	 * 游戏开始
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/record/calculate/mine/user")
+	public String calculateMineUser(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) throws Exception {
+
+		// 先创建一个假房间?那房间里的Query怎么办.
+		// 没有Email再判断是否是cookie
+		Long uid = cookieUtil.getID(request, response);
+		if (uid != 256L && uid != 245L) {
+			log.info("not limt " + uid);
+		} else {
+
+			List<Long> rids = this.recordService.getRecordIdsByVersion(
+					"mine_1.0", 0, Integer.MAX_VALUE);
+			List<Records> records = this.recordService.getObjectsByIds(rids);
+			for (Records r : records) {
+
+				String settingVersion = RoomUtil.getMIneSettingVersion(r
+						.getRoom());
+				if (StringUtils.isNotBlank(settingVersion)) {
+					log.info(r.getId()+" will be calculate to rank");
+					List<Long> uids = r.getRoom().getPlayers();
+
+					for (Long id : uids) {
+						MineStatistics mineStatistics = new MineStatistics();
+						mineStatistics.setId(r.getId());
+						mineStatistics.setUid(uid);
+
+						mineStatistics.setSetting(settingVersion);
+						mineStatistics.setTime(r.getTime());
+						this.mineStatisticService.insert(mineStatistics);
+
+					}
+
+				} else {
 
 				}
 

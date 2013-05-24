@@ -73,7 +73,7 @@ public class RecordStastisticsEtl {
 		}
 		List<Long> lists;
 		if ("day".equals(type)) {
-			// 1.init all players and init all statistics
+			// 1.init all players and init all statistics ---这儿有问题啊。零点的局会被重复计算的。这个计算的逻辑还得重新想一想。要么就是改时间。
 			lists = this.recordService.getRecordIdsByVersionAndCreateAt("simple_1.0", MyTimeUtil.getPreZeroTimeMillions(1), 0, Integer.MAX_VALUE);
 		} else {
 			lists = this.recordService.getRecordIdsByVersion("simple_1.0", 0, Integer.MAX_VALUE);
