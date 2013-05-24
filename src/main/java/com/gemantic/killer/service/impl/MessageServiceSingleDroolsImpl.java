@@ -151,8 +151,11 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			r.setStatus(Room.status_start);
 			r.setPlayers(operater.getPlayers());
 			User u = this.userService.getObjectById(r.getCreaterID());
-			r.setExpressions(u.getExpression());
-			this.roomService.updateRoom(r);
+			if(u!=null){
+				r.setExpressions(u.getExpression());
+				this.roomService.updateRoom(r);
+			}
+		
 
 		}
 
