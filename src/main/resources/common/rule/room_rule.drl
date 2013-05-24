@@ -408,6 +408,23 @@ then
 end
 
 
+
+rule 'unlimit ready'
+ruleflow-group "action"
+no-loop true
+when	
+    $room:Room($creater:creater,status=="run")
+    $message:Message($subject:subject,predict=="ready")
+ 
+then      
+	//actions
+     LogUtil.log("unlimit ready ================= "); 
+       retract($message);
+   
+     LogUtil.log("unlimit ready over =================");
+end
+
+
 rule 'kick'
 ruleflow-group "action"
 when

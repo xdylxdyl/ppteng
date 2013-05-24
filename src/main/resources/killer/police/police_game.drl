@@ -826,7 +826,7 @@ end
 
 
 
-rule 'person lastword by kill'
+rule 'person lastword by kill and confirm'
 ruleflow-group "person status"
 no-loop true
 
@@ -835,26 +835,49 @@ when
   
   $game:Game(status=="night") 
   KillConfirm($id:id)
-  (CheckConfirm()  
-   or
-    Message(subject=="day",predict=="switch")    
-   )
+  CheckConfirm()
   $player:Player(id==$id,status!="lastword")
 then
-   LogUtil.log("person lastword  by kill start=============="); 
+   LogUtil.log("person lastword  by kill confirm start=============="); 
      StatusChange sc=new StatusChange("lastword");
      insert(sc);  
        
    modify($player){setStatus("lastword"))};      
    
     Message lastWorder=new Message($id,"status","lastword");       
-    insert(lastWorder); 
-   LogUtil.log("person lastword by kill over==============");   
+    insert(lastWorder);
+ 
+   LogUtil.log("person lastword by kill confirm over==============");   
   
  
 end
 
+rule 'person lastword by kill and day come'
+ruleflow-group "person status"
+no-loop true
 
+when
+ 
+  
+  $game:Game(status=="night") 
+  KillConfirm($id:id) 
+  $message:Message(subject=="day",predict=="switch")   
+  
+  $player:Player(id==$id,status!="lastword")
+then
+   LogUtil.log("person lastword  by kill day start=============="); 
+     StatusChange sc=new StatusChange("lastword");
+     insert(sc);  
+       
+   modify($player){setStatus("lastword"))};      
+   
+    Message lastWorder=new Message($id,"status","lastword");       
+    insert(lastWorder);
+    retract($message); 
+   LogUtil.log("person lastword by kill day over==============");   
+  
+ 
+end
 
 rule 'person die by kill'
 ruleflow-group "person status"
@@ -1480,7 +1503,7 @@ ruleflow-group "message accept"
 salience 50
 no-loop true 
 when
-     $message:Message($subject:subject,predict=="say"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)
+     $message:Message($subject:subject,predict=="say"||predict=="check"||predict=="kill",$accepts:accepts)
         eval($message.getAccepts().size()==0)     
 	 Role(id==$subject,$role:role)
 	 
