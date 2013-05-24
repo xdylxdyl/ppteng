@@ -154,7 +154,7 @@ then
      //0 setGameName 
      String	rname=String.valueOf(RandomUtils.nextLong());
      //1.assign role	
-	 int  killerCount=Integer.valueOf(getRoomSetting($room,"killerCount","1")); 
+	 int  killerCount=getKillerCount($room.getSetting(),$allReadys.size());
 	
 	 int  waterCount= $allReadys.size()-killerCount;
 	 

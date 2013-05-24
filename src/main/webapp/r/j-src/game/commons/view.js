@@ -62,9 +62,36 @@ var settingView = {
 
         }
 
+
+        if (settingView.getDefaultAutoSetting()) {
+            var html = "<label for='autoSettingCheckBox' class='checkbox'><input type='checkbox' checked='checked' id='autoSettingCheckBox'>自动设置</label>"
+            $("#" + selects.$settingArea).prepend(html);
+            settingView.autoSetting(true);
+        } else {
+            var html = "<label for='autoSettingCheckBox' class='checkbox'><input type='checkbox' id='autoSettingCheckBox'>自动设置</label>"
+            $("#" + selects.$settingArea).prepend(html);
+            settingView.autoSetting(false);
+        }
+
+
         if (versionFunction["initSetting"]) {
             versionFunction["initSetting"]()
         }
+
+        $("#autoSettingCheckBox").live("click", function () {
+
+            if (settingView.getAutoSetting()) {
+                settingView.autoSetting(true);
+
+
+            } else {
+                settingView.autoSetting(false);
+
+            }
+            ;
+
+
+        });
 
 
         $("#" + selects.$submitSetting).bind("click", function () {
@@ -91,6 +118,44 @@ var settingView = {
     },
     getSettingParameter:function (fun) {
         return fun;
+    },
+    autoSetting:function (auto) {
+        if (auto) {
+            //autosetting
+            $("#ghostCountGroup").hide();
+            $("#autoSettingGroup").hide();
+
+            ;
+            $("#autoSetting").val("true");
+
+        } else {
+            $("#ghostCountGroup").show();
+            // $("#autoSettingGroup").show();
+            $("#autoSettingGroup").hide();
+            $("#autoSetting").val("false");
+
+        }
+        if (versionFunction["autoSettingShow"]) {
+            versionFunction["autoSettingShow"](auto);
+        }
+
+
+    },
+    getAutoSetting:function () {
+        if ($("#autoSettingCheckBox").attr("checked") == "checked") {
+            return true;
+        } else {
+            return false;
+        }
+        ;
+    },
+    getDefaultAutoSetting:function () {
+        if ($("#autoSetting").val() == "true") {
+            return true;
+        } else {
+            return false;
+        }
+        ;
     }
 
 }

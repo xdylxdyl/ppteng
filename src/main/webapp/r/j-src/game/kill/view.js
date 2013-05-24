@@ -324,7 +324,20 @@ var simpleSettingView = {
         $("#lastwordTime").val($("#lastwordTime").val() * 60000);
         var params = jQuery("#setting").serialize();
         return params;
-    }
+    },
+
+      autoSettingShow:function (auto) {
+            if (auto) {
+                //autosetting
+                $("#policeCountGroup").hide();
+                $("#killerCountGroup").hide();
+
+            } else {
+                $("#killerCountGroup").show();
+                $("#killerCountGroup").show();
+
+            }
+        }
 }
 
 
@@ -446,6 +459,7 @@ versionFunction = {
     "initSetting":simpleSettingView.initSetting,
     //获取初始化参数
     "getSettingParameter":simpleSettingView.getSettingParameter,
+    "autoSettingShow":simpleSettingView.autoSettingShow,
     //解析消息
     "parseMessage":killController.parseMessage,
     //解析房间Detail,用于页面刷新及进入房间

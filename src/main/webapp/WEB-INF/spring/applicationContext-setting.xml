@@ -131,6 +131,13 @@
 
 
 	<bean id="rest_1.0_setting" class="java.util.HashMap">
+	<constructor-arg>
+			<map>
+				
+				<entry key="autoSetting" value="true">
+				</entry>
+			</map>
+		</constructor-arg>
 	</bean>
 
 
@@ -182,7 +189,7 @@
 				</entry>
 				<entry key="autoSetting" value="true">
 				</entry>
-				
+
 			</map>
 		</constructor-arg>
 	</bean>
@@ -207,7 +214,7 @@
 				</entry>
 				<entry key="mineCount" value="雷数">
 				</entry>
-				<entry key="ghostCount" value="鬼数">
+				<entry key="ghostCount" value="幽灵数">
 				</entry>
 				<entry key="topicTime" value="出题时间">
 				</entry>

@@ -14,7 +14,7 @@
 		</spring:bind>
 
 		<c:forEach items="${setting.setting}" var="entry">
-		<div class="control-group">
+		<div class="control-group"  id="${entry.key}Group">
 		
 			<c:choose>
 				<c:when test="${empty settingDisplay[entry.key]}">

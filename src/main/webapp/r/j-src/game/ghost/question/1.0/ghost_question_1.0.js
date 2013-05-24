@@ -298,9 +298,8 @@ var ghostQuestionController = {
     answer:function (message) {
 
 
-            ghostView.answer(playerService.getPlayer(message.subject).name,
-                playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
-
+        ghostView.answer(playerService.getPlayer(message.subject).name,
+            playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
 
 
     },
@@ -454,7 +453,6 @@ var ghostView = {
     },
 
 
-
     die:function (id, name, action) {
         $("#" + id).children("a").removeClass().addClass("die");
         if (action == "vote") {
@@ -552,6 +550,7 @@ var ghostQuestionRightView = {
 var ghostQuestionSettingView = {
     initSetting:function () {
 
+
         $("#dayTime").val($("#dayTime").val() / 60000);
         $("#topicTime").val($("#topicTime").val() / 60000);
         $("#questionTime").val($("#questionTime").val() / 60000);
@@ -559,14 +558,32 @@ var ghostQuestionSettingView = {
         $("<span>分</span>").insertAfter("#dayTime");
         $("<span>分</span>").insertAfter("#topicTime");
         $("<span>分</span>").insertAfter("#questionTime");
+
+
+
     },
+
+
     getSettingParameter:function () {
         $("#dayTime").val($("#dayTime").val() * 60000);
         $("#topicTime").val($("#topicTime").val() * 60000);
         $("#questionTime").val($("#questionTime").val() * 60000);
         var params = jQuery("#setting").serialize();
         return params;
+    },
+
+
+    autoSettingShow:function (auto) {
+        if (auto) {
+            //autosetting
+            $("#ghostCountGroup").hide();
+
+        } else {
+            $("#ghostCountGroup").show();
+
+        }
     }
+
 }
 
 
@@ -690,6 +707,7 @@ versionFunction = {
     "initSetting":ghostQuestionSettingView.initSetting,
     //获取初始化参数
     "getSettingParameter":ghostQuestionSettingView.getSettingParameter,
+    "autoSettingShow":ghostQuestionSettingView.autoSettingShow,
     //解析消息
     "parseMessage":ghostQuestionController.parseMessage,
     //解析房间Detail,用于页面刷新及进入房间

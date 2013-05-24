@@ -181,7 +181,24 @@ function List getVoteStatus(String status,String personStatus,String role,List v
      
 }
 
+function int getKillerCount(Map map, int totalCount) {
+		// TODO Auto-generated method stub
+		String isAutoSet = (String) map.get("autoSetting");
+		String ghostCount = (String) map.get("killerCount");
+		
+		int part = 4;
+		if(totalCount<8){
+		  totalCount=8;
+		}
+		
+		if ("true".equals(isAutoSet)) {
+			return (totalCount - 1) / part ;
+		} else {
+			int count=Integer.valueOf(ghostCount);
+			return count;
+		}
 
+}
 
 
 

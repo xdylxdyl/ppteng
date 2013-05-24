@@ -26,8 +26,8 @@ var ghostSimpleModel = {
         topic:"【系统消息】请耐心等英明的国王出题,出题时间,其他玩家不能说话.卡片格式:第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开,国王请在指令里选择出题",
         day:"【系统消息】 国王在上,感谢您给了你的子民们又一次找出幽灵的机会,我们一定不负重望~",
         assignTopic:"【系统消息】国王分给您的卡片是: ",
-        dayCount:function(count){
-          return  "【系统消息】幽灵还剩下 ["+count+"]天就可获胜,并会成功盗走皇冠~";
+        dayCount:function (count) {
+            return  "【系统消息】幽灵还剩下 [" + count + "]天就可获胜,并会成功盗走皇冠~";
         }
     },
     commandHint:{
@@ -135,8 +135,8 @@ var ghostSimpleController = {
                 ghostSimpleController.decryptionGhostCard(message);
                 break;
             case "wrong topic":
-                          ghostSimpleController.wrongTopic(message);
-                          break;
+                ghostSimpleController.wrongTopic(message);
+                break;
             case "status" :
                 ghostSimpleController.status(message);
                 break;
@@ -160,21 +160,20 @@ var ghostSimpleController = {
 
     wrongTopic:function (message) {
 
-            $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + message.content + "]不符合规范,第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开</p>");
+        $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + message.content + "]不符合规范,第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开</p>");
 
 
-        },
+    },
     decryption:function (message) {
 
-        var role=message.object;
-        if(ghostSimpleModel.role.water==role||ghostSimpleModel.role.king==role){
+        var role = message.object;
+        if (ghostSimpleModel.role.water == role || ghostSimpleModel.role.king == role) {
             return;
-        }else{
+        } else {
             var name = playerService.getName(message.subject);
-             $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + ghostSimpleModel.roleName[message.object] + "</p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + ghostSimpleModel.roleName[message.object] + "</p>");
 
         }
-
 
 
     },
@@ -209,7 +208,7 @@ var ghostSimpleController = {
     topicAssign:function (message) {
 
         ghostView.displayCard(message.subject);
-        ghostView.showContentForGameArea(ghostSimpleModel.hint.assignTopic+message.subject);
+        ghostView.showContentForGameArea(ghostSimpleModel.hint.assignTopic + message.subject);
 
     },
 
@@ -224,7 +223,7 @@ var ghostSimpleController = {
         var p = playerService.getPlayer(globalView.getCurrentID());
 
         ghostView.showContentForGameArea(ghostSimpleModel.hint[status]);
-        if("day"==status){
+        if ("day" == status) {
             ghostView.showContentForGameArea(ghostSimpleModel.hint.dayCount(message.content));
         }
 
@@ -372,19 +371,18 @@ var ghostView = {
 
                 break;
             case ghostSimpleModel.playerStatus.living:
-               break;
+                break;
             case playerStatus.unready:
-                                     if ($("#time").val() == "over") {
+                if ($("#time").val() == "over") {
 
-                                     } else {
-                                         //没有结束
+                } else {
+                    //没有结束
 
-                                         place = "deadArea";
+                    place = "deadArea";
 
-                                     }
-                                     break;
+                }
+                break;
             default :
-
 
 
         }
@@ -443,11 +441,11 @@ var ghostView = {
         var share;
         switch (obj) {
             case "ghost win" :
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，幽灵胜利！成功盗取皇冠~卖出后可获得2000金币~</p> " );
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，幽灵胜利！成功盗取皇冠~卖出后可获得2000金币~</p> ");
                 share = "这局杀人游戏[简化]中,杀手又赢了~,抢走了2000金币~点此链接回放场景,重现杀人现场: " + shareLink + ";";
                 break;
             case "water win" :
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！保卫皇冠成功,将获得国王400金币的奖励~</p> " );
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！保卫皇冠成功,将获得国王400金币的奖励~</p> ");
                 share = "这局杀人游戏[简化]中,水民又赢了~,赢回了2000金币~点此链接回放场景,重现水民分析实况:" + shareLink + ";";
                 break;
             default :
@@ -509,6 +507,17 @@ var ghostSimpleSettingView = {
         $("#topicTime").val($("#topicTime").val() * 60000);
         var params = jQuery("#setting").serialize();
         return params;
+    },
+
+    autoSettingShow:function (auto) {
+        if (auto) {
+            //autosetting
+            $("#ghostCountGroup").hide();
+
+        } else {
+            $("#ghostCountGroup").show();
+
+        }
     }
 }
 
@@ -560,7 +569,7 @@ var gameView = {
         $("#" + selects.$mainArea).removeClass().addClass("span12");
     },
     showSecondArea:function (p) {
-        if (playerStatus.die == p.status || playerStatus.unready == p.status||playerStatus.king== p.status) {
+        if (playerStatus.die == p.status || playerStatus.unready == p.status || playerStatus.king == p.status) {
             gameView.showDieArea();
         } else {
             gameView.hideDieArea();
@@ -633,6 +642,7 @@ versionFunction = {
     "initSetting":ghostSimpleSettingView.initSetting,
     //获取初始化参数
     "getSettingParameter":ghostSimpleSettingView.getSettingParameter,
+    "autoSettingShow":ghostSimpleSettingView.autoSettingShow,
     //解析消息
     "parseMessage":ghostSimpleController.parseMessage,
     //解析房间Detail,用于页面刷新及进入房间

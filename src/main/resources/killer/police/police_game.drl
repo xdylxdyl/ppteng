@@ -158,8 +158,9 @@ then
      //0 setGameName 
      String	rname=String.valueOf(RandomUtils.nextLong());
      //1.assign role	
-	 int  killerCount=Integer.valueOf(getRoomSetting($room,"killerCount","1")); 
-	 int  policeCount=Integer.valueOf(getRoomSetting($room,"policeCount","1")); 
+     int  policeCount=getPoliceCount($room.getSetting(),$allReadys.size());
+     int  killerCount=getKillerCount($room.getSetting(),$allReadys.size());
+	
 	 int  waterCount= $allReadys.size()-killerCount-policeCount;
 	 
 	 Map role_count=new HashMap();
@@ -1517,8 +1518,8 @@ salience 50
 no-loop true 
 when
      $message:Message(predict=="set kill",$accepts:accepts)
-        eval($message.getAccepts().size()==0)     
-	 Role(id==$subject,$role:role)
+     eval($message.getAccepts().size()==0)     
+
 	 
 	 $living_ids:HashSet()
 	      from accumulate(
@@ -1551,9 +1552,9 @@ ruleflow-group "message accept"
 salience 50
 no-loop true 
 when
-     $message:Message(predict=="set check",$accepts:accepts)
+     $message:Message($subject:subject,predict=="set check",$accepts:accepts)
         eval($message.getAccepts().size()==0)     
-	
+
 	 
 	 $living_ids:HashSet()
 	      from accumulate(
