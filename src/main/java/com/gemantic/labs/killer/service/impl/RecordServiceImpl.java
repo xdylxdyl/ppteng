@@ -1,4 +1,4 @@
-package com.gemantic.labs.killer.service;
+package com.gemantic.labs.killer.service.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +19,7 @@ import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.service.MemberService;
 import com.gemantic.killer.util.MessageUtil;
 import com.gemantic.labs.killer.model.Records;
+import com.gemantic.labs.killer.service.RecordService;
 
 @Component
 public class RecordServiceImpl implements RecordService {
@@ -355,7 +356,7 @@ public class RecordServiceImpl implements RecordService {
 
 		try {
 			//idList = (List<Long>) dao.excuteSimpleSql("select id from records where version = "+version, Records.class);
-			idList = dao.getIdList("getRecordIdsByVersionAndCreateAt", new Object[] { version,createAt }, start, limit, false);
+			idList = dao.getIdList("getRecordIdsByVersionAndCreateAt", new Object[] { version,createAt,createAt+24*60*60*1000L }, start, limit, false);
 
 		} catch (DaoException e) {
 			log.error(" get ids  wrong by version,start,limit)  , " + start + " , " + limit);

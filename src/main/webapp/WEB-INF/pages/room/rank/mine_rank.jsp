@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-<input type="hidden" id="version" value="${version}"></input>
+<input type="hidden" id="version" value="${smallVersion}"></input>
  <div class="span9">
 <div class="container" >
 	<c:forEach items="${records}" var="record" begin="0" step="1"
@@ -25,8 +25,8 @@
 						
 							版本[<span style="color: #4B0082"><%@ include
 									file="../../room/version/show.jsp"%></span>] ,
-							用时[ <span style="color: #4B0082"> <date:length
-									date="${record.time}"></date:length>
+							用时[ <span style="color: #4B0082"><fmt:formatNumber pattern="0.000"
+								value='${record.time/1000}'></fmt:formatNumber>秒
 							</span>]
 			</small>
             </blockquote>           
@@ -38,9 +38,9 @@
 
 <div class="pagination pagination-centered">
   <ul>
-    <li><a href="/record/list?page=${page-1}&size=${size}&uid=${uid}" id="pagePrev">Prev</a></li>   
-      <li class="active"><a href="/record/list?page=${page}&size=${size}&uid=${uid}">${page}</a></li>
-    <li><a href="/record/list?page=${page+1}&size=${size}&uid=${uid}" id="pageNext">Next</a></li>
+    <li><a href="/mine/statistics/${smallVersion}?page=${page-1}&size=${size}&uid=${uid}" id="pagePrev">Prev</a></li>   
+      <li class="active"><a href="/mine/statistics/${smallVersion}?page=${page}&size=${size}&uid=${uid}">${page}</a></li>
+    <li><a href="/mine/statistics/${smallVersion}?page=${page+1}&size=${size}&uid=${uid}" id="pageNext">Next</a></li>
   </ul>
 </div>
 </div>
