@@ -349,6 +349,7 @@ $(document).ready(function () {
 
             mineView.startCountTime();
 
+            notifyUtil.sendNotify("各位雷神", "游戏已开始，速度带手指头归位", "");
 
         },
         startCountTime:function () {

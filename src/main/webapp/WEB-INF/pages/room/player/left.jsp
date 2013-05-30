@@ -23,11 +23,10 @@
 				<li id="leftNav_edit"><a href="/player/regedit?type=edit">修改密码</a></li>
 				<li id="leftNav_email"><a href="/player/regedit?type=email">找回密码</a></li>
 			</c:if>
-		
-			
-			
 			<li class="nav-header">查找用户</li>
 			<li id="leftNav_search"><a href="/player/search ">查找用户</a></li>
+			<li class="nav-header">通知设置</li>
+			<li id="leftNav_notification"><a href="/player/notification">通知设置</a></li>
 		</ul>
 	</div>
 	<!--/.well -->
