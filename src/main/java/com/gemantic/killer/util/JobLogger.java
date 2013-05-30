@@ -82,7 +82,7 @@ public class JobLogger {
 		//log.info(jobName+" : "+messages);
 		String json = MessageUtil.convertMessages2String(messages);
 		Logger l = getJobLogger(jobName);
-		log.info(json);
+		//log.info(json);
 		l.info(json);
 		
 	}

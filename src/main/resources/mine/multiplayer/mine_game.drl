@@ -65,7 +65,7 @@ then
 	 int  bombCount=Integer.valueOf(getRoomSetting($room,"mineCount","10"));//1*60*1000  
 
      String systemBombPic=BombUtil.assign(rowCount,columnCount,bombCount);
-     LogUtil.log(" systemBombPic ================= "+systemBombPic);
+     //LogUtil.log(" systemBombPic ================= "+systemBombPic);
      BombPic bombPic=new BombPic(systemBombPic,"");
      insert(bombPic);
      
@@ -81,10 +81,11 @@ then
      for(Object o: $allReadys){
      
         Player p=(Player)o;
+      
           String uid=p.getId();
 		readyIDS.add(Long.valueOf(uid));
 				  
-				  UserCount uc=new UserCount(uid,0);
+				  UserCount uc=new UserCount(uid,0,0);
 				  insert(uc);	  
 				  Message assignMessage=new Message(uid,"count","0");
 				  insert(assignMessage);	
@@ -131,10 +132,10 @@ when
     $tag:Tag()   
 then      
 
-	LogUtil.log("clear tag start  =================");	
+	//LogUtil.log("clear tag start  =================");	
     retract($tag);
 
-	LogUtil.log("clear tag over  =================");
+	//LogUtil.log("clear tag over  =================");
 end
 
 
@@ -222,29 +223,29 @@ when
     not Tag(pid==$object) 
    
 then
-    LogUtil.log("click pane start  ================="); 
+    //LogUtil.log("click pane start  ================="); 
     
      Pair p=BombUtil.convertString2Pair($object);   
      
      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
-     LogUtil.log("=========");
+     
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  	 
 	 
-	  LogUtil.log("=========");
+	 
     String userTag=BombUtil.clickOpen(p,$system,rowCount,columnCount);     
    
     
     //  LogUtil.log("=========");
     Click click=new Click($subject,userTag,$object);
-      LogUtil.log("=========");
+    
     insert(click);     
    // Tag tag=new Tag($subject,pane,BombUtil.convertPair2String(pane.getCoordinate()));
     //  LogUtil.log("=========");
   //  insert(tag);   
     
-    retract($message);
+ 
     
-    LogUtil.log("click pane over  ================="); 
+  //  LogUtil.log("click pane over  ================="); 
 end
 
 
@@ -259,7 +260,7 @@ when
     $bombPic:BombPic($system:system,$user:user)    
     not Tag(pid==$object)
     $count:Count($bomb:bomb,$right:right)
-    $userCount:UserCount($uc:count,uid==$subject)
+    
 then
     LogUtil.log("tag pane start  ================="); 
      Pair p=BombUtil.convertString2Pair($object);
@@ -281,16 +282,10 @@ then
     update($count);
     LogUtil.log("count is   ================="+$count);
     
-    $uc=$uc+1; 
-      Message ucMessage=new Message($subject,"count",String.valueOf($uc));
-    insert(ucMessage);     
-       
-    $userCount.setCount($uc);
-    update($userCount);
-    LogUtil.log("user count is   ================="+$uc);
+   
     
     
-    Tag tag=new Tag($subject,"//",$object);
+    Tag tag=new Tag($subject,"#",$object);
     insert(tag);
     retract($message);
     
@@ -307,8 +302,8 @@ when
     $message:Message($subject:subject,predict=="tag",$object:object)  
     $player:Player(id==$subject,status=="living")  
     $count:Count($bomb:bomb,$right:right)
-    $tag:Tag(pid==$object,value=="//")
-     $userCount:UserCount($uc:count,uid==$subject)
+    $tag:Tag(pid==$object,value=="#")
+   
        
 then
     LogUtil.log("clear tag pane start  ================="); 
@@ -326,13 +321,7 @@ then
     $count.setBomb($bomb);
     update($count);
     
-      $uc=$uc-1; 
-      Message ucMessage=new Message($subject,"count",String.valueOf($uc));
-    insert(ucMessage);     
-       
-    $userCount.setCount($uc);
-    update($userCount);
-    LogUtil.log("user count is   ================="+$uc);
+     
     
     
     
@@ -402,6 +391,7 @@ when
     $game:Game() 
      $room:Room()
       $count:Count($user:user) 
+      $userCount:UserCount($uc:count,uid==$uid)
 then
    // LogUtil.log("click number  start  =================");   
    
@@ -418,9 +408,11 @@ then
     
      $count.setUser($user+1);
      update($count);
-   //  LogUtil.log(" count is  ================="+$count); 
-    //LogUtil.log("click number over  ================="); 
-   //  LogUtil.log("click  number use time   ================="+(System.currentTimeMillis()-start));
+   $uc=$uc+1; 
+    $userCount.setCount($uc);
+    update($userCount);
+  
+
 end
 
 
@@ -434,7 +426,9 @@ when
     not Tag(pid==$pid)
     $game:Game()    
     $room:Room()
-     $count:Count($userCount:user)
+    $count:Count($userCount:user)
+    $uCount:UserCount($uc:count,uid==$uid)
+     
 then
     //LogUtil.log("click  zero number  start  ================= "+$click);   
    // Long start=System.currentTimeMillis();
@@ -463,12 +457,31 @@ then
         $count.setUser($userCount+1);
        //  LogUtil.log(" count is  ================="+$count); 
      update($count);
+       $uc=$uc+1; 
+    $uCount.setCount($uc);
+    update($uCount);
+
     //LogUtil.log("click zero number use time   ================="+(System.currentTimeMillis()-start)); 
 end
 
 
 
+rule 'user count'
+ruleflow-group "count action"
+no-loop true
+when
+    
+    $message:Message($subject:subject,$object:object,predict=="click")  
+    $userCount:UserCount($uc:count,uid==$subject,$clickCount:clickCount)
+then
 
+    Message ucMessage=new Message($subject,"count",String.valueOf($uc));
+    insert(ucMessage);
+      modify($userCount){setClickCount($clickCount+1)};    
+  
+    //LogUtil.log("count actionr  start  ================= "+$userCount); 
+    retract($message);
+end
 
 
 rule 'merge message'
@@ -526,7 +539,13 @@ when
     $bombPic:BombPic($system:system,$user:user)    
     $game:Game($recordName:recordName)
   
-    $count:Count()
+   
+    
+    $money:Double()
+	      from accumulate(
+	      UserCount($c:count),
+	      sum($c)	     
+	      )    
     
 then
     LogUtil.log("click mine start  ================="); 
@@ -537,9 +556,12 @@ then
      insert(tagMessage); 
      
       Message wrongMessage=new Message($uid,"wrong",$pid); 
+      wrongMessage.setContent(String.valueOf($money));
+      
      insert(wrongMessage); 
      
-     Message gameOverMessage=new Message($recordName,"over","you lose"); 
+     Message gameOverMessage=new Message($recordName,"over","you lose");
+     gameOverMessage.setContent(String.valueOf(System.currentTimeMillis()-$game.getStartAt())); 
      insert(gameOverMessage); 
       
      $game.setStatus("over");
@@ -640,6 +662,7 @@ then
      LogUtil.log("no player game over start  ================="); 
       
      Message gameOverMessage=new Message($recordName,"over","lose"); 
+     gameOverMessage.setContent(String.valueOf(System.currentTimeMillis()-$game.getStartAt()));
      insert(gameOverMessage); 
            
      $game.setStatus("over");
@@ -680,16 +703,21 @@ then
    
      retract($count);
      retract($bombPic);   
-     
+     Map m=new HashMap();
      for(Object o:$allUserCount){
-        retract(o);
+         UserCount uc=(UserCount)o;
+         Message clickCountMessage=new Message(uc.getUid(),"clickCount",String.valueOf(uc.getClickCount())); 
+         insert(clickCountMessage);
+         retract(o);
+         m.put(Long.valueOf(uc.getUid()),uc.getClickCount());
      }
     
      $room.setStatus("unrun"); 
      update($room);
      
      $operater.setGameOver(true);
-     $operater.setRecordID(Long.valueOf($recordName));  
+     $operater.setRecordID(Long.valueOf($recordName));
+     $operater.setMoney(m);  
      
      
    
@@ -850,10 +878,10 @@ when
 	$game:Game(); 
     $operater:Operater()     
 then      
-	 LogUtil.log("record start=================");       
+	// LogUtil.log("record start=================");       
 
       JobLogger.logMessages($game.getRecordName(), $operater.getNextMessages());
-	LogUtil.log("record over =================");
+	//LogUtil.log("record over =================");
 end
 
 

@@ -1,6 +1,5 @@
-
-var gameView={
-    hideDieArea:function(){
+var gameView = {
+    hideDieArea:function () {
 
     }
 }
@@ -11,10 +10,17 @@ $(document).ready(function () {
     $("#inner div").live("click", function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
         if ("living" == p.status || "ready" == p.status) {
-            var mo = mineView.getMineOperater(this, mouseAction.click);
-            var rid = globalView.getRoomID();
-            var version = globalView.getVersion();
-            mineService.sendMineOperater(mo, rid, version);
+            var divClass = $(this).attr("class");
+            if (divClass != undefined) {
+
+            } else {
+
+                var mo = mineView.getMineOperater(this, mouseAction.click);
+                var rid = globalView.getRoomID();
+                var version = globalView.getVersion();
+                mineService.sendMineOperater(mo, rid, version);
+            }
+
 
         } else {
             return;
@@ -245,8 +251,26 @@ $(document).ready(function () {
 
             var player = playerService.getPlayer(uid);
             $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] " + action + "了 [" + place + "] </p>");
+            viewUtil.autoBottom($("#" + selects.$gameArea));
+
 
         },
+        showClickCount:function (message) {
+            var uid = message.subject;
+            var player = playerService.getPlayer(uid);
+            var time = parseInt($("#overMessage").attr("time")) / 1000;
+            var count = parseInt(message.object);
+            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 共点击了 [" + message.object + "]次 ,平均每秒 [" + (count / time).toFixed(3) + "] 次</p>");
+            var money=$("#"+uid+"_vote").text();
+           if($("#overMessage").attr("result")=="win"){
+               $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 金币  [" +money + "]</p>");
+           }else{
+
+           }
+
+            viewUtil.autoBottom($("#" + selects.$gameArea));
+        },
+
         showMineOperater:function (mo) {
             var x = mo.x;
             var y = mo.y;
@@ -360,8 +384,9 @@ $(document).ready(function () {
             var uid = message.subject;
             var place = message.object;
             var player = playerService.getPlayer(uid);
+            var money=message.content;
 
-            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 同学我早知道你不靠谱了,你在 [" + place + "] 点到雷了 </p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 哈哈哈哈哈哈哈 [" + player.name + "]同学我早知道你不靠谱了,你在 [" + place + "] 点到雷了，会被扣除"+money+"～心疼不，自断手指吧亲 </p>");
         },
         over:function (message) {
 
@@ -375,9 +400,9 @@ $(document).ready(function () {
             settingView.displaySetting();
             mineService.parseBomb(bombStr.system, "mine");
             if ("win" == obj) {
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 居然赢了.~~赶紧的开始下一局,用时 [" + userTime + "]秒</p>");
+                $("#" + selects.$gameArea).append("<p style='color:#F00' id='overMessage' result='win' time='" + message.content + "''>【系统消息】 居然赢了.~~赶紧的开始下一局,用时 [" + userTime + "]秒</p>");
             } else {
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 果然输了,~~赶紧的开始下一局</p>");
+                $("#" + selects.$gameArea).append("<p style='color:#F00'  id='overMessage' result='lose'time='" + message.content + "'>【系统消息】 果然输了,用时 [" + userTime + "]秒~~赶紧的开始下一局</p>");
                 mineView.showMineOperater(wrongMine);
 
             }
@@ -400,8 +425,8 @@ $(document).ready(function () {
 
             //12的Div+左右两个2PX+1
             var containerWidth = 16 * parseInt(column);
-            console.log("mine width is " + mineSize.width + " border is " + mineSize.border + " column is " + column + " ,so Total" +
-                "weith is " + containerWidth);
+            /*   console.log("mine width is " + mineSize.width + " border is " + mineSize.border + " column is " + column + " ,so Total" +
+             "weith is " + containerWidth);*/
             /*
              var containerHeight = (mineSize.width + mineSize.border) * parseInt(column);
              console.log("mine height is " + mineSize.height + " border is " + mineSize.border + " row is " + row + " ,so Total" +
@@ -460,6 +485,10 @@ $(document).ready(function () {
             }
 
             globalView.setGameStatus(data.status);
+
+            controlView.clearCountDownTime();
+            controlView.startCountTime(jQuery.now()-data.startAt);
+
         },
 
         parseCount:function (counts) {
@@ -491,7 +520,7 @@ $(document).ready(function () {
                     break;
 
                 case "mine":
-                    console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
+                    //  console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
                     var mine = mineUtil.convertMessage2Mine(message);
                     if (mine.value == "bomb") {
                         wrongMine = mine;
@@ -513,10 +542,14 @@ $(document).ready(function () {
 
                 case "init":
                     bombStr.system = message.object;
-                    console.log("init is " + bombStr.system);
+                    // console.log("init is " + bombStr.system);
                     break;
                 case "count":
                     playerListView.setVote(message.subject, message.object);
+                    break;
+
+                case "clickCount":
+                    mineView.showClickCount(message);
                     break;
 
                 case "wrong":

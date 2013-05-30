@@ -92,7 +92,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 		if (CollectionUtils.isEmpty(operater.getTimerMessages())) {
 
-			log.info(message.getId() + " not have time ");
+			// log.info(message.getId() + " not have time ");
 
 		} else {
 			log.info(message.getId() + " have time "
@@ -100,10 +100,12 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			roomTimerSevice.nextMessages(operater.getTimerMessages());
 		}
 		// 怎么对顺序排序
-		log.info(message.getId() + " user time is "
-				+ (System.currentTimeMillis() - start));
+		/*
+		 * log.info(message.getId() + " user time is " +
+		 * (System.currentTimeMillis() - start));
+		 */
 
-		log.info(operater.getNextMessages());
+		// log.info(operater.getNextMessages());
 		return operater.getNextMessages();
 
 	}
@@ -151,7 +153,10 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			r.setStatus(Room.status_start);
 			r.setPlayers(operater.getPlayers());
 			User u = this.userService.getObjectById(r.getCreaterID());
-			r.setExpressions(u.getExpression());
+			if (u != null) {
+				r.setExpressions(u.getExpression());
+			}
+
 			this.roomService.updateRoom(r);
 
 		}
@@ -178,10 +183,17 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			if (isSaveRecord) {
 				// 六人局才发钱和超过三分钟才给钱存战例
 
+				Map<Long, Integer> m = operater.getMoney();
+				log.info("mone is " + m);
 				for (Long uid : r.getPlayers()) {
 
 					User u = this.userService.getObjectById(uid);
-					u.setMoney(u.getMoney() + 1000);//
+					if (m.containsKey(u.getId())) {
+						u.setMoney(u.getMoney() + m.get(u.getId()));//
+					} else {
+						u.setMoney(u.getMoney() + 1000);//
+					}
+
 					this.userService.update(u);
 
 				}
@@ -229,6 +241,29 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 				}
 
+			} else {
+				// 扫雷输了。就扣钱。扣其他的人钱的总数
+				if (r.getVersion().contains("mine")) {
+					for (Message m : messages) {
+						if ("wrong".equals(m.getPredict())) {
+							Integer i = 0;
+							Long wuid = Long.valueOf(m.getSubject());
+							Map<Long, Integer> money = operater.getMoney();
+							log.info("mone is " + money);
+							for (Long uid : money.keySet()) {
+
+								i = i + money.get(uid);
+
+							}
+							User wuser = this.userService.getObjectById(wuid);
+							wuser.setMoney(wuser.getMoney() - i);
+							this.userService.update(wuser);
+
+						}
+					}
+
+				}
+
 			}
 
 		}
@@ -248,8 +283,6 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 		return operater;
 	}
-
-	
 
 	private boolean isSaveRecord(Room r, Long time, List<Message> messages) {
 		String version = r.getVersion();
