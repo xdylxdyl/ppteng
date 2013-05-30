@@ -136,7 +136,7 @@
 <script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script><!--侦测键盘-->
 
-
+	<script src="/r/j-src/game/video/video.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
 <script
