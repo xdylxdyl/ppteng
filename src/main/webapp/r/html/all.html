@@ -1,116 +1,131 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<title>LogIn</title>
-<link href="../css/all.css" rel="stylesheet"/>
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
-<script src="../j-src/framework/jquery/jquery-1.6.1.js"></script>
-
+    <meta charset="utf-8">
+    <title>LogIn</title>
+    <link href="../css/all.css" rel="stylesheet"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+    <script src="../j-src/framework/jquery/jquery-1.6.1.js"></script>
+    <script src="../j-src/util/notify.js"></script>
 </head>
-	<body>
-		<div id="wrap">
-			<div id="content">
-				<header></header>
-				<nav></nav>
-				<div id="index">
-					<div id="create">
-						<p>您是要创建一个房间呢还是创建一个房间呢还是创建一个房间？  </p>
-						<p class="right"><a href="" class="button"> Create Room </a></p>
-					</div>
-					<article class="sample">
-						<h2><a href="">Room name is here</a></h2>
-						<p class="data">纪元：2011-10-26 7:00AM 房主：<a href="">name</a></p>
-						<p class="describe">房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述</p>
-					</article>
-					<article class="sample">
-                        <h2><a href="">Room name is here</a></h2>
-                        <p class="data">纪元：2011-10-26 7:00AM 房主：<a href="">name</a></p>
-                        <p class="describe">房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述</p>
-                    </article>
-					<article class="sample">
-                        <h2><a href="">Room name is here</a></h2>
-                        <p class="data">纪元：2011-10-26 7:00AM 房主：<a href="">name</a></p>
-                        <p class="describe">房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述</p>
-                    </article>
-				</div>
-			</div>
-			<div id="uplayer">
-	            <form>
-	                <label>房间名称：</label>
-	                <input type="text" class="text"/><br />
-	                <label>游戏版本：</label>
-	                <select>
-	                    <option>简化</option>
-	                    <option>猜数字</option>
-	                </select><br />
-	                <input class="submit" type="submit" />
-	                <a href="" class="cancel">取消并返回房间列表</a>
-	            </form>
-	        </div>
-		</div>
-		
+<body>
+<div id="wrap">
+    <div id="content">
+        <header></header>
+        <nav></nav>
+        <div id="index">
+            <div id="create">
+                <p>您是要创建一个房间呢还是创建一个房间呢还是创建一个房间？ </p>
+
+                <p class="right"><a href="" class="button"> Create Room </a></p>
+            </div>
+            <article class="sample">
+                <h2><a href="">Room name is here</a></h2>
+
+                <p class="data">纪元：2011-10-26 7:00AM 房主：<a href="">name</a></p>
+
+                <p class="describe">房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述</p>
+            </article>
+            <article class="sample">
+                <h2><a href="">Room name is here</a></h2>
+
+                <p class="data">纪元：2011-10-26 7:00AM 房主：<a href="">name</a></p>
+
+                <p class="describe">房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述</p>
+            </article>
+            <article class="sample">
+                <h2><a href="">Room name is here</a></h2>
+
+                <p class="data">纪元：2011-10-26 7:00AM 房主：<a href="">name</a></p>
+
+                <p class="describe">房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述房间描述</p>
+            </article>
+        </div>
+    </div>
+    <div id="uplayer">
+        <form>
+            <label>房间名称：</label>
+            <input type="text" class="text"/><br/>
+            <label>游戏版本：</label>
+            <select>
+                <option>简化</option>
+                <option>猜数字</option>
+            </select><br/>
+            <input class="submit" type="submit"/>
+            <a href="" class="cancel">取消并返回房间列表</a>
+        </form>
+    </div>
+    <input type="button" id="notify" title="Set notification permissions for this page" value="在这个页面设置通知权限">
+</div>
+
 <script>
-    $(document).ready(function() {
-        $(".sample").hover(function() {
+    $(document).ready(function () {
+        notifyUtil.sendNotify("title", "hello world ", "");
+        $(".sample").hover(function () {
             $(this).addClass("samplehover");
-        }, function() {
+        }, function () {
             $(this).removeClass("samplehover");
         })
-		
-		$("#create .button").bind('click', function() {
 
-            var html=ajaxJson("http://music.baidu.com/search", "get", {key:"xd"}, null, 5000, "html");
+        $("#create .button").bind('click', function () {
+
+            var html = ajaxJson("http://music.baidu.com/search", "get", {key:"xd"}, null, 5000, "html");
             console.log(html);
-			var width = $("#wrap").width();
-			var layerWidth = $("#uplayer").width();
-			$("#uplayer").css({
-				display : 'block',
-				top : 100,
-				left : (width-layerWidth)/2,
-			});
-			$(window).resize(function() {
-				var width = $("#wrap").width();
+            var width = $("#wrap").width();
+            var layerWidth = $("#uplayer").width();
+            $("#uplayer").css({
+                display:'block',
+                top:100,
+                left:(width - layerWidth) / 2
+            });
+            $(window).resize(function () {
+                var width = $("#wrap").width();
                 var layerWidth = $("#uplayer").width();
-	            $("#uplayer").css({
-	                display : 'block',
-	                top : 100,
-	                left : (width-layerWidth)/2
-	            });
-	        })
-			return false;
-		})
-		$(".cancel").click(function() {
-			$("#uplayer").hide();
-		})
+                $("#uplayer").css({
+                    display:'block',
+                    top:100,
+                    left:(width - layerWidth) / 2
+                });
+            })
+            return false;
+        })
+        $(".cancel").click(function () {
+            $("#uplayer").hide();
+        })
+        $("#notify").click(function () {
 
-        function ajaxJson(url, type, param, parse,timeout,dataType,async) {
-            if(timeout==null){
-                timeout=10000;
+                notifyUtil.sendNotify("title", "hello world ", "");
+
+        })
+
+        function ajaxJson(url, type, param, parse, timeout, dataType, async) {
+            if (timeout == null) {
+                timeout = 10000;
             }
-            if(async==null){
-                async=false;
+            if (async == null) {
+                async = false;
             }
             var result;
             $.ajax({
-                url : url,
-                type : type,
-                data: param,
-                dataType :dataType,
+                url:url,
+                type:type,
+                data:param,
+                dataType:dataType,
                 timeout:timeout,
-                async : async,
-                success : function(data) {
+                async:async,
+                success:function (data) {
 
                     if (parse == null) {
-                        result= data;
+                        result = data;
 
                     } else {
-                        if(parse!=null){
+                        if (parse != null) {
                             result = parse(data);
-                            if(result==undefined){
+                            if (result == undefined) {
 
-                            }else{
-                                console.log("In Ajax The Result Is:"+result);
+                            } else {
+                                console.log("In Ajax The Result Is:" + result);
 
                             }
 
@@ -121,14 +136,14 @@
 
                 },
 
-                error: function(XMLHttpRequest, textStatus) {
+                error:function (XMLHttpRequest, textStatus) {
                     if (textStatus == "timeout") {
                         console.log("[超时]");
                         //alert("连接超时");
                         return null;
                     } else {
                         console.log("[error]" + textStatus);
-                       // alert("无法获取版本号");
+                        // alert("无法获取版本号");
                         return null;
                     }
 
@@ -137,8 +152,8 @@
             });
             return result;
         }
-		
+
     })
 </script>
-	</body>
+</body>
 </html>

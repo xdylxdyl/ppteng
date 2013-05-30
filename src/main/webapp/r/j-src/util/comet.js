@@ -20,7 +20,7 @@ var cometUtil = {
 
                 //console.log(data);
                 successCB(data);
-                console.log("success");
+             //console.log("success");
                 cometUtil.polling(url, successCB);
             },
             error:function (XMLHttpRequest, textStatus) {

@@ -189,12 +189,7 @@
 	
 	
 	
-<script type="text/javascript" src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
-<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-tab.js"></script>
-<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-modal.js"></script>
-<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
-<script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script><!--侦测键盘-->
+<tiles:insertDefinition name="commonJSImport" />
 <script type="text/javascript" src="/r/j-src/framework/audio/audio.min.js"></script>
  <script src="/r/j-src/framework/angular/angular.min.js"></script>
 

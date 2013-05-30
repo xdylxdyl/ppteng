@@ -97,7 +97,7 @@ public class MoneyController {
 		users = this.userSevice.getObjectsByIds(new ArrayList(uids));
 		Map<Long, User> ids_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);
 
-		log.info("money all " + ids_user);
+		//log.info("money all " + ids_user);
 
 		users = this.userSevice.getObjectsByIds(userIDS);
 

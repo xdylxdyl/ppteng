@@ -597,18 +597,6 @@ end
 
 
 
-rule 'ready test all accepts message'
-ruleflow-group "all accepts message"
-no-loop true
-when
-
-then      
-	//actions
-     LogUtil.log("ready test  all accepts message================= "); 
-    
-     LogUtil.log("ready test all accepts message over =================");
-end
-
 
 
 rule 'all accepts message'

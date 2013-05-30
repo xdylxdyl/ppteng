@@ -13,7 +13,7 @@
 				keyProperty="version" valueProperty="id" keyColumn="version" />
 
 
-		<list name="getRecordIdsByVersionAndCreateAt" sqlitem="select id from records where version = ? and create_at >= ? order by create_at desc"
+		<list name="getRecordIdsByVersionAndCreateAt" sqlitem="select id from records where version = ? and create_at >= ? and create_at &lt;= ? order by create_at desc"
 			sqlType="hsql" 	keyProperty="nonSence" valueProperty="id" keyColumn="version,create_at" />
 				
 						

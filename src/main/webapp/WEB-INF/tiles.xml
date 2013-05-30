@@ -208,7 +208,8 @@
 		<!--leftNavHead -->
 	<definition name="currentUserHint" template="/WEB-INF/pages/room/tiles/left_nav_head.jsp" />
 	
-	
+		<!--commonJSImport -->
+	<definition name="commonJSImport" template="/WEB-INF/pages/common/commonJSImport.jsp" />
 	
 		<!--carousel -->
 	<definition name="carousel" template="/WEB-INF/pages/room/index/img.jsp" />

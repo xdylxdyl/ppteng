@@ -1059,6 +1059,29 @@ public class PlayerController {
 		return "/room/player/search";
 
 	}
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/notification")
+	public String notification(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) throws Exception {
+
+		Long self = cookieUtil.getID(request, response);
+		if(self==null){
+			return "redirect:/";
+		}
+		log.info(self);
+		
+		return "/room/player/notification";
+
+	}
 
 	/**
 	 * 获取玩家的状态信息

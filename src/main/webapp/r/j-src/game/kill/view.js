@@ -362,6 +362,8 @@ var gameView = {
 
         gameView.showSecondArea(p);
 
+        notifyUtil.sendNotify("举起手来", "杀人了杀人了杀人了", "");
+
 
     },
     over:function (message) {

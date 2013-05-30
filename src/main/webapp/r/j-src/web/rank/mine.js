@@ -24,6 +24,9 @@ $(document).ready(function () {
     leftView.highLight("leftNav_"+type);
 
 
+
+
+
 });
 
 

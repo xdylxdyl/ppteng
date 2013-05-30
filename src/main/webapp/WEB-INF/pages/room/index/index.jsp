@@ -217,6 +217,9 @@
 					<p>
 						<a href="http://www.neiht.com/" target="_blank">内涵图</a>
 					<p>
+					<p>
+						<a href="http://www.sjwyb.com/" target="_blank">手机网游帮</a>
+					<p>
 				</div>
 				<div class="span3">
 					<p>

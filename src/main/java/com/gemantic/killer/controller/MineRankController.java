@@ -72,15 +72,13 @@ public class MineRankController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/mine/statistics/{version}")
+	@RequestMapping(value = "/mine/statistics/{smallVersion}")
 	public String list(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model,@PathVariable String version,
+			HttpServletResponse response, ModelMap model,@PathVariable String smallVersion,
 			Integer page, Integer size, Long uid) throws Exception {
 
-		if (StringUtils.isBlank(version)) {
-			version = "all";
-		}
-		log.info("start get room list " + version);
+		
+		log.info("start get room list " + smallVersion);
 		Long selfID = cookieUtil.getID(request, response);
 
 		if (page == null) {
@@ -94,7 +92,7 @@ public class MineRankController {
 		}
 		Integer start = (page - 1) * size;
 
-		List<Records> records = this.getRecords(version, uid, start, size);
+		List<Records> records = this.getRecords(smallVersion, uid, start, size);
 
 		log.info("get record size " + records.size());
 		model.addAttribute("records", records);
@@ -127,7 +125,7 @@ public class MineRankController {
 		model.addAttribute("users", id_user);
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
-		model.addAttribute("version", version);
+		model.addAttribute("smallVersion", smallVersion);
 
 		return "/room/rank/mine_rank";
 	}

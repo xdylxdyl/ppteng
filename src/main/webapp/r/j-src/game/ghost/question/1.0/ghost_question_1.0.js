@@ -605,6 +605,7 @@ var gameView = {
         gameView.hideDieArea();
         var p = playerService.getPlayer(globalView.getCurrentID());
         gameView.showSecondArea(p);
+        notifyUtil.sendNotify("各位大神", "国王生气了，赶紧上朝", "");
 
     },
     over:function (message) {

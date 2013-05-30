@@ -48,7 +48,7 @@ var recordService = {
 
         }
         index++;
-        console.log("next message will run after " + msg_interval);
+      //  console.log("next message will run after " + msg_interval);
         setTimeout(recordService.showMessage, msg_interval, index, messages, speed);
 
     }
@@ -338,7 +338,7 @@ var roomService = {
         //由nameID获取真正name
         var name = this.getPerson(rid, uids);
         for (var j = 0; j < name.length; j++) {
-            console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
+           // console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
             var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
             playerService.addPlayer(p.id, p);
             // playerListView.login(p);
@@ -363,7 +363,7 @@ var roomService = {
         //由nameID获取真正name
         var name = this.getRecordPerson(rid, uids);
         for (var j = 0; j < name.length; j++) {
-            console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
+           // console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
             var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
             playerService.addPlayer(p.id, p);
             playerListView.login(p);
@@ -486,7 +486,7 @@ roomService.info = function () {
         //由nameID获取真正name
         var name = getPersonName(uids);
         for (var j = 0; j < name.length; j++) {
-            console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
+            //console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
             var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
             playerService.addPlayer(p.id, p);
             playerListView.login(p);
@@ -550,7 +550,7 @@ var cometService = {
     },
     sendMessage:function (message) {
         lastMessageSendAt = jQuery.now();
-        return ajaxJson("/message/accept2", "POST", message, controlView.showDelay, 5000, "json");
+        return ajaxJson("/message/accept2", "POST", message, controlView.showDelay, 5000, "json",false);
     },
     messageQ:function (msgObj) {
         $(document).queue("messages", cometService.parseMessage(msgObj.message));
@@ -574,7 +574,7 @@ var roomParseService = {
 
 
     branch:function (message) {
-        console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
+       // console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
         var rid = globalView.getRoomID();
         var type = globalView.getRoomType();
         if (rid != message.where && "game" == type) {
@@ -618,7 +618,7 @@ var roomParseService = {
                 this.setting(message);
                 break;
             default:
-                console.log("room parse over,start version parse");
+               // console.log("room parse over,start version parse");
                 versionFunction["parseMessage"](message);
         }
 
@@ -726,7 +726,7 @@ var roomParseService = {
 
         } else {
 
-            console.log(message);
+            //console.log(message);
             var p = playerService.getPlayer(id);
             gameAreaView.logout(p);
             playerListView.logout(p.id);

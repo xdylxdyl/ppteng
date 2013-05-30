@@ -113,7 +113,7 @@ public class MessageController {
 	 */
 	@RequestMapping(value = "/message/accept2")
 	public String accept(HttpServletRequest request, HttpServletResponse response, ModelMap model,  @ModelAttribute  Message message) throws Exception {
-		log.info(" accept  "+ message);
+		//log.info(" accept  "+ message);
 		int code = 0;
 		    
 		Long selfID = cookieUtil.getID(request, response);
