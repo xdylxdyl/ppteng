@@ -177,7 +177,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			r.setStatus(Room.status_wait);
 
 			this.roomService.updateRoom(r);
-			// 从哪知道游戏里的玩家呢
+			// 从哪知道游戏里的玩家呢...
 
 			boolean isSaveRecord = this.isSaveRecord(r, time, messages);
 			if (isSaveRecord) {
