@@ -192,3 +192,12 @@ li label.checkbox, li .help-inline {
 .icon-king {
     background-position: -75px 0;
 }
+
+.reflect{
+    text-shadow: rgba(0, 0, 0, 0.5) 0 5px 5px;
+    background:  -webkit-gradient(linear, left top, left bottom,
+                       from(rgba(200, 200, 240, 0.55)), to(rgba(255, 255, 255, 0.55)));
+    border-radius: 5px;
+    -webkit-box-reflect: below 10px  -webkit-gradient(linear, left top, left bottom,from(transparent), to(rgba(255, 255, 255, 1)));
+}
+

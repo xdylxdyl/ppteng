@@ -422,7 +422,7 @@ public class RecordController {
 
 					for (Long id : uids) {
 						MineStatistics mineStatistics = new MineStatistics();
-						mineStatistics.setId(r.getId());
+						mineStatistics.setRid(r.getId());
 						mineStatistics.setUid(uid);
 
 						mineStatistics.setSetting(settingVersion);

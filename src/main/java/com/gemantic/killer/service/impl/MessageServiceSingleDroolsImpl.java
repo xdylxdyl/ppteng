@@ -189,7 +189,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 					User u = this.userService.getObjectById(uid);
 					if (m.containsKey(u.getId())) {
-						u.setMoney(u.getMoney() + m.get(u.getId()));//
+						u.setMoney(u.getMoney() + m.get(u.getId())*10);//
 					} else {
 						u.setMoney(u.getMoney() + 1000);//
 					}
@@ -228,7 +228,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 					if (StringUtils.isNotBlank(settingVersion)) {
 
 						MineStatistics mineStatistics = new MineStatistics();
-						mineStatistics.setId(rid);
+						mineStatistics.setRid(rid);
 						mineStatistics.setUid(uid);
 
 						mineStatistics.setSetting(settingVersion);

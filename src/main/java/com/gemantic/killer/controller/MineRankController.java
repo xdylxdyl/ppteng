@@ -138,14 +138,14 @@ public class MineRankController {
 			// get all
 
 			ids = this.mineStatisticService
-					.getMineStatisticsIdsBySettingOrderByTime(version, start,
+					.getRecordIdsBySettingOrderByTime(version, start,
 							size);
 
 		} else {
 			// get persion
 
 			ids = this.mineStatisticService
-					.getMineStatisticsIdsBySettingAndUidOrderByTime(version,
+					.getRecordIdsBySettingAndUidOrderByTime(version,
 							uid, start, size);
 
 		}

@@ -29,6 +29,8 @@ public class MineStatistics implements Serializable {
 
 	private Long uid;
 
+	private Long rid;
+
 	private String setting;
 
 	private Long time;
@@ -38,6 +40,7 @@ public class MineStatistics implements Serializable {
 	private Long createAt;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	public Long getId() {
 		return id;
@@ -54,6 +57,15 @@ public class MineStatistics implements Serializable {
 
 	public void setUid(Long uid) {
 		this.uid = uid;
+	}
+
+	@Column(name = "rid")
+	public Long getRid() {
+		return rid;
+	}
+
+	public void setRid(Long rid) {
+		this.rid = rid;
 	}
 
 	@Column(name = "setting")

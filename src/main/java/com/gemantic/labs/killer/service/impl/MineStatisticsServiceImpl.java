@@ -16,14 +16,14 @@ import com.gemantic.dal.dao.exception.DaoException;
 import com.gemantic.killer.service.MineStatisticsService;
 import com.gemantic.labs.killer.model.MineStatistics;
 
-
 @Component
 public class MineStatisticsServiceImpl implements MineStatisticsService {
 
 	@Autowired
-    private Dao dao;
+	private Dao dao;
 
-	private static final Log log = LogFactory.getLog(MineStatisticsServiceImpl.class);
+	private static final Log log = LogFactory
+			.getLog(MineStatisticsServiceImpl.class);
 
 	public Dao getDao() {
 		return dao;
@@ -33,15 +33,13 @@ public class MineStatisticsServiceImpl implements MineStatisticsService {
 		this.dao = dao;
 	}
 
+	@Override
+	public Long insert(MineStatistics mineStatistics) throws ServiceException,
+			ServiceDaoException {
 
-		   
-		@Override
-		public Long insert(MineStatistics mineStatistics)throws ServiceException, ServiceDaoException{
-		
-	
-		           if(log.isInfoEnabled()){	
-    log.info(" insert data : " + mineStatistics);
- }
+		if (log.isInfoEnabled()) {
+			log.info(" insert data : " + mineStatistics);
+		}
 		if (mineStatistics == null) {
 			return null;
 		}
@@ -59,20 +57,22 @@ public class MineStatisticsServiceImpl implements MineStatisticsService {
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-      if(log.isInfoEnabled()){
-		log.info(" insert data success : " + result);
-      }
-return result;	
-		}	
-		  
-    	   
-		@Override
-		public List<MineStatistics> insertList(List<MineStatistics> mineStatisticsList)throws ServiceException, ServiceDaoException{
-		
-	
-		          	 if(log.isInfoEnabled()){
-        log.info(" insert lists : " + (mineStatisticsList == null ? "null" : mineStatisticsList.size()));
-      }
+		if (log.isInfoEnabled()) {
+			log.info(" insert data success : " + result);
+		}
+		return result;
+	}
+
+	@Override
+	public List<MineStatistics> insertList(
+			List<MineStatistics> mineStatisticsList) throws ServiceException,
+			ServiceDaoException {
+
+		if (log.isInfoEnabled()) {
+			log.info(" insert lists : "
+					+ (mineStatisticsList == null ? "null" : mineStatisticsList
+							.size()));
+		}
 		List<MineStatistics> resultList = null;
 
 		if (CollectionUtils.isEmpty(mineStatisticsList)) {
@@ -86,30 +86,28 @@ return result;
 		}
 
 		try {
-			resultList = (List<MineStatistics>) dao.batchSave(mineStatisticsList);
+			resultList = (List<MineStatistics>) dao
+					.batchSave(mineStatisticsList);
 		} catch (DaoException e) {
 			log.error(" insert list wrong : " + mineStatisticsList);
 			log.error(e);
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-     if(log.isInfoEnabled()){
-		log.info(" insert lists  success : " + (resultList == null ? "null" : resultList.size()));
-      }
+		if (log.isInfoEnabled()) {
+			log.info(" insert lists  success : "
+					+ (resultList == null ? "null" : resultList.size()));
+		}
 		return resultList;
-		
-		
-			
-		}	
-		  
-    	   
-		@Override
-		public boolean delete(Long id)throws ServiceException, ServiceDaoException{
-		
-	
-		             if(log.isInfoEnabled()){
-	    log.info(" delete data : " + id);
-    }
+
+	}
+
+	@Override
+	public boolean delete(Long id) throws ServiceException, ServiceDaoException {
+
+		if (log.isInfoEnabled()) {
+			log.info(" delete data : " + id);
+		}
 		boolean result = false;
 
 		if (id == null) {
@@ -124,20 +122,19 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-   if(log.isInfoEnabled()){
-		log.info(" delete data success : " + id);
-    }
+		if (log.isInfoEnabled()) {
+			log.info(" delete data success : " + id);
+		}
 		return result;
-		
-		}	
-		  
-    	   
-		@Override
-		public boolean update(MineStatistics mineStatistics)throws ServiceException, ServiceDaoException{
-		
-	
-		          
-	log.info(" update data : " + (mineStatistics == null ? "null" : mineStatistics.getId()));
+
+	}
+
+	@Override
+	public boolean update(MineStatistics mineStatistics)
+			throws ServiceException, ServiceDaoException {
+
+		log.info(" update data : "
+				+ (mineStatistics == null ? "null" : mineStatistics.getId()));
 
 		boolean result = false;
 
@@ -155,18 +152,19 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-       if(log.isInfoEnabled()){
-		log.info(" update data success : " + mineStatistics);
-       }
-		return result;	
-		}	
-		  
-    	   
-		@Override
-		public boolean updateList(List<MineStatistics> mineStatisticsList)throws ServiceException, ServiceDaoException{
-		
-	
-		          log.info(" update lists : " + (mineStatisticsList == null ? "null" : mineStatisticsList.size()));
+		if (log.isInfoEnabled()) {
+			log.info(" update data success : " + mineStatistics);
+		}
+		return result;
+	}
+
+	@Override
+	public boolean updateList(List<MineStatistics> mineStatisticsList)
+			throws ServiceException, ServiceDaoException {
+
+		log.info(" update lists : "
+				+ (mineStatisticsList == null ? "null" : mineStatisticsList
+						.size()));
 
 		boolean result = false;
 
@@ -187,20 +185,19 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-         if(log.isInfoEnabled()){
-		log.info(" update lists success : " + mineStatisticsList.size());
-         }
-		return result;	
-		}	
-		  
-    	   
-		@Override
-		public MineStatistics getObjectById(Long id)throws ServiceException, ServiceDaoException{
-		
-	
-		                 if(log.isInfoEnabled()){
-        log.info(" get data : " + id);
-       }
+		if (log.isInfoEnabled()) {
+			log.info(" update lists success : " + mineStatisticsList.size());
+		}
+		return result;
+	}
+
+	@Override
+	public MineStatistics getObjectById(Long id) throws ServiceException,
+			ServiceDaoException {
+
+		if (log.isInfoEnabled()) {
+			log.info(" get data : " + id);
+		}
 		MineStatistics mineStatistics = null;
 
 		if (id == null) {
@@ -215,20 +212,19 @@ return result;
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-       if(log.isInfoEnabled()){
-		log.info(" get data success : " + id);
-        }
-		return mineStatistics;		
-		}	
-		  
-    	   
-		@Override
-		public List<MineStatistics> getObjectsByIds(List<Long> ids)throws ServiceException, ServiceDaoException{
-		
-	
-		          	  if(log.isInfoEnabled()){
-	    log.info(" get lists : " + (ids == null ? "null" : ids));
-      }
+		if (log.isInfoEnabled()) {
+			log.info(" get data success : " + id);
+		}
+		return mineStatistics;
+	}
+
+	@Override
+	public List<MineStatistics> getObjectsByIds(List<Long> ids)
+			throws ServiceException, ServiceDaoException {
+
+		if (log.isInfoEnabled()) {
+			log.info(" get lists : " + (ids == null ? "null" : ids));
+		}
 		List<MineStatistics> mineStatistics = null;
 
 		if (CollectionUtils.isEmpty(ids)) {
@@ -236,117 +232,192 @@ return result;
 		}
 
 		try {
-			mineStatistics = (List<MineStatistics>) dao.getList(MineStatistics.class, ids);
+			mineStatistics = (List<MineStatistics>) dao.getList(
+					MineStatistics.class, ids);
 		} catch (DaoException e) {
 			log.error(" get wrong : " + ids);
 			log.error(e);
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-     if(log.isInfoEnabled()){
-		log.info(" get data success : " + (mineStatistics == null ? "null" : mineStatistics.size()));
-     }
-		return mineStatistics;	
-		}	
-		  
-    	
-		
-	
-	
-			
-			
-		/**
+		if (log.isInfoEnabled()) {
+			log.info(" get data success : "
+					+ (mineStatistics == null ? "null" : mineStatistics.size()));
+		}
+		return mineStatistics;
+	}
+
+	/**
 	 * 
-	 * @param 
-	 * @return 
+	 * @param
+	 * @return
 	 * @throws ServiceException
 	 * @throws ServiceDaoException
 	 */
-	 @Override
-	public List<Long>  getMineStatisticsIdsBySettingAndUidOrderByTime(String setting,Long uid,Integer start,Integer limit)throws ServiceException, ServiceDaoException{
-		
-		       if(log.isInfoEnabled()){
-      log.info(" get ids by setting,uid,start,limit  : " + setting+" , "+uid+" , "+start+" , "+limit );
-	  }
-	 	List<Long> idList = null;
-        
-        // TODO 参数检查!
+	@Override
+	public List<Long> getMineStatisticsIdsBySettingAndUidOrderByTime(
+			String setting, Long uid, Integer start, Integer limit)
+			throws ServiceException, ServiceDaoException {
 
-        if (start == null) {
-            start = 0;
-        }
+		if (log.isInfoEnabled()) {
+			log.info(" get ids by setting,uid,start,limit  : " + setting
+					+ " , " + uid + " , " + start + " , " + limit);
+		}
+		List<Long> idList = null;
 
-        if (limit == null) {
-            limit = Integer.MAX_VALUE;
-        }
+		// TODO 参数检查!
 
-	try {
-		idList = dao.getIdList("getMineStatisticsIdsBySettingAndUidOrderByTime", new Object[] { setting,uid},start,limit, false);
+		if (start == null) {
+			start = 0;
+		}
 
-   
-   } catch (DaoException e) {
-			log.error(" get ids  wrong by setting,uid,start,limit)  : " + setting+" , "+uid+" , "+start+" , "+limit );
+		if (limit == null) {
+			limit = Integer.MAX_VALUE;
+		}
+
+		try {
+			idList = dao.getIdList(
+					"getMineStatisticsIdsBySettingAndUidOrderByTime",
+					new Object[] { setting, uid }, start, limit, false);
+
+		} catch (DaoException e) {
+			log.error(" get ids  wrong by setting,uid,start,limit)  : "
+					+ setting + " , " + uid + " , " + start + " , " + limit);
 			log.error(e);
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-  if(log.isInfoEnabled()){
-   log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
-  }
+		if (log.isInfoEnabled()) {
+			log.info(" get ids success : "
+					+ (idList == null ? "null" : idList.size()));
+		}
 		return idList;
-		
-	
-	
+
 	}
-	
-			
-			
-		/**
+
+	/**
 	 * 
-	 * @param 
-	 * @return 
+	 * @param
+	 * @return
 	 * @throws ServiceException
 	 * @throws ServiceDaoException
 	 */
-	 @Override
-	public List<Long>  getMineStatisticsIdsBySettingOrderByTime(String setting,Integer start,Integer limit)throws ServiceException, ServiceDaoException{
-		
-		       if(log.isInfoEnabled()){
-      log.info(" get ids by setting,start,limit  : " + setting+" , "+start+" , "+limit );
-	  }
-	 	List<Long> idList = null;
-        
-        // TODO 参数检查!
+	@Override
+	public List<Long> getMineStatisticsIdsBySettingOrderByTime(String setting,
+			Integer start, Integer limit) throws ServiceException,
+			ServiceDaoException {
 
-        if (start == null) {
-            start = 0;
-        }
+		if (log.isInfoEnabled()) {
+			log.info(" get ids by setting,start,limit  : " + setting + " , "
+					+ start + " , " + limit);
+		}
+		List<Long> idList = null;
 
-        if (limit == null) {
-            limit = Integer.MAX_VALUE;
-        }
+		// TODO 参数检查!
 
-	try {
-		idList = dao.getIdList("getMineStatisticsIdsBySettingOrderByTime", new Object[] { setting},start,limit, false);
+		if (start == null) {
+			start = 0;
+		}
 
-   
-   } catch (DaoException e) {
-			log.error(" get ids  wrong by setting,start,limit)  : " + setting+" , "+start+" , "+limit );
+		if (limit == null) {
+			limit = Integer.MAX_VALUE;
+		}
+
+		try {
+			idList = dao.getIdList("getMineStatisticsIdsBySettingOrderByTime",
+					new Object[] { setting }, start, limit, false);
+
+		} catch (DaoException e) {
+			log.error(" get ids  wrong by setting,start,limit)  : " + setting
+					+ " , " + start + " , " + limit);
 			log.error(e);
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
-  if(log.isInfoEnabled()){
-   log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
-  }
+		if (log.isInfoEnabled()) {
+			log.info(" get ids success : "
+					+ (idList == null ? "null" : idList.size()));
+		}
 		return idList;
-		
-	
-	
+
 	}
-	
-		
-	
+
+	@Override
+	public List<Long> getRecordIdsBySettingAndUidOrderByTime(String setting,
+			Long uid, Integer start, Integer limit) throws ServiceException,
+			ServiceDaoException {
+
+		if (log.isInfoEnabled()) {
+			log.info(" get ids by setting,uid,start,limit  : " + setting
+					+ " , " + uid + " , " + start + " , " + limit);
+		}
+		List<Long> idList = null;
+
+		// TODO 参数检查!
+
+		if (start == null) {
+			start = 0;
+		}
+
+		if (limit == null) {
+			limit = Integer.MAX_VALUE;
+		}
+
+		try {
+			idList = dao.getIdList(
+					"getMineStatisticsRIdsBySettingAndUidOrderByTime",
+					new Object[] { setting, uid }, start, limit, false);
+
+		} catch (DaoException e) {
+			log.error(" get ids  wrong by setting,uid,start,limit)  : "
+					+ setting + " , " + uid + " , " + start + " , " + limit);
+			log.error(e);
+			e.printStackTrace();
+			throw new ServiceDaoException(e);
+		}
+		if (log.isInfoEnabled()) {
+			log.info(" get ids success : "
+					+ (idList == null ? "null" : idList.size()));
+		}
+		return idList;
+	}
+
+	@Override
+	public List<Long> getRecordIdsBySettingOrderByTime(String setting,
+			Integer start, Integer limit) throws ServiceException,
+			ServiceDaoException {
+		if (log.isInfoEnabled()) {
+			log.info(" get ids by setting,start,limit  : " + setting + " , "
+					+ start + " , " + limit);
+		}
+		List<Long> idList = null;
+
+		// TODO 参数检查!
+
+		if (start == null) {
+			start = 0;
+		}
+
+		if (limit == null) {
+			limit = Integer.MAX_VALUE;
+		}
+
+		try {
+			idList = dao.getIdList("getMineStatisticsRIdsBySettingOrderByTime",
+					new Object[] { setting }, start, limit, false);
+
+		} catch (DaoException e) {
+			log.error(" get ids  wrong by setting,start,limit)  : " + setting
+					+ " , " + start + " , " + limit);
+			log.error(e);
+			e.printStackTrace();
+			throw new ServiceDaoException(e);
+		}
+		if (log.isInfoEnabled()) {
+			log.info(" get ids success : "
+					+ (idList == null ? "null" : idList.size()));
+		}
+		return idList;
+	}
 
 }
-
