@@ -844,8 +844,10 @@ no-loop true
 when
 	//conditions    
 	$message:Message($phase:subject,predict=="die",object=="vote")
+	
     $room:Room(status=="run")
-    $game:Game(status=="day") 
+    $game:Game(status=="day",ghostCount > 0) 
+  
     $operater:Operater()
     
 then     
