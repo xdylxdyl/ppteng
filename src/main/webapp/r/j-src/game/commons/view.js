@@ -256,9 +256,11 @@ var playerListView = {
     setVote:function (id, count) {
         if (count == 0) {
             $("#" + id + "_vote").text("");
+            $("#" + id + "_vote").attr("count",0);
 
         } else {
             $("#" + id + "_vote").text(" +" + count);
+            $("#" + id + "_vote").attr("count",count);
         }
     },
     displayCreater:function (player) {

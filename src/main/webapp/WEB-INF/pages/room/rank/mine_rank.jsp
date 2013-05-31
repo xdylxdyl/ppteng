@@ -4,12 +4,14 @@
 <input type="hidden" id="version" value="${smallVersion}"></input>
  <div class="span9">
 <div class="container" >
-	<c:forEach items="${records}" var="record" begin="0" step="1"
+	<c:forEach items="${mines}" var="mine" begin="0" step="1"
 		varStatus="status">
+	<c:set var="record" value="${records[mine.rid]}"></c:set>	
+		
 	 <c:set var="version" value="${record.room.version}"></c:set>
     <div class="row"  style="margin-top:1em;margin-bottom:1em">
         <div class="span2">
-            <img src="http://www.ptteng.com${users[record.room.createrID].icon}" alt="${users[record.room.createrID].name}" class="img-polaroid" style="max-width:8em;height:8em" >
+            <img src="http://www.ptteng.com${users[mine.uid].icon}" alt="${users[record.room.createrID].name}" class="img-polaroid" style="max-width:8em;height:8em" >
         </div>
         <div class="span10">
             <h3 class="text-error"><a href="/record/enter?recordID=${record.id}"> ${(page-1)*size+status.index+1}.${record.room.name}</a></h2>
@@ -17,8 +19,8 @@
                 <p>纪元：
 						<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
 								value="${record.createAt}"></date:date>
-				房主：<a href="/player/detail?uid=${record.room.createrID}"
-								target="_blank">${users[record.room.createrID].name}</a>
+				玩家：<a href="/player/detail?uid=${mine.uid}"
+								target="_blank">${users[mine.uid].name}</a>
 				</p>
                 <small> 
 

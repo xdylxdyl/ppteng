@@ -26,6 +26,7 @@ import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MineStatisticsService;
 import com.gemantic.killer.service.SettingService;
 import com.gemantic.labs.killer.etl.RecordStastisticsEtl;
+import com.gemantic.labs.killer.model.MineStatistics;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.service.RecordService;
 import com.gemantic.labs.killer.service.UserRecordService;
@@ -93,20 +94,24 @@ public class MineRankController {
 		Integer start = (page - 1) * size;
 
 		List<Records> records = this.getRecords(smallVersion, uid, start, size);
+		List<MineStatistics> ms=this.getMines(smallVersion, uid, start, size);
 
 		log.info("get record size " + records.size());
 		model.addAttribute("records", records);
 
 		List<Long> userIDS = new ArrayList();
-		for (Records record : records) {
-			Room r = record.getRoom();
-			userIDS.add(r.getCreaterID());
-
+		for (MineStatistics mine : ms) {			
+			userIDS.add(mine.getUid());
 		}
+		
+		
+		
 
 		List<User> users = this.userSevice.getObjectsByIds(userIDS);
 		Map id_user = MyListUtil.convert2Map(User.class.getDeclaredField("id"),
 				users);
+		Map id_record = MyListUtil.convert2Map(Records.class.getDeclaredField("id"),
+				records);
 
 		if (uid != null) {
 			User u = this.userSevice.getObjectById(uid);
@@ -121,13 +126,37 @@ public class MineRankController {
 		model.addAttribute("selfID", selfID);
 		model.addAttribute("uid", uid);
 
-		model.addAttribute("records", records);
+		model.addAttribute("records", id_record);
+		model.addAttribute("mines", ms);		
 		model.addAttribute("users", id_user);
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
 		model.addAttribute("smallVersion", smallVersion);
 
 		return "/room/rank/mine_rank";
+	}
+
+	private List<MineStatistics> getMines(String version, Long uid, Integer start, Integer size) throws ServiceException, ServiceDaoException {
+		List<Long> ids = new ArrayList();
+
+		if (uid == null) {
+			// get all
+
+			ids = this.mineStatisticService
+					.getMineStatisticsIdsBySettingOrderByTime(version, start,
+							size);
+
+		} else {
+			// get persion
+
+			ids = this.mineStatisticService
+					.getMineStatisticsIdsBySettingAndUidOrderByTime(version,
+							uid, start, size);
+
+		}
+
+		List<MineStatistics> records = this.mineStatisticService.getObjectsByIds(ids);
+		return records;
 	}
 
 	private List<Records> getRecords(String version, Long uid, Integer start,

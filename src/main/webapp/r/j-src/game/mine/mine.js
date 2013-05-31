@@ -261,7 +261,7 @@ $(document).ready(function () {
             var time = parseInt($("#overMessage").attr("time")) / 1000;
             var count = parseInt(message.object);
             $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 共点击了 [" + message.object + "]次 ,平均每秒 [" + (count / time).toFixed(3) + "] 次</p>");
-            var money=$("#"+uid+"_vote").text();
+            var money=parseInt($("#"+uid+"_vote").attr("count"))*10;
            if($("#overMessage").attr("result")=="win"){
                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 金币  [" +money + "]</p>");
            }else{
