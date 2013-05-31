@@ -709,7 +709,7 @@ then
          Message clickCountMessage=new Message(uc.getUid(),"clickCount",String.valueOf(uc.getClickCount())); 
          insert(clickCountMessage);
          retract(o);
-         m.put(Long.valueOf(uc.getUid()),uc.getClickCount());
+         m.put(Long.valueOf(uc.getUid()),uc.getCount());
      }
     
      $room.setStatus("unrun"); 

@@ -188,11 +188,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 				for (Long uid : r.getPlayers()) {
 
 					User u = this.userService.getObjectById(uid);
-					if (m.containsKey(u.getId())) {
-						u.setMoney(u.getMoney() + m.get(u.getId())*10);//
-					} else {
-						u.setMoney(u.getMoney() + 1000);//
-					}
+					this.giveMoney(u, r, m);
 
 					this.userService.update(u);
 
@@ -244,22 +240,29 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			} else {
 				// 扫雷输了。就扣钱。扣其他的人钱的总数
 				if (r.getVersion().contains("mine")) {
-					for (Message m : messages) {
-						if ("wrong".equals(m.getPredict())) {
-							Integer i = 0;
-							Long wuid = Long.valueOf(m.getSubject());
-							Map<Long, Integer> money = operater.getMoney();
-							log.info("mone is " + money);
-							for (Long uid : money.keySet()) {
 
-								i = i + money.get(uid);
+					String settingVersion = RoomUtil.getMIneSettingVersion(r);
+					if (StringUtils.isNotBlank(settingVersion)) {
+						for (Message m : messages) {
+							if ("wrong".equals(m.getPredict())) {
+								Integer i = 0;
+								Long wuid = Long.valueOf(m.getSubject());
+								Map<Long, Integer> money = operater.getMoney();
+								log.info("mone is " + money);
+								for (Long uid : money.keySet()) {
+
+									i = i + money.get(uid);
+
+								}
+								User wuser = this.userService
+										.getObjectById(wuid);
+								wuser.setMoney(wuser.getMoney() - i);
+								this.userService.update(wuser);
 
 							}
-							User wuser = this.userService.getObjectById(wuid);
-							wuser.setMoney(wuser.getMoney() - i);
-							this.userService.update(wuser);
-
 						}
+					} else {
+
 					}
 
 				}
@@ -282,6 +285,23 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		}
 
 		return operater;
+	}
+
+	private void giveMoney(User u, Room r, Map<Long, Integer> m) {
+		if (r.getVersion().contains("mine")) {
+			String settingVersion = RoomUtil.getMIneSettingVersion(r);
+			if (StringUtils.isNotBlank(settingVersion)) {
+
+				u.setMoney(u.getMoney() + m.get(u.getId()) * 10);//
+
+			} else {
+
+			}
+
+		} else {
+			u.setMoney(u.getMoney() + 1000);//
+		}
+
 	}
 
 	private boolean isSaveRecord(Room r, Long time, List<Message> messages) {

@@ -11,7 +11,7 @@ $(document).ready(function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
         if ("living" == p.status || "ready" == p.status) {
             var divClass = $(this).attr("class");
-            if (divClass != undefined) {
+            if (divClass != undefined&&divClass!="") {
 
             } else {
 
