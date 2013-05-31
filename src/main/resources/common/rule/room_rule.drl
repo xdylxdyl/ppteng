@@ -42,13 +42,13 @@ when
     
 then      
 	//actions
-     LogUtil.log("reset player status  start '================= ");
+     //LogUtil.log("reset player status  start '================= ");
      modify($player){setStatus("unready")}; 
       // send right message
 	 Message message=new Message($id,"status","unready"); 
      insert(message);	
      
-     LogUtil.log("reset player status  over' ================="); 
+    // LogUtil.log("reset player status  over' ================="); 
     
 end
 
@@ -64,13 +64,13 @@ when
     $right:Right(id==$id)
 then      
 	//actions
-     LogUtil.log("reset right start '================= ");
+    // LogUtil.log("reset right start '================= ");
      modify($right){setRight(convertString2Set("say"))}; 
       // send right message
 	 Message rightMessage=new Message($id,"right","say"); 
      insert(rightMessage);	
      
-     LogUtil.log("reset right over' ================="); 
+    // LogUtil.log("reset right over' ================="); 
     
 end
 
@@ -93,7 +93,7 @@ when
     
 then      
 	
-	 LogUtil.log("create rooom =================");	
+	// LogUtil.log("create rooom =================");	
 	 
 	  Map set=new HashMap();	
 	  if($setting==null){
@@ -110,8 +110,8 @@ then
  
      Message loginMessage=new Message($message.getSubject(),"login",""); 
      insert(loginMessage);
-  LogUtil.log("create rooom ================="+room);	
-    LogUtil.log("create rooom over =================");
+ // LogUtil.log("create rooom ================="+room);	
+  // LogUtil.log("create rooom over =================");
 
     
 end
@@ -129,17 +129,17 @@ when
     
 then      
 	
-	 LogUtil.log("update room setting start =================");
+	// LogUtil.log("update room setting start =================");
 	 
 	 
 
        
        
 	  $room.setSetting($setting.getSetting());
-	 LogUtil.log($setting.getSetting());
+	// LogUtil.log($setting.getSetting());
      update($room);  
      
-    LogUtil.log("update room setting over =================");
+   // LogUtil.log("update room setting over =================");
 
     
 end
@@ -159,7 +159,7 @@ when
 
 then      
    //why not run 
-    LogUtil.log("admin right start   =============");
+   // LogUtil.log("admin right start   =============");
     
    
 
@@ -168,7 +168,7 @@ then
     //Message right=new Message($creater,"right",$person.getRight().toString().replace("[", "").replace("]", "")); 
    
    // insert(right);
-    LogUtil.log("admin right  over =============");
+   // LogUtil.log("admin right  over =============");
 end
 
 
@@ -185,13 +185,13 @@ when
 
 then      
    //why not run 
-    LogUtil.log("admin right start   =============");
+   // LogUtil.log("admin right start   =============");
     $right.getRight().add("start"); 
     $right.setIsNotify(false);
     //Message right=new Message($creater,"right",$person.getRight().toString().replace("[", "").replace("]", "")); 
     update($right);
     //insert(right);
-    LogUtil.log("admin right  over =============");
+  //  LogUtil.log("admin right  over =============");
 end
 
 
@@ -204,7 +204,7 @@ when
      $person:Player($pid:id)
 then      
 	
-	 LogUtil.log("change admin =================");
+	// LogUtil.log("change admin =================");
 	$room.setCreater($pid);
 	update($room);
 	
@@ -212,7 +212,7 @@ then
      insert(admin);
      
      
-     LogUtil.log("change admin over =================");
+   //  LogUtil.log("change admin over =================");
 
     
 end
@@ -239,12 +239,12 @@ when
     not Player(id==$subject)
 then      
 	//actions
-     LogUtil.log("login =================");  
+    // LogUtil.log("login =================");  
     Player person=new Player($message.getSubject(),"","unready");
     insert(person);
-    LogUtil.log(person); 
+   // LogUtil.log(person); 
     
-     LogUtil.log("login over ================= "); 
+    // LogUtil.log("login over ================= "); 
       
     
 end
@@ -263,13 +263,13 @@ when
     $room:Room(status!="run")
 then      
 	//actions
-     LogUtil.log("login init right ================="); 
+  //   LogUtil.log("login init right ================="); 
      Right r=new Right($id,convertString2Set("say,ready"),false);
      insert(r);
          
     //  LogUtil.log(person); 
  // LogUtil.log($room); 
-     LogUtil.log("login init right over ================= "); 
+    // LogUtil.log("login init right over ================= "); 
       
     
 end
@@ -286,13 +286,13 @@ when
     $room:Room(status=="run")
 then      
 	//actions
-     LogUtil.log("login init right ================="); 
+   //  LogUtil.log("login init right ================="); 
      Right r=new Right($id,convertString2Set("say"),false);
      insert(r);
          
     //  LogUtil.log(person); 
  // LogUtil.log($room); 
-     LogUtil.log("login init right over ================= "); 
+   //  LogUtil.log("login init right over ================= "); 
       
     
 end
@@ -312,9 +312,9 @@ when
     $room:Room()   
 then      
 	//actions
-     LogUtil.log("logout clear person ================= "+$person); 
+   //  LogUtil.log("logout clear person ================= "+$person); 
      retract($person); 
-     LogUtil.log("logout  clear person over ================="); 
+    // LogUtil.log("logout  clear person over ================="); 
      
 end
 
@@ -330,10 +330,10 @@ when
     not Player()
 then      
 	//actions
-     LogUtil.log("logout clear person ================= "); 
+    // LogUtil.log("logout clear person ================= "); 
      $operater.setRoomEmpty(true);
      update($operater);     
-     LogUtil.log("logout  clear person over ================="); 
+    // LogUtil.log("logout  clear person over ================="); 
      
 end
 
@@ -347,10 +347,10 @@ when
     not Player()
 then      
 	//actions
-     LogUtil.log("logout clear person ================= "); 
+   //  LogUtil.log("logout clear person ================= "); 
      $operater.setRoomEmpty(true);
      update($operater);     
-     LogUtil.log("logout  clear person over ================="); 
+   //  LogUtil.log("logout  clear person over ================="); 
      
 end
 
@@ -366,11 +366,11 @@ when
     
 then      
 	//actions
-     LogUtil.log("logout clear right start ================= "); 
+   //  LogUtil.log("logout clear right start ================= "); 
    
     
      retract($right);
-     LogUtil.log("logout clear right over ================="); 
+   //  LogUtil.log("logout clear right over ================="); 
     
 end
 
@@ -391,7 +391,7 @@ when
     $right:Right(id==$subject,right contains "ready")
 then      
 	//actions
-     LogUtil.log("ready ================= "+$person+" room is "+$room); 
+     //LogUtil.log("ready ================= "+$person+" room is "+$room); 
        
      $right.getRight().remove("ready");
 
@@ -404,7 +404,7 @@ then
      $person.setStatus("ready");     
      update($right);
      update($person);
-     LogUtil.log("ready over =================");
+   ///  LogUtil.log("ready over =================");
 end
 
 
@@ -418,10 +418,10 @@ when
  
 then      
 	//actions
-     LogUtil.log("unlimit ready ================= "); 
+   //  LogUtil.log("unlimit ready ================= "); 
        retract($message);
    
-     LogUtil.log("unlimit ready over =================");
+   //  LogUtil.log("unlimit ready over =================");
 end
 
 
@@ -434,11 +434,11 @@ when
     $person:Player(id==$object)
 then      
 	//actions
-    LogUtil.log("kick ================= "+$person); 
+  //  LogUtil.log("kick ================= "+$person); 
 
    
      retract($person);
-     LogUtil.log("kick over =================");
+   //  LogUtil.log("kick over =================");
 end
 
 
@@ -464,11 +464,11 @@ when
     Player(id==$subject)
 then      
 	//actions
-     LogUtil.log("login repeat ================="); 
+  //   LogUtil.log("login repeat ================="); 
     retract($message);
     //  LogUtil.log(person); 
  // LogUtil.log($room); 
-     LogUtil.log("login repeat over ================= "); 
+   //  LogUtil.log("login repeat over ================= "); 
       
     
 end
@@ -526,7 +526,7 @@ when
 
    $right:Right($id:id,isNotify==false)
 then      
-    LogUtil.log("generate right message  start =============");
+  //  LogUtil.log("generate right message  start =============");
    
    Message right=new Message($id,"right",$right.getRight().toString().replace("[", "").replace("]", "")); 
     insert(right);
@@ -534,7 +534,7 @@ then
     $right.setIsNotify(true);
     update($right);
 	
-   LogUtil.log("generate right message  over =============");
+ //  LogUtil.log("generate right message  over =============");
 end
 
 
@@ -550,10 +550,10 @@ when
 	 eval($message.getAccepts().size()==0)
     $operater:Operater()
 then      
-    LogUtil.log(" say to one person message start  =============");   
+  //  LogUtil.log(" say to one person message start  =============");   
    $message.getAccepts().add($message.getObject()); 
     update($message);
-    LogUtil.log("generate message over =============");
+   // LogUtil.log("generate message over =============");
   
 end
 
@@ -567,11 +567,11 @@ when
 	 eval($message.getAccepts().size()==0)
     $operater:Operater()
 then      
-    LogUtil.log(" admin kick message start  =============");   
+  //  LogUtil.log(" admin kick message start  =============");   
     $message.getAccepts().add($subject);
     $message.getAccepts().add($object);
      update($message);
-    LogUtil.log("admin kick messagessage over =============");  
+   // LogUtil.log("admin kick messagessage over =============");  
 end
 
 
@@ -585,11 +585,11 @@ when
 
     $operater:Operater()
 then      
-    LogUtil.log(" right  message  accepts start  =============");     
+  //  LogUtil.log(" right  message  accepts start  =============");     
     $message.getAccepts().add($subject);
      update($message);
      //LogUtil.log($message.getAccepts()); 
-    LogUtil.log("right  message accepts over =============");  
+  //  LogUtil.log("right  message accepts over =============");  
 end
 
 
@@ -675,7 +675,7 @@ when
    
 then      
 	
-	 LogUtil.log("room get query info ================= ");	  
+	// LogUtil.log("room get query info ================= ");	  
       Map m=new HashMap();
       m.put("room",$room);
       m.put("person",$allLogins);  
@@ -683,7 +683,7 @@ then
 
       $operater.setSnapshots(GsonUtil.toJson(m));
     	//actions
-	LogUtil.log("room get query info over =================");
+	//LogUtil.log("room get query info over =================");
 end
 
 

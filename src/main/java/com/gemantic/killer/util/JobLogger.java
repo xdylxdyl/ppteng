@@ -20,19 +20,22 @@ public class JobLogger {
 	private static Hashtable<String, Logger> m_loggers = new Hashtable<String, Logger>();// 什么时候清空呢.
 	private static String m_filename = "record"; // Root log directory
 	private static final Log log = LogFactory.getLog(JobLogger.class);
+	private static boolean logEnable = false;
 
 	public static synchronized void logMessage(String jobName, Message message) {
-		//log.info(jobName+" : "+message);
-
-		String json = MessageUtil.convert2String(message);
-		Logger l = getJobLogger(jobName);
-		l.info(json);
+		if (logEnable) {
+			String json = MessageUtil.convert2String(message);
+			Logger l = getJobLogger(jobName);
+			l.info(json);
+		}
 	}
 
 	public static synchronized void log(String jobName, String message) {
-		//log.info(jobName+" : "+message);
-		Logger l = getJobLogger(jobName);
-		l.info(message);
+		if (logEnable) {
+			;
+			Logger l = getJobLogger(jobName);
+			l.info(message);
+		}
 	}
 
 	public static synchronized void logException(String jobName, Exception e) {
@@ -49,8 +52,9 @@ public class JobLogger {
 			try {
 				File file = new File(m_filename);
 				file.mkdirs();
-				file = new File(m_filename + "/" + jobName+".txt");
-				FileAppender appender = new FileAppender(layout, file.getAbsolutePath(), true);
+				file = new File(m_filename + "/" + jobName + ".txt");
+				FileAppender appender = new FileAppender(layout,
+						file.getAbsolutePath(), true);
 				appender.setEncoding("utf-8");
 				logger.removeAllAppenders();
 				logger.addAppender(appender);
@@ -68,24 +72,22 @@ public class JobLogger {
 		List<String> messages = FileUtil
 				.readFileAsList("src/test/resources/killer_police.txt");
 		String policeVersion = "killer_police_1.0";
-		List<Message> ls=new ArrayList<Message>();
-		for(String line:messages){
+		List<Message> ls = new ArrayList<Message>();
+		for (String line : messages) {
 			Message m = MessageUtil.parse(policeVersion, line);
 			ls.add(m);
 		}
-		
-		JobLogger.logMessages("test",ls);
+
+		JobLogger.logMessages("test", ls);
 
 	}
 
 	public static void logMessages(String jobName, List<Message> messages) {
-		//log.info(jobName+" : "+messages);
-		String json = MessageUtil.convertMessages2String(messages);
-		Logger l = getJobLogger(jobName);
-		//log.info(json);
-		l.info(json);
-		
+		if (logEnable) {
+			String json = MessageUtil.convertMessages2String(messages);
+			Logger l = getJobLogger(jobName);
+			l.info(json);
+		}
 	}
-	
-	
+
 }
