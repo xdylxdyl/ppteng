@@ -13,11 +13,11 @@
 		<repository>
 			<releases>
 				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
+				<updatePolicy>never</updatePolicy>
 				<checksumPolicy>warn</checksumPolicy>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 				<updatePolicy>never</updatePolicy>
 				<checksumPolicy>fail</checksumPolicy>
 			</snapshots>
@@ -267,6 +267,12 @@
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-workitems</artifactId>
 			<version>5.1.0.Final</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-finder</artifactId>
+					<groupId>org.apache.commons</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 
