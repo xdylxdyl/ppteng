@@ -23,6 +23,7 @@ import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
+import com.gemantic.kill.thread.RoomMessageThread;
 import com.gemantic.kill.thread.RoomThread;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.common.model.Setting;
@@ -135,16 +136,20 @@ public class RoomFormController {
     		s.setRid(roomID);        
         	room.setCreateAt(System.currentTimeMillis());        	
         	
-        	List<Message> messages=this.droolsGameMessageService.createRoom(room);        	
-    		
+        	this.droolsGameMessageService.createRoom(room);       
+        
+        	
     		this.addRoom(room);//这个时候会出问题.Room已经创建好,别人可以进.可是还没有初始化好.
     		
-    		MessageUtil.sendMessage(version,messages,this.pushClient);
+    
     		
 
     		RoomThread r=new RoomThread(roomID, roomService, droolsGameMessageService, pushClient);
     		r.start();
     		
+    		RoomMessageThread rm = new RoomMessageThread(roomID, roomService,
+    				droolsGameMessageService, pushClient);
+    		rm.start();
     		
     		
     		

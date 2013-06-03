@@ -17,15 +17,15 @@ import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.util.MessageUtil;
 
-public class RoomThread extends Thread {
+public class RoomMessageThread extends Thread {
 
-	private static final Log log = LogFactory.getLog(RoomThread.class);
+	private static final Log log = LogFactory.getLog(RoomMessageThread.class);
 	private Long rid;
 	private RoomService roomService;
 	private MessageService messageService;
 	private PushClient pushClient;
 
-	public RoomThread(Long rid, RoomService roomService,
+	public RoomMessageThread(Long rid, RoomService roomService,
 			MessageService messageService, PushClient pushClient) {
 		super();
 		this.rid = rid;
@@ -41,6 +41,7 @@ public class RoomThread extends Thread {
 
 			Message m;
 			
+			List<Message> all = new ArrayList();
 			while (true) {
 
 				Room r;
@@ -52,23 +53,27 @@ public class RoomThread extends Thread {
 
 					break;
 				}
-				LinkedList<Message> msgs = r.getMessages();
+				LinkedList<Message> msgs = r.getSendMessages();
 
 				if ((m = msgs.poll()) != null) {
-					Long start = System.currentTimeMillis();
-					List<Message> messages = this.messageService.generate(m, r);
-					for(Message msg:messages){
-						r.getSendMessages().offer(msg);
-					}
-				
-					log.info(messages.size() + " drools use time "
-							+ (System.currentTimeMillis() - start));
+					
+					all.add(m);
 				
 
 				} else {
-				
-					sleep(10);
 
+					if(CollectionUtils.isEmpty(all)){					
+						
+						sleep(10);
+					}else{
+						List<Message> sendAll = new ArrayList();
+						
+						sendAll.addAll(all);
+						log.info(sendAll);
+						MessageUtil.sendMessage(r.getVersion(), sendAll,
+								this.pushClient);
+						all.clear();
+					}
 					
 				}
 				continue;

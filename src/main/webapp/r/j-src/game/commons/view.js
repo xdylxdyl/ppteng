@@ -594,6 +594,7 @@ var controlView = {
         return  $("#sayButton").prop("disabled");
     },
     showDelay:function () {
+        console.log(jQuery.now()+" accept time is "+lastMessageSendAt);
         $("#netSpeedHint").text("延迟:" + (jQuery.now() - lastMessageSendAt) + "毫秒");
     },
     getMessage:function () {

@@ -46,6 +46,7 @@ public class Room implements Serializable {
 	
 	
 	private LinkedList<Message> messages=new LinkedList<Message>();
+	private LinkedList<Message> sendMessages=new LinkedList<Message>();
 	
 	private List<String> expressions=new ArrayList();
 	
@@ -152,6 +153,14 @@ public class Room implements Serializable {
 	
 	
 	
+	
+	
+	public LinkedList<Message> getSendMessages() {
+		return sendMessages;
+	}
+	public void setSendMessages(LinkedList<Message> sendMessages) {
+		this.sendMessages = sendMessages;
+	}
 	public List<Long> getPlayers() {
 		return players;
 	}

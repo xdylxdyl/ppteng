@@ -498,10 +498,10 @@ when
     
     
  then      
-    LogUtil.log("game over start  =============");
+    //LogUtil.log("game over start  =============");
 	$operater.setGameOver(true);
 	
-    LogUtil.log("game over over =============");
+   // LogUtil.log("game over over =============");
 end
 
 

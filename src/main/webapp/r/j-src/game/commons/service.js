@@ -550,7 +550,7 @@ var cometService = {
     },
     sendMessage:function (message) {
         lastMessageSendAt = jQuery.now();
-        return ajaxJson("/message/accept2", "POST", message, controlView.showDelay, 5000, "json",false);
+        return ajaxJson("/message/accept2", "POST", message, null, 5000, "json",false);
     },
     messageQ:function (msgObj) {
         $(document).queue("messages", cometService.parseMessage(msgObj.message));
@@ -558,12 +558,12 @@ var cometService = {
     },
 
     parseMessage:function (message) {
+        controlView.showDelay();
 
         var msgLength = message.length; //msg数组长度
         for (var i = msgLength - 1; i >= 0; i--) {
             roomParseService.branch(message[i]);
         }
-        controlView.showDelay();
         $(document).dequeue("messages");
 
 

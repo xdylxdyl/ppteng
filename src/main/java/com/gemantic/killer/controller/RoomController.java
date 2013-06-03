@@ -25,6 +25,7 @@ import com.gemantic.common.util.MyListUtil;
 import com.gemantic.common.util.MyMapUtil;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
+import com.gemantic.kill.thread.RoomMessageThread;
 import com.gemantic.kill.thread.RoomThread;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.exception.ServiceErrorCode;
@@ -372,6 +373,11 @@ public class RoomController {
 		RoomThread r = new RoomThread(rid, roomService,
 				droolsGameMessageService, pushClient);
 		r.run();
+
+		RoomMessageThread rm = new RoomMessageThread(rid, roomService,
+				droolsGameMessageService, pushClient);
+		rm.run();
+		
 
 		model.addAttribute("code", code);
 		model.addAttribute("room", room);

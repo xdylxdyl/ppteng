@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
@@ -21,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 public class MessageUtil {
 
 	private static final Log log = LogFactory.getLog(MessageUtil.class);
+	private static final Executor exec = Executors.newFixedThreadPool(10);
 	public static final String Split_Comma = ",";
 	public static final String Split_Space = ",";
 	private static final String Replace = "<script type=\"text/javascript\">parseMessage(\"replace\");</script>";
@@ -99,61 +102,35 @@ public class MessageUtil {
 
 	// 我怎么样才能把日志打出来.为什么这一点儿怎么都想不通.我需要同时给八个人发消息.每个人收到的消息肯定是不一样的.有一些权限信息什么的.
 	// 该怎么记日志呢.
-	public static void sendMessage(String version, List<Message> messages,
-			PushClient pushClient) throws ServiceException {
+	public static void sendMessage(final String version, final List<Message> messages,
+			final PushClient pushClient) throws ServiceException {
+		Runnable task = new Runnable() {
+			@Override
+			public void run() {
+				Long start=System.currentTimeMillis();
+						log.info(messages+" version "+version);
+				Map<Long, String> uid_content = MessageUtil.groupByAccepts(version,
+						messages);
+				try {
+					pushClient.batchPush(uid_content);
+				} catch (ServiceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				log.info(uid_content.size()+" users use time "+(System.currentTimeMillis()-start));
+				
+			};
+		};
+		exec.execute(task);	
 
-
-		Long start=System.currentTimeMillis();
-		Map<Long, String> uid_content = MessageUtil.groupByAccepts(version,
-				messages);
-		log.info("group use time is "+(System.currentTimeMillis()-start));
-	//	log.info(uid_content);
-		pushClient.batchPush(uid_content);
-		
-		
-/*
-		Message m = new Message();
-		m.setId(5695563775843012000L);
-		m.setColor("#000000");
-		m.setExpression("0");		
-		m.setObject("-500");
-		m.setSubject("5911882831208552448");
-		m.setTime(1356348642250L);
-		m.setWhere("1356348303093");
-		m.setPredict("say");
-		m.setContent("{2314234234,,,adaf\"}");		
-		m.getAccepts().add("5911882831208552441");
-		m.getAccepts().add("4667499677747302401");
-
-		List ls = new ArrayList();
-		ls.add(m);
-		Map<Long, String> uid_content2 = MessageUtil.groupByAccepts(version,
-				ls);
-		log.info(uid_content2);
-		pushClient.batchPush(uid_content2);*/
 	
-		
-	/*	Map<Long,String> maps=new HashMap();
-		maps.put(5L, "玛");
-		maps.put(3L, "中国");
-		pushClient.batchPush(maps);*/
-		
-		
-	/*	for (Long uid : uid_content.keySet()) {
-			List<Long> uids = new ArrayList();
-			uids.add(uid);
-			String content=uid_content.get(uid);			
-			pushClient.push(uids, content);
 
-			log.info("send " + uid);
-			log.info("content  " + uid_content.get(uid));
-
-		}*/
 
 	}
 
 	public static Map<Long, String> groupByAccepts(String version,
 			List<Message> messages) {
+		log.info(version+" of messages "+messages.size());
 		Map<Long, String> uid_content = new HashMap();
 		Map<String, List<Message>> uid_msgs = new HashMap();
 		for (Message m : messages) {

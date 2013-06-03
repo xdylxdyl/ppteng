@@ -58,8 +58,8 @@ when
     $room:Room(status=="unrun")    
      $operater:Operater()
 then      
-	LogUtil.log("bomb assign  =================");
-	LogUtil.log($allReadys);
+	//LogUtil.log("bomb assign  =================");
+	//LogUtil.log($allReadys);
 	 int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  
 	 int  bombCount=Integer.valueOf(getRoomSetting($room,"mineCount","10"));//1*60*1000  
@@ -105,7 +105,7 @@ then
 	Game game=new Game("run",System.currentTimeMillis(),0L,$time,rname, $allReadys.size(),$time);
 	insert(game);
 	
-	LogUtil.log(" game status  ================="+game);
+	//LogUtil.log(" game status  ================="+game);
 	
 	Count count=new Count(0,bombCount,rowCount*columnCount,0,0);
 	insert(count);
@@ -117,7 +117,7 @@ then
 	Message initMessage=new Message("","init",systemBombPic);
 	insert(initMessage); 
 	
-	LogUtil.log("role assign process over  =================");
+	//LogUtil.log("role assign process over  =================");
 end
 
 
@@ -149,10 +149,10 @@ when
     $click:Click()   
 then      
 
-	LogUtil.log("clear click start  =================");	
+	//LogUtil.log("clear click start  =================");	
     retract($click);
 
-	LogUtil.log("clear click over  =================");
+	//LogUtil.log("clear click over  =================");
 end
 
 
@@ -169,15 +169,15 @@ when
 
 	
 then      
-    LogUtil.log("start game right   start ============= "+$message);
+    //LogUtil.log("start game right   start ============= "+$message);
     
 	$right.setRight(convertString2Set("say"));
 	LogUtil.log(" =============");
 	$right.setIsNotify(false);
     LogUtil.log(" ============="+$right);
     update($right);
-    LogUtil.log(" =============");    
-    LogUtil.log("start game right  over =============");
+    //LogUtil.log(" =============");    
+    //LogUtil.log("start game right  over =============");
 end
 
 
@@ -193,12 +193,12 @@ when
     $right:Right(id==$id)
 
 then      
-    LogUtil.log("game over  right start   =============");
+  //  LogUtil.log("game over  right start   =============");
     $right.setRight(convertString2Set("say,ready"));
     $right.setIsNotify(false); 		
     update($right);
    
-    LogUtil.log("game over  right  over =============");
+   // LogUtil.log("game over  right  over =============");
 end
 
 
@@ -262,7 +262,7 @@ when
     $count:Count($bomb:bomb,$right:right)
     
 then
-    LogUtil.log("tag pane start  ================="); 
+  //  LogUtil.log("tag pane start  ================="); 
      Pair p=BombUtil.convertString2Pair($object);
      
       int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
@@ -280,7 +280,7 @@ then
     $count.setBomb($bomb);
     $count.setRight($right);
     update($count);
-    LogUtil.log("count is   ================="+$count);
+   // LogUtil.log("count is   ================="+$count);
     
    
     
@@ -289,7 +289,7 @@ then
     insert(tag);
     retract($message);
     
-    LogUtil.log("tag pane over  ================="); 
+  //  LogUtil.log("tag pane over  ================="); 
 end
 
 //tag Pane
@@ -306,7 +306,7 @@ when
    
        
 then
-    LogUtil.log("clear tag pane start  ================="); 
+    
     Pair p=BombUtil.convertString2Pair($object);
      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000      
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  
@@ -331,7 +331,7 @@ then
      m.setContent($subject);
     insert(m);
     
-    LogUtil.log("clear tag pane over  ================="); 
+
 end
 
 
@@ -350,11 +350,11 @@ when
     $room:Room()
    
 then
-    LogUtil.log("double click pane start  ================= "+$object+" system "+ $system);
+   // LogUtil.log("double click pane start  ================= "+$object+" system "+ $system);
  
         Pair pair=BombUtil.convertString2Pair($object);
      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
-      LogUtil.log("=========");
+     // LogUtil.log("=========");
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  
 	  LogUtil.log("=========");
     List<Pair> roundPanes=BombUtil.getRoundPanes(pair,rowCount,columnCount);
@@ -362,7 +362,7 @@ then
       LogUtil.log("roundPanes  ================= "+roundPanes);
     boolean doubleClick=true;
     for(Pair p:roundPanes){
-       LogUtil.log(p);
+       //LogUtil.log(p);
        String tag=BombUtil.clickOpen(p,$system,rowCount,columnCount);     
        Pane pane=new Pane(BombUtil.convertPair2String(p),p,tag,"" ); 
     
@@ -373,7 +373,7 @@ then
    
     
     
-    LogUtil.log("double click pane over  ================="); 
+   // LogUtil.log("double click pane over  ================="); 
 end
 
 
@@ -520,7 +520,7 @@ then
        
      Message mergeMessage=new Message("","mergeMine",sb.toString());      
      insert(mergeMessage);      
-     LogUtil.log("merge message use time   ================="+(System.currentTimeMillis()-start)); 
+   //  LogUtil.log("merge message use time   ================="+(System.currentTimeMillis()-start)); 
     //LogUtil.log("click zero number use time   ================="+(System.currentTimeMillis()-start)); 
 end
 
@@ -548,7 +548,7 @@ when
 	      )    
     
 then
-    LogUtil.log("click mine start  ================="); 
+   // LogUtil.log("click mine start  ================="); 
   
      retract($click);
                
@@ -568,7 +568,7 @@ then
      update($game);
     
    
-    LogUtil.log("click mine over  ================="); 
+   // LogUtil.log("click mine over  ================="); 
 end
 
 
@@ -610,7 +610,7 @@ when
     
     
 then
-    LogUtil.log("click mine start  ================="); 
+   // LogUtil.log("click mine start  ================="); 
 
      Message gameOverMessage=new Message($recordName,"over","win"); 
      gameOverMessage.setContent(String.valueOf(System.currentTimeMillis()-$game.getStartAt()));
@@ -622,7 +622,7 @@ then
      
      
    
-    LogUtil.log("click mine over  ================="); 
+   // LogUtil.log("click mine over  ================="); 
 end
 
 
@@ -641,12 +641,12 @@ when
  
 
 then  
-     LogUtil.log(" logout game live count start  ================="); 
+   //  LogUtil.log(" logout game live count start  ================="); 
       
      
     $game.setPlayerCount($playerCount-1);   
      update($game);
-     LogUtil.log(" logout game live count over  ================="+$game); 
+  //   LogUtil.log(" logout game live count over  ================="+$game); 
 end
 
 
@@ -659,7 +659,7 @@ when
   
  
 then  
-     LogUtil.log("no player game over start  ================="); 
+   //  LogUtil.log("no player game over start  ================="); 
       
      Message gameOverMessage=new Message($recordName,"over","lose"); 
      gameOverMessage.setContent(String.valueOf(System.currentTimeMillis()-$game.getStartAt()));
@@ -668,7 +668,7 @@ then
      $game.setStatus("over");
      $game.setOverAt(System.currentTimeMillis());
      update($game);   
-     LogUtil.log("no player game over over  ================="); 
+    // LogUtil.log("no player game over over  ================="); 
 end
 
 
@@ -698,7 +698,7 @@ when
    
     
 then
-    LogUtil.log("game over processstart  ================="); 
+   // LogUtil.log("game over processstart  ================="); 
     
    
      retract($count);
@@ -721,7 +721,7 @@ then
      
      
    
-    LogUtil.log("game over process over  ================="); 
+  //  LogUtil.log("game over process over  ================="); 
 end
 
 
@@ -734,12 +734,12 @@ when
      $person:Player(status!="unready");
      
 then 
-     LogUtil.log("game over status start  ================="); 
+    // LogUtil.log("game over status start  ================="); 
     $person.setStatus("unready");   
     update($person);   
     
   
-    LogUtil.log("game over status over  ================="); 
+   // LogUtil.log("game over status over  ================="); 
 end
 
 
@@ -760,9 +760,9 @@ when
 	$game:Game()
 then      
 	//actions
-     LogUtil.log("retract game start================= ");  
+    // LogUtil.log("retract game start================= ");  
      retract($game);
-     LogUtil.log("retract game over ================="); 
+    // LogUtil.log("retract game over ================="); 
     
 end
 
@@ -786,14 +786,14 @@ when
     $room:Room($rid:id,status=="run")
     $operater:Operater()
 then      
-    LogUtil.log("time operater  start  =============");   
+  //  LogUtil.log("time operater  start  =============");   
     
     $message.setPredict("time");
     $message.setWhere($rid);
 
 	$operater.getTimerMessages().add($message);		
 
-    LogUtil.log("time operater over =============");
+  //  LogUtil.log("time operater over =============");
   
 end
 
@@ -841,7 +841,7 @@ when
     
 then      
 
-	 LogUtil.log("get player query info =================");	 
+	// LogUtil.log("get player query info =================");	 
       Map m=new HashMap();
       m.put("room",$room);
       m.put("person",$allLogins);     
@@ -862,7 +862,7 @@ then
        
       $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);   
-	  LogUtil.log("get player query info over =================");
+	//  LogUtil.log("get player query info over =================");
 end
 
 
