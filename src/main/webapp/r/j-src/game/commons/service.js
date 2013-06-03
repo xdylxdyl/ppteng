@@ -563,6 +563,7 @@ var cometService = {
         for (var i = msgLength - 1; i >= 0; i--) {
             roomParseService.branch(message[i]);
         }
+        controlView.showDelay();
         $(document).dequeue("messages");
 
 

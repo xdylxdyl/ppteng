@@ -24,6 +24,7 @@ public class MessageUtil {
 	public static final String Split_Comma = ",";
 	public static final String Split_Space = ",";
 	private static final String Replace = "<script type=\"text/javascript\">parseMessage(\"replace\");</script>";
+	public static Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
 	public static Message parse(String version, String action, String content) {
 
@@ -75,7 +76,7 @@ public class MessageUtil {
 	}
 
 	public static String convert2String(Message m) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+	
 
 		String json = gson.toJson(m);
 
@@ -101,8 +102,11 @@ public class MessageUtil {
 	public static void sendMessage(String version, List<Message> messages,
 			PushClient pushClient) throws ServiceException {
 
+
+		Long start=System.currentTimeMillis();
 		Map<Long, String> uid_content = MessageUtil.groupByAccepts(version,
 				messages);
+		log.info("group use time is "+(System.currentTimeMillis()-start));
 	//	log.info(uid_content);
 		pushClient.batchPush(uid_content);
 		
@@ -177,7 +181,7 @@ public class MessageUtil {
 	}
 
 	public static String converts2String(String version, List<Message> message) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+	
 		Map<String, Object> m = new HashMap();
 		m.put("version", version);
 		m.put("message", message);
@@ -272,14 +276,8 @@ public class MessageUtil {
 	}
 
 	public static String convertMessages2String(List<Message> messages) {
-		/*
-		 * List<String> ls=new ArrayList(); for (Message message : messages) {
-		 * String content = MessageUtil.convert2String(message);
-		 * ls.add(content);
-		 * 
-		 * }
-		 */
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+
+	
 		return gson.toJson(messages);
 
 	}
@@ -391,13 +389,13 @@ public class MessageUtil {
 }
 
 	public static Message fromString(String line) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+	
 		Message obj2 = gson.fromJson(line, Message.class);
 		return obj2;
 	} 
 	
 	public static List<Message> fromStrings(String line){
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+	
 		List<Message> messages = gson.fromJson(line, new TypeToken< List<Message>>() {}.getType());
 		return messages;
 	}

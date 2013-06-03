@@ -1,4 +1,5 @@
 function ajaxJson(url, type, param, parse,timeout,dataType,async) {
+    lastMessageSendAt = jQuery.now();
     if(timeout==null){
         timeout=10000;
     }

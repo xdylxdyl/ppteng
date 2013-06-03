@@ -18,15 +18,19 @@ import com.gemantic.killer.common.model.Message;
 
 public class JobLogger {
 	private static Hashtable<String, Logger> m_loggers = new Hashtable<String, Logger>();// 什么时候清空呢.
+	
+	
 	private static String m_filename = "record"; // Root log directory
 	private static final Log log = LogFactory.getLog(JobLogger.class);
-	private static boolean logEnable = false;
+	private static boolean logEnable = true;
 
 	public static synchronized void logMessage(String jobName, Message message) {
 		if (logEnable) {
+			Long start=System.currentTimeMillis();
 			String json = MessageUtil.convert2String(message);
 			Logger l = getJobLogger(jobName);
 			l.info(json);
+			log.info("time is "+(System.currentTimeMillis()-start));
 		}
 	}
 
@@ -83,11 +87,14 @@ public class JobLogger {
 	}
 
 	public static void logMessages(String jobName, List<Message> messages) {
+		Long start=System.currentTimeMillis();
 		if (logEnable) {
 			String json = MessageUtil.convertMessages2String(messages);
+			log.info("time is "+(System.currentTimeMillis()-start));
 			Logger l = getJobLogger(jobName);
 			l.info(json);
 		}
+		log.info("time is "+(System.currentTimeMillis()-start));
 	}
 
 }

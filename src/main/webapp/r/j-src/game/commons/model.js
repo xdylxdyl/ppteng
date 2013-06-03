@@ -1,3 +1,6 @@
+
+var time=null;
+
 var expression = {
 
     "1":"温柔的",
