@@ -22,7 +22,7 @@ public class JobLogger {
 	
 	private static String m_filename = "record"; // Root log directory
 	private static final Log log = LogFactory.getLog(JobLogger.class);
-	private static boolean logEnable = false;
+	private static boolean logEnable = true;
 
 	public static synchronized void logMessage(String jobName, Message message) {
 		if (logEnable) {
