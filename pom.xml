@@ -17,13 +17,13 @@
 				<checksumPolicy>warn</checksumPolicy>
 			</releases>
 			<snapshots>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
+				<checksumPolicy>warn</checksumPolicy>
 			</snapshots>
 			<id>nexus</id>
 			<name>releases</name>
-			<url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
+			<url>http://mvn.gemantic.com/content/repositories/releases</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
@@ -32,7 +32,7 @@
 		<pluginRepository>
 			<id>nexus</id>
 			<name>releases</name>
-			<url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
+			<url>http://mvn.gemantic.com/content/repositories/releases</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -57,6 +57,7 @@
 		<gemantic.nlp.all.core.version>1.0</gemantic.nlp.all.core.version>
 		<gemantic.app.dict.core.version>1.2</gemantic.app.dict.core.version>
 		<gemantic.app.document.core.version>1.1</gemantic.app.document.core.version>
+		<jetty.version>8.1.9.v20130131</jetty.version>
 	</properties>
 
 
@@ -66,25 +67,9 @@
 	<dependencies>
 
 
-		<!-- jetty -->
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>8.0.0.M3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-webapp</artifactId>
-			<version>8.0.0.M3</version>
-		</dependency>
 
 
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-servlet</artifactId>
-			<version>8.0.0.M3</version>
-		</dependency>
+
 
 
 		<dependency>
@@ -187,11 +172,8 @@
 
 
 
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-		</dependency>
+
+
 
 
 		<dependency>
@@ -207,15 +189,9 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.1.2</version>
+			<version>1.2</version>
 		</dependency>
 
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-		</dependency>
 
 
 		<dependency>
@@ -314,11 +290,7 @@
 			<version>1.7.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-websocket</artifactId>
-			<version>8.0.0.RC0</version>
-		</dependency>
+
 
 
 
@@ -583,7 +555,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
-			<version>${org.springframework.version}</version>			
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<!-- Bean Factory and JavaBeans utilities (depends on spring-core) Define 
@@ -594,7 +566,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${org.springframework.version}</version>			
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<!-- Application Context (depends on spring-core, spring-expression, spring-aop, 
@@ -607,7 +579,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework.version}</version>
-			
+
 		</dependency>
 
 		<!-- Transaction Management Abstraction (depends on spring-core, spring-beans, 
@@ -616,7 +588,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework.version}</version>			
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<!-- JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, 
@@ -643,7 +615,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>${org.springframework.version}</version>			
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<!-- Spring MVC for Servlet Environments (depends on spring-core, spring-beans, 
@@ -656,7 +628,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc-portlet</artifactId>
-			<version>${org.springframework.version}</version>			
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<!-- Support for testing Spring applications with tools such as JUnit and 
@@ -674,7 +646,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework.version}</version>
-			<scope>compile</scope>			
+			<scope>compile</scope>
 		</dependency>
 
 
@@ -683,7 +655,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework.version}</version>
-			<scope>compile</scope>			
+			<scope>compile</scope>
 		</dependency>
 
 
@@ -709,7 +681,7 @@
 
 
 
-		
+
 
 
 		<dependency>
@@ -722,7 +694,8 @@
 					<groupId>jboss</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency><dependency>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-jsp</artifactId>
 			<version>2.2.2</version>
@@ -763,6 +736,26 @@
 
 
 
+
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-websocket</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+		<!-- jetty -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
 	</dependencies>
 
 
@@ -781,14 +774,20 @@
 					<target>1.6</target>
 					<encoding>utf-8</encoding>
 				</configuration>
+
+
+
 			</plugin>
+
 
 
 
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-                
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.version}</version>
+
+
 				<configuration>
 					<contextPath>/</contextPath>
 					<scanIntervalSeconds>3</scanIntervalSeconds>
@@ -801,15 +800,21 @@
 							</includes>
 						</scanTargetPattern>
 					</scanTargetPatterns>
-					<webDefaultXml>src/test/resources/webdefault1.xml</webDefaultXml>
-					<defaultsDescriptor>webdefault.xml</defaultsDescriptor>
+					
+
+					<webAppConfig>
+						<defaultsDescriptor>src/main/resources/webdefault1.xml</defaultsDescriptor>
+					</webAppConfig>
 					<connectors>
-						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
 							<port>9090</port>
-							<maxIdleTime>60000</maxIdleTime>
+							<maxIdleTime>400000</maxIdleTime>
 						</connector>
+
 					</connectors>
 				</configuration>
+
+
 			</plugin>
 
 			<plugin>

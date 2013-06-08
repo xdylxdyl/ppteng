@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2.5.xsd"
 	version="2.4">
 
 	<display-name>search</display-name>
@@ -14,10 +14,7 @@
 			<taglib-uri>http://www.gemantic.com/taglibs/page</taglib-uri>
 			<taglib-location>/WEB-INF/tag/page.tld</taglib-location>
 		</taglib>
-		<taglib>
-			<taglib-uri>http://www.gemantic.com/taglibs/pinyin</taglib-uri>
-			<taglib-location>/WEB-INF/tag/pinyin.tld</taglib-location>
-		</taglib>
+
 
 	</jsp-config>
 
@@ -26,7 +23,8 @@
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -51,9 +49,11 @@
 
 
 
+
 	<filter>
 		<filter-name>UrlRewriteFilter</filter-name>
-		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
+		</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -65,12 +65,15 @@
 
 
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class>
 	</listener>
+
 
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
@@ -81,7 +84,8 @@
 
 	<servlet>
 		<servlet-name>WebSocket</servlet-name>
-		<servlet-class>com.gemantic.killer.websocket.TailorWebSocketServlet</servlet-class>
+		<servlet-class>com.gemantic.killer.websocket.TailorWebSocketServlet
+		</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WebSocket</servlet-name>
@@ -91,7 +95,7 @@
 
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>test.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
@@ -106,8 +110,17 @@
 		<location>/error/500.html</location>
 	</error-page>
 
-	<!-- not lock css/js file when jetty run :tomcat will be error -->
-	<!-- <servlet> <servlet-name>default</servlet-name> <init-param> <param-name>useFileMappedBuffer</param-name> 
-		<param-value>false</param-value> </init-param> </servlet> -->
+
+	<servlet>
+		<servlet-name>default</servlet-name>
+		<servlet-class>org.eclipse.jetty.servlet.DefaultServlet
+		</servlet-class>
+		<init-param>
+			<param-name>useFileMappedBuffer</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+
 
 </web-app>

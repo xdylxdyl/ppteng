@@ -1,93 +1,57 @@
 package com.gemantic.killer.websocket;
 
-
-
-import java.io.IOException;
-import java.util.Date;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import com.gemantic.labs.killer.service.WebSocketService;
 
 public class TailorWebSocketServlet extends WebSocketServlet {
 	private static final long serialVersionUID = -7289719281366784056L;
+	private static final Log log = LogFactory
+			.getLog(TailorWebSocketServlet.class);
 	public static String newLine = System.getProperty("line.separator");
 
-	private final Set<TailorSocket> _members = new CopyOnWriteArraySet<TailorSocket>();
-	private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+	private WebSocketService webSocketService;
 
 	@Override
 	public void init() throws ServletException {
-		super.init();
-		executor.scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("Running Server Message Sending");
-				for(TailorSocket member : _members){
-					System.out.println("Trying to send to Member!");
-					if(member.isOpen()){
-						System.out.println("Sending!");
-						try {
-							member.sendMessage("Sending a Message to you Guys! "+new Date()+newLine);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		}, 2, 2, TimeUnit.SECONDS);
+		try {
+			// trying to load the Spring context file.
+			ServletContext servletContext = this.getServletContext();
+			WebApplicationContext ctx = WebApplicationContextUtils
+					.getWebApplicationContext(servletContext);
+			webSocketService = (WebSocketService) ctx
+					.getBean("webSocketService");
 
+			super.init();
+		} catch (ServletException se) {
+			throw se;
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		getServletContext().getNamedDispatcher("default").forward(request,
-				response);
-	}
-
+	@RequestMapping(value = "/servlet/websocket")
 	public WebSocket doWebSocketConnect(HttpServletRequest request,
 			String protocol) {
-		return new TailorSocket();
+		Long uid = Long.valueOf(request.getParameter("uid"));
+
+		log.info("you access me " + uid);
+
+		WebSocket ws = webSocketService.createWebSocket(uid);
+		return ws;
 	}
 
-	class TailorSocket implements WebSocket.OnTextMessage {
-		private Connection _connection;
-
-		@Override
-		public void onClose(int closeCode, String message) {
-			_members.remove(this);
-		}
-
-		public void sendMessage(String data) throws IOException {
-			_connection.sendMessage(data);
-		}
-
-		@Override
-		public void onMessage(String data) {
-			System.out.println("Received: "+data);
-		}
-
-		public boolean isOpen() {
-			return _connection.isOpen();
-		}
-
-		@Override
-		public void onOpen(Connection connection) {
-			_members.add(this);
-			_connection = connection;
-			try {
-				connection.sendMessage("Server received Web Socket upgrade and added it to Receiver List.");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
 }

@@ -65,7 +65,8 @@ var initGame = function () {
 
 
     //5 start comet
-    cometService.comet(uid, cometService.messageQ);
+    webSocketUtil.connect(uid);
+
 
     //6.initControllview
     controlView.initButtonOfGame();

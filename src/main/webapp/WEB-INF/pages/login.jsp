@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="includes/includes.jsp"%>
 <HTML>
 <HEAD>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -87,9 +88,11 @@ $(document).ready(function() {
 		</div>
 
 		<div>
-			<a href="/player/regedit ">注册:</a>
+			<a href="/player/regedit ">注册2222222222222:</a>
 
 		</div>
+		
+		  <tiles:insertDefinition name="musicList" />
 
 	</div>
 

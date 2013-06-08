@@ -4,10 +4,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
+
 	<context:annotation-config />
 	<context:component-scan base-package="com.gemantic" />
-
-
 	<bean id="exceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
@@ -71,8 +70,8 @@
 				<value>*/room/player/*</value>
 				<value>*/room/statistics/*</value>
 				<value>*/room/financial/*</value>
-				<value>*/room/about/*</value>	
-			    <value>*/room/tool/*</value>	
+				<value>*/room/about/*</value>
+				<value>*/room/tool/*</value>
 			</list>
 		</property>
 	</bean>
