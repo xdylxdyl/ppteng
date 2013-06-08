@@ -7,9 +7,7 @@
 	<packaging>war</packaging>
 	<name>analyse-chatroom-home</name>
 	<description>analyse-chatroom-home</description>
-
-
-	<repositories>
+<repositories>
 		<repository>
 			<releases>
 				<enabled>true</enabled>
@@ -17,13 +15,13 @@
 				<checksumPolicy>warn</checksumPolicy>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
+				<checksumPolicy>fail</checksumPolicy>
 			</snapshots>
 			<id>nexus</id>
 			<name>releases</name>
-			<url>http://mvn.gemantic.com/content/repositories/releases</url>
+			<url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
@@ -32,7 +30,7 @@
 		<pluginRepository>
 			<id>nexus</id>
 			<name>releases</name>
-			<url>http://mvn.gemantic.com/content/repositories/releases</url>
+			<url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
