@@ -102,7 +102,7 @@
 						<value>killer/police/police_game.rf</value>
 					</list>
 				</entry>
-				
+
 				<entry key="mine_1.0">
 					<list>
 						<value>mine/multiplayer/mine_model.drl</value>
@@ -113,7 +113,7 @@
 					</list>
 				</entry>
 				<entry key="video_1.0">
-					<list>						
+					<list>
 					</list>
 				</entry>
 				<entry key="ghost_simple_1.0">
@@ -125,7 +125,7 @@
 						<value>ghost/simple/simple_game.rf</value>
 					</list>
 				</entry>
-					<entry key="ghost_question_1.0">
+				<entry key="ghost_question_1.0">
 					<list>
 						<value>ghost/question/question_model.drl</value>
 						<value>ghost/question/question_query.drl</value>
@@ -143,7 +143,7 @@
 						<value>ghost/soul/soul_game.rf</value>
 					</list>
 				</entry>
-				
+
 			</map>
 		</constructor-arg>
 	</bean>
@@ -187,7 +187,8 @@
 	<bean id="dao" class="com.gemantic.dal.dao.impl.CompositeDaoImpl" />
 
 
-
+	<bean id="webSocketService"
+		class="com.gemantic.labs.killer.service.impl.WebSocketServiceImpl" />
 
 
 
