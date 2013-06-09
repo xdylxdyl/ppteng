@@ -4,19 +4,6 @@
 	version="2.4">
 
 	<display-name>search</display-name>
-	<jsp-config>
-		<taglib>
-			<taglib-uri>http://www.gemantic.com/taglibs/date</taglib-uri>
-			<taglib-location>/WEB-INF/tag/date.tld</taglib-location>
-		</taglib>
-
-		<taglib>
-			<taglib-uri>http://www.gemantic.com/taglibs/page</taglib-uri>
-			<taglib-location>/WEB-INF/tag/page.tld</taglib-location>
-		</taglib>
-
-
-	</jsp-config>
 
 
 

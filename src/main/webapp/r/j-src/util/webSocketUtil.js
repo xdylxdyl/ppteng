@@ -12,7 +12,7 @@ var webSocketUtil = {
     connect:function (uid) {
 
         var l = document.location.toString();
-        var location = l.substr(0, l.indexOf("9090")).replace('http://', 'ws://').replace('https://', 'wss://') + '9090/servlet/websocket?uid=' + uid;
+        var location = l.substr(0, l.indexOf("8014")).replace('http://', 'ws://').replace('https://', 'wss://') + '9090/servlet/websocket?uid=' + uid;
 
         webSocketUtil._ws = new WebSocket(location);
 
