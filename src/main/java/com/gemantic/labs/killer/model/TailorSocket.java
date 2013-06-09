@@ -1,12 +1,12 @@
 package com.gemantic.labs.killer.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.websocket.WebSocket;
-
-import com.gemantic.killer.websocket.TailorWebSocketServlet;
 
 public class TailorSocket implements WebSocket.OnTextMessage {
 	
@@ -16,7 +16,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 
 	private Long uid;
 	
-	
+	private List<String> messages=new ArrayList();
 	
 	public TailorSocket(Long uid) {
 
@@ -52,12 +52,37 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 
 	public void sendMessage(String data) throws IOException {			
 	
-		log.info(this.uid+" send message "+data);
-		_connection.sendMessage(data);	
+		if(_connection.isOpen()){
+			log.info(this.uid+" send message "+data);
+			_connection.sendMessage(data);	
+		}else{
+			this.messages.add(data);
+			
+		}
+		
 		
 	
 	
 	}
+	
+	
+	
+
+	public List<String> getMessages() {
+		return messages;
+	}
+
+
+
+
+
+	public void setMessages(List<String> messages) {
+		this.messages = messages;
+	}
+
+
+
+
 
 	@Override
 	public void onMessage(String data) {
@@ -73,9 +98,24 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 	
 		_connection = connection;
 		try {
-			connection.sendMessage("already open ~~"+this.uid);
+			if(this.messages.isEmpty()){
+				connection.sendMessage("already open ~~"+this.uid);
+			}else{
+				log.info(this.uid+" has messages ~~"+this.messages.size());
+				connection.sendMessage(this.uid+" has messages ~~"+this.messages.size());
+				List<String> ms=new ArrayList();
+				ms.addAll(this.messages);
+				this.messages.clear();
+				for(String str:ms){
+					connection.sendMessage(str);
+				}
+				log.info(this.uid+" send old messages over ");
+				
+			}
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	
 	}
 }

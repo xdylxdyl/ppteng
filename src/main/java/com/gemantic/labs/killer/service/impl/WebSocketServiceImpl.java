@@ -48,7 +48,7 @@ public class WebSocketServiceImpl implements WebSocketService {
 	@Override
 	public void sendMessage(Long uid, String string) {
 		TailorSocket socket = null;
-		log.info(webSockets);
+		
 		if (webSockets.containsKey(uid)) {
 			socket = webSockets.get(uid);
 		} else {
@@ -57,6 +57,7 @@ public class WebSocketServiceImpl implements WebSocketService {
 			return ;
 		}
 		try {
+		
 			socket.sendMessage(string);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

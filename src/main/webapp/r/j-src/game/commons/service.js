@@ -549,6 +549,9 @@ var cometService = {
         cometUtil.polling(url, parse);
     },
     sendMessage:function (message) {
+        if(!webSocketUtil.isConnect()){
+            webSocketUtil.connect(globalView.getCurrentID());
+        }
         lastMessageSendAt = jQuery.now();
         return ajaxJson("/message/accept2", "POST", message, null, 5000, "json",false);
     },
