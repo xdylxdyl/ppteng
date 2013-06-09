@@ -4,73 +4,85 @@
  */
 
 var webSocketUtil = {
-	_ws : "",
+    _ws:"",
 
-	connect : function(uid) {
+    connect:function (uid) {
 
-		var l = document.location.toString();
-		var index = l.indexOf("com");
-		var location = "ws://42.121.113.70:8013/servlet/websocket?uid=" + uid;
-		if (index > 0) {
+        var l = document.location.toString();
+        var index = l.indexOf("com");
+        var location = "ws://42.121.113.70:8013/servlet/websocket?uid=" + uid;
+        if (index > 0) {
 
-		} else {
-			 location = "ws://192.168.11.68:9090/servlet/websocket?uid=" + uid;
-		}
-		console.log(location);
+        } else {
+            location = "ws://192.168.11.68:9090/servlet/websocket?uid=" + uid;
+        }
+        console.log(location);
 
-		webSocketUtil._ws = new WebSocket(location);
-		console.log(webSocketUtil._ws.readyState);
-		webSocketUtil._ws.onopen = webSocketUtil._onopen;
-		webSocketUtil._ws.onmessage = webSocketUtil._onmessage;
-		webSocketUtil._ws.onclose = webSocketUtil._onclose;
-	},
+        if (window.WEB_SOCKET_FORCE_FLASH) {
+            // Keeps going.
+        } else if (window.WebSocket) {
+            return;
+        } else if (window.MozWebSocket) {
+            // Firefox.
+            window.WebSocket = MozWebSocket;
+            return;
+        }
 
-	_onopen : function() {
-		webSocketUtil._ws.send('i am open ~~,are you ready ?');
-	},
 
-	_send : function(message) {
-		if (webSocketUtil._ws)
-			webSocketUtil._ws.send(message);
-	},
+        webSocketUtil._ws = new WebSocket(location);
+        alert(webSocketUtil._ws.readyState);
+        console.log(webSocketUtil._ws.readyState);
+        webSocketUtil._ws.onopen = webSocketUtil._onopen;
+        webSocketUtil._ws.onmessage = webSocketUtil._onmessage;
+        webSocketUtil._ws.onclose = webSocketUtil._onclose;
+    },
 
-	send : function(text) {
-		if (text != null && text.length > 0)
-			webSocketUtil._ws._send(text);
-	},
+    _onopen:function () {
+        webSocketUtil._ws.send('i am open ~~,are you ready ?');
+    },
 
-	_onmessage : function(m) {
-		if (m.data) {
+    _send:function (message) {
+        if (webSocketUtil._ws)
+            webSocketUtil._ws.send(message);
+    },
 
-			if (isJson(m.data)) {
-				console.log(m.data);
-				var message = JSON.parse(m.data);
-				$(document).queue("messages",
-						cometService.parseMessage(message.message));
+    send:function (text) {
+        if (text != null && text.length > 0)
+            webSocketUtil._ws._send(text);
+    },
 
-			} else {
-				console.log(m.data);
-			}
+    _onmessage:function (m) {
+        if (m.data) {
 
-		}
-	},
-	_onclose : function(m) {
-		webSocketUtil._ws = null;
-	},
-	isConnect:function(){	
-		if(webSocketUtil._ws==null||webSocketUtil._ws.readyState==3){
-			return false;
-		}else{
-			return true;
-		}
-	}
+            if (isJson(m.data)) {
+                console.log(m.data);
+                var message = JSON.parse(m.data);
+                $(document).queue("messages",
+                    cometService.parseMessage(message.message));
+
+            } else {
+                console.log(m.data);
+            }
+
+        }
+    },
+    _onclose:function (m) {
+        webSocketUtil._ws = null;
+    },
+    isConnect:function () {
+        if (webSocketUtil._ws == null || webSocketUtil._ws.readyState == 3) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }
 
 function isJson(content) {
-	if (content.match("^\{(.+:.+,*){1,}\}$")) {
-		return true;
-	} else {
-		return false;
-	}
+    if (content.match("^\{(.+:.+,*){1,}\}$")) {
+        return true;
+    } else {
+        return false;
+    }
 }
