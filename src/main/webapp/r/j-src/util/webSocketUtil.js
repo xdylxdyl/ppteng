@@ -4,7 +4,7 @@
  */
 
 var webSocketUtil = {
-    _ws:"",
+    _ws:null,
 
     connect:function (uid) {
 
@@ -21,16 +21,16 @@ var webSocketUtil = {
         if (window.WEB_SOCKET_FORCE_FLASH) {
             // Keeps going.
         } else if (window.WebSocket) {
-            return;
+          
         } else if (window.MozWebSocket) {
             // Firefox.
             window.WebSocket = MozWebSocket;
-            return;
+          
         }
 
 
         webSocketUtil._ws = new WebSocket(location);
-        alert(webSocketUtil._ws.readyState);
+       
         console.log(webSocketUtil._ws.readyState);
         webSocketUtil._ws.onopen = webSocketUtil._onopen;
         webSocketUtil._ws.onmessage = webSocketUtil._onmessage;
