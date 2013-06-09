@@ -13,13 +13,13 @@
 	<!-- Activates mapping of @Controller -->
 
 	<!-- hotFacet fitler -->
-	<bean id="pushClient"
+<!-- 	<bean id="pushClient"
 		class="com.gemantic.commons.push.client.impl.HttpPushClientImpl">
 		<property name="serverUri" value="42.121.113.70"></property>
 		<property name="path" value="/batchChannel"></property>
 		<property name="port" value="8000"></property>
 	</bean>
-
+ -->
 
 
 	<bean id="openIdManager" class="org.expressme.openid.OpenIdManager">

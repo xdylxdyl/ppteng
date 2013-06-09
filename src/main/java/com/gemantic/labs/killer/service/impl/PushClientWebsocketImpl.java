@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.labs.killer.service.WebSocketService;
-//@Component
+@Component
 public class PushClientWebsocketImpl implements PushClient {
 	
 	
