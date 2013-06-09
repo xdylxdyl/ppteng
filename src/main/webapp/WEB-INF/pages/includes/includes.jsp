@@ -4,8 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json"%>
-<%@ taglib prefix="date" uri="http://www.gemantic.com/taglibs/date"%>
-<%@ taglib prefix="page" uri="http://www.gemantic.com/taglibs/page"%>
+<%@ taglib prefix="date" uri="/WEB-INF/tag/date.tld"%>
+<%@ taglib prefix="page" uri="/WEB-INF/tag/page.tld"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <jsp:useBean id="now" class="java.util.Date" />
 <%
