@@ -25,8 +25,7 @@ public class RoomMessageThread extends Thread {
 	private MessageService messageService;
 	private PushClient pushClient;
 
-	public RoomMessageThread(Long rid, RoomService roomService,
-			MessageService messageService, PushClient pushClient) {
+	public RoomMessageThread(Long rid, RoomService roomService, MessageService messageService, PushClient pushClient) {
 		super();
 		this.rid = rid;
 		this.roomService = roomService;

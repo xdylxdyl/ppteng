@@ -143,13 +143,13 @@ public class RoomFormController {
     		
     
     		
-
+/*
     		RoomThread r=new RoomThread(roomID, roomService, droolsGameMessageService, pushClient);
-    		r.start();
+    		r.start();*/
     		
-    		RoomMessageThread rm = new RoomMessageThread(roomID, roomService,
+    		/*RoomMessageThread rm = new RoomMessageThread(roomID, roomService,
     				droolsGameMessageService, pushClient);
-    		rm.start();
+    		rm.start();*/
     		
     		
     		

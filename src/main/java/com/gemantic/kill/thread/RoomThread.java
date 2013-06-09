@@ -57,17 +57,16 @@ public class RoomThread extends Thread {
 				if ((m = msgs.poll()) != null) {
 					Long start = System.currentTimeMillis();
 					List<Message> messages = this.messageService.generate(m, r);
-					for(Message msg:messages){
-						r.getSendMessages().offer(msg);
-					}
-				
+
 					log.info(messages.size() + " drools use time "
 							+ (System.currentTimeMillis() - start));
+					MessageUtil.sendMessage(r.getVersion(), messages,
+							this.pushClient);
 				
 
 				} else {
 				
-					sleep(10);
+					sleep(2);
 
 					
 				}

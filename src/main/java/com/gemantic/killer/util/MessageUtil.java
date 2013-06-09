@@ -22,8 +22,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class MessageUtil {
 
-	private static final Log log = LogFactory.getLog(MessageUtil.class);
-	private static final Executor exec = Executors.newFixedThreadPool(10);
+	private static final Log log = LogFactory.getLog(MessageUtil.class);	
 	public static final String Split_Comma = ",";
 	public static final String Split_Space = ",";
 	private static final String Replace = "<script type=\"text/javascript\">parseMessage(\"replace\");</script>";
@@ -79,7 +78,6 @@ public class MessageUtil {
 	}
 
 	public static String convert2String(Message m) {
-	
 
 		String json = gson.toJson(m);
 
@@ -102,40 +100,25 @@ public class MessageUtil {
 
 	// 我怎么样才能把日志打出来.为什么这一点儿怎么都想不通.我需要同时给八个人发消息.每个人收到的消息肯定是不一样的.有一些权限信息什么的.
 	// 该怎么记日志呢.
-	public static void sendMessage(final String version, final List<Message> messages,
-			final PushClient pushClient) throws ServiceException {
-		Runnable task = new Runnable() {
-			@Override
-			public void run() {
-				Long start=System.currentTimeMillis();
-						log.info(messages+" version "+version);
-				Map<Long, String> uid_content = MessageUtil.groupByAccepts(version,
-						messages);
-				try {
-					pushClient.batchPush(uid_content);
-				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				log.info(uid_content.size()+" users use time "+(System.currentTimeMillis()-start));
-				
-			};
-		};
-		exec.execute(task);	
+	public static void sendMessage(final String version,
+			final List<Message> messages, final PushClient pushClient)
+			throws ServiceException {
 
-	
+		Map<Long, String> uid_content = MessageUtil.groupByAccepts(version,
+				messages);
 
+		pushClient.batchPush(uid_content);
 
 	}
 
 	public static Map<Long, String> groupByAccepts(String version,
 			List<Message> messages) {
-		log.info(version+" of messages "+messages.size());
+		//log.info(version + " of messages " + messages.size());
 		Map<Long, String> uid_content = new HashMap();
 		Map<String, List<Message>> uid_msgs = new HashMap();
 		for (Message m : messages) {
 			List<String> uids = m.getAccepts();
-			//m.setContent( org.json.JSONObject.quote(m.getContent()));
+			// m.setContent( org.json.JSONObject.quote(m.getContent()));
 			for (String uid : uids) {
 				List<Message> msgs = uid_msgs.get(uid);
 				if (msgs == null) {
@@ -149,7 +132,7 @@ public class MessageUtil {
 		}
 		for (String uid : uid_msgs.keySet()) {
 			List<Message> message = uid_msgs.get(uid);
-			String content = MessageUtil.converts2String(version,message);
+			String content = MessageUtil.converts2String(version, message);
 			uid_content.put(Long.valueOf(uid), content);
 
 		}
@@ -158,7 +141,7 @@ public class MessageUtil {
 	}
 
 	public static String converts2String(String version, List<Message> message) {
-	
+
 		Map<String, Object> m = new HashMap();
 		m.put("version", version);
 		m.put("message", message);
@@ -167,10 +150,10 @@ public class MessageUtil {
 
 	}
 
-	//特殊字条转义的时候会报错怎么办.
+	// 特殊字条转义的时候会报错怎么办.
 	public static String replace(String content) {
 		// parent.parseMessage
-		String rcnt=content.replace("$", "\\$");		
+		String rcnt = content.replace("$", "\\$");
 		String str = "<script type='text/javascript'>document.domain='gemantic.com';parent.parseMessage('replace');</script>"
 				.replaceAll("replace", rcnt);
 		return str;
@@ -254,16 +237,13 @@ public class MessageUtil {
 
 	public static String convertMessages2String(List<Message> messages) {
 
-	
 		return gson.toJson(messages);
 
 	}
 
 	public static void main(String[] args) throws ServiceException {
 
-
-		
-	    Message m = new Message();
+		Message m = new Message();
 		m.setContent("\"<");
 		log.info(MessageUtil.escape(m.getContent()));
 		m.getAccepts().add("3");
@@ -280,100 +260,90 @@ public class MessageUtil {
 
 		Map<Long, String> k = MessageUtil.groupByAccepts("", ls);
 		log.info(k);
-		
-	
-		
-		
-		HttpPushClientImpl h=new HttpPushClientImpl();
+
+		HttpPushClientImpl h = new HttpPushClientImpl();
 		h.setServerUri("42.121.113.70");
 		h.setPath("/batchChannel");
-		h.setPort(8000);	
-	/*	Map<Long,String> maps=new HashMap();
-		maps.put(3L, "中国");
-		maps.put(4L, "玛玛玛玛玛玛玛玛");
-		String s=h.batchPush(maps);
-		System.out.println(s);*/
+		h.setPort(8000);
+		/*
+		 * Map<Long,String> maps=new HashMap(); maps.put(3L, "中国"); maps.put(4L,
+		 * "玛玛玛玛玛玛玛玛"); String s=h.batchPush(maps); System.out.println(s);
+		 */
 		MessageUtil.sendMessage("", ls, h);
-		
-		
-		
-		
+
 	}
-	
-	public static String escape(String s){ 
-        if(s==null) 
-                return null; 
-        StringBuffer sb=new StringBuffer(); 
-        for(int i=0;i<s.length();i++){ 
-                char ch=s.charAt(i); 
-                switch(ch){ 
-                case '"': 
-                	    sb.append("\\\\"); 
-                        sb.append("\\\"");
-                        
-                        break; 
-                case '\\': 
-                	sb.append("\\\\"); 
-                        sb.append("\\\\"); 
-                       
-                        break; 
-                case '\b': 
-                	sb.append("\\\\"); 
-                        sb.append("\\b"); 
-                     
-                        break; 
-                case '\f': 
-                	sb.append("\\\\"); 
-                        sb.append("\\f"); 
-                       ; 
-                        break; 
-                case '\n': 
-                	sb.append("\\\\"); 
-                        sb.append("\\n"); 
-                    ; 
-                        break; 
-                case '\r': 
-                	sb.append("\\\\"); 
-                        sb.append("\\r"); 
-                         
-                        break; 
-                case '\t': 
-                	sb.append("\\\\"); 
-                        sb.append("\\t"); 
-                       
-                        break; 
-                case '/': 
-                	sb.append("\\\\"); 
-                        sb.append("\\/"); 
-                      
-                        break; 
-                default: 
-                       /* if(ch>='\u0000' && ch<='\u001F'){ 
-                                String ss=Integer.toHexString(ch);                                 
-                                sb.append("\\u"); 
-                                for(int k=0;k<4-ss.length();k++){ 
-                                        sb.append('0'); 
-                                } 
-                                sb.append(ss.toUpperCase()); 
-                        } 
-                        else{ 
-                                sb.append(ch); 
-                        } */
-                        sb.append(ch);
-                } 
-        }//for 
-        return sb.toString(); 
-}
+
+	public static String escape(String s) {
+		if (s == null)
+			return null;
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < s.length(); i++) {
+			char ch = s.charAt(i);
+			switch (ch) {
+			case '"':
+				sb.append("\\\\");
+				sb.append("\\\"");
+
+				break;
+			case '\\':
+				sb.append("\\\\");
+				sb.append("\\\\");
+
+				break;
+			case '\b':
+				sb.append("\\\\");
+				sb.append("\\b");
+
+				break;
+			case '\f':
+				sb.append("\\\\");
+				sb.append("\\f");
+				;
+				break;
+			case '\n':
+				sb.append("\\\\");
+				sb.append("\\n");
+				;
+				break;
+			case '\r':
+				sb.append("\\\\");
+				sb.append("\\r");
+
+				break;
+			case '\t':
+				sb.append("\\\\");
+				sb.append("\\t");
+
+				break;
+			case '/':
+				sb.append("\\\\");
+				sb.append("\\/");
+
+				break;
+			default:
+				/*
+				 * if(ch>='\u0000' && ch<='\u001F'){ String
+				 * ss=Integer.toHexString(ch); sb.append("\\u"); for(int
+				 * k=0;k<4-ss.length();k++){ sb.append('0'); }
+				 * sb.append(ss.toUpperCase()); } else{ sb.append(ch); }
+				 */
+				sb.append(ch);
+			}
+		}// for
+		return sb.toString();
+	}
 
 	public static Message fromString(String line) {
-	
+
 		Message obj2 = gson.fromJson(line, Message.class);
 		return obj2;
-	} 
-	
-	public static List<Message> fromStrings(String line){
-	
-		List<Message> messages = gson.fromJson(line, new TypeToken< List<Message>>() {}.getType());
+	}
+
+	public static List<Message> fromStrings(String line) {
+
+		List<Message> messages = gson.fromJson(line,
+				new TypeToken<List<Message>>() {
+				}.getType());
 		return messages;
 	}
 

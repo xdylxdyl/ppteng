@@ -10,10 +10,10 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,6 @@ import com.gemantic.common.util.MyListUtil;
 import com.gemantic.common.util.MyMapUtil;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
-import com.gemantic.kill.thread.RoomMessageThread;
 import com.gemantic.kill.thread.RoomThread;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.exception.ServiceErrorCode;
@@ -65,6 +64,8 @@ public class RoomController {
 
 	@Autowired
 	private CookieUtil cookieUtil;
+
+
 
 	/**
 	 * 房间列表
@@ -369,15 +370,17 @@ public class RoomController {
 		// TODO 我判断不出来用Int还是用String好
 
 		Long rid = this.roomService.createRoom(room);
-
-		RoomThread r = new RoomThread(rid, roomService,
-				droolsGameMessageService, pushClient);
-		r.run();
-
-		RoomMessageThread rm = new RoomMessageThread(rid, roomService,
-				droolsGameMessageService, pushClient);
-		rm.run();
 		
+
+
+	/*	RoomThread r = new RoomThread(rid, roomService,
+				droolsGameMessageService, pushClient);
+		r.run();*/
+
+		/*
+		 * RoomMessageThread rm = new RoomMessageThread(rid, roomService,
+		 * droolsGameMessageService, pushClient); rm.run();
+		 */
 
 		model.addAttribute("code", code);
 		model.addAttribute("room", room);

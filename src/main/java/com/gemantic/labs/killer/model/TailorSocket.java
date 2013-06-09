@@ -53,7 +53,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 	public void sendMessage(String data) throws IOException {			
 	
 		if(_connection.isOpen()){
-			log.info(this.uid+" send message "+data);
+			//log.info(this.uid+" send message "+data);
 			_connection.sendMessage(data);	
 		}else{
 			this.messages.add(data);
