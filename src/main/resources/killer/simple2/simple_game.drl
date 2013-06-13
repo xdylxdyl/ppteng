@@ -1287,7 +1287,7 @@ salience 50
 no-loop true 
 when
      $message:Message($subject:subject,predict=="say"||predict=="check"||predict=="kill"||predict=="set kill"||predict=="set check",$accepts:accepts)
-      eval($message.getAccepts().size()==0)   
+     eval($message.getAccepts().size()==0)   
 	 Role(id==$subject,$role:role)
 	 
 	 
@@ -1308,7 +1308,7 @@ when
 	      result(ls)
 	      );
 	 Game(status=="night"||status=="lastword")
-	 Player(status=="living")
+	 Player(status=="living",id==$subject)
 	 
 then
      LogUtil.log(" group say start  ============="+$message); 

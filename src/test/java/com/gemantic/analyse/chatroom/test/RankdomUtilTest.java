@@ -148,5 +148,13 @@ public class RankdomUtilTest {
 	}
 	
 	
+	@Test
+	public void testList(){
+		List<String> ls =new ArrayList<String>();
+		ls.add("2");
+		ls.add("3");
+		log.info("test list "+ls);
+	}
+	
 	
 }

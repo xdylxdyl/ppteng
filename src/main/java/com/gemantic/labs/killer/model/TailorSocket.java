@@ -87,6 +87,9 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 	@Override
 	public void onMessage(String data) {
 		
+		
+		
+		
 	}
 
 	public boolean isOpen() {

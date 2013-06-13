@@ -66,6 +66,7 @@ var initGame = function () {
 
     //5 start comet
     webSocketUtil.connect(uid);
+
 	//cometService.comet(uid,cometService.messageQ)
     
     

@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 	<name>analyse-chatroom-home</name>
 	<description>analyse-chatroom-home</description>
-<repositories>
+	<repositories>
 		<repository>
 			<releases>
 				<enabled>true</enabled>
@@ -55,7 +55,7 @@
 		<gemantic.nlp.all.core.version>1.0</gemantic.nlp.all.core.version>
 		<gemantic.app.dict.core.version>1.2</gemantic.app.dict.core.version>
 		<gemantic.app.document.core.version>1.1</gemantic.app.document.core.version>
-		<jetty.version>8.1.9.v20130131</jetty.version>
+		<jetty.version>8.1.11.v20130520</jetty.version>
 	</properties>
 
 
@@ -676,7 +676,7 @@
 
 
 
-      
+
 
 
 
@@ -814,10 +814,10 @@
 							</includes>
 						</scanTargetPattern>
 					</scanTargetPatterns>
-					
+
 
 					<webAppConfig>
-						<defaultsDescriptor>src/main/resources/webdefault1.xml</defaultsDescriptor>
+						<defaultsDescriptor>webdefault.xml</defaultsDescriptor>
 					</webAppConfig>
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">

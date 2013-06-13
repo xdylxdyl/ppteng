@@ -1525,6 +1525,9 @@ when
 	      );
 	 Game(status=="night"||status=="lastword")
 	 
+	 
+	  Player(status=="living",id==$subject)
+	 
 then
      LogUtil.log(" group say start  ============="+$message); 
     
