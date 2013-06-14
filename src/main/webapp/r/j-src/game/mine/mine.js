@@ -109,30 +109,29 @@ $(document).ready(function () {
     var mineSettingView = {
         initSetting:function () {
 
-            var html = "<select id='mineSelect'><option value ='0' selected='selected'>初级</option><option value ='1'>中级</option><option value ='2'>高级</option><option value='3'>仙级</option><option value='4'>神级</option>" +
-                "<option value='5'>自定义</option>" +
+            var html = "<select id='mineSelect'><option value ='0' id='level0'>初级</option><option value ='1' id='level1'>中级</option><option  id='level2' value ='2'>高级</option><option  id='level3'value='3'>仙级</option><option  id='level4' value='4'>神级</option>" +
+                "<option  id='level5' value='5'>自定义</option>" +
                 "</select> <small class='text-error'>提交生效</small>";
             $("#" + selects.$settingArea).prepend(html);
-            //default mineSelect is 1.
-            mineSettingView.updateSettingParameter(null, null, null, true);
+
             var row = $("#rowCount").val();
             var column = $("#columnCount").val();
             var mine = $("#mineCount").val();
 
-
-            $("")
             mineView.updateSetting(row, column, mine);
-
+            //default mineSelect is 1.
+            mineSettingView.updateSettingParameter(row, column, mine, true);
 
             $("#mineSelect").live("change", function () {
                 var level = $(this).children('option:selected').val();
                 switch (level) {
                     case "0":
-                        mineSettingView.updateSettingParameter(16, 16, 40, true);
-                        break;
-                    case "1":
                         mineSettingView.updateSettingParameter(9, 9, 10, true);
                         break;
+                    case "1":
+                        mineSettingView.updateSettingParameter(16, 16, 40, true);
+                        break;
+
                     case "2":
                         mineSettingView.updateSettingParameter(16, 30, 99, true);
                         break;
@@ -182,6 +181,29 @@ $(document).ready(function () {
             $("#rowCount").attr("readOnly", readOnly);
             $("#columnCount").attr("readOnly", readOnly);
             $("#mineCount").attr("readOnly", readOnly);
+
+            var str = row + "-" + column + "-" + mine;
+            switch (str) {
+                case "9-9-10":
+                    $("#level0").attr("selected", true);
+                    break;
+                case "16-16-40":
+                    $("#level1").attr("selected", true);
+                    break;
+                case "16-30-99":
+                    $("#level2").attr("selected", true);
+                    break;
+                case "40-40-500":
+                    $("#level3").attr("selected", true);
+                    break;
+                case "100-100-2000":
+                    $("#level4").attr("selected", true);
+                    break;
+                default:
+                    $("#level5").attr("selected", true);
+                    break;
+
+            }
 
 
         },

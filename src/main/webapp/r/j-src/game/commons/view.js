@@ -62,18 +62,7 @@ var settingView = {
 
         }
 
-
-        if (settingView.getDefaultAutoSetting()) {
-            var html = "<label for='autoSettingCheckBox' class='checkbox'><input type='checkbox' checked='checked' id='autoSettingCheckBox'>自动设置</label>"
-            $("#" + selects.$settingArea).prepend(html);
-            settingView.autoSetting(true);
-        } else {
-            var html = "<label for='autoSettingCheckBox' class='checkbox'><input type='checkbox' id='autoSettingCheckBox'>自动设置</label>"
-            $("#" + selects.$settingArea).prepend(html);
-            settingView.autoSetting(false);
-        }
-
-
+        settingView.showAutoSetting();
         if (versionFunction["initSetting"]) {
             versionFunction["initSetting"]()
         }
@@ -106,6 +95,30 @@ var settingView = {
 
         });
 
+
+    },
+    existAutoSetting:function () {
+        if ($("#autoSetting").length!=0 ) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    showAutoSetting:function () {
+
+        if (settingView.existAutoSetting()) {
+            if (settingView.getDefaultAutoSetting()) {
+                var html = "<label for='autoSettingCheckBox' class='checkbox'><input type='checkbox' checked='checked' id='autoSettingCheckBox'>自动设置</label>"
+                $("#" + selects.$settingArea).prepend(html);
+                settingView.autoSetting(true);
+            } else {
+                var html = "<label for='autoSettingCheckBox' class='checkbox'><input type='checkbox' id='autoSettingCheckBox'>自动设置</label>"
+                $("#" + selects.$settingArea).prepend(html);
+                settingView.autoSetting(false);
+            }
+        } else {
+
+        }
 
     },
 
@@ -256,11 +269,11 @@ var playerListView = {
     setVote:function (id, count) {
         if (count == 0) {
             $("#" + id + "_vote").text("");
-            $("#" + id + "_vote").attr("count",0);
+            $("#" + id + "_vote").attr("count", 0);
 
         } else {
             $("#" + id + "_vote").text(" +" + count);
-            $("#" + id + "_vote").attr("count",count);
+            $("#" + id + "_vote").attr("count", count);
         }
     },
     displayCreater:function (player) {
@@ -594,7 +607,7 @@ var controlView = {
         return  $("#sayButton").prop("disabled");
     },
     showDelay:function () {
-        console.log(jQuery.now()+" accept time is "+lastMessageSendAt);
+        console.log(jQuery.now() + " accept time is " + lastMessageSendAt);
         $("#netSpeedHint").text("延迟:" + (jQuery.now() - lastMessageSendAt) + "毫秒");
     },
     getMessage:function () {

@@ -66,8 +66,7 @@
 			<map>
 				<entry key="视频地址" value="">
 				</entry>
-				<entry key="autoSetting" value="true">
-				</entry>
+				
 			</map>
 		</constructor-arg>
 	</bean>
@@ -81,9 +80,7 @@
 				</entry>
 				<entry key="mineCount" value="10">
 				</entry>
-				<entry key="autoSetting" value="true">
-				</entry>
-
+				
 			</map>
 		</constructor-arg>
 	</bean>
@@ -131,13 +128,7 @@
 
 
 	<bean id="rest_1.0_setting" class="java.util.HashMap">
-	<constructor-arg>
-			<map>
-				
-				<entry key="autoSetting" value="true">
-				</entry>
-			</map>
-		</constructor-arg>
+
 	</bean>
 
 
