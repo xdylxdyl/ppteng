@@ -19,7 +19,7 @@ var webSocketUtil = {
         } else {
             location = "ws://192.168.11.68:9090/servlet/websocket?uid=" + uid;
         }
-        console.log(" this will be error,upgrade version work? test again? " + location);
+        console.log(" this will create websocket ? " + location);
 
 
         webSocketUtil._ws = new WebSocket(location);
@@ -79,7 +79,7 @@ var webSocketUtil = {
     _onclose:function (m) {
         console.log("connection close .reopen it ");
         $("#netSpeedHint").text("断线中..正重连");
-        webSocketUtil.retry();
+
     },
     _onerror:function (m) {
 
