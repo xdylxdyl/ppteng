@@ -42,7 +42,7 @@ public class WebSocketServiceImpl implements WebSocketService {
 			webSockets.put(uid, socket);
 
 		}
-		log.info(webSockets);
+	//	log.info(webSockets);
 		return webSockets.get(uid);
 	}
 

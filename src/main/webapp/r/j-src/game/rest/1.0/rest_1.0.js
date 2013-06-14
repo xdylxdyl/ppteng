@@ -115,7 +115,7 @@ function publicCtrl($scope, $timeout) {
         }
       var mytimeout = $timeout($scope.onTimeout,120000);
 
-    $scope.refresh();
+
 
 
 };

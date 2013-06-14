@@ -84,8 +84,8 @@ var webSocketUtil = {
     _onerror:function (m) {
 
         console.log("connection close cause something wrong?.reopen it ");
-        $("#netSpeedHint").text("断线中..正重连");
-        webSocketUtil.retry();
+        $("#netSpeedHint").text("网络连接异常.");
+
     },
     isConnect:function () {
         if (webSocketUtil._ws == null || webSocketUtil._ws.readyState == 3) {

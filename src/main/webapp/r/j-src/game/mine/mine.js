@@ -11,7 +11,7 @@ $(document).ready(function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
         if ("living" == p.status || "ready" == p.status) {
             var divClass = $(this).attr("class");
-            if (divClass != undefined&&divClass!="") {
+            if (divClass != undefined && divClass != "") {
 
             } else {
 
@@ -109,7 +109,7 @@ $(document).ready(function () {
     var mineSettingView = {
         initSetting:function () {
 
-            var html = "<select id='mineSelect'><option value ='0' selected='selected'>级别</option><option value ='1'>低级</option><option value ='2'>中级</option><option value='3'>高级</option><option value='4'>神级</option>" +
+            var html = "<select id='mineSelect'><option value ='0' selected='selected'>初级</option><option value ='1'>中级</option><option value ='2'>高级</option><option value='3'>仙级</option><option value='4'>神级</option>" +
                 "<option value='5'>自定义</option>" +
                 "</select> <small class='text-error'>提交生效</small>";
             $("#" + selects.$settingArea).prepend(html);
@@ -119,14 +119,19 @@ $(document).ready(function () {
             var column = $("#columnCount").val();
             var mine = $("#mineCount").val();
 
+
+            $("")
             mineView.updateSetting(row, column, mine);
 
 
             $("#mineSelect").live("change", function () {
                 var level = $(this).children('option:selected').val();
                 switch (level) {
-                    case "1":
+                    case "0":
                         mineSettingView.updateSettingParameter(16, 16, 40, true);
+                        break;
+                    case "1":
+                        mineSettingView.updateSettingParameter(9, 9, 10, true);
                         break;
                     case "2":
                         mineSettingView.updateSettingParameter(16, 30, 99, true);
@@ -261,12 +266,12 @@ $(document).ready(function () {
             var time = parseInt($("#overMessage").attr("time")) / 1000;
             var count = parseInt(message.object);
             $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 共点击了 [" + message.object + "]次 ,平均每秒 [" + (count / time).toFixed(3) + "] 次</p>");
-            var money=parseInt($("#"+uid+"_vote").attr("count"))*10;
-           if($("#overMessage").attr("result")=="win"){
-               $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 金币  [" +money + "]</p>");
-           }else{
+            var money = parseInt($("#" + uid + "_vote").attr("count")) * 10;
+            if ($("#overMessage").attr("result") == "win") {
+                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 金币  [" + money + "]</p>");
+            } else {
 
-           }
+            }
 
             viewUtil.autoBottom($("#" + selects.$gameArea));
         },
@@ -384,9 +389,9 @@ $(document).ready(function () {
             var uid = message.subject;
             var place = message.object;
             var player = playerService.getPlayer(uid);
-            var money=message.content;
+            var money = message.content;
 
-            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 哈哈哈哈哈哈哈 [" + player.name + "]同学我早知道你不靠谱了,你在 [" + place + "] 点到雷了，会被扣除"+money+"～心疼不，自断手指吧亲 </p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 哈哈哈哈哈哈哈 [" + player.name + "]同学我早知道你不靠谱了,你在 [" + place + "] 点到雷了，会被扣除" + money + "～心疼不，自断手指吧亲 </p>");
         },
         over:function (message) {
 
@@ -487,7 +492,7 @@ $(document).ready(function () {
             globalView.setGameStatus(data.status);
 
             controlView.clearCountDownTime();
-            controlView.startCountTime(jQuery.now()-data.startAt);
+            controlView.startCountTime(jQuery.now() - data.startAt);
 
         },
 
