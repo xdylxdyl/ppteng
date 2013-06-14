@@ -38,6 +38,7 @@ var webSocketUtil = {
         connectCheck=null;
         webSocketUtil.retryCount = 0;
         webSocketUtil.check();
+        $("#netSpeedHint").text("已连接");
 
     },
 
