@@ -3,6 +3,8 @@
  * 上午10:08 To change this template use File | Settings | File Templates.
  */
 
+var connectCheck=null;
+
 var webSocketUtil = {
     _ws:"",
     uid:null,
@@ -33,7 +35,7 @@ var webSocketUtil = {
     },
 
     _onopen:function () {
-        webSocketUtil._ws.send('i am open ~~,are you ready ?');
+        connectCheck=null;
         webSocketUtil.retryCount = 0;
         webSocketUtil.check();
 
@@ -95,7 +97,7 @@ var webSocketUtil = {
         }
     },
     check:function () {
-        setInterval(function () {
+        connectCheck= setInterval(function () {
             if (!webSocketUtil._ws || webSocketUtil._ws.readyState != 1) {
                 console.log("reconnect");
 
