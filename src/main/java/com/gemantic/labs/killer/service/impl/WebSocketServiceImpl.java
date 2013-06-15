@@ -38,6 +38,7 @@ public class WebSocketServiceImpl implements WebSocketService
 
 	@Override
 	public WebSocket createWebSocket(Long uid) {
+		log.info("websocket is "+webSockets);
 		if (webSockets.containsKey(uid)) {
 
 		} else {
