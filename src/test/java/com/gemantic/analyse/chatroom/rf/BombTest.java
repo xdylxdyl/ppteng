@@ -69,7 +69,7 @@ public class BombTest {
 		log.info(" how to destory ");
 
 	}
-	@Test
+	//@Test
 	public void testClient() throws ServiceException{
 		
 		
@@ -263,6 +263,10 @@ public class BombTest {
 		record.setRoom(new Room());
 		this.recordService.addRecord(record);*/
 	
+		
+	}
+	@Test
+	public void testNull(){
 		
 	}
 
