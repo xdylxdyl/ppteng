@@ -27,13 +27,13 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 
 	private List<String> messages = new ArrayList();
 
-	private ApplicationContext context;
+	private MessageService messageService;
 
-	public TailorSocket(Long uid, ApplicationContext context) {
+	public TailorSocket(Long uid, MessageService messageService) {
 
 		this.uid = uid;
 
-		this.context = context;
+		this.messageService = messageService;
 		log.info("create new socket " + uid);
 
 	}
@@ -72,15 +72,19 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 	}
 
 	@Override
-	public void onMessage(String data) {
-		log.info("accept content " + data);
-		Message message = MessageUtil.fromString(data);
-		SendMessageEvent event = new SendMessageEvent(this, message,
-				Long.valueOf(message.getWhere()));
-		log.info(this.context);
-		this.context.publishEvent(event);
-		log.info("accept message over");
-
+	public void onMessage(String data) {	
+		Message message = MessageUtil.fromString(data);		
+		try {
+			messageService.sendMessage(message);
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceDaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+	
 	}
 
 	public boolean isOpen() {

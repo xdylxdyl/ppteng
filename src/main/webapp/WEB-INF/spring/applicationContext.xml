@@ -204,20 +204,8 @@
 
 	<bean id="dao" class="com.gemantic.dal.dao.impl.CompositeDaoImpl" />
 
-	<bean id="webSocketService"
-		class="com.gemantic.labs.killer.service.impl.WebSocketServiceImpl"></bean>
 
-	<bean id="roomService" class="com.gemantic.killer.service.impl.RoomServiceImpl"></bean>
-	<bean id="sessionService" class="com.gemantic.killer.service.impl.SessionServiceImpl">
 	
-	<property name="version_path">
-			<ref local="version_path_simple" />
-		</property>
-		<property name="rules">
-			<ref local="roomRulePaths" />
-		</property>
-	
-	</bean>
 
 
 </beans>

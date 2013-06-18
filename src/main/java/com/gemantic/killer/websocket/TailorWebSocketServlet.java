@@ -34,7 +34,7 @@ public class TailorWebSocketServlet extends WebSocketServlet {
 					.getWebApplicationContext(servletContext);
 
 			webSocketService = (WebSocketService) ctx
-					.getBean("webSocketService");
+					.getBean("webSocketServiceImpl");
 			
 			
 

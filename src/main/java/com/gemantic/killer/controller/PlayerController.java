@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,6 +40,7 @@ import com.gemantic.killer.service.MemberService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.util.MailUtil;
 import com.gemantic.killer.util.PunchUtil;
+import com.gemantic.labs.killer.event.SendMessageEvent;
 import com.gemantic.labs.killer.model.Records;
 import com.gemantic.labs.killer.model.SimpleStatistics;
 import com.gemantic.labs.killer.service.RecordService;
@@ -52,7 +56,7 @@ import com.google.gson.GsonBuilder;
  * 
  */
 @Controller
-public class PlayerController {
+public class PlayerController implements ApplicationContextAware {
 	private static final Log log = LogFactory.getLog(PlayerController.class);
 	@Autowired
 	private RoomService roomService;
@@ -72,6 +76,8 @@ public class PlayerController {
 
 	@Autowired
 	private SimpleStatisticsService simpleStatisticsService;
+
+	private ApplicationContext context;
 
 	/**
 	 * 玩家登入
@@ -896,17 +902,18 @@ public class PlayerController {
 				// 2.发送消息给所有的成员
 				Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 				String json = gson.toJson(r.getExpressions());
-				Message m = new Message(uid.toString(), "expression", json, "#0000FF",
-						"", r.getId().toString(), "", r.getVersion());
-				r.getMessages().offer(m);			
-				
+				Message m = new Message(uid.toString(), "expression", json,
+						"#0000FF", "", r.getId().toString(), "", r.getVersion());
+
 				this.roomService.updateRoom(r);
+
+				SendMessageEvent event = new SendMessageEvent(this, m,
+						r.getId());
+				this.context.publishEvent(event);
 
 				log.info(uid + " is admin so update express from use "
 						+ r.getExpressions() + " of room " + r.getId());
-				
-				
-				
+
 			} else {
 				log.info(uid + " is not admin so get express from room ");
 			}
@@ -1059,7 +1066,7 @@ public class PlayerController {
 		return "/room/player/search";
 
 	}
-	
+
 	/**
 	 * 获取玩家的状态信息
 	 * 
@@ -1074,11 +1081,11 @@ public class PlayerController {
 			HttpServletResponse response, ModelMap model) throws Exception {
 
 		Long self = cookieUtil.getID(request, response);
-		if(self==null){
+		if (self == null) {
 			return "redirect:/";
 		}
 		log.info(self);
-		
+
 		return "/room/player/notification";
 
 	}
@@ -1125,6 +1132,13 @@ public class PlayerController {
 		model.addAttribute("code", code);
 
 		return "common/success";
+
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+		this.context = applicationContext;
 
 	}
 

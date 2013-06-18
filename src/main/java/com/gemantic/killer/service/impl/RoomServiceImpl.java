@@ -16,7 +16,7 @@ import com.gemantic.common.exception.ServiceException;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.util.MapDataUtil;
-
+@Component
 public class RoomServiceImpl implements RoomService {
 	private Map<Long,Room> roomID_Room=new HashMap<Long, Room>();
 	private Map<Long,Set<Long>> roomID_readyUID=new HashMap<Long,Set<Long>>();
