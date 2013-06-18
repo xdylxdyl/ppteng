@@ -12,11 +12,14 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.gemantic.killer.websocket.TailorWebSocketServlet;
+
 public class HttpServletProxy extends HttpServlet {
 
 	private static final long serialVersionUID = -7208519469035631940L;
 
-	Log logger = LogFactory.getLog(HttpServletProxy.class);
+	private static final Log log = LogFactory
+			.getLog(TailorWebSocketServlet.class);
 
 	private String targetServlet;
 
@@ -24,12 +27,12 @@ public class HttpServletProxy extends HttpServlet {
 
 	public void init() throws ServletException {
 
-		this.targetServlet = getInitParameter("targetServlet");
+		this.targetServlet = getInitParameter("targetBean");
 
 		getServletBean();
 		proxy.init(getServletConfig());
 
-		logger.info(targetServlet
+		log.info(targetServlet
 				+ " was inited by HttpServletProxy  successfully......");
 	}
 
@@ -37,6 +40,10 @@ public class HttpServletProxy extends HttpServlet {
 		WebApplicationContext wac = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(getServletContext());
 		this.proxy = (HttpServlet) wac.getBean(targetServlet);
+
+		for (String str : wac.getBeanDefinitionNames()) {
+			log.info("get bean is " + str);
+		}
 
 	}
 

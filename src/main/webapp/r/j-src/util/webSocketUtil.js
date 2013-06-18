@@ -3,7 +3,19 @@
  * 上午10:08 To change this template use File | Settings | File Templates.
  */
 
-var connectCheck=null;
+
+var checkWebSocket = function () {
+
+    if (!webSocketUtil._ws || webSocketUtil._ws.readyState != 1) {
+        console.log("reconnect");
+
+        webSocketUtil.connect(webSocketUtil.uid);
+    } else {
+        console.log("normal");
+    }
+};
+
+var checkID=null;
 
 var webSocketUtil = {
     _ws:"",
@@ -35,22 +47,18 @@ var webSocketUtil = {
     },
 
     _onopen:function () {
-        connectCheck=null;
+        clearInterval(checkID);
         webSocketUtil.retryCount = 0;
-        webSocketUtil.check();
+        webSocketUtil.timer();
         $("#netSpeedHint").text("已连接");
 
     },
 
     _send:function (message) {
-        if (webSocketUtil._ws)
-            webSocketUtil._ws.send(message);
+        webSocketUtil._ws.send(message);
+        console.log(message);
     },
 
-    send:function (text) {
-        if (text != null && text.length > 0)
-            webSocketUtil._ws._send(text);
-    },
 
     retry:function () {
         console.log("retry count is " + webSocketUtil.retryCount);
@@ -97,16 +105,8 @@ var webSocketUtil = {
             return true;
         }
     },
-    check:function () {
-        connectCheck= setInterval(function () {
-            if (!webSocketUtil._ws || webSocketUtil._ws.readyState != 1) {
-                console.log("reconnect");
-
-                webSocketUtil.connect(webSocketUtil.uid);
-            } else {
-                console.log("normal");
-            }
-        }, 5000);
+    timer:function () {
+        checkID= setInterval(checkWebSocket, 60000);
     }
 
 }

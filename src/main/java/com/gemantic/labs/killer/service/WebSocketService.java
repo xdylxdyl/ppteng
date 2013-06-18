@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.eclipse.jetty.websocket.WebSocket;
 
+import com.gemantic.killer.service.MessageService;
+
 public interface WebSocketService {
 
 	WebSocket createWebSocket(Long uid);

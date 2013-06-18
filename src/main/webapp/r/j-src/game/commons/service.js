@@ -553,7 +553,10 @@ var cometService = {
             webSocketUtil.connect(globalView.getCurrentID());
         }
         lastMessageSendAt = jQuery.now();
-        return ajaxJson("/message/accept2", "POST", message, null, 5000, "json",false);
+
+        webSocketUtil._send(JSON.stringify(message));
+
+
     },
     messageQ:function (msgObj) {
         $(document).queue("messages", cometService.parseMessage(msgObj.message));

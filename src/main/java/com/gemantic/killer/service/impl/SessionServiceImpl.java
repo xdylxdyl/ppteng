@@ -27,15 +27,14 @@ import com.gemantic.common.exception.ServiceException;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.service.SessionService;
 
-@Component
+
 public class SessionServiceImpl implements SessionService {
 	private static final Log log = LogFactory.getLog(SessionServiceImpl.class);
 	
-	
-	@Resource(name = "version_path_simple")	
+
 	private Map<String,List<String>> version_path=new HashMap();
 	
-	@Resource(name = "roomRulePaths")	
+
 	private List<String> rules=new ArrayList();
 
 	private Map<Long,StatefulKnowledgeSession> roomID_Session=new HashMap();

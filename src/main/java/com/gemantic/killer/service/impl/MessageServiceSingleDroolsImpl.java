@@ -20,10 +20,12 @@ import org.springframework.stereotype.Component;
 
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
+import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.common.model.Operater;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
+import com.gemantic.killer.service.MemberService;
 import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.MineStatisticsService;
 import com.gemantic.killer.service.RoomService;
@@ -68,6 +70,11 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 	@Autowired
 	private MineStatisticsService mineStatisticService;
+
+	@Autowired
+	private PushClient pushClient;
+	@Autowired
+	private MemberService memberService;
 
 	@Resource(name = "roomAction")
 	private Set<String> roomAction = new HashSet();
@@ -338,6 +345,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 	private boolean IsRoomMessage(Message message, Room r) {
 
+		
 		if ("video_1.0".equals(r.getVersion())) {
 			return true;
 		}
@@ -415,6 +423,27 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		// 怎么对顺序排序
 
 		return operator.getNextMessages();
+
+	}
+
+	@Override
+	public void sendMessage(Message message) throws ServiceException,
+			ServiceDaoException {
+
+		Room r = this.roomService.getRoom(Long.valueOf(message.getWhere()));
+		if(r==null){
+			return;
+		}
+		log.info("get room is "+r);
+		List<Message> messages = this.generate(message, r);
+
+		MessageUtil.sendMessage(r.getVersion(), messages, this.pushClient);
+
+		if ("logout".equals(message.getPredict())) {
+			this.memberService.userLogOut(Long.valueOf(message.getWhere()),
+					Long.valueOf(message.getSubject()));
+
+		}
 
 	}
 

@@ -56,6 +56,9 @@ public interface MessageService {
 	public List<Message> updateSetting(Room room)throws ServiceException,ServiceDaoException;
 	
 	
+	public void sendMessage(Message message) throws ServiceException,ServiceDaoException;
+	
+	
 
 
 	

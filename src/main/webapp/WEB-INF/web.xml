@@ -5,7 +5,23 @@
 
 	<display-name>search</display-name>
 
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/application*.xml
+		</param-value>
+	</context-param>
 
+	<context-param>
+		<param-name>org.eclipse.jetty.servlet.Default.useFileMappedBuffer
+		</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
 
 
 	<filter>
@@ -22,10 +38,6 @@
 		</init-param>
 	</filter>
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/application*.xml</param-value>
-	</context-param>
 
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
@@ -51,16 +63,13 @@
 
 
 
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener
-		</listener-class>
-	</listener>
 
 
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet
 		</servlet-class>
+
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
@@ -70,12 +79,13 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>WebSocket</servlet-name>
+		<display-name>webSocketServlet</display-name>
+		<servlet-name>webSocketServlet</servlet-name>
 		<servlet-class>com.gemantic.killer.websocket.TailorWebSocketServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>WebSocket</servlet-name>
+		<servlet-name>webSocketServlet</servlet-name>
 		<url-pattern>/servlet/*</url-pattern>
 	</servlet-mapping>
 
@@ -98,11 +108,5 @@
 	</error-page>
 
 
-
-	<context-param>
-		<param-name>org.eclipse.jetty.servlet.Default.useFileMappedBuffer
-		</param-name>
-		<param-value>false</param-value>
-	</context-param>
 
 </web-app>

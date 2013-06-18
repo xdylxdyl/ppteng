@@ -10,21 +10,24 @@ import java.util.concurrent.Executors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.websocket.WebSocket;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
-import com.gemantic.common.exception.ServiceException;
-import com.gemantic.killer.util.MessageUtil;
 import com.gemantic.killer.websocket.TailorWebSocketServlet;
 import com.gemantic.labs.killer.model.TailorSocket;
 import com.gemantic.labs.killer.service.WebSocketService;
 
-public class WebSocketServiceImpl implements WebSocketService {
+public class WebSocketServiceImpl implements WebSocketService,
+		ApplicationContextAware {
 
 	private static final Log log = LogFactory
 			.getLog(TailorWebSocketServlet.class);
 
 	private static final Executor exec = Executors.newFixedThreadPool(20);
 	private final Map<Long, TailorSocket> webSockets = new HashMap<Long, TailorSocket>();
+
+	private ApplicationContext context;
 
 	public WebSocketServiceImpl() {
 		super();
@@ -38,11 +41,11 @@ public class WebSocketServiceImpl implements WebSocketService {
 
 		} else {
 			log.info(uid + " will be create new socket");
-			TailorSocket socket = new TailorSocket(uid);
+			TailorSocket socket = new TailorSocket(uid,context);
 			webSockets.put(uid, socket);
 
 		}
-	//	log.info(webSockets);
+		// log.info(webSockets);
 		return webSockets.get(uid);
 	}
 
@@ -89,6 +92,14 @@ public class WebSocketServiceImpl implements WebSocketService {
 			this.sendMessage(id, id_comtent.get(id));
 		}
 		return "";
+
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+		this.context = applicationContext;
+		log.info("set context"+context);
 
 	}
 

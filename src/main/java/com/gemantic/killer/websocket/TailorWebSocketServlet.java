@@ -8,10 +8,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -24,16 +20,23 @@ public class TailorWebSocketServlet extends WebSocketServlet {
 	public static String newLine = System.getProperty("line.separator");
 
 	private WebSocketService webSocketService;
+	
+	
+	private ServletContext servletContext;
 
 	@Override
 	public void init() throws ServletException {
+
 		try {
-			// trying to load the Spring context file.
-			ServletContext servletContext = this.getServletContext();
+
+			servletContext = this.getServletContext();
 			WebApplicationContext ctx = WebApplicationContextUtils
 					.getWebApplicationContext(servletContext);
+
 			webSocketService = (WebSocketService) ctx
 					.getBean("webSocketService");
+			
+			
 
 			super.init();
 		} catch (ServletException se) {
@@ -41,15 +44,13 @@ public class TailorWebSocketServlet extends WebSocketServlet {
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
+
 	}
 
-	@RequestMapping(value = "/servlet/websocket")
 	public WebSocket doWebSocketConnect(HttpServletRequest request,
 			String protocol) {
 		Long uid = Long.valueOf(request.getParameter("uid"));
-
 		log.info("you access me " + uid);
-
 		WebSocket ws = webSocketService.createWebSocket(uid);
 		return ws;
 	}
