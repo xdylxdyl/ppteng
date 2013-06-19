@@ -11,8 +11,8 @@
 
 
 
-<c:set var="class" value="background-first" scope="session"></c:set>
-<c:set var="indexClass" value="badge badge-important" scope="session"></c:set>
+<c:set var="class" value="background-first" scope="request"></c:set>
+<c:set var="indexClass" value="badge badge-important" scope="request"></c:set>
 <!-- container start  -->
 <div class="span9">
 
@@ -25,11 +25,11 @@
 		<c:set var="allIndex" value="${(page-1)*size+status.index+1}"></c:set>
 	
 			<c:if test="${((page-1)*size+status.index+1)> 3}">
-				<c:set var="class" value="" scope="session"></c:set>
-					<c:set var="indexClass" value="badge badge-info" scope="session"></c:set>
+				<c:set var="class" value="" scope="request"></c:set>
+					<c:set var="indexClass" value="badge badge-info" scope="request"></c:set>
 			</c:if>
 		<div class="container">
-			<c:set var="current" value="${user}" scope="session"></c:set>
+			<c:set var="current" value="${user}" scope="request"></c:set>
 				<p>
 			<span class="${indexClass}">${(page-1)*size+status.index+1} 	</span> <span class="${indexClass}">${user.money}</span><p>
 			<tiles:insertDefinition name="personCard" />
