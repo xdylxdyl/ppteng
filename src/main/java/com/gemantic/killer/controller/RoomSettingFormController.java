@@ -1,5 +1,6 @@
 package com.gemantic.killer.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,10 +28,14 @@ import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.common.model.Setting;
 import com.gemantic.killer.model.Room;
+import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.service.SettingService;
 import com.gemantic.killer.util.MessageUtil;
+import com.gemantic.labs.killer.model.Records;
+import com.gemantic.labs.killer.service.RecordService;
+import com.gemantic.labs.killer.service.UsersService;
 
 @Controller
 @RequestMapping(value = "/m/form/setting")
@@ -50,6 +55,13 @@ public class RoomSettingFormController {
 	
 	@Autowired
 	private CookieUtil cookieUtil;
+	
+	@Autowired
+	private UsersService userService;
+
+
+	@Autowired
+	private RecordService recordService;
 
 	private static final Log log = LogFactory.getLog(RoomSettingFormController.class);
 
@@ -138,6 +150,26 @@ public class RoomSettingFormController {
 			this.roomService.updateRoom(room);
 			List<Message> messages = this.droolsGameMessageService.updateSetting(room);
 			MessageUtil.sendMessage(setting.getVersion(), messages, this.pushClient);
+			
+			if(room.getVersion().contains("video")){
+				
+				Records record = new Records();
+				Long rid=System.currentTimeMillis();
+				record.setId(rid);
+				record.setPath("record/" + rid + ".txt");
+				record.setTime(0L);
+				record.setRoom(room);
+				record.setVersion(room.getVersion());
+
+				List<Long> ls = room.getPlayers();
+				List<User> users = this.userService.getObjectsByIds(ls);
+				Map<Long, String> uid_names = new HashMap();
+				for (User user : users) {
+					uid_names.put(user.getId(), user.getName());
+				}
+				record.setUid_names(uid_names);
+				this.recordService.insert(record);
+			}
 
 		}
 

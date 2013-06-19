@@ -20,6 +20,19 @@ public class Message implements Serializable, Cloneable {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Message(String subject, String predict, String object, String color, String expression, String where, String content, String version,Long time) {
+		this.subject = subject;
+		this.predict = predict;
+		this.object = object;
+		this.color = color;
+		this.expression = expression;
+		this.where = where;
+		this.content = content;
+		this.time =time;
+		this.version = version;
+		
+	}
+	
 	public Message(String subject, String predict, String object, String color, String expression, String where, String content, String version) {
 		this.subject = subject;
 		this.predict = predict;
@@ -28,7 +41,7 @@ public class Message implements Serializable, Cloneable {
 		this.expression = expression;
 		this.where = where;
 		this.content = content;
-		this.time = System.currentTimeMillis();
+		this.time =System.currentTimeMillis();
 		this.version = version;
 		
 	}

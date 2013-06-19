@@ -564,11 +564,13 @@ var cometService = {
     },
 
     parseMessage:function (message) {
-        controlView.showDelay();
+
 
         var msgLength = message.length; //msg数组长度
+
         for (var i = msgLength - 1; i >= 0; i--) {
             roomParseService.branch(message[i]);
+
         }
         $(document).dequeue("messages");
 
@@ -594,6 +596,7 @@ var roomParseService = {
         }
 
         var start = jQuery.now();
+        controlView.showDelay(message);
         var predict = message.predict;
 
         switch (predict) {

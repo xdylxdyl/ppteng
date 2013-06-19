@@ -10,7 +10,7 @@
 var timer = null;
 
 var ghostSimpleModel = {
-    topicHint:"格式不正确,第一个词为水民卡,第二个词为幽灵卡,中间以空格隔开",
+    topicHint:"格式不正确,第一个词为水民卡,第二个词为幽灵卡,中间以逗号隔开",
     playerStatus:{
         die:"die",
         living:"living",
@@ -23,7 +23,7 @@ var ghostSimpleModel = {
         king:"king"
     },
     hint:{
-        topic:"【系统消息】请耐心等英明的国王出题,出题时间,其他玩家不能说话.卡片格式:第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开,国王请在指令里选择出题",
+        topic:"【系统消息】请耐心等英明的国王出题,出题时间,其他玩家不能说话.卡片格式:第一个词是水民卡,第二个词是幽灵卡,中间以逗号隔开,水民卡和幽灵卡是两个相近词.如('桔子,橙子')国王请在指令里选择出题",
         day:"【系统消息】 国王在上,感谢您给了你的子民们又一次找出幽灵的机会,我们一定不负重望~",
         assignTopic:"【系统消息】国王分给您的卡片是: ",
         dayCount:function (count) {
@@ -83,7 +83,8 @@ var ghostSimpleController = {
         switch (command) {
             case "topic":
                 var content = $("#sayInput").val();
-                var contents = content.split(" ");
+                content=DBC2SBC(content);
+                var contents = content.split(",");
                 if (contents.length < 2) {
                     result.code = -1;
                     result.message = ghostSimpleModel.topicHint;

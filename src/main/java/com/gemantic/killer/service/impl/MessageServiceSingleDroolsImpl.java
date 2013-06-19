@@ -159,11 +159,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 			r.setStatus(Room.status_start);
 			r.setPlayers(operater.getPlayers());
-			User u = this.userService.getObjectById(r.getCreaterID());
-			if (u != null) {
-				r.setExpressions(u.getExpression());
-			}
-
+			
 			this.roomService.updateRoom(r);
 
 		}
@@ -434,10 +430,12 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		if(r==null){
 			return;
 		}
-		log.info("get room is "+r);
+		//log.info("get room is "+r);
 		List<Message> messages = this.generate(message, r);
 
 		MessageUtil.sendMessage(r.getVersion(), messages, this.pushClient);
+		
+		//log.info(messages);
 
 		if ("logout".equals(message.getPredict())) {
 			this.memberService.userLogOut(Long.valueOf(message.getWhere()),

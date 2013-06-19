@@ -1,3 +1,10 @@
+var gameView={
+    hideDieArea:function(){
+        
+    }
+}
+
+
 $(document).ready(function () {
 
     var videoView = {

@@ -74,6 +74,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 	@Override
 	public void onMessage(String data) {	
 		Message message = MessageUtil.fromString(data);		
+		log.info(message);
 		try {
 			messageService.sendMessage(message);
 		} catch (ServiceException e) {

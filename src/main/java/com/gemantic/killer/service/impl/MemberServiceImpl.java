@@ -51,6 +51,9 @@ public class MemberServiceImpl implements MemberService {
 	public List<Long> getMembers(Long roomID) throws ServiceException, ServiceDaoException {
 		try{
 		Room r = this.roomService.getRoom(roomID);
+		if(r==null){
+			return new ArrayList<Long>();
+		}
 		Message m = new Message("-500", "get", "member");
 		m.setVersion(r.getVersion());
 		m.setWhere(r.getId().toString());

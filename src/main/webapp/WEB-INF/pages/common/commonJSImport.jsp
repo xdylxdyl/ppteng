@@ -14,4 +14,6 @@
 	src="/r/j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script>
 <script type="text/javascript" src="/r/j-src/util/notify.js"></script>
+<script
+	src="<%=request.getContextPath() %>/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
 <script type="text/javascript" src="/r/j-src/util/webSocketUtil.js?v=${frontVersion}"></script>

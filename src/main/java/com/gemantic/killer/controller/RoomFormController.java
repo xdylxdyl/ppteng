@@ -1,7 +1,5 @@
 package com.gemantic.killer.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,15 +21,14 @@ import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.commons.push.client.PushClient;
-import com.gemantic.kill.thread.RoomMessageThread;
-import com.gemantic.kill.thread.RoomThread;
-import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.common.model.Setting;
 import com.gemantic.killer.model.Room;
+import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.service.SettingService;
-import com.gemantic.killer.util.MessageUtil;
+import com.gemantic.killer.service.UserService;
+import com.gemantic.labs.killer.service.UsersService;
 
 
 @Controller
@@ -54,6 +51,9 @@ public class RoomFormController {
 	@Autowired
 	private CookieUtil cookieUtil;
 	
+	
+	@Autowired
+	private UsersService userService;
 	
 
     private static final Log log = LogFactory.getLog(RoomFormController.class);
@@ -134,11 +134,13 @@ public class RoomFormController {
     			room.setSetting(s);
     		}
     		s.setRid(roomID);        
-        	room.setCreateAt(System.currentTimeMillis());        	
+        	room.setCreateAt(System.currentTimeMillis());        
+        	
         	
         	this.droolsGameMessageService.createRoom(room);       
         
-        	
+        	User user=userService.getObjectById(room.getCreaterID());
+        	room.setExpressions(user.getExpression());
     		this.addRoom(room);//这个时候会出问题.Room已经创建好,别人可以进.可是还没有初始化好.
     		
     

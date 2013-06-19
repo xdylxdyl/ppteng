@@ -111,12 +111,5 @@ var webSocketUtil = {
 
 }
 
-function isJson(content) {
-    if (content.match("^\{(.+:.+,*){1,}\}$")) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 

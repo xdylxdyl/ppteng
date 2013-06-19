@@ -52,11 +52,11 @@ function htmlDecode(value) {
     }
 }
 
-function isJson(content){
-    if(!content.match("^\{(.+:.+,*){1,}\}$")){
-        return true;
-    }else{
-        return false;
-    }
+function isJson(content) {
+    if (content.match("^\{(.+:.+,*){1,}\}$")) {
+         return true;
+     } else {
+         return false;
+     }
 }
 

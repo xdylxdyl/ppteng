@@ -23,6 +23,8 @@
 			<li id="nav_ghost_soul_1"><a href="/record/list?version=ghost_soul_1&uid=${uid}">魂版</a></li>
 			<li class="nav-header">扫雷</li>		
 			<li id="nav_mine_1"><a href="/record/list?version=mine_1&uid=${uid}">多人扫雷</a></li>
+			<li class="nav-header">电影院</li>		
+			<li id="nav_video_1"><a href="/record/list?version=video_1&uid=${uid}">电影</a></li>
 		
 		</ul>
 	</div>

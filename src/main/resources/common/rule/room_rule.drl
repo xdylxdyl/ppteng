@@ -637,8 +637,7 @@ when
     $operater:Operater()
 then      
     //LogUtil.log("next operater  start  =============222");   
-     $message.setWhere($rid);
-     $message.setTime(System.currentTimeMillis());
+     $message.setWhere($rid);  
   
      $operater.getNextMessages().add($message);	
    

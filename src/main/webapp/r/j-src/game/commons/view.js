@@ -98,7 +98,7 @@ var settingView = {
 
     },
     existAutoSetting:function () {
-        if ($("#autoSetting").length!=0 ) {
+        if ($("#autoSetting").length != 0) {
             return true;
         } else {
             return false;
@@ -606,9 +606,12 @@ var controlView = {
     isMute:function () {
         return  $("#sayButton").prop("disabled");
     },
-    showDelay:function () {
-        console.log(jQuery.now() + " accept time is " + lastMessageSendAt);
-        $("#netSpeedHint").text("延迟:" + (jQuery.now() - lastMessageSendAt) + "毫秒");
+    showDelay:function (message) {
+        var t = jQuery.now() - message.time;
+        if (message.subject == globalView.getCurrentID()) {
+            $("#netSpeedHint").text("延迟:" + (jQuery.now() - message.time) + "毫秒");
+        }
+
     },
     getMessage:function () {
 
@@ -626,7 +629,8 @@ var controlView = {
             expression:controlView.getExpressionValue(),
             "content":content,
             "isDrools":"true",
-            "version":$("#version").val()
+            "version":$("#version").val(),
+            "time":jQuery.now()
         };
 
 

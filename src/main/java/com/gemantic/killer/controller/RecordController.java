@@ -63,7 +63,7 @@ public class RecordController {
 	private UsersService userSevice;
 	@Autowired
 	private RecordStastisticsEtl recordStastisticsEtl;
-	
+
 	@Autowired
 	private MineStatisticsService mineStatisticService;
 
@@ -136,7 +136,12 @@ public class RecordController {
 		model.addAttribute("size", size);
 		model.addAttribute("version", version);
 
-		return "/record/list/all";
+		if ("video_1".equals(version)) {
+			return "/record/list/video";
+		} else {
+			return "/record/list/all";
+		}
+
 	}
 
 	private List<Records> getRecords(String version, Long uid, Integer start,
@@ -215,8 +220,12 @@ public class RecordController {
 		// 先创建一个假房间?那房间里的Query怎么办.
 
 		Records record = this.recordService.getObjectById(recordID);
+		List<String> contents = new ArrayList();
+		if (record.getVersion().contains("video")) {
 
-		List<String> contents = this.recordService.getContent(recordID);
+		} else {
+			contents = this.recordService.getContent(recordID);
+		}
 
 		String version = record.getVersion();
 		model.addAttribute("contents", contents);
@@ -417,7 +426,7 @@ public class RecordController {
 				String settingVersion = RoomUtil.getMIneSettingVersion(r
 						.getRoom());
 				if (StringUtils.isNotBlank(settingVersion)) {
-					log.info(r.getId()+" will be calculate to rank");
+					log.info(r.getId() + " will be calculate to rank");
 					List<Long> uids = r.getRoom().getPlayers();
 
 					for (Long id : uids) {
