@@ -61,8 +61,7 @@
 
 						<li><a href="#setting_area" data-toggle="tab">设置</a></li>
 						<li><a href="#music_area" data-toggle="tab">音乐</a></li>
-						<li><a href="#help_area" data-toggle="tab">帮助</a></li>
-						<tiles:insertDefinition name="navAdvertiseNormal" />
+						<li><a href="#help_area" data-toggle="tab">帮助</a></li>						
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="game_area"></div>
@@ -95,11 +94,7 @@
 
 						</div>
 
-						<!-- advertise -->
-						<tiles:insertDefinition name="advertiseNormal" />
-
-
-
+						
 						<!-- end of tab-content -->
 
 
