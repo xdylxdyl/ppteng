@@ -27,13 +27,15 @@ $(document).ready(function() {
     function checkhHtml5() {
         if (typeof(Worker) !== "undefined") {
             //什么都不用做
-           // alert("支持~")
+
         }
         else {
+
             showBg();
         }
     }
     checkhHtml5();
+
     $(window).resize(function() {
         checkhHtml5();
     })

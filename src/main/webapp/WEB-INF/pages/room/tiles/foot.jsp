@@ -97,10 +97,10 @@
 			<p>非常抱歉,请使用以下浏览器访问本站</p>
 			<p>
 			<ul>
-				<li><p><a href="http://www.firefox.com.cn/download/">FireFox</a></p></li>
-				<li><p><a href="http://dl.pconline.com.cn/download/51614.html">Chrome</a></p></li>
-				<li><p><a href="http://ie.sogou.com/">Sogou(高速模式)</a></p></li>
-				<li><p><a href="http://chrome.360.cn/">360极速浏览器(闪电模式)</a></p></li>
+				<li><p><a href="http://www.firefox.com.cn/download/" target="_blank">FireFox</a></p></li>
+				<li><p><a href="http://dl.pconline.com.cn/download/51614.html" target="_blank">Chrome</a></p></li>
+				<li><p><a href="http://ie.sogou.com/" target="_blank">Sogou(高速模式)</a></p></li>
+				<li><p><a href="http://chrome.360.cn/" target="_blank">360极速浏览器(闪电模式)</a></p></li>
 			</ul>			
 
 			</p>
