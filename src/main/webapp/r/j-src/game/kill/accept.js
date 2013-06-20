@@ -76,7 +76,7 @@ killController.parseMessage = function (message) {
 killController.isDisplayDecryption = function () {
 
      if("killer_police_secret_1.0"==globalView.getVersion()){
-         if(gameGlobalStatus.over==gameView.getGameStatus()){
+         if(gameGlobalStatus.over==globalView.getGameStatus()){
              return true;
          }else{
              return false;

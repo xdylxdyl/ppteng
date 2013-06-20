@@ -15,7 +15,7 @@ var checkWebSocket = function () {
     }
 };
 
-var checkID=null;
+var checkID = null;
 
 var webSocketUtil = {
     _ws:"",
@@ -24,24 +24,31 @@ var webSocketUtil = {
     retryLimit:3,
 
     connect:function (uid) {
-        webSocketUtil.uid = uid;
-        var l = document.location.toString();
-        var index = l.indexOf("com");
-        var location = "ws://42.121.113.70:8013/servlet/websocket?uid=" + uid;
-        if (index > 0) {
 
+        if ("WebSocket" in window) {
+            webSocketUtil.uid = uid;
+            var l = document.location.toString();
+            var index = l.indexOf("com");
+            var location = "ws://42.121.113.70:8013/servlet/websocket?uid=" + uid;
+            if (index > 0) {
+
+            } else {
+                location = "ws://192.168.11.68:9090/servlet/websocket?uid=" + uid;
+            }
+            console.log(" this will create websocket ? " + location);
+
+
+            webSocketUtil._ws = new WebSocket(location);
+            console.log(webSocketUtil._ws.readyState);
+            webSocketUtil._ws.onopen = webSocketUtil._onopen;
+            webSocketUtil._ws.onmessage = webSocketUtil._onmessage;
+            webSocketUtil._ws.onclose = webSocketUtil._onclose;
+            webSocketUtil._ws.onerror = webSocketUtil._onerror;
         } else {
-            location = "ws://192.168.11.68:9090/servlet/websocket?uid=" + uid;
+            alert("不支持的浏览器~,请使用Chrome/Firefox/搜狗/360极速");
+
+
         }
-        console.log(" this will create websocket ? " + location);
-
-
-        webSocketUtil._ws = new WebSocket(location);
-        console.log(webSocketUtil._ws.readyState);
-        webSocketUtil._ws.onopen = webSocketUtil._onopen;
-        webSocketUtil._ws.onmessage = webSocketUtil._onmessage;
-        webSocketUtil._ws.onclose = webSocketUtil._onclose;
-        webSocketUtil._ws.onerror = webSocketUtil._onerror;
 
 
     },
@@ -106,7 +113,7 @@ var webSocketUtil = {
         }
     },
     timer:function () {
-        checkID= setInterval(checkWebSocket, 60000);
+        checkID = setInterval(checkWebSocket, 60000);
     }
 
 }
