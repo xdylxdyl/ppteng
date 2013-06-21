@@ -2,7 +2,7 @@ var restModel = {
     publicFeed:[],
     privateFeed:[],
     feedUrl:{
-        public:"http://pipes.yahoo.com/pipes/pipe.run?_id=7f99d978f43fc6e5013f294a38f92ee7&_render=json",
+        public:"http://www.ptteng.com/r/json/news.json",
         private:""
     }
 
