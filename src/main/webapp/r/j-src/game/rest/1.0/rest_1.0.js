@@ -2,7 +2,7 @@ var restModel = {
     publicFeed:[],
     privateFeed:[],
     feedUrl:{
-        public:"http://www.ptteng.com/r/json/news.json?v="+jQuery.now(),
+        public:"/r/json/news.json?v="+jQuery.now(),
         private:""
     }
 
