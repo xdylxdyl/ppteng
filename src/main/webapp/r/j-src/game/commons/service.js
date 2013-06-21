@@ -462,11 +462,7 @@ roomService.info = function () {
         globalView.setGameStatusHint(data.status);
         controlView.setCountDownTime(data.remainTime);
         var player = playerService.getPlayer(globalView.getCurrentID());
-        if (playerStatus.die == player.status) {
-            gameAreaView.swithTopArea("deadArea");
-        } else {
 
-        }
 
 
     }

@@ -88,12 +88,15 @@ var ghostQuestionController = {
         var command = controlView.getCommandValue();
         switch (command) {
             case "topic":
+
                 var content = $("#sayInput").val();
-                content=DBC2SBC(content);
+                content = DBC2SBC(content);
                 var contents = content.split(",");
                 if (contents.length < 2) {
                     result.code = -1;
                     result.message = ghostQuestionModel.topicHint;
+                } else {
+                    $("#sayInput").val(content);
                 }
 
                 break;
@@ -168,7 +171,7 @@ var ghostQuestionController = {
 
     wrongTopic:function (message) {
 
-        $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + message.content + "]不符合规范,第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开</p>");
+        $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + message.content + "]不符合规范,第一个词是水民卡,第二个词是幽灵卡,中间以逗号隔开</p>");
 
 
     },
@@ -559,7 +562,6 @@ var ghostQuestionSettingView = {
         $("<span>分</span>").insertAfter("#dayTime");
         $("<span>分</span>").insertAfter("#topicTime");
         $("<span>分</span>").insertAfter("#questionTime");
-
 
 
     },

@@ -42,7 +42,6 @@ $(document).ready(function () {
                 if (player.status == playerStatus.lastword && "lastword" == globalView.getGameStatus()) {
                     message.predict = globalView.getGameStatus();
                 }
-
                 cometService.sendMessage(message);
                 controlView.clearSayInput();
                 controlView.resetCommand();

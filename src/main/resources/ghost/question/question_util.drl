@@ -153,7 +153,7 @@ function int getGhostCount(Map map, int totalCount) {
 		String isAutoSet = (String) map.get("autoSetting");
 		String ghostCount = (String) map.get("ghostCount");
 		
-		int part = 6;
+		int part = 7;
 		
 		if ("true".equals(isAutoSet)) {
 			return (totalCount - 1) / part + 1;
