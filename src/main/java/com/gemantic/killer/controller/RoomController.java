@@ -193,10 +193,10 @@ public class RoomController {
 
 		User u = this.userService.getObjectById(uid);
 		String version = room.getVersion();
-		log.info("version is " + version);
+		//log.info("version is " + version);
 		String stageShow = UserUtil.getRandomStageShow(
 				UserUtil.StageShow_Login, u);
-		log.info(u + "get stage show is " + stageShow);
+		//log.info(u + "get stage show is " + stageShow);
 		Message loginMessage = new Message(uid.toString(), "login", "-500",
 				"#0000FF", "78", rid.toString(), stageShow, version,System.currentTimeMillis());
 		List<Message> messages = this.droolsGameMessageService.generate(

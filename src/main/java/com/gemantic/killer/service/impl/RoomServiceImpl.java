@@ -44,7 +44,7 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public Room getRoom(Long roomID) {
-		log.info(roomID_Room);
+
 		return roomID_Room.get(roomID);
 	}
 

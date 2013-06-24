@@ -555,7 +555,7 @@ var cometService = {
 
     },
     messageQ:function (msgObj) {
-        $(document).queue("messages", cometService.parseMessage(msgObj.message));
+      cometService.parseMessage(msgObj.message);
 
     },
 
@@ -568,7 +568,6 @@ var cometService = {
             roomParseService.branch(message[i]);
 
         }
-        $(document).dequeue("messages");
 
 
     }
@@ -710,6 +709,7 @@ var roomParseService = {
                     type:"GET",
                     dataType:'json',
                     url:"/player/info?rid=" + rid + "&uids=" + message.subject,
+                    async : false,
                     success:function (data) {
                         console.log(data);
                         var name = data.infos[0].name;

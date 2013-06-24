@@ -85,8 +85,7 @@ var webSocketUtil = {
             if (isJson(m.data)) {
                 console.log(m.data);
                 var message = JSON.parse(m.data);
-                $(document).queue("messages",
-                    cometService.parseMessage(message.message));
+                cometService.parseMessage(message.message);
 
             } else {
                 console.log(m.data);

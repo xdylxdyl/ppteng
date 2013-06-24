@@ -54,7 +54,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 	public void sendMessage(String data) throws IOException {
 
 		if (_connection.isOpen()) {
-			 log.info(this.uid+" send message "+data);
+			// log.info(this.uid+" send message "+data);
 			_connection.sendMessage(data);
 		} else {
 			this.messages.add(data);
@@ -100,9 +100,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 			if (this.messages.isEmpty()) {
 				connection.sendMessage("already open ~~" + this.uid);
 			} else {
-				log.info(this.uid + " has messages ~~" + this.messages.size());
-				connection.sendMessage(this.uid + " has messages ~~"
-						+ this.messages.size());
+				log.info(this.uid + " has messages ~~" + this.messages);			
 				List<String> ms = new ArrayList();
 				ms.addAll(this.messages);
 				this.messages.clear();
