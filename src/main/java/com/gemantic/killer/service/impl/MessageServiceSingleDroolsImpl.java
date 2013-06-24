@@ -155,7 +155,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			// 创建的时候不会更新.因为创建的时候不会是Start
 			// log.info("game start");//
 			// 主要是在Session里.愁死我了.Gameover的时候不能把Session给Remove了.
-			r.setStartAt(operater.getMessage().getTime());
+			r.setStartAt(System.currentTimeMillis());
 
 			r.setStatus(Room.status_start);
 			r.setPlayers(operater.getPlayers());
