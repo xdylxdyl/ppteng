@@ -12,7 +12,18 @@
             <img src="http://www.ptteng.com${users[record.room.createrID].icon}" alt="${users[record.room.createrID].name}" class="img-polaroid" style="max-width:8em;height:8em" >
         </div>
         <div class="span10">
-            <h3 class="text-error"><a href="/record/enter?recordID=${record.id}"> ${(page-1)*size+status.index+1}.${record.room.name}</a></h2>
+            <h3 class="text-error"><a href="/record/enter?recordID=${record.id}" title="${record.room.name}"> ${(page-1)*size+status.index+1}.
+            
+            	<c:choose>
+						<c:when test="${fn:length(record.room.name) > 50}">
+							<c:out value="${fn:substring(record.room.name, 0, 50)}..." />
+						</c:when>
+						<c:otherwise>
+							<c:out value="${record.room.name}" />
+						</c:otherwise>
+					</c:choose>
+            
+            </a></h2>
             <blockquote>
                 <p>纪元：
 						<date:date pattern="yyyy年 MM月dd日  HH时mm分mm秒 "
