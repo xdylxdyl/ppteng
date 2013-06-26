@@ -67,9 +67,8 @@ var initGame = function () {
     //5 start comet
     webSocketUtil.connect(uid);
 
-	//cometService.comet(uid,cometService.messageQ)
-    
-    
+    //cometService.comet(uid,cometService.messageQ)
+
 
     //6.initControllview
     controlView.initButtonOfGame();
@@ -178,11 +177,11 @@ $(document).ready(function () {
     $.ajaxSettings.traditional = true;
     //初始化，获取房间所有信息,有可能是玩的房间,有可能是战例播放
 
-    if ("game" == globalView.getRoomType()) {
-
-        initGame();
-    } else {
+    if ("game" != globalView.getRoomType()) {
         initRecord();
+
+    } else {
+        initGame();
     }
 
     jiathis_config = {
