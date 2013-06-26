@@ -33,6 +33,9 @@ var ghostQuestionModel = {
         },
         questionCount:function (count) {
             return "【系统消息】幽灵可以向国王提出[" + count + "]个问题~";
+        },
+        sort:function (content) {
+            return "【系统消息】可以按以下顺序描述自己的卡牌,[" + content + "]~,或由国王直接指定~~"
         }
     },
     commandHint:{
@@ -160,6 +163,11 @@ var ghostQuestionController = {
                 break;
             case "say":
                 ghostQuestionController.say(message);
+                break;
+
+
+            case "sort" :
+                ghostView.showSort(message);
                 break;
 
             default :
@@ -509,7 +517,19 @@ var ghostView = {
         viewUtil.autoBottom($("#" + selects.$gameArea));
 
 
+    },
+    showSort:function (message) {
+        var list = JSON.parse(message.object)
+        var names = [];
+        for (var l in list) {
+            var player = playerService.getPlayer(list[l]);
+            names.push(player.name)
+        }
+        ghostView.showContentForGameArea(ghostQuestionModel.hint.sort(JSON.stringify(names)))
+
+
     }
+
 
 }
 
@@ -644,7 +664,6 @@ var gameView = {
             gameView.hideDieArea();
         }
     }
-
 
 }
 

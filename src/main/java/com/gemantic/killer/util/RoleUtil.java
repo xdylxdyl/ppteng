@@ -13,6 +13,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gemantic.common.util.zip.RunLengthEncoding;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class RoleUtil {
 	private static final Log log = LogFactory.getLog(RoleUtil.class);
@@ -116,6 +118,14 @@ public class RoleUtil {
 	public static String decodeRole(String role) {
 		// TODO Auto-generated method stub
 		return  RunLengthEncodingUtil.decode(role,"[0-9]+|[WK]");
+	}
+	
+	public static String shuffleList2Json(List list){
+		Collections.shuffle(list);
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		return gson.toJson(list);
+		
+		
 	}
 
 }

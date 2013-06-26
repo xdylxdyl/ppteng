@@ -348,6 +348,14 @@ when
     $message:Message($id:subject,predict=="topic",$content:content)
     Game(status=="topic")   
     not Card()
+     //get all readys
+    $allLiving:ArrayList()
+	      from accumulate(
+	      Player($pid:id)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($pid);),
+	      result(ls)
+	      );
        
 then
     LogUtil.log("topic createstart  ================="); 
@@ -365,6 +373,9 @@ then
   
        Card  card=new Card(waterCard,ghostCard); 
 	   insert(card);
+	  
+	    Message sortMessage=new Message("-500","sort",RoleUtil.shuffleList2Json($allLiving));     
+        insert(sortMessage);
     
     }
     
