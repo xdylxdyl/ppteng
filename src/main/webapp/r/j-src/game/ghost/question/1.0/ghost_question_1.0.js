@@ -137,6 +137,7 @@ var ghostQuestionController = {
                 ghostQuestionController.topicAssign(message);
                 break;
             case "topic" :
+                message.object="-500";
                 ghostQuestionController.say(message);
                 break;
             case "decryption" :

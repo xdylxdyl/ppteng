@@ -376,6 +376,8 @@ then
 	  
 	    Message sortMessage=new Message("-500","sort",RoleUtil.shuffleList2Json($allLiving));     
         insert(sortMessage);
+       
+        
     
     }
     

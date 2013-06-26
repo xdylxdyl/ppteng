@@ -100,7 +100,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 			if (this.messages.isEmpty()) {
 				connection.sendMessage("already open ~~" + this.uid);
 			} else {
-				log.info(this.uid + " has messages ~~" + this.messages);			
+				log.info(this.uid + " has messages ~~" + this.messages.size());			
 				List<String> ms = new ArrayList();
 				ms.addAll(this.messages);
 				this.messages.clear();

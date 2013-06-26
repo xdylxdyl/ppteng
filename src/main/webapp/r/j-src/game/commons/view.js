@@ -632,7 +632,10 @@ var controlView = {
             "version":$("#version").val(),
             "time":jQuery.now()
         };
-
+        if("topic"==message.predict){
+            //只发给自己
+            message.object=message.subject;
+        }
 
         return message;
     },
