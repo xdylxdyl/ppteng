@@ -13,7 +13,6 @@
         </div>
         <div class="span10">
             <h3 class="text-error"><a href="/record/enter?recordID=${record.id}" title="${record.room.name}"> ${(page-1)*size+status.index+1}.
-            
             	<c:choose>
 						<c:when test="${fn:length(record.room.name) > 50}">
 							<c:out value="${fn:substring(record.room.name, 0, 50)}..." />
