@@ -1,105 +1,111 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Room</title>
-		<meta charset="utf-8">
-		<!--[if IE]>
+<head>
+<title>Room</title>
+<meta charset="utf-8">
+<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" href="../css/common/room.css">
-		<script src="../j-src/framework/jquery/jquery-1.6.1.js"></script>
-		<script src="../j-src/game/commons/base.js"></script>
-	</head>
-	
-	<body>
-		<div id="container">
-			<div class="clearfix">
-				<nav>
-					<article>
-						<p>游戏进程：等待开始</p>
-					    <p>白天时间：4分钟</p>
-					    <p>夜晚时间：1分钟</p>
-					    <p>lastwordTime：1分钟</p>
-					    <p>杀手人数：缺省</p>
-					    <p>警察人数：缺省</p>
-					</article>
-					<div class="line"></div>
-					<ul>
-						<li><span class="waiting"></span><a>Gamers Name</a></li>
-						<li><span class="alive"></span><a>Gamers Name</a></li>
-						<li><span class="dead"></span><a>Gamers Name</a></li>
-						<li><span class="waiting"></span><a>Gamers Name</a><span class="victim"></span></li>
-						<li><span class="waiting"></span><a>Gamers Name</a><span class="killer"></span></li>
-					</ul>
-				</nav>
-				<section>
-					<header>
-                    HTML5是一个新鲜玩意，目前在大环境下全面应用HTML5还不现实，但是我们还是要尽可能多的去了解以备日后应用。
-从目前收集的信息来看，HTML5的推出意义要大于实际应用，HTML5只是按照现在前端技术的大环境做出的一种进化版本。革命性的东西，也许我笨，到目前还没有看出有多少来。但是这个推出意义还是有的，因为这是历史的进步、也是顺理成章的事。 HTML5是一个新鲜玩意，目前在大环境下全面应用HTML5还不现实，但是我们还是要尽可能多的去了解以备日后应用。
-从目前收集的信息来看，HTML5的推出意义要大于实际应用，HTML5只是按照现在前端技术的大环境做出的一种进化版本。革命性的东西，也许我笨，到目前还没有看出有多少来。但是这个推出意义还是有的，因为这是历史的进步、也是顺理成章的事。
-                    </header>
-					<div class="line"></div>
-                    <article>
-                        <p>子贡问曰：孔文子何以谓之文也。</p>
-                        <p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
-                        <p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
-                        <p>子贡问曰：孔文子何以谓之文也。</p>
-                        <p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
-                        <p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
-                        <p>子贡问曰：孔文子何以谓之文也。</p>
-                        <p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
-                        <p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
-                        <p>子贡问曰：孔文子何以谓之文也。</p>
-                        <p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
-                        <p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
-                        <p>子贡问曰：孔文子何以谓之文也。</p>
-                        <p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
-                        <p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
-                        <p>子贡问曰：孔文子何以谓之文也。</p>
-                        <p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
-                        <p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
-                        <p>子贡问曰：孔文子何以谓之文也。</p>
-                        <p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
-                        <p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
-                        <p>子贡问曰：孔文子何以谓之文也。</p>
-                        <p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
-                        <p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
-                        <p>子贡问曰：孔文子何以谓之文也。</p>
-                        <p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
-                        <p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
-                    </article>
-				</section>
-			</div>
-			<footer>
-				<form>
-					<fieldset class="choose">
-						<select>
-							<option value="0">神态&gt;&gt;</option>
-				            <option value="1">温柔</option>
-				            <option value="2">笑</option>
-						</select>
-						<select>
-                            <option selected="" style="background-color: #000000; color: white" value="#000000">黑色&gt;&gt;</option>
-				            <option style="background-color: #0088FF; color: white" value="#0088FF">海蓝</option>
-				            <option style="background-color: #0000FF; color: white" value="#0000FF">亮蓝</option>
-				            <option style="background-color: #000088; color: white" value="#000088">深蓝</option>
-                        </select>
-						<select>
-                            <option>-指令-</option>
-                        </select>
-						<select>
-                            <option>-对象-</option>
-                        </select>
-						<input type="button" class="button" value="准备游戏">
-                        <input type="button" class="button" value="开始游戏">
-					</fieldset>
-					<fieldset>
-                        <input type="text" class="text">
-						<input type="submit" class="submit" value="发送">
-                    </fieldset>
-					<div class="quiet"></div>
-				</form>
-			</footer>
+
+<link href="../css/common/room.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="./css/room/style.css">
+<script src="../j-src/framework/jquery/jquery-1.6.1.js"></script>
+<script src="../j-src/game/commons/base.js"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+	  <div class="row-fluid"></div>
+		<div class="clearfix">
+			<nav>
+				<article>
+					<p>游戏进程：等待开始</p>
+					<p>白天时间：4分钟</p>
+					<p>夜晚时间：1分钟</p>
+					<p>lastwordTime：1分钟</p>
+					<p>杀手人数：缺省</p>
+					<p>警察人数：缺省</p>
+				</article>
+				<div class="line"></div>
+				<ul>
+					<li><span class="waiting"></span><a>Gamers Name</a></li>
+					<li><span class="alive"></span><a>Gamers Name</a></li>
+					<li><span class="dead"></span><a>Gamers Name</a></li>
+					<li><span class="waiting"></span><a>Gamers Name</a><span
+						class="victim"></span></li>
+					<li><span class="waiting"></span><a>Gamers Name</a><span
+						class="killer"></span></li>
+				</ul>
+			</nav>
+			<section>
+				<header>
+					HTML5是一个新鲜玩意，目前在大环境下全面应用HTML5还不现实，但是我们还是要尽可能多的去了解以备日后应用。
+					从目前收集的信息来看，HTML5的推出意义要大于实际应用，HTML5只是按照现在前端技术的大环境做出的一种进化版本。革命性的东西，也许我笨，到目前还没有看出有多少来。但是这个推出意义还是有的，因为这是历史的进步、也是顺理成章的事。
+					HTML5是一个新鲜玩意，目前在大环境下全面应用HTML5还不现实，但是我们还是要尽可能多的去了解以备日后应用。
+					从目前收集的信息来看，HTML5的推出意义要大于实际应用，HTML5只是按照现在前端技术的大环境做出的一种进化版本。革命性的东西，也许我笨，到目前还没有看出有多少来。但是这个推出意义还是有的，因为这是历史的进步、也是顺理成章的事。
+				</header>
+				<div class="line"></div>
+				<article>
+					<p>子贡问曰：孔文子何以谓之文也。</p>
+					<p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
+					<p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
+					<p>子贡问曰：孔文子何以谓之文也。</p>
+					<p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
+					<p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
+					<p>子贡问曰：孔文子何以谓之文也。</p>
+					<p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
+					<p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
+					<p>子贡问曰：孔文子何以谓之文也。</p>
+					<p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
+					<p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
+					<p>子贡问曰：孔文子何以谓之文也。</p>
+					<p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
+					<p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
+					<p>子贡问曰：孔文子何以谓之文也。</p>
+					<p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
+					<p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
+					<p>子贡问曰：孔文子何以谓之文也。</p>
+					<p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
+					<p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
+					<p>子贡问曰：孔文子何以谓之文也。</p>
+					<p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
+					<p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
+					<p>子贡问曰：孔文子何以谓之文也。</p>
+					<p>子曰：敏而好学，不耻下问，是以谓之文也。</p>
+					<p>子曰：好仁不好学，其蔽也愚；好知不好学，其蔽也荡；好信不好学，其蔽也贼；好直不好学，其蔽也绞；好勇不好学，其蔽也乱；好刚不好学，其蔽也狂。</p>
+				</article>
+			</section>
 		</div>
-	</body>
+		<footer>
+			<form>
+				<fieldset class="choose">
+					<select>
+						<option value="0">神态&gt;&gt;</option>
+						<option value="1">温柔</option>
+						<option value="2">笑</option>
+					</select> <select>
+						<option selected=""
+							style="background-color: #000000; color: white" value="#000000">黑色&gt;&gt;</option>
+						<option style="background-color: #0088FF; color: white"
+							value="#0088FF">海蓝</option>
+						<option style="background-color: #0000FF; color: white"
+							value="#0000FF">亮蓝</option>
+						<option style="background-color: #000088; color: white"
+							value="#000088">深蓝</option>
+					</select> <select>
+						<option>-指令-</option>
+					</select> <select>
+						<option>-对象-</option>
+					</select> <input type="button" class="button" value="准备游戏"> <input
+						type="button" class="button" value="开始游戏">
+				</fieldset>
+				<fieldset>
+					<input type="text" class="text"> <input type="submit"
+						class="submit" value="发送">
+				</fieldset>
+				<div class="quiet"></div>
+			</form>
+		</footer>
+	</div>
+</body>
 </html>

@@ -1,0 +1,320 @@
+<!doctype html>
+<html>
+<head>
+<title>Room</title>
+<meta charset="utf-8">
+<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../css/room/mstyle.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="test.css">
+
+
+
+
+</head>
+
+<body>
+	<!--  container-fluid -->
+
+	<div class="container-fluid">
+
+
+		<!-- first row -->
+
+		<div class="row-fluid" id="row1">
+
+
+			<div class="navbar">
+				<div class="navbar-inner">
+
+					<span class="brand"> <small><a
+							href="/player/detail?uid=${room.createrID}" id="createName"></a></small>
+					</span> <span class="brand"> <small id="gamePhase"></small>
+					</span> <span class="brand"> <small id="playerRole"></small>
+					</span>
+					<ul class="nav pull-right">
+						<li><a href="#" id="exitButton" rel="tooltip" title="点此离开房间"
+							data-original-title="点此离开房间" data-placement="bottom">退出房间 <i
+								class="icon-off"></i></a></li>
+					</ul>
+				</div>
+			</div>
+
+
+		</div>
+		<!-- first row -->
+		<!-- second row -->
+
+		<div class="row-fluid wrap" id="row2">
+
+			<div class="content">
+
+				<div class="tabbable">
+
+					<ul class="nav nav-tabs">
+						<li><a href="#player_list" data-toggle="tab">玩家</a></li>
+						<li><a href="#game_area" data-toggle="tab">茶馆闲聊</a></li>
+						<li class="active"><a href="#rest_public" data-toggle="tab">精选</a></li>
+						<li><a href="#rest_private" data-toggle="tab">偏爱</a></li>
+						<li><a href="#music_area" data-toggle="tab">音乐</a></li>
+						<li><a href="#setting_area" data-toggle="tab">设置</a></li>
+						<li><a href="#help_area" data-toggle="tab">帮助</a></li>
+
+
+
+
+
+					</ul>
+					<div class="tab-content">
+
+						<!--<button ng-click="refresh()">刷新</button>-->
+
+						<div class="tab-pane active" id="player_list">
+							<div class="span2" id="sidebar-nav">
+								<div class="span11">
+									<ul class="nav nav-list" id="playerList">
+										<li>xd</li>
+										<li>xd</li>
+										<li>xd</li>
+										<li>xd</li>
+									</ul>
+
+								</div>
+
+							</div>
+						</div>
+						<div class="tab-pane" id="rest_public" ng-controller="publicCtrl">
+
+							<blockquote>
+								<div class="pull-right">
+									<button ng-click="refresh()" class="btn">刷新</button>
+								</div>
+								<p>茶座休息室</p>
+								<small>葡萄藤精选的内容</small>
+
+							</blockquote>
+
+
+							<div class="" id="news_public">
+
+								<div class="span12">
+
+									<div>
+
+
+										<p>又吵架了又吵架了又吵架了</p>
+										<p>又吵架了又吵架了又吵架了</p>
+										<p>又吵架了又吵架了又吵架了</p>
+										<p>又吵架了又吵架了又吵架了</p>
+										<p>又吵架了又吵架了又吵架了</p>
+										<p>又吵架了又吵架了又吵架了</p>
+										<p>又吵架了又吵架了又吵架了</p>
+										<p>又吵架了又吵架了又吵架了</p>
+										<p>又吵架了又吵架了又吵架了</p>
+										<p>又吵架了又吵架了又吵架了</p>
+
+
+
+
+									</div>
+
+
+
+
+
+								</div>
+
+
+
+							</div>
+
+						</div>
+
+
+						<div class="tab-pane" id="rest_private">
+
+							<div class="">
+								<blockquote>
+									<p>茶座休息室</p>
+									<small>房主偏爱的内容</small>
+
+								</blockquote>
+								<div id="news_private">
+
+									<p>正在开发中~敬请期待~</p>
+
+								</div>
+							</div>
+
+						</div>
+						<div class="tab-pane" id="setting_area"></div>
+						<div class="tab-pane" id="music_area"></div>
+
+						<div class="tab-pane" id="help_area">
+							<div class="hero-unit">
+
+								<p></p>
+								<p>
+									<a
+										href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=2007"
+										class="text-warning" target="_blank">1.订阅说明 &raquo;</a>
+								</p>
+
+
+
+							</div>
+
+
+
+						</div>
+
+
+
+						<div class="tab-pane" id="game_area">
+
+							<p>正在开发中~敬请期待~</p>
+							<p>正在开发中~敬请期待~</p>
+							<p>正在开发中~敬请期待~</p>
+							<p>正在开发中~敬请期待~</p>
+							<p>正在开发中~敬请期待~</p>
+							<p>正在开发中~敬请期待~</p>
+							<p>正在开发中~敬请期待~</p>
+						</div>
+
+
+
+
+						<!-- advertise -->
+
+
+
+
+						<!-- end of tab-content -->
+
+
+					</div>
+
+
+
+
+				</div>
+			</div>
+
+		</div>
+
+		<!-- second row -->
+
+		<!-- three row -->
+		<div class="row-fluid footer" id="row3">
+			<div class="inner-space">
+				<!--act-->
+				<ul class="toolbar">
+					<li class="dropup"><a href="#" id="select_expression"
+						data-default="" class="btn dropdown-toggle btn-small"
+						data-toggle="dropdown"> &nbsp; <span>神态</span> &nbsp; <b
+							class="caret"></b>
+					</a>
+						<ul class="dropdown-menu" id="expression">
+						</ul></li>
+					<li class="dropup"><a href="#" id="select_color"
+						data-default="#000" class="btn dropdown-toggle btn-small"
+						data-toggle="dropdown"> &nbsp; <span>颜色</span> &nbsp; <b
+							class="caret"></b>
+					</a>
+						<ul class="dropdown-menu" id="color">
+
+						</ul></li>
+					<li class="dropup"><a href="#" id="select_command"
+						data-default="" class="btn dropdown-toggle btn-small"
+						data-toggle="dropdown"> &nbsp; <span>指令</span> &nbsp; <b
+							class="caret"></b>
+					</a>
+						<ul class="dropdown-menu" id="command">
+
+						</ul></li>
+					<li class="dropup"><a href="#" id="select_object"
+						data-default="" class="btn dropdown-toggle btn-small"
+						data-toggle="dropdown"> &nbsp; <span>对象</span> &nbsp; <b
+							class="caret"></b>
+					</a>
+						<ul class="dropdown-menu" id="object">
+
+						</ul></li>
+					<li><label for="checkBox" class="checkbox"> <input
+							type="checkbox" checked="checked" value="scroll" id="checkBox">
+							滚屏
+					</label></li>
+
+					<li id="displayRoleGroup" class="hide"><label
+						for="displayRole" class="checkbox"> <input type="checkbox"
+							checked="checked" value="scroll" id="displayRole"> 隐藏角色
+					</label></li>
+					<li><span class="help-inline" id="countDown">04:00</span></li>
+
+					<li>
+						<button class="btn btn-info" id="readyButton">准备</button>
+					</li>
+					<li>
+						<button class="btn btn-info" id="startButton">开始游戏</button>
+					</li>
+					<li>
+						<button class="btn btn-info" id="replayButton">播放战例</button>
+					</li>
+					<li class="pull-right"><span class="help-inline"
+						id="netSpeedHint">延迟：0 毫秒</span></li>
+				</ul>
+				<!--input-->
+				<div class="form-horizontal">
+					<div class="control-group">
+						<label for="" class="control-label" id="sayLabel"><span
+							id="playerName"></span>说:</label>
+						<div class="controls">
+							<div class="row-fluid">
+								<div class="span10">
+									<input type="text" class="span12" id="sayInput">
+								</div>
+								<div class="span2">
+									<a href="#" class="btn medium btn-primary" id="sayButton">发送</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- three row -->
+
+
+	</div>
+
+	<!--  container-fluid -->
+
+
+
+
+
+
+
+
+	<script type="text/javascript"
+		src="../j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript"
+		src="../j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
+	<script type="text/javascript"
+		src="../j-src/framework/bootstrap/bootstrap-tab.js"></script>
+	<script type="text/javascript"
+		src="../j-src/framework/bootstrap/bootstrap-modal.js"></script>
+	<script type="text/javascript"
+		src="../j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
+	<script type="text/javascript" src="../j-src/framework/kibo/kibo.js"></script>
+	<script type="text/javascript" src="../j-src/util/notify.js"></script>
+	<script src="../j-src/util/stringUtil.js?v=${frontVersion}"></script>
+	<script type="text/javascript"
+		src="../j-src/util/webSocketUtil.js?v=${frontVersion}"></script>
+</body>
+</html>

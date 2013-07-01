@@ -157,7 +157,7 @@ public class RoomController {
 	 */
 	@RequestMapping(value = "/m/play/enter")
 	public String enterRoom(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model, @RequestParam Long rid)
+			HttpServletResponse response, ModelMap model, @RequestParam Long rid,String from)
 			throws Exception {
 
 		Long uid = cookieUtil.getID(request, response);
@@ -217,8 +217,16 @@ public class RoomController {
 		} else {
 			model.addAttribute("first", "notFirst");
 		}
+		if("mobile".equals(from)){
+			model.addAttribute("switchFrom", "pc");
+			
+			return "/room/mplay/" + version;
+		}else{
+			model.addAttribute("switchFrom", "mobile");
+			return "/room/play/" + version;
+		}
 
-		return "/room/play/" + version;
+	
 
 	}
 

@@ -13,7 +13,7 @@
 </head>
 <body>
 
-
+ <tiles:insertAttribute name="header" />
 
        
    <tiles:insertAttribute name="body" />

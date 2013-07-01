@@ -33,47 +33,60 @@
 	</definition>
 
 
+	<definition name="game.mroom" template="/WEB-INF/pages/tiles/mlayout/layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/pages/tiles/mlayout/head.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/tiles/mlayout/body.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/pages/tiles/mlayout/foot.jsp" />
+
+	</definition>
+
+	<definition name="/room/mplay/*" extends="game.mroom">
+		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
+	</definition>
+
+
 
 
 	<definition name="/room/list/*" extends="ptt">
 		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
-		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-房间列表" type="string" />
+		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-房间列表"
+			type="string" />
 	</definition>
 
 	<definition name="/room/index/*" extends="ptt">
 		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
-		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-首页" type="string" />
+		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-首页"
+			type="string" />
 	</definition>
 
 
 
-	
-	
 
-	<definition name="record*"
-		template="/WEB-INF/pages/record/layout/layout.jsp">
+
+
+	<definition name="record*" template="/WEB-INF/pages/record/layout/layout.jsp">
 		<put-attribute name="left"
 			value="/WEB-INF/pages/record/layout/left.jsp" />
-		<put-attribute name="right"
-			value="/WEB-INF/pages/record/list/{1}.jsp" />
+		<put-attribute name="right" value="/WEB-INF/pages/record/list/{1}.jsp" />
 	</definition>
-	
-     <definition name="/record/list/*" extends="ptt">			
-		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-战例" type="string" />
+
+	<definition name="/record/list/*" extends="ptt">
+		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-战例"
+			type="string" />
 		<put-attribute name="body" value="record{1}"></put-attribute>
 	</definition>
-	
-	
-	
-	<definition name="about*"
-		template="/WEB-INF/pages/room/about/layout.jsp">
-		<put-attribute name="left"
-			value="/WEB-INF/pages/room/about/left.jsp" />
-		<put-attribute name="right"
-			value="/WEB-INF/pages/room/about/{1}.jsp" />
+
+
+
+	<definition name="about*" template="/WEB-INF/pages/room/about/layout.jsp">
+		<put-attribute name="left" value="/WEB-INF/pages/room/about/left.jsp" />
+		<put-attribute name="right" value="/WEB-INF/pages/room/about/{1}.jsp" />
 	</definition>
-	
-	
+
+
 
 	<definition name="/room/about/*" extends="ptt">
 		<put-attribute name="title" value="葡萄藤" type="string" />
@@ -83,17 +96,14 @@
 
 
 	</definition>
-	
-	
-		<definition name="tool*"
-		template="/WEB-INF/pages/room/tool/layout.jsp">
-		<put-attribute name="left"
-			value="/WEB-INF/pages/room/tool/left.jsp" />
-		<put-attribute name="right"
-			value="/WEB-INF/pages/room/tool/{1}.jsp" />
+
+
+	<definition name="tool*" template="/WEB-INF/pages/room/tool/layout.jsp">
+		<put-attribute name="left" value="/WEB-INF/pages/room/tool/left.jsp" />
+		<put-attribute name="right" value="/WEB-INF/pages/room/tool/{1}.jsp" />
 	</definition>
-	
-	
+
+
 
 	<definition name="/room/tool/*" extends="ptt">
 		<put-attribute name="title" value="工具-葡萄藤" type="string" />
@@ -103,115 +113,111 @@
 
 
 	</definition>
-	
-	
-	
-	<definition name="rank*"
-		template="/WEB-INF/pages/room/rank/layout.jsp">
-		<put-attribute name="left"
-			value="/WEB-INF/pages/room/rank/left.jsp" />
-		<put-attribute name="right"
-			value="/WEB-INF/pages/room/rank/{1}.jsp" />
+
+
+
+	<definition name="rank*" template="/WEB-INF/pages/room/rank/layout.jsp">
+		<put-attribute name="left" value="/WEB-INF/pages/room/rank/left.jsp" />
+		<put-attribute name="right" value="/WEB-INF/pages/room/rank/{1}.jsp" />
 	</definition>
-	
-	
+
+
 
 	<definition name="/room/rank/*" extends="ptt">
 		<put-attribute name="title" value="葡萄藤" type="string" />
 		<put-attribute name="body" value="rank{1}">
 		</put-attribute>
 	</definition>
-	
-	
-	<definition name="player*"
-		template="/WEB-INF/pages/room/player/layout.jsp">
+
+
+	<definition name="player*" template="/WEB-INF/pages/room/player/layout.jsp">
 		<put-attribute name="left"
 			value="/WEB-INF/pages/room/player/left.jsp" />
-		<put-attribute name="right"
-			value="/WEB-INF/pages/room/player/{1}.jsp" />
+		<put-attribute name="right" value="/WEB-INF/pages/room/player/{1}.jsp" />
 	</definition>
-	
+
 	<definition name="/room/player/*" extends="ptt">
-		<put-attribute name="body"
-			value="player{1}" />
+		<put-attribute name="body" value="player{1}" />
 	</definition>
-	
-	
-	<definition name="playerForm"
-		template="/WEB-INF/pages/room/player/layout.jsp">
+
+
+	<definition name="playerForm" template="/WEB-INF/pages/room/player/layout.jsp">
 		<put-attribute name="left"
 			value="/WEB-INF/pages/room/player/left.jsp" />
 		<put-attribute name="right"
 			value="/WEB-INF/pages//player/form/init.jsp" />
 	</definition>
-	
+
 	<definition name="/player/form/init" extends="ptt">
 		<put-attribute name="body" value="playerForm" />
-		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-注册" type="string" />
+		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-注册"
+			type="string" />
 	</definition>
-	
-	
-	<definition name="financial*"
-		template="/WEB-INF/pages/room/player/layout.jsp">
+
+
+	<definition name="financial*" template="/WEB-INF/pages/room/player/layout.jsp">
 		<put-attribute name="left"
 			value="/WEB-INF/pages/room/financial/left.jsp" />
 		<put-attribute name="right"
 			value="/WEB-INF/pages/room/financial/{1}.jsp" />
 	</definition>
-	
+
 	<definition name="/room/financial/*" extends="ptt">
-		<put-attribute name="body"
-			value="financial{1}" />
+		<put-attribute name="body" value="financial{1}" />
 	</definition>
-	
-	
-	
-	<definition name="statistics*"
-		template="/WEB-INF/pages/room/player/layout.jsp">
+
+
+
+	<definition name="statistics*" template="/WEB-INF/pages/room/player/layout.jsp">
 		<put-attribute name="left"
 			value="/WEB-INF/pages/room/statistics/left.jsp" />
 		<put-attribute name="right"
 			value="/WEB-INF/pages/room/statistics/{1}.jsp" />
 	</definition>
-	
-	<definition name="/room/statistics/*" extends="ptt">
-		<put-attribute name="body"
-			value="statistics{1}" />
-	</definition>
-	
 
-			<!--roomList -->
+	<definition name="/room/statistics/*" extends="ptt">
+		<put-attribute name="body" value="statistics{1}" />
+	</definition>
+
+
+	<!--roomList -->
 	<definition name="roomList" template="/WEB-INF/pages/room/list/list.jsp" />
-		<!--roomCreate -->
+	<!--roomCreate -->
 	<definition name="roomCreate" template="/WEB-INF/pages/room/list/create.jsp" />
 
 
 
-	
-		<!--versionSnapshot -->
+
+	<!--versionSnapshot -->
 	<definition name="navAdvertiseNormal" template="/WEB-INF/pages/advertise/taobao/nav.jsp" />
-		<!--versionSnapshot -->
-	<definition name="advertiseNormal" template="/WEB-INF/pages/advertise/taobao/normal.jsp" />
-	
-		<!--versionSnapshot -->
+	<!--versionSnapshot -->
+	<definition name="advertiseNormal"
+		template="/WEB-INF/pages/advertise/taobao/normal.jsp" />
+
+	<!--versionSnapshot -->
 	<definition name="versionSnapshot" template="/WEB-INF/pages/room/list/snapshot2.jsp" />
-		<!--roomSnapshot -->
+	<!--roomSnapshot -->
 	<definition name="roomSnapshot" template="/WEB-INF/pages/room/list/snapshot.jsp" />
-	
-		<!--personCard -->
+
+	<!--personCard -->
 	<definition name="personCard" template="/WEB-INF/pages/player/detail/show.jsp" />
-	
-		<!--leftNavHead -->
+
+	<!--leftNavHead -->
 	<definition name="musicList" template="/WEB-INF/pages/room/music/show.jsp" />
 	
+		<!--room,-playerList -->
+	<definition name="playerList" template="/WEB-INF/pages/tiles/mlayout/playerlist.jsp" />
 	
-		<!--leftNavHead -->
-	<definition name="currentUserHint" template="/WEB-INF/pages/room/tiles/left_nav_head.jsp" />
-	
-		<!--commonJSImport -->
+
+
+	<!--leftNavHead -->
+	<definition name="currentUserHint"
+		template="/WEB-INF/pages/room/tiles/left_nav_head.jsp" />
+
+	<!--commonJSImport -->
 	<definition name="commonJSImport" template="/WEB-INF/pages/common/commonJSImport.jsp" />
-	
-		<!--carousel -->
+
+	<!--carousel -->
 	<definition name="carousel" template="/WEB-INF/pages/room/index/img.jsp" />
-	
+
 </tiles-definitions>

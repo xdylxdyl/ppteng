@@ -1,13 +1,8 @@
-
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
-<title>${room.name}-多人扫雷-葡萄藤轻游戏</title>
-<link rel="stylesheet" href="/r/css/bootstrap.css">
-<link rel="stylesheet" href="/r/css/room/style.css">
 
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/r/css/mine/mine.css?v=${frontVersion}">
 
+<title>${room.name}-休息室-葡萄藤轻游戏</title>
 
 <input type="hidden" id="uid" value="${uid}">
 <!-- 玩家ID -->
@@ -20,7 +15,6 @@
 <!-- 游戏时间白天黑夜 -->
 <input type="hidden" id="createrID" value="${room.createrID}">
 <input type="hidden" id="type" value="${type}">
-
 <input type="hidden" id="recordID" value="${record.id}">
 <input type="hidden" id="recordTime" value="${record.time}">
 <input type="hidden" id="first" value="${first}">
@@ -29,116 +23,113 @@
 <div id="escape" class="hide"></div>
 
 
+<div class="content">
 
+	<div class="tabbable">
 
-<!--left list-->
-<div class="sidebar-nav" id="sidebar-nav">
-	<ul class="nav nav-list" id="playerList">
+		<ul class="nav nav-tabs">
+			<li><a href="#player_list" data-toggle="tab">玩家</a></li>
+			<li><a href="#game_area" data-toggle="tab">茶馆闲聊</a></li>
+			<li class="active"><a href="#rest_public" data-toggle="tab">精选</a></li>
 
-
-	</ul>
-	<div class="sidebar-toggle" id="sidebar-toggle">-</div>
-</div>
-
-<!--main-->
-<div class="content" id="content">
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="span9">
-
-				<div class="tabbable">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#mine_area" data-toggle="tab">多人扫雷</a></li>
-
-						<li><a href="#setting_area" data-toggle="tab">设置</a></li>
-						<li><a href="#music_area" data-toggle="tab">音乐</a></li>
-						<li><a href="#help_area" data-toggle="tab">帮助</a></li>
-
-
-					</ul>
-					<div class="tab-content">
-
-
-						<div class="tab-pane active" id="mine_area">
-							<div class="outer">
-								<div class="inner" id="inner"></div>
-
-							</div>
-						</div>
-						<div class="tab-pane" id="setting_area">
-						
-						
-						
-						
-						</div>
-
-						<div class="tab-pane" id="music_area">
-							<tiles:insertDefinition name="musicList" />
-
-
-
-						</div>
-
-						<div class="tab-pane" id="help_area">
-							<div class="hero-unit">
-
-								<p>多人扫雷协作版</p>
-
-
-							</div>
-
-
-						</div>
-
-
-						<!-- advertise -->
+			<li><a href="#music_area" data-toggle="tab">音乐</a></li>
+			<li><a href="#setting_area" data-toggle="tab">设置</a></li>
+			<li><a href="#help_area" data-toggle="tab">帮助</a></li>
 
 
 
 
-						<!-- end of tab-content -->
 
+		</ul>
+		<div class="tab-content">
 
+		
 
-					</div>
-				</div>
+			<div class="tab-pane" id="player_list">
+					<tiles:insertDefinition name="playerList" />
 			</div>
+			<div class="tab-pane" id="rest_public" ng-controller="publicCtrl">
 
-			<div class="span3">
-
-				<div class="tabbable death">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#game_area" data-toggle="tab">聊天</a></li>
-					</ul>
-					<div class="tab-content">
-						<div class="tab-pane active" id="game_area"></div>
+				<blockquote>
+					<div class="pull-right">
+						<button ng-click="refresh()" class="btn">刷新</button>
 					</div>
+					<p>茶座休息室</p>
+					<small>葡萄藤精选的内容</small>
+
+				</blockquote>
+
+
+				<div class="" id="news_public">				
+
+
+
+
+
+
 				</div>
 
 			</div>
+
+
+
+			<div class="tab-pane" id="setting_area"></div>
+			<div class="tab-pane" id="music_area">
+				<tiles:insertDefinition name="musicList" />
+
+			</div>
+
+			<div class="tab-pane" id="help_area">
+				<div class="hero-unit">
+
+					<p></p>
+					<p>
+						<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=2007"
+							class="text-warning" target="_blank">1.订阅说明 &raquo;</a>
+					</p>
+
+
+
+				</div>
+
+
+
+			</div>
+
+
+
+			<div class="tab-pane active" id="game_area"></div>
+
+
+
+
+			<!-- advertise -->
+
+
+
+
+			<!-- end of tab-content -->
+
+
 		</div>
+
+
+
+
 	</div>
 </div>
 
 
-
-
 <tiles:insertDefinition name="commonJSImport" />
-
-
-
-<!--侦测键盘-->
 
 <script type="text/javascript"
 	src="/r/j-src/framework/audio/audio.min.js"></script>
-
 <script src="/r/j-src/framework/angular/angular.min.js"></script>
 
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
-	
-<script src="/r/j-src/game/mine/mine.js?v=${frontVersion}"></script>
 
+<script src="/r/j-src/game/rest/1.0/rest_1.0.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
 <script
@@ -147,8 +138,6 @@
 	src="<%=request.getContextPath() %>/r/j-src/game/commons/base.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/commons/action.js?v=${frontVersion}"></script>
-
-
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/commons/view.js?v=${frontVersion}"></script>
 <script

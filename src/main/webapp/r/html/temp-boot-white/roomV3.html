@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/room/style.css">
+</head>
+<body>
+<!--header-->
+<div class="navbar">
+    <div class="navbar-inner">
+        <a href="#" class="brand">PTT</a>
+        <div class="brand">
+            <small>乃就是杀手，别逃了，逃不掉的！</small>
+        </div>
+        <ul class="nav pull-right">
+            <li><a href="#setRoomBlock" data-toggle="modal" id="setRoom" rel="tooltip" title="点此设置房间" data-original-title="点此设置房间" data-placement="bottom">Settings</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">还没想好 <i class="caret"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">account</a></li>
+                    <li><a href="#">others</a></li>
+                </ul>
+            </li>
+            <li><a href="#" id="closeRoom" rel="tooltip" title="点此离开房间" data-original-title="点此离开房间" data-placement="bottom">close <i class="icon-off"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+
+<!--left list-->
+<div class="sidebar-nav">
+    <ul class="nav nav-list">
+        <li><a href="#"><i class="icon-ready"></i>一二三四五六<small>(管理)</small><span class="vote">+1</span></a></li>
+        <li><a href="#"><i class="icon-unready"></i>list item<span class="vote">+1</span></a></li>
+        <li><a href="#"><i class="icon-living"></i>list item</a></li>
+        <li><a href="#"><i class="icon-die"></i>list item</a></li>
+        <li><a href="#"><i class="icon-lastword"></i>list item</a></li>
+    </ul>
+    <div class="sidebar-toggle" id="sidebar-toggle">
+        -
+    </div>
+</div>
+
+<!--main-->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span10">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                       
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="1">
+                          
+                        </div>
+                      
+                       
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>
+
+<!--footer-->
+<div class="foot">
+    <div class="row-fluid">
+        <div class="inner-space">
+            <!--act-->
+            <ul class="toolbar">
+                <li class="dropup">
+                    <a href="#" id="selectExpression" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>神态</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">神态</a></li>
+                        <li class="divider"></li>
+                        <li data-default="123"><a href="#">123</a></li>
+                        <li data-default="123"><a href="#">223</a></li>
+                        <li data-default="123"><a href="#">323</a></li>
+                        <li data-default="123"><a href="#">123</a></li>
+                        <li data-default="123"><a href="#">223</a></li>
+                        <li data-default="123"><a href="#">323</a></li>
+                        <li data-default="123"><a href="#">123</a></li>
+                        <li data-default="123"><a href="#">223</a></li>
+                    </ul>
+                </li>
+                <li class="dropup">
+                    <a href="#" id="selectColor" data-default="#000" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>color</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li data-default="#000"><a href="#">color</a></li>
+                        <li class="divider"></li>
+                        <li data-default="#000">
+                            <div class="color-block" data-theme="black"></div>
+                            <a href="#" class="color-font">black</a>
+                        </li>
+                        <li  data-default="#f00">
+                            <div class="color-block" data-theme="red"></div>
+                            <a href="#" class="color-font">red</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropup">
+                    <a href="#" id="selectOrder" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>指令</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li data-default=""><a href="#">指令</a></li>
+                        <li class="divider"></li>
+                        <li data-default=""><a href="#">123</a></li>
+                        <li data-default=""><a href="#">223</a></li>
+                        <li data-default=""><a href="#">323</a></li>
+                    </ul>
+                </li>
+                <li class="dropup">
+                    <a href="#" id="selectObject" data-default="" class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+                        &nbsp;
+                        <span>对象</span>
+                        &nbsp;
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li data-default=""><a href="#">对象</a></li>
+                        <li class="divider"></li>
+                        <li data-default=""><a href="#">123</a></li>
+                        <li data-default=""><a href="#">223</a></li>
+                        <li data-default=""><a href="#">323</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <label for="scroll" class="checkbox">
+                        <input type="checkbox" checked="checked" value="scroll" id="scroll">
+                        滚屏选我选我
+                    </label>
+                </li>
+                <li>
+                    <span class="help-inline">04:00</span>
+                </li>
+                <li class="pull-right">
+                    <button class="btn btn-info">ready</button>
+                </li>
+                <li class="pull-right">
+                    <span class="help-inline">延迟：120毫秒</span>
+                </li>
+            </ul>
+            <!--input-->
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label for="" class="control-label">I say:</label>
+                    <div class="controls">
+                        <div class="row-fluid">
+                            <div class="span10"><input type="text" class="span12" id="inputText"></div>
+                            <div class="span2">
+                                <a href="#" class="btn medium btn-primary">send</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../../j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="../../j-src/framework/bootstrap/bootstrap-tab.js"></script>
+<script type="text/javascript" src="../../j-src/framework/bootstrap/bootstrap-modal.js"></script>
+<script type="text/javascript" src="../../j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="../../j-src/framework/kibo/kibo.js"></script><!--侦测键盘-->
+<script type="text/javascript" src="../../j-src/framework/audio/audio.min.js"></script>
+<script>
+    /*音乐播放器*/
+    $(function() {
+        // Setup the player to autoplay the next track
+        var a = audiojs.createAll({
+            trackEnded: function() {
+                var next = $('ol li.playing').next();
+                if (!next.length) next = $('ol li').first();
+                next.addClass('playing').siblings().removeClass('playing');
+                audio.load($('a', next).attr('data-src'));
+                audio.play();
+            }
+        });
+
+        // Load in the first track
+        var audio = a[0];
+        first = $('ol a').attr('data-src');
+        $('ol li').first().addClass('playing');
+        audio.load(first);
+
+        // Load in a track on click
+        $('ol li').click(function(e) {
+            e.preventDefault();
+            $(this).addClass('playing').siblings().removeClass('playing');
+            audio.load($('a', this).attr('data-src'));
+            audio.play();
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    /*小提示*/
+    $('#closeRoom').tooltip();
+    $('#setRoom').tooltip();
+    /*键盘快捷控制，还未想好如何设置*/
+    var key = new Kibo();
+    $('#inputText').focus(function() {
+        key.down(['alt 1'], function() {
+            $("#selectExpression").click();
+        })
+    });
+    /*宽度min-width: 600px时页面高度控制*/
+    function controlHeight() {
+        var winH = $(window).height();
+        var headH = $('.navbar').outerHeight();
+        var footH = $('.foot').outerHeight();
+        var mainH = winH - headH - footH - 20;
+        var contentH = mainH - $('ul.nav-tabs').outerHeight();
+        $('.sidebar-nav').css({
+            maxHeight: mainH,
+            minHeight: mainH
+        });
+        $('.tab-pane').css({
+            maxHeight: contentH,
+            minHeight: contentH
+        });
+
+    }
+    controlHeight();
+    $(window).resize(controlHeight);
+
+
+    /*
+    * 动作栏下拉框
+    * @elem 传入选择器ID
+    * 选择器的文本变为所选项文本
+    * 选择器的data-default属性变为所选项data-default属性
+    * 所选项如果为color，则选择器文本颜色也改为相应颜色*/
+    function selectors(elem) {
+        var $elem = $('#' + elem);
+        var $menu = $elem.siblings('ul.dropdown-menu');
+        $menu.children('li').click(function() {
+            var txt = $(this).text();//获取到li的文本值
+            var val = $(this).attr('data-default');//获取到li的自定义属性
+            $elem.find('span').text(txt);
+            $elem.attr('data-default', val);
+            if (val.indexOf('#') == '0') {
+                $elem.find('span').css({
+                    color: val
+                })
+            }
+        })
+    }
+    selectors('selectExpression');
+    selectors('selectColor');
+    selectors('selectOrder');
+    selectors('selectObject');
+
+</script>
+
+<script type="text/javascript">
+
+    $('#sidebar-toggle').toggle(function() {
+        var $leftBlock = $('.sidebar-nav');
+        var $rightBlock = $('.content');
+
+        $(this).text('+');
+        $leftBlock.animate({left: -180});
+        $rightBlock.animate({marginLeft: 20})
+
+    }, function() {
+        var $leftBlock = $('.sidebar-nav');
+        var $rightBlock = $('.content');
+
+        $(this).text('-');
+        $leftBlock.animate({left: 0});
+        $rightBlock.animate({marginLeft: 200})
+    })
+</script>

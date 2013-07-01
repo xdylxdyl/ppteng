@@ -70,6 +70,7 @@
 		<property name="viewNames">
 			<list>
 				<value>*/room/play/*</value>
+				<value>*/room/mplay/*</value>
 				<value>*/room/list/*</value>
 				<value>*/record/list/*</value>
 				<value>*/room/rank/*</value>
