@@ -23,68 +23,70 @@
 <div id="escape" class="hide"></div>
 
 <!--main-->
-<div class="content" id="content">
+
+<div class="tabbable" id="content">
 
 
-	<div class="tabbable">
-		<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs">
 			<li><a href="#player_list" data-toggle="tab">玩家</a></li>
-			<li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
-			<li class=""><a href="#die_area" data-toggle="tab">亡灵</a></li>
-			<li><a href="#setting_area" data-toggle="tab">设置</a></li>
-			<li><a href="#music_area" data-toggle="tab">音乐</a></li>
-			<li><a href="#help_area" data-toggle="tab">帮助</a></li>
-
-
-		</ul>
-		<div class="tab-content">
-			<div class="tab-pane" id="player_list">
-				<tiles:insertDefinition name="playerList" />
-			</div>
-			<div class="tab-pane active" id="game_area"></div>
-
-
-			<div class="tab-pane" id="setting_area"></div>
-			<div class="tab-pane" id="music_area">
-				<tiles:insertDefinition name="musicList" />
+				<li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
+				<li class=""><a href="#die_area" data-toggle="tab">亡灵</a></li>
+				<li><a href="#setting_area" data-toggle="tab">设置</a></li>
+				<li><a href="#music_area" data-toggle="tab">音乐</a></li>
+				<li><a href="#help_area" data-toggle="tab">帮助</a></li>
+		
+	</ul>
 
 
 
-			</div>
-
-			<div class="tab-pane" id="help_area">
-				<div class="hero-unit">
-
-					<p></p>
-					<p>
-						<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=15"
-							class="text-warning" target="_blank">1.简化术语表 &raquo;</a>
-					</p>
-					<p>
-						<a
-							href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=125&fromuid=4"
-							class="text-warning" target="_blank">2.[二六八活动]索引贴 &raquo;</a>
-					</p>
-
-				</div>
-
-			</div>
-
-			<div class="tab-pane active" id="die_area"></div>
+	<div class="tab-content">
+		<div class="tab-pane" id="player_list">
+			<tiles:insertDefinition name="playerList" />
+		</div>
+		<div class="tab-pane active" id="game_area"></div>
 
 
+		<div class="tab-pane" id="setting_area"></div>
+		<div class="tab-pane" id="music_area">
+			<tiles:insertDefinition name="musicList" />
 
-
-
-
-			<!-- end of tab-content -->
 
 
 		</div>
+
+		<div class="tab-pane" id="help_area">
+			<div class="hero-unit">
+
+				<p></p>
+				<p>
+					<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=15"
+						class="text-warning" target="_blank">1.简化术语表 &raquo;</a>
+				</p>
+				<p>
+					<a
+						href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=125&fromuid=4"
+						class="text-warning" target="_blank">2.[二六八活动]索引贴 &raquo;</a>
+				</p>
+
+			</div>
+
+		</div>
+
+		<div class="tab-pane" id="die_area"></div>
+
+
+
+
+
+
+		<!-- end of tab-content -->
+
+
 	</div>
+
+
+
 </div>
-
-
 
 
 

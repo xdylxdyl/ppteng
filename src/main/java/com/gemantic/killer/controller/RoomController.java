@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,6 @@ public class RoomController {
 
 	@Autowired
 	private CookieUtil cookieUtil;
-
-
 
 	/**
 	 * 房间列表
@@ -157,8 +156,8 @@ public class RoomController {
 	 */
 	@RequestMapping(value = "/m/play/enter")
 	public String enterRoom(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model, @RequestParam Long rid,String from)
-			throws Exception {
+			HttpServletResponse response, ModelMap model,
+			@RequestParam Long rid, String from) throws Exception {
 
 		Long uid = cookieUtil.getID(request, response);
 		if (uid == null) {
@@ -193,12 +192,13 @@ public class RoomController {
 
 		User u = this.userService.getObjectById(uid);
 		String version = room.getVersion();
-		//log.info("version is " + version);
+		// log.info("version is " + version);
 		String stageShow = UserUtil.getRandomStageShow(
 				UserUtil.StageShow_Login, u);
-		//log.info(u + "get stage show is " + stageShow);
+		// log.info(u + "get stage show is " + stageShow);
 		Message loginMessage = new Message(uid.toString(), "login", "-500",
-				"#0000FF", "78", rid.toString(), stageShow, version,System.currentTimeMillis());
+				"#0000FF", "78", rid.toString(), stageShow, version,
+				System.currentTimeMillis());
 		List<Message> messages = this.droolsGameMessageService.generate(
 				loginMessage, room);
 		MessageUtil.sendMessage(version, messages, this.pushClient);
@@ -217,16 +217,25 @@ public class RoomController {
 		} else {
 			model.addAttribute("first", "notFirst");
 		}
-		if("mobile".equals(from)){
+
+		if (StringUtils.isBlank(from)) {
+			if (request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+				from="mobile";
+				// you're in mobile land
+			} else {
+				// nope, this is probably a desktop
+				from="pc";
+			}
+		}
+
+		if ("mobile".equals(from)) {
 			model.addAttribute("switchFrom", "pc");
-			
+
 			return "/room/mplay/" + version;
-		}else{
+		} else {
 			model.addAttribute("switchFrom", "mobile");
 			return "/room/play/" + version;
 		}
-
-	
 
 	}
 
@@ -378,12 +387,11 @@ public class RoomController {
 		// TODO 我判断不出来用Int还是用String好
 
 		Long rid = this.roomService.createRoom(room);
-		
 
-
-	/*	RoomThread r = new RoomThread(rid, roomService,
-				droolsGameMessageService, pushClient);
-		r.run();*/
+		/*
+		 * RoomThread r = new RoomThread(rid, roomService,
+		 * droolsGameMessageService, pushClient); r.run();
+		 */
 
 		/*
 		 * RoomMessageThread rm = new RoomMessageThread(rid, roomService,
@@ -414,7 +422,8 @@ public class RoomController {
 		Map<Long, Map<String, Set<String>>> user_info = new HashMap();
 		String version = room.getVersion();
 		Message queryMessage = new Message(uid.toString(), "query", "-500",
-				"#0000FF", "78", rid.toString(), "我查询", version,System.currentTimeMillis());
+				"#0000FF", "78", rid.toString(), "我查询", version,
+				System.currentTimeMillis());
 		// List<Message>
 		// messages=this.droolsGameMessageService.generate(queryMessage);
 
@@ -496,7 +505,7 @@ public class RoomController {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = gson.toJson(ls);
 		Message m = new Message(uid.toString(), "expression", json, "#0000FF",
-				"", rid.toString(), "", version,System.currentTimeMillis());
+				"", rid.toString(), "", version, System.currentTimeMillis());
 
 		r.getMessages().offer(m);
 		r.setExpressions(ls);

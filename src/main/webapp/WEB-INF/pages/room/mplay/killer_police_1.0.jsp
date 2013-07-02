@@ -72,7 +72,7 @@
 
 			</div>
 
-			<div class="tab-pane active" id="die_area"></div>
+			<div class="tab-pane" id="die_area"></div>
 
 
 

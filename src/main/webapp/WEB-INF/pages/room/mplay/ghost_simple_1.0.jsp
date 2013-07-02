@@ -22,7 +22,7 @@
 <div id="contents" class="hide">${contents}</div>
 <div id="escape" class="hide"></div>
 
->
+
 
 <!--main-->
 <div class="content" id="content">
@@ -43,7 +43,7 @@
 
 
 			<div class="tab-pane" id="player_list">
-				<tiles:insertDefinition name="playList" />
+				<tiles:insertDefinition name="playerList" />
 
 			</div>
 			<div class="tab-pane active" id="game_area"></div>

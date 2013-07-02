@@ -8,8 +8,7 @@
 		</span> <span class="brand"> <small id="gamePhase"></small>
 		</span> <span class="brand"> <small id="playerRole"></small>
 		</span> <span class="brand"> <small id="playerCard"></small>
-		</span>
-		<span class="brand"><span id="count"></span></span>
+		</span> <span class="brand"><span id="count"></span></span>
 		<ul class="nav pull-right">
 			<li><a
 				href="/m/play/enter.do?rid=${room.id}&uid=${uid}&from=${switchFrom}"
@@ -19,5 +18,7 @@
 				data-original-title="点此离开房间" data-placement="bottom">退出房间 <i
 					class="icon-off"></i></a></li>
 		</ul>
+
+
 	</div>
 </div>

@@ -1,6 +1,7 @@
-body {
+html, body {
     background: #f9f9f9;
     color: #333;
+
 }
 
 /*head*/
@@ -13,18 +14,29 @@ body {
 }
 
 .wrap {
-    min-height: 50%;
-    overflow: auto;
 
+    background: #fff;
+    border: 1px solid #cfcfd6;
+
+}
+
+.wrap .row-fluid {
+
+}
+
+.box {
+    bottom: 7em;
 }
 
 .no-space [class*="span"] {
     margin-left: 0;
 }
 
-.footer {
-    background-color: #f5f5f5;
+.foot {
+    background: #f9f9f9;
+    border-top: 1px solid #cfcfd6;
 }
+
 
 /* Lastly, apply responsive CSS fixes as necessary */
 @media ( max-width : 767px) {
@@ -86,14 +98,16 @@ body {
 /*right*/
 .content {
 
-    overflow: auto;
     background: #fff;
     border: 1px solid #cfcfd6;
+
 }
 
 .content .tab-pane {
-    overflow-y: auto;
+
     word-break: break-all;
+    overflow: auto;
+
 }
 
 .video {
@@ -116,13 +130,6 @@ body {
 .death .nav-tabs > .active > a {
     border: none;
     background: transparent;
-}
-
-/*foot*/
-.foot {
-    background: #f9f9f9;
-    border-top: 1px solid #cfcfd6;
-    min-width: 600px;
 }
 
 .inner-space {
