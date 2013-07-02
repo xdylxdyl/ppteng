@@ -26,6 +26,17 @@
 
 
 
+<!--left list-->
+<div class="sidebar-nav" id="sidebar-nav">
+    <ul class="nav nav-list" id="playerList">
+
+
+    </ul>
+    
+     <div class="sidebar-toggle" id="sidebar-toggle">
+    -
+    </div>
+</div>
 
 <!--main-->
 <div class="content" id="content">
