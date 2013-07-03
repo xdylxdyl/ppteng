@@ -29,8 +29,8 @@
 
 		<ul class="nav nav-tabs">
 			<li><a href="#player_list" data-toggle="tab">玩家</a></li>
-			<li><a href="#game_area" data-toggle="tab">茶馆闲聊</a></li>
-			<li class="active"><a href="#rest_public" data-toggle="tab">精选</a></li>
+			<li class="active"><a href="#game_area" data-toggle="tab">茶馆闲聊</a></li>
+			<li><a href="#rest_public" data-toggle="tab">精选</a></li>
 
 			<li><a href="#music_area" data-toggle="tab">音乐</a></li>
 			<li><a href="#setting_area" data-toggle="tab">设置</a></li>
@@ -43,10 +43,10 @@
 		</ul>
 		<div class="tab-content">
 
-		
+
 
 			<div class="tab-pane" id="player_list">
-					<tiles:insertDefinition name="playerList" />
+				<tiles:insertDefinition name="playerList" />
 			</div>
 			<div class="tab-pane" id="rest_public" ng-controller="publicCtrl">
 
@@ -60,9 +60,27 @@
 				</blockquote>
 
 
-				<div class="" id="news_public">				
+				<div class="" id="news_public">
 
 
+					<div class="span12">
+
+						<div ng-repeat="pfeed in publicFeed">
+
+							<h4>
+								<a href="{{pfeed.link}}" target="_blank">{{pfeed.title}}</a>
+							</h4>
+							<blockquote>
+
+								<small> {{pfeed.pubDate|timeConvert}}</small>
+							</blockquote>
+
+
+
+						</div>
+
+
+					</div>
 
 
 

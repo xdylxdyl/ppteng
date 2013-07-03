@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-    <link rel="stylesheet" href="/r/css/bootstrap.css">
-    <link rel="stylesheet" href="/r/css/room/style.css">
+<link rel="stylesheet" href="/r/css/bootstrap.css">
+<link rel="stylesheet" href="/r/css/room/style.css">
 
 <title>${room.name}-休息室-葡萄藤轻游戏</title>
 
@@ -29,155 +29,152 @@
 
 <!--left list-->
 <div class="sidebar-nav" id="sidebar-nav">
-    <ul class="nav nav-list" id="playerList">
+	<ul class="nav nav-list" id="playerList">
 
 
-    </ul>
-    
-     <div class="sidebar-toggle" id="sidebar-toggle">
-    -
-    </div>
+	</ul>
+
+	<div class="sidebar-toggle" id="sidebar-toggle">-</div>
 </div>
 
 <!--main-->
 
 <div class="content" id="content">
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span7">
-            
-            <div class="tabbable">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#rest_public" data-toggle="tab">精选</a></li>
-                    <li><a href="#rest_private" data-toggle="tab">偏爱</a></li>
-                    <li><a href="#music_area" data-toggle="tab">音乐</a></li>          
-                    <li><a href="#setting_area" data-toggle="tab">设置</a></li>
-                      <li><a href="#help_area" data-toggle="tab">帮助</a></li>
-                   
-                 
-                </ul>
-                <div class="tab-content">
-                   
-                    <!--<button ng-click="refresh()">刷新</button>-->
-                    <div class="tab-pane active" id="rest_public" ng-controller="publicCtrl">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span7">
 
-                                <blockquote>
-                                    <div class="pull-right">
-                                        <button ng-click="refresh()" class="btn">刷新</button>
-                                    </div> 
-                                    <p>茶座休息室</p>
-                                    <small>葡萄藤精选的内容</small>
-
-                                </blockquote>
+				<div class="tabbable">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#rest_public" data-toggle="tab">精选</a></li>
+						<li><a href="#rest_private" data-toggle="tab">偏爱</a></li>
+						<li><a href="#music_area" data-toggle="tab">音乐</a></li>
+						<li><a href="#setting_area" data-toggle="tab">设置</a></li>
+						<li><a href="#help_area" data-toggle="tab">帮助</a></li>
 
 
-                                <div class="" id="news_public">
+					</ul>
+					<div class="tab-content">
 
-                                        <div class="span12">
+						<!--<button ng-click="refresh()">刷新</button>-->
+						<div class="tab-pane active" id="rest_public"
+							ng-controller="publicCtrl">
 
-              <div ng-repeat="pfeed in publicFeed">
+							<blockquote>
+								<div class="pull-right">
+									<button ng-click="refresh()" class="btn">刷新</button>
+								</div>
+								<p>茶座休息室</p>
+								<small>葡萄藤精选的内容</small>
 
-                        <h4>
-                            <a href="{{pfeed.link}}" target="_blank">{{pfeed.title}}</a>
-                        </h4>
-                        <blockquote>
-                       
-                        <small> {{pfeed.pubDate|timeConvert}}</small> 
-                        </blockquote>
-
-
-
-            </div>
-            
-        
-    
+							</blockquote>
 
 
-        </div>
-                                
-                                
-                                
-                                </div>
+							<div class="" id="news_public">
 
-                    </div>
-                    <div class="tab-pane" id="rest_private">
-                      
-                            <div class="">
-                                <blockquote>
-                                    <p>茶座休息室</p>
-                                    <small>房主偏爱的内容</small>
-                                 
-                                </blockquote>
-                                <div id="news_private">
-                                
-                                    <p>正在开发中~敬请期待~</p>
-                                
-                                  </div>
-                            </div>
-                           
-                    </div>
-                    <div class="tab-pane" id="setting_area">
-                       
-                    </div>                    
-                     <div class="tab-pane" id="music_area">
-                       <tiles:insertDefinition name="musicList" />
-                        
-                       
-                        
-                    </div>
-                    
-                      <div class="tab-pane" id="help_area">
-                         <div class="hero-unit">
-     
-          <p></p>     
-    <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=2007" class="text-warning" target="_blank">1.订阅说明 &raquo;</a></p>
-    
-       
-       
-            </div>
-                        
-                       
-                       
-                    </div>
-                    
-                      <!-- advertise -->
-                     
-                    
-                    
-                    
-                    <!-- end of tab-content -->
-                    
-                    
-                </div>
-            </div>
-           </div>
-           
-             <div  class="span5">
-             
-                <div class="tabbable death">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#game_area" data-toggle="tab">茶馆闲聊</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="game_area">
-                       
-                        </div>
-                    </div>
-                </div>
-          
-             </div>
-        </div>
-    </div>
+								<div class="span12">
+
+									<div ng-repeat="pfeed in publicFeed">
+
+										<h4>
+											<a href="{{pfeed.link}}" target="_blank">{{pfeed.title}}</a>
+										</h4>
+										<blockquote>
+
+											<small> {{pfeed.pubDate|timeConvert}}</small>
+										</blockquote>
+
+
+
+									</div>
+
+
+								</div>
+
+
+
+							</div>
+
+						</div>
+						<div class="tab-pane" id="rest_private">
+
+							<div class="">
+								<blockquote>
+									<p>茶座休息室</p>
+									<small>房主偏爱的内容</small>
+
+								</blockquote>
+								<div id="news_private">
+
+									<p>正在开发中~敬请期待~</p>
+
+								</div>
+							</div>
+
+						</div>
+						<div class="tab-pane" id="setting_area"></div>
+						<div class="tab-pane" id="music_area">
+							<tiles:insertDefinition name="musicList" />
+
+
+
+						</div>
+
+						<div class="tab-pane" id="help_area">
+							<div class="hero-unit">
+
+								<p></p>
+								<p>
+									<a
+										href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=2007"
+										class="text-warning" target="_blank">1.订阅说明 &raquo;</a>
+								</p>
+
+
+
+							</div>
+
+
+
+						</div>
+
+						<!-- advertise -->
+
+
+
+
+						<!-- end of tab-content -->
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="span5">
+
+				<div class="tabbable death">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#game_area" data-toggle="tab">茶馆闲聊</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="game_area"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>
 
-	
-	
-	
-<tiles:insertDefinition name="commonJSImport" />
-<script type="text/javascript" src="/r/j-src/framework/audio/audio.min.js"></script>
- <script src="/r/j-src/framework/angular/angular.min.js"></script>
 
-	<script
+
+
+<tiles:insertDefinition name="commonJSImport" />
+<script type="text/javascript"
+	src="/r/j-src/framework/audio/audio.min.js"></script>
+<script src="/r/j-src/framework/angular/angular.min.js"></script>
+
+<script
 	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
 
 <script src="/r/j-src/game/rest/1.0/rest_1.0.js?v=${frontVersion}"></script>
@@ -201,6 +198,6 @@
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
 
-	
 
-	
+
+
