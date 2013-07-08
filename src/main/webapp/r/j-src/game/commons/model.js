@@ -189,6 +189,7 @@ var lastMessageSendAt=null;
 var selects={
     $gameArea:"game_area",
     $dieArea:"die_area",
+    $description:"description_area",
     $killerArea:"killer_area",
     $settingArea:"setting_area",
     $playerList:"playerList",

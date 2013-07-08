@@ -75,12 +75,9 @@ public class RoomFormController {
      * @throws ServiceException 
        */
     @RequestMapping(method = RequestMethod.GET)
-    public String setupForm(Model model, Long id,@RequestParam Long uid) throws Exception {
+    public String setupForm(Model model, Long id,@RequestParam Long uid,String version) throws Exception {
     	
-    	
-    	
-    	
-    	log.debug("HI "+ uid);
+    	log.info(uid+" want create room of version "+version);
     	Room room=new Room();
     	if(id==null){
     		//新房间
@@ -96,8 +93,10 @@ public class RoomFormController {
     			
     		}
     	}
+    	room.setVersion(version);
     	model.addAttribute("room", room);
     	model.addAttribute("uid", uid);
+
         return "/room/form/init";
     	
     }

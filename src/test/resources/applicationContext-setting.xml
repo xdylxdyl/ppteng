@@ -27,6 +27,8 @@
 				</entry>
 				<entry key="ghost_question_1.0" value-ref="ghost_question_1.0_setting">
 				</entry>
+					<entry key="ghost_question_2.0" value-ref="ghost_question_2.0_setting">
+				</entry>
 				<entry key="ghost_soul_1.0" value-ref="ghost_soul_1.0_setting">
 				</entry>
 			</map>
@@ -114,6 +116,26 @@
 				</entry>
 				<entry key="questionTime" value="60000">
 				</entry>		
+			</map>
+		</constructor-arg>
+	</bean>
+		
+	<bean id="ghost_question_2.0_setting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="ghostCount" value="1">
+				</entry>
+				<entry key="dayTime" value="300000">
+				</entry>
+				<entry key="topicTime" value="120000">
+				</entry>
+				<entry key="questionTime" value="180000">
+				</entry>
+				<entry key="descriptionTime" value="180000">
+				</entry>
+				
+				<entry key="autoSetting" value="true">
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>

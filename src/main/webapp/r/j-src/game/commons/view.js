@@ -357,12 +357,13 @@ var playerListView = {
     },
     appendPlayerItem:function (player) {
         var voteID = player.id + "_vote";
+        var nameID = player.id + "_name";
         if (player.count == 0) {
 
-            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "</span><span class='vote' id='" + voteID + "'></span></a></li>";
+            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span id='" + nameID + "'>" + player.name + "</span><span class='vote' id='" + voteID + "'></span></a></li>";
             $("#" + selects.$playerList).append(item);
         } else {
-            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span>" + player.name + "<span class='vote' id='" + voteID + "'>+" + player.count + "</span></a></span></a></li>";
+            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span id='" + nameID + "'>" + player.name + "<span class='vote' id='" + voteID + "'>+" + player.count + "</span></a></span></a></li>";
             $("#" + selects.$playerList).append(item);
 
 
@@ -382,6 +383,18 @@ var playerListView = {
     },
     living:function () {
         this.sortPlayer();
+    },
+    setClass:function (id, clasz) {
+        var nameId = id + "_name";
+        $("#" + nameId).removeClass().addClass(clasz);
+
+    },
+    clearPlayerNameClass:function () {
+        for (var key in id_name) {
+            this.setClass(key, "");
+
+
+        }
     }
 
 
@@ -632,9 +645,9 @@ var controlView = {
             "version":$("#version").val(),
             "time":jQuery.now()
         };
-        if("topic"==message.predict){
+        if ("topic" == message.predict) {
             //只发给自己
-            message.object=message.subject;
+            message.object = message.subject;
         }
 
         return message;
@@ -665,6 +678,15 @@ var controlView = {
                 }
                 break;
 
+            case "description":
+                var sayNotEmpty = controlView.checkSayNotEmpty();
+                if (sayNotEmpty) {
+                    result.code = 0;
+                } else {
+                    result.code = -1;
+                    result.message = sayHint.empty;
+                }
+                break;
             case "answer":
                 var sayNotEmpty = controlView.checkSayNotEmpty();
                 if (sayNotEmpty) {

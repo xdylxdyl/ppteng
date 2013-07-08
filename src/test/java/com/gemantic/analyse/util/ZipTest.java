@@ -70,12 +70,17 @@ public class ZipTest {
 				+ MyTimeUtil.convertLong2String(pre, "yyyy-MM-dd"));
 		log.info(1364309002676L + " day is "
 				+ MyTimeUtil.convertLong2String(1364309002676L, "yyyy-MM-dd"));
+		
+		log.info(System.currentTimeMillis());
 	}
 
 	public void testCount() {
 
 		Map m = new HashMap();		
 		int c=getGhostCount(m,10);
+		log.info(System.currentTimeMillis());
+		
+		
 	
 
 	}

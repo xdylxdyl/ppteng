@@ -23,9 +23,10 @@ var ghostQuestionModel = {
         king:"king"
     },
     hint:{
-        topic:"【系统消息】请耐心等英明的国王出题,卡片格式:第一个词是水民卡第二个词是幽灵卡,幽灵卡是水民卡的类别,中间以','隔开,(如'苹果,食物'),国王请在指令里选择[出题]",
+        topic:"【系统消息】国王发现自己的王冠被盗,非常的生气!所以英明的国王打算用一个神奇的办法找出幽灵.他将写出来两种卡片,水民卡和幽灵卡,通过神秘星术的力量,幽灵拿到的只会是幽灵卡",
         day:"【系统消息】 国王在上,感谢您给了你的子民们又一次找出幽灵的机会,我们一定不负重望~",
-        question:"【系统消息】提问时间到了~幽灵一定数量的问题后,国王用是和不是来回答。之后幽灵请在指定里选择[回答],并将答案附上～",
+        question:"【系统消息】提问时间到了~国王还是决定表现一下自己的仁慈,如果幽灵可以猜出国王发的水民卡是什么,那么就可以放你一条生路和~幽灵一定数量的问题后,国王用是和不是来回答。",
+        description:"【系统消息】生存吧我的子民们,暴怒的国王已经把你们全部浸在了水里,只有说出来自己卡牌才能浮上来~否则的话,就要被淹死了~~~~",
         assignTopic:"【系统消息】国王分给您的卡片是: ",
 
         dayCount:function (count) {
@@ -62,9 +63,10 @@ var ghostQuestionModel = {
     rightName:{
         vote:"指证",
         topic:"出题",
-        answer:"回答"
+        answer:"回答",
+        description:"描述"
     },
-    settingPostParameter:function (rid, version, ghostCount, dayTime, topicTime, questionTime) {
+    settingPostParameter:function (rid, version, ghostCount, dayTime, topicTime, questionTime, descriptionTime) {
         return{
             rid:rid,
             version:version,
@@ -72,7 +74,8 @@ var ghostQuestionModel = {
                 {"ghostCount":ghostCount},
                 {"dayTime":dayTime},
                 {"topicTime":topicTime},
-                {"questionTime":questionTime}
+                {"questionTime":questionTime},
+                {"descriptionTime":descriptionTime}
             ]
         }
     }
@@ -137,8 +140,11 @@ var ghostQuestionController = {
                 ghostQuestionController.topicAssign(message);
                 break;
             case "topic" :
-                message.object="-500";
+                message.object = "-500";
                 ghostQuestionController.say(message);
+                break;
+            case "description" :
+                ghostQuestionController.description(message);
                 break;
             case "decryption" :
                 ghostQuestionController.decryption(message);
@@ -184,6 +190,21 @@ var ghostQuestionController = {
 
 
     },
+
+    description:function (message) {
+
+
+        playerListView.setClass(message.subject, "text-error");
+
+        var p = playerService.getPlayer(message.subject);
+        ghostView.say(message.subject, p.name, message.content, message.expression, message.color, message.object, "", ghostQuestionModel.rightName.description);
+
+
+
+
+    },
+
+
     decryption:function (message) {
 
         var role = message.object;
@@ -390,13 +411,18 @@ var ghostView = {
     },
 
 
-    say:function (id, name, content, exp, color, subject, subjectName) {
+    say:function (id, name, content, exp, color, subject, subjectName, command) {
         var express = controlView.showExpression(exp);
         var obj;
         if (subject != "-500") {
             obj = " 对 [" + subjectName + " ]";
         } else {
             obj = "";
+        }
+
+        if (!command) {
+            command = "";
+
         }
         //say出现的位置 这个.话说.原来死人说的话是JS控制的么
         //1、死人（dead_area）——a、游戏结束后；b、游戏未结束时。 2、活人——a、白天； b、遗言时； css、晚上（killer_area）。
@@ -439,17 +465,27 @@ var ghostView = {
 
         switch (place) {
             case "normal":
-                $("#" + selects.$gameArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+                $("#" + selects.$gameArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + command + " 说：" + content + "</p>");
                 viewUtil.autoBottom($("#" + selects.$gameArea));
                 break;
             case "deadArea":
-                $("#" + selects.$dieArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+                $("#" + selects.$dieArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + command + " 说：" + content + "</p>");
                 viewUtil.autoBottom($("#" + selects.$dieArea));
                 break;
             default:
         }
 
+        if(ghostQuestionModel.rightName.description==command){
+            $("#" + selects.$description).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + command + " 说：" + content + "</p>");
+            viewUtil.autoBottom($("#" + selects.$description));
+        }
 
+
+    },
+    description:function(message ,p){
+
+        $("#" + selects.$gameArea).append("<p style='color:" + color + "'>[" + p.name + "] " + express + obj + command + " 说：" + content + "</p>");
+                   viewUtil.autoBottom($("#" + selects.$gameArea));
     },
     vote:function (subjectName, objectName, color, exp, content) {
 
@@ -468,9 +504,20 @@ var ghostView = {
 
     die:function (id, name, action) {
         $("#" + id).children("a").removeClass().addClass("die");
-        if (action == "vote") {
-            $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 积毁销骨，众口铄金，[" + name + "]你就认命吧！</p>");
+        switch (action) {
+            case "vote":
+                $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 积毁销骨，众口铄金，[" + name + "]你就认命吧！</p>");
+
+                break;
+            case "drown":
+                $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】[" + name + "]无视国王的权威,失去了证明自己清白的机会.就这么被淹死了</p>");
+
+                break;
+            default :
+                ;
         }
+
+
     },
     showContentForGameArea:function (content) {
         if (content == "" || content == undefined) {
@@ -544,6 +591,9 @@ var ghostQuestionRightView = {
             case "topic" :
                 ghostQuestionRightView.commandRight(right);
                 break;
+            case "description" :
+                ghostQuestionRightView.commandRight(right);
+                break;
             case "answer" :
                 ghostQuestionRightView.commandRight(right);
                 break;
@@ -579,10 +629,12 @@ var ghostQuestionSettingView = {
         $("#dayTime").val($("#dayTime").val() / 60000);
         $("#topicTime").val($("#topicTime").val() / 60000);
         $("#questionTime").val($("#questionTime").val() / 60000);
+        $("#descriptionTime").val($("#descriptionTime").val() / 60000);
 
         $("<span>分</span>").insertAfter("#dayTime");
         $("<span>分</span>").insertAfter("#topicTime");
         $("<span>分</span>").insertAfter("#questionTime");
+        $("<span>分</span>").insertAfter("#descriptionTime");
 
 
     },
@@ -592,6 +644,7 @@ var ghostQuestionSettingView = {
         $("#dayTime").val($("#dayTime").val() * 60000);
         $("#topicTime").val($("#topicTime").val() * 60000);
         $("#questionTime").val($("#questionTime").val() * 60000);
+        $("#descriptionTime").val($("#descriptionTime").val() * 60000);
         var params = jQuery("#setting").serialize();
         return params;
     },
@@ -624,9 +677,11 @@ var gameView = {
         $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始,臣民们请等国王出题</p>");
 
         playerListView.sortPlayer();
+        playerListView.clearPlayerNameClass();
         ghostView.clearStatusArea();
         settingView.hideSettingButton();
         gameView.hideDieArea();
+        gameView.clearDescription();
         var p = playerService.getPlayer(globalView.getCurrentID());
         gameView.showSecondArea(p);
         notifyUtil.sendNotify("各位大神", "国王生气了，赶紧上朝", "");
@@ -664,6 +719,9 @@ var gameView = {
         } else {
             gameView.hideDieArea();
         }
+    },
+    clearDescription:function(){
+        $("#"+selects.$description).empty();
     }
 
 }

@@ -271,7 +271,7 @@ public class One23Test {
 	public void testGhostQuestionRule() throws ServiceException,
 			ServiceDaoException, IOException {
 
-		String policeVersion = "ghost_question_1.0";
+		String policeVersion = "ghost_question_2.0";
 		String simpleVersion = "simple_1.0";
 		String currentVersion = policeVersion;
 		Room room = new Room("sss", 3L, currentVersion);

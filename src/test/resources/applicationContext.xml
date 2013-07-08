@@ -134,6 +134,18 @@
 						<value>ghost/question/question_game.rf</value>
 					</list>
 				</entry>
+				
+				
+				<entry key="ghost_question_2.0">
+					<list>
+						<value>ghost/question2/question_model.drl</value>
+						<value>ghost/question2/question_query.drl</value>
+						<value>ghost/question2/question_util.drl</value>
+						<value>ghost/question2/question_game.drl</value>
+						<value>ghost/question2/question_game.rf</value>
+					</list>
+				</entry>
+				
 				<entry key="ghost_soul_1.0">
 					<list>
 						<value>ghost/soul/soul_model.drl</value>
