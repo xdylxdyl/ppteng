@@ -748,7 +748,9 @@ when
      $game:Game($kingCount:kingCount,$ghostCount:ghostCount,$recordName:recordName)       
      ( eval($ghostCount <= 0)      and 
        Role($id:id,role=="ghost")  and 
-       Message(subject==$id,predict=="die",object!="vote")       
+       Message(subject==$id,predict=="die",object!="vote")    
+       
+          
        
      )
      or
