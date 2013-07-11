@@ -24,7 +24,7 @@
 <div id="contents" class="hide">${contents}</div>
 <div id="escape" class="hide"></div>
 
-iv>
+
 </div>
 
 <!--left list-->

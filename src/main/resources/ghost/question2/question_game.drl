@@ -247,22 +247,7 @@ end
 //===========game prepare will process clear info,role assing ,right assign============over 
 
 //========================phase clear start =========================
-rule 'phase clear vote message '
-ruleflow-group "phase clear"
-no-loop true
-when
-	//conditions    
-    
-    $room:Room(status=="run")
-    Game(status!="day") 
-    $message:Message($subject:subject,predict=="vote")     
-then      
-	//actions
-   //actions
-     LogUtil.log("phase clear vote start================= "); 
-     retract($message);
-     LogUtil.log("phase clear vote over =================");   
-end
+
 
 
 
@@ -1321,7 +1306,7 @@ when
     Role(id==$uid,$role:role)
 then      
 	//actions 
-     LogUtil.log("topic phase prepare  start================= ");
+     LogUtil.log("question phase prepare  start================= ");
      String rightContent=""; 
      String voteType="";
     
@@ -1360,7 +1345,7 @@ then
     }
 		            
           
-     LogUtil.log("topic phase prepare  over =================");   
+     LogUtil.log("question phase prepare  over =================");   
 end
 
 

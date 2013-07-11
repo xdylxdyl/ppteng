@@ -272,6 +272,7 @@ public class SimpleStatisticsServiceImpl implements SimpleStatisticsService {
 				throw new ServiceDaoException(e);
 			}
 		}else{
+			log.info(query+" is null "+" secondQuery");
 			throw new ServiceException(-222,"no query");
 		}
 		
