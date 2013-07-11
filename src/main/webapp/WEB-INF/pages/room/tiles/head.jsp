@@ -37,7 +37,7 @@
 	<ul id="firstHead" class="social">	    
 	
 		<li><a href="http://bbs.ptteng.com/forum.php" target="_blank">论坛</a></li>
-		<li><a href="http://xdylxdyl.diandian.com/" target="_blank">博客</a></li>
+		<li><a href="http://ptteng.lofter.com/" target="_blank">博客</a></li>
 		<li id="nav_favorite"><a
 			href="javascript:AddFavorite('http://www.ptteng.com/','葡萄藤')">收藏</a></li>
 		<li id="nav_quit"><a href="/player/offline " id="navLogout">退出</a></li>
