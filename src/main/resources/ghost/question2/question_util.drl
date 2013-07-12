@@ -22,7 +22,7 @@ function void setRemainTime(String status,Game game,Room room) {
       Long lastTime=game.getLastTime();
       Long time=lastTime+setting-System.currentTimeMillis();
       if(time < 0){
-            LogUtil.log("=========== error ======= "+time);          
+            LogUtil.log("=========== remain time wrong ======= "+time);          
       }else{
           game.setRemainTime(time);
       }
