@@ -44,7 +44,7 @@
             
             <div class="tabbable">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
+                    <li class="active"><a href="#game_area" data-toggle="tab" auto-bottom>游戏</a></li>
                                
                     <li><a href="#setting_area" data-toggle="tab">设置</a></li>
                     <li><a href="#music_area" data-toggle="tab">音乐</a></li>

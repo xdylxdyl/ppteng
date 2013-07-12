@@ -29,7 +29,7 @@
 
 		<ul class="nav nav-tabs">
 			<li><a href="#player_list" data-toggle="tab">玩家</a></li>
-			<li class="active"><a href="#game_area" data-toggle="tab">茶馆闲聊</a></li>
+			<li class="active"><a href="#game_area" data-toggle="tab" auto-bottom>茶馆闲聊</a></li>
 			<li><a href="#rest_public" data-toggle="tab">精选</a></li>
 
 			<li><a href="#music_area" data-toggle="tab">音乐</a></li>

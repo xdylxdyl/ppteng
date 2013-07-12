@@ -29,8 +29,8 @@
 	<div class="tabbable">
 		<ul class="nav nav-tabs">
 			<li><a href="#player_list" data-toggle="tab">玩家</a></li>
-			<li class="active"><a href="#video_area" data-toggle="tab">电影</a></li>
-			<li class=""><a href="#game_area" data-toggle="tab">小树林</a></li>
+			<li class="active"><a href="#video_area" data-toggle="tab" >电影</a></li>
+			<li class=""><a href="#game_area" data-toggle="tab" auto-bottom>小树林</a></li>
 			<li><a href="#setting_area" data-toggle="tab">设置</a></li>
 		</ul>
 		<div class="tab-content">

@@ -164,6 +164,11 @@ $(document).ready(function () {
             globalView.hidePlayerList('#sidebar-toggle');
         }, function () {
             globalView.showPlayerList('#sidebar-toggle');
+        });
+
+        $('[href][auto-bottom]').live("click", function () {
+            var linkID = $(this).attr("href");
+            viewUtil.autoBottom($(linkID));
         })
 
 

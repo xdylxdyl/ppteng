@@ -34,7 +34,7 @@
 		<ul class="nav nav-tabs">
 			<li><a href="#player_list" data-toggle="tab">玩家</a></li>
 			<li class="active"><a href="#mine_area" data-toggle="tab">多人扫雷</a></li>
-			<li class=""><a href="#game_area" data-toggle="tab">聊天</a></li>
+			<li class=""><a href="#game_area" data-toggle="tab" auto-bottom>聊天</a></li>
 
 			<li><a href="#setting_area" data-toggle="tab">设置</a></li>
 			<li><a href="#music_area" data-toggle="tab">音乐</a></li>
