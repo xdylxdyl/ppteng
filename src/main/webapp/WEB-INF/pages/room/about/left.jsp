@@ -4,24 +4,26 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 
- <div class="span3">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">葡萄藤</li>
-                    <li id="about"><a href="/about?type=about">简介</a></li>
-                     <li id="master"><a href="/about?type=master">站长</a></li>
-                   <li class="nav-header">杀人游戏</li>
-                    <li id="simple"><a href="/about?type=simple">简化版规则</a></li>
-                    <li id="simpleImg"><a href="/about?type=simpleImg">简化版图示</a></li>
-                    <li class="nav-header">虚拟电影院</li>
-                      <li id="film"><a href="/about?type=film">电影院</a></li>
-                   <!--  <li class="nav-header">扫雷</li>
+<div class="span3">
+	<div class="well sidebar-nav">
+		<ul class="nav nav-list">
+			<li class="nav-header">葡萄藤</li>
+			<li id="about"><a href="/about?type=about">简介</a></li>
+			<li id="master"><a href="/about?type=master">站长</a></li>
+			<li class="nav-header">杀人游戏</li>
+			<li id="simple"><a href="/about?type=simple">简化版规则</a></li>
+			<li id="simpleImg"><a href="/about?type=simpleImg">简化版图示</a></li>
+			<li class="nav-header">捉鬼</li>
+			<li id="ghost"><a href="/about?type=ghost">捉鬼</a></li>
+			<li class="nav-header">虚拟电影院</li>
+			<li id="film"><a href="/about?type=film">电影院</a></li>
+			<!--  <li class="nav-header">扫雷</li>
                     <li><a href="#">多人扫雷</a></li>
                     <li class="nav-header">在一起</li>
                     <li><a href="#">一起看电影</a></li>
                     <li><a href="#">一起听音乐</a></li> -->
-                </ul>
-            </div>
-            <!--/.well -->
-        </div>
-        <!--/span-->
+		</ul>
+	</div>
+	<!--/.well -->
+</div>
+<!--/span-->
