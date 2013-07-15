@@ -743,9 +743,9 @@ public class PlayerController implements ApplicationContextAware {
 		}
 
 		User user = this.userService.getObjectById(uid);
-		if (user == null) {
+		if (user != null) {
 
-			return "redirect:/";
+			model.addAttribute("current", user);
 		}
 
 		log.info(" get user statistics info " + user);
@@ -755,7 +755,7 @@ public class PlayerController implements ApplicationContextAware {
 			statistics = new SimpleStatistics();
 		}
 		model.addAttribute("statistics", statistics);
-		model.addAttribute("current", user);
+		
 		return "/room/statistics/" + version;
 
 	}

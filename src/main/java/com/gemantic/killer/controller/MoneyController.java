@@ -58,7 +58,7 @@ public class MoneyController {
 		if (uid == null) {
 			uid = cookieUtil.getID(request, response);
 			if(uid==null){
-				return "redirect/";
+				return "redirect:/";
 			}
 		}
 		if ("out".equals(type)) {
