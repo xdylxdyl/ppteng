@@ -1,10 +1,8 @@
 package com.gemantic.killer.common.model;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -87,7 +85,7 @@ public class Message implements Serializable, Cloneable {
 	 */
 	private String expression="";
 	/**
-	 * 时间
+	 * 时间,服务器端接收到的消息时间.用于战例重放
 	 */
 	private Long time=System.currentTimeMillis();
 	/**
@@ -109,6 +107,12 @@ public class Message implements Serializable, Cloneable {
 	 * 计划执行时间
 	 */
 	private Long scheduledTime;
+	
+	/**
+	 * 消息的发送时间.以客户端的时间为准,用以计算消息的网络延迟
+	 */
+	
+	private Long sendAt;
 
 	/**
 	 * 消息的接收者,用于发送消息,和消息的生成无关
@@ -225,6 +229,17 @@ public class Message implements Serializable, Cloneable {
 
 	public void setScheduledTime(Long scheduledTime) {
 		this.scheduledTime = scheduledTime;
+	}
+	
+	
+	
+
+	public Long getSendAt() {
+		return sendAt;
+	}
+
+	public void setSendAt(Long sendAt) {
+		this.sendAt = sendAt;
 	}
 
 	public String toString() {

@@ -620,10 +620,14 @@ var controlView = {
         return  $("#sayButton").prop("disabled");
     },
     showDelay:function (message) {
-        var t = jQuery.now() - message.time;
-        if (message.subject == globalView.getCurrentID()) {
-            $("#netSpeedHint").text("延迟:" + (jQuery.now() - message.time) + "毫秒");
+        if (message.sendAt) {
+
+            var t = jQuery.now() - message.sendAt;
+            if (message.subject == globalView.getCurrentID()) {
+                $("#netSpeedHint").text("延迟:" + (t) + "毫秒");
+            }
         }
+
 
     },
     getMessage:function () {
@@ -643,7 +647,7 @@ var controlView = {
             "content":content,
             "isDrools":"true",
             "version":$("#version").val(),
-            "time":jQuery.now()
+            "sendAt":jQuery.now()
         };
         if ("topic" == message.predict) {
             //只发给自己
