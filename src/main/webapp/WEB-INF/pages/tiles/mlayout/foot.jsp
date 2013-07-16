@@ -59,6 +59,10 @@
 						type="checkbox" checked="checked" value="scroll" id="checkBox">
 						滚屏
 				</label></li>
+				<li id="privateSayGroup" class="hide"><label for="privateSay"
+					class="checkbox"> <input type="checkbox" value="scroll"
+						id="privateSay"> 私聊
+				</label></li>
 				<li><span class="help-inline pull-right" id="countDown">04:00</span></li>
 
 
