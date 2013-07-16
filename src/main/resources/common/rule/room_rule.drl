@@ -540,22 +540,22 @@ end
 
 
 
-rule 'say to one person message'
-ruleflow-group "part accepts message"
+//rule 'say to one person message'
+//ruleflow-group "part accepts message"
 
-when
+//when
 	//conditions	
-    $message:Message($subject:subject,predict=="say",object!="-500")   
-	$room:Room(status=="unrun")
-	 eval($message.getAccepts().size()==0)
-    $operater:Operater()
-then      
+    //$message:Message($subject:subject,predict=="say",object!="-500")   
+	//$room:Room(status=="unrun")
+	// eval($message.getAccepts().size()==0)
+   // $operater:Operater()
+//then      
   //  LogUtil.log(" say to one person message start  =============");   
-   $message.getAccepts().add($message.getObject()); 
-    update($message);
+   //$message.getAccepts().add($message.getObject()); 
+    //update($message);
    // LogUtil.log("generate message over =============");
   
-end
+//end
 
 rule 'admin kick message'
 ruleflow-group "part accepts message"

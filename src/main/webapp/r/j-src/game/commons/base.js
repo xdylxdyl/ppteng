@@ -38,6 +38,8 @@ var initGame = function () {
     //2.init color
     controlView.initColor();
 
+
+
     //2.init game status every has self setting.expect playlist etc
     var param = {
         uid:uid,
@@ -86,11 +88,15 @@ var initGame = function () {
     gameAreaView.login(player, message, first);
 
 
+
+
     //8 version self dependency
     if (versionFunction["init"]) {
         versionFunction["init"]();
     }
 
+    //9
+    controlView.initObject();
 
 }
 

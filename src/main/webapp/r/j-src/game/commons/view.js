@@ -572,14 +572,20 @@ var gameAreaView = {
         $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
-    say:function (id, name, content, exp, color, subject, subjectName, time) {
+    say:function (id, name, content, exp, color, object, objectName, time, privateContent) {
         var express = controlView.showExpression(exp);
         var obj = "";
 
-        var player = playerService.getPlayer(id);
+        if (object != "-500") {
+            obj = "对[" + objectName + "]";
+        }
+        var preStr = "";
+        if ("true" == privateContent) {
+            preStr = "[密]";
+        }
 
 
-        $("#" + selects.$gameArea).append("<p  title='" + timeUtil.time2String(time) + "' style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+        $("#" + selects.$gameArea).append("<p  title='" + timeUtil.time2String(time) + "' style='color:" + color + "'>" + preStr + "[" + name + "] " + express + obj + " 说：" + content + "</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
 
 
@@ -647,12 +653,34 @@ var controlView = {
             "content":content,
             "isDrools":"true",
             "version":$("#version").val(),
-            "sendAt":jQuery.now()
+            "sendAt":jQuery.now(),
+            "accepts":[],
+            "privateContent":"false"
         };
-        if ("topic" == message.predict) {
-            //只发给自己
-            message.object = message.subject;
+        switch (message.predict) {
+            case "topic":
+                //只发给自己
+                message.object = message.subject;
+                break;
+            case "say":
+                if ("-500" != message.object) {
+                    if (controlView.getPrivateSay()) {
+                        message.accepts.push(message.object);
+                        if (message.object == message.subject) {
+
+                        } else {
+                            message.accepts.push(message.subject);
+                        }
+                        message.privateContent = "true";
+                    }
+
+                }
+
+                break;
+            default :
+
         }
+
 
         return message;
     },
@@ -847,6 +875,10 @@ var controlView = {
 
 
     },
+    initObject:function () {
+        var playList = playerService.getAllPlayer();
+        controlView.filterObject("command", playList);
+    },
     sortColor:function (a, b) {
         var a2 = a.value.substring(1, a.value.length);
         var b2 = b.value.substring(1, b.value.length);
@@ -925,6 +957,9 @@ var controlView = {
     getAutoRoll:function () {
         return $("#" + selects.$checkBox).attr("checked");
     },
+    getPrivateSay:function () {
+        return $("#" + selects.$privateSay).attr("checked");
+    },
     getSayInput:function () {
         return $("#sayInput").val();
     },
@@ -943,7 +978,7 @@ var controlView = {
                 controlView.filterSingleObject("living", playerList);
                 break;
             case "command" :
-                controlView.filterSingleObject("none", playerList);
+                controlView.filterSingleObject("all", playerList);
                 break;
             default :
                 console.log("亲，这个指令你还没写嘛.,start version commandFilter");

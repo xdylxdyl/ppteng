@@ -216,6 +216,7 @@ var selects={
     $playerRole:"playerRole",
     $playerCard:"playerCard",
     $checkBox:"checkBox",//auto roll
+    $privateSay:"privateSay",//privateSay
     $displayRole:"displayRole",
     $countDown:"countDown",
     $select_command:"select_command",

@@ -113,6 +113,13 @@ public class Message implements Serializable, Cloneable {
 	 */
 	
 	private Long sendAt;
+	
+	/**
+	 * 是否私聊内容
+	 */
+	
+	private String privateContent;
+	
 
 	/**
 	 * 消息的接收者,用于发送消息,和消息的生成无关
@@ -240,6 +247,18 @@ public class Message implements Serializable, Cloneable {
 
 	public void setSendAt(Long sendAt) {
 		this.sendAt = sendAt;
+	}
+	
+	
+	
+
+
+	public String getPrivateContent() {
+		return privateContent;
+	}
+
+	public void setPrivateContent(String privateContent) {
+		this.privateContent = privateContent;
 	}
 
 	public String toString() {
