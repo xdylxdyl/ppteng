@@ -231,17 +231,19 @@
 					<p>
 						<a href="http://www.wargamechina.com/" target="_blank">中国兵棋网</a>
 					<p>
+					<p>
+						<a href="http://v.500178.com/" target="_blank">游戏视频</a>
+					<p>
 				</div>
 				<div class="span3">
-					<p>
-						<a href="http://www.j-show.com/" target="_blank">吉时吉会展</a>
-					<p>
-					<p>
-						<a href="http://zhujiusanguo.5d6d.net/" target="_blank">煮酒三国文史论坛</a>
-					<p>
+				
 					<p>
 						<a href="http://www.duole.com/" target="_blank">多乐音乐电台</a>
 					<p>
+					<p>
+						<a href="http://fifa.wemvp.com/" target="_blank">FIFA14</a>
+					<p>
+					
 				</div>
 				<div class="span">
 					<p>
@@ -253,6 +255,8 @@
 					<p>
 						<a href="http://www.neihan8.com/yj/list_3_1.html" target="_blank">色系军团</a>
 					<p>
+				
+					
 				</div>
 			</div>
 		</div>

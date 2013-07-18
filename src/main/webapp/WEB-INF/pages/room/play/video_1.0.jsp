@@ -48,6 +48,8 @@
                     <li class="active"><a href="#video_area" data-toggle="tab">电影</a></li>
                                
                     <li><a href="#setting_area" data-toggle="tab">设置</a></li>
+                    
+                    <li><a href="#help_area" data-toggle="tab">帮助</a></li>
                       
                      
                  
@@ -72,7 +74,35 @@
                     </div>
                     <div class="tab-pane" id="setting_area">
                        
-                    </div>    
+                    </div> 
+                    
+                    <div class="tab-pane" id="help_area">
+							<div class="hero-unit">
+
+								
+								<p>
+									<a
+										href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=94"
+										class="text-warning" target="_blank">了解如何播放视频,请点击这里&raquo;</a>
+								</p>
+								
+
+
+								<p class="text-error"></p>
+
+								<p class="text-success">简要帮助:</p>
+								<p class="text-success">1.虚拟电影院是用来和朋友一起看电影</p>
+								<p class="text-success">2.多数视频网站并不提供接口支持,所以大家看的电影是无法同步的</p>
+							
+							</div>
+
+
+
+
+
+
+						</div>
+                       
                     
                       <!-- advertise -->
                      
