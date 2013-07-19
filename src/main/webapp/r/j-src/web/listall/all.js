@@ -107,15 +107,11 @@ function VersionConfigCtrl($scope) {
             version:"ghost_simple_1.0",
             title:"捉鬼游戏 简化版"
         },
-        {
-            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLc4ProN5QAAEtdgKHwiA797.jpg",
-            version:"ghost_question_1.0",
-            title:"捉鬼游戏 猜词版"
-        },
+
         {
                     img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLc4ProN5QAAEtdgKHwiA797.jpg",
                     version:"ghost_question_2.0",
-                    title:"捉鬼游戏 猜词版[优化内测版]"
+                    title:"捉鬼游戏 猜词版"
                 },
        /* {
             img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLfr7O0rCtAAIoXr_bQgo287.jpg",
