@@ -1,5 +1,3 @@
-
-
 var expression = {
 
     "1":"温柔的",
@@ -30,9 +28,9 @@ var commandCommonSetting = {
     kick:"果断一脚"
 }
 
-var gameGlobalStatus={
-       over:"over",
-       run:"run"
+var gameGlobalStatus = {
+    over:"over",
+    run:"run"
 
 }
 
@@ -90,6 +88,25 @@ var color = {
 }
 
 
+var PlayerAction = {
+    "/kiss":"轻轻亲吻了一下自己的手,就好像在亲许久不见的朋友",
+    "/site":"盘腿坐在木头房顶上,闭上眼睛开始念经",
+    "/out":"团成一团飞快的滚向远方,瞬间消失不见了",
+    "/laugh":"一楞.突然反应过来.然后实在忍不住了,一口水直接喷出十多米远",
+    "/think":"歪着着想了很久,一动也不动.就这样一年多过去了....",
+    "/cry":"对着空气就大声哭起来,泪水落在地上哗哗的",
+    "/miss":"实在太想念臭臭了,就双手紧紧抱着自己,好像是自己在抱着别人,又像是别人在抱着自己",
+    "/walk":"叹了口气.还是决定继续走下去,背个包一个人出门而已,有什么好怕的",
+    "/run":"飞快的冲着公交车跑过去,气都喘不上来了还是喘着气想要追上公交车上的她,怕错过",
+    "/angry":"悲从心来,怒吼一声,双手握拳,仰天长啸,小宇宙直接以2^8次方燃烧起来,众人无法承受这种灼热的温度,无奈的散开了去",
+    "/eat":"直接抓起馒头大的包子塞到嘴里,水都来不及喝,就这么直接咽了下去",
+    "/hungry":"忽然觉得前胸贴后背,肚子咕咕叫,顿时什么兴致都没有了,一脚踹开还在呻吟的另一位,光着身子就奔厨房去了",
+    "/sleep":"看了看XD在自己的身边,于是就拉着他的手沉沉睡去了,还梦到了自己和XD一起在一个一望无际的草原中看星星",
+    "/jump":"轻轻一跃,就到了最高的摘星塔尖上,众人顿时吸了一口气,这塔可是高达几万米啊"
+
+}
+
+
 var player = function (id, name, status, count, role) {
     return{
         id:id,
@@ -126,8 +143,6 @@ var settingGetParameter = function (rid, version) {
 }
 
 
-
-
 var expressionParameter = function (rid, exp) {
     return{
         rid:rid,
@@ -151,9 +166,9 @@ var recordSecondTime = null;
 var msg_interval = null;
 var recordReplayStartAt = null;
 var record_timer = null;
-var lastMessageSendAt=null;
+var lastMessageSendAt = null;
 
-var selects={
+var selects = {
     $gameArea:"game_area",
     $dieArea:"die_area",
     $description:"description_area",
@@ -182,15 +197,15 @@ var selects={
     $gamePhase:"gamePhase",
     $playerRole:"playerRole",
     $playerCard:"playerCard",
-    $checkBox:"checkBox",//auto roll
-    $privateSay:"privateSay",//privateSay
+    $checkBox:"checkBox", //auto roll
+    $privateSay:"privateSay", //privateSay
     $displayRole:"displayRole",
     $countDown:"countDown",
     $select_command:"select_command",
     $select_object:"select_object",
     $mainArea:"mainArea",
     $secondArea:"secondArea",
-    $content: "content",
-    $sidebarNav: "sidebar-nav"
+    $content:"content",
+    $sidebarNav:"sidebar-nav"
 
 }

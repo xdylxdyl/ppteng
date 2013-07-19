@@ -572,7 +572,7 @@ var gameAreaView = {
         $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
-    say:function (id, name, content, exp, color, object, objectName, time, privateContent) {
+    say:function (id, name, content, exp, color, object, objectName, time, privateContent,playAction) {
         var express = controlView.showExpression(exp);
         var obj = "";
 
@@ -584,8 +584,15 @@ var gameAreaView = {
             preStr = "[密]";
         }
 
+        var action=" 说：";
 
-        $("#" + selects.$gameArea).append("<p  title='" + timeUtil.time2String(time) + "' style='color:" + color + "'>" + preStr + "[" + name + "] " + express + obj + " 说：" + content + "</p>");
+        if(playAction=="say"){
+
+        }else{
+            action=" ";
+        }
+
+        $("#" + selects.$gameArea).append("<p  title='" + timeUtil.time2String(time) + "' style='color:" + color + "'>" + preStr + "[" + name + "] " + express + obj + action + content + "</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
 
 
@@ -599,6 +606,11 @@ var gameAreaView = {
         alert("click me");
         return  $(this).html();
 
+    },
+    playAction:function(message){
+        if(PlayerAction[message.content]){
+            message.content=PlayerAction[message.content];
+        }
     }
 
 

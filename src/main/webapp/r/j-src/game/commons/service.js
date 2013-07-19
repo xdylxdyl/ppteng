@@ -662,12 +662,24 @@ var roomParseService = {
 
         var status = globalView.getGameStatus();
         if ("over" == status) {
-            var name;
-            if (message.object != -500) {
-                name = playerService.getPlayer(message.object).name;
+
+            var playAction;
+            if (PlayerAction[message.content]) {
+                playAction="";
+                message.content=PlayerAction[message.content];
+
+            } else {
+                playAction="say"
+
             }
-            gameAreaView.say(message.subject, playerService.getPlayer(message.subject).name, message.content, message.expression,
-                message.color, message.object, name, message.time,message.privateContent);
+            var name;
+                         if (message.object != -500) {
+                             name = playerService.getPlayer(message.object).name;
+                         }
+                         gameAreaView.say(message.subject, playerService.getPlayer(message.subject).name, message.content, message.expression,
+                             message.color, message.object, name, message.time, message.privateContent,playAction);
+
+
         } else {
 
             versionFunction["say"](message);
