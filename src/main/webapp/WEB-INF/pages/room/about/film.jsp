@@ -112,7 +112,7 @@
 			type="text/javascript" charset="utf-8"></script>
 		<script src="/r/j-src/framework/gridster/jquery.gridster.extras.js"
 			type="text/javascript" charset="utf-8"></script>
-		<script src="/r/j-src/framework/angular/angular.min.js"></script>
+		
 		<script src="/r/j-src/web/about/film.js"></script>
 
 		<script

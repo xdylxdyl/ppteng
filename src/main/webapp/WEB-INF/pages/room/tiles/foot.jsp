@@ -79,10 +79,10 @@
 		<div class="stastic">
 			<p>
 				© 2012 Company, Inc. 京ICP备13005880号
-				<script
+				<!-- <script
 					src="http://s96.cnzz.com/stat.php?id=4923206&web_id=4923206&online=2"
 					language="JavaScript"></script>
-			</p>
+			</p> -->
 			<p>
 				<script type="text/javascript">
         var _bdhmProtocol = (("https:" == document.location.protocol)? " https://" : " http://");

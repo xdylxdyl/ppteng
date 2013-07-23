@@ -96,7 +96,7 @@
 <tiles:insertDefinition name="commonJSImport" />
 <script type="text/javascript"
 	src="/r/j-src/framework/audio/audio.min.js"></script>
-<script src="/r/j-src/framework/angular/angular.min.js"></script>
+
 
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>

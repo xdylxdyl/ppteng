@@ -103,7 +103,7 @@ function VersionConfigCtrl($scope) {
             title:"杀人游戏 警版不翻牌"
         },
         {
-            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLflqyXbUoAAeYwgwpoqQ586.jpg",
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLfr7O0rCtAAIoXr_bQgo287.jpg",
             version:"ghost_simple_1.0",
             title:"捉鬼游戏 简化版"
         },
