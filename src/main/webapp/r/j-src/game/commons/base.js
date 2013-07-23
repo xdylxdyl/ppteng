@@ -81,11 +81,11 @@ var initGame = function () {
     playerListView.displayCreater(creater);
 
     //7.set staging show
-    var player = playerService.getPlayer(uid);
+/*    var player = playerService.getPlayer(uid);
     var message = {};
     message.content = globalView.getLoginShow();
     var first = globalView.getFirst();
-    gameAreaView.login(player, message, first);
+    gameAreaView.login(player, message, first);*/
 
 
 

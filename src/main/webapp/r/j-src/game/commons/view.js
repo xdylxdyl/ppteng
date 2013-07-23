@@ -513,14 +513,66 @@ var gameAreaView = {
 
         var name = player.name;
         var isDisplay = gameAreaView.isDisplayStage(player, first);
+        var ptitle = gameAreaView.getPlayerTitle(player);
+        ptitle="["+ptitle+"]的"
         if (isDisplay) {
             //只有房间是处在结束状态下才在游戏区显示消息
-            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】" + ptitle + "[" + name + "]" + action + "进入了房间</p>");
             viewUtil.autoBottom($("#" + selects.$gameArea));
         } else {
             //不显示
 
         }
+
+    },
+    getPlayerTitle:function (player) {
+        var money = player.money;
+        var level = gameAreaView.getPlayerLever(money);
+        return ptitle[level];
+
+    },
+    getPlayerLever:function (money) {
+
+
+        var unit=10000;
+        //2万
+        if (money < 2*unit) {
+            return 1;
+        }
+        //10万
+        if (money < 10*unit) {
+            return 2;
+        }
+        //50万
+        if (money < 50*unit) {
+            return 3;
+        }
+        //100万
+        if (money < 100*unit) {
+            return 4;
+        }
+        //200万
+        if (money < 200*unit) {
+            return 5;
+        }//500万
+        if (money < 500*unit) {
+            return 6;
+        }
+        //1000万
+        if (money < 1000*unit) {
+            return 7;
+        }
+        //5000万
+        if (money < 5000*unit) {
+            return 8;
+        }
+        //一个亿
+        if (money < 10000*unit) {
+            return 9;
+        }
+
+        return 10
+
 
     },
     isDisplayStage:function (player, first) {
@@ -572,7 +624,7 @@ var gameAreaView = {
         $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
-    say:function (id, name, content, exp, color, object, objectName, time, privateContent,playAction) {
+    say:function (id, name, content, exp, color, object, objectName, time, privateContent, playAction) {
         var express = controlView.showExpression(exp);
         var obj = "";
 
@@ -584,12 +636,12 @@ var gameAreaView = {
             preStr = "[密]";
         }
 
-        var action=" 说：";
+        var action = " 说：";
 
-        if(playAction=="say"){
+        if (playAction == "say") {
 
-        }else{
-            action=" ";
+        } else {
+            action = " ";
         }
 
         $("#" + selects.$gameArea).append("<p  title='" + timeUtil.time2String(time) + "' style='color:" + color + "'>" + preStr + "[" + name + "] " + express + obj + action + content + "</p>");
@@ -607,9 +659,9 @@ var gameAreaView = {
         return  $(this).html();
 
     },
-    playAction:function(message){
-        if(PlayerAction[message.content]){
-            message.content=PlayerAction[message.content];
+    playAction:function (message) {
+        if (PlayerAction[message.content]) {
+            message.content = PlayerAction[message.content];
         }
     }
 

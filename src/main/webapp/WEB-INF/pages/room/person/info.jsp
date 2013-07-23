@@ -13,6 +13,7 @@
 				<json:property name="name" value="${user.name}"></json:property>
 				<json:property name="rid" value="${uid_rid[user.id]}"></json:property>
 				<json:property name="rname" value="${rid_room[uid_rid[user.id]].name}"></json:property>
+				<json:property name="money" value="${user.money}"></json:property>
 			</json:object>
 		</c:forEach>
 	</json:array>

@@ -338,7 +338,7 @@ var roomService = {
         var name = this.getPerson(rid, uids);
         for (var j = 0; j < name.length; j++) {
             // console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
-            var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
+            var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count, "", data[j].money);
             playerService.addPlayer(p.id, p);
             // playerListView.login(p);
 
@@ -665,19 +665,19 @@ var roomParseService = {
 
             var playAction;
             if (PlayerAction[message.content]) {
-                playAction="";
-                message.content=PlayerAction[message.content];
+                playAction = "";
+                message.content = PlayerAction[message.content];
 
             } else {
-                playAction="say"
+                playAction = "say"
 
             }
             var name;
-                         if (message.object != -500) {
-                             name = playerService.getPlayer(message.object).name;
-                         }
-                         gameAreaView.say(message.subject, playerService.getPlayer(message.subject).name, message.content, message.expression,
-                             message.color, message.object, name, message.time, message.privateContent,playAction);
+            if (message.object != -500) {
+                name = playerService.getPlayer(message.object).name;
+            }
+            gameAreaView.say(message.subject, playerService.getPlayer(message.subject).name, message.content, message.expression,
+                message.color, message.object, name, message.time, message.privateContent, playAction);
 
 
         } else {
@@ -723,9 +723,12 @@ var roomParseService = {
                     success:function (data) {
                         console.log(data);
                         var name = data.infos[0].name;
-                        var p = new player(id, name, playerStatus.unready, 0);
+                        var money = data.infos[0].money;
+                        var p = new player(id, name, playerStatus.unready, 0, "", money);
                         playerService.addPlayer(p.id, p);
-                        gameAreaView.login(p, message);
+
+
+                        gameAreaView.login(p, message, true);
                         playerListView.login(p);
 
                     },

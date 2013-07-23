@@ -20,6 +20,21 @@ var expression = {
     "18":"骑在月亮上"
 };
 
+var ptitle={
+    1:"一贫如洗",
+    2:"衣衫褴褛",
+    3:"小有积蓄",
+    4:"家徒四壁",
+    5:"锦衣玉食",
+    6:"穿金戴银",
+    7:"家财万贯",
+    8:"一掷千金",
+    9:"富可敌国",
+    10:"天下无双"
+
+
+}
+
 var hint = {
     kick:"你好,再见"
 }
@@ -107,13 +122,14 @@ var PlayerAction = {
 }
 
 
-var player = function (id, name, status, count, role) {
+var player = function (id, name, status, count, role,money) {
     return{
         id:id,
         name:name,
         status:status,
         count:count,
-        role:(role == null) ? "water" : role
+        role:(role == null) ? "water" : role,
+        money:money
     };
 
 }
