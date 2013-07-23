@@ -44,9 +44,9 @@ function publicCtrl($scope, $timeout) {
     };
     $scope.onTimeout = function () {
         $scope.publicFeed = newsService.getPublicFeed()
-        mytimeout = $timeout($scope.onTimeout, 120000);
+        mytimeout = $timeout($scope.onTimeout, 600000);
     }
-    var mytimeout = $timeout($scope.onTimeout, 120000);
+    var mytimeout = $timeout($scope.onTimeout, 600000);
 
 
 };
