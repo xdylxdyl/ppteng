@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<html ng-app="roomList">
+<html ng-app="">
 <head>
 <meta charset=utf-8">
 <title>LogIn</title>

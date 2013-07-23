@@ -1,9 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
-
-	
-    <link rel="stylesheet" href="/r/css/bootstrap.css">
-    <link rel="stylesheet" href="/r/css/room/style.css">
+<tiles:insertDefinition name="commonCSSImport" />
 <title>${room.name}-简化-捉鬼-葡萄藤轻游戏</title>
 
 <input type="hidden" id="uid" value="${uid}">

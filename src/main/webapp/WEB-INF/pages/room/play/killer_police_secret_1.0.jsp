@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-<link rel="stylesheet" href="/r/css/bootstrap.css">
-<link rel="stylesheet" href="/r/css/room/style.css">
+<tiles:insertDefinition name="commonCSSImport" />
 
 <title>${room.name}-警版不翻牌-葡萄藤轻游戏</title>
 

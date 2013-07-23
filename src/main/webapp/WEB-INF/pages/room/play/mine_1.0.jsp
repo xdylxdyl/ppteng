@@ -2,8 +2,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 <title>${room.name}-多人扫雷-葡萄藤轻游戏</title>
-<link rel="stylesheet" href="/r/css/bootstrap.css">
-<link rel="stylesheet" href="/r/css/room/style.css">
+<tiles:insertDefinition name="commonCSSImport" />
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/r/css/mine/mine.css?v=${frontVersion}">

@@ -3,7 +3,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@page contentType="text/html;charset=utf-8"%>
 <script type="text/javascript"
-	src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+	src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
 <script type="text/javascript"
 	src="/r/j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
 <script type="text/javascript"

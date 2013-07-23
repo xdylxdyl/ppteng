@@ -216,6 +216,8 @@
 
 	<!--commonJSImport -->
 	<definition name="commonJSImport" template="/WEB-INF/pages/common/commonJSImport.jsp" />
+	<!--commonCSSImport -->
+	<definition name="commonCSSImport" template="/WEB-INF/pages/common/commonCSSImport.jsp" />
 
 	<!--carousel -->
 	<definition name="carousel" template="/WEB-INF/pages/room/index/img.jsp" />

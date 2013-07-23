@@ -7,7 +7,7 @@ var gameView = {
 $(document).ready(function () {
     timer = null;
     //左键
-    $("#inner div").live("click", function () {
+    $("#inner div").on("click", function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
         if ("living" == p.status || "ready" == p.status) {
             var divClass = $(this).attr("class");
@@ -30,7 +30,7 @@ $(document).ready(function () {
     });
 
 
-    $("#restart").live("click", function () {
+    $("#restart").on("click", function () {
         mineView.initMine();
         return false;
     });
@@ -122,7 +122,7 @@ $(document).ready(function () {
             //default mineSelect is 1.
             mineSettingView.updateSettingParameter(row, column, mine, true);
 
-            $("#mineSelect").live("change", function () {
+            $("#mineSelect").on("change", function () {
                 var level = $(this).children('option:selected').val();
                 switch (level) {
                     case "0":

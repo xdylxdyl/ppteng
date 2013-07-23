@@ -187,7 +187,7 @@ $(document).ready(function () {
     /*
      * 创建房间
      * */
-    $(".createCategory").live('click', function () {
+    $(".createCategory").on('click', function () {
         var v = $(this).attr("version");
         return createRoom(v);
     });

@@ -121,7 +121,7 @@ $(document).ready(function () {
 
         });
 
-        $("#replayButton").live("click", function () {
+        $("#replayButton").on("click", function () {
             recordFirstTime = null;
             recordSecondTime = null;
             msg_interval = null;
@@ -138,7 +138,7 @@ $(document).ready(function () {
         });
 
 
-        $("#displayRole").live("click", function () {
+        $("#displayRole").on("click", function () {
 
             if (controlView.isShow()) {
                 $("#" + selects.$playerRole).show();
@@ -153,7 +153,7 @@ $(document).ready(function () {
         });
 
 
-        $("#" + selects.$gameArea + " p").live("dblclick", function () {
+        $("#" + selects.$gameArea + " p").on("dblclick", function () {
 
             roomService.appendContent.call(this);
             return false;
@@ -166,7 +166,7 @@ $(document).ready(function () {
             globalView.showPlayerList('#sidebar-toggle');
         });
 
-        $('[href][auto-bottom]').live("click", function () {
+        $('[href][auto-bottom]').on("click", function () {
             var linkID = $(this).attr("href");
             viewUtil.autoBottom($(linkID));
         })

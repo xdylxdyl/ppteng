@@ -43,22 +43,22 @@ $(function () {
 });
 
 
-$("#expression li").live("click", function () {
+$("#expression li").on("click", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     return false;
 })
-$("#color li").live("click", function () {
+$("#color li").on("click", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     return false;
 })
-$("#command li").live("click", function () {
+$("#command li").on("click", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     var command = controlView.getCommandValue();
     var playList = playerService.getAllPlayer();
     controlView.filterObject(command, playList);
     return false;
 })
-$("#object li").live("click", function () {
+$("#object li").on("click", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     if (controlView.checkSayNotEmpty()) {
 

@@ -67,7 +67,7 @@ var settingView = {
             versionFunction["initSetting"]()
         }
 
-        $("#autoSettingCheckBox").live("click", function () {
+        $("#autoSettingCheckBox").on("click", function () {
 
             if (settingView.getAutoSetting()) {
                 settingView.autoSetting(true);

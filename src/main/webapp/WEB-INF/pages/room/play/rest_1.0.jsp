@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-<link rel="stylesheet" href="/r/css/bootstrap.css">
-<link rel="stylesheet" href="/r/css/room/style.css">
+<tiles:insertDefinition name="commonCSSImport" />
 
 <title>${room.name}-休息室-葡萄藤轻游戏</title>
 
@@ -176,7 +175,7 @@
 
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
-
+<script src="/r/j-src/util/newsUtil.js?v=${frontVersion}"></script>
 <script src="/r/j-src/game/rest/1.0/rest_1.0.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
