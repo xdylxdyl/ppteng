@@ -24,6 +24,10 @@
 						class="caret"></b>
 				</a>
 					<ul class="dropdown-menu" id="color">
+						<li data-default="#000000">
+							<div class="color-block" style="background: #000000"></div>
+							<a href="#" class="color-font">高级黑</a>
+						</li>
 
 					</ul></li>
 				<li class="dropup"><a href="#" id="select_command"
@@ -52,8 +56,8 @@
 						value="scroll" id="displayRole"> 隐藏角色
 				</label></li>
 				<li id="privateSayGroup" class="hide"><label for="privateSay"
-					class="checkbox"> <input type="checkbox" 
-						value="scroll" id="privateSay"> 私聊
+					class="checkbox"> <input type="checkbox" value="scroll"
+						id="privateSay"> 私聊
 				</label></li>
 				<li><span class="help-inline" id="countDown">04:00</span></li>
 
@@ -91,6 +95,10 @@
 		</div>
 	</div>
 </div>
+
+
+<script
+	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
 
 
 

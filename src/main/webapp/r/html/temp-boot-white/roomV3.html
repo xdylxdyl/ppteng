@@ -99,7 +99,7 @@
                         &nbsp;
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" id="color">
                         <li data-default="#000"><a href="#">color</a></li>
                         <li class="divider"></li>
                         <li data-default="#000">
@@ -177,7 +177,7 @@
 </div>
 </body>
 </html>
-<script type="text/javascript" src="../../j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="../../j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
 <script type="text/javascript" src="../../j-src/framework/bootstrap/bootstrap-tab.js"></script>
 <script type="text/javascript" src="../../j-src/framework/bootstrap/bootstrap-modal.js"></script>
@@ -185,7 +185,7 @@
 <script type="text/javascript" src="../../j-src/framework/kibo/kibo.js"></script><!--侦测键盘-->
 <script type="text/javascript" src="../../j-src/framework/audio/audio.min.js"></script>
 <script>
-    /*音乐播放器*/
+   /* *//*音乐播放器*//*
     $(function() {
         // Setup the player to autoplay the next track
         var a = audiojs.createAll({
@@ -211,7 +211,7 @@
             audio.load($('a', this).attr('data-src'));
             audio.play();
         });
-    });
+    });*/
 </script>
 
 <script type="text/javascript">
@@ -255,7 +255,7 @@
     function selectors(elem) {
         var $elem = $('#' + elem);
         var $menu = $elem.siblings('ul.dropdown-menu');
-        $menu.children('li').click(function() {
+       /*$menu.on('click','li',function() {
             var txt = $(this).text();//获取到li的文本值
             var val = $(this).attr('data-default');//获取到li的自定义属性
             $elem.find('span').text(txt);
@@ -265,12 +265,22 @@
                     color: val
                 })
             }
-        })
+        })*/
     }
     selectors('selectExpression');
     selectors('selectColor');
     selectors('selectOrder');
     selectors('selectObject');
+
+
+    $("#color").on("click","li",function () {
+        alert("success");
+        extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
+        return false;
+    })
+
+
+
 
 </script>
 

@@ -43,22 +43,24 @@ $(function () {
 });
 
 
-$("#expression li").on("click", function () {
+$("#expression").on("click","li", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     return false;
 })
-$("#color li").on("click", function () {
-    extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
+$("#color").on("click","li",function () {
+    var mid="select_" + $(this).parent().attr("id");
+    var did=$(this).parent().attr("id");
+    extracted.call(this, mid,did );
     return false;
 })
-$("#command li").on("click", function () {
+$("#command").on("click","li", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     var command = controlView.getCommandValue();
     var playList = playerService.getAllPlayer();
     controlView.filterObject(command, playList);
     return false;
 })
-$("#object li").on("click", function () {
+$("#object").on("click","li", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     if (controlView.checkSayNotEmpty()) {
 

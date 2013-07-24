@@ -527,13 +527,16 @@ $(document).ready(function () {
         },
         sendMineOperater:function (mo, rid, version) {
             var message = {
+                subject:globalView.getCurrentID(),
                 predict:mo.action,
                 object:mo.id,
                 where:rid,
-                version:version
+                version:version,
+                sendAt:jQuery.now()
             }
+            cometService.sendMessage(message);
 
-            return ajaxJson("/message/accept2?", "post", message, null, 5000, "html")
+           // return ajaxJson("/message/accept2?", "post", message, null, 5000, "html")
 
         },
         parseMessage:function (message) {
@@ -829,8 +832,8 @@ var s = {
     wrongClass:'wrong',
     uMineClass:'umine',
     unsureClass:'unsure',
-    L_BUTTON:$.browser.msie ? 1 : 0,
-    R_BUTTON:$.browser.msie ? 0 : 2,
+    L_BUTTON: 0,
+    R_BUTTON: 2,
     firstClick:true,
     totalButton:'#total',
     resetButton:'#reset',
