@@ -911,13 +911,13 @@ var controlView = {
         var expressionStr = "  <li data-default='0'><a href='#'>神态</a></li> <li class='divider'></li>";
 
         for (var key in expression) {
-            expressionStr += "<li data-default='" + key + "'><a href=''#'>" + expression[key] + "</a></li>";
+            expressionStr += "<li data-default='" + key + "'><a href='#'>" + expression[key] + "</a></li>";
 
         }
 
 
         for (var key in userExpression) {
-            expressionStr += "<li data-default='" + key + "'><a href=''#'>" + userExpression[key] + "</a></li>";
+            expressionStr += "<li data-default='" + key + "'><a href='#'>" + userExpression[key] + "</a></li>";
         }
 
 

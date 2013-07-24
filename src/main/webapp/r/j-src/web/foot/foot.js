@@ -45,20 +45,22 @@ $(function () {
 
 $("#expression").on("click","li", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
-    return false;
+
+
 })
 $("#color").on("click","li",function () {
     var mid="select_" + $(this).parent().attr("id");
     var did=$(this).parent().attr("id");
     extracted.call(this, mid,did );
-    return false;
+
+
 })
 $("#command").on("click","li", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     var command = controlView.getCommandValue();
     var playList = playerService.getAllPlayer();
     controlView.filterObject(command, playList);
-    return false;
+
 })
 $("#object").on("click","li", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
@@ -77,7 +79,7 @@ $("#object").on("click","li", function () {
 
         controlView.hintSay(content);
     }
-    return false;
+
 })
 
 
