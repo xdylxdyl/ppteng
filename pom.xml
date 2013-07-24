@@ -803,7 +803,10 @@
 
 
 				<configuration>
-					<contextPath>/</contextPath>
+					<webApp>
+						<contextPath>/</contextPath>
+					</webApp>
+
 					<scanIntervalSeconds>3</scanIntervalSeconds>
 					<scanTargetPatterns>
 						<scanTargetPattern>
