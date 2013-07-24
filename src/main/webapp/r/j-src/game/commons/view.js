@@ -514,10 +514,11 @@ var gameAreaView = {
         var name = player.name;
         var isDisplay = gameAreaView.isDisplayStage(player, first);
         var ptitle = gameAreaView.getPlayerTitle(player);
-        ptitle="["+ptitle+"]的"
+        ptitle="["+ptitle+"]的";
+        var animal="animated flip";
         if (isDisplay) {
             //只有房间是处在结束状态下才在游戏区显示消息
-            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】" + ptitle + "[" + name + "]" + action + "进入了房间</p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00' class='"+animal+"'>【系统消息】" + ptitle + "[" + name + "]" + action + "进入了房间</p>");
             viewUtil.autoBottom($("#" + selects.$gameArea));
         } else {
             //不显示

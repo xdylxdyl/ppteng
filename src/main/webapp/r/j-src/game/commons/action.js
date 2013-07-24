@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 
         //玩家动作：say, ready, start, kick, vote, kill
-        $("#" + selects.$sayInput).bind("keydown", function (event) {
+        $("#" + selects.$sayInput).on("keydown", function (event) {
 
             //发送内容违禁词过滤检查函数
             //TODO
@@ -54,7 +54,7 @@ $(document).ready(function () {
 
         }
 
-        $("#" + selects.$sayButton).bind("click", function (event) {
+        $("#" + selects.$sayButton).on("click", function (event) {
             if (controlView.isMute()) {
                 alert("嘘.现在不能说话.");
             }
@@ -65,7 +65,7 @@ $(document).ready(function () {
         });
 
 
-        $("#" + selects.$startButton).click(function () {
+        $("#" + selects.$startButton).on('click',function () {
             //检查准备人数是否合规则，否则return
 
             var count = versionFunction["readyCount"];
@@ -89,7 +89,7 @@ $(document).ready(function () {
             }
 
         });
-        $("#" + selects.$readyButton).click(function () {
+        $("#" + selects.$readyButton).on('click',function () {
             //检查准备人数是否合规则，否则return
             var message = controlView.getMessage();
             message.predict = "ready";
@@ -153,7 +153,7 @@ $(document).ready(function () {
         });
 
 
-        $("#" + selects.$gameArea + " p").on("dblclick", function () {
+        $("#" + selects.$gameArea).on("dblclick","p", function () {
 
             roomService.appendContent.call(this);
             return false;

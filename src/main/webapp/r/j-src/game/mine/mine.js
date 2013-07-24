@@ -7,7 +7,7 @@ var gameView = {
 $(document).ready(function () {
     timer = null;
     //左键
-    $("#inner div").on("click", function () {
+    $("#inner").on("click","div", function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
         if ("living" == p.status || "ready" == p.status) {
             var divClass = $(this).attr("class");
