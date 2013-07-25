@@ -52,11 +52,13 @@
 				<div class="span3">
 					<p>联系我们</p>
 					<p>xdylxdyl@163.com</p>
-				    <p>
-					<!--QQ邮件列表订阅嵌入代码-->
-					<a target="_blank" href="http://list.qq.com/cgi-bin/qf_invite?id=7c386592ccb3f0eef0cba4de0b960b11797ec3cf7d79daef">
-					<img alt="填写您的邮件地址，订阅我们的精彩内容：" border="0" src="http://rescdn.list.qq.com/zh_CN/htmledition/images/qunfa/manage/picMode_light_s.png"/>
-					</a>
+					<p>
+						<!--QQ邮件列表订阅嵌入代码-->
+						<a target="_blank"
+							href="http://list.qq.com/cgi-bin/qf_invite?id=7c386592ccb3f0eef0cba4de0b960b11797ec3cf7d79daef">
+							<img alt="填写您的邮件地址，订阅我们的精彩内容：" border="0"
+							src="http://rescdn.list.qq.com/zh_CN/htmledition/images/qunfa/manage/picMode_light_s.png" />
+						</a>
 					</p>
 					<p>
 						<a target="_blank"
@@ -65,12 +67,12 @@
 							src="http://wpa.qq.com/imgd?IDKEY=8971a9b0581ad8da3c8686766f8f9c69b8f587e5fa00eb0f&pic=41"
 							alt="给葡萄藤发消息" title="联系站长"></a>
 					</p>
-									
+
 				</div>
-                <div class="span3">
-                    <p>扫下二维码记住我们</p>
-                    <img src="/r/img/qrcode.png" alt="葡萄藤二维码">
-                </div>
+				<div class="span3">
+					<p>扫下二维码记住我们</p>
+					<img src="/r/img/qrcode.png" alt="葡萄藤二维码">
+				</div>
 
 			</div>
 
@@ -84,10 +86,16 @@
 					language="JavaScript"></script>
 			</p> -->
 			<p>
+
 				<script type="text/javascript">
-        var _bdhmProtocol = (("https:" == document.location.protocol)? " https://" : " http://");
-        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F79c744d26f2bde0fbda0f22eecb8437f' type='text/javascript'%3E%3C/script%3E"));
-        </script>
+					var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://"
+							: " http://");
+					document
+							.write(unescape("%3Cscript src='"
+									+ _bdhmProtocol
+									+ "hm.baidu.com/h.js%3F2ad0d8640151fdb8fb079b96123b23eb' type='text/javascript'%3E%3C/script%3E"));
+				</script>
+
 			</p>
 		</div>
 
@@ -97,11 +105,20 @@
 			<p>非常抱歉,请使用以下浏览器访问本站</p>
 			<p>
 			<ul>
-				<li><p><a href="http://www.firefox.com.cn/download/" target="_blank">FireFox</a></p></li>
-				<li><p><a href="http://dl.pconline.com.cn/download/51614.html" target="_blank">Chrome</a></p></li>
-				<li><p><a href="http://ie.sogou.com/" target="_blank">Sogou(高速模式)</a></p></li>
-				<li><p><a href="http://chrome.360.cn/" target="_blank">360极速浏览器(闪电模式)</a></p></li>
-			</ul>			
+				<li><p>
+						<a href="http://www.firefox.com.cn/download/" target="_blank">FireFox</a>
+					</p></li>
+				<li><p>
+						<a href="http://dl.pconline.com.cn/download/51614.html"
+							target="_blank">Chrome</a>
+					</p></li>
+				<li><p>
+						<a href="http://ie.sogou.com/" target="_blank">Sogou(高速模式)</a>
+					</p></li>
+				<li><p>
+						<a href="http://chrome.360.cn/" target="_blank">360极速浏览器(闪电模式)</a>
+					</p></li>
+			</ul>
 
 			</p>
 			<p>
