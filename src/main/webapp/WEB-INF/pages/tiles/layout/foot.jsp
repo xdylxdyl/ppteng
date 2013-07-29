@@ -24,10 +24,7 @@
 						class="caret"></b>
 				</a>
 					<ul class="dropdown-menu" id="color">
-						<li data-default="#000000">
-							<div class="color-block" style="background: #000000"></div>
-							<a href="#" class="color-font">高级黑</a>
-						</li>
+					
 
 					</ul></li>
 				<li class="dropup"><a href="#" id="select_command"

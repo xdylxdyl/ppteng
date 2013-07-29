@@ -9,7 +9,7 @@
 </style>
 
 
-<div class="span9">
+<div class="span9" style="height:35em;overflow:auto">
 <div id="altContent">
 	<h1>美图秀秀</h1>
 </div>

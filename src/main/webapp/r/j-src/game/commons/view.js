@@ -155,12 +155,8 @@ var settingView = {
 
     },
     getAutoSetting:function () {
-        if ($("#autoSettingCheckBox").attr("checked") == "checked") {
-            return true;
-        } else {
-            return false;
-        }
-        ;
+
+        return $("#autoSettingCheckBox").prop("checked");
     },
     getDefaultAutoSetting:function () {
         if ($("#autoSetting").val() == "true") {
@@ -514,11 +510,11 @@ var gameAreaView = {
         var name = player.name;
         var isDisplay = gameAreaView.isDisplayStage(player, first);
         var ptitle = gameAreaView.getPlayerTitle(player);
-        ptitle="["+ptitle+"]的";
-        var animal="animated flip";
+        ptitle = "[" + ptitle + "]的";
+        var animal = "animated flip";
         if (isDisplay) {
             //只有房间是处在结束状态下才在游戏区显示消息
-            $("#" + selects.$gameArea).append("<p style='color:#F00' class='"+animal+"'>【系统消息】" + ptitle + "[" + name + "]" + action + "进入了房间</p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00' class='" + animal + "'>【系统消息】" + ptitle + "[" + name + "]" + action + "进入了房间</p>");
             viewUtil.autoBottom($("#" + selects.$gameArea));
         } else {
             //不显示
@@ -535,40 +531,40 @@ var gameAreaView = {
     getPlayerLever:function (money) {
 
 
-        var unit=10000;
+        var unit = 10000;
         //2万
-        if (money < 2*unit) {
+        if (money < 2 * unit) {
             return 1;
         }
         //10万
-        if (money < 10*unit) {
+        if (money < 10 * unit) {
             return 2;
         }
         //50万
-        if (money < 50*unit) {
+        if (money < 50 * unit) {
             return 3;
         }
         //100万
-        if (money < 100*unit) {
+        if (money < 100 * unit) {
             return 4;
         }
         //200万
-        if (money < 200*unit) {
+        if (money < 200 * unit) {
             return 5;
         }//500万
-        if (money < 500*unit) {
+        if (money < 500 * unit) {
             return 6;
         }
         //1000万
-        if (money < 1000*unit) {
+        if (money < 1000 * unit) {
             return 7;
         }
         //5000万
-        if (money < 5000*unit) {
+        if (money < 5000 * unit) {
             return 8;
         }
         //一个亿
-        if (money < 10000*unit) {
+        if (money < 10000 * unit) {
             return 9;
         }
 
@@ -1016,14 +1012,17 @@ var controlView = {
         alert("内容不能为空！请输入内容重新发送");
     },
     isShow:function () {
-        return $("#displayRole").attr("checked");
+        return $("#displayRole").prop("checked");
 
     },
     getAutoRoll:function () {
-        return $("#" + selects.$checkBox).attr("checked");
+        var result = $("#" + selects.$checkBox).prop("checked");
+
+        return result;
     },
     getPrivateSay:function () {
-        return $("#" + selects.$privateSay).attr("checked");
+        return $("#" + selects.$privateSay).prop("checked");
+
     },
     getSayInput:function () {
         return $("#sayInput").val();

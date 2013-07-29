@@ -159,9 +159,6 @@
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
 
-<script
-	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
-	
 
 
 
