@@ -48,7 +48,7 @@ $(function () {
     audio.load(first);
 
     // Load in a track on click
-    $('ol li').on("click",function (e) {
+    $('ol').on("click","li",function (e) {
         e.preventDefault();
         $(this).addClass('playing').siblings().removeClass('playing');
         audio.load($('a', this).attr('data-src'));
