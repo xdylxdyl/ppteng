@@ -20,7 +20,8 @@
                 <p> 这是葡萄藤.</p>
 
 
-                <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5" class="btn btn-primary btn-large" target="_blank">Learn more &raquo;</a></p>
+           
+                <p><a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=98&extra=page%3D1" class="btn btn-primary btn-large" target="_blank">新手入门 &raquo;</a></p>
             </div>
             <div class="row-fluid">
                 <div class="span6">
