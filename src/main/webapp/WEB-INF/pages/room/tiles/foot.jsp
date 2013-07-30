@@ -109,7 +109,7 @@
 						<a href="http://www.firefox.com.cn/download/" target="_blank">FireFox</a>
 					</p></li>
 				<li><p>
-						<a href="http://dl.pconline.com.cn/download/51614.html"
+						<a href="http://www.google.cn/intl/zh-CN/chrome/"
 							target="_blank">Chrome</a>
 					</p></li>
 				<li><p>

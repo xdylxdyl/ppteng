@@ -289,6 +289,12 @@ var ghostQuestionController = {
 
     say:function (message) {
 
+        //1.get content from message
+
+        //2.get place from message
+
+        //3.show content at place
+
         var p = playerService.getPlayer(message.subject);
         ghostView.say(message.subject, p.name, message.content, message.expression, message.color, message.object, "");
 
