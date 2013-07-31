@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -194,6 +195,17 @@ public class MoneyController {
 
         model.addAttribute("current", user);
     	return "/room/financial/trade";
+	}
+	
+	
+
+	
+	@RequestMapping(value = "/financial/{type}")
+	public String finanical(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, @PathVariable String type)
+			throws Exception {
+
+		return "/room/financial/" + type;
 	}
 
 }
