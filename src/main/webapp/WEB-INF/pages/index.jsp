@@ -3,7 +3,7 @@
 <HTML>
 <HEAD>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<script src="/resource/jquery.js"></script>
+
 
 <script type="text/javascript">
 	function displayMsg(msg) {

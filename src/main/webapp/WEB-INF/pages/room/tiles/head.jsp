@@ -64,8 +64,8 @@
 	</div>
 </div>
 
-
-<script type="text/javascript" src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript"
+	src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 

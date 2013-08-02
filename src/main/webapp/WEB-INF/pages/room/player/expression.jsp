@@ -53,7 +53,7 @@
 	</c:choose>
     </div>
     
-    <script type="text/javascript" src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+
 <script type="text/javascript" src="/r/j-src/framework/jquery/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/r/j-src/framework/tagit/tag-it.js"></script>
 <script
