@@ -1,6 +1,6 @@
-var gameView={
-    hideDieArea:function(){
-        
+var gameView = {
+    hideDieArea:function () {
+
     }
 }
 
@@ -27,8 +27,20 @@ $(document).ready(function () {
         getVideoAddress:function () {
             var r = ($("#视频地址").val());
             return r;
+        },
+        isVideoAddress:function () {
+            var r = videoSettingView.getVideoAddress();
+            var pattern = /swf$/;
+            if (r.match(pattern)) {
+
+            } else {
+                alert("请仔细查看网站分享内容,选择Flash格式,如果有问题.请联系站长~~");
+                e.preventDefault();
+            }
+
         }
     }
+
 
     var videoService = {
 
@@ -59,9 +71,9 @@ $(document).ready(function () {
         updateSetting:function (init) {
 
             var address = videoSettingView.getVideoAddress();
-            if(address==null|address==""){
+            if (address == null | address == "") {
 
-            }else{
+            } else {
                 videoView.setVideo(address);
             }
 
@@ -72,10 +84,10 @@ $(document).ready(function () {
                 alert("亲爱的管理员已经更改视频了~");
             }
         },
-        init:function(){
+        init:function () {
             gameAreaView.systemMessage("【系统消息】亲爱的朋友,欢迎您来到" +
                 "<a href='http://bbs.ptteng.com/forum.php?mod=viewthread&tid=159' target='_blank''>葡萄藤电影院</a>" +
-                ",请保持安静,电影结束时,带好您的手机钱包和男朋友~" );
+                ",请保持安静,电影结束时,带好您的手机钱包和男朋友~");
             videoService.updateSetting(true);
 
             controlView.hideButton(selects.$readyButton);
@@ -87,7 +99,6 @@ $(document).ready(function () {
 
 
     }
-
 
 
     versionFunction = {
@@ -102,6 +113,10 @@ $(document).ready(function () {
 
 
     }
+
+    $("#setting_area").on("blur","input", function () {
+        videoSettingView.isVideoAddress();
+    })
 
 
 });
