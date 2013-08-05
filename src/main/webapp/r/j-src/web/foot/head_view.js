@@ -21,8 +21,8 @@ var headView = {
     },
     showSelf:function (link) {
 
-        var selfNode = " <li><a href='" + link.link + "'>" + link.name + "</a></li>";
-        $(selfNode).insertBefore($("#firstHead li:eq(0)"));
+        var selfNode = "<li><a href='" + link.link + "'>" + link.name + "</a></li>";
+        $("#firstHead li:eq(0)").before($(selfNode));
 
     }
 

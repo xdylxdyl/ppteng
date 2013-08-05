@@ -5,6 +5,15 @@
 
 
 
+var userInfo = function (id, name, icon, sign) {
+    return {
+        id:id,
+        name:name,
+        icon:icon,
+        sign:sign
+
+    }
+}
 
 
 var userEditView = function () {

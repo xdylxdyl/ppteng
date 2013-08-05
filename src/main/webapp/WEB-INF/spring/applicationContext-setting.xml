@@ -85,6 +85,8 @@
 				</entry>
 				<entry key="mineCount" value="10">
 				</entry>
+				<entry key="mineContent" value="">
+				</entry>
 				
 			</map>
 		</constructor-arg>
@@ -229,6 +231,8 @@
 				<entry key="columnCount" value="列数">
 				</entry>
 				<entry key="mineCount" value="雷数">
+				</entry>
+				<entry key="mineContent" value="雷图">
 				</entry>
 				<entry key="ghostCount" value="幽灵数">
 				</entry>
