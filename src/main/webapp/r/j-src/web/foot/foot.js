@@ -19,7 +19,7 @@ $('#inputText').focus(function () {
 function controlHeight() {
     var winH;
     if ($(window).height() <= 300) {
-        winH =  300;
+        winH = 300;
     } else {
         winH = $(window).height();
     }
@@ -37,53 +37,55 @@ function controlHeight() {
     });
 
 }
-$(function() {
+$(function () {
     controlHeight();
     $(window).resize(controlHeight);
 });
 
 
+$("#expression").on("click","li", function () {
+    extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
 
 
-$("#expression li").live("click", function () {
-    extracted.call(this,"select_"+$(this).parent().attr("id"),$(this).parent().attr("id"));
-    return false;
 })
-$("#color li").live("click", function () {
-    extracted.call(this,"select_"+$(this).parent().attr("id"),$(this).parent().attr("id"));
-    return false;
+$("#color").on("click","li",function () {
+    var mid="select_" + $(this).parent().attr("id");
+    var did=$(this).parent().attr("id");
+    extracted.call(this, mid,did );
+
+
 })
-$("#command li").live("click", function () {
-    extracted.call(this,"select_"+$(this).parent().attr("id"),$(this).parent().attr("id"));
-    var command =controlView.getCommandValue();
-    var playList=playerService.getAllPlayer();
-    controlView.filterObject(command,playList);
-    return false;
+$("#command").on("click","li", function () {
+    extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
+    var command = controlView.getCommandValue();
+    var playList = playerService.getAllPlayer();
+    controlView.filterObject(command, playList);
+
 })
-$("#object li").live("click", function () {
-    extracted.call(this,"select_"+$(this).parent().attr("id"),$(this).parent().attr("id"));
+$("#object").on("click","li", function () {
+    extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     if (controlView.checkSayNotEmpty()) {
 
-       } else {
+    } else {
 
-           var command =controlView.getCommandValue();
-           var content = hint[command];
-           if (content == null) {
-               content = versionFunction["commandHint"](command);
-           }
+        var command = controlView.getCommandValue();
+        var content = hint[command];
+        if (content == null) {
+            if (versionFunction["commandHint"]) {
+                content = versionFunction["commandHint"](command);
+            }
 
-           controlView.hintSay(content);
-       }
-    return false;
+        }
+
+        controlView.hintSay(content);
+    }
+
 })
 
 
-
-
-
-function extracted(mid,did) {
-     var txt = $(this).text();
-     var val = $(this).attr('data-default');
-     $("#"+mid).find('span').text(txt);
-     $("#"+did).attr('data-default', val);
- }
+function extracted(mid, did) {
+    var txt = $(this).text();
+    var val = $(this).attr('data-default');
+    $("#" + mid).find('span').text(txt);
+    $("#" + did).attr('data-default', val);
+}

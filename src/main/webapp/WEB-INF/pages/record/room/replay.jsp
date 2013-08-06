@@ -44,8 +44,7 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/r/c/room.css">
-<script
-	src="<%=request.getContextPath()%>/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
+
 <script
 	src="<%=request.getContextPath()%>/r/j-src/web/record/controller.js"></script>
 	

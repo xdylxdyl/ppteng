@@ -1,27 +1,6 @@
-var restModel = {
-    publicFeed:[],
-    privateFeed:[],
-    feedUrl:{
-        public:"/r/json/news.json?v="+jQuery.now(),
-        private:""
-    }
-
-}
 
 
-var restView = {
 
-    updatePublicFeed:function (feed) {
-        restModel.publicFeed = feed;
-
-        for (var f in feed) {
-
-            console.log(feed[f].title);
-
-        }
-    }
-
-}
 
 var restSettingView = {
     initSetting:function () {
@@ -88,37 +67,6 @@ var restService = {
 
 }
 
-
-
-
-
-
-app.filter('timeConvert', function() {
-    return function(value) {
-      return  new Date(value).toLocaleTimeString();
-
-
-
-    }
-  });
-
-
-
-function publicCtrl($scope, $timeout) {
-    $scope.publicFeed = [];
-    $scope.refresh = function() {
-           $scope.publicFeed = restService.getPublicFeed();
-       };
-    $scope.onTimeout = function(){
-            $scope.publicFeed = restService.getPublicFeed()
-            mytimeout = $timeout($scope.onTimeout,120000);
-        }
-      var mytimeout = $timeout($scope.onTimeout,120000);
-
-
-
-
-};
 
 
 

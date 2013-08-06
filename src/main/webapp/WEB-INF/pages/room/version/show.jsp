@@ -21,7 +21,7 @@
 <c:when test="${'ghost_simple_1.0'==version}">
 捉鬼[简化][测试版]
 </c:when>
-<c:when test="${'ghost_question_1.0'==version}">
+<c:when test="${'ghost_question_2.0'==version}">
 捉鬼[猜词版][测试版]
 </c:when>
 <c:when test="${'ghost_soul_1.0'==version}">

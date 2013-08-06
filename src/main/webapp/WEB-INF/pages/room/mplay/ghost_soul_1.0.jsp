@@ -117,7 +117,7 @@
 <tiles:insertDefinition name="commonJSImport" />
 <script type="text/javascript"
 	src="/r/j-src/framework/audio/audio.min.js"></script>
-<script src="/r/j-src/framework/angular/angular.min.js"></script>
+
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
 
@@ -139,10 +139,6 @@
 	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
-
-<script
-	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
-
 
 
 

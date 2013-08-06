@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gemantic.common.util.FileUtil;
 import com.gemantic.common.util.MyListUtil;
 import com.gemantic.common.util.http.cookie.CookieUtil;
 import com.gemantic.killer.model.Room;
@@ -25,6 +26,9 @@ import com.gemantic.labs.killer.model.SimpleStatistics;
 import com.gemantic.labs.killer.model.Users;
 import com.gemantic.labs.killer.service.SimpleStatisticsService;
 import com.gemantic.labs.killer.service.UsersService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * 提供游戏房间的创建,删除,玩家列表等功能
@@ -56,7 +60,9 @@ public class GameController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/index")
-	public String index(HttpServletRequest request, HttpServletResponse response, ModelMap model, Integer code) throws Exception {
+	public String index(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, Integer code)
+			throws Exception {
 
 		if (code == null) {
 			code = 0;
@@ -71,7 +77,9 @@ public class GameController {
 				model.addAttribute("user", user);
 				boolean isPunch = PunchUtil.isPunched(user);
 				if (isPunch) {
-					int punchCount = PunchUtil.getLatestContinueDay(PunchUtil.Punch_Time_Start, Integer.MAX_VALUE, PunchUtil.Punch_Time_Start, user.getPunch());
+					int punchCount = PunchUtil.getLatestContinueDay(
+							PunchUtil.Punch_Time_Start, Integer.MAX_VALUE,
+							PunchUtil.Punch_Time_Start, user.getPunch());
 					model.addAttribute("punchCount", punchCount);
 				} else {
 
@@ -83,10 +91,14 @@ public class GameController {
 		Integer count = this.userService.getTotalCount();
 		log.info("======================");
 
-		List<Long> userIDS = simpleStatisticsService.getSimpleStatisticsIDSByQuery("killerWin", "killer", "desc", 0,3);
-		List<SimpleStatistics> statistics = this.simpleStatisticsService.getObjectsByIds(userIDS);
+		List<Long> userIDS = simpleStatisticsService
+				.getSimpleStatisticsIDSByQuery("killerWin", "killer", "desc",
+						0, 3);
+		List<SimpleStatistics> statistics = this.simpleStatisticsService
+				.getObjectsByIds(userIDS);
 		List<User> users = this.userService.getObjectsByIds(userIDS);
-		Map<Long, User> id_users = MyListUtil.convert2Map(User.class.getDeclaredField("id"), users);
+		Map<Long, User> id_users = MyListUtil.convert2Map(
+				User.class.getDeclaredField("id"), users);
 
 		model.addAttribute("id_users", id_users);
 		model.addAttribute("statisticsList", statistics);
@@ -107,7 +119,9 @@ public class GameController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/game/ready")
-	public String createQuestion(HttpServletRequest request, HttpServletResponse response, ModelMap model, @RequestParam Long roomID) throws Exception {
+	public String createQuestion(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model,
+			@RequestParam Long roomID) throws Exception {
 		log.debug("start get room list ");
 
 		List<Room> rooms = roomService.getList();
@@ -125,7 +139,9 @@ public class GameController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/game/start")
-	public String createRoom(HttpServletRequest request, HttpServletResponse response, ModelMap model, String name) throws Exception {
+	public String createRoom(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, String name)
+			throws Exception {
 		log.debug("HI");
 		model.addAttribute("name", name);
 
@@ -142,7 +158,9 @@ public class GameController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/about")
-	public String about(HttpServletRequest request, HttpServletResponse response, ModelMap model, String type) throws Exception {
+	public String about(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, String type)
+			throws Exception {
 
 		return "/room/about/" + type;
 	}
@@ -157,8 +175,11 @@ public class GameController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/tool/{type}")
-	public String tool(HttpServletRequest request, HttpServletResponse response, ModelMap model, @PathVariable String type) throws Exception {
+	public String tool(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model,
+			@PathVariable String type) throws Exception {
 
+		
 		return "/room/tool/" + type;
 	}
 

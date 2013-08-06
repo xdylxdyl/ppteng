@@ -67,7 +67,7 @@ var settingView = {
             versionFunction["initSetting"]()
         }
 
-        $("#autoSettingCheckBox").live("click", function () {
+        $("#autoSettingCheckBox").on("click", function () {
 
             if (settingView.getAutoSetting()) {
                 settingView.autoSetting(true);
@@ -155,12 +155,8 @@ var settingView = {
 
     },
     getAutoSetting:function () {
-        if ($("#autoSettingCheckBox").attr("checked") == "checked") {
-            return true;
-        } else {
-            return false;
-        }
-        ;
+
+        return $("#autoSettingCheckBox").prop("checked");
     },
     getDefaultAutoSetting:function () {
         if ($("#autoSetting").val() == "true") {
@@ -513,14 +509,67 @@ var gameAreaView = {
 
         var name = player.name;
         var isDisplay = gameAreaView.isDisplayStage(player, first);
+        var ptitle = gameAreaView.getPlayerTitle(player);
+        ptitle = "[" + ptitle + "]的";
+        var animal = "animated flip";
         if (isDisplay) {
             //只有房间是处在结束状态下才在游戏区显示消息
-            $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】[" + name + "]" + action + "进入了房间</p>");
+            $("#" + selects.$gameArea).append("<p style='color:#F00' class='" + animal + "'>【系统消息】" + ptitle + "[" + name + "]" + action + "进入了房间</p>");
             viewUtil.autoBottom($("#" + selects.$gameArea));
         } else {
             //不显示
 
         }
+
+    },
+    getPlayerTitle:function (player) {
+        var money = player.money;
+        var level = gameAreaView.getPlayerLever(money);
+        return ptitle[level];
+
+    },
+    getPlayerLever:function (money) {
+
+
+        var unit = 10000;
+        //2万
+        if (money < 2 * unit) {
+            return 1;
+        }
+        //10万
+        if (money < 10 * unit) {
+            return 2;
+        }
+        //50万
+        if (money < 50 * unit) {
+            return 3;
+        }
+        //100万
+        if (money < 100 * unit) {
+            return 4;
+        }
+        //200万
+        if (money < 200 * unit) {
+            return 5;
+        }//500万
+        if (money < 500 * unit) {
+            return 6;
+        }
+        //1000万
+        if (money < 1000 * unit) {
+            return 7;
+        }
+        //5000万
+        if (money < 5000 * unit) {
+            return 8;
+        }
+        //一个亿
+        if (money < 10000 * unit) {
+            return 9;
+        }
+
+        return 10
+
 
     },
     isDisplayStage:function (player, first) {
@@ -572,14 +621,27 @@ var gameAreaView = {
         $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 " + name + "被一脚踢出了房间。</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
     },
-    say:function (id, name, content, exp, color, subject, subjectName, time) {
+    say:function (id, name, content, exp, color, object, objectName, time, privateContent, playAction) {
         var express = controlView.showExpression(exp);
         var obj = "";
 
-        var player = playerService.getPlayer(id);
+        if (object != "-500") {
+            obj = "对[" + objectName + "]";
+        }
+        var preStr = "";
+        if ("true" == privateContent) {
+            preStr = "[密]";
+        }
 
+        var action = " 说：";
 
-        $("#" + selects.$gameArea).append("<p  title='" + timeUtil.time2String(time) + "' style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>");
+        if (playAction == "say") {
+
+        } else {
+            action = " ";
+        }
+
+        $("#" + selects.$gameArea).append("<p  title='" + timeUtil.time2String(time) + "' style='color:" + color + "'>" + preStr + "[" + name + "] " + express + obj + action + content + "</p>");
         viewUtil.autoBottom($("#" + selects.$gameArea));
 
 
@@ -593,6 +655,11 @@ var gameAreaView = {
         alert("click me");
         return  $(this).html();
 
+    },
+    playAction:function (message) {
+        if (PlayerAction[message.content]) {
+            message.content = PlayerAction[message.content];
+        }
     }
 
 
@@ -620,10 +687,14 @@ var controlView = {
         return  $("#sayButton").prop("disabled");
     },
     showDelay:function (message) {
-        var t = jQuery.now() - message.time;
-        if (message.subject == globalView.getCurrentID()) {
-            $("#netSpeedHint").text("延迟:" + (jQuery.now() - message.time) + "毫秒");
+        if (message.sendAt) {
+
+            var t = jQuery.now() - message.sendAt;
+            if (message.subject == globalView.getCurrentID()) {
+                $("#netSpeedHint").text("延迟:" + (t) + "毫秒");
+            }
         }
+
 
     },
     getMessage:function () {
@@ -643,12 +714,34 @@ var controlView = {
             "content":content,
             "isDrools":"true",
             "version":$("#version").val(),
-            "time":jQuery.now()
+            "sendAt":jQuery.now(),
+            "accepts":[],
+            "privateContent":"false"
         };
-        if ("topic" == message.predict) {
-            //只发给自己
-            message.object = message.subject;
+        switch (message.predict) {
+            case "topic":
+                //只发给自己
+                message.object = message.subject;
+                break;
+            case "say":
+                if ("-500" != message.object) {
+                    if (controlView.getPrivateSay()) {
+                        message.accepts.push(message.object);
+                        if (message.object == message.subject) {
+
+                        } else {
+                            message.accepts.push(message.subject);
+                        }
+                        message.privateContent = "true";
+                    }
+
+                }
+
+                break;
+            default :
+
         }
+
 
         return message;
     },
@@ -814,13 +907,13 @@ var controlView = {
         var expressionStr = "  <li data-default='0'><a href='#'>神态</a></li> <li class='divider'></li>";
 
         for (var key in expression) {
-            expressionStr += "<li data-default='" + key + "'><a href=''#'>" + expression[key] + "</a></li>";
+            expressionStr += "<li data-default='" + key + "'><a href='#'>" + expression[key] + "</a></li>";
 
         }
 
 
         for (var key in userExpression) {
-            expressionStr += "<li data-default='" + key + "'><a href=''#'>" + userExpression[key] + "</a></li>";
+            expressionStr += "<li data-default='" + key + "'><a href='#'>" + userExpression[key] + "</a></li>";
         }
 
 
@@ -842,6 +935,10 @@ var controlView = {
         $("#color").empty().append(colorStr);
 
 
+    },
+    initObject:function () {
+        var playList = playerService.getAllPlayer();
+        controlView.filterObject("command", playList);
     },
     sortColor:function (a, b) {
         var a2 = a.value.substring(1, a.value.length);
@@ -915,11 +1012,17 @@ var controlView = {
         alert("内容不能为空！请输入内容重新发送");
     },
     isShow:function () {
-        return $("#displayRole").attr("checked");
+        return $("#displayRole").prop("checked");
 
     },
     getAutoRoll:function () {
-        return $("#" + selects.$checkBox).attr("checked");
+        var result = $("#" + selects.$checkBox).prop("checked");
+
+        return result;
+    },
+    getPrivateSay:function () {
+        return $("#" + selects.$privateSay).prop("checked");
+
     },
     getSayInput:function () {
         return $("#sayInput").val();
@@ -939,7 +1042,7 @@ var controlView = {
                 controlView.filterSingleObject("living", playerList);
                 break;
             case "command" :
-                controlView.filterSingleObject("none", playerList);
+                controlView.filterSingleObject("all", playerList);
                 break;
             default :
                 console.log("亲，这个指令你还没写嘛.,start version commandFilter");

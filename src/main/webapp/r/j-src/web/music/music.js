@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 /*音乐播放器*/
-var app = angular.module('myApp', []);
+
 
 
 var musicService = {
@@ -48,7 +48,7 @@ $(function () {
     audio.load(first);
 
     // Load in a track on click
-    $('ol li').live("click",function (e) {
+    $('ol').on("click","li",function (e) {
         e.preventDefault();
         $(this).addClass('playing').siblings().removeClass('playing');
         audio.load($('a', this).attr('data-src'));

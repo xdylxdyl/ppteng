@@ -176,6 +176,9 @@ public class RoomController {
 		// 进入房间,判断房间这些都是相同的
 
 		Room room = this.roomService.getRoom(rid);
+		if(room==null){
+			return "redirect:/m/list";
+		}
 		// 告诉MembService,有新用户加入了房间
 
 		Room oldRoom = this.memberService.getRoomOfUser(uid);

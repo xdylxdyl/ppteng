@@ -22,6 +22,10 @@
 				</a>
 					<ul class="dropdown-menu" id="color">
 
+						<li data-default="#000000">
+							<div class="color-block" style="background: #000000"></div> <a
+							href="#" class="color-font">高级黑</a>
+						</li>
 					</ul></li>
 				<li class="dropup"><a href="#" id="select_command"
 					data-default="" class="btn dropdown-toggle btn-small"
@@ -59,6 +63,10 @@
 						type="checkbox" checked="checked" value="scroll" id="checkBox">
 						滚屏
 				</label></li>
+				<li id="privateSayGroup" class="hide"><label for="privateSay"
+					class="checkbox"> <input type="checkbox" value="scroll"
+						id="privateSay"> 私聊
+				</label></li>
 				<li><span class="help-inline pull-right" id="countDown">04:00</span></li>
 
 
@@ -88,6 +96,7 @@
 </div>
 
 
-
+<script
+	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
 
 

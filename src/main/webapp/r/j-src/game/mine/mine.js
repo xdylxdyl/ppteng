@@ -7,7 +7,7 @@ var gameView = {
 $(document).ready(function () {
     timer = null;
     //左键
-    $("#inner div").live("click", function () {
+    $("#inner").on("click","div", function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
         if ("living" == p.status || "ready" == p.status) {
             var divClass = $(this).attr("class");
@@ -30,7 +30,7 @@ $(document).ready(function () {
     });
 
 
-    $("#restart").live("click", function () {
+    $("#restart").on("click", function () {
         mineView.initMine();
         return false;
     });
@@ -122,7 +122,7 @@ $(document).ready(function () {
             //default mineSelect is 1.
             mineSettingView.updateSettingParameter(row, column, mine, true);
 
-            $("#mineSelect").live("change", function () {
+            $("#mineSelect").on("change", function () {
                 var level = $(this).children('option:selected').val();
                 switch (level) {
                     case "0":
@@ -527,13 +527,16 @@ $(document).ready(function () {
         },
         sendMineOperater:function (mo, rid, version) {
             var message = {
+                subject:globalView.getCurrentID(),
                 predict:mo.action,
                 object:mo.id,
                 where:rid,
-                version:version
+                version:version,
+                sendAt:jQuery.now()
             }
+            cometService.sendMessage(message);
 
-            return ajaxJson("/message/accept2?", "post", message, null, 5000, "html")
+           // return ajaxJson("/message/accept2?", "post", message, null, 5000, "html")
 
         },
         parseMessage:function (message) {
@@ -829,8 +832,8 @@ var s = {
     wrongClass:'wrong',
     uMineClass:'umine',
     unsureClass:'unsure',
-    L_BUTTON:$.browser.msie ? 1 : 0,
-    R_BUTTON:$.browser.msie ? 0 : 2,
+    L_BUTTON: 0,
+    R_BUTTON: 2,
     firstClick:true,
     totalButton:'#total',
     resetButton:'#reset',

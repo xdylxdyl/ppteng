@@ -3,7 +3,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@page contentType="text/html;charset=utf-8"%>
 <script type="text/javascript"
-	src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+	src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript"
 	src="/r/j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
 <script type="text/javascript"
@@ -13,7 +13,13 @@
 <script type="text/javascript"
 	src="/r/j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script>
+<script src="/r/j-src/framework/angular/angular.min.js"></script>
+
+
 <script type="text/javascript" src="/r/j-src/util/notify.js"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
 <script type="text/javascript" src="/r/j-src/util/webSocketUtil.js?v=${frontVersion}"></script>
+<script src="/r/j-src/util/newsUtil.js?v=${frontVersion}"></script>
+
+

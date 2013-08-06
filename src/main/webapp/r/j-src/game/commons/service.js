@@ -48,7 +48,7 @@ var recordService = {
 
         }
         index++;
-      //  console.log("next message will run after " + msg_interval);
+        //  console.log("next message will run after " + msg_interval);
         setTimeout(recordService.showMessage, msg_interval, index, messages, speed);
 
     }
@@ -83,14 +83,13 @@ var playerService = {
 
         for (var key in id_name) {
             var player = this.getPlayer(id_name[key]);
-            if(role==player.role){
+            if (role == player.role) {
                 result.push(player.name);
             }
 
         }
         return result;
     },
-
 
 
     updatePlayer:function (p) {
@@ -338,8 +337,8 @@ var roomService = {
         //由nameID获取真正name
         var name = this.getPerson(rid, uids);
         for (var j = 0; j < name.length; j++) {
-           // console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
-            var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
+            // console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
+            var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count, "", data[j].money);
             playerService.addPlayer(p.id, p);
             // playerListView.login(p);
 
@@ -363,7 +362,7 @@ var roomService = {
         //由nameID获取真正name
         var name = this.getRecordPerson(rid, uids);
         for (var j = 0; j < name.length; j++) {
-           // console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
+            // console.log(name[j].id + " : " + name[j].name + " : " + data[j].status);
             var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count);
             playerService.addPlayer(p.id, p);
             playerListView.login(p);
@@ -464,7 +463,6 @@ roomService.info = function () {
         var player = playerService.getPlayer(globalView.getCurrentID());
 
 
-
     }
 
     function person(data) {
@@ -545,7 +543,7 @@ var cometService = {
         cometUtil.polling(url, parse);
     },
     sendMessage:function (message) {
-        if(!webSocketUtil.isConnect()){
+        if (!webSocketUtil.isConnect()) {
             webSocketUtil.connect(globalView.getCurrentID());
         }
         lastMessageSendAt = jQuery.now();
@@ -555,7 +553,7 @@ var cometService = {
 
     },
     messageQ:function (msgObj) {
-      cometService.parseMessage(msgObj.message);
+        cometService.parseMessage(msgObj.message);
 
     },
 
@@ -578,7 +576,7 @@ var roomParseService = {
 
 
     branch:function (message) {
-       // console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
+        // console.log(message.subject + " " + message.predict + " " + message.object + " " + message.content + " " + message.where);
         var rid = globalView.getRoomID();
         var type = globalView.getRoomType();
         if (rid != message.where && "game" == type) {
@@ -623,7 +621,7 @@ var roomParseService = {
                 this.setting(message);
                 break;
             default:
-               // console.log("room parse over,start version parse");
+                // console.log("room parse over,start version parse");
                 versionFunction["parseMessage"](message);
         }
 
@@ -664,12 +662,24 @@ var roomParseService = {
 
         var status = globalView.getGameStatus();
         if ("over" == status) {
+
+            var playAction;
+            if (PlayerAction[message.content]) {
+                playAction = "";
+                message.content = PlayerAction[message.content];
+
+            } else {
+                playAction = "say"
+
+            }
             var name;
             if (message.object != -500) {
                 name = playerService.getPlayer(message.object).name;
             }
             gameAreaView.say(message.subject, playerService.getPlayer(message.subject).name, message.content, message.expression,
-                message.color, message.object, name,message.time);
+                message.color, message.object, name, message.time, message.privateContent, playAction);
+
+
         } else {
 
             versionFunction["say"](message);
@@ -709,13 +719,16 @@ var roomParseService = {
                     type:"GET",
                     dataType:'json',
                     url:"/player/info?rid=" + rid + "&uids=" + message.subject,
-                    async : false,
+                    async:false,
                     success:function (data) {
                         console.log(data);
                         var name = data.infos[0].name;
-                        var p = new player(id, name, playerStatus.unready, 0);
+                        var money = data.infos[0].money;
+                        var p = new player(id, name, playerStatus.unready, 0, "", money);
                         playerService.addPlayer(p.id, p);
-                        gameAreaView.login(p, message);
+
+
+                        gameAreaView.login(p, message, true);
                         playerListView.login(p);
 
                     },
@@ -723,6 +736,9 @@ var roomParseService = {
                         console.log("此人名字获取失败");
                     }
                 })
+
+                //9
+                controlView.initObject();
             } else {
 
                 var p = playerService.getPlayer(id);
@@ -737,6 +753,9 @@ var roomParseService = {
             gameAreaView.logout(p);
             playerListView.logout(p.id);
             playerService.deletePlayer(id);
+
+            //9
+            controlView.initObject();
 
 
         }

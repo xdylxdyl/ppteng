@@ -23,7 +23,7 @@
 		</div>
 		
 	</div>
-<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
+
 <script type="text/javascript"
 src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
 <script src="/r/j-src/game/commons/third.js?v=${frontVersion}"></script>

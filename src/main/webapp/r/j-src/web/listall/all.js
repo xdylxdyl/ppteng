@@ -103,19 +103,15 @@ function VersionConfigCtrl($scope) {
             title:"杀人游戏 警版不翻牌"
         },
         {
-            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLflqyXbUoAAeYwgwpoqQ586.jpg",
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLfr7O0rCtAAIoXr_bQgo287.jpg",
             version:"ghost_simple_1.0",
             title:"捉鬼游戏 简化版"
         },
-        {
-            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLc4ProN5QAAEtdgKHwiA797.jpg",
-            version:"ghost_question_1.0",
-            title:"捉鬼游戏 猜词版"
-        },
+
         {
                     img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLc4ProN5QAAEtdgKHwiA797.jpg",
                     version:"ghost_question_2.0",
-                    title:"捉鬼游戏 猜词版[优化内测版]"
+                    title:"捉鬼游戏 猜词版"
                 },
        /* {
             img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLfr7O0rCtAAIoXr_bQgo287.jpg",
@@ -191,7 +187,7 @@ $(document).ready(function () {
     /*
      * 创建房间
      * */
-    $(".createCategory").live('click', function () {
+    $(".createCategory").on('click', function () {
         var v = $(this).attr("version");
         return createRoom(v);
     });

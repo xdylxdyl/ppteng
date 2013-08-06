@@ -46,15 +46,10 @@
 <c:set var="versionDescription" value="规则简洁" scope="request"></c:set>
 <c:set var="version" value="ghost_simple_1.0" scope="request"></c:set>
 <tiles:insertDefinition name="roomSnapshot" />
-<!--猜词版-->
-<c:set var="versionTitle" value="[捉鬼游戏]猜词版" scope="request"></c:set>
-<c:set var="versionDescription" value="即便幽灵被推出局.也未必没有获胜的机会"
-	scope="request"></c:set>
-<c:set var="version" value="ghost_question_1.0" scope="request"></c:set>
-<tiles:insertDefinition name="roomSnapshot" />
+
 
 <!--猜词版-->
-<c:set var="versionTitle" value="[捉鬼游戏]猜词版[优化测试版]" scope="request"></c:set>
+<c:set var="versionTitle" value="[捉鬼游戏]猜词版" scope="request"></c:set>
 <c:set var="versionDescription" value="即便幽灵被推出局.也未必没有获胜的机会"
 	scope="request"></c:set>
 <c:set var="version" value="ghost_question_2.0" scope="request"></c:set>

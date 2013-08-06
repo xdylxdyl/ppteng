@@ -48,9 +48,9 @@
 
 <div class="pagination pagination-centered">
   <ul>
-    <li><a href="/record/list?page=${page-1}&size=${size}&uid=${uid}" id="pagePrev">Prev</a></li>   
-      <li class="active"><a href="/record/list?page=${page}&size=${size}&uid=${uid}">${page}</a></li>
-    <li><a href="/record/list?page=${page+1}&size=${size}&uid=${uid}" id="pageNext">Next</a></li>
+    <li><a href="/record/list?page=${page-1}&size=${size}&uid=${uid}&version=${version}" id="pagePrev">Prev</a></li>   
+      <li class="active"><a href="/record/list?page=${page}&size=${size}&uid=${uid}&version=${version}">${page}</a></li>
+    <li><a href="/record/list?page=${page+1}&size=${size}&uid=${uid}&version=${version}" id="pageNext">Next</a></li>
   </ul>
 </div>
 </div>

@@ -61,9 +61,7 @@ killGameAreaView = {
         checkPerson:function (killerName,exp,objName,content) {
            return  "<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "查证 [" + objName + "] 说 : " + content + " </p>";
         },
-        say:function (color, name, express, content) {
-            return  "<p  style='color:" + color + "'>[" + name + "] " + express  + " 说：" + content + "</p>"
-        },
+
         killerWin:function(recordLink){
           return "<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink;
         },
@@ -83,6 +81,12 @@ killGameAreaView = {
         }
 
 
+
+    },
+    View:{
+        say:function (color, name, express, content) {
+            return  "<p  style='color:" + color + "'>[" + name + "] " + express  + " 说：" + content + "</p>"
+        }
 
     },
 
@@ -182,11 +186,11 @@ killGameAreaView = {
 
         switch (place) {
             case "normal":
-                $("#" + selects.$gameArea).append(killGameAreaView.Hint.say(color, name, express, content));
+                $("#" + selects.$gameArea).append(killGameAreaView.View.say(color, name, express, content));
                 viewUtil.autoBottom($("#" + selects.$gameArea));
                 break;
             case "deadArea":
-                $("#" + selects.$dieArea).append(killGameAreaView.Hint.say(color, name, express, content));
+                $("#" + selects.$dieArea).append(killGameAreaView.View.say(color, name, express, content));
                 viewUtil.autoBottom($("#" + selects.$dieArea));
                 break;
             default:

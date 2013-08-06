@@ -104,8 +104,7 @@
 	</div>
 
 
-	<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
-	<script src="/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
+
 	<script src="/r/j-src/util/stringUtil.js?v=${frontVersion}"></script>
 	<script src="/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
 

@@ -24,7 +24,7 @@
 </div>
 <!-- container over  -->
     
-    <script type="text/javascript" src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+
  <script src="/r/j-src/framework/flotr2/flotr2.min.js"></script>
 <script src="/r/j-src/util/line.js?v=1.0"></script>
 <script src="/r/j-src/web/person/punchlist.js"></script>

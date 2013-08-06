@@ -19,7 +19,7 @@
 
 	<div id="push"></div>
 </div>
-<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
+
 <script
 	src="<%=request.getContextPath()%>/r/j-src/util/comet.js?v=${frontVersion}"></script>
 

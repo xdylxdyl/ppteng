@@ -215,7 +215,6 @@
 
 </body>
 
-<script src="/r/j-src/framework/jquery/jquery-1.6.1.js"></script>
 <script src="/r/j-src/web/listall/init.js"></script>
 <script src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js"></script>
 <!-- Le styles -->

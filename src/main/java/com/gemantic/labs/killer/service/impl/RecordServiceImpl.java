@@ -27,12 +27,11 @@ public class RecordServiceImpl implements RecordService {
 	@Autowired
 	private Dao dao;
 
-	
 	private String path = "record";
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	private static final Log log = LogFactory.getLog(RecordServiceImpl.class);
 
 	public Dao getDao() {
@@ -44,7 +43,8 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public Long insert(Records record) throws ServiceException, ServiceDaoException {
+	public Long insert(Records record) throws ServiceException,
+			ServiceDaoException {
 
 		if (log.isInfoEnabled()) {
 			log.info(" insert data : " + record);
@@ -73,10 +73,12 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public List<Records> insertList(List<Records> recordList) throws ServiceException, ServiceDaoException {
+	public List<Records> insertList(List<Records> recordList)
+			throws ServiceException, ServiceDaoException {
 
 		if (log.isInfoEnabled()) {
-			log.info(" insert lists : " + (recordList == null ? "null" : recordList.size()));
+			log.info(" insert lists : "
+					+ (recordList == null ? "null" : recordList.size()));
 		}
 		List<Records> resultList = null;
 
@@ -99,7 +101,8 @@ public class RecordServiceImpl implements RecordService {
 			throw new ServiceDaoException(e);
 		}
 		if (log.isInfoEnabled()) {
-			log.info(" insert lists  success : " + (resultList == null ? "null" : resultList.size()));
+			log.info(" insert lists  success : "
+					+ (resultList == null ? "null" : resultList.size()));
 		}
 		return resultList;
 
@@ -133,7 +136,8 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public boolean update(Records record) throws ServiceException, ServiceDaoException {
+	public boolean update(Records record) throws ServiceException,
+			ServiceDaoException {
 
 		log.info(" update data : " + (record == null ? "null" : record.getId()));
 
@@ -160,9 +164,11 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public boolean updateList(List<Records> recordList) throws ServiceException, ServiceDaoException {
+	public boolean updateList(List<Records> recordList)
+			throws ServiceException, ServiceDaoException {
 
-		log.info(" update lists : " + (recordList == null ? "null" : recordList.size()));
+		log.info(" update lists : "
+				+ (recordList == null ? "null" : recordList.size()));
 
 		boolean result = false;
 
@@ -190,11 +196,11 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public Records getObjectById(Long id) throws ServiceException, ServiceDaoException {
+	public Records getObjectById(Long id) throws ServiceException,
+			ServiceDaoException {
 
-		if (log.isInfoEnabled()) {
-			log.info(" get data : " + id);
-		}
+		log.info(" get data : " + id);
+
 		Records record = null;
 
 		if (id == null) {
@@ -216,7 +222,8 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public List<Records> getObjectsByIds(List<Long> ids) throws ServiceException, ServiceDaoException {
+	public List<Records> getObjectsByIds(List<Long> ids)
+			throws ServiceException, ServiceDaoException {
 
 		if (log.isInfoEnabled()) {
 			log.info(" get lists : " + (ids == null ? "null" : ids));
@@ -236,7 +243,8 @@ public class RecordServiceImpl implements RecordService {
 			throw new ServiceDaoException(e);
 		}
 		if (log.isInfoEnabled()) {
-			log.info(" get data success : " + (record == null ? "null" : record.size()));
+			log.info(" get data success : "
+					+ (record == null ? "null" : record.size()));
 		}
 		return record;
 	}
@@ -249,10 +257,12 @@ public class RecordServiceImpl implements RecordService {
 	 * @throws ServiceDaoException
 	 */
 	@Override
-	public List<Long> getRecordIdsByVersion(String version, Integer start, Integer limit) throws ServiceException, ServiceDaoException {
+	public List<Long> getRecordIdsByVersion(String version, Integer start,
+			Integer limit) throws ServiceException, ServiceDaoException {
 
 		if (log.isInfoEnabled()) {
-			log.info(" get ids by version,start,limit  : " + version + " , " + start + " , " + limit);
+			log.info(" get ids by version,start,limit  : " + version + " , "
+					+ start + " , " + limit);
 		}
 		List<Long> idList = null;
 
@@ -267,24 +277,30 @@ public class RecordServiceImpl implements RecordService {
 		}
 
 		try {
-			//idList = (List<Long>) dao.excuteSimpleSql("select id from records where version = "+version, Records.class);
-			idList = dao.getIdList("getRecordIdsByVersion", new Object[] { version }, start, limit, false);
+			// idList = (List<Long>)
+			// dao.excuteSimpleSql("select id from records where version = "+version,
+			// Records.class);
+			idList = dao.getIdList("getRecordIdsByVersion",
+					new Object[] { version }, start, limit, false);
 
 		} catch (DaoException e) {
-			log.error(" get ids  wrong by version,start,limit)  : " + version + " , " + start + " , " + limit);
+			log.error(" get ids  wrong by version,start,limit)  : " + version
+					+ " , " + start + " , " + limit);
 			log.error(e);
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
 		if (log.isInfoEnabled()) {
-			log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
+			log.info(" get ids success : "
+					+ (idList == null ? "null" : idList.size()));
 		}
 		return idList;
 
 	}
 
 	@Override
-	public List<Long> getList(Integer start, Integer limit) throws ServiceException, ServiceDaoException {
+	public List<Long> getList(Integer start, Integer limit)
+			throws ServiceException, ServiceDaoException {
 
 		if (log.isInfoEnabled()) {
 			log.info(" get all ids ,start,limit  :  " + start + " , " + limit);
@@ -302,32 +318,38 @@ public class RecordServiceImpl implements RecordService {
 		}
 
 		try {
-			//idList = (List<Long>) dao.excuteSimpleSql("select id from records where version = "+version, Records.class);
-			idList = dao.getIdList("getAll", new Object[] {  }, start, limit, false);
+			// idList = (List<Long>)
+			// dao.excuteSimpleSql("select id from records where version = "+version,
+			// Records.class);
+			idList = dao.getIdList("getAll", new Object[] {}, start, limit,
+					false);
 
 		} catch (DaoException e) {
-			log.error(" get ids  wrong by version,start,limit)  , " + start + " , " + limit);
+			log.error(" get ids  wrong by version,start,limit)  , " + start
+					+ " , " + limit);
 			log.error(e);
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
 		if (log.isInfoEnabled()) {
-			log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
+			log.info(" get ids success : "
+					+ (idList == null ? "null" : idList.size()));
 		}
 		return idList;
 
 	}
-	
+
 	@Override
-	public List<String> getContent(Long recordID) throws ServiceException, ServiceDaoException {
+	public List<String> getContent(Long recordID) throws ServiceException,
+			ServiceDaoException {
 		try {
-			
-			Records r=this.getObjectById(recordID);
-			if(r==null){
+
+			Records r = this.getObjectById(recordID);
+			if (r == null) {
 				return new ArrayList();
 			}
-			List<String> lines = FileUtil.readFileAsList(r.getPath(),"utf-8");
-		
+			List<String> lines = FileUtil.readFileAsList(r.getPath(), "utf-8");
+
 			return lines;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -337,8 +359,9 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public List<Long> getRecordIdsByVersionAndCreateAt(String version, Long createAt, Integer start, Integer limit) throws ServiceException,
-			ServiceDaoException {
+	public List<Long> getRecordIdsByVersionAndCreateAt(String version,
+			Long createAt, Integer start, Integer limit)
+			throws ServiceException, ServiceDaoException {
 		if (log.isInfoEnabled()) {
 			log.info(" get all ids ,start,limit  :  " + start + " , " + limit);
 		}
@@ -355,20 +378,26 @@ public class RecordServiceImpl implements RecordService {
 		}
 
 		try {
-			//idList = (List<Long>) dao.excuteSimpleSql("select id from records where version = "+version, Records.class);
-			idList = dao.getIdList("getRecordIdsByVersionAndCreateAt", new Object[] { version,createAt,createAt+24*60*60*1000L }, start, limit, false);
+			// idList = (List<Long>)
+			// dao.excuteSimpleSql("select id from records where version = "+version,
+			// Records.class);
+			idList = dao.getIdList("getRecordIdsByVersionAndCreateAt",
+					new Object[] { version, createAt,
+							createAt + 24 * 60 * 60 * 1000L }, start, limit,
+					false);
 
 		} catch (DaoException e) {
-			log.error(" get ids  wrong by version,start,limit)  , " + start + " , " + limit);
+			log.error(" get ids  wrong by version,start,limit)  , " + start
+					+ " , " + limit);
 			log.error(e);
 			e.printStackTrace();
 			throw new ServiceDaoException(e);
 		}
 		if (log.isInfoEnabled()) {
-			log.info(" get ids success : " + (idList == null ? "null" : idList.size()));
+			log.info(" get ids success : "
+					+ (idList == null ? "null" : idList.size()));
 		}
 		return idList;
 	}
-
 
 }

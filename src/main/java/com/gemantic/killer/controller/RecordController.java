@@ -100,6 +100,7 @@ public class RecordController {
 			size = 20;
 		}
 		Integer start = (page - 1) * size;
+	
 
 		List<Records> records = this.getRecords(version, uid, start, size);
 
@@ -157,6 +158,9 @@ public class RecordController {
 				ids = recordService.getList(start, size);
 
 			} else {
+				if(version.contains(".0")){
+					version=version.replace(".0", "");
+				}
 				ids = recordService.getRecordIdsByVersion(version + ".0",
 						start, size);
 			}

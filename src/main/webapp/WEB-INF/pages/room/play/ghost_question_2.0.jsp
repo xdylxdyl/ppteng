@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-<link rel="stylesheet" href="/r/css/bootstrap.css">
-<link rel="stylesheet" href="/r/css/room/style.css">
+<tiles:insertDefinition name="commonCSSImport" />
 
 <title>${room.name}-猜词-捉鬼-葡萄藤轻游戏</title>
 
@@ -43,7 +42,7 @@
 
 				<div class="tabbable">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
+						<li class="active"><a href="#game_area" data-toggle="tab" auto-bottom>游戏</a></li>
 						<li><a href="#description_area" data-toggle="tab">描述</a></li>
 						<li><a href="#setting_area" data-toggle="tab">设置</a></li>
 						<li><a href="#music_area" data-toggle="tab">音乐</a></li>
@@ -141,7 +140,7 @@
 
 <script type="text/javascript"
 	src="/r/j-src/framework/audio/audio.min.js"></script>
-<script src="/r/j-src/framework/angular/angular.min.js"></script>
+
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
 
@@ -163,9 +162,5 @@
 	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
-
-<script
-	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
-
 
 

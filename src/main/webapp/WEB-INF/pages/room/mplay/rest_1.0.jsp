@@ -29,7 +29,7 @@
 
 		<ul class="nav nav-tabs">
 			<li><a href="#player_list" data-toggle="tab">玩家</a></li>
-			<li class="active"><a href="#game_area" data-toggle="tab">茶馆闲聊</a></li>
+			<li class="active"><a href="#game_area" data-toggle="tab" auto-bottom>茶馆闲聊</a></li>
 			<li><a href="#rest_public" data-toggle="tab">精选</a></li>
 
 			<li><a href="#music_area" data-toggle="tab">音乐</a></li>
@@ -142,8 +142,8 @@
 
 <script type="text/javascript"
 	src="/r/j-src/framework/audio/audio.min.js"></script>
-<script src="/r/j-src/framework/angular/angular.min.js"></script>
 
+<script src="/r/j-src/util/newsUtil.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
 
@@ -165,8 +165,7 @@
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
 
-<script
-	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
+
 
 
 

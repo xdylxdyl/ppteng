@@ -29,10 +29,10 @@
 
 	<div class="tabbable">
 		<ul class="nav nav-tabs">
-			<li><a href="#player_list" data-toggle="tab">玩家</a></li>
-			<li class="active"><a href="#game_area" data-toggle="tab">游戏</a></li>
+			<li><a href="#player_list" data-toggle="tab" >玩家</a></li>
+			<li class="active"><a href="#game_area" data-toggle="tab" auto-bottom>游戏</a></li>
 			<li><a href="#description_area" data-toggle="tab">描述</a></li>
-			<li class=""><a href="#die_area" data-toggle="tab">亡灵</a></li>
+			<li class=""><a href="#die_area" data-toggle="tab" auto-bottom>亡灵</a></li>
 
 			<li><a href="#setting_area" data-toggle="tab">设置</a></li>
 			<li><a href="#music_area" data-toggle="tab">音乐</a></li>
@@ -122,7 +122,7 @@
 
 <script type="text/javascript"
 	src="/r/j-src/framework/audio/audio.min.js"></script>
-<script src="/r/j-src/framework/angular/angular.min.js"></script>
+
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
 
@@ -144,9 +144,4 @@
 	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
-
-<script
-	src="<%=request.getContextPath() %>/r/j-src/web/foot/foot.js?v=${frontVersion}"></script>
-
-
 

@@ -72,9 +72,14 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 	}
 
 	@Override
-	public void onMessage(String data) {	
-		Message message = MessageUtil.fromString(data);		
-		log.info("will send message "+message);
+	public synchronized void onMessage(String data) {
+		processData(data);
+
+	}
+
+	private void processData(String data) {
+		Message message = MessageUtil.fromString(data);
+		log.info("will send message " + message);
 		try {
 			messageService.sendMessage(message);
 		} catch (ServiceException e) {
@@ -83,9 +88,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 		} catch (ServiceDaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		
-	
+		}
 	}
 
 	public boolean isOpen() {
@@ -100,7 +103,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 			if (this.messages.isEmpty()) {
 				connection.sendMessage("already open ~~" + this.uid);
 			} else {
-				log.info(this.uid + " has messages ~~" + this.messages.size());			
+				log.info(this.uid + " has messages ~~" + this.messages.size());
 				List<String> ms = new ArrayList();
 				ms.addAll(this.messages);
 				this.messages.clear();

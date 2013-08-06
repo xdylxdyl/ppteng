@@ -37,7 +37,7 @@
 	<ul id="firstHead" class="social">	    
 	
 		<li><a href="http://bbs.ptteng.com/forum.php" target="_blank">论坛</a></li>
-		<li><a href="http://xdylxdyl.diandian.com/" target="_blank">博客</a></li>
+		<li><a href="http://ptteng.lofter.com/" target="_blank">博客</a></li>
 		<li id="nav_favorite"><a
 			href="javascript:AddFavorite('http://www.ptteng.com/','葡萄藤')">收藏</a></li>
 		<li id="nav_quit"><a href="/player/offline " id="navLogout">退出</a></li>
@@ -54,7 +54,7 @@
 				<li id="nav_case"><a href="/record/list?version=all">战例</a></li>
 				<li id="nav_person"><a href="/player/detail">设置</a></li>				
 				<li id="nav_financial"><a href="/money/flow ">财务</a></li>
-				<li id="nav_tool"><a href="/tool/weather">工具</a></li>
+				<li id="nav_tool"><a href="/tool/news">工具</a></li>
 				<li id="nav_about"><a href="/about?type=about">帮助</a></li>
 			</ul>
 		</div>
@@ -64,8 +64,8 @@
 	</div>
 </div>
 
-
-<script type="text/javascript" src="/r/j-src/framework/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript"
+	src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 
