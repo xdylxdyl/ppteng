@@ -57,10 +57,9 @@ public class WeixinController {
 			HttpServletResponse response, ModelMap model, Integer code,String echostr)
 			throws Exception {
 
+		log.info("get stris "+echostr);
 		
-		model.addAttribute("echostr", echostr);
-
-		return "/weixin/token/show";
+		return echostr;
 	}
 
 	
