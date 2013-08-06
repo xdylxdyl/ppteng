@@ -327,12 +327,20 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		}
 
 		if (version.contains("mine")) {
-			for (Message m : messages) {
-				if (("over".equals(m.getPredict()))
-						&& ("win".equals(m.getObject()))) {
-					return true;
+			
+			String level=r.getSetting().getSetting().get("mineLevel");
+			if("level6"!=level){
+				for (Message m : messages) {
+					if (("over".equals(m.getPredict()))
+							&& ("win".equals(m.getObject()))) {
+						return true;
+					}
 				}
+			}else{
+				//训练模式下没有金币
+				
 			}
+			
 
 		}
 

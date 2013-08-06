@@ -7,7 +7,7 @@ var gameView = {
 $(document).ready(function () {
     timer = null;
     //左键
-    $("#inner").on("click","div", function () {
+    $("#inner").on("click", "div", function () {
         var p = playerService.getPlayer(globalView.getCurrentID())
         if ("living" == p.status || "ready" == p.status) {
             var divClass = $(this).attr("class");
@@ -107,43 +107,75 @@ $(document).ready(function () {
     };
 
     var mineSettingView = {
+        isTrain:function () {
+            var level = $("#mineLevel").val();
+            if (level == "level6") {
+                return true;
+            } else {
+                return false;
+            }
+        },
         initSetting:function () {
 
             var html = "<select id='mineSelect'><option value ='0' id='level0'>初级</option><option value ='1' id='level1'>中级</option><option  id='level2' value ='2'>高级</option><option  id='level3'value='3'>仙级</option><option  id='level4' value='4'>神级</option>" +
-                "<option  id='level5' value='5'>自定义</option>" +
+                "<option  id='level5' value='5'>自定义</option>" + "<option  id='level6' value='6'>训练模式</option>" +
                 "</select> <small class='text-error'>提交生效</small>";
-            $("#" + selects.$settingArea).prepend(html);
+            var nextHtml = "<p class='pull-right' ><a href='#' class='btn' id='nextButton'>下一组雷图</a></p>";
+            $("#" + selects.$settingArea).prepend(html + nextHtml);
 
             var row = $("#rowCount").val();
             var column = $("#columnCount").val();
             var mine = $("#mineCount").val();
+            var content = $("#mineContent").val();
+            var systemContent=$("#systemContent").val();
+            var level = $("#mineLevel").val();
+            $("#mineContentGroup").hide();
+            $("#systemContentGroup").hide();
+            $("#mineLevelGroup").hide();
+            $("#nextButton").hide();
 
-            mineView.updateSetting(row, column, mine);
+            mineView.updateSetting(row, column, mine, content);
             //default mineSelect is 1.
-            mineSettingView.updateSettingParameter(row, column, mine, true);
+            mineSettingView.updateSettingParameter(level, row, column, mine, true, content,systemContent);
+
+
+            $("#nextButton").on("click", function () {
+
+                trainMineIndex++;
+                //通过trainMineIndex来控制.这段代码写的不太好
+                var mineSetting = mineService.getTrainMine();
+                mineSettingView.updateSettingParameter("level6", mineSetting.row, mineSetting.column, mineSetting.mine, true, mineSetting.content,mineSetting.systemContent);
+            });
+
 
             $("#mineSelect").on("change", function () {
                 var level = $(this).children('option:selected').val();
                 switch (level) {
                     case "0":
-                        mineSettingView.updateSettingParameter(9, 9, 10, true);
+                        mineSettingView.updateSettingParameter("level0", 9, 9, 10, true);
                         break;
                     case "1":
-                        mineSettingView.updateSettingParameter(16, 16, 40, true);
+                        mineSettingView.updateSettingParameter("level1", 16, 16, 40, true);
                         break;
 
                     case "2":
-                        mineSettingView.updateSettingParameter(16, 30, 99, true);
+                        mineSettingView.updateSettingParameter("level2", 16, 30, 99, true);
                         break;
                     case "3":
-                        mineSettingView.updateSettingParameter(40, 40, 500, true);
+                        mineSettingView.updateSettingParameter("level3", 40, 40, 500, true);
                         break;
                     case "4":
-                        mineSettingView.updateSettingParameter(100, 100, 2000, true);
+                        mineSettingView.updateSettingParameter("level4", 100, 100, 2000, true);
                         break;
                     case "5":
                         //self
-                        mineSettingView.updateSettingParameter(16, 16, 40, false);
+                        mineSettingView.updateSettingParameter("level5", 16, 16, 40, false);
+                        break;
+                    case "6":
+                        //train
+
+                        var mineSetting = mineService.getTrainMine();
+                        mineSettingView.updateSettingParameter("level6", mineSetting.row, mineSetting.column, mineSetting.mine, true, mineSetting.content, mineSetting.systemContent);
                         break;
                     default:
                         break;
@@ -156,7 +188,7 @@ $(document).ready(function () {
 
 
         },
-        updateSettingParameter:function (row, column, mine, readOnly) {
+        updateSettingParameter:function (level, row, column, mine, readOnly, content, systemContent) {
             if (row) {
                 $("#rowCount").val(row);
 
@@ -177,33 +209,49 @@ $(document).ready(function () {
                 $("#mineCount").attr("old", $("#mineCount").val());
             }
 
+            if (level) {
+                $("#mineLevel").val(level);
+            } else {
 
-            $("#rowCount").attr("readOnly", readOnly);
-            $("#columnCount").attr("readOnly", readOnly);
-            $("#mineCount").attr("readOnly", readOnly);
-
-            var str = row + "-" + column + "-" + mine;
-            switch (str) {
-                case "9-9-10":
-                    $("#level0").attr("selected", true);
-                    break;
-                case "16-16-40":
-                    $("#level1").attr("selected", true);
-                    break;
-                case "16-30-99":
-                    $("#level2").attr("selected", true);
-                    break;
-                case "40-40-500":
-                    $("#level3").attr("selected", true);
-                    break;
-                case "100-100-2000":
-                    $("#level4").attr("selected", true);
-                    break;
-                default:
-                    $("#level5").attr("selected", true);
-                    break;
+                $("#mineLevel").attr("old", $("#mineLevel").val());
 
             }
+            if (content) {
+                $("#mineContentGroup").show();
+
+                $("#nextButton").show();
+                $("#mineContent").val(content);
+            } else {
+                $("#mineContentGroup").hide();
+                $("#nextButton").hide();
+                $("#mineContent").val("");
+                $("#mineContent").attr("old", $("#mineContent").val());
+
+
+            }
+
+
+            if (systemContent) {
+                $("#systemContentGroup").show();
+
+
+                $("#systemContent").val(systemContent);
+            } else {
+                $("#systemContentGroup").hide();
+
+                $("#systemContent").val("");
+                $("#systemContent").attr("old", $("#systemContent").val());
+
+
+            }
+
+
+            $("#rowCount").prop("readOnly", readOnly);
+            $("#columnCount").prop("readOnly", readOnly);
+            $("#mineCount").prop("readOnly", readOnly);
+            $("#mineContent").prop("readOnly", readOnly);
+            $("#systemContent").prop("readOnly", readOnly);
+            $("#" + level).prop("selected", true);
 
 
         },
@@ -220,9 +268,13 @@ $(document).ready(function () {
             if (m > c * r) {
                 m = c * r / 2;
             }
-            if (m < 10) {
-                m = 10;
+            var level = $("#mineLevel").val();
+            if ("level5" == level) {
+                if (m < 10) {
+                    m = 10;
+                }
             }
+
 
             $("#mineCount").val(m);
             var params = jQuery("#setting").serialize();
@@ -230,18 +282,25 @@ $(document).ready(function () {
         }
     }
 
+    //{1:{row:2,column:3,mine:2,content:"xxxxx"}}
+    var trainMineContents = null;
 
+    var trainMineIndex = 0;
     var mineView = {
 
-        updateSetting:function (row, column, mine) {
+        updateSetting:function (row, column, mine, content) {
             mineView.setting.row = row;
             mineView.setting.column = column;
             mineView.setting.mine = mine;
+            if (content) {
+                mineView.setting.content = content;
+            }
         },
         setting:{
             row:0,
             column:0,
-            mine:0
+            mine:0,
+            content:""
 
         },
 
@@ -398,6 +457,8 @@ $(document).ready(function () {
             mineView.initMine();
 
 
+
+
             mineView.startCountTime();
 
             notifyUtil.sendNotify("各位雷神", "游戏已开始，速度带手指头归位", "");
@@ -475,7 +536,14 @@ $(document).ready(function () {
             //右键,似乎必须是要加在这个位置
             $("#inner div").rightClick(function (e) {
 
+
+                var c=this.prop("class");
+                if(c&&c!="flag"){
+                    return;
+                }
+
                 var p = playerService.getPlayer(globalView.getCurrentID())
+
                 if ("living" == p.status || "ready" == p.status) {
                     var mo = mineView.getMineOperater(this, mouseAction.rightClick);
                     var rid = globalView.getRoomID();
@@ -497,6 +565,37 @@ $(document).ready(function () {
     }
 
     var mineService = {
+        getTrainMine:function () {
+
+
+            trainMineContents = mineService.getTranMainContents();
+
+            //循环.如果是最后一个.就自动开始第一局
+            if (trainMineIndex > trainMineContents.length - 1) {
+                trainMineIndex = 0;
+            }
+            return trainMineContents[trainMineIndex];
+
+        },
+        getTranMainContents:function () {
+            return  ajaxJson("/mine/train/list?", "get", mineService.parseTrainList, null, 5000, "json");
+        },
+        parseTrainList:function (data) {
+            trainMineContents = {};
+            for (var key in data) {
+
+                var mineSetting = {};
+                mineSetting.row = data[key].row;
+                mineSetting.column = data[key].column;
+                mineSetting.mine = data[key].mine;
+                mineSetting.content = data[key].content;
+                mineSetting.systemContent = data[key].systemContent;
+                trainMineContents[key] = mineSetting;
+
+            }
+
+        },
+
         parseRoom:function (data) {
             var row = data.setting.rowCount;
             var column = data.setting.columnCount;
@@ -536,7 +635,7 @@ $(document).ready(function () {
             }
             cometService.sendMessage(message);
 
-           // return ajaxJson("/message/accept2?", "post", message, null, 5000, "html")
+            // return ajaxJson("/message/accept2?", "post", message, null, 5000, "html")
 
         },
         parseMessage:function (message) {
@@ -571,7 +670,9 @@ $(document).ready(function () {
                     break;
 
                 case "init":
-                    bombStr.system = message.object;
+                    bombStr.user = message.object;
+                    bombStr.system = message.subject;
+                    mineService.parseBomb(bombStr.user);
                     // console.log("init is " + bombStr.system);
                     break;
                 case "count":
@@ -832,8 +933,8 @@ var s = {
     wrongClass:'wrong',
     uMineClass:'umine',
     unsureClass:'unsure',
-    L_BUTTON: 0,
-    R_BUTTON: 2,
+    L_BUTTON:0,
+    R_BUTTON:2,
     firstClick:true,
     totalButton:'#total',
     resetButton:'#reset',

@@ -321,7 +321,7 @@ public class RecordServiceImpl implements RecordService {
 			// idList = (List<Long>)
 			// dao.excuteSimpleSql("select id from records where version = "+version,
 			// Records.class);
-			idList = dao.getIdList("getAll", new Object[] {}, start, limit,
+			idList = dao.getIdList("getRecordAll", new Object[] {}, start, limit,
 					false);
 
 		} catch (DaoException e) {

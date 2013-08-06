@@ -9,7 +9,7 @@
 			<list name="getRecordIdsByVersion" sqlitem="select id from records where version = ? order by create_at desc"
 				keyProperty="version" valueProperty="id" keyColumn="version" />
 
-			<list name="getAll" sqlitem="select id from records where 1 = 1 order by create_at desc"
+			<list name="getRecordAll" sqlitem="select id from records where 1 = 1 order by create_at desc"
 				keyProperty="version" valueProperty="id" keyColumn="version" />
 
 

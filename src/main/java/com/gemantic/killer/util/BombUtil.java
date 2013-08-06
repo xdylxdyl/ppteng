@@ -225,9 +225,32 @@ public class BombUtil {
 		sb=sb.append(BombUtil.Split_Underline);
 		sb=sb.append(m.getObject());
 		
+		int i=BombUtil.convertIndex(2, 1, 4);
+		//i=4
+		
+		log.info("index is "+i);
+		
+		
+		int iiii=BombUtil.getUserCount("nnnnn3333");
+		log.info("count is "+iiii);
+		
 		
 		
 	}
+
+	public static int getUserCount(String pic) {
+		int i=0;
+		char[] cs=pic.toCharArray();
+		
+		for(char ch:cs){
+			if(ch!='n'){
+				i++;	
+			}
+			
+		}
+		return i;
+	}
+
 
 	public static String initBomb(int row, int column) {
 		StringBuffer sb=new StringBuffer();
@@ -237,10 +260,10 @@ public class BombUtil {
 		return sb.toString();
 	}
 	
-	public static int convertIndex(int row,int column,int maxRow){
+	public static int convertIndex(int row,int column,int maxColumn){
 		//log.info("row is "+row);
 		//log.info("column is "+column);
-		int index=(row-1)*maxRow+(column-1);
+		int index=(row-1)*maxColumn+(column-1);
 		//log.info("index is "+index);
 		return index;
 	}
@@ -280,5 +303,87 @@ public class BombUtil {
 		return Pair.of(Integer.valueOf(indexs[0]),Integer.valueOf(indexs[1]));
 		
 	}
+
+
+	public static String generateSystemContent(Integer row,
+			Integer column, String c) {
+		List<Pair> pairs=new ArrayList();
+		List<Pair> inits=new ArrayList();
+		Map<Pair,String> pair_tags=new HashMap();
+		Map<Pair,String> minepair_tags=new HashMap();
+		for(int i=1;i<=row;i++){
+			for(int j=1;j<=column;j++){
+				Pair p=Pair.of(i,j);
+				//log.info(p);
+				pairs.add(p);
+				inits.add(p);
+				pair_tags.put(p, "0");
+			}			
+		}
+		
+		log.info("content is "+c);
+		//从字符串中找出雷的位置
+		char[] cs=c.toCharArray();
+		int i=0;
+		for(char ch:cs){
+			if(ch=='*'){
+				int rIndex=i/column;
+				int cIndex=i%column;
+				Pair p=Pair.of(rIndex+1,cIndex+1);
+				log.info(p);
+				pair_tags.put(p, BombUtil.Bomb);
+			}
+			i++;
+		}
+		log.info(pair_tags);
+		
+		int index=0;
+		log.info(index);
+		
+		for(Pair pair:pair_tags.keySet()){
+			
+		     if(pair_tags.get(pair).equals(BombUtil.Bomb)){
+		    	 
+		     }else{
+		    	 continue;
+		     }
+			List<Pair> roundPanes=BombUtil.getRoundPanes(pair,row,column);
+			//log.info(pair+" get round "+roundPanes);
+			for(Pair pane:roundPanes){
+				String tag=pair_tags.get(pane);
+				if(StringUtils.isBlank(tag)){
+					tag="0";
+				}
+				if(BombUtil.Bomb.equals(tag)){
+					
+				}else{
+					
+					Integer tagCount=Integer.valueOf(tag);
+					tagCount++;
+					pair_tags.put(pane, tagCount.toString());
+					
+				}
+			}
+			index++;
+			log.info(index);
+		}
+		//log.info(pair_tags);
+		
+		
+	
+		StringBuffer sb=new StringBuffer();
+		for(Pair p:inits){
+			sb.append(pair_tags.get(p));
+		}
+		log.info("get str : "+sb.toString());
+		return sb.toString();
+		
+		
+		
+	
+	
+	}
+	
+	
 
 }

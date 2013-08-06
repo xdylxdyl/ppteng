@@ -63,10 +63,29 @@ then
 	 int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));//1*60*1000  
 	 int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));//1*60*1000  
 	 int  bombCount=Integer.valueOf(getRoomSetting($room,"mineCount","10"));//1*60*1000  
+	 String  systemBombPic=getRoomSetting($room,"systemContent","");
+    String  userBombPic=getRoomSetting($room,"mineContent","");
+    int userCount=0;  
+   
+    if(StringUtils.isBlank(systemBombPic)){
+          systemBombPic=BombUtil.assign(rowCount,columnCount,bombCount);
+    }else{
+      
+    }
+    
+     if(StringUtils.isBlank(userBombPic)){
+           userBombPic=BombUtil.initBomb(rowCount,columnCount);
+           
+    }else{
+          userCount=BombUtil.getUserCount(userBombPic);//get init user count;
+    }
+    
+    
+   
+   
 
-     String systemBombPic=BombUtil.assign(rowCount,columnCount,bombCount);
      //LogUtil.log(" systemBombPic ================= "+systemBombPic);
-     BombPic bombPic=new BombPic(systemBombPic,"");
+     BombPic bombPic=new BombPic(systemBombPic,userBombPic);
      insert(bombPic);
      
     String	rname=String.valueOf(RandomUtils.nextLong());
@@ -107,14 +126,14 @@ then
 	
 	//LogUtil.log(" game status  ================="+game);
 	
-	Count count=new Count(0,bombCount,rowCount*columnCount,0,0);
+	Count count=new Count(0,bombCount,rowCount*columnCount,0,userCount);
 	insert(count);
 	
 	$room.setStatus("run");	
 	update($room);
 	$operater.setGameStart(true);
 	$operater.setPlayers(readyIDS);
-	Message initMessage=new Message("","init",systemBombPic);
+	Message initMessage=new Message(systemBombPic,"init",userBombPic);
 	insert(initMessage); 
 	
 	//LogUtil.log("role assign process over  =================");
@@ -818,7 +837,7 @@ when
 	      );
 	$game:Game($status:status);  
     $operater:Operater()
-    $bombPic:BombPic()   
+    $bombPic:BombPic($user:user)   
   
     $tags:ArrayList()
 	      from accumulate(
@@ -849,11 +868,12 @@ then
       m.put("game",$game);     
      int  rowCount=Integer.valueOf(getRoomSetting($room,"rowCount","9"));	 
      int  columnCount=Integer.valueOf(getRoomSetting($room,"columnCount","9"));
-     String bomb=BombUtil.initBomb(rowCount,columnCount);
+     String bomb=$user;
+   
      for(Object o:$tags){
         Tag tag=(Tag)o;
        Pair p=  BombUtil.convertString2Pair(tag.getPid());
-        int index=BombUtil.convertIndex((Integer)p.getLeft(), (Integer)p.getRight(), rowCount);
+        int index=BombUtil.convertIndex((Integer)p.getLeft(), (Integer)p.getRight(), columnCount);
 		bomb=BombUtil.replaceBomb(index, bomb, tag.getValue());
       } 
       $bombPic.setUser(bomb);

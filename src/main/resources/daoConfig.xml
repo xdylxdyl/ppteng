@@ -25,11 +25,15 @@
 		<config>
 			<path>userRecord_dao.xml</path>
 		</config>
-		
-			<config>
+
+		<config>
 			<path>mineStatistics_dao.xml</path>
 		</config>
 
+
+		<config>
+			<path>mineTrain_dao.xml</path>
+		</config>
 
 
 	</list>
