@@ -58,8 +58,10 @@ public class WeixinController {
 			throws Exception {
 
 		log.info("get stris "+echostr);
-		
-		return echostr;
+
+		model.addAttribute("echostr", echostr);
+
+		return "/weixin/token/show";
 	}
 
 	
