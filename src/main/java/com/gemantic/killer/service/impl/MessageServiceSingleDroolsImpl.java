@@ -159,7 +159,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 			r.setStatus(Room.status_start);
 			r.setPlayers(operater.getPlayers());
-			
+
 			this.roomService.updateRoom(r);
 
 		}
@@ -327,20 +327,23 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		}
 
 		if (version.contains("mine")) {
-			
-			String level=r.getSetting().getSetting().get("mineLevel");
-			if("level6"!=level){
+
+			String level = r.getSetting().getSetting().get("mineLevel");
+			log.info("level is " + level);
+			if ("level6".equals(level)) {
+				// 训练模式下没有金币
+				log.info("not save record");
+			} else {
+
+				log.info("save record");
 				for (Message m : messages) {
 					if (("over".equals(m.getPredict()))
 							&& ("win".equals(m.getObject()))) {
 						return true;
 					}
 				}
-			}else{
-				//训练模式下没有金币
-				
+
 			}
-			
 
 		}
 
@@ -349,7 +352,6 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 	private boolean IsRoomMessage(Message message, Room r) {
 
-		
 		if ("video_1.0".equals(r.getVersion())) {
 			return true;
 		}
@@ -435,15 +437,15 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			ServiceDaoException {
 
 		Room r = this.roomService.getRoom(Long.valueOf(message.getWhere()));
-		if(r==null){
+		if (r == null) {
 			return;
 		}
-		//log.info("get room is "+r);
+		// log.info("get room is "+r);
 		List<Message> messages = this.generate(message, r);
 
 		MessageUtil.sendMessage(r.getVersion(), messages, this.pushClient);
-		
-		//log.info(messages);
+
+		// log.info(messages);
 
 		if ("logout".equals(message.getPredict())) {
 			this.memberService.userLogOut(Long.valueOf(message.getWhere()),
