@@ -231,7 +231,10 @@ public class BombUtil {
 		log.info("index is "+i);
 		
 		
-		int iiii=BombUtil.getUserCount("nnnnn3333");
+		int iiii=BombUtil.getUserCount("nnnn" +
+				"nn11" +
+				"1110" +
+				"0000");
 		log.info("count is "+iiii);
 		
 		
@@ -321,7 +324,7 @@ public class BombUtil {
 			}			
 		}
 		
-		log.info("content is "+c);
+		
 		//从字符串中找出雷的位置
 		char[] cs=c.toCharArray();
 		int i=0;
@@ -330,15 +333,15 @@ public class BombUtil {
 				int rIndex=i/column;
 				int cIndex=i%column;
 				Pair p=Pair.of(rIndex+1,cIndex+1);
-				log.info(p);
+				
 				pair_tags.put(p, BombUtil.Bomb);
 			}
 			i++;
 		}
-		log.info(pair_tags);
+		
 		
 		int index=0;
-		log.info(index);
+	
 		
 		for(Pair pair:pair_tags.keySet()){
 			

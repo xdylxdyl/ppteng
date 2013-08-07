@@ -75,9 +75,25 @@ then
     
      if(StringUtils.isBlank(userBombPic)){
            userBombPic=BombUtil.initBomb(rowCount,columnCount);
+           //init tag
+       
+           
            
     }else{
           userCount=BombUtil.getUserCount(userBombPic);//get init user count;
+           char[] cs=userBombPic.toCharArray();
+		int i=0;
+		for(char ch:cs){
+			if(ch!='n'){
+			    int rIndex=i/columnCount+1;
+				int cIndex=i%columnCount+1;
+				Tag tag=new Tag("-500",String.valueOf(ch),rIndex+"-"+cIndex);
+                insert(tag);
+               
+			}
+			i++;
+			
+		}
     }
     
     
@@ -128,6 +144,7 @@ then
 	
 	Count count=new Count(0,bombCount,rowCount*columnCount,0,userCount);
 	insert(count);
+	LogUtil.log(count);
 	
 	$room.setStatus("run");	
 	update($room);
@@ -412,7 +429,7 @@ when
       $count:Count($user:user) 
       $userCount:UserCount($uc:count,uid==$uid)
 then
-   // LogUtil.log("click number  start  =================");   
+    LogUtil.log("click number  start  ================="+$click);   
    
    //  Long start=System.currentTimeMillis();
     
@@ -427,6 +444,7 @@ then
     
      $count.setUser($user+1);
      update($count);
+ 
    $uc=$uc+1; 
     $userCount.setCount($uc);
     update($userCount);
@@ -476,6 +494,7 @@ then
         $count.setUser($userCount+1);
        //  LogUtil.log(" count is  ================="+$count); 
      update($count);
+   
        $uc=$uc+1; 
     $uCount.setCount($uc);
     update($uCount);
