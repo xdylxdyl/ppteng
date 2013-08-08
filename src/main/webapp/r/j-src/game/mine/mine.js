@@ -8,21 +8,24 @@ $(document).ready(function () {
     timer = null;
     //左键
     $("#inner").on("click", "div", function () {
-        var p = playerService.getPlayer(globalView.getCurrentID())
-        if ("living" == p.status || "ready" == p.status) {
-            var divClass = $(this).attr("class");
-            if (divClass != undefined && divClass != "") {
+
+        var isSendMessage = mineView.isSendClickMessage();
+        if (isSendMessage) {
+            var mo = mineView.getMineOperater(this, mouseAction.click);
+            var rid = globalView.getRoomID();
+            var version = globalView.getVersion();
+            mineService.sendMineOperater(mo, rid, version);
+        } else {
+
+            if (mineView.isSaveMine()) {
+                mineView.showStoreMine.call(this);
+                mineView.setSaveMineCheckBox(false);
+                return;
 
             } else {
 
-                var mo = mineView.getMineOperater(this, mouseAction.click);
-                var rid = globalView.getRoomID();
-                var version = globalView.getVersion();
-                mineService.sendMineOperater(mo, rid, version);
+
             }
-
-
-        } else {
             return;
         }
 
@@ -127,7 +130,7 @@ $(document).ready(function () {
             var column = $("#columnCount").val();
             var mine = $("#mineCount").val();
             var content = $("#mineContent").val();
-            var systemContent=$("#systemContent").val();
+            var systemContent = $("#systemContent").val();
             var level = $("#mineLevel").val();
             $("#mineContentGroup").hide();
             $("#systemContentGroup").hide();
@@ -136,7 +139,7 @@ $(document).ready(function () {
 
             mineView.updateSetting(row, column, mine, content);
             //default mineSelect is 1.
-            mineSettingView.updateSettingParameter(level, row, column, mine, true, content,systemContent);
+            mineSettingView.updateSettingParameter(level, row, column, mine, true, content, systemContent);
 
 
             $("#nextButton").on("click", function () {
@@ -144,7 +147,7 @@ $(document).ready(function () {
                 trainMineIndex++;
                 //通过trainMineIndex来控制.这段代码写的不太好
                 var mineSetting = mineService.getTrainMine();
-                mineSettingView.updateSettingParameter("level6", mineSetting.row, mineSetting.column, mineSetting.mine, true, mineSetting.content,mineSetting.systemContent);
+                mineSettingView.updateSettingParameter("level6", mineSetting.row, mineSetting.column, mineSetting.mine, true, mineSetting.content, mineSetting.systemContent);
             });
 
 
@@ -287,6 +290,92 @@ $(document).ready(function () {
 
     var trainMineIndex = 0;
     var mineView = {
+        isSaveMine:function () {
+            return $("#saveMineCheckBox").prop("checked");
+        },
+        //计算雷图
+        showStoreMine:function () {
+            //1.获取当前鼠标点击的Div的坐标
+            var x =parseInt($(this).attr("x"));
+            var y = parseInt($(this).attr("y"));
+            console.log(x+","+y);
+            //2.获取截取雷图的坐标范围，雷区选择 9*9
+
+            var divCount=3;
+
+            var leftTopX = (x - divCount) < 1 ? 1 : x - divCount;
+
+            var leftTopY = (y - divCount) < 1 ? 1 : y - divCount;
+
+            var rightTopX = leftTopX;
+            var rightTopY = (y + divCount) > mineView.setting.column ? mineView.setting.column : y + divCount;
+
+            var leftBottomX = (x + divCount) > mineView.setting.row ? mineView.setting.row : x + divCount;
+            var leftBottomY = rightTopY;
+
+            var rightBottomX = leftBottomX;
+            var rightBottomY = rightTopY;
+
+            console.log(leftTopX+","+leftTopY+"  -   "+rightTopX+","+rightTopY+"  -   "+leftBottomX+","+leftBottomY+"  -   "+rightBottomX+","+rightBottomY);
+
+            var systemContent="";
+            //3.从当前的系统坐标中生成新的字符串
+            var i=0;
+            for(var saveHeight=leftTopX;saveHeight<leftBottomX;saveHeight++){
+                var row=bombStr.system.substring(leftTopY+i*mineView.setting.row-1,rightTopY+i*mineView.setting.row-1);
+                console.log(row);
+                systemContent=systemContent+row;
+                i++;
+            }
+            console.log(systemContent);
+
+
+
+            //4.从当前的用户坐标中儿取点开的字符串位置
+
+            for(var saveHeight=rightTopY;saveHeight<leftBottomY;saveHeight++){
+                          var row=bombStr.user.sub(leftTopX,rightTopX);
+                          systemContent=systemContent+row;
+                      }
+              console.log(systemContent);
+
+
+            //5.根据3,4生成保存的雷图，根据雷的数目生成系统雷图。根据用户点开的格子生成最终的雷图
+
+
+            //6.显示出来
+
+
+
+
+
+
+        },
+        setSaveMineCheckBox:function (isCheck) {
+            $("#saveMineCheckBox").prop("checked", isCheck);
+        },
+        isSendClickMessage:function () {
+            var isSendMessage = false;
+            if (mineView.isSaveMine()) {
+                return false;
+            }
+            var p = playerService.getPlayer(globalView.getCurrentID());
+            if ("living" == p.status || "ready" == p.status) {
+                var divClass = $(this).attr("class");
+                if (divClass != undefined && divClass != "") {
+
+                } else {
+
+                    isSendMessage = true;
+
+                }
+
+
+            } else {
+
+            }
+            return isSendMessage;
+        },
 
         updateSetting:function (row, column, mine, content) {
             mineView.setting.row = row;
@@ -348,7 +437,7 @@ $(document).ready(function () {
             var count = parseInt(message.object);
             $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 共点击了 [" + message.object + "]次 ,平均每秒 [" + (count / time).toFixed(3) + "] 次</p>");
             var money = parseInt($("#" + uid + "_vote").attr("count")) * 10;
-            if ($("#overMessage").attr("result") == "win"&&!mineSettingView.isTrain()) {
+            if ($("#overMessage").attr("result") == "win" && !mineSettingView.isTrain()) {
                 $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 [" + player.name + "] 金币  [" + money + "]</p>");
             } else {
 
@@ -457,8 +546,6 @@ $(document).ready(function () {
             mineView.initMine();
 
 
-
-
             mineView.startCountTime();
 
             notifyUtil.sendNotify("各位雷神", "游戏已开始，速度带手指头归位", "");
@@ -537,8 +624,8 @@ $(document).ready(function () {
             $("#inner div").rightClick(function (e) {
 
 
-                var c=this.prop("class");
-                if(c&&c!="flag"){
+                var c = this.prop("class");
+                if (c && c != "flag") {
                     return;
                 }
 

@@ -59,17 +59,19 @@
 
 
 						<div class="tab-pane active" id="mine_area">
+							<div>
+								<label for="saveMineCheckBox" class="checkbox"> <input
+									type="checkbox" value="scroll" id="saveMineCheckBox">
+									保存
+								</label>
+							</div>
 							<div class="outer">
+
 								<div class="inner" id="inner"></div>
 
 							</div>
 						</div>
-						<div class="tab-pane" id="setting_area">
-						
-						
-						
-						
-						</div>
+						<div class="tab-pane" id="setting_area"></div>
 
 						<div class="tab-pane" id="music_area">
 							<tiles:insertDefinition name="musicList" />
@@ -135,7 +137,7 @@
 
 <script
 	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
-	
+
 <script src="/r/j-src/game/mine/mine.js?v=${frontVersion}"></script>
 
 <script

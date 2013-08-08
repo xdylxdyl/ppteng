@@ -1,0 +1,138 @@
+<html>
+<style>
+    body {
+        margin: 0;
+        font-size: 10pt;
+        background: #666666;
+        padding: 100px
+    }
+
+    #mousewindow {
+        position: absolute;
+        font-size: 0;
+        border: 1px dashed #ff6600;
+        display: none;
+        background: #ffffcc;
+        opacity: 0.50;
+        filter: alpha(opacity = 50)
+    }
+
+    #nofocus {
+        border: 0;
+        width: 0;
+        height: 0;
+        font-size: 0;
+        background: none;
+        overflow: hidden;
+    }
+</style>
+<body onload=myctrl()>
+<div id=mousewindow><input id=nofocus></div>
+<script>
+    //var x,y,ox,oy,osl,ost,sl,st,cw,ch,xy=false,chk,imgurl,ctrlable=false
+    function myctrl() {
+        var x, y, ox, oy, osl, ost, sl, st, cw, ch, xy = false, chk
+        document.onmousedown = function (evt) {
+            evt = evt || window.event
+//alert(evt.srcElement.tagName)
+            ox = evt.clientX;
+            oy = evt.clientY
+            osl = document.body.scrollLeft;
+            ost = document.body.scrollTop
+            cw = document.body.clientWidth;
+            ch = document.body.clientHeight
+//if(evt.srcElement.tagName=="BODY"&&ox<=cw&&oy<=ch)
+            if (ox <= cw && oy <= ch) {
+                xy = true;
+                mousewindow.style.left = ox + osl + "px";
+                mousewindow.style.top = oy + ost + "px"
+                chk = document.all.tags("input")
+                for (i = 0; i < chk.length; i++) {
+                    if (chk[i].type == "checkbox") {
+                        chk[i].chkctrl = 0
+                    }
+                }
+            }
+        }
+        document.onmousemove = function (evt) {
+            evt = evt || window.event
+            if (xy == true) {
+//nofocus.focus()
+                x = evt.clientX;
+                y = evt.clientY
+                sl = document.body.scrollLeft;
+                st = document.body.scrollTop
+                mousewindow.style.display = "block"
+                nofocus.focus()
+                mousewindow.style.width = Math.abs(x - ox + sl - osl) + "px"
+                mousewindow.style.height = Math.abs(y - oy + st - ost) + "px"
+                if (x > ox) {
+                    mousewindow.style.left = ox + osl + "px"
+                }
+                if (x < ox) {
+                    mousewindow.style.left = x + sl + "px"
+                }
+                if (y > oy) {
+                    mousewindow.style.top = oy + ost + "px"
+                }
+                if (y < oy) {
+                    mousewindow.style.top = y + st + "px"
+                }
+                minx = parseInt(mousewindow.style.left + "px")
+                maxx = minx + parseInt(mousewindow.style.width)
+                miny = parseInt(mousewindow.style.top)
+                maxy = miny + parseInt(mousewindow.style.height)
+                ctrl(minx, maxx, miny, maxy)
+            }
+        }
+        document.onmouseup = function () {
+            xy = false
+            mousewindow.style.display = "none"
+            mousewindow.style.width = 0
+            mousewindow.style.height = 0
+        }
+    }
+    function ctrl(minx, maxx, miny, maxy) {
+        chk = document.all.tags("input")
+        for (i = 0; i < chk.length; i++) {
+            var obj = chk[i]
+            var mmx = obj.offsetLeft, mmy = obj.offsetTop
+            while (obj = obj.offsetParent) {
+                mmx += obj.offsetLeft;
+                mmy += obj.offsetTop;
+            }
+            if (mmx >= minx && mmx <= maxx && mmy >= miny && mmy <= maxy) {
+                if (chk[i].chkctrl == "0" && chk[i].checked == false) {
+                    chk[i].checked = true;
+                    chk[i].chkctrl = 1
+                }
+                if (chk[i].chkctrl == "0" && chk[i].checked == true) {
+                    chk[i].checked = false;
+                    chk[i].chkctrl = -1
+                }
+            }
+            else {
+                if (chk[i].checked == true && chk[i].chkctrl != 0) {
+                    chk[i].checked = false;
+                    chk[i].chkctrl = 0
+                }
+                if (chk[i].checked == false && chk[i].chkctrl != 0) {
+                    chk[i].checked = true;
+                    chk[i].chkctrl = 0
+                }
+            }
+        }
+    }
+</script>
+<div align=center style="width:100%;height:100%">
+    <input type=checkbox><input type=checkbox><input type=checkbox><input type=checkbox><input
+        type=checkbox><Br>
+    <input type=checkbox><input type=checkbox><input type=checkbox><input type=checkbox><input
+        type=checkbox><Br>
+    <input type=checkbox><input type=checkbox><input type=checkbox><input type=checkbox><input
+        type=checkbox><Br>
+    <input type=checkbox><input type=checkbox><input type=checkbox><input type=checkbox><input
+        type=checkbox><Br>
+    <input type=checkbox><input type=checkbox><input type=checkbox><input type=checkbox><input
+        type=checkbox><Br>
+</div>  
