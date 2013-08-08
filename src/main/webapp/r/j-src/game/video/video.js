@@ -30,8 +30,9 @@ $(document).ready(function () {
         },
         isVideoAddress:function () {
             var r = videoSettingView.getVideoAddress();
-            var pattern = /swf$/;
-            if (r.match(pattern)) {
+           if( r.indexOf(".swf")>=0)
+           {
+
 
             } else {
                 alert("请仔细查看网站分享内容,选择Flash格式,如果有问题.请联系站长~~");

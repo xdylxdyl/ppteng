@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
  <div class="span9">
-          <iframe width="800" scrolling="no" height="120" frameborder="0" allowtransparency="true" src="http://www.tianqi.com/index.php?c=code&id=19&color=%230070C0&bdc=%23&icon=5&temp=1&num=5"></iframe>
+          <iframe width="800" scrolling="no" height="120" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=19&color=%230070C0&bdc=%23&icon=5&temp=1&num=5"></iframe>
  
     </div>
     <!--/row-->

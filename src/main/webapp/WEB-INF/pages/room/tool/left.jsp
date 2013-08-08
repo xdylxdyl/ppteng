@@ -12,6 +12,7 @@
 			<li id="nav_weather"><a href="/tool/weather">天气</a></li>
 			<li id="nav_deposit"><a href="/tool/deposit">充值</a></li>
 			<li id="nav_picture"><a href="/tool/picture">图片处理</a></li>
+			<li id="nav_games"><a href="/tool/games">精品小游戏</a></li>
 		
 
 
