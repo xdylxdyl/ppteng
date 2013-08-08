@@ -36,13 +36,35 @@
 					src="http://download.ptteng.com/group1/M00/00/00/KnlxRlIC_q7EYMGJAACyfQ89BRY539.jpg" />
 			</div>
 		</div>
+
+
+		<hr>
+		<div class="row-fluid">
+
+
+			<div class="span8">
+				<h2>2.新闻DNA</h2>
+				<p>网易一向出神器。这个新闻DNA的测试也很好玩儿。通过对不同新闻的兴趣度，加上你的观点和立场，得出你的DNA图谱，我的是什么？看右图</p>
+				<p></p>
+				<p></p>
+				<p>
+					<a class="btn"
+						href="http://dna.163.com"
+						target="_blank">去玩一局 »</a>
+				</p>
+			</div>
+			<div class="span4">
+				<img alt="163DNA"
+					src="http://download.ptteng.com/group1/M00/00/00/KnlxRlIDBpLtXHugAANoeh00gGw587.jpg" />
+			</div>
+		</div>
 		<hr>
 		<div class="row-fluid">
 
 			<div class="alert">
 
 				<h4>有更好玩的游戏。点击页面底部的QQ图标，推荐给我</h4>
-				
+
 			</div>
 		</div>
 	</div>
