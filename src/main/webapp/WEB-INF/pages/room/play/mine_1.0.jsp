@@ -59,12 +59,29 @@
 
 
 						<div class="tab-pane active" id="mine_area">
-							<div>
+							<div id="saveMineArea">
 								<label for="saveMineCheckBox" class="checkbox"> <input
 									type="checkbox" value="scroll" id="saveMineCheckBox">
-									保存
+									保存雷图
 								</label>
+								<div id="previewHint">
+									<div class="alert">
+										<button type="button" class="close" data-dismiss="alert"
+											id="closePreview">×</button>
+										<h4>预览雷图</h4>
+										鼠标点击雷图,以鼠标为中心点，自动生成7*7的雷图预览，关闭预览重新回到页面。
+									</div>
+									<div class="outer">
+
+										<div class="inner" id="innerDemo"></div>
+
+									</div>
+								</div>
+
+
 							</div>
+
+
 							<div class="outer">
 
 								<div class="inner" id="inner"></div>

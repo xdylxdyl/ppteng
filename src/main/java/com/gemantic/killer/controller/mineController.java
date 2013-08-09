@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.gemantic.common.util.http.HttpClientUtil;
 import com.gemantic.common.util.http.HttpUrl;
 import com.gemantic.common.util.http.cookie.CookieUtil;
+import com.gemantic.killer.util.BombUtil;
 import com.gemantic.labs.killer.model.MineTrain;
 import com.gemantic.labs.killer.service.MineTrainService;
 import com.gemantic.labs.killer.service.UsersService;
@@ -66,6 +67,27 @@ public class mineController {
 		return "/mine/train/jlist";
 	}
 
+	
+	/**
+	 * 游戏准备
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/mine/train/generate")
+	public String generate(HttpServletRequest request, HttpServletResponse response, ModelMap model, Integer row, Integer column, String systemContent, String userContent) throws Exception {
+
+		
+		String newSystemContent=BombUtil.generateSystemContent(row, column, systemContent);
+		String newUserContent=BombUtil.generateUserContent(userContent, systemContent);
+		Integer mine=BombUtil.countMine(systemContent);
+		MineTrain train=new MineTrain(row,column,mine,newUserContent,newSystemContent);
+		model.addAttribute("train", train);	
+		return "/mine/train/jgenerate";
+	}
 
 
 }

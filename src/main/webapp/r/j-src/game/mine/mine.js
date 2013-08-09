@@ -33,6 +33,17 @@ $(document).ready(function () {
     });
 
 
+    $("#saveMineCheckBox").on("click", function () {
+        $("#previewHint").show();
+    })
+
+    $("#closePreview").on("click", function () {
+
+        $("#previewHint").hide();
+
+    })
+
+
     $("#restart").on("click", function () {
         mineView.initMine();
         return false;
@@ -126,9 +137,9 @@ $(document).ready(function () {
             var nextHtml = "<p class='pull-right' ><a href='#' class='btn' id='nextButton'>下一组雷图</a></p>";
             $("#" + selects.$settingArea).prepend(html + nextHtml);
 
-            var row = $("#rowCount").val();
-            var column = $("#columnCount").val();
-            var mine = $("#mineCount").val();
+            var row = parseInt($("#rowCount").val());
+            var column = parseInt($("#columnCount").val());
+            var mine = parseInt($("#mineCount").val());
             var content = $("#mineContent").val();
             var systemContent = $("#systemContent").val();
             var level = $("#mineLevel").val();
@@ -136,7 +147,8 @@ $(document).ready(function () {
             $("#systemContentGroup").hide();
             $("#mineLevelGroup").hide();
             $("#nextButton").hide();
-
+            $("#previewHint").hide();
+            $("#saveMineArea").hide();
             mineView.updateSetting(row, column, mine, content);
             //default mineSelect is 1.
             mineSettingView.updateSettingParameter(level, row, column, mine, true, content, systemContent);
@@ -296,12 +308,12 @@ $(document).ready(function () {
         //计算雷图
         showStoreMine:function () {
             //1.获取当前鼠标点击的Div的坐标
-            var x =parseInt($(this).attr("x"));
+            var x = parseInt($(this).attr("x"));
             var y = parseInt($(this).attr("y"));
-            console.log(x+","+y);
+            console.log(x + "," + y);
             //2.获取截取雷图的坐标范围，雷区选择 9*9
 
-            var divCount=3;
+            var divCount = 3;
 
             var leftTopX = (x - divCount) < 1 ? 1 : x - divCount;
 
@@ -316,38 +328,39 @@ $(document).ready(function () {
             var rightBottomX = leftBottomX;
             var rightBottomY = rightTopY;
 
-            console.log(leftTopX+","+leftTopY+"  -   "+rightTopX+","+rightTopY+"  -   "+leftBottomX+","+leftBottomY+"  -   "+rightBottomX+","+rightBottomY);
+            var rowCount = leftBottomY - leftTopY;
+            var columnCount = rightTopY - leftTopY;
+            console.log(leftTopX + "," + leftTopY + "  -   " + rightTopX + "," + rightTopY + "  -   " + leftBottomX + "," + leftBottomY + "  -   " + rightBottomX + "," + rightBottomY);
 
-            var systemContent="";
-            //3.从当前的系统坐标中生成新的字符串
-            var i=0;
-            for(var saveHeight=leftTopX;saveHeight<leftBottomX;saveHeight++){
-                var row=bombStr.system.substring(leftTopY+i*mineView.setting.row-1,rightTopY+i*mineView.setting.row-1);
-                console.log(row);
-                systemContent=systemContent+row;
+            var systemContent = "";
+            var userContent = "";
+            //3.从当前的系统坐标中生成新的字符串//4.从当前的用户坐标中儿取点开的字符串位置
+
+            console.log(bombStr.system);
+            var i = 0;
+            for (var saveHeight = leftTopX - 1; saveHeight < leftBottomX; saveHeight++) {
+                var start = leftTopY + i * mineView.setting.row - 1;
+                var end = rightTopY + i * mineView.setting.row;
+
+                if (end >= bombStr.system.length) {
+                    break;
+                }
+                var row = bombStr.system.substring(start, end);
+                var userrow = bombStr.user.substring(start, end);
+                console.log(start + "," + end + " : " + row + " : " + userrow);
+                systemContent = systemContent + row;
+                userContent = userContent + userrow;
                 i++;
             }
             console.log(systemContent);
-
-
-
-            //4.从当前的用户坐标中儿取点开的字符串位置
-
-            for(var saveHeight=rightTopY;saveHeight<leftBottomY;saveHeight++){
-                          var row=bombStr.user.sub(leftTopX,rightTopX);
-                          systemContent=systemContent+row;
-                      }
-              console.log(systemContent);
+            console.log(userContent);
 
 
             //5.根据3,4生成保存的雷图，根据雷的数目生成系统雷图。根据用户点开的格子生成最终的雷图
+            var content = mineService.getMineContent({row:rowCount + 1, column:columnCount + 1, systemContent:systemContent, userContent:userContent});
 
 
             //6.显示出来
-
-
-
-
 
 
         },
@@ -386,6 +399,13 @@ $(document).ready(function () {
             }
         },
         setting:{
+            row:0,
+            column:0,
+            mine:0,
+            content:""
+
+        },
+        oldSetting:{
             row:0,
             column:0,
             mine:0,
@@ -446,11 +466,26 @@ $(document).ready(function () {
             viewUtil.autoBottom($("#" + selects.$gameArea));
         },
 
-        showMineOperater:function (mo) {
-            var x = mo.x;
-            var y = mo.y;
-            var id = "#" + mo.id;
+        showMineOperater:function (mo, divID) {
+            if (divID) {
+
+            } else {
+                divID = "inner";
+            }
+            var x = parseInt(mo.x);
+            var y = parseInt(mo.y);
+            var id = "#" + divID + "-" + mo.id;
             var value = mo.value;
+
+           // var index = (x - 1) * mineView.setting.column + y - 1;
+           // console.log(index + "," + bombStr.user);
+
+          //  var pre = bombStr.user.substring(0, index);
+          //  var nex = bombStr.user.substring(index + 1, bombStr.user.length);
+
+            var replaceValue = value;
+
+
             switch (value) {
                 case "#":
                     $(id).empty();
@@ -460,18 +495,21 @@ $(document).ready(function () {
                 case "empty":
                     $(id).empty();
                     $(id).removeClass().addClass("square");
+                    replaceValue = 0;
                     break;
                 case "bomb":
                     $(id).empty();
                     $(id).removeClass();
                     $(id).addClass("square").addClass("wrong");
                     $(id).text("*");
+                    replaceValue = "*";
                     break;
                 case "clear":
                     $(id).empty();
                     $(id).removeClass();
 
                     mineView.tagMine();
+                    replaceValue = "n";
                     break;
                 case "n":
                     $(id).empty();
@@ -489,6 +527,9 @@ $(document).ready(function () {
                     $(id).addClass("square").addClass("q" + value);
                     $(id).text(value);
             }
+
+          //  bombStr.user = pre + replaceValue + nex;
+           // console.log(index + "," + pre + "," + nex + "," + bombStr.user);
 
 
         },
@@ -590,12 +631,21 @@ $(document).ready(function () {
             controlView.clearCountDownTime();
 
         },
-        initMine:function () {
-            $("#inner").empty();
+        initMine:function (id) {
 
             var row = mineView.getSettingRow();
             var column = mineView.getSettingColumn();
             var maxCount = mineView.getSettingMineCount();
+            if (id) {
+                row=mineView.oldSetting.row;
+                column=mineView.oldSetting.column;
+
+
+            } else {
+                id = "inner";
+            }
+            $("#" + id).empty();
+
             mineView.initMineCount(maxCount);
 
             //12的Div+左右两个2PX+1
@@ -607,15 +657,15 @@ $(document).ready(function () {
              console.log("mine height is " + mineSize.height + " border is " + mineSize.border + " row is " + row + " ,so Total" +
              "height is " + containerHeight);*/
 
-            $("#inner").width(containerWidth);
+            $("#" + id).width(containerWidth);
 
 
             for (var i = 0; i < row * column; i++) {
 
                 var r = Math.floor(i / column) + 1;
                 var c = Math.floor(i % column) + 1;
-                var mineHtml = "<div x='" + r + "' y='" + c + "' id='" + r + "-" + c + "'></div>"
-                $("#inner").append(mineHtml);
+                var mineHtml = "<div x='" + r + "' y='" + c + "' id='" + id + "-" + r + "-" + c + "'></div>"
+                $("#" + id).append(mineHtml);
                 //  $("#inner2").append(mineHtml);
             }
             ;
@@ -652,10 +702,24 @@ $(document).ready(function () {
     }
 
     var mineService = {
+        getMineContent:function (param) {
+            return  ajaxJson("/mine/train/generate?", "get", param, mineService.parseMIneContentt, 5000, "json");
+
+        },
+        parseMIneContentt:function (data) {
+            console.log(data);
+            mineView.oldSetting.row = data.row;
+            mineView.oldSetting.column = data.column;
+            mineView.oldSetting.mine = data.mine;
+
+
+            mineView.initMine("innerDemo");
+            mineService.parseBomb(data.userContent, false, "innerDemo");
+        },
         getTrainMine:function () {
 
 
-            trainMineContents = mineService.getTranMainContents();
+            mineService.getTranMainContents();
 
             //循环.如果是最后一个.就自动开始第一局
             if (trainMineIndex > trainMineContents.length - 1) {
@@ -665,7 +729,7 @@ $(document).ready(function () {
 
         },
         getTranMainContents:function () {
-            return  ajaxJson("/mine/train/list?", "get", mineService.parseTrainList, null, 5000, "json");
+            return  ajaxJson("/mine/train/list?", "get", null, mineService.parseTrainList, 5000, "json");
         },
         parseTrainList:function (data) {
             trainMineContents = {};
@@ -800,16 +864,16 @@ $(document).ready(function () {
             //  console.log("parse use time "+(new Date().getTime()-start));
         },
 
-        parseBomb:function (str, mine) {
+        parseBomb:function (str, mine, id) {
             var mines = mineUtil.convertStr2Mine(str);
             for (var key in mines) {
                 //是否只显示雷
                 if (mine) {
                     if (mines[key].value == "bomb" || mines[key].value == "*") {
-                        mineView.showMineOperater(mines[key]);
+                        mineView.showMineOperater(mines[key], id);
                     }
                 } else {
-                    mineView.showMineOperater(mines[key]);
+                    mineView.showMineOperater(mines[key], id);
                 }
 
 
