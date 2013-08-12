@@ -17,7 +17,7 @@ $(document).ready(function () {
             mineService.sendMineOperater(mo, rid, version);
         } else {
 
-            if (mineView.isSaveMine()) {
+            if (mineView.isSaveMine() && "run" == globalView.getGameStatus()) {
                 mineView.showStoreMine.call(this);
                 mineView.setSaveMineCheckBox(false);
                 return;
@@ -34,12 +34,18 @@ $(document).ready(function () {
 
 
     $("#saveMineCheckBox").on("click", function () {
-        $("#previewHint").show();
+        if (mineView.isSaveMine()) {
+            $("#previewHint").show();
+        } else {
+            $("#previewHint").hide();
+        }
+
     })
 
     $("#closePreview").on("click", function () {
 
         $("#previewHint").hide();
+        mineView.setSaveMineCheckBox(false);
 
     })
 
@@ -97,9 +103,18 @@ $(document).ready(function () {
             return new mineOperater(message.predict, ids[0], ids[1], message.object);
 
         },
-        convertStr2Mine:function (str) {
-            var row = mineView.getSettingRow();
-            var column = mineView.getSettingColumn();
+        convertStr2Mine:function (str, row, column) {
+            if (row) {
+
+            } else {
+                row = mineView.getSettingRow();
+            }
+            if (column) {
+
+            } else {
+                column = mineView.getSettingColumn();
+            }
+
             var result = [];
             for (var i = 0; i < str.length; i++) {
                 var v = str.substr(i, 1);
@@ -148,7 +163,7 @@ $(document).ready(function () {
             $("#mineLevelGroup").hide();
             $("#nextButton").hide();
             $("#previewHint").hide();
-            $("#saveMineArea").hide();
+            // $("#saveMineArea").hide();
             mineView.updateSetting(row, column, mine, content);
             //default mineSelect is 1.
             mineSettingView.updateSettingParameter(level, row, column, mine, true, content, systemContent);
@@ -310,7 +325,8 @@ $(document).ready(function () {
             //1.获取当前鼠标点击的Div的坐标
             var x = parseInt($(this).attr("x"));
             var y = parseInt($(this).attr("y"));
-            console.log(x + "," + y);
+
+
             //2.获取截取雷图的坐标范围，雷区选择 9*9
 
             var divCount = 3;
@@ -328,7 +344,7 @@ $(document).ready(function () {
             var rightBottomX = leftBottomX;
             var rightBottomY = rightTopY;
 
-            var rowCount = leftBottomY - leftTopY;
+            var rowCount = leftBottomX - leftTopX;
             var columnCount = rightTopY - leftTopY;
             console.log(leftTopX + "," + leftTopY + "  -   " + rightTopX + "," + rightTopY + "  -   " + leftBottomX + "," + leftBottomY + "  -   " + rightBottomX + "," + rightBottomY);
 
@@ -337,6 +353,7 @@ $(document).ready(function () {
             //3.从当前的系统坐标中生成新的字符串//4.从当前的用户坐标中儿取点开的字符串位置
 
             console.log(bombStr.system);
+            mineService.updateUserContent();
             var i = 0;
             for (var saveHeight = leftTopX - 1; saveHeight < leftBottomX; saveHeight++) {
                 var start = leftTopY + i * mineView.setting.row - 1;
@@ -477,13 +494,11 @@ $(document).ready(function () {
             var id = "#" + divID + "-" + mo.id;
             var value = mo.value;
 
-           // var index = (x - 1) * mineView.setting.column + y - 1;
-           // console.log(index + "," + bombStr.user);
+            // var index = (x - 1) * mineView.setting.column + y - 1;
+            // console.log(index + "," + bombStr.user);
 
-          //  var pre = bombStr.user.substring(0, index);
-          //  var nex = bombStr.user.substring(index + 1, bombStr.user.length);
-
-            var replaceValue = value;
+            //  var pre = bombStr.user.substring(0, index);
+            //  var nex = bombStr.user.substring(index + 1, bombStr.user.length);
 
 
             switch (value) {
@@ -495,21 +510,21 @@ $(document).ready(function () {
                 case "empty":
                     $(id).empty();
                     $(id).removeClass().addClass("square");
-                    replaceValue = 0;
+
                     break;
                 case "bomb":
                     $(id).empty();
                     $(id).removeClass();
                     $(id).addClass("square").addClass("wrong");
                     $(id).text("*");
-                    replaceValue = "*";
+
                     break;
                 case "clear":
                     $(id).empty();
                     $(id).removeClass();
 
                     mineView.tagMine();
-                    replaceValue = "n";
+
                     break;
                 case "n":
                     $(id).empty();
@@ -528,8 +543,8 @@ $(document).ready(function () {
                     $(id).text(value);
             }
 
-          //  bombStr.user = pre + replaceValue + nex;
-           // console.log(index + "," + pre + "," + nex + "," + bombStr.user);
+            //  bombStr.user = pre + replaceValue + nex;
+            // console.log(index + "," + pre + "," + nex + "," + bombStr.user);
 
 
         },
@@ -637,8 +652,8 @@ $(document).ready(function () {
             var column = mineView.getSettingColumn();
             var maxCount = mineView.getSettingMineCount();
             if (id) {
-                row=mineView.oldSetting.row;
-                column=mineView.oldSetting.column;
+                row = mineView.oldSetting.row;
+                column = mineView.oldSetting.column;
 
 
             } else {
@@ -702,6 +717,16 @@ $(document).ready(function () {
     }
 
     var mineService = {
+        updateUserContent:function () {
+
+
+            var param = {
+                uid:globalView.getCurrentID(),
+                rid:globalView.getRoomID()
+            };
+            var data = roomService.getRoomDetail(param);
+            mineService.updateBomb(data.bomb);
+        },
         getMineContent:function (param) {
             return  ajaxJson("/mine/train/generate?", "get", param, mineService.parseMIneContentt, 5000, "json");
 
@@ -715,6 +740,10 @@ $(document).ready(function () {
 
             mineView.initMine("innerDemo");
             mineService.parseBomb(data.userContent, false, "innerDemo");
+        },
+        parseMIneTrainContentt:function (data) {
+
+            return data;
         },
         getTrainMine:function () {
 
@@ -865,7 +894,8 @@ $(document).ready(function () {
         },
 
         parseBomb:function (str, mine, id) {
-            var mines = mineUtil.convertStr2Mine(str);
+            var mines = mineUtil.convertStr2Mine(str, mineView.oldSetting.row,
+                mineView.oldSetting.column);
             for (var key in mines) {
                 //是否只显示雷
                 if (mine) {

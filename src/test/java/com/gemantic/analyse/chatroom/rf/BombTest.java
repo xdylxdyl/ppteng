@@ -100,21 +100,21 @@ public class BombTest {
 		MessageUtil.sendMessage("", ls, pushClient);
 	}
 
-	//@Test
+	@Test
 	public void testBombAssign() {
-
+/*
 		List<Pair> pairs = BombUtil.getRoundPanes(Pair.of(4, 9), 9, 9);
 		log.info(pairs);
 
-		log.info(BombUtil.convertPair2String(Pair.of(3, 1)));
+		log.info(BombUtil.convertPair2String(Pair.of(3, 1)));*/
 
 		// 1.生成一个系统的雷图
 		String systemBombPic = BombUtil.assign(9, 9, 10);
 		log.info(systemBombPic);
-		//systemBombPic="110000011*1000002*12110002*01*11111101111*1000001221001212*1011*2*21212*121101*21";		  
-		log.info(systemBombPic.length());
-		log.info(BombUtil.clickOpen(Pair.of(1, 1), systemBombPic, 19, 19));
-		List<String> pic = BombUtil.printPic(systemBombPic, 19, 19);
+		systemBombPic="01121101*3*1013*31002*20";		  
+		/*log.info(systemBombPic.length());
+		log.info(BombUtil.clickOpen(Pair.of(1, 1), systemBombPic, 19, 19));*/
+		List<String> pic = BombUtil.printPic(systemBombPic, 4, 6);
 		for (String line : pic) {
 			log.info(line);
 		}

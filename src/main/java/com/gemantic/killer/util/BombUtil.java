@@ -1,5 +1,6 @@
 package com.gemantic.killer.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +12,12 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+
+import com.gemantic.common.util.FileUtil;
 import com.gemantic.killer.common.model.Message;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 public class BombUtil {
 	private static final Log log = LogFactory.getLog(BombUtil.class);
@@ -172,7 +178,7 @@ public class BombUtil {
 		return result;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		/*
 		 * String[][] pic=new String[][]{{"1","2"},{"3","4"}}; log.info(pic);
@@ -213,6 +219,12 @@ public class BombUtil {
 
 		int iiii = BombUtil.getUserCount("nnnn" + "nn11" + "1110" + "0000");
 		log.info("count is " + iiii);
+		
+		String snapshot=FileUtil.readFileAsString("d:/data/mine-snapshot.txt");
+				
+		
+		Map snap=BombUtil.revertMineSnapshot(snapshot);
+		log.info(snap);
 
 	}
 
@@ -380,6 +392,12 @@ public class BombUtil {
 		}
 		
 		return sb.toString();
+	}
+	public static Map revertMineSnapshot(String snapshot){
+		Gson gson = new GsonBuilder().create();
+		Map map = gson.fromJson(snapshot, new TypeToken<Map<String,Object>>() {}.getType());
+		return map;
+		
 	}
 
 }
