@@ -246,6 +246,9 @@
 					<p>
 						<a href="http://fifa.wemvp.com/" target="_blank">FIFA14</a>
 					<p>
+					<p>
+						<a href="http://www.yiyuanerci.com/" target="_blank">一元二次游戏网</a>
+					<p>
 				</div>
 				<div class="span">
 					<p>
