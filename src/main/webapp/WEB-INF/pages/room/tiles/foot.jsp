@@ -67,6 +67,12 @@
 							src="http://wpa.qq.com/imgd?IDKEY=8971a9b0581ad8da3c8686766f8f9c69b8f587e5fa00eb0f&pic=41"
 							alt="给葡萄藤发消息" title="联系站长"></a>
 					</p>
+					<p>
+						<a target="_blank"
+							href="http://wp.qq.com/wpa/qunwpa?idkey=d9d67cb3dec77080413ecfe7286ba08d108aface039f6cfc09260788a3df493d"><img
+							border="0" src="http://pub.idqqimg.com/wpa/images/group.png"
+							alt="290560933" title="290560933"></a>
+					</p>
 
 				</div>
 				<div class="span3">
@@ -75,7 +81,7 @@
 				</div>
 
 			</div>
-			
+
 
 		</div>
 
@@ -110,8 +116,7 @@
 						<a href="http://www.firefox.com.cn/download/" target="_blank">FireFox</a>
 					</p></li>
 				<li><p>
-						<a href="http://www.google.cn/intl/zh-CN/chrome/"
-							target="_blank">Chrome</a>
+						<a href="http://www.google.cn/intl/zh-CN/chrome/" target="_blank">Chrome</a>
 					</p></li>
 				<li><p>
 						<a href="http://ie.sogou.com/" target="_blank">Sogou(高速模式)</a>
