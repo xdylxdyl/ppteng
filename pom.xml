@@ -770,6 +770,14 @@
 			<artifactId>jstl-api</artifactId>
 			<version>1.2</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.9.3</version>
+
+		</dependency>
 	</dependencies>
 
 

@@ -61,6 +61,8 @@ public class ZipTest {
 
 		String url = "http://www.popo8.com/host/data/20121231/ac4a366.jpg";
 		FileUtil.saveImage(url, "d://test");
+		
+		
 
 	}
 

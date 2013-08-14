@@ -36,7 +36,7 @@ public class RecordServiceTest {
 
 	private RecordStastisticsEtl recordStastisticsEtl;
 
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 
 		// dao
@@ -186,7 +186,7 @@ public class RecordServiceTest {
 	
 
 
-	@Test
+	//@Test
 	public void getRecordIdsByVersionssssss() throws ServiceException, ServiceDaoException, IOException, InterruptedException, SecurityException, IllegalAccessException, NoSuchFieldException {
 		List<Long> lists = this.recordService.getRecordIdsByVersionAndCreateAt("simple_1.0", MyTimeUtil.getTodayZeroTimeMillions(), 0, Integer.MAX_VALUE);
 
