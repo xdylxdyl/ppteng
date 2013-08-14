@@ -593,6 +593,7 @@ $(document).ready(function () {
 
             viewUtil.autoBottom($("#" + selects.$gameArea));
 
+            globalView.setGameStatus("run");
 
             playerListView.sortPlayer();
             settingView.hideSettingButton();
