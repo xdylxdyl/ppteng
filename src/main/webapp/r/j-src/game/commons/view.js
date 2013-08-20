@@ -23,8 +23,8 @@ var sayHint = {
 }
 
 var defaultHint = {
-    command:"<li data-default=''><a href=''#'>指令</a></li><li class='divider'></li>",
-    object:"<li data-default=''><a href=''#'>对象</a></li><li class='divider'></li>"
+    command:"<li data-default='say'><a href='#'>指令</a></li><li class='divider'></li>",
+    object:"<li data-default='-500'><a href='#'>对象</a></li><li class='divider'></li>"
 }
 
 var settingView = {
@@ -836,7 +836,7 @@ var controlView = {
     resetCommand:function () {
 
         $("#" + selects.$select_command).find('span').text("指令");
-        $("#" + selects.$command).attr("data-default", "");
+        $("#" + selects.$command).attr("data-default", "say");
         controlView.resetObject();
 
 
@@ -926,7 +926,7 @@ var controlView = {
     initColor:function () {
 
 
-        var colorStr = "  <li data-default='#000'><a href='#'>color</a></li><li class='divider'></li>";
+        var colorStr = "  <li data-default='#000'><a href='#'>颜色</a></li><li class='divider'></li>";
         for (var key in color) {
             colorStr += "<li data-default='" + key + "'> <div class='color-block' style='background:" + key + "'></div><a href='#' class='color-font'>" + color[key] + "</a></li>";
 
@@ -1053,7 +1053,7 @@ var controlView = {
         }
     },
     filterSingleObject:function (keyword, playerList) {
-        var objectStr = "<li data-default=''><a href='#'>对象</a></li> <li class='divider'></li>";
+        var objectStr = "<li data-default='-500'><a href='#'>对象</a></li> <li class='divider'></li>";
         $("#object").empty().append(objectStr);
 
 

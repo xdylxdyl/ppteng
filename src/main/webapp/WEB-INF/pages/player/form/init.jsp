@@ -158,11 +158,7 @@
 			</spring:bind>
 
 			<h1>Create Your Account</h1>
-			<div class="signin-social">
-				<p>第三方注册</p>
-				<a href="#"><img src="/r/img/qq_login.png" alt="QQ登录"></a> <a
-					href="#"><img src="/r/img/weibo_login.png" alt="微博登录"></a>
-			</div>
+			
 
 			<div class="signin-action">
 				<p>一分钟注册:</p>

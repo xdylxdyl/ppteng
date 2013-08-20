@@ -43,26 +43,26 @@ $(function () {
 });
 
 
-$("#expression").on("click","li", function () {
+$("#expression").on("click", "li", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
 
 
 })
-$("#color").on("click","li",function () {
-    var mid="select_" + $(this).parent().attr("id");
-    var did=$(this).parent().attr("id");
-    extracted.call(this, mid,did );
+$("#color").on("click", "li", function () {
+    var mid = "select_" + $(this).parent().attr("id");
+    var did = $(this).parent().attr("id");
+    extracted.call(this, mid, did);
 
 
 })
-$("#command").on("click","li", function () {
+$("#command").on("click", "li", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     var command = controlView.getCommandValue();
     var playList = playerService.getAllPlayer();
     controlView.filterObject(command, playList);
 
 })
-$("#object").on("click","li", function () {
+$("#object").on("click", "li", function () {
     extracted.call(this, "select_" + $(this).parent().attr("id"), $(this).parent().attr("id"));
     if (controlView.checkSayNotEmpty()) {
 
@@ -86,6 +86,8 @@ $("#object").on("click","li", function () {
 function extracted(mid, did) {
     var txt = $(this).text();
     var val = $(this).attr('data-default');
+
     $("#" + mid).find('span').text(txt);
     $("#" + did).attr('data-default', val);
+
 }
