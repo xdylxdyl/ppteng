@@ -121,7 +121,7 @@ public class MineController {
 		Long uid = cookieUtil.getID(request, response);
 		if (uid == null) {
 			// 登录不成功,重新登录
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 		Room room = this.roomService.getRoom(rid);
 		Map<Long, Map<String, Set<String>>> user_info = new HashMap();

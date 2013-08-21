@@ -84,11 +84,11 @@ public class RoomController {
 		Long uid = cookieUtil.getID(request, response);
 		if (uid == null) {
 			// 登录不成功,重新登录
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 		boolean isPunch = PunchUtil.isPunched(user);
 		if (isPunch) {
@@ -162,7 +162,7 @@ public class RoomController {
 		Long uid = cookieUtil.getID(request, response);
 		if (uid == null) {
 			// 登录不成功,重新登录
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 
 		log.debug("id is " + rid + " uid " + uid);
@@ -378,7 +378,7 @@ public class RoomController {
 		Long uid = cookieUtil.getID(request, response);
 		if (uid == null) {
 			// 登录不成功,重新登录
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 		log.debug(createID + " want create  " + name + " type " + version);
 

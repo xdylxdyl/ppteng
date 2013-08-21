@@ -59,7 +59,7 @@ public class MoneyController {
 		if (uid == null) {
 			uid = cookieUtil.getID(request, response);
 			if(uid==null){
-				return "redirect:/";
+				return "redirect:/login?code=-6008";
 			}
 		}
 		if ("out".equals(type)) {
@@ -186,7 +186,7 @@ public class MoneyController {
 
 		Long uid = cookieUtil.getID(request, response);
 		if(uid==null){
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 
 		

@@ -76,13 +76,13 @@ public class UserFormController {
 
 			if (uid == null) {
 				model.addAttribute("code", -6004);
-				return "redirect:/";
+				return "redirect:/login";
 			} else {
 				user = this.userService.getObjectById(uid);
 				if (user == null) {
 
 					model.addAttribute("code", -6005);
-					return "redirect:/";
+					return "redirect:/login";
 				} else {
 
 				}
@@ -96,7 +96,7 @@ public class UserFormController {
 			if (StringUtils.isBlank(token)) {
 				log.error(" empty token ");
 				model.addAttribute("code", -6006);
-				return "redirect:/";
+				return "redirect:/login";
 			} else {
 
 				String content = DESUtil.decrypt(token.getBytes());
@@ -104,21 +104,21 @@ public class UserFormController {
 				if (cs.length != 2) {
 					log.error(content+" invalid token ");
 					model.addAttribute("code", -6006);
-					return "redirect:/";
+					return "redirect:/login";
 				}
 				Long uid=Long.valueOf(cs[0]);
 				Long time=Long.valueOf(cs[1]);
 				if(System.currentTimeMillis()-time>5*60*1000){
 					log.error(content+" invalid time ");
 					model.addAttribute("code", -6007);
-					return "redirect:/";
+					return "redirect:/login";
 					
 				}
 				user = this.userService.getObjectById(uid);
 				if (user == null) {
 					log.error(content+" invalid user ");
 					model.addAttribute("code", -6005);
-					return "redirect:/";
+					return "redirect:/login";
 				} else {
 					
 

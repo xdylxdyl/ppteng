@@ -71,17 +71,19 @@
 
 
 								<div class="span3" ng-repeat="config in versionConfig">
-									<a href="" class="createCategory" version="{{config.version}}">
+								<h3 class="">{{config.title}}</h3>								
+										
+								
 										<img class="img-polaroid fix-img" ng-src="{{config.img}}">
-									</a>
-
-
-									<h4>
-										<a href="" class="createCategory" version="{{config.version}}">{{config.title}}</a>
-									</h4>
-
-
+										   
+										
+										
+										<h3><a href="" class="btn btn-primary  createCategory" version="{{config.version}}">创建</a></h3>
+										<hr>
+									
 								</div>
+								
+								
 
 
 

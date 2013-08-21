@@ -222,7 +222,7 @@ public class PlayerController implements ApplicationContextAware {
 				uid = this.userService.getUsersIdByEmail(email);
 				if (uid == null) {
 					model.addAttribute("code", "-6003");
-					return "redirect:/";
+					return "redirect:/login";
 				}
 				success = this.userService.verify(uid, password);
 				loginUID = uid;
@@ -236,7 +236,7 @@ public class PlayerController implements ApplicationContextAware {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					model.addAttribute("code", "-6003");
-					return "redirect:/";
+					return "redirect:/login";
 				}
 
 			}
@@ -251,7 +251,7 @@ public class PlayerController implements ApplicationContextAware {
 				// 怎么清除还不知道
 
 				model.addAttribute("code", "-6003");
-				return "redirect:/";
+				return "redirect:/login";
 			} else {
 				uname = user.getName();
 				// loging success we should set cookie;
@@ -271,7 +271,7 @@ public class PlayerController implements ApplicationContextAware {
 			// 登录不成功,重新登录
 			model.addAttribute("code", "-6002");
 
-			return "redirect:/";
+			return "redirect:/login";
 
 		}
 
@@ -613,16 +613,22 @@ public class PlayerController implements ApplicationContextAware {
 
 		log.info(uid + " detail ");
 
-		Long selfID = cookieUtil.getID(request, response);
-
-		if (selfID == null) {
-			return "redirect:/?";
-		}
-
+		Long viewUserID;
 		if (uid == null) {
-			uid = selfID;
+
+			viewUserID = cookieUtil.getID(request, response);
+
+			if (viewUserID == null) {
+				return "redirect:/login?code=-6008";
+			}
+			model.addAttribute("selfID", viewUserID);
+
+		} else {
+			viewUserID = uid;
+
 		}
-		User u = this.userService.getObjectById(uid);
+
+		User u = this.userService.getObjectById(viewUserID);
 		log.info(" get user info " + u);
 
 		int punchCount = PunchUtil.getLatestContinueDay(
@@ -631,7 +637,7 @@ public class PlayerController implements ApplicationContextAware {
 
 		model.addAttribute("current", u);
 		model.addAttribute("punchCount", punchCount);
-		model.addAttribute("selfID", selfID);
+		
 		model.addAttribute("uid", uid);
 		return "/room/player/detail";
 
@@ -655,7 +661,7 @@ public class PlayerController implements ApplicationContextAware {
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
 
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 		boolean isPunch = PunchUtil.isPunched(user);
 		if (isPunch) {
@@ -708,7 +714,7 @@ public class PlayerController implements ApplicationContextAware {
 		User user = this.userService.getObjectById(uid);
 		if (user == null) {
 
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 
 		log.info(" get user info " + user);
@@ -755,7 +761,7 @@ public class PlayerController implements ApplicationContextAware {
 			statistics = new SimpleStatistics();
 		}
 		model.addAttribute("statistics", statistics);
-		
+
 		return "/room/statistics/" + version;
 
 	}
@@ -1082,7 +1088,7 @@ public class PlayerController implements ApplicationContextAware {
 
 		Long self = cookieUtil.getID(request, response);
 		if (self == null) {
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 		log.info(self);
 

@@ -109,6 +109,25 @@ public class GameController {
 		return "/room/index/index";
 	}
 
+	@RequestMapping(value = "/login")
+	public String login(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, Integer code)
+			throws Exception {
+		if (code == null) {
+			code = 0;
+		}
+
+		Long uid = cookieUtil.getID(request, response);
+		if (uid == null) {
+			model.addAttribute("code", code);			
+
+			return "/room/index/login";
+		
+		} else {
+			return "redirect:/m/list" ;
+		}
+		}
+
 	/**
 	 * 游戏准备
 	 * 
@@ -179,7 +198,6 @@ public class GameController {
 			HttpServletResponse response, ModelMap model,
 			@PathVariable String type) throws Exception {
 
-		
 		return "/room/tool/" + type;
 	}
 

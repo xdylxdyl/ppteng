@@ -40,8 +40,8 @@
 					</c:choose>
 				
 
-					<a href="" rid="${room.id}" uid="${uid}"
-						class="enterRoom pull-right ">进入</a>
+					<button href="" rid="${room.id}" uid="${uid}"
+						class="enterRoom btn btn-primary pull-right">进入</button>
 				</h4>
 				<blockquote>
 					<small> <date:date pattern="HH时mm分 "

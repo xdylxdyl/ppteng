@@ -134,7 +134,7 @@ public class RoomSettingFormController {
 		Long uid = cookieUtil.getID(request, response);
 		if (uid == null) {
 			// 登录不成功,重新登录
-			return "redirect:/";
+			return "redirect:/login?code=-6008";
 		}
 		
 		
