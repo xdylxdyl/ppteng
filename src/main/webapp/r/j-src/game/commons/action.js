@@ -45,6 +45,7 @@ $(document).ready(function () {
                 cometService.sendMessage(message);
                 controlView.clearSayInput();
                 controlView.resetCommand();
+                controlView.resetExpression();
             } else {
                 //error
                 alert(formatResult.message);

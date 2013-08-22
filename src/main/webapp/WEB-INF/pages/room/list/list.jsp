@@ -76,6 +76,15 @@
 <c:set var="version" value="mine_1.0" scope="request"></c:set>
 <tiles:insertDefinition name="roomSnapshot" />
 
+<!--DIY游戏室-->
+<c:set var="categoryTitle" value="DIY游戏室" scope="request"></c:set>
+<c:set var="categoryDescription" value="自定义桌游" scope="request"></c:set>
+<tiles:insertDefinition name="versionSnapshot" />
+<c:set var="versionTitle" value="DIY游戏室" scope="request"></c:set>
+<c:set var="version" value="labs_diy_1.0" scope="request"></c:set>
+<tiles:insertDefinition name="roomSnapshot" />
+
+
 <!--休息室-->
 <c:set var="categoryTitle" value="休息室" scope="request"></c:set>
 <c:set var="categoryDescription" value="看新闻,听音乐,闲聊天" scope="request"></c:set>

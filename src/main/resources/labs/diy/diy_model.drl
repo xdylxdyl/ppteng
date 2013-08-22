@@ -1,0 +1,43 @@
+package drools.common
+
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import org.apache.commons.lang.StringUtils;
+
+
+declare Game
+	status: String
+	liverCount:int	
+	kingCount:int	
+	lastTime:Long
+	remainTime:Long
+	startAt:Long
+	recordName:String	
+end
+
+
+declare Role
+       id:String
+       role:String 
+end
+
+declare Die
+	id: String
+	type: String
+	role:String
+end
+
+
+declare StatusChange
+     change:String
+end
+
+
+declare TimerMesasage
+	phase: String
+	time: Long
+	schedule:Long
+end
+

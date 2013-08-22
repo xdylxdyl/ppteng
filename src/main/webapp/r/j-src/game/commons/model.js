@@ -209,6 +209,7 @@ var selects = {
     $displayRole:"displayRole",
     $countDown:"countDown",
     $select_command:"select_command",
+    $select_expression:"select_expression",
     $select_object:"select_object",
     $mainArea:"mainArea",
     $secondArea:"secondArea",

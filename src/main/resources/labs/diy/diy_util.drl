@@ -1,0 +1,98 @@
+package drools.common
+
+import drools.common.*
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Collections;
+
+
+
+import org.apache.commons.lang.StringUtils;
+
+
+
+
+function void setRemainTime(String status,Game game,Room room) {
+     
+     String statusTime=status+"Time";    
+     
+     Long setting=Long.valueOf(getRoomSetting(room,statusTime,"-1"));
+      Long lastTime=game.getLastTime();
+      Long time=lastTime+setting-System.currentTimeMillis();
+      if(time < 0){
+            LogUtil.log("=========== remain time wrong ======= "+time);          
+      }else{
+          game.setRemainTime(time);
+      }
+     
+       
+}
+
+
+
+function List<String>  getIDFromPlayer(List players) {
+
+      List<String> pids=new ArrayList();
+	    for(Object o:players){
+	          Player p=(Player)o;			 
+			  pids.add(p.getId());
+		}
+		return pids;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function Message createDay(Room room) {
+    String  dayTime=getRoomSetting(room,"dayTime","30000");//1*60*1000
+    Message day=new Message("day","time",dayTime);
+ 
+     return day;
+   
+  
+}
+
+function Message createDelayAnnounceOfQuestion(Room room) {
+
+  
+    Message night=new Message("king","announce","over");
+    String  schedule=getRoomSetting(room,"dayTime","15000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(schedule));    
+    night.setWhere(room.getId());
+    
+    return night;
+  
+}
+    
+  
+
+
+  
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

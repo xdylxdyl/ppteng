@@ -43,6 +43,8 @@
 				<%-- 	<option value="ghost_soul_1.0"
 					<c:if test="${room.version=='ghost_soul_1.0'}">selected="selected"</c:if>>捉鬼[魂版]测试版</option> --%>
 					
+						<option value="labs_diy_1.0"
+					<c:if test="${room.version=='labs_diy_1.0'}">selected="selected"</c:if>>DIY游戏室</option>
 				<option value="rest_1.0"
 					<c:if test="${room.version=='rest_1.0'}">selected="selected"</c:if>>茶座休息室</option>	
 			</select>

@@ -50,8 +50,17 @@
 			</map>
 		</constructor-arg>
 	</bean>
+	<bean id="labs_diy_1.0_setting" class="java.util.HashMap">
+	<constructor-arg>
+			<map>			
+				<entry key="dayTime" value="3000000">
+				</entry>
+				
+			</map>
+		</constructor-arg>
+	
 
-
+	</bean>
 
 	<bean id="video_1.0_setting" class="java.util.HashMap">
 		<constructor-arg>

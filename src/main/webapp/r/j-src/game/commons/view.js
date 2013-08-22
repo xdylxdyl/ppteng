@@ -761,6 +761,10 @@ var controlView = {
                     result.message = sayHint.empty;
                 }
                 break;
+            case "announce":
+
+                result.code = 0;
+                break;
             case "topic":
                 var sayNotEmpty = controlView.checkSayNotEmpty();
                 if (sayNotEmpty) {
@@ -840,6 +844,11 @@ var controlView = {
         controlView.resetObject();
 
 
+    },
+
+    resetExpression:function () {
+        $("#" + selects.$select_expression).find('span').text("神态");
+        $("#" + selects.$expression).attr("data-default", "0");
     },
 
     emptyCommand:function () {
@@ -1029,6 +1038,28 @@ var controlView = {
     },
     filterObject:function (command, playerList) {
         switch (command) {
+            case "say" :
+
+                if (globalView.getGameStatus() == "over") {
+                    controlView.filterSingleObject("all", playerList);
+                } else {
+                    var p = playerService.getPlayer(globalView.getCurrentID());
+                    switch (p.status) {
+                        case "unready":
+                            controlView.filterSingleObject("none", playerList);
+                            break;
+                        case "die":
+                            controlView.filterSingleObject("none", playerList);
+                            break;
+                        default:
+                            controlView.filterSingleObject("living,king", playerList);
+                    }
+
+                }
+
+                break;
+
+
             case "kick" :
                 controlView.filterSingleObject("all", playerList);
                 break;
@@ -1042,10 +1073,26 @@ var controlView = {
                 controlView.filterSingleObject("living", playerList);
                 break;
             case "command" :
-                controlView.filterSingleObject("all", playerList);
+                if (globalView.getGameStatus() == "over") {
+                    controlView.filterSingleObject("all", playerList);
+                } else {
+                    var p = playerService.getPlayer(globalView.getCurrentID());
+
+                    switch (p.status) {
+                        case "unready":
+                            controlView.filterSingleObject("none", playerList);
+                            break;
+                        case "die":
+                            controlView.filterSingleObject("none", playerList);
+                            break;
+                        default:
+                            controlView.filterSingleObject("living,king", playerList);
+                    }
+
+                }
                 break;
             default :
-                console.log("亲，这个指令你还没写嘛.,start version commandFilter");
+                console.log("亲,not have common filter.,start version commandFilter");
                 if (versionFunction["commandFilter"]) {
                     versionFunction["commandFilter"](command);
                 }
@@ -1077,6 +1124,18 @@ var controlView = {
 
                 }
                 break;
+            case "living,king":
+                for (var key in playerList) {
+                    var player = playerList[key];
+                    if ("living" == player.status || "king" == player.status) {
+                        controlView.appendObject(player);
+                    }
+
+
+                }
+                break;
+
+
         }
 
 

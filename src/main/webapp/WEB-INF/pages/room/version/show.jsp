@@ -27,10 +27,14 @@
 <c:when test="${'ghost_soul_1.0'==version}">
 捉鬼[魂版][测试版]
 </c:when>
+<c:when test="${'labs_diy_1.0'==version}">
+DIY游戏室
+</c:when>
 
 <c:when test="${'rest_1.0'==version}">
 茶座休息室
 </c:when>
 <c:otherwise>
+未知版本
 </c:otherwise>
 </c:choose>

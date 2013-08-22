@@ -304,6 +304,9 @@ public class One23Test {
 		}
 
 	}
+	
+	
+
 
 	@Test
 	public void testGhostSoulRule() throws ServiceException,
@@ -629,6 +632,44 @@ public class One23Test {
 
 		}
 		return ls;
+	}
+	
+	
+	
+
+	@Test
+	public void testLabsDiyRule() throws ServiceException,
+			ServiceDaoException, IOException {
+
+		String diyVersion = "labs_diy_1.0";
+	
+		String currentVersion = diyVersion;
+		Room room = new Room("sss", 3L, currentVersion);
+		Setting s = settingService.getSetting(currentVersion);
+		log.info(s);
+		room.setSetting(s);
+		room.setId(5000L);
+		this.droolsGameMessageService.createRoom(room);
+		
+
+		List<String> messages = FileUtil
+				.readFileAsList("src/test/resources/ghost_question.txt");
+		List<Message> ms = new ArrayList();
+
+		Long rid = null;
+
+		for (String message : messages) {
+			if (message.startsWith("#")) {
+				continue;
+			}
+
+			Message m = MessageUtil.parse(diyVersion, message);
+			log.info("message start=========================== " + m);
+			List<Message> ms2 = this.droolsGameMessageService.generate(m, room);
+			log.info(ms2);
+			log.info("message over =============================");
+		}
+
 	}
 
 }

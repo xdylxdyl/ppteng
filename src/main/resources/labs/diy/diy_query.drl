@@ -1,0 +1,39 @@
+package drools.common
+
+import drools.common.*
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Collections;
+
+
+
+import org.apache.commons.lang.StringUtils;
+
+
+
+
+query "snapshot" ()
+    $room:Room()
+	$game:Game()
+    $right:Right() 
+end
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

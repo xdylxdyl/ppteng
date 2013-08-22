@@ -155,6 +155,19 @@
 						<value>ghost/soul/soul_game.rf</value>
 					</list>
 				</entry>
+				
+				
+				
+				<entry key="labs_diy_1.0">
+					<list>
+						<value>labs/diy/diy_model.drl</value>
+						<value>labs/diy/diy_query.drl</value>
+						<value>labs/diy/diy_util.drl</value>
+						<value>labs/diy/diy_game.drl</value>
+						<value>labs/diy/diy_game.rf</value>
+					</list>
+				</entry>
+				
 
 			</map>
 		</constructor-arg>

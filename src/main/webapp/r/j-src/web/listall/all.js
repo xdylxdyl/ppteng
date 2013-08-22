@@ -68,7 +68,7 @@ function createRoom(v) {
 
     $.ajax({
         url:"/m/form/init",
-        data:{uid:uid,version:v},
+        data:{uid:uid, version:v},
         type:"GET",
         success:function (data) {
             modal.open(data);
@@ -79,13 +79,11 @@ function createRoom(v) {
 }
 
 
-
-
 var defaultImg = "/r/img/room/wait.jpg";
 
 
 function VersionConfigCtrl($scope) {
-    $scope.test="xx";
+    $scope.test = "xx";
     $scope.versionConfig = [
         {
             img:"http://img.ledanji.com/other/news/Article/UploadFiles/201011/20101109121212479.jpg",
@@ -109,15 +107,15 @@ function VersionConfigCtrl($scope) {
         },
 
         {
-                    img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLc4ProN5QAAEtdgKHwiA797.jpg",
-                    version:"ghost_question_2.0",
-                    title:"捉鬼游戏 猜词版"
-                },
-       /* {
-            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLfr7O0rCtAAIoXr_bQgo287.jpg",
-            version:"ghost_soul_1.0",
-            title:"捉鬼游戏 魂版"
-        },*/
+            img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLc4ProN5QAAEtdgKHwiA797.jpg",
+            version:"ghost_question_2.0",
+            title:"捉鬼游戏 猜词版"
+        },
+        /* {
+         img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLfr7O0rCtAAIoXr_bQgo287.jpg",
+         version:"ghost_soul_1.0",
+         title:"捉鬼游戏 魂版"
+         },*/
         {
             img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLd-qckytpAAMnWr-oy7g440.jpg",
             version:"mine_1.0",
@@ -127,6 +125,11 @@ function VersionConfigCtrl($scope) {
             img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLZ6CNywCaAAM3d8V9NxE730.jpg",
             version:"video_1.0",
             title:"虚拟电影院"
+        },
+        {
+            img:"http://bbs.ptteng.com/data/attachment/forum/201308/22/182411xulua22kl4w6k4u0.png",
+            version:"labs_diy_1.0",
+            title:"DIY游戏室"
         },
         {
             img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLYvKiTYQ_AAC3jLeuXzk8284.sh",

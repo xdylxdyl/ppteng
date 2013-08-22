@@ -302,7 +302,13 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			}
 
 		} else {
-			u.setMoney(u.getMoney() + 1000);//
+			if (r.getVersion().contains("labs")) {
+				//实验室不给钱~~
+				
+			}else{
+				u.setMoney(u.getMoney() + 1000);//
+			}
+			
 		}
 
 	}
@@ -317,6 +323,15 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			}
 
 		}
+		
+		if (version.contains("labs")) {
+			// 实验室游戏
+			if ( time > 4 * 60 * 1000) {
+				return true;
+			}
+
+		}
+		
 
 		if (version.contains("ghost")) {
 			// 捉鬼游戏 四人 三分钟
