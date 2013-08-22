@@ -166,7 +166,7 @@ $(document).ready(function () {
             globalView.showPlayerList('#sidebar-toggle');
         });
 
-        $('[href][auto-bottom]').on("click", function () {
+        $('[href][auto-bottom]').on("shown", function () {
             var linkID = $(this).attr("href");
             viewUtil.autoBottom($(linkID));
         })
