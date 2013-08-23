@@ -26,7 +26,8 @@ var LabsDIYModel = {
     },
     commandHint:{
         announce:"游戏结束~",
-        kick:"你好,再见"
+        kick:"你好,再见",
+        private:"让我偷偷的告诉你"
 
     },
 
@@ -44,7 +45,8 @@ var LabsDIYModel = {
     },
 
     rightName:{
-        announce:"结束"
+        announce:"结束",
+        private:"私聊"
 
     },
     settingPostParameter:function (rid, version, ghostCount, dayTime, topicTime, questionTime, descriptionTime) {
@@ -97,6 +99,10 @@ var LabsDIYController = {
                 break;
             case "say":
                 LabsDIYController.say(message);
+                break;
+
+            case "private":
+                LabsDIYController.privateSay(message);
                 break;
 
             default :
@@ -164,7 +170,27 @@ var LabsDIYController = {
         }
 
         var p = playerService.getPlayer(message.subject);
-        LabsDIYView.say(message.subject, p.name, message.content, message.expression, message.color, message.object, name,"", message.privateContent);
+        LabsDIYView.say(message.subject, p.name, message.content, message.expression, message.color, message.object, name, "", message.privateContent);
+
+
+    },
+
+    privateSay:function (message) {
+
+        //1.get content from message
+
+        //2.get place from message
+
+        //3.show content at place
+
+
+        var name;
+        if (message.object != -500) {
+            name = playerService.getPlayer(message.object).name;
+        }
+
+        var p = playerService.getPlayer(message.subject);
+        LabsDIYView.say(message.subject, p.name, message.content, message.expression, message.color, message.object, name, "", "true");
 
 
     },
@@ -326,6 +352,9 @@ var LabsDIYRightView = {
             case "announce" :
                 LabsDIYRightView.commandRight(right);
                 break;
+            case "private" :
+                LabsDIYRightView.commandRight(right);
+                break;
             default :
                 console.log("version view not process right: " + right);
         }
@@ -342,7 +371,6 @@ var LabsDIYRightView = {
     commandFilter:function (right) {
         var objectStr = "<li data-default=''><a href='#'>对象</a></li> <li class='divider'></li>";
         $("#object").empty().append(objectStr);
-        controlView.filterSingleObject("living", playerList)
 
 
     }

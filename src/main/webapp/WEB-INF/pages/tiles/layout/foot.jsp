@@ -51,11 +51,7 @@
 				<li id="displayRoleGroup" class="hide"><label for="displayRole"
 					class="checkbox"> <input type="checkbox" checked="checked"
 						value="scroll" id="displayRole"> 隐藏角色
-				</label></li>
-				<li id="privateSayGroup" class="hide"><label for="privateSay"
-					class="checkbox"> <input type="checkbox" value="scroll"
-						id="privateSay"> 私聊
-				</label></li>
+				</label></li>				
 				<li><span class="help-inline" id="countDown">04:00</span></li>
 
 				<li>

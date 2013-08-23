@@ -1038,26 +1038,6 @@ var controlView = {
     },
     filterObject:function (command, playerList) {
         switch (command) {
-            case "say" :
-
-                if (globalView.getGameStatus() == "over") {
-                    controlView.filterSingleObject("all", playerList);
-                } else {
-                    var p = playerService.getPlayer(globalView.getCurrentID());
-                    switch (p.status) {
-                        case "unready":
-                            controlView.filterSingleObject("none", playerList);
-                            break;
-                        case "die":
-                            controlView.filterSingleObject("none", playerList);
-                            break;
-                        default:
-                            controlView.filterSingleObject("living,king", playerList);
-                    }
-
-                }
-
-                break;
 
 
             case "kick" :
@@ -1072,24 +1052,11 @@ var controlView = {
             case "vote" :
                 controlView.filterSingleObject("living", playerList);
                 break;
-            case "command" :
-                if (globalView.getGameStatus() == "over") {
-                    controlView.filterSingleObject("all", playerList);
-                } else {
-                    var p = playerService.getPlayer(globalView.getCurrentID());
+            case "private" :
 
-                    switch (p.status) {
-                        case "unready":
-                            controlView.filterSingleObject("none", playerList);
-                            break;
-                        case "die":
-                            controlView.filterSingleObject("none", playerList);
-                            break;
-                        default:
-                            controlView.filterSingleObject("living,king", playerList);
-                    }
+                controlView.filterSingleObject("ready", playerList);
 
-                }
+
                 break;
             default :
                 console.log("亲,not have common filter.,start version commandFilter");
@@ -1124,10 +1091,10 @@ var controlView = {
 
                 }
                 break;
-            case "living,king":
+            case "ready":
                 for (var key in playerList) {
                     var player = playerList[key];
-                    if ("living" == player.status || "king" == player.status) {
+                    if ("unready" != player.status) {
                         controlView.appendObject(player);
                     }
 

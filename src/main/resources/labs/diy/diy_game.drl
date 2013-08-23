@@ -328,7 +328,7 @@ when
       
 then 
      LogUtil.log("game over process  start  ================="); 
-     String rightContent="say,ready";
+     String rightContent="say,private,ready";
      for(Object o:$all_login_ids){
             String uid=(String)o;             
             
@@ -435,10 +435,10 @@ then
      LogUtil.log("day phase prepare  start================= "); 
   
   
-     modify($right){setRight(convertString2Set("say"))};    	
+     modify($right){setRight(convertString2Set("say,private"))};    	
 	
 	
-	 Message rightMessage=new Message($uid,"right","say"); 
+	 Message rightMessage=new Message($uid,"right","say,private"); 
      insert(rightMessage);
           
      LogUtil.log("day phase prepare  over =================");   
@@ -463,10 +463,10 @@ then
      LogUtil.log("day phase prepare of king start================= "); 
   
   
-     modify($right){setRight(convertString2Set("say,announce"))};    	
+     modify($right){setRight(convertString2Set("say,announce,private"))};    	
 	
 	
-	 Message rightMessage=new Message($uid,"right","say,announce"); 
+	 Message rightMessage=new Message($uid,"right","say,announce,private"); 
      insert(rightMessage);
           
      LogUtil.log("day phase prepare of king over =================");   
@@ -495,6 +495,25 @@ when
 then
      LogUtil.log(" single accept of assign start  ============="+$message);        
      $accepts.add($object); 
+     modify($message){setAccepts($accepts)};    
+    LogUtil.log("single accept of assign over =============");
+    
+end
+
+
+
+rule 'couple accept of assign'
+ruleflow-group "message accept"
+salience 100
+no-loop true 
+when
+     $message:Message($subject:subject,predict=="private",$object:object,$accepts:accepts)   
+	 
+	 
+then
+     LogUtil.log(" single accept of assign start  ============="+$message);        
+     $accepts.add($object); 
+     $accepts.add($subject); 
      modify($message){setAccepts($accepts)};    
     LogUtil.log("single accept of assign over =============");
     
