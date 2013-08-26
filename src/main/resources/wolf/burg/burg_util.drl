@@ -1,0 +1,195 @@
+package drools.common
+
+import drools.common.*
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Collections;
+
+
+
+import org.apache.commons.lang.StringUtils;
+
+
+
+
+function void setRemainTime(String status,Game game,Room room) {
+     
+     String statusTime=status+"Time";    
+     
+     Long setting=Long.valueOf(getRoomSetting(room,statusTime,"-1"));
+      Long lastTime=game.getLastTime();
+      Long time=lastTime+setting-System.currentTimeMillis();
+      if(time < 0){
+            LogUtil.log("=========== remain time wrong ======= "+time);          
+      }else{
+          game.setRemainTime(time);
+      }
+     
+       
+}
+
+
+
+function List<String>  getIDFromPlayer(List players) {
+
+      List<String> pids=new ArrayList();
+	    for(Object o:players){
+	          Player p=(Player)o;			 
+			  pids.add(p.getId());
+		}
+		return pids;
+}
+
+
+
+
+
+
+
+function Message createDelayDay(Room room) {
+
+    String  time=getRoomSetting(room,"dayTime","30000");//1*60*1000 
+    Message night=new Message("day","switch",time);
+    String  schedule=getRoomSetting(room,"dayTime","30000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(schedule));
+    night.setWhere(room.getId());
+    
+    return night;
+  
+}
+
+
+function Message createDelayDescriptionOfTopic(Room room) {
+
+    String  time=getRoomSetting(room,"descriptionTime","30000");//1*60*1000 
+    Message night=new Message("description","switch",time);
+    String  schedule=getRoomSetting(room,"topicTime","15000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(schedule));    
+     night.setWhere(room.getId());
+    
+    return night;
+  
+}
+
+function Message createDelayDayOfDescription(Room room) {
+
+    String  time=getRoomSetting(room,"dayTime","30000");//1*60*1000 
+    Message night=new Message("day","switch",time);
+    String  schedule=getRoomSetting(room,"descriptionTime","15000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(schedule));    
+     night.setWhere(room.getId());
+    
+    return night;
+  
+}
+
+function Message createDelayAnnounceOfQuestion(Room room) {
+
+  
+    Message night=new Message("king","announce","water");
+    String  schedule=getRoomSetting(room,"questionTime","15000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(schedule));    
+    night.setWhere(room.getId());
+    
+    return night;
+  
+}
+
+
+
+
+function Message createDay(Room room) {
+    String  dayTime=getRoomSetting(room,"dayTime","30000");//1*60*1000
+    Message day=new Message("day","time",dayTime);
+ 
+     return day;
+   
+  
+}
+
+
+    
+    function Message createTopic(Room room) {
+    String  dayTime=getRoomSetting(room,"topicTime","30000");//1*60*1000
+    Message day=new Message("topic","time",dayTime);
+ 
+     return day;
+   
+  
+}
+    function Message createDescription(Room room) {
+    String  dayTime=getRoomSetting(room,"descriptionTime","30000");//1*60*1000
+    Message day=new Message("description","time",dayTime);
+ 
+     return day;
+   
+  
+}
+
+
+    function Message createQuestion(Room room) {
+    String  dayTime=getRoomSetting(room,"questionTime","30000");//1*60*1000
+    Message day=new Message("question","time",dayTime);
+ 
+     return day;
+   
+  
+}
+
+  
+
+   
+   
+function String parseTopic(String topic, String role) {
+     String[] contents=topic.split(",");
+     if(contents.length<2){
+         return null; 
+     
+     }
+     if("water".equals(role)){
+        return contents[0].trim(); 
+     
+     }else{
+        return contents[1].trim(); 
+     
+     }
+    
+   
+  
+}  
+
+
+
+function int getGhostCount(Map map, int totalCount) {
+		// TODO Auto-generated method stub
+		String isAutoSet = (String) map.get("autoSetting");
+		String ghostCount = (String) map.get("ghostCount");
+		
+		int part = 7;
+		
+		if ("true".equals(isAutoSet)) {
+			return (totalCount - 1) / part + 1;
+		} else {
+			int count=Integer.valueOf(ghostCount);
+			return count;
+		}
+
+
+	}
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+

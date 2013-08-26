@@ -126,6 +126,11 @@ public class MessageController implements ApplicationContextAware {
 		int code = 0;
 
 		Long selfID = cookieUtil.getID(request, response);
+		if(selfID==null){
+			code=-6008;
+			model.addAttribute("code", code);
+			return "/message/accept/show";
+		}
 
 		message.setId(RandomUtils.nextLong());
 		message.setSubject(String.valueOf(selfID));

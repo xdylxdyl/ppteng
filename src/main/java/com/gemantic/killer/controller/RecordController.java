@@ -100,7 +100,6 @@ public class RecordController {
 			size = 20;
 		}
 		Integer start = (page - 1) * size;
-	
 
 		List<Records> records = this.getRecords(version, uid, start, size);
 
@@ -158,8 +157,8 @@ public class RecordController {
 				ids = recordService.getList(start, size);
 
 			} else {
-				if(version.contains(".0")){
-					version=version.replace(".0", "");
+				if (version.contains(".0")) {
+					version = version.replace(".0", "");
 				}
 				ids = recordService.getRecordIdsByVersion(version + ".0",
 						start, size);
@@ -224,6 +223,10 @@ public class RecordController {
 		// 先创建一个假房间?那房间里的Query怎么办.
 
 		Records record = this.recordService.getObjectById(recordID);
+		
+		if(record==null){
+			return "redirect:/record/list";
+		}
 		List<String> contents = new ArrayList();
 		if (record.getVersion().contains("video")) {
 
@@ -257,10 +260,17 @@ public class RecordController {
 
 		Records record = this.recordService.getObjectById(recordID);
 
-		model.addAttribute("record", record);
-		model.addAttribute("room", record.getRoom());
+		if (record == null) {
+			log.info(recordID + " not get record ");
+			return "redirect:/record/list?version=all";
+		} else {
+			model.addAttribute("record", record);
 
-		return "/record/detail/show";
+			model.addAttribute("room", record.getRoom());
+
+			return "/record/detail/show";
+		}
+
 	}
 
 	/**
