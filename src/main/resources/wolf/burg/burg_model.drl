@@ -9,49 +9,89 @@ import org.apache.commons.lang.StringUtils;
 
 declare Game
 	status: String
-	liverCount:int	
-	kingCount:int	
+	liverCount:int		
 	waterCount:int
-	ghostCount:int		
-	dayCount:int
-	questionCount:int
+	wolfCount:int		
+	burgCount:int
+	dismissalCount:int
+	currentBurg:int
+	bombBurgCount:int
+	unbombBurgCount:int
 	lastTime:Long
 	remainTime:Long
 	startAt:Long
 	recordName:String	
 end
-
-declare VoteConvert
-	id: String		
-	vote:String
-	type:String
+#index of action attempts,  attempts ++
+#<String> when king dispatch , we get this value
+#dismissal result,when player dismissal,we get this value 
+declare ActionDetail
+        attempts:int 
+        members:List 
+        dismissal:String  
+         king:String    
 end
 
-declare Description
+
+#<attempts,ActionDetail>,when king is be dismissal,actionDetails get new Details.
+declare Burg
+        id:int
+        actionDetails:Map
+        result:String
+        memberCount:int
+        attemptCount:int
+             
+        
+end
+
+
+
+
+declare King
+       id:String
+       index:int
+       
+end
+
+declare KingDie
+        id:String            
+end
+
+declare KingLiving
+        id:String         
+end
+
+declare KingSwitch
+        bid:int     
+end
+
+
+declare BurgDie
+        id:int
+end
+
+declare BurgLiving
+        id:int
+end
+
+#create bombAction when dismissal is agree
+declare BombAction
     id: String
-    description:String
+    burgID:int
+    result:String
 end
-declare Vote
+
+declare Dismissal
 	id: String		
-	vote:String
-	type:String
+	result:String
+	
 end
 
-declare VoteStatus
-      id:String
-      voters:List      
-end
-
-declare Card
-       waterCard:String 
-       ghostCard:String 
-end
 
 
 declare Role
        id:String
-       role:String    
-       card:String  
+       role:String      
 end
 
 
@@ -72,5 +112,9 @@ declare TimerMesasage
 	phase: String
 	time: Long
 	schedule:Long
+end
+
+declare LivingPlayers
+      players:List
 end
 

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
@@ -654,6 +655,47 @@ public class One23Test {
 
 		List<String> messages = FileUtil
 				.readFileAsList("src/test/resources/ghost_question.txt");
+		List<Message> ms = new ArrayList();
+
+		Long rid = null;
+
+		for (String message : messages) {
+			if (message.startsWith("#")) {
+				continue;
+			}
+
+			Message m = MessageUtil.parse(diyVersion, message);
+			log.info("message start=========================== " + m);
+			List<Message> ms2 = this.droolsGameMessageService.generate(m, room);
+			
+		
+			log.info(ms2);
+			log.info("message over =============================");
+			
+			Random random=new Random();
+			
+		}
+
+	}
+	
+	
+	@Test
+	public void testWolfBurgRule() throws ServiceException,
+			ServiceDaoException, IOException {
+
+		String diyVersion = "wolf_burg_1.0";
+	
+		String currentVersion = diyVersion;
+		Room room = new Room("sss", 3L, currentVersion);
+		Setting s = settingService.getSetting(currentVersion);
+		log.info(s);
+		room.setSetting(s);
+		room.setId(5000L);
+		this.droolsGameMessageService.createRoom(room);
+		
+
+		List<String> messages = FileUtil
+				.readFileAsList("src/test/resources/wolf_burg.txt");
 		List<Message> ms = new ArrayList();
 
 		Long rid = null;

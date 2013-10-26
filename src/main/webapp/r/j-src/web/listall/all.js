@@ -116,6 +116,16 @@ function VersionConfigCtrl($scope) {
          version:"ghost_soul_1.0",
          title:"捉鬼游戏 魂版"
          },*/
+
+
+        {
+            img:"http://img10.360buyimg.com/N0/26914/0554bc75-3eb8-4222-a13d-91183470a221.jpg",
+            version:"wolf_burg_1.0",
+            title:"炸狼堡"
+        },
+
+
+
         {
             img:"http://download.ptteng.com/group1/M00/00/00/KnlxRlGLd-qckytpAAMnWr-oy7g440.jpg",
             version:"mine_1.0",

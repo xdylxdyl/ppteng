@@ -82,6 +82,38 @@ $("#object").on("click", "li", function () {
 
 })
 
+$('.multiselect').multiselect({
+    buttonClass:'btn',
+    buttonWidth:'auto',
+    buttonContainer:'<div class="btn-group" />',
+    maxHeight:false,
+    buttonText:function (options) {
+        var text="";
+        if (options.length == 0) {
+            text= '对象 <b class="caret"></b>';
+        }
+        else if (options.length > 3) {
+            text= options.length + ' selected  <b class="caret"></b>';
+        }
+        else {
+            var selected = '';
+            options.each(function () {
+                selected += $(this).text() + ', ';
+            });
+            text= selected.substr(0, selected.length - 2) + ' <b class="caret"></b>';
+        }
+        var result = [];
+        options.each(function () {
+            result.push($(this).attr("value"));
+        });
+        controlView.multiObject=result;
+
+
+
+        return text;
+    }
+});
+
 
 function extracted(mid, did) {
     var txt = $(this).text();

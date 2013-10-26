@@ -6,6 +6,10 @@ import com.gemantic.killer.common.model.Message;
 
 public class SendMessageEvent extends ApplicationEvent {
 
+	
+	
+	
+	
 	private Message message;
 
 	private Long rid;

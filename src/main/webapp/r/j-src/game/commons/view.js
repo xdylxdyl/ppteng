@@ -473,6 +473,25 @@ var rightView = {
 
 
 var gameAreaView = {
+    showMessageContent:function (message, type) {
+        var content = "";
+        switch (type) {
+            case "system":
+                content = viewUtil.message2SystemContent(message);
+                break;
+            case "user":
+                content = viewUtil.message2UserContent(message);
+
+                break;
+            default :
+                content = viewUtil.message2UserContent(message);
+                break;
+        }
+
+        var contentID = versionFunction["contentID"](message.predict);
+        gameAreaView.showContent(contentID, content);
+
+    },
 
     updateRubbishText:function () {
 
@@ -660,6 +679,11 @@ var gameAreaView = {
         if (PlayerAction[message.content]) {
             message.content = PlayerAction[message.content];
         }
+    },
+    showContent:function (id, content) {
+        $("#" + id).append(content);
+        viewUtil.autoBottom($("#" + id));
+
     }
 
 
@@ -671,11 +695,37 @@ var gameAreaView = {
 
 var viewUtil = {
     autoBottom:function (dom) {
+
         var isAuto = controlView.getAutoRoll();
         if (isAuto) {
             var height = $(dom)[0].scrollHeight;
             $(dom).scrollTop(height);
         }
+
+    },
+    message2SystemContent:function (message) {
+        var first = controlView.getAction(message);
+        var c = controlView.getContent(message);
+
+
+        return contentTemplate.generateSystemContent(c);
+    },
+    message2UserContent:function (message, firstAction, secondAction) {
+
+        var first = controlView.getAction(firstAction);
+        var second = controlView.getAction(secondAction);
+        var c = controlView.getActionContent(message);
+        var object = playerService.getName(message.object);
+        var content = {
+            color:message.color,
+            expression:controlView.showExpression(message.expression),
+            subject:playerService.getPlayer(message.subject).name,
+            firstAction:first,
+            object:object,
+            secondAction:second,
+            content:c
+        }
+        return contentTemplate.generateUserContent(content);
 
     }
 
@@ -683,6 +733,28 @@ var viewUtil = {
 
 
 var controlView = {
+
+    hideRecordEmpty:[selects.$select_expression, selects.$select_color, selects.$select_command, selects.$select_object, selects.$sayButton, selects.$sayInput, selects.$sayLabel, selects.$multiObjectGroup],
+    hideGameEmpty:[selects.$multiObjectGroup],
+
+
+    getContent:function (message) {
+        if (versionFunction["systemContent"]) {
+            return versionFunction["systemContent"](message);
+        }
+
+    },
+
+    getActionContent:function (message) {
+        var actionContent = "";
+        if (actionContent = "") {
+            return message.content;
+        }
+
+    },
+    getAction:function (action) {
+        return "";
+    },
     isMute:function () {
         return  $("#sayButton").prop("disabled");
     },
@@ -722,7 +794,6 @@ var controlView = {
             case "topic":
                 //只发给自己
                 message.object = message.subject;
-                break;
             case "say":
                 if ("-500" != message.object) {
                     if (controlView.getPrivateSay()) {
@@ -829,8 +900,14 @@ var controlView = {
         return  expression == "" || expression == undefined ? expression = 0 : expression;
     },
     getObjectValue:function () {
-        var object = $("#object").attr("data-default");
-        return  object == "" || object == undefined ? object = -500 : object;
+        if (controlView.objectType == "single") {
+            var object = $("#object").attr("data-default");
+            return  object == "" || object == undefined ? object = -500 : object;
+        } else {
+
+            return controlView.getMultiObject();
+        }
+
     },
     getCommandValue:function () {
         var command = $("#command").attr("data-default");
@@ -842,6 +919,7 @@ var controlView = {
         $("#" + selects.$select_command).find('span').text("指令");
         $("#" + selects.$command).attr("data-default", "say");
         controlView.resetObject();
+        controlView.switchObject("single");
 
 
     },
@@ -858,6 +936,10 @@ var controlView = {
     resetObject:function () {
         $("#" + selects.$select_object).find('span').text("对象");
         $("#" + selects.$object).attr("data-default", "");
+
+    },
+    resetMultiObject:function () {
+        controlView.multiObject = [];
 
     },
     emptyObject:function () {
@@ -1053,20 +1135,66 @@ var controlView = {
                 controlView.filterSingleObject("living", playerList);
                 break;
             case "private" :
-
                 controlView.filterSingleObject("ready", playerList);
-
+                break;
 
                 break;
             default :
                 console.log("亲,not have common filter.,start version commandFilter");
                 if (versionFunction["commandFilter"]) {
-                    versionFunction["commandFilter"](command);
+                    versionFunction["commandFilter"](command, playerList);
                 }
 
         }
     },
+
+    filterMultiObject:function (keyword, playerList) {
+
+        controlView.switchObject("multi");
+        $('option', $('#multiObject')).each(function (element) {
+            $(this).remove();
+        });
+        switch (keyword) {
+            case "none":
+                break;
+            case "all":
+
+                for (var key in playerList) {
+                    controlView.appendMultiObject(playerList[key]);
+
+
+                }
+                break;
+            case "living":
+                for (var key in playerList) {
+                    var player = playerList[key];
+                    if ("living" == player.status) {
+                        controlView.appendMultiObject(player);
+                    }
+
+
+                }
+                break;
+            case "ready":
+                for (var key in playerList) {
+                    var player = playerList[key];
+                    if ("unready" != player.status) {
+                        controlView.appendMultiObject(player);
+                    }
+
+
+                }
+                break;
+
+
+        }
+        $("#multiObject").multiselect("rebuild");
+
+
+    },
+
     filterSingleObject:function (keyword, playerList) {
+        controlView.switchObject("single");
         var objectStr = "<li data-default='-500'><a href='#'>对象</a></li> <li class='divider'></li>";
         $("#object").empty().append(objectStr);
 
@@ -1108,12 +1236,26 @@ var controlView = {
 
     },
 
+    filterDIYObject:function (objects) {
+        $("#object").empty();
+        for (var index in objects) {
+            controlView.appendObject(objects[index]);
+        }
+
+    },
+
     appendObject:function (player) {
 
         var objectStr = " <li data-default='" + player.id + "'><a href='#'>" + player.name + "</a></li>";
         $("#object").append(objectStr);
 
     },
+    appendMultiObject:function (player) {
+        var objectStr = "<option value=" + player.id + ">" + player.name + "</option>"
+        $("#multiObject").append(objectStr);
+
+    },
+
     appendObjectContent:function (data, display) {
 
         var objectStr = " <li data-default='" + data + "'><a href='#'>" + display + "</a></li>";
@@ -1123,9 +1265,33 @@ var controlView = {
     },
     hideButton:function (id) {
         $("#" + id).hide();
+    },
+
+    switchObject:function (type) {
+        switch (type) {
+            case "multi":
+                $("#objectGroup").hide();
+                $("#multiObjectGroup").show();
+                controlView.objectType = "multi";
+                break;
+            case "single":
+                $("#multiObjectGroup").hide();
+                $("#objectGroup").show();
+                controlView.objectType = "single";
+                break;
+            default:
+                break;
+        }
+
+
+    },
+    objectType:"single",
+    multiObject:[],
+    getMultiObject:function () {
+
+        return array2splitString(controlView.multiObject, ",");
+
     }
-
-
 
 }
 

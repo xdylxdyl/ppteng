@@ -32,12 +32,18 @@ var initGame = function () {
     var exp;
 
 
+       //1.hide
+    for (var index in controlView.hideGameEmpty) {
+        $("#" + controlView.hideGameEmpty[index]).hide();
+    }
+
+
+
     //1.init expression
     exp = settingService.getExpress(globalView.getRoomID());
     controlView.initExpression(exp);
     //2.init color
     controlView.initColor();
-
 
 
     //2.init game status every has self setting.expect playlist etc
@@ -81,13 +87,11 @@ var initGame = function () {
     playerListView.displayCreater(creater);
 
     //7.set staging show
-/*    var player = playerService.getPlayer(uid);
-    var message = {};
-    message.content = globalView.getLoginShow();
-    var first = globalView.getFirst();
-    gameAreaView.login(player, message, first);*/
-
-
+    /*    var player = playerService.getPlayer(uid);
+     var message = {};
+     message.content = globalView.getLoginShow();
+     var first = globalView.getFirst();
+     gameAreaView.login(player, message, first);*/
 
 
     //8 version self dependency
@@ -122,13 +126,11 @@ var initRecord = function () {
 
 
     $("#displayRoleGroup").show();
-    controlView.hideButton("select_expression");
-    controlView.hideButton("select_color");
-    controlView.hideButton("select_command");
-    controlView.hideButton("select_object");
-    controlView.hideButton("sayButton");
-    controlView.hideButton("sayInput");
-    controlView.hideButton("sayLabel");
+
+    //1.hide
+    for (var index in controlView.hideEmpty) {
+        $("#" + controlView.hideEmpty[index]).hide();
+    }
 
     //Record
     var recordID = globalView.getRecordId();

@@ -31,6 +31,8 @@
 				</entry>
 				<entry key="ghost_soul_1.0" value-ref="ghost_soul_1.0_setting">
 				</entry>
+				<entry key="wolf_burg_1.0" value-ref="wolf_burg_1.0_setting">
+				</entry>
 			</map>
 		</constructor-arg>
 	</bean>
@@ -165,6 +167,22 @@
 	</bean>
 
 
+	<bean id="wolf_burg_1.0_setting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+
+				<entry key="dispatchTime" value="300000">
+				</entry>
+				<entry key="dismissalTime" value="120000">
+				</entry>
+				<entry key="actionTime" value="120000">
+				</entry>
+				<entry key="autoSetting" value="true">
+				</entry>
+
+			</map>
+		</constructor-arg>
+	</bean>
 
 
 		<bean id="settingDisplay" class="java.util.HashMap">

@@ -42,6 +42,8 @@
 					<c:if test="${room.version=='ghost_question_2.0'}">selected="selected"</c:if>>捉鬼[猜词]</option>
 				<%-- 	<option value="ghost_soul_1.0"
 					<c:if test="${room.version=='ghost_soul_1.0'}">selected="selected"</c:if>>捉鬼[魂版]测试版</option> --%>
+						<option value="wolf_burg_1.0"
+					<c:if test="${room.version=='wolf_burg_1.0'}">selected="selected"</c:if>>炸狼堡</option>	
 					
 						<option value="labs_diy_1.0"
 					<c:if test="${room.version=='labs_diy_1.0'}">selected="selected"</c:if>>DIY游戏室</option>

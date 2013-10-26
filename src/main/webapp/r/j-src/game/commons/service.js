@@ -56,6 +56,15 @@ var recordService = {
 }
 
 var playerService = {
+    assign:function (message) {
+        var p = playerService.getPlayer(message.object);
+        p.role = message.subject;
+        playerService.updatePlayer(p);
+    },
+    die:function (message) {
+        playerService.setStatus(message.subject, playerStatus.die)
+        playerListView.sortPlayer();
+    },
     clearCount:function (status) {
         if ("night" == status || "lastword" == status) {
             for (var key in id_name) {
@@ -109,16 +118,24 @@ var playerService = {
         return p;
     },
 
-    getName:function (id) {
+    getName:function (idContent) {
 
+        var ids = idContent.split(","); //字符分割
+        var names = [];
+        for (var id in ids) {
+            var p = id_name[id];
+            var name = "";
+            if (p == null) {
 
-        var p = id_name[id];
-        if (p == null) {
+                name = ajaxJson("/player/detail/show?", "get", {"uid":id}, playerService.parseDetail, 5000, "json");
+            } else {
+                name = p.name;
+            }
+            names.push(name);
 
-            return  ajaxJson("/player/detail/show?", "get", {"uid":id}, playerService.parseDetail, 5000, "json");
-        } else {
-            return p.name;
         }
+
+        return array2splitString(names, ",");
 
 
     },

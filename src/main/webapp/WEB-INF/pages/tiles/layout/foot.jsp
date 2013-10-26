@@ -24,7 +24,7 @@
 						class="caret"></b>
 				</a>
 					<ul class="dropdown-menu" id="color">
-					
+
 
 					</ul></li>
 				<li class="dropup"><a href="#" id="select_command"
@@ -35,7 +35,7 @@
 					<ul class="dropdown-menu" id="command">
 
 					</ul></li>
-				<li class="dropup"><a href="#" id="select_object"
+				<li class="dropup" id="objectGroup"><a href="#" id="select_object"
 					data-default="" class="btn dropdown-toggle btn-small"
 					data-toggle="dropdown"> &nbsp; <span>对象</span> &nbsp; <b
 						class="caret"></b>
@@ -43,6 +43,11 @@
 					<ul class="dropdown-menu" id="object">
 
 					</ul></li>
+
+
+				<li id="multiObjectGroup" class="hide"><select class="multiselect" multiple="multiple" id="multiObject">						
+				</select></li>
+
 				<li><label for="checkBox" class="checkbox"> <input
 						type="checkbox" checked="checked" value="scroll" id="checkBox">
 						滚屏
@@ -51,7 +56,7 @@
 				<li id="displayRoleGroup" class="hide"><label for="displayRole"
 					class="checkbox"> <input type="checkbox" checked="checked"
 						value="scroll" id="displayRole"> 隐藏角色
-				</label></li>				
+				</label></li>
 				<li><span class="help-inline" id="countDown">04:00</span></li>
 
 				<li>

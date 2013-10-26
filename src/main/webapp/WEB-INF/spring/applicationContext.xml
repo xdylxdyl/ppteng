@@ -181,6 +181,16 @@
 						<value>labs/diy/diy_game.rf</value>
 					</list>
 				</entry>
+				
+				<entry key="wolf_burg_1.0">
+					<list>
+						<value>wolf/burg/burg_model.drl</value>
+						<value>wolf/burg/burg_query.drl</value>
+						<value>wolf/burg/burg_util.drl</value>
+						<value>wolf/burg/burg_game.drl</value>
+						<value>wolf/burg/burg_game.rf</value>
+					</list>
+				</entry>
 
 			</map>
 		</constructor-arg>

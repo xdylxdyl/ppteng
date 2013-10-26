@@ -27,6 +27,11 @@
 <c:when test="${'ghost_soul_1.0'==version}">
 捉鬼[魂版][测试版]
 </c:when>
+
+<c:when test="${'wolf_burg_1.0'==version}">
+炸狼堡
+</c:when>
+
 <c:when test="${'labs_diy_1.0'==version}">
 DIY游戏室
 </c:when>

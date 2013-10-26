@@ -53,6 +53,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 
 	public void sendMessage(String data) throws IOException {
 
+		//有可能会空
 		if (_connection.isOpen()) {
 			// log.info(this.uid+" send message "+data);
 			_connection.sendMessage(data);
@@ -78,7 +79,9 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 	}
 
 	private void processData(String data) {
+		
 		Message message = MessageUtil.fromString(data);
+	
 		log.info("will send message " + message);
 		try {
 			messageService.sendMessage(message);

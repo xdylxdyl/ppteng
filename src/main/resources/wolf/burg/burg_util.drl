@@ -30,6 +30,49 @@ function void setRemainTime(String status,Game game,Room room) {
        
 }
 
+function String  getNextKingIDFromPlayers(List players,int index) {
+         
+       int next=index+1;
+      if(next>=players.size()){
+         next=next%players.size();
+      }
+       LogUtil.log(players+" =========== next index ======= "+next); 
+     
+     Object o=  players.get(next);
+     Player p=(Player)o;
+     return p.getId();
+	    
+}
+
+      
+        
+
+
+function List<Burg>  initBurgs() {
+
+    List<Burg> burgs=new ArrayList();
+      int initCount=2;
+      for(int i=1;i<6;i++){
+         int memberCount=initCount;
+          if(i==1||i==3){
+           memberCount=initCount-1;
+          }     
+          
+          Map acs=new HashMap();
+          for(int attemptCount=1;attemptCount<=3;attemptCount++){
+             ActionDetail ad=new ActionDetail(attemptCount,new ArrayList(),"unknown","");
+             acs.put(Integer.valueOf(attemptCount),ad);
+          
+          }
+          
+          Burg burg=new Burg(i,acs,"unknown",memberCount,1);
+          burgs.add(burg);
+      
+      }
+      return burgs;
+}
+
+
 
 
 function List<String>  getIDFromPlayer(List players) {
@@ -48,11 +91,34 @@ function List<String>  getIDFromPlayer(List players) {
 
 
 
-function Message createDelayDay(Room room) {
+function Message createDelayDispatchPhaseFromDispatchPhase(Room room) {
 
-    String  time=getRoomSetting(room,"dayTime","30000");//1*60*1000 
-    Message night=new Message("day","switch",time);
-    String  schedule=getRoomSetting(room,"dayTime","30000");//1*60*1000
+    String  time=getRoomSetting(room,"dispatchTime","30000");//1*60*1000 
+    Message night=new Message("dispatch","switch",time);
+    String  schedule=getRoomSetting(room,"dispatchTime","30000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(schedule));
+    night.setWhere(room.getId());
+    
+    return night;
+  
+}
+function Message createDelayDispatchPhaseFromActionPhase(Room room) {
+
+    String  time=getRoomSetting(room,"dispatchTime","30000");//1*60*1000 
+    Message night=new Message("dispatch","switch",time);
+    String  schedule=getRoomSetting(room,"actionTime","30000");//1*60*1000
+    night.setScheduledTime(Long.valueOf(schedule));
+    night.setWhere(room.getId());
+    
+    return night;
+  
+}
+
+function Message createDelayDispatchPhaseFromDismissalPhase(Room room) {
+
+    String  time=getRoomSetting(room,"dispatchTime","30000");//1*60*1000 
+    Message night=new Message("dispatch","switch",time);
+    String  schedule=getRoomSetting(room,"dismissalTime","30000");//1*60*1000
     night.setScheduledTime(Long.valueOf(schedule));
     night.setWhere(room.getId());
     
@@ -61,11 +127,13 @@ function Message createDelayDay(Room room) {
 }
 
 
-function Message createDelayDescriptionOfTopic(Room room) {
 
-    String  time=getRoomSetting(room,"descriptionTime","30000");//1*60*1000 
-    Message night=new Message("description","switch",time);
-    String  schedule=getRoomSetting(room,"topicTime","15000");//1*60*1000
+
+function Message createDelayActionPhase(Room room) {
+
+    String  time=getRoomSetting(room,"actionime","30000");//1*60*1000 
+    Message night=new Message("action","switch",time);
+    String  schedule=getRoomSetting(room,"dismismalTime","15000");//1*60*1000
     night.setScheduledTime(Long.valueOf(schedule));    
      night.setWhere(room.getId());
     
@@ -85,24 +153,12 @@ function Message createDelayDayOfDescription(Room room) {
   
 }
 
-function Message createDelayAnnounceOfQuestion(Room room) {
-
-  
-    Message night=new Message("king","announce","water");
-    String  schedule=getRoomSetting(room,"questionTime","15000");//1*60*1000
-    night.setScheduledTime(Long.valueOf(schedule));    
-    night.setWhere(room.getId());
-    
-    return night;
-  
-}
 
 
 
-
-function Message createDay(Room room) {
-    String  dayTime=getRoomSetting(room,"dayTime","30000");//1*60*1000
-    Message day=new Message("day","time",dayTime);
+function Message createDisPatchPhase(Room room) {
+    String  dayTime=getRoomSetting(room,"dispatchTime","30000");//1*60*1000
+    Message day=new Message("dispatch","time",dayTime);
  
      return day;
    
@@ -111,76 +167,33 @@ function Message createDay(Room room) {
 
 
     
-    function Message createTopic(Room room) {
-    String  dayTime=getRoomSetting(room,"topicTime","30000");//1*60*1000
-    Message day=new Message("topic","time",dayTime);
+    function Message createDismissalPhase(Room room) {
+    String  dayTime=getRoomSetting(room,"dismissalTime","30000");//1*60*1000
+    Message day=new Message("dismissal","time",dayTime);
  
      return day;
    
   
 }
-    function Message createDescription(Room room) {
-    String  dayTime=getRoomSetting(room,"descriptionTime","30000");//1*60*1000
-    Message day=new Message("description","time",dayTime);
- 
-     return day;
-   
-  
-}
-
-
-    function Message createQuestion(Room room) {
-    String  dayTime=getRoomSetting(room,"questionTime","30000");//1*60*1000
-    Message day=new Message("question","time",dayTime);
+    function Message createActionPhase(Room room) {
+    String  dayTime=getRoomSetting(room,"actionTime","30000");//1*60*1000
+    Message day=new Message("action","time",dayTime);
  
      return day;
    
   
 }
 
+
+
+
+
+   
+function List<String> parseMembers(String object) {
+     String[] contents=object.split(",");
+     return Arrays.asList(contents);
   
-
-   
-   
-function String parseTopic(String topic, String role) {
-     String[] contents=topic.split(",");
-     if(contents.length<2){
-         return null; 
-     
-     }
-     if("water".equals(role)){
-        return contents[0].trim(); 
-     
-     }else{
-        return contents[1].trim(); 
-     
-     }
-    
-   
-  
-}  
-
-
-
-function int getGhostCount(Map map, int totalCount) {
-		// TODO Auto-generated method stub
-		String isAutoSet = (String) map.get("autoSetting");
-		String ghostCount = (String) map.get("ghostCount");
-		
-		int part = 7;
-		
-		if ("true".equals(isAutoSet)) {
-			return (totalCount - 1) / part + 1;
-		} else {
-			int count=Integer.valueOf(ghostCount);
-			return count;
-		}
-
-
-	}
-
-   
-
+} 
 
 
 

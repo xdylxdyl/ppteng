@@ -54,9 +54,30 @@ function htmlDecode(value) {
 
 function isJson(content) {
     if (content.match("^\{(.+:.+,*){1,}\}$")) {
-         return true;
-     } else {
-         return false;
-     }
+        return true;
+    } else {
+        return false;
+    }
 }
 
+function array2splitString(arrays, split) {
+
+    var result = "";
+    for (var i = 0; i < arrays.length; i++) {
+        if (i == arrays.length - 1) {
+            result = result + arrays[i];
+        } else {
+            result = result + arrays[i] + split;
+        }
+
+    }
+
+    return result;
+
+}
+
+function splitString2Array(string, split) {
+    var result = string.split(split)
+    return result;
+
+}

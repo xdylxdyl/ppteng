@@ -629,6 +629,7 @@ public class PlayerController implements ApplicationContextAware {
 		}
 
 		User u = this.userService.getObjectById(viewUserID);
+		//不存在怎么显示.
 		log.info(" get user info " + u);
 
 		int punchCount = PunchUtil.getLatestContinueDay(
@@ -1061,7 +1062,7 @@ public class PlayerController implements ApplicationContextAware {
 
 		Long self = cookieUtil.getID(request, response);
 		log.info(self);
-		if (self != 256L && self != 245L) {
+		if (256L!=self   && 245L!=self  ) {
 
 		} else {
 

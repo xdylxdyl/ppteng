@@ -66,7 +66,7 @@ $(document).ready(function () {
         });
 
 
-        $("#" + selects.$startButton).on('click',function () {
+        $("#" + selects.$startButton).on('click', function () {
             //检查准备人数是否合规则，否则return
 
             var count = versionFunction["readyCount"];
@@ -90,7 +90,7 @@ $(document).ready(function () {
             }
 
         });
-        $("#" + selects.$readyButton).on('click',function () {
+        $("#" + selects.$readyButton).on('click', function () {
             //检查准备人数是否合规则，否则return
             var message = controlView.getMessage();
             message.predict = "ready";
@@ -154,7 +154,7 @@ $(document).ready(function () {
         });
 
 
-        $("#" + selects.$gameArea).on("dblclick","p", function () {
+        $("#" + selects.$gameArea).on("dblclick", "p", function () {
 
             roomService.appendContent.call(this);
             return false;
@@ -171,6 +171,8 @@ $(document).ready(function () {
             var linkID = $(this).attr("href");
             viewUtil.autoBottom($(linkID));
         })
+
+
 
 
     }

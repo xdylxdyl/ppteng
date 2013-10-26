@@ -695,7 +695,7 @@ then
      insert(addSetVoteMessage);     
       Message subractSetVoteMessage=new Message($old,"set check",String.valueOf($oldVoteMe.size()));
      insert(subractSetVoteMessage);
-     retract($voteConvert);
+     retract($);
       LogUtil.log("change check over  ================="); 
 end
 

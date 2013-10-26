@@ -40,6 +40,9 @@
 				</entry>
 				<entry key="labs_diy_1.0" value-ref="labs_diy_1.0_setting">
 				</entry>
+				<entry key="wolf_burg_1.0" value-ref="wolf_burg_1.0_setting">
+				</entry>
+
 
 
 
@@ -145,16 +148,16 @@
 	<bean id="rest_1.0_setting" class="java.util.HashMap">
 
 	</bean>
-	
+
 	<bean id="labs_diy_1.0_setting" class="java.util.HashMap">
-	<constructor-arg>
-			<map>			
+		<constructor-arg>
+			<map>
 				<entry key="dayTime" value="3000000">
 				</entry>
-				
+
 			</map>
 		</constructor-arg>
-	
+
 
 	</bean>
 
@@ -233,12 +236,34 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="wolf_burg_1.0_setting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+
+				<entry key="dispatchTime" value="300000">
+				</entry>
+				<entry key="dismissalTime" value="120000">
+				</entry>
+				<entry key="actionTime" value="120000">
+				</entry>
+				<entry key="playerCount" value="3">
+				</entry>
+				<entry key="autoSetting" value="true">
+				</entry>
+
+			</map>
+		</constructor-arg>
+	</bean>
+
 	<bean id="settingDisplay" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
 				<!-- simple-version -->
+				<entry key="playerCount" value="杀手人数">
+				</entry>
 				<entry key="killerCount" value="杀手人数">
 				</entry>
+				
 				<entry key="policeCount" value="警察人数">
 				</entry>
 				<entry key="dayTime" value="白天时间">
@@ -268,6 +293,15 @@
 				</entry>
 				<entry key="descriptionTime" value="描述时间">
 				</entry>
+
+				<entry key="dispatchTime" value="指派时间">
+				</entry>
+				<entry key="dismissalTime" value="罢免时间">
+				</entry>
+				<entry key="actionTime" value="行动时间">
+				</entry>
+
+
 				<entry key="autoSetting" value="自动设置">
 				</entry>
 

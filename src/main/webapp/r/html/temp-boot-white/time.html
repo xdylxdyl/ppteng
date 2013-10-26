@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
+</head>
+<body>
+<select class="multiselect" multiple="multiple">
+    <option value="cheese">Cheese</option>
+    <option value="tomatoes">Tomatoes</option>
+    <option value="mozarella">Mozzarella</option>
+    <option value="mushrooms">Mushrooms</option>
+    <option value="pepperoni">Pepperoni</option>
+    <option value="onions">Onions</option>
+</select>
+
+<!--<div class="input-prepend input-append">
+  <span class="add-on"><b class="icon-list-alt"></b></span>
+  <select class="multiselect" multiple="multiple">
+    <option value="cheese">Cheese</option>
+    <option value="tomatoes">Tomatoes</option>
+    <option value="mozarella">Mozzarella</option>
+    <option value="mushrooms">Mushrooms</option>
+    <option value="pepperoni">Pepperoni</option>
+    <option value="onions">Onions</option>
+  </select>
+  <button class="btn btn-danger">Cancel</button>
+  <button class="btn btn-success">Save</button>
+</div>-->
+<div id="forumTime" time="1380173320000"></div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    window.onload = setInterval("GetTime()", 1000);
+
+    function GetTime() {
+
+        var timeDiv = document.getElementById("forumTime")
+        var long = parseInt(timeDiv.getAttribute("time"));
+        now = new Date(long);
+        year = now.getFullYear();
+        month = now.getMonth()+1;
+        day = now.getDay()+1;
+        hour = now.getHours();
+        min = now.getMinutes();
+        sec = now.getSeconds();
+        if (hour < 10) {
+            hour = "0" + hour;
+        }
+        if (min < 10) {
+            min = "0" + min;
+        }
+        if (sec < 10) {
+            sec = "0" + sec;
+        }
+        document.getElementById("forumTime").innerHTML =
+                "<nobr>" + year + "年" + month + "月" + day + "日, " + " " + hour
+                        + ":" + min + ":" + sec + "</nobr>";
+
+        timeDiv.setAttribute("time", long + parseInt(1000));
+
+    }
+</script>
+
+

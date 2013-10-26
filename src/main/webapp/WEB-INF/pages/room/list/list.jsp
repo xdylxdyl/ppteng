@@ -59,6 +59,12 @@
 <c:set var="version" value="ghost_soul_1.0" scope="request"></c:set>
 <tiles:insertDefinition name="roomSnapshot" />
 
+<!--魂版-->
+<c:set var="versionTitle" value="炸狼堡" scope="request"></c:set>
+<c:set var="version" value="wolf_burg_1.0" scope="request"></c:set>
+<tiles:insertDefinition name="roomSnapshot" />
+
+
 <!--虚拟电影院-->
 <c:set var="categoryTitle" value="虚拟电影院" scope="request"></c:set>
 <c:set var="categoryDescription" value="和喜欢的人一起看喜欢的电影" scope="request"></c:set>

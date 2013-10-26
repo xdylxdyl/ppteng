@@ -20,7 +20,7 @@ var expression = {
     "18":"骑在月亮上"
 };
 
-var ptitle={
+var ptitle = {
     1:"一贫如洗",
     2:"衣衫褴褛",
     3:"家徒四壁",
@@ -32,6 +32,34 @@ var ptitle={
     9:"富可敌国",
     10:"天下无双"
 
+
+}
+
+var colorConfig={
+    "system":"#F00"
+
+}
+
+var contentTemplate = {
+    generateUserContent:function (content) {
+        return   "<p style='font-weight:bold;color:" + content.color + "'>[" + content.subject + "] " + content.expression + " " + content.firstAction + " [" + content.object + "] " + content.secondAction + " : " + content.content + " </p>"
+    },
+    generateSystemContent:function(content){
+
+        if(content.subject==""){
+            return "<p style='color:#F00;'> 【系统消息】"+content.firstAction + content.content  + "</p>";
+        }else{
+            return "<p style='color:#F00;'> 【系统消息】 [" + content.subject + "] "+content.firstAction + content.content  + "</p>";
+        }
+
+
+    }
+
+
+}
+
+var action = {
+    say:"说"
 
 }
 
@@ -122,7 +150,7 @@ var PlayerAction = {
 }
 
 
-var player = function (id, name, status, count, role,money) {
+var player = function (id, name, status, count, role, money) {
     return{
         id:id,
         name:name,
@@ -132,6 +160,16 @@ var player = function (id, name, status, count, role,money) {
         money:money
     };
 
+}
+
+var Content = {
+    color:"",
+    expression:"",
+    subject:"",
+    firstAction:"",
+    object:"",
+    secondAction:"",
+    content:""
 }
 
 var playerStatus = {
@@ -167,7 +205,6 @@ var expressionParameter = function (rid, exp) {
 }
 
 
-
 var recordFirstTime = null;
 var recordSecondTime = null;
 var msg_interval = null;
@@ -188,6 +225,7 @@ var selects = {
     $setting_nav:"setting_nav",
     $music_nav:"music_nav",
     $submitSetting:"submitSetting",
+    $sayLabel:"sayLabel",
     $sayInput:"sayInput",
     $sayButton:"sayButton",
     $readyButton:"readyButton",
@@ -211,9 +249,13 @@ var selects = {
     $select_command:"select_command",
     $select_expression:"select_expression",
     $select_object:"select_object",
+    $select_color:"select_color",
     $mainArea:"mainArea",
     $secondArea:"secondArea",
     $content:"content",
-    $sidebarNav:"sidebar-nav"
+    $sidebarNav:"sidebar-nav",
+    $multiObjectGroup:"multiObjectGroup"
+
+
 
 }

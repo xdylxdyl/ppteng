@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!-- Le styles -->
     <link href="../../j-src/framework/bootstrap/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="../../j-src/framework/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -11,15 +11,16 @@
 
 </head>
 <body>
-<select class="multiselect" multiple="multiple">
-  <option value="cheese">Cheese</option>
-  <option value="tomatoes">Tomatoes</option>
-  <option value="mozarella">Mozzarella</option>
-  <option value="mushrooms">Mushrooms</option>
-  <option value="pepperoni">Pepperoni</option>
-  <option value="onions">Onions</option>
+<select class="multiselect" multiple="multiple" id="multiObject">
+    <option value="cheese">Cheese</option>
+    <option value="tomatoes">Tomatoes</option>
+    <option value="mozarella">Mozzarella</option>
+    <option value="mushrooms">Mushrooms</option>
+    <option value="pepperoni">Pepperoni</option>
+    <option value="onions">Onions</option>
 </select>
 
+<a id="generate">生成</a>
 <!--<div class="input-prepend input-append">
   <span class="add-on"><b class="icon-list-alt"></b></span>
   <select class="multiselect" multiple="multiple">
@@ -33,12 +34,46 @@
   <button class="btn btn-danger">Cancel</button>
   <button class="btn btn-success">Save</button>
 </div>-->
+<div id="forumTime" time="1380173320000"></div>
 
 </body>
 </html>
 <script type="text/javascript" src="../../j-src/framework/jquery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../../j-src/framework/bootstrap/bootstrap-multiselect.js"></script>
 <script type="text/javascript" src="../../j-src/framework/bootstrap/bootstrap-2.3.2.min.js"></script>
+<script type="text/javascript">
+
+    window.onload = function () {
+        setInterval("GetTime()", 1000);
+    };
+    function GetTime() {
+
+        var timeDiv = document.getElementById("forumTime")
+        var long = parseInt($.trim(timeDiv.getAttribute("time")));
+        now = new Date(long);
+        year = now.getFullYear();
+        month = now.getMonth();
+        day = now.getDay();
+        hour = now.getHours();
+        min = now.getMinutes();
+        sec = now.getSeconds();
+        if (hour < 10) {
+            hour = "0" + hour;
+        }
+        if (min < 10) {
+            min = "0" + min;
+        }
+        if (sec < 10) {
+            sec = "0" + sec;
+        }
+        $("#forumTime").html(
+                "<nobr>" + year + "年" + month + "月" + day + "日, " + " " + hour
+                        + ":" + min + ":" + sec + "</nobr>");
+        timeDiv.setAttribute("time", long + parseInt(1000));
+
+    }
+</script>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -48,8 +83,15 @@
             buttonContainer:'<div class="btn-group" />',
             maxHeight:false,
             buttonText:function (options) {
+
+                var result = [];
+                options.each(function () {
+                    result.push($(this).attr("value"));
+                });
+                console.log(result);
+
                 if (options.length == 0) {
-                    return 'None selected <b class="caret"></b>';
+                    return '对象 <b class="caret"></b>';
                 }
                 else if (options.length > 3) {
                     return options.length + ' selected  <b class="caret"></b>';
@@ -63,5 +105,17 @@
                 }
             }
         });
+
+        $("#generate").on("click", function () {
+            console.log("run");
+            // $("#multiObject").html().empty();
+            $('option', $('#multiObject')).each(function (element) {
+                $(this).remove();
+            });
+            var objectStr = "<option value='xxxx'>xd</option>"
+            $("#multiObject").append(objectStr);
+            $("#multiObject").multiselect("rebuild");
+
+        })
     });
 </script>
