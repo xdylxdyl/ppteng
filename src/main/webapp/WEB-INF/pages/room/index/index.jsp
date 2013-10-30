@@ -267,7 +267,7 @@
 			</div>
 		</div>
 
-		<script type="text/javascript"
+	<script type="text/javascript"
 			src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
 			data-appid="100372616"
 			data-redirecturi="http://www.ptteng.com/qc_callback.html"
@@ -279,10 +279,6 @@
 			src="/r/j-src/game/commons/third.js?version=${frontVersion}"></script>
 		<script type="text/javascript"
 			src="/r/j-src/web/punch/punch.js?version=${frontVersion}"></script>
-
-
-		<script
-			src="<%=request.getContextPath()%>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 
 		<script src="/r/j-src/web/index/index.js?v=${frontVersion}"></script>
 		<script type="text/javascript"

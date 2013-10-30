@@ -42,21 +42,6 @@ then
     
 end
 
-rule 'clear prev game kingswitch '
-ruleflow-group "game clear"
-no-loop true
-when
-	//conditions    
-    $message:Message($subject:subject,predict=="start")   
-    $kingSwitch:KingSwitch()    //clear source    
-    
-then      
-	//actions
-     LogUtil.log("clear prev game kingswitch start================= ");      
-     retract ($kingSwitch);
-     LogUtil.log("clear prev game role over ================="); 
-    
-end
 
 
 
@@ -318,12 +303,11 @@ then
         King king=new King(kingID,index);
         insert(king);       
       
+        Message assignKingMessage=new Message(kingID,"assignKing","1"); 
+		insert(assignKingMessage);
            
-        KingSwitch ks=new KingSwitch();
-        insert(ks);
-	
-        
-   
+        Message burgMessage=new Message("1","burgDetail","2"); 
+		insert(burgMessage);
      
 	
 	
@@ -358,22 +342,6 @@ end
 
 //========================phase clear start =========================
 
-rule 'clear prev phase kingswitch '
-ruleflow-group "phase clear"
-no-loop true
-when
-	//conditions    
-    $room:Room(status=="run")
-    Game()
-    $kingSwitch:KingSwitch()    //clear source    
-    
-then      
-	//actions
-     LogUtil.log("clear prev game kingswitch start================= ");      
-     retract ($kingSwitch);
-     LogUtil.log("clear prev game role over ================="); 
-    
-end
 
 
 
@@ -721,8 +689,68 @@ then
    LogUtil.log("King Die start==============");
    KingDie die=new KingDie($id); 
    insert(die);
-   LogUtil.log("King Die start==============");   
+ 
+   LogUtil.log("King Die over==============");   
 
+ 
+end
+
+
+
+
+rule 'burg die process'
+ruleflow-group "person status"
+no-loop true
+when
+    $room:Room(status=="run")  
+    $game:Game(status=="action",$currentBurg:currentBurg)
+    $burg:Burg(id==$currentBurg)     
+    forall($agreeBombAction:BombAction(result=="agree"))
+    not BurgDie()
+ then
+ 
+ LogUtil.log(" burg die process  start============="); 
+      BurgDie burgDie=new BurgDie($currentBurg);
+      insert(burgDie);
+ 
+     LogUtil.log(" burg die process over============="); 
+ 
+end
+
+
+
+
+rule 'burg living process'
+ruleflow-group "person status"
+no-loop true
+when
+    $room:Room(status=="run")
+    Game($currentBurg:currentBurg)
+    Burg(id==$currentBurg)
+    $operater:Operater()
+    (
+    BombAction(result=="disagree")
+    and 
+    Game(status=="action")   
+    )
+    or
+    ($message:Message(subject=="dispatch",predict=="switch"))
+    and 
+    Game(status=="action")   
+    or
+    (
+     Game()
+     and
+     Burg(id==$currentBurg,attemptCount > 3)   
+     
+    )
+    not BurgLiving()
+ then
+   LogUtil.log(" burg living process start=============");     
+   BurgLiving burgLiving=new BurgLiving($currentBurg);
+   insert(burgLiving);   
+   LogUtil.log("burg living process  over=============");
+    
  
 end
 
@@ -780,41 +808,31 @@ end
 
 //==die process==
 rule 'king die process'
-ruleflow-group "die process"
+ruleflow-group "person status"
 no-loop true
 when
   $game:Game($currentBurg:currentBurg);
   $kingDie:KingDie($id:id)
   $burg:Burg(id==$currentBurg,$attemptCount:attemptCount)   
   $room:Room(status=="run")
-  $king:King(id==$id,$index:index)
-  //get all readys
-  $livingPlayers:LivingPlayers($allReadys:players)
  
  then
-   LogUtil.log(" king die process  start=============");   
+   LogUtil.log(" king die process  start=============");  
   
-    if($attemptCount>2){
-    LogUtil.log(" burg living of attempt count too many ============="+$burg);  
-      BurgLiving burgLiving=new BurgLiving($currentBurg);
-      insert(burgLiving);
-    }else{
-     LogUtil.log(" attemput count +1 ============="+$burg);
-      modify($burg){setAttemptCount($attemptCount+1)};
-      KingSwitch ks=new KingSwitch();
-      insert(ks);
-    }
-    
+  
+      modify($burg){setAttemptCount($attemptCount+1)};    
+      LogUtil.log(" ============="+$burg);
      Message dismissalResult=new Message($id,"dismissalResult","disagree"); 
      insert(dismissalResult);	
-   
     
-  
    
    LogUtil.log(" king die process  over=============");
     
  
 end
+
+
+
 
 
 
@@ -859,49 +877,6 @@ end
 
 
 
-
-rule 'burg die process'
-ruleflow-group "die process"
-no-loop true
-when
-    $room:Room(status=="run")  
-    $game:Game(status=="action",$currentBurg:currentBurg)
-    $burg:Burg(id==$currentBurg)     
-    forall($agreeBombAction:BombAction(result=="agree"))
-    not BurgDie()
- then
- 
- LogUtil.log(" burg die process  start============="); 
-      BurgDie burgDie=new BurgDie($currentBurg);
-      insert(burgDie);
- 
-     LogUtil.log(" burg die process over============="); 
- 
-end
-
-
-
-
-rule 'burg living process'
-ruleflow-group "die process"
-no-loop true
-when
-    $room:Room(status=="run")
-    $game:Game($currentBurg:currentBurg,status=="action",$unbombBurgCount:unbombBurgCount)
-    $burg:Burg(id==$currentBurg,$memberCount:memberCount)
-    $operater:Operater()
-    (BombAction(result=="disagree"))
-    or
-    ($message:Message(subject=="dispatch",predict=="switch"))
-    not BurgLiving()
- then
-   LogUtil.log(" burg living process start=============");     
-   BurgLiving burgLiving=new BurgLiving($currentBurg);
-   insert(burgLiving);
-   LogUtil.log("burg living process  over=============");
-    
- 
-end
 
 
 rule 'die process'
@@ -957,26 +932,6 @@ end
 
 
 
-rule ' burg living unbomb insert kingswitch'
-ruleflow-group "die process"
-no-loop true
-when
-	//conditions    
-  
-    $room:Room(status=="run")
-    $game:Game($currentBurg:currentBurg,$unbombBurgCount:unbombBurgCount)
-    $burg:Burg(id==$currentBurg,$memberCount:memberCount)
-    $BurgLiving:BurgLiving(id==$currentBurg)
-    $king:King($index:index)  
-    not KingSwitch()
-then     
-    LogUtil.log("burg living unbomb insert kingswitch start================= "); 
-  
-      
-    KingSwitch ks=new KingSwitch();
-    insert(ks);
-    LogUtil.log("burg living unbomb insert kingswitch over================= "); 
-end
 
 
 
@@ -1003,9 +958,6 @@ then
     modify($game){setBombBurgCount($bombBurgCount+1),setCurrentBurg($currentBurg+1)};
     
     
-     KingSwitch ks=new KingSwitch();
-    insert(ks);
-    
     
     LogUtil.log("burg  die bomb process  over================= "); 
 end
@@ -1013,7 +965,7 @@ end
 
 
 rule 'king switch process'
-ruleflow-group "die process"
+ruleflow-group "switch process"
 no-loop true
 when
   //conditions all player description ready   
@@ -1022,8 +974,18 @@ when
     $game:Game($currentBurg:currentBurg) 
     $operater:Operater()
     $burg:Burg(id==$currentBurg,$attemptCount:attemptCount,$actionDetails:actionDetails) 
-    $king:King($index:index)  
-    KingSwitch()
+    $king:King($index:index) 
+    (KingDie()
+     and 
+     not BurgDie()
+     and 
+     not BurgLiving()
+    )
+    or
+    (BurgDie())
+    or
+    (BurgLiving())
+    
     $livingPlayers:LivingPlayers($allReadys:players)
  then
    LogUtil.log(" king switch process start=============");   
@@ -1039,6 +1001,36 @@ when
     
  
 end
+
+
+
+rule 'burg switch process'
+ruleflow-group " switch process"
+no-loop true
+when
+  //conditions all player description ready   
+		
+    $room:Room(status=="run")
+    $game:Game($currentBurg:currentBurg) 
+    $operater:Operater()
+    $burg:Burg(id==$currentBurg,$attemptCount:attemptCount,$actionDetails:actionDetails,$memberCount:memberCount) 
+    $king:King($index:index)
+    (BurgDie())
+    or
+    (BurgLiving())
+    
+    $livingPlayers:LivingPlayers($allReadys:players)
+ then
+   LogUtil.log(" burg switch process start=============");   
+  Message burgMessage=new Message(String.valueOf($currentBurg),"burgDetail",String.valueOf($memberCount)); 
+  insert(burgMessage);
+
+   
+   LogUtil.log(" burg switch process  over=============");
+    
+ 
+end
+
 
 
 //==person status ===over 
@@ -1615,12 +1607,12 @@ when
 	      );
 	
 	
-	$game:Game($status:status);  
+	$game:Game($status:status,$currentBurg:currentBurg);  
     $operater:Operater()
     $right:Right(id==$subject)
     $role:Role(id==$subject,$r:role)
     $king:King()
-    
+      $burg:Burg(id==$currentBurg)
     
 then      
 
@@ -1633,7 +1625,7 @@ then
       m.put("game",$game);     
       m.put("role",$role);          
       m.put("king",$king);
-     
+        m.put("burg",$burg);
           
       $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);   
@@ -1657,11 +1649,11 @@ when
 	      );	      
 	
 	$right:Right(id==$subject)
-	$game:Game($status:status);  
+	$game:Game($status:status,$currentBurg:currentBurg);  
     $operater:Operater() 
     not Role(id==$subject)
     $king:King()
-    
+    $burg:Burg(id==$currentBurg)
     
 then      
 	 LogUtil.log("get unplayer query info =================");  
@@ -1674,6 +1666,7 @@ then
      
         m.put("right",$right);    
         m.put("king",$king);
+        m.put("burg",$burg);
         
 
       $operater.setSnapshots(GsonUtil.toJson(m));     

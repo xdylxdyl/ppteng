@@ -51,7 +51,7 @@ function String  getNextKingIDFromPlayers(List players,int index) {
 function List<Burg>  initBurgs() {
 
     List<Burg> burgs=new ArrayList();
-      int initCount=2;
+      int initCount=3;
       for(int i=1;i<6;i++){
          int memberCount=initCount;
           if(i==1||i==3){

@@ -36,10 +36,11 @@
     <ruleSet id="88" name="phase switch prepare" x="136" y="401" width="185" height="48" ruleFlowGroup="phase switch prepare" />
     <ruleSet id="91" name="login action" x="22" y="296" width="80" height="48" ruleFlowGroup="login action" />
     <ruleSet id="90" name="game reset" x="18" y="22" width="88" height="48" ruleFlowGroup="game reset" />
+    <ruleSet id="96" name="switch process" x="876" y="196" width="80" height="48" ruleFlowGroup="switch process" />
   </nodes>
 
   <connections>
-    <connection from="70" to="68" />
+    <connection from="96" to="68" />
     <connection from="67" to="70" />
     <connection from="94" to="5" />
     <connection from="80" to="67" />
@@ -62,6 +63,7 @@
     <connection from="83" to="88" />
     <connection from="89" to="91" />
     <connection from="76" to="90" />
+    <connection from="70" to="96" />
   </connections>
 
 </process>

@@ -10,6 +10,7 @@
 var timer = null;
 
 var burgModel = {
+    memberCount:2,
     dismissalObject:[
         { id:"agree", name:"通过"
         },
@@ -66,7 +67,7 @@ var burgModel = {
 
     },
     errorHint:{
-        dispatch:"只能选三个人亲~"
+        dispatch:function(count){return "只能选"+count+"个人亲~~~"}
     },
 
     phase:{
@@ -161,9 +162,9 @@ var burgController = {
             case "dispatch":
                 //检查人数是否符合要求
                 var users = controlView.multiObject;
-                if (users.length != 2) {
+                if (users.length != burgModel.memberCount) {
                     result.code = -1;
-                    result.message = burgModel.errorHint["dispatch"];
+                    result.message = burgModel.errorHint["dispatch"](burgModel.memberCount);
                 } else {
 
                 }
@@ -183,7 +184,7 @@ var burgController = {
                     color:message.color,
                     expression:controlView.showExpression(message.expression),
                     subject:playerService.getPlayer(message.subject).name,
-                    firstAction:"第"+message.object+"次",
+                    firstAction:"第" + message.object + "次",
                     content:burgModel.hint[message.predict]
                 }
                 var contentID = selects.$gameArea;
@@ -238,6 +239,24 @@ var burgController = {
                 var contentID = selects.$gameArea;
                 var c = contentTemplate.generateSystemContent(content)
                 gameAreaView.showContent(contentID, c);
+
+                break;
+
+            case  "burgDetail":
+                var content = {
+                    color:colorConfig.system,
+                    expression:controlView.showExpression(message.expression),
+                    subject:message.subject + "号狼堡",
+                    firstAction:"的小组人员数是",
+                    content:"[ " + message.object + " ]"
+                }
+                var contentID = selects.$gameArea;
+                var c = contentTemplate.generateSystemContent(content)
+                gameAreaView.showContent(contentID, c);
+                burgModel.memberCount=parseInt( message.object);
+
+
+                break;
 
                 break;
 
@@ -813,6 +832,7 @@ var ghostSimpleService = {
         ghostSimpleService.parseCount(data.votes);
         ghostSimpleService.parseRole(data.role);
         ghostSimpleService.parseKing(data.king);
+        ghostSimpleService.parseBurg(data.burg);
     },
     parseKing:function (king) {
 
@@ -822,6 +842,12 @@ var ghostSimpleService = {
         burgPlayerView.playerHeight(king.id);
     },
 
+    parseBurg:function(burg){
+        if (burg == null) {
+                   return;
+       }
+       burgModel.memberCount=burg["memberCount"];
+    },
     parseCount:function (counts) {
         for (var key in counts) {
             var c = counts[key];
@@ -885,7 +911,9 @@ versionFunction = {
     //游戏中发言
     "say":burgController.say,
     //游戏中开始游戏的限制
-    "readyCount":2,
+    "readyCount":4,
+    //playercount -1
+    "readyMaxCount":4,
     //Command Hint
     "commandHint":wolfView.getCommandHint,
     commandCheck:burgController.commandCheck,

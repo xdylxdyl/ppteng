@@ -70,14 +70,12 @@ $(document).ready(function () {
             //检查准备人数是否合规则，否则return
 
             var count = versionFunction["readyCount"];
-            ;
             if (count) {
 
             } else {
                 count = 0;
             }
             var isReady = playerService.statusCount("ready", count);
-
 
             if (isReady) {
 
@@ -92,10 +90,23 @@ $(document).ready(function () {
         });
         $("#" + selects.$readyButton).on('click', function () {
             //检查准备人数是否合规则，否则return
-            var message = controlView.getMessage();
-            message.predict = "ready";
-            cometService.sendMessage(message);
-            $("#" + selects.$readyButton).hide();
+            var maxCount = versionFunction["readyMaxCount"];
+            if (maxCount) {
+
+            } else {
+                maxCount = 65539;
+            }
+            var isMaxReady = playerService.statusCount("ready", maxCount);
+
+            if (isMaxReady) {
+                alert("已经超过" + maxCount + "人了.等一局吧亲~~~~~");
+            } else {
+                var message = controlView.getMessage();
+                message.predict = "ready";
+                cometService.sendMessage(message);
+                $("#" + selects.$readyButton).hide();
+            }
+
 
         });
         $("#" + selects.$exitButton).click(function () {
@@ -171,8 +182,6 @@ $(document).ready(function () {
             var linkID = $(this).attr("href");
             viewUtil.autoBottom($(linkID));
         })
-
-
 
 
     }

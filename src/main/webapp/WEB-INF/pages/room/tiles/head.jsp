@@ -24,9 +24,6 @@
 <link href="/r/css/reboot.css" rel="stylesheet">
 <link href="/r/css/theme.css" rel="stylesheet">
 <link href="/r/css/layout/header.css" rel="stylesheet">
-
-
-
 </head>
 
 
@@ -34,8 +31,8 @@
 	<div class="mobinav" id="mobinav">
 		<i class="icon-th-list icon-white"></i>
 	</div>
-	<ul id="firstHead" class="social">	    
-	
+	<ul id="firstHead" class="social">
+
 		<li><a href="http://bbs.ptteng.com/forum.php" target="_blank">论坛</a></li>
 		<li><a href="http://ptteng.lofter.com/" target="_blank">博客</a></li>
 		<li id="nav_favorite"><a
@@ -52,7 +49,7 @@
 				<li id="nav_rank"><a href="/rank/list?type=money">排行</a></li>
 				<li id="nav_statistics"><a href="/player/statistics ">统计</a></li>
 				<li id="nav_case"><a href="/record/list?version=all">战例</a></li>
-				<li id="nav_person"><a href="/player/detail">设置</a></li>				
+				<li id="nav_person"><a href="/player/detail">设置</a></li>
 				<li id="nav_financial"><a href="/money/flow ">财务</a></li>
 				<li id="nav_tool"><a href="/tool/news">工具</a></li>
 				<li id="nav_about"><a href="/about?type=about">帮助</a></li>
@@ -64,14 +61,45 @@
 	</div>
 </div>
 
+<div id="mask">
+			<p>您的浏览器已经过时了~</p>
+			<p>非常抱歉,请使用以下浏览器访问本站</p>
+			<p>
+			<ul>
+				<li><p>
+						<a href="http://www.firefox.com.cn/download/" target="_blank">FireFox</a>
+					</p></li>
+				<li><p>
+						<a href="http://www.google.cn/intl/zh-CN/chrome/" target="_blank">Chrome</a>
+					</p></li>
+				<li><p>
+						<a href="http://ie.sogou.com/" target="_blank">Sogou(高速模式)</a>
+					</p></li>
+				<li><p>
+						<a href="http://chrome.360.cn/" target="_blank">360极速浏览器(闪电模式)</a>
+					</p></li>
+			</ul>
+
+			</p>
+			<p>
+				更多帮助请点击<a
+					href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=88"
+					target="_blank">这里 </a>
+			</p>
+
+		</div>
+		
+<script type="text/javascript"
+	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script>
+
 <script type="text/javascript"
 	src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
 
-<script src="/r/j-src/web/foot/head_view.js"></script> <script
-	type="text/javascript"
-	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script>
+<script src="/r/j-src/web/foot/head_view.js"></script>
 
 </body>
 </html>

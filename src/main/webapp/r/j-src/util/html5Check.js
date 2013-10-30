@@ -6,37 +6,33 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
+checkhHtml5();
 
 //显示灰色遮罩层
 function showBg() {
-    var bh = $(window).height();
-    var bw = $(window).width();
-    $("#mask").css({
-        height:bh,
-        width:bw,
-        display:"block"
-    });
-    $("#mask").show();
+
+    document.getElementById("#mask").show();
+
+
 }
 //关闭灰色遮罩
 function closeBg() {
-    $("#mask").hide();
+    document.getElementById("#mask").hide();
 }
-$(document).ready(function() {
-    function checkhHtml5() {
-        if (typeof(Worker) !== "undefined") {
-            //什么都不用做
 
-        }
-        else {
+function checkhHtml5() {
+  
+    if ("WebSocket" in window) {
+        //什么都不用做
 
-            showBg();
-        }
+
     }
-    checkhHtml5();
+    else {
 
-    $(window).resize(function() {
-        checkhHtml5();
-    })
-})
+        showBg();
+    }
+
+}
+
+
+
