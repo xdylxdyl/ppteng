@@ -21,7 +21,7 @@ function closeBg() {
 }
 
 function checkhHtml5() {
-  
+
     if ("WebSocket" in window) {
         //什么都不用做
 

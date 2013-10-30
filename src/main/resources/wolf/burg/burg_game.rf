@@ -12,7 +12,7 @@
   </header>
 
   <nodes>
-    <ruleSet id="68" name="game status" x="679" y="291" width="86" height="48" ruleFlowGroup="game status" />
+    <ruleSet id="68" name="game status" x="681" y="272" width="86" height="48" ruleFlowGroup="game status" />
     <start id="1" name="Start" x="31" y="706" width="49" height="49" />
     <ruleSet id="70" name="die process" x="669" y="172" width="101" height="48" ruleFlowGroup="die process" />
     <end id="5" name="End" x="400" y="689" width="19" height="48" />
@@ -26,7 +26,7 @@
     <ruleSet id="87" name="phase convert" x="177" y="177" width="87" height="48" ruleFlowGroup="phase convert" />
     <ruleSet id="86" name="action" x="430" y="529" width="80" height="48" ruleFlowGroup="action" />
     <ruleSet id="80" name="phase action" x="330" y="169" width="98" height="60" ruleFlowGroup="phase action" />
-    <ruleSet id="83" name="game over" x="187" y="295" width="80" height="48" ruleFlowGroup="game over" />
+    <ruleSet id="83" name="game over" x="429" y="274" width="80" height="48" ruleFlowGroup="game over" />
     <ruleSet id="82" name="phase switch" x="455" y="396" width="80" height="48" ruleFlowGroup="phase switch" />
     <ruleSet id="93" name="record" x="132" y="524" width="80" height="48" ruleFlowGroup="record" />
     <ruleSet id="92" name="logout action" x="685" y="517" width="80" height="46" ruleFlowGroup="logout action" />
@@ -36,11 +36,11 @@
     <ruleSet id="88" name="phase switch prepare" x="136" y="401" width="185" height="48" ruleFlowGroup="phase switch prepare" />
     <ruleSet id="91" name="login action" x="22" y="296" width="80" height="48" ruleFlowGroup="login action" />
     <ruleSet id="90" name="game reset" x="18" y="22" width="88" height="48" ruleFlowGroup="game reset" />
-    <ruleSet id="96" name="switch process" x="876" y="196" width="80" height="48" ruleFlowGroup="switch process" />
+    <ruleSet id="96" name="switch process" x="167" y="271" width="115" height="48" ruleFlowGroup="switch process" />
   </nodes>
 
   <connections>
-    <connection from="96" to="68" />
+    <connection from="70" to="68" />
     <connection from="67" to="70" />
     <connection from="94" to="5" />
     <connection from="80" to="67" />
@@ -60,10 +60,10 @@
     <connection from="77" to="95" />
     <connection from="93" to="94" />
     <connection from="1" to="89" />
-    <connection from="83" to="88" />
+    <connection from="96" to="88" />
     <connection from="89" to="91" />
     <connection from="76" to="90" />
-    <connection from="70" to="96" />
+    <connection from="83" to="96" />
   </connections>
 
 </process>

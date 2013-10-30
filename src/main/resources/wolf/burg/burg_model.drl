@@ -61,17 +61,17 @@ declare KingLiving
         id:String         
 end
 
-declare KingSwitch
-        bid:int     
-end
+
 
 
 declare BurgDie
         id:int
+        kid:String
 end
 
 declare BurgLiving
         id:int
+        kid:String
 end
 
 #create bombAction when dismissal is agree

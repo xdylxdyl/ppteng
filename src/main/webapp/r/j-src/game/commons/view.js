@@ -325,6 +325,7 @@ var playerListView = {
                     hint = hint + "," + player.name;
                 }
                 break;
+
             default:
                 break;
         }

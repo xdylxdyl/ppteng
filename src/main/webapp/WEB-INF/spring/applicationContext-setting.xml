@@ -244,7 +244,7 @@
 				</entry>
 				<entry key="dismissalTime" value="120000">
 				</entry>
-				<entry key="actionTime" value="120000">
+				<entry key="actionTime" value="30000">
 				</entry>
 				<entry key="playerCount" value="3">
 				</entry>
@@ -260,11 +260,10 @@
 		<constructor-arg>
 			<map>
 				<!-- simple-version -->
-				<entry key="playerCount" value="杀手人数">
+				<entry key="playerCount" value="玩家人数">
 				</entry>
-				<entry key="killerCount" value="玩家人数">
-				</entry>
-				
+				<entry key="killerCount" value="杀手人数">
+				</entry>				
 				<entry key="policeCount" value="警察人数">
 				</entry>
 				<entry key="dayTime" value="白天时间">

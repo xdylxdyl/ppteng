@@ -236,7 +236,7 @@ then
      String	rname=String.valueOf(RandomUtils.nextLong());
      //1.assign role	
    	 
-	 int  wolfCount=1;  
+	 int  wolfCount=2;  
 	 int  waterCount= $allReadys.size()-wolfCount;
 	 int burgCount=5;
 	 int attemptCount=3;
@@ -552,6 +552,7 @@ when
     $right:Right(id==$id,right contains "dismissal")
     Role(id==$id,$role:Role)
     $burg:Burg(id==$currentBurg)
+    not Dismissal(id==$id)
     
 then
     LogUtil.log(" dismissal  action start  ================="); 
@@ -592,7 +593,7 @@ when
     $message:Message($id:subject,predict=="action",object=="disagree")   
     Game(status=="action",$currentBurg:currentBurg)   
     $right:Right(id==$id,right contains "action")
-    $bombAction:BombAction(id==$id,$result:result)
+    $bombAction:BombAction(id==$id,result=="unknown")
     Role(id==$id,$role:Role)
     $burg:Burg(id==$currentBurg)
 then
@@ -707,10 +708,11 @@ when
     $burg:Burg(id==$currentBurg)     
     forall($agreeBombAction:BombAction(result=="agree"))
     not BurgDie()
+    King($kid:id)
  then
  
  LogUtil.log(" burg die process  start============="); 
-      BurgDie burgDie=new BurgDie($currentBurg);
+      BurgDie burgDie=new BurgDie($currentBurg,$kid);
       insert(burgDie);
  
      LogUtil.log(" burg die process over============="); 
@@ -745,9 +747,10 @@ when
      
     )
     not BurgLiving()
+    King($kid:id)
  then
    LogUtil.log(" burg living process start=============");     
-   BurgLiving burgLiving=new BurgLiving($currentBurg);
+   BurgLiving burgLiving=new BurgLiving($currentBurg,$kid);
    insert(burgLiving);   
    LogUtil.log("burg living process  over=============");
     
@@ -861,7 +864,7 @@ when
       modify($burg){setActionDetails($actionDetails)};
      for(Object o:ad.getMembers()){
          String id=(String)o;
-         BombAction ba=new BombAction(id,$currentBurg,"unkown");
+         BombAction ba=new BombAction(id,$currentBurg,"unknown");
          insert(ba);
          
           LogUtil.log("insert bomb action ================= "+ba); 
@@ -974,17 +977,17 @@ when
     $game:Game($currentBurg:currentBurg) 
     $operater:Operater()
     $burg:Burg(id==$currentBurg,$attemptCount:attemptCount,$actionDetails:actionDetails) 
-    $king:King($index:index) 
-    (KingDie()
+    $king:King($index:index,$kid:id) 
+    (KingDie(id==$kid)
      and 
      not BurgDie()
      and 
      not BurgLiving()
     )
     or
-    (BurgDie())
+    (BurgDie(kid==$kid))
     or
-    (BurgLiving())
+    (BurgLiving(kid==$kid))
     
     $livingPlayers:LivingPlayers($allReadys:players)
  then
@@ -1005,7 +1008,7 @@ end
 
 
 rule 'burg switch process'
-ruleflow-group " switch process"
+ruleflow-group "switch process"
 no-loop true
 when
   //conditions all player description ready   
@@ -1013,13 +1016,11 @@ when
     $room:Room(status=="run")
     $game:Game($currentBurg:currentBurg) 
     $operater:Operater()
-    $burg:Burg(id==$currentBurg,$attemptCount:attemptCount,$actionDetails:actionDetails,$memberCount:memberCount) 
-    $king:King($index:index)
+    $burg:Burg(id==$currentBurg,$memberCount:memberCount) 
     (BurgDie())
     or
     (BurgLiving())
-    
-    $livingPlayers:LivingPlayers($allReadys:players)
+ 
  then
    LogUtil.log(" burg switch process start=============");   
   Message burgMessage=new Message(String.valueOf($currentBurg),"burgDetail",String.valueOf($memberCount)); 
@@ -1516,7 +1517,7 @@ ruleflow-group "message accept"
 salience 100
 no-loop true 
 when
-     $message:Message($subject:subject,predict=="assign",$object:object,$accepts:accepts)   
+     $message:Message(subject=="water",predict=="assign",$object:object,$accepts:accepts)   
 	 
 	 
 then
@@ -1560,6 +1561,30 @@ then
     
 end
 
+rule 'group accept of assign'
+ruleflow-group "message accept"
+salience 50
+no-loop true 
+when
+     $message:Message(subject=="wolf",predict=="assign",$object:object,$accepts:accepts)   
+        eval($message.getAccepts().size()==0)  
+	 Role(id==$object,$role:role)
+	 $all_group_ids:ArrayList()
+	      from accumulate(
+	      Role($id:id,role==$role)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($id);),
+	      result(ls)
+	      );
+	 Game()	
+	 
+then
+     LogUtil.log(" group say start  ============="+$message); 
+    
+     modify($message){setAccepts($all_group_ids)};    
+    LogUtil.log("group say over =============");
+    
+end
 
 
 
@@ -1610,9 +1635,16 @@ when
 	$game:Game($status:status,$currentBurg:currentBurg);  
     $operater:Operater()
     $right:Right(id==$subject)
-    $role:Role(id==$subject,$r:role)
+    $role:Role(id==$subject,$prole:role)
     $king:King()
-      $burg:Burg(id==$currentBurg)
+    $burg:Burg(id==$currentBurg)    
+    $group:List()
+	      from accumulate(
+	      $r:Role($pid:id,role==$prole)	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($pid);),
+	      result(ls)
+	      );
     
 then      
 
@@ -1623,7 +1655,8 @@ then
       m.put("right",$right);
       setRemainTime($status,$game,$room) ; 
       m.put("game",$game);     
-      m.put("role",$role);          
+      m.put("role",$role);    
+       m.put("group",$group);      
       m.put("king",$king);
         m.put("burg",$burg);
           

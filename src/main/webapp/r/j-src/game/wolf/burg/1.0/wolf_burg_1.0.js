@@ -67,7 +67,17 @@ var burgModel = {
 
     },
     errorHint:{
-        dispatch:function(count){return "只能选"+count+"个人亲~~~"}
+        dispatch:function (count) {
+            return "只能选" + count + "个人亲~~~"
+        }
+    },
+    roleHint:{
+        wolf:function (name) {
+            return "【狼人名单】 " + JSON.stringify(name);
+        },
+        water:function (name) {
+            return "【身份】水民 "
+        }
     },
 
     phase:{
@@ -253,7 +263,7 @@ var burgController = {
                 var contentID = selects.$gameArea;
                 var c = contentTemplate.generateSystemContent(content)
                 gameAreaView.showContent(contentID, c);
-                burgModel.memberCount=parseInt( message.object);
+                burgModel.memberCount = parseInt(message.object);
 
 
                 break;
@@ -278,8 +288,8 @@ var burgController = {
             case "assign" :
                 //本地存入自己身份
                 playerService.assign(message);
-                //杀手栏展示杀手名单
-                wolfView.displayRole(burgModel.roleName[message.subject]);
+                wolfView.assignRole(message);
+
                 break;
             case "action" :
 
@@ -429,6 +439,16 @@ var burgController = {
  * 游戏区域
  */
 var wolfView = {
+    assignRole:function (message) {
+        var player=playerService.getPlayer(message.object);
+        var hint = $("#" + selects.$playerRole).text();
+        if (hint == "") {
+            hint = burgModel.roleHint[message.subject](player.name);
+        } else {
+            hint = hint + "," + player.name;
+        }
+        $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
+    },
     systemContent:function (message) {
         console.log(message.predict + " get system content");
         var c = burgModel.hint[message.predict];
@@ -831,6 +851,7 @@ var ghostSimpleService = {
         roomService.parseRight(data.right);
         ghostSimpleService.parseCount(data.votes);
         ghostSimpleService.parseRole(data.role);
+        ghostSimpleService.parseGroup(data.group);
         ghostSimpleService.parseKing(data.king);
         ghostSimpleService.parseBurg(data.burg);
     },
@@ -842,11 +863,11 @@ var ghostSimpleService = {
         burgPlayerView.playerHeight(king.id);
     },
 
-    parseBurg:function(burg){
+    parseBurg:function (burg) {
         if (burg == null) {
-                   return;
-       }
-       burgModel.memberCount=burg["memberCount"];
+            return;
+        }
+        burgModel.memberCount = burg["memberCount"];
     },
     parseCount:function (counts) {
         for (var key in counts) {
@@ -863,6 +884,18 @@ var ghostSimpleService = {
         wolfView.displayCard(data.card);
     },
 
+    parseGroup:function (group) {
+        var p = playerService.getPlayer(globalView.getCurrentID());
+        if ("water" == p.role) {
+
+        } else {
+            var names = playerService.getGroupNames(group);
+            var hint = burgModel.roleHint.wolf(names);
+            $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
+
+
+        }
+    },
     parseRole:function (data) {
         if (data == null) {
             return;

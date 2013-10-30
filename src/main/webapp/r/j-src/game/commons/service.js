@@ -123,7 +123,7 @@ var playerService = {
         var ids = idContent.split(","); //字符分割
         var names = [];
         for (var id in ids) {
-            var p = id_name[id];
+            var p = id_name[ids[id]];
             var name = "";
             if (p == null) {
 
