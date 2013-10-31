@@ -268,6 +268,31 @@ var playerService = {
             }
         }
         return null;
+    },
+    getNamesByIds:function(idsring,split){
+        if(split==""){
+            split==",";
+        }
+        var ids = splitString2Array(idsring, split);
+                     var names = [];
+                     for (var index in ids) {
+                         var name = playerService.getPlayer(ids[index]).name
+                         names.push(name);
+                     }
+
+          return array2splitString(names, split);
+
+    },
+    getNamesByIdLists:function(ids,split){
+
+                     var names = [];
+                     for (var index in ids) {
+                         var name = playerService.getPlayer(ids[index]).name
+                         names.push(name);
+                     }
+
+          return array2splitString(names, split);
+
     }
 
 

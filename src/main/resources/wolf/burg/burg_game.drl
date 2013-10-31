@@ -287,12 +287,7 @@ then
 			
 		}
 		
-		List burgs=initBurgs();
-		for(Object o:burgs){
 		
-		  Burg burg=(Burg)o;
-		  insert(burg);		  
-		}
 		LivingPlayers lp=new LivingPlayers($allReadys);
         insert(lp);
 		
@@ -308,6 +303,15 @@ then
            
         Message burgMessage=new Message("1","burgDetail","2"); 
 		insert(burgMessage);
+		
+		
+		List burgs=initBurgs(kingID);
+		for(Object o:burgs){
+		
+		  Burg burg=(Burg)o;
+		  insert(burg);		  
+		}
+		  LogUtil.log("init burgs   ================="+burgs);
      
 	
 	
@@ -816,14 +820,17 @@ no-loop true
 when
   $game:Game($currentBurg:currentBurg);
   $kingDie:KingDie($id:id)
-  $burg:Burg(id==$currentBurg,$attemptCount:attemptCount)   
+  $burg:Burg(id==$currentBurg,$attemptCount:attemptCount,$actionDetails:actionDetails)   
   $room:Room(status=="run")
  
  then
    LogUtil.log(" king die process  start=============");  
   
-  
-      modify($burg){setAttemptCount($attemptCount+1)};    
+     Object ado=$actionDetails.get($attemptCount);
+      ActionDetail ad=(ActionDetail)ado;
+      ad.setDismissal("disagree");
+      $actionDetails.put($attemptCount,ad);
+      modify($burg){setAttemptCount($attemptCount+1),setActionDetails($actionDetails)};    
       LogUtil.log(" ============="+$burg);
      Message dismissalResult=new Message($id,"dismissalResult","disagree"); 
      insert(dismissalResult);	
@@ -996,9 +1003,23 @@ when
       String kingID=getNextKingIDFromPlayers($allReadys,$index+1);		
         modify($king){setId(kingID),setIndex($index+1)}; 
         
+        
+        
+        Object ado=$actionDetails.get($attemptCount);
+         ActionDetail ad=(ActionDetail)ado;
+         ad.setKing(kingID);
+        $actionDetails.put($attemptCount,ad);
+         modify($burg){setActionDetails($actionDetails)};
+         
+         
+        
         Message assignKingMessage=new Message(kingID,"assignKing",String.valueOf($attemptCount)); 
 		insert(assignKingMessage);	
-        LogUtil.log("assign king is   ================="+$king);
+		
+		
+		
+		
+        LogUtil.log("assign king is   =================");
    
    LogUtil.log(" king switch process  over=============");
     
@@ -1637,7 +1658,14 @@ when
     $right:Right(id==$subject)
     $role:Role(id==$subject,$prole:role)
     $king:King()
-    $burg:Burg(id==$currentBurg)    
+    $burgs:Map()
+	      from accumulate(
+	      $burg:Burg($bid:id)	     
+	      init(Map m=new HashMap();),
+	      action(m.put(new Integer($bid),$burg);),
+	      result(m) 
+	      );
+	          
     $group:List()
 	      from accumulate(
 	      $r:Role($pid:id,role==$prole)	     
@@ -1658,7 +1686,7 @@ then
       m.put("role",$role);    
        m.put("group",$group);      
       m.put("king",$king);
-        m.put("burg",$burg);
+       m.put("burgs",$burgs);
           
       $operater.setSnapshots(GsonUtil.toJson(m));     
       retract($message);   
@@ -1686,7 +1714,15 @@ when
     $operater:Operater() 
     not Role(id==$subject)
     $king:King()
-    $burg:Burg(id==$currentBurg)
+  
+    
+       $burgs:Map()
+	      from accumulate(
+	      $burg:Burg($bid:id)	     
+	      init(Map m=new HashMap();),
+	      action(m.put(new Integer($bid),$burg);),
+	      result(m) 
+	      );
     
 then      
 	 LogUtil.log("get unplayer query info =================");  
@@ -1699,7 +1735,7 @@ then
      
         m.put("right",$right);    
         m.put("king",$king);
-        m.put("burg",$burg);
+        m.put("burgs",$burgs);
         
 
       $operater.setSnapshots(GsonUtil.toJson(m));     

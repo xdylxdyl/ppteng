@@ -48,7 +48,7 @@ function String  getNextKingIDFromPlayers(List players,int index) {
         
 
 
-function List<Burg>  initBurgs() {
+function List<Burg>  initBurgs(String king) {
 
     List<Burg> burgs=new ArrayList();
       int initCount=3;
@@ -59,8 +59,8 @@ function List<Burg>  initBurgs() {
           }     
           
           Map acs=new HashMap();
-          for(int attemptCount=1;attemptCount<=3;attemptCount++){
-             ActionDetail ad=new ActionDetail(attemptCount,new ArrayList(),"unknown","");
+          for(int attemptCount=1;attemptCount<=3;attemptCount++){                       
+            ActionDetail ad=new ActionDetail(attemptCount,new ArrayList(),"unknown","");
              acs.put(Integer.valueOf(attemptCount),ad);
           
           }
@@ -69,6 +69,9 @@ function List<Burg>  initBurgs() {
           burgs.add(burg);
       
       }
+      Object o= burgs.get(0).getActionDetails().get(1);
+      ActionDetail a=(ActionDetail)o;
+      a.setKing(king);
       return burgs;
 }
 

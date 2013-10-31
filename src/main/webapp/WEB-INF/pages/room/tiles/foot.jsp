@@ -106,8 +106,37 @@
 			</p>
 		</div>
 
+		<div id="mask">
+			<p>您的浏览器已经太老了~本站无法支持</p>
+			<p>非常抱歉,为了您的体验,请花费几分钟时间,下载以下浏览器以访问本站(点击即可下载)</p>
+			<p>
+			<ul>
+				<li><p>
+						<a href="http://www.firefox.com.cn/download/" target="_blank">FireFox</a>
+					</p></li>
+				<li><p>
+						<a href="http://www.google.cn/intl/zh-CN/chrome/" target="_blank">Chrome</a>
+					</p></li>
+				<li><p>
+						<a href="http://ie.sogou.com/" target="_blank">Sogou(高速模式)</a>
+					</p></li>
+				<li><p>
+						<a href="http://chrome.360.cn/" target="_blank">360极速浏览器(闪电模式)</a>
+					</p></li>
+			</ul>
 
-		
+			</p>
+			<p>
+				更多帮助请点击<a
+					href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=88"
+					target="_blank">这里 </a>
+			</p>
+
+		</div>
+
+
+
+
 
 	</div>
 </body>

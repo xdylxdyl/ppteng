@@ -244,7 +244,7 @@
 				</entry>
 				<entry key="dismissalTime" value="120000">
 				</entry>
-				<entry key="actionTime" value="30000">
+				<entry key="actionTime" value="60000">
 				</entry>
 				<entry key="playerCount" value="3">
 				</entry>

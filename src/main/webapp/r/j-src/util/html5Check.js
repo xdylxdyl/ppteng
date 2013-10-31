@@ -6,18 +6,23 @@
  * To change this template use File | Settings | File Templates.
  */
 
-checkhHtml5();
+
 
 //显示灰色遮罩层
 function showBg() {
-
-    document.getElementById("#mask").show();
-
+    var bh = $(window).height();
+    var bw = $(window).width();
+    $("#mask").css({
+        height:bh,
+        width:bw,
+        display:"block"
+    });
+    $("#mask").show();
 
 }
 //关闭灰色遮罩
 function closeBg() {
-    document.getElementById("#mask").hide();
+    $("#mask").hide();
 }
 
 function checkhHtml5() {
@@ -31,8 +36,14 @@ function checkhHtml5() {
 
         showBg();
     }
-
 }
 
+$(document).ready(function () {
+    checkhHtml5();
 
+    $(window).resize(function () {
+        checkhHtml5();
+    })
+
+})
 

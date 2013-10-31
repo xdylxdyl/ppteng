@@ -29,7 +29,7 @@ declare ActionDetail
         attempts:int 
         members:List 
         dismissal:String  
-         king:String    
+        king:String    
 end
 
 

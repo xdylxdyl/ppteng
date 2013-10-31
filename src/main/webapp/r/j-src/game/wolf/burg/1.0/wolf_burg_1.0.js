@@ -10,6 +10,16 @@
 var timer = null;
 
 var burgModel = {
+    clz:{
+        "agree":"text-success",
+        "disagree":"text-error",
+        "bomb":"text-success",
+        "unbomb":"text-error"
+    },
+    bombBurgCount:0,
+    unbombBurgCount:0,
+    burgIndex:1,
+    attemptCount:1,
     memberCount:2,
     dismissalObject:[
         { id:"agree", name:"通过"
@@ -22,6 +32,7 @@ var burgModel = {
     dismissalObjectHint:{
         "agree":"通过",
         "disagree":"不通过"
+
     },
     actionObject:[
         { id:"agree", name:"炸毁"
@@ -34,11 +45,13 @@ var burgModel = {
     actionObjectHint:{
         "agree":"炸毁",
         "disagree":"不炸"
+
     },
 
     actionResultHint:{
         "bomb":"成功炸毁",
         "unbomb":"未炸毁"
+
     },
     king:-500,
     playerStatus:{
@@ -160,7 +173,26 @@ var burgPlayerView = {
 
 };
 //房间状态相关.如显身身份,当前状态等
-var burgRoomView = {};
+var burgRoomView = {
+    updateDetailTitle:function () {
+
+        $("#detail_process").empty().html("当前进度" + burgModel.burgIndex + "号城堡第" + burgModel.attemptCount + "次尝试,已炸毁狼堡" + burgModel.bombBurgCount + "次,已成功保卫狼堡" + burgModel.unbombBurgCount + "次");
+
+    },
+    showDetail:function (burgIndex, attemptCount, suffix, content, clz) {
+        var id = "detail_" + burgIndex + "_" + attemptCount + "_" + suffix;
+        if (attemptCount == null) {
+            id = "detail_" + burgIndex + "_" + suffix;
+        } else {
+
+        }
+        if(clz==""){
+            clz="text-warning";
+        }
+        $("#" + id).empty().removeClass().addClass(clz).html(content);
+    }
+
+};
 
 var burgController = {
 
@@ -190,10 +222,12 @@ var burgController = {
         switch (message.predict) {
             case "assignKing" :
 
+                var p = playerService.getPlayer(message.subject);
+
                 var content = {
                     color:message.color,
                     expression:controlView.showExpression(message.expression),
-                    subject:playerService.getPlayer(message.subject).name,
+                    subject:p.name,
                     firstAction:"第" + message.object + "次",
                     content:burgModel.hint[message.predict]
                 }
@@ -201,27 +235,26 @@ var burgController = {
                 var c = contentTemplate.generateSystemContent(content)
                 gameAreaView.showContent(contentID, c);
                 burgPlayerView.changePlayerStatus(message);
+                burgModel.attemptCount = parseInt(message.object);
+                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "king", p.name, "");
+                burgRoomView.updateDetailTitle();
                 break;
 
             case "dispatch" :
 
-                var ids = splitString2Array(message.object, ",");
-                var names = [];
-                for (var index in ids) {
-                    var name = playerService.getPlayer(ids[index]).name
-                    names.push(name);
-                }
-
+                var nameString = playerService.getNamesByIds(message.object,",");
                 var content = {
                     color:colorConfig.system,
                     expression:controlView.showExpression(message.expression),
                     subject:playerService.getPlayer(message.subject).name,
                     firstAction:"指定",
-                    content:"[ " + array2splitString(names, ",") + " ]" + burgModel.actionHint[message.predict]
+                    content:"[ " + nameString + " ]" + burgModel.actionHint[message.predict]
                 }
                 var contentID = selects.$gameArea;
                 var c = contentTemplate.generateSystemContent(content)
                 gameAreaView.showContent(contentID, c);
+
+                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "member", nameString, "");
                 break;
             case "dismissal" :
 
@@ -235,6 +268,7 @@ var burgController = {
                 var contentID = selects.$gameArea;
                 var c = contentTemplate.generateSystemContent(content)
                 gameAreaView.showContent(contentID, c);
+
 
                 break;
             case "dismissalResult" :
@@ -250,6 +284,8 @@ var burgController = {
                 var c = contentTemplate.generateSystemContent(content)
                 gameAreaView.showContent(contentID, c);
 
+                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "dismissal",  burgModel.dismissalObjectHint[message.object], burgModel.clz[message.object]);
+
                 break;
 
             case  "burgDetail":
@@ -264,6 +300,7 @@ var burgController = {
                 var c = contentTemplate.generateSystemContent(content)
                 gameAreaView.showContent(contentID, c);
                 burgModel.memberCount = parseInt(message.object);
+                burgModel.burgIndex = parseInt(message.subject);
 
 
                 break;
@@ -318,6 +355,15 @@ var burgController = {
                 var contentID = selects.$gameArea;
                 var c = contentTemplate.generateSystemContent(content)
                 gameAreaView.showContent(contentID, c);
+                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "action", burgModel.actionResultHint[message.object], burgModel.clz[message.object]);
+                burgRoomView.showDetail(burgModel.burgIndex, null, "result", burgModel.actionResultHint[message.object], burgModel.clz[message.object]);
+
+                if("bomb"==message.object){
+                    burgModel.bombBurgCount++;
+                }else{
+                    burgModel.unbombBurgCount++;
+                }
+                burgRoomView.updateDetailTitle();
                 break;
             case "decryption" :
 
@@ -440,7 +486,7 @@ var burgController = {
  */
 var wolfView = {
     assignRole:function (message) {
-        var player=playerService.getPlayer(message.object);
+        var player = playerService.getPlayer(message.object);
         var hint = $("#" + selects.$playerRole).text();
         if (hint == "") {
             hint = burgModel.roleHint[message.subject](player.name);
@@ -853,7 +899,7 @@ var ghostSimpleService = {
         ghostSimpleService.parseRole(data.role);
         ghostSimpleService.parseGroup(data.group);
         ghostSimpleService.parseKing(data.king);
-        ghostSimpleService.parseBurg(data.burg);
+        ghostSimpleService.parseBurgs(data.burgs);
     },
     parseKing:function (king) {
 
@@ -863,11 +909,35 @@ var ghostSimpleService = {
         burgPlayerView.playerHeight(king.id);
     },
 
-    parseBurg:function (burg) {
-        if (burg == null) {
+    parseBurgs:function (burgs) {
+        if (burgs == null) {
             return;
         }
-        burgModel.memberCount = burg["memberCount"];
+        burgModel.memberCount = burgs[burgModel.burgIndex]["memberCount"];
+        burgModel.attemptCount = burgs[burgModel.burgIndex]["attemptCount"];
+
+
+        $.each(burgs, function (k, v) {
+            var burgIndex = k;
+            var burg = v;
+            $.each(v.actionDetails, function (kt, vt) {
+                var nameString = playerService.getNamesByIdLists(vt.members,",");
+                burgRoomView.showDetail(burgIndex, kt, "king", playerService.getPlayer(vt.king).name, "");
+                burgRoomView.showDetail(burgIndex, kt, "member", nameString, "");
+                burgRoomView.showDetail(burgIndex, kt, "dismissal", burgModel.dismissalObjectHint[vt.dismissal], "");
+                burgRoomView.showDetail(burgIndex, kt, "action", burgModel.actionResultHint[burg.result], "");
+                if ("unkknown" != burg.result) {
+                    burgRoomView.showDetail(burgIndex, null, "result", burgModel.actionResultHint[burg.result], burgModel.clz[burg.result]);
+
+                }
+
+
+            });
+        });
+
+        burgRoomView.updateDetailTitle();
+
+
     },
     parseCount:function (counts) {
         for (var key in counts) {
@@ -885,6 +955,9 @@ var ghostSimpleService = {
     },
 
     parseGroup:function (group) {
+        if (group == null) {
+            return;
+        }
         var p = playerService.getPlayer(globalView.getCurrentID());
         if ("water" == p.role) {
 
@@ -920,6 +993,9 @@ var ghostSimpleService = {
         var uid = globalView.getCurrentID();
         var p = playerService.getPlayer(uid);
         gameView.showSecondArea(p);
+        burgModel.burgIndex = data.currentBurg;
+        burgModel.bombBurgCount = data.bombBurgCount;
+        burgModel.unbombBurgCount = data.unbombBurgCount;
 
 
     }
@@ -944,9 +1020,9 @@ versionFunction = {
     //游戏中发言
     "say":burgController.say,
     //游戏中开始游戏的限制
-    "readyCount":4,
+    "readyCount":2,
     //playercount -1
-    "readyMaxCount":4,
+    "readyMaxCount":2,
     //Command Hint
     "commandHint":wolfView.getCommandHint,
     commandCheck:burgController.commandCheck,

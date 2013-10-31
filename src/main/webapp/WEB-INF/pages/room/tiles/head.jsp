@@ -61,39 +61,22 @@
 	</div>
 </div>
 
-<div id="mask">
-			<p>您的浏览器已经过时了~</p>
-			<p>非常抱歉,请使用以下浏览器访问本站</p>
-			<p>
-			<ul>
-				<li><p>
-						<a href="http://www.firefox.com.cn/download/" target="_blank">FireFox</a>
-					</p></li>
-				<li><p>
-						<a href="http://www.google.cn/intl/zh-CN/chrome/" target="_blank">Chrome</a>
-					</p></li>
-				<li><p>
-						<a href="http://ie.sogou.com/" target="_blank">Sogou(高速模式)</a>
-					</p></li>
-				<li><p>
-						<a href="http://chrome.360.cn/" target="_blank">360极速浏览器(闪电模式)</a>
-					</p></li>
-			</ul>
 
-			</p>
-			<p>
-				更多帮助请点击<a
-					href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=88"
-					target="_blank">这里 </a>
-			</p>
 
-		</div>
-		
+
+
+
+<!--[if lte IE 9]>
 <script type="text/javascript"
-	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script>
+	src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>	
+<![endif]-->
 
 <script type="text/javascript"
 	src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+<script type="text/javascript"
+	src="/r/j-src/util/html5Check.js?v=${frontVersion}"></script>
+
 
 
 <script
