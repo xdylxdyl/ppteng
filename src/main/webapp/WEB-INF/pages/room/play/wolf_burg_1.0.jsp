@@ -359,6 +359,7 @@
 								<p class="text-success">1.狼堡共五个,行动小组的人数为23233</p>
 								<p class="text-success">2.小组中有一个人选择"不炸",行动就失败.三个狼堡失败,水民输</p>
 								<p class="text-success">3.连续三次罢免村长,此次行动失败.</p>
+								<p class="text-success">4.默认按对狼人有利规则.如到审核时间未投票,那么默认为不通过</p>
 							</div>
 
 

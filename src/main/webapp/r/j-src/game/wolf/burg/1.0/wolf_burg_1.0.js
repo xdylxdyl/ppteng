@@ -840,6 +840,11 @@ var gameView = {
             $("#" + gameView.startEmpty[index]).empty();
         }
 
+        burgModel.burgIndex=1;
+           burgModel.bombBurgCount=0;
+           burgModel.unbombBurgCount=0;
+           burgModel.attemptCount=1;
+
         $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始了~狼人和水民们开始狂欢吧</p>");
 
         playerListView.sortPlayer();
@@ -849,6 +854,8 @@ var gameView = {
         var p = playerService.getPlayer(globalView.getCurrentID());
         gameView.showSecondArea(p);
         notifyUtil.sendNotify("各位大神", "前方发现狼堡,速度归队", "");
+
+
 
     },
     over:function (message) {

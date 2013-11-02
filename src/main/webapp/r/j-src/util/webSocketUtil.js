@@ -22,6 +22,7 @@ var webSocketUtil = {
     uid:null,
     retryCount:0,
     retryLimit:3,
+    version:0,
 
     connect:function (uid) {
 
@@ -56,7 +57,7 @@ var webSocketUtil = {
     _onopen:function () {
         clearInterval(checkID);
         webSocketUtil.retryCount = 0;
-        webSocketUtil.timer();
+        //webSocketUtil.timer();
         $("#netSpeedHint").text("已连接");
 
     },

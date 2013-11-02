@@ -25,6 +25,8 @@
 			<li id="nav_mine_1"><a href="/record/list?version=mine_1&uid=${uid}">多人扫雷</a></li>
 			<li class="nav-header">电影院</li>		
 			<li id="nav_video_1"><a href="/record/list?version=video_1&uid=${uid}">电影</a></li>
+				<li class="nav-header">炸狼堡</li>		
+			<li id="nav_wolf_burg_1"><a href="/record/list?version=wolf_burg_1&uid=${uid}">炸狼堡</a></li>
 		
 		</ul>
 	</div>

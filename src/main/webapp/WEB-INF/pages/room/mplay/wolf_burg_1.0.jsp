@@ -29,11 +29,9 @@
 
 	<div class="tabbable">
 		<ul class="nav nav-tabs">
-			<li><a href="#player_list" data-toggle="tab" >玩家</a></li>
-			<li class="active"><a href="#game_area" data-toggle="tab" auto-bottom>游戏</a></li>
-			<li><a href="#description_area" data-toggle="tab">描述</a></li>
-			<li class=""><a href="#die_area" data-toggle="tab" auto-bottom>亡灵</a></li>
-
+			<li><a href="#player_list" data-toggle="tab">玩家</a></li>
+			<li class=""><a href="#game_area" data-toggle="tab" auto-bottom>游戏</a></li>
+			<li><a href="#description_area" data-toggle="tab">狼堡</a></li>
 			<li><a href="#setting_area" data-toggle="tab">设置</a></li>
 			<li><a href="#music_area" data-toggle="tab">音乐</a></li>
 			<li><a href="#help_area" data-toggle="tab">帮助</a></li>
@@ -47,7 +45,288 @@
 				<tiles:insertDefinition name="playerList" />
 			</div>
 			<div class="tab-pane active" id="game_area"></div>
-			<div class="tab-pane" id="description_area"></div>
+			
+						<div class="tab-pane" id="description_area">
+							<div class="container-fluid">
+								<div class="row-fluid">
+
+									<div class="span12">
+										<h3 id="detail_process"></h3>
+									</div>
+									<hr>
+									<div class="span12">
+										<h3 id="detail_1_h">
+											一号狼堡 <span class="text-error" id="detail_1_result"></span>
+										</h3>
+										<div class="row-fluid">
+											<div class="span4">
+												<h3>第一次</h3>
+												<p>
+													村长:<span id="detail_1_1_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_1_1_member"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_1_1_dismissal"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_1_1_action"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第二次</h3>
+												<p class="">
+													村长:<span id="detail_1_2_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_1_2_member"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_1_2_dismissal"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_1_2_action"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第三次</h3>
+												<p class="">
+													村长:<span id="detail_1_3_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_1_3_member"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_1_3_dismissal"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_1_3_action"></span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row-fluid">
+									<div class="span12">
+										<h3>
+											二号狼堡 <span class="text-success"></span>
+										</h3>
+										<div class="row-fluid">
+											<div class="span4">
+												<h3>第一次</h3>
+												<p>
+													村长:<span id="detail_2_1_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_2_1_member"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_2_1_dismissal"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_2_1_action"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第二次</h3>
+												<p class="">
+													村长:<span id="detail_2_2_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_2_2_member"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_2_2_dismissal"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_2_2_action"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第三次</h3>
+												<p class="">
+													村长:<span id="detail_2_3_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_2_3_member"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_2_3_dismissal"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_2_3_action"></span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row-fluid">
+									<div class="span12">
+										<h3>三号狼堡</h3>
+										<div class="row-fluid">
+											<div class="span4">
+												<h3>第一次</h3>
+												<p>
+													村长:<span id="detail_3_1_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_3_1_member"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_3_1_dismissal"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_3_1_action"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第二次</h3>
+												<p class="">
+													村长:<span id="detail_3_2_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_3_2_member"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_3_2_dismissal"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_3_2_action"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第三次</h3>
+												<p class="">
+													村长:<span id="detail_3_3_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_3_3_member"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_3_3_dismissal"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_3_3_action"></span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row-fluid">
+									<div class="span12">
+										<h3>四号狼堡</h3>
+										<div class="row-fluid">
+											<div class="span4">
+												<h3>第一次</h3>
+												<p>
+													村长:<span id="detail_4_1_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_4_1_member>"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_4_1_dismissal>"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_4_1_action>"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第二次</h3>
+												<p class="">
+													村长:<span id="detail_4_2_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_4_2_member>"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_4_2_dismissal>"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_4_2_action>"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第三次</h3>
+												<p class="">
+													村长:<span id="detail_4_3_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_4_3_member>"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_4_3_dismissal>"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_4_3_action>"></span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row-fluid">
+									<div class="span12">
+										<h3>五号狼堡</h3>
+										<div class="row-fluid">
+											<div class="span4">
+												<h3>第一次</h3>
+												<p>
+													村长:<span id="detail_5_1_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_5_1_member>"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_5_1_dismissal>"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_5_1_action>"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第二次</h3>
+												<p class="">
+													村长:<span id="detail_5_2_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_5_2_member>"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_5_2_dismissal>"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_5_2_action>"></span>
+												</p>
+											</div>
+											<div class="span4">
+												<h3>第三次</h3>
+												<p class="">
+													村长:<span id="detail_5_3_king"></span>
+												</p>
+												<p class="">
+													小组名单:<span id="detail_5_3_member>"></span>
+												</p>
+												<p class="">
+													审核结果:<span id="detail_5_3_dismissal>"></span>
+												</p>
+												<p class="">
+													行动结果:<span id="detail_5_3_action>"></span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+
+						</div>
 
 			<div class="tab-pane" id="setting_area"></div>
 			<div class="tab-pane" id="music_area">
@@ -57,44 +336,31 @@
 
 			</div>
 
-			<div class="tab-pane" id="help_area">
-				<div class="hero-unit">
+					<div class="tab-pane" id="help_area">
+							<div class="hero-unit">
 
-					<p></p>
-					<p>
-						<a href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=1931"
-							class="text-warning" target="_blank">1.捉鬼[简化版]术语表 &raquo;</a>
-					</p>
-					<p>
-						<a
-							href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=2058&fromuid=4"
-							class="text-warning" target="_blank">2.[捉鬼-猜词版]规则 &raquo;</a>
-					</p>
+								<p></p>
+								<p>
+									<a
+										href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=3399&page=1&extra=#pid14703"
+										class="text-warning" target="_blank">1.炸狼堡规则&raquo;</a>
+								</p>
 
+								<p class="text-error">特别提示,游戏还在公测中.如果发现问题,可以先尝试刷新,如果能记录发生问题的情形并反馈给我,会更加感谢</p>
 
-
-					<p>
-						<a href="http://www.wandianba.com/" class="text-warning"
-							target="_blank">3.感谢玩点吧首创捉鬼规则 &raquo;</a>
-					</p>
-
-					<p class="text-error">特别提示,游戏还在公测中.如果发现问题,可以先尝试刷新,如果能记录发生问题的情形并反馈给我,会更加感谢</p>
-
-					<p class="text-success">简要帮助:</p>
-					<p class="text-success">1.国王出题需要在指令里选择"出题","出题"之后,国王需要给出发言的顺序</p>
-					<p class="text-success">2.一定天数后未能全部推出幽灵,幽灵获胜</p>
-					<p class="text-success">3.提问阶段.国王自行判断幽灵提问的个数,系统仅提示幽灵允许提出问题的个数.</p>
-					<p class="text-success">4.提问阶段.幽灵需要在指令中选择"回答",然后将答案附上才可以</p>
-				</div>
+								<p class="text-success">简要帮助:</p>
+								<p class="text-success">1.狼堡共五个,行动小组的人数为23233</p>
+								<p class="text-success">2.小组中有一个人选择"不炸",行动就失败.三个狼堡失败,水民输</p>
+								<p class="text-success">3.连续三次罢免村长,此次行动失败.</p>
+							    <p class="text-success">4.默认按对狼人有利规则.如到审核时间未投票,那么默认为不通过</p>
+							</div>
 
 
 
 
 
 
-
-
-			</div>
+						</div>
 
 			<div class="tab-pane" id="die_area"></div>
 
@@ -135,7 +401,7 @@
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/commons/action.js?v=${frontVersion}"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/game/ghost/question/2.0/ghost_question_2.0.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/game/wolf/burg/1.0/wolf_burg_1.0.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/commons/view.js?v=${frontVersion}"></script>
 <script

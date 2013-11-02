@@ -324,6 +324,14 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 		}
 		
+		if (version.contains("burg")) {
+			// 
+			if (time > 5 * 60 * 1000) {
+				return true;
+			}
+
+		}
+		
 		if (version.contains("labs")) {
 			// 实验室游戏
 			if ( time > 4 * 60 * 1000) {
