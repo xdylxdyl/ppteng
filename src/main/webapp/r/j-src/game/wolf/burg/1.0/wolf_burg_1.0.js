@@ -690,7 +690,7 @@ var wolfView = {
         var shareLink = "http://42.121.113.70/record/enter?recordID=" + recordID;
         var share;
         switch (obj) {
-            case "ghost win" :
+            case "wolf win" :
                 $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，狼人胜利！</p> ");
                 share = "这局杀人游戏[简化]中,杀手又赢了~,抢走了2000金币~点此链接回放场景,重现杀人现场: " + shareLink + ";";
                 break;
@@ -1020,9 +1020,9 @@ versionFunction = {
     //游戏中发言
     "say":burgController.say,
     //游戏中开始游戏的限制
-    "readyCount":2,
+    "readyCount":4,
     //playercount -1
-    "readyMaxCount":2,
+    "readyMaxCount":4,
     //Command Hint
     "commandHint":wolfView.getCommandHint,
     commandCheck:burgController.commandCheck,

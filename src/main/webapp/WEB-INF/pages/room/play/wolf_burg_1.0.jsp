@@ -349,7 +349,7 @@
 								<p></p>
 								<p>
 									<a
-										href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=3218&extra=page%3D1"
+										href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=3399&page=1&extra=#pid14703"
 										class="text-warning" target="_blank">1.炸狼堡规则&raquo;</a>
 								</p>
 
