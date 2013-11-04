@@ -231,12 +231,12 @@ then
 
 	//actions
    
-     LogUtil.log("game init process start =================");
+     LogUtil.log("game init process start ================="+$allReadys.size());
      //0 setGameName 
      String	rname=String.valueOf(RandomUtils.nextLong());
      //1.assign role	
    	 
-	 int  wolfCount=2;  
+	 int  wolfCount=initWolfCount($allReadys.size());  
 	 int  waterCount= $allReadys.size()-wolfCount;
 	 int burgCount=5;
 	 int attemptCount=3;
@@ -305,7 +305,7 @@ then
 		insert(burgMessage);
 		
 		
-		List burgs=initBurgs(kingID);
+		List burgs=initBurgs(kingID,$allReadys.size());
 		for(Object o:burgs){
 		
 		  Burg burg=(Burg)o;
@@ -709,8 +709,16 @@ no-loop true
 when
     $room:Room(status=="run")  
     $game:Game(status=="action",$currentBurg:currentBurg)
-    $burg:Burg(id==$currentBurg)     
-    forall($agreeBombAction:BombAction(result=="agree"))
+    $burg:Burg(id==$currentBurg,$memberCount:memberCount,$bombWolfCount:bombWolfCount)     
+          //get all readys
+    $agreeCounts:ArrayList()
+	      from accumulate(
+	      $bombAction:BombAction(result=="agree")	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($bombAction);),
+	      result(ls)
+	      ); 
+    eval($agreeCounts.size()>=$bombWolfCount)
     not BurgDie()
     King($kid:id)
  then
@@ -732,12 +740,21 @@ no-loop true
 when
     $room:Room(status=="run")
     Game($currentBurg:currentBurg)
-    Burg(id==$currentBurg)
+    Burg(id==$currentBurg,$bombWolfCount:bombWolfCount,$memberCount:memberCount)
     $operater:Operater()
     (
-    BombAction(result=="disagree")
+      //get all readys
+    $disAgreeCounts:ArrayList()
+	      from accumulate(
+	      $bombAction:BombAction(result=="disagree")	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($bombAction);),
+	      result(ls)
+	      );    
     and 
     Game(status=="action")   
+    and 
+    eval($disAgreeCounts.size()+$bombWolfCount>$memberCount)
     )
     or
     ($message:Message(subject=="dispatch",predict=="switch"))

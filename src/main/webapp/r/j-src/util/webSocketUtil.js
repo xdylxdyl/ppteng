@@ -96,7 +96,7 @@ var webSocketUtil = {
     },
     _onclose:function (m) {
         console.log("connection close .reopen it ");
-        $("#netSpeedHint").text("断线中..正重连");
+        $("#netSpeedHint").text("断线了..随便打点什么东西重连");
 
     },
     _onerror:function (m) {

@@ -688,7 +688,7 @@ public class One23Test {
 		String currentVersion = diyVersion;
 		Room room = new Room("sss", 3L, currentVersion);
 		Setting s = settingService.getSetting(currentVersion);
-		log.info(s);
+		log.info("wolf setting "+s);
 		room.setSetting(s);
 		room.setId(5000L);
 		this.droolsGameMessageService.createRoom(room);
@@ -696,6 +696,7 @@ public class One23Test {
 
 		List<String> messages = FileUtil
 				.readFileAsList("src/test/resources/wolf_burg.txt");
+		log.info("get messageis "+messages);
 		List<Message> ms = new ArrayList();
 
 		Long rid = null;

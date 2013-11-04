@@ -44,20 +44,41 @@ function String  getNextKingIDFromPlayers(List players,int index) {
 	    
 }
 
-      
+    
+function Integer  initWolfCount(Integer all) {
+  
+    	 Integer[] wolf=new Integer[]{2,2,3,3,3,4};
+    	 return wolf[all-5];
+}  
         
 
 
-function List<Burg>  initBurgs(String king) {
-
+function List<Burg>  initBurgs(String king,Integer all) {
+  
+    	   Map<Integer,Integer[]> memberConfig=new HashMap<Integer,Integer[]>();
+	   memberConfig.put(5, new Integer[]{2,3,2,3,3});
+	   memberConfig.put(6, new Integer[]{2,3,4,3,4});
+	   memberConfig.put(7, new Integer[]{2,3,3,4,4});
+	   memberConfig.put(8, new Integer[]{3,4,4,5,5});
+	   memberConfig.put(9, new Integer[]{3,4,4,5,5});
+	   memberConfig.put(10, new Integer[]{3,4,4,5,5});
+	  
+	   Map<Integer,Integer[]> bombWolfConfig=new HashMap<Integer,Integer[]>();
+	   bombWolfConfig.put(5, new Integer[]{1,1,1,1,1});
+	   bombWolfConfig.put(6, new Integer[]{1,1,1,1,1});
+	   bombWolfConfig.put(7, new Integer[]{1,1,1,2,1});
+	   bombWolfConfig.put(8, new Integer[]{1,1,1,2,1});
+	   bombWolfConfig.put(9, new Integer[]{1,1,1,2,1});
+	   bombWolfConfig.put(10, new Integer[]{1,1,1,2,1});
+	    
+	   
+    
     List<Burg> burgs=new ArrayList();
-      int initCount=3;
+     
       for(int i=1;i<6;i++){
-         int memberCount=initCount;
-          if(i==1||i==3){
-           memberCount=initCount-1;
-          }     
-          
+          int memberCount=memberConfig.get(all)[i-1];  
+           int bombWolfCount=bombWolfConfig.get(all)[i-1]; 
+               
           Map acs=new HashMap();
           for(int attemptCount=1;attemptCount<=3;attemptCount++){                       
             ActionDetail ad=new ActionDetail(attemptCount,new ArrayList(),"unknown","");
@@ -65,7 +86,7 @@ function List<Burg>  initBurgs(String king) {
           
           }
           
-          Burg burg=new Burg(i,acs,"unknown",memberCount,1);
+          Burg burg=new Burg(i,acs,"unknown",memberCount,1,bombWolfCount);
           burgs.add(burg);
       
       }

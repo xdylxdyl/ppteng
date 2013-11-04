@@ -3,6 +3,7 @@ package com.gemantic.analyse.chatroom.test;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -153,8 +154,35 @@ public class RankdomUtilTest {
 		List<String> ls =new ArrayList<String>();
 		ls.add("2");
 		ls.add("3");
+		
 		log.info("test list "+ls);
+		
+		
+	   Map<Integer,Integer[]> memberConfig=new HashMap<Integer,Integer[]>();
+	   memberConfig.put(5, new Integer[]{2,3,2,3,3});
+	   memberConfig.put(6, new Integer[]{2,3,4,3,4});
+	   memberConfig.put(7, new Integer[]{2,3,3,4,4});
+	   memberConfig.put(8, new Integer[]{3,4,4,5,5});
+	   memberConfig.put(9, new Integer[]{3,4,4,5,5});
+	   memberConfig.put(10, new Integer[]{3,4,4,5,5});
+	   
+	   
+	   
+	   Map<Integer,Integer[]> bombWolfConfig=new HashMap<Integer,Integer[]>();
+	   bombWolfConfig.put(5, new Integer[]{1,1,1,1,1});
+	   bombWolfConfig.put(6, new Integer[]{1,1,1,1,1});
+	   bombWolfConfig.put(7, new Integer[]{1,1,1,2,1});
+	   bombWolfConfig.put(8, new Integer[]{1,1,1,2,1});
+	   bombWolfConfig.put(9, new Integer[]{1,1,1,2,1});
+	   bombWolfConfig.put(10, new Integer[]{1,1,1,2,1});
+	  
+	   
+	 
+	    int memberCount=memberConfig.get(5)[1];
+	    log.info(memberCount);
+	    int bombWolfCount=bombWolfConfig.get(7)[3];
+	    log.info(bombWolfCount);
+	   
 	}
-	
 	
 }

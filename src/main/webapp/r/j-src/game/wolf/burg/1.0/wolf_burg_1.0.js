@@ -66,7 +66,7 @@ var burgModel = {
     hint:{
         dispatch:"选人阶段,村长要担负起选择行动小组成员名单的重任了~~",
         dismissal:"大家要认真审核村长提出的名单~通过投票来决定是否通过~",
-        action:"行动时间到了~~GoGoGo",
+        action:"行动时间到了~~GoGoGo(如果是七人以上,四号狼堡需要至少两个人选择不炸才能保卫成功)",
         assignKing:"被指定为村长,认真挑选行动小组名单吧~"
 
     },
@@ -227,8 +227,8 @@ var burgController = {
                 var content = {
                     color:message.color,
                     expression:controlView.showExpression(message.expression),
-                    subject:p.name,
-                    firstAction:"第" + message.object + "次",
+                    subject:"第(" + message.object + ")/3次尝试,"+p.name,
+                    firstAction:"",
                     content:burgModel.hint[message.predict]
                 }
                 var contentID = selects.$gameArea;
@@ -262,7 +262,7 @@ var burgController = {
                     color:colorConfig.system,
                     expression:controlView.showExpression(message.expression),
                     subject:playerService.getPlayer(message.subject).name,
-                    firstAction:"对行动小组的名单表决结果为",
+                    firstAction:"认为小组名单 ",
                     content:"[ " + burgModel.dismissalObjectHint[message.object] + " ]"
                 }
                 var contentID = selects.$gameArea;
@@ -277,7 +277,7 @@ var burgController = {
                     color:colorConfig.system,
                     expression:controlView.showExpression(message.expression),
                     subject:playerService.getPlayer(message.subject).name,
-                    firstAction:"给出的行动小组名单表决结果为",
+                    firstAction:"村长的审核结果为 ",
                     content:"[ " + burgModel.dismissalObjectHint[message.object] + " ]"
                 }
                 var contentID = selects.$gameArea;
@@ -333,7 +333,7 @@ var burgController = {
                 var content = {
                     color:colorConfig.system,
                     expression:controlView.showExpression(message.expression),
-                    subject:playerService.getPlayer(message.subject).name,
+                    subject:"[密]"+playerService.getPlayer(message.subject).name,
                     firstAction:"你对本次狼堡采取的行动是",
                     content:"[ " + burgModel.actionObjectHint[message.object] + " ]"
                 }
@@ -1029,7 +1029,7 @@ versionFunction = {
     //游戏中开始游戏的限制
     "readyCount":4,
     //playercount -1
-    "readyMaxCount":4,
+    "readyMaxCount":9,
     //Command Hint
     "commandHint":wolfView.getCommandHint,
     commandCheck:burgController.commandCheck,
