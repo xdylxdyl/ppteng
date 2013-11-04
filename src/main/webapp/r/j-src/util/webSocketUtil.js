@@ -3,6 +3,11 @@
  * 上午10:08 To change this template use File | Settings | File Templates.
  */
 
+$("#reconnect" ).on("click", function (event) {
+    webSocketUtil.retry;
+
+});
+
 
 var checkWebSocket = function () {
 
@@ -70,14 +75,10 @@ var webSocketUtil = {
 
     retry:function () {
         console.log("retry count is " + webSocketUtil.retryCount);
-        if (webSocketUtil.retryCount > webSocketUtil.retryLimit) {
 
-        } else {
-            webSocketUtil.retryCount = webSocketUtil.retryCount + 1;
-            webSocketUtil.connect(webSocketUtil.uid);
+       webSocketUtil.connect(webSocketUtil.uid);
 
 
-        }
     },
 
     _onmessage:function (m) {
@@ -96,7 +97,7 @@ var webSocketUtil = {
     },
     _onclose:function (m) {
         console.log("connection close .reopen it ");
-        $("#netSpeedHint").text("断线了..随便打点什么东西重连");
+        $("#netSpeedHint").html("断线了...点击此处<a href='' id='reconnect'>重连</a>");
 
     },
     _onerror:function (m) {
