@@ -764,7 +764,23 @@ var controlView = {
 
             var t = jQuery.now() - message.sendAt;
             if (message.subject == globalView.getCurrentID()) {
-                $("#netSpeedHint").text("延迟:" + (t) + "毫秒");
+
+                var h="网速很给力";
+                if(t<50){
+
+                }else{
+                    if(t<100){
+                        h="网速正常"
+                    }else{
+                    if(t<300){
+                        h="网速有一点卡"
+                    }else{
+                        h="网速不给力啊"
+                    }
+
+                    }
+                }
+                $("#netSpeedHint").text(h+" 延迟:" + (t) + "毫秒");
             }
         }
 

@@ -718,7 +718,7 @@ when
 	      action(ls.add($bombAction);),
 	      result(ls)
 	      ); 
-    eval($agreeCounts.size()>=$bombWolfCount)
+    eval($agreeCounts.size()+$bombWolfCount>$memberCount)
     not BurgDie()
     King($kid:id)
  then
@@ -754,7 +754,7 @@ when
     and 
     Game(status=="action")   
     and 
-    eval($disAgreeCounts.size()+$bombWolfCount>$memberCount)
+    eval($disAgreeCounts.size()>=$bombWolfCount)
     )
     or
     ($message:Message(subject=="dispatch",predict=="switch"))
