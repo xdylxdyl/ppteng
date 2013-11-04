@@ -59,7 +59,7 @@ body {
 .content {
     min-width: 400px;
     position: relative;
-    background: #fff;
+    background: #fefefe;
     margin-left: 200px;
     border-left: 1px solid #cfcfd6;
 }
