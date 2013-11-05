@@ -3,11 +3,6 @@
  * 上午10:08 To change this template use File | Settings | File Templates.
  */
 
-$("#reconnect" ).on("click", function (event) {
-    webSocketUtil.retry;
-
-});
-
 
 var checkWebSocket = function () {
 
@@ -64,6 +59,7 @@ var webSocketUtil = {
         webSocketUtil.retryCount = 0;
         //webSocketUtil.timer();
         $("#netSpeedHint").text("已连接");
+        //$("#netSpeedHint").empty().html("断线了...点击此处<a href='' id='reconnect'>重连</a>");
 
     },
 
@@ -76,7 +72,7 @@ var webSocketUtil = {
     retry:function () {
         console.log("retry count is " + webSocketUtil.retryCount);
 
-       webSocketUtil.connect(webSocketUtil.uid);
+        webSocketUtil.connect(webSocketUtil.uid);
 
 
     },
@@ -97,7 +93,7 @@ var webSocketUtil = {
     },
     _onclose:function (m) {
         console.log("connection close .reopen it ");
-        $("#netSpeedHint").html("断线了...点击此处<a href='' id='reconnect'>重连</a>");
+        $("#netSpeedHint").empty().html("断线了...点击此处<a href=''  id='reconnect'>重连</a>");
 
     },
     _onerror:function (m) {
@@ -120,4 +116,13 @@ var webSocketUtil = {
 }
 
 
+$(document).ready(function(){
+    $("#netSpeedHint").on("click",'a', function (event) {
+
+             webSocketUtil.retry();
+            event.preventDefault();
+
+
+         });
+});
 

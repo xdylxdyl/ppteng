@@ -68,7 +68,7 @@
 				<li>
 					<button class="btn btn-info" id="replayButton">播放战例</button>
 				</li>
-				<li class="pull-right"><span class="text-success help-inline"
+				<li class="pull-right" id="netSpeedHintLI"><span class="text-success help-inline"
 					id="netSpeedHint"
 					title="此处用于展示当前网络和服务器之间的延迟,数字越小网速越好,正常情况下应在100MS以下,1秒=1000MS.如果看不到自己说话,先刷新,如果仍然看不到说话,检查自己是否打开了多个聊天窗口">延迟：0
 						毫秒</span></li>

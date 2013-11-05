@@ -49,7 +49,7 @@ var contentTemplate = {
         if(content.subject==""){
             return "<p style='color:#F00;'> 【系统消息】"+content.firstAction + content.content  + "</p>";
         }else{
-            return "<p style='color:#F00;'> 【系统消息】 [" + content.subject + "] "+content.firstAction + content.content  + "</p>";
+            return "<p style='color:#F00;'> 【系统消息】 " + content.subject + " "+content.firstAction + content.content  + "</p>";
         }
 
 
