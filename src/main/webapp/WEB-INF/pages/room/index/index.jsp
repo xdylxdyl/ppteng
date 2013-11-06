@@ -94,15 +94,19 @@
 
 
 				<div class="span8 banner-screen">
-
+					<%-- 
 					<div id="indexCarousel" class="carousel ng-scope" interval="500"
 						ng-controller="ImgCtrl">
 						<div class="carousel-inner">
 							<tiles:insertDefinition name="carousel" />
 						</div>
-						<a class="carousel-control left" href="#indexCarousel"
+						<!-- <a class="carousel-control left" href="#indexCarousel"
 							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
-							href="#indexCarousel" data-slide="next">&rsaquo;</a>
+							href="#indexCarousel" data-slide="next">&rsaquo;</a> -->
+					</div> --%>
+					<div class="item">
+						<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
+						
 					</div>
 				</div>
 			</div>
@@ -114,7 +118,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="span8">
-					<h3>葡萄藤轻游戏</h3>
+					<h3 class="" style="color:#0088cc">葡萄藤-好玩的在线桌游</h3>
+					<hr>					
 					<div class="row-fluid">
 						<div class="span6">
 							<div class="chapter">
@@ -123,24 +128,16 @@
 										alt="电影院" width="64" height="64"></span>
 									<h4>虚拟电影院</h4>
 									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
-									<p>
-										<a class="btn"
-											href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=159"
-											target="_blank">活动报名&raquo;</a>
-									</p>
+								
 								</div>
 							</div>
 							<div class="chapter">
 								<span class="pull-left"><img src="/r/img/icon_killer.png"
 									alt="杀人游戏简化版" width="64" height="64"></span>
 								<div class="chapter-body">
-									<h4>杀人游戏[简化版]</h4>
-									<p>高雅的简化,妙趣横生的对话,风格迥异的人物,知性漂亮的姑娘</p>
-									<p>
-										<a class="btn"
-											href="http://www.ptteng.com/record/list?version=simple_1"
-											target="_blank">查看战例&raquo;</a>
-									</p>
+									<h4>杀人游戏</h4>
+									<p>三个版本的杀人游戏,高雅的简化,平衡的警版,惊喜的不翻牌</p>
+								
 
 								</div>
 							</div>
@@ -151,13 +148,9 @@
 									src="/r/img/icon_clearance.png" alt="多人扫雷" width="64"
 									height="64"></span>
 								<div class="chapter-body">
-									<h4>扫雷[多人版]</h4>
-									<p>玩过单机扫雷,有没有和朋友一起玩过联机扫雷?</p>
-									<p>
-										<a class="btn"
-											href="http://www.ptteng.com/record/list?version=mine_1"
-											target="_blank">查看战例&raquo;</a>
-									</p>
+									<h4>炸狼堡</h4>
+									<p>又叫抵抗组织~厌倦了杀手?那么来炸狼堡吧</p>
+								
 								</div>
 
 							</div>
@@ -165,8 +158,8 @@
 								<span class="pull-left"><img src="/r/img/icon_design.png"
 									alt="多人扫雷" width="64" height="64"></span>
 								<div class="chapter-body">
-									<h4>这些游戏都不喜欢?</h4>
-									<p>设计一个自己喜欢的游戏吧?强权外交?可以.三国杀?可以.吹牛骰子?可以.捉鬼?可以~</p>
+									<h4>捉鬼</h4>
+									<p>两个版本的谁是卧底,不知道自己身份的简化版本,和妙趣横生的猜词版</p>
 								</div>
 
 							</div>
@@ -261,13 +254,13 @@
 						<a href="http://www.baimeiba.com/" target="_blank">性感MM</a>
 					<p>
 					<p>
-						 <a href="http://www.neihan8.com/gaoxiaomanhua/" target="_blank">搞笑漫画</a>
+						<a href="http://www.neihan8.com/gaoxiaomanhua/" target="_blank">搞笑漫画</a>
 					<p>
 				</div>
 			</div>
 		</div>
 
-	<script type="text/javascript"
+		<script type="text/javascript"
 			src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
 			data-appid="100372616"
 			data-redirecturi="http://www.ptteng.com/qc_callback.html"

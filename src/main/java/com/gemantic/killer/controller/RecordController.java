@@ -134,7 +134,7 @@ public class RecordController {
 		model.addAttribute("users", id_user);
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
-		model.addAttribute("version", version);
+		model.addAttribute("version", version.replace(".0", ""));
 
 		if ("video_1".equals(version)) {
 			return "/record/list/video";
