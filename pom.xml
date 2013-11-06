@@ -21,7 +21,7 @@
 			</snapshots>
 			<id>nexus</id>
 			<name>releases</name>
-			<url>http://42.121.113.70:8081/nexus/content/repositories/releases</url>
+			<url>http://42.121.113.70:8081/nexus/content/groups/public/</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
@@ -778,9 +778,15 @@
 			<version>2.9.3</version>
 
 		</dependency>
-	   
-		
-		
+		<dependency>
+			<groupId>qq</groupId>
+			<artifactId>qq-login</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
+
+
 	</dependencies>
 
 
@@ -845,19 +851,9 @@
 
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<configuration>
-					<tagBase>https://svn.gemantic.com/gemantic/tags/analyse-chatroom-home</tagBase>
-				</configuration>
-			</plugin>
+
 		</plugins>
 	</build>
-
-	<scm>
-		<developerConnection>scm:svn:https://svn.gemantic.com/gemantic/tags/analyse-chatroom-home/analyse-chatroom-home.0.1.1</developerConnection>
-	</scm>
 
 
 

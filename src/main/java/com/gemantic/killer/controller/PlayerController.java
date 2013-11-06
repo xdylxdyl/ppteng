@@ -1,5 +1,6 @@
 package com.gemantic.killer.controller;
 
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.DESUtil;
 import com.gemantic.common.util.FileUtil;
@@ -48,6 +50,16 @@ import com.gemantic.labs.killer.service.SimpleStatisticsService;
 import com.gemantic.labs.killer.service.UsersService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import com.qq.connect.QQConnectException;
+import com.qq.connect.api.OpenID;
+import com.qq.connect.api.qzone.PageFans;
+import com.qq.connect.api.qzone.UserInfo;
+import com.qq.connect.javabeans.AccessToken;
+import com.qq.connect.javabeans.qzone.PageFansBean;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
+import com.qq.connect.javabeans.weibo.Company;
+import com.qq.connect.oauth.Oauth;
 
 /**
  * 提供游戏房间的创建,删除,玩家列表等功能
@@ -116,6 +128,14 @@ public class PlayerController implements ApplicationContextAware {
 	public String loginThird(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model, String type,
 			String openID, String name) throws Exception {
+		return loginOfThird(request, response, model, type, openID, name);
+
+	}
+
+	private String loginOfThird(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, String type,
+			String openID, String name) throws ServiceException,
+			ServiceDaoException {
 		Long uid = null;
 		String uname = null;
 		boolean success = false;
@@ -181,7 +201,6 @@ public class PlayerController implements ApplicationContextAware {
 			return "common/success";
 
 		}
-
 	}
 
 	/**
@@ -629,7 +648,7 @@ public class PlayerController implements ApplicationContextAware {
 		}
 
 		User u = this.userService.getObjectById(viewUserID);
-		//不存在怎么显示.
+		// 不存在怎么显示.
 		log.info(" get user info " + u);
 
 		int punchCount = PunchUtil.getLatestContinueDay(
@@ -638,7 +657,7 @@ public class PlayerController implements ApplicationContextAware {
 
 		model.addAttribute("current", u);
 		model.addAttribute("punchCount", punchCount);
-		
+
 		model.addAttribute("uid", uid);
 		return "/room/player/detail";
 
@@ -1062,7 +1081,7 @@ public class PlayerController implements ApplicationContextAware {
 
 		Long self = cookieUtil.getID(request, response);
 		log.info(self);
-		if (256L!=self   && 245L!=self  ) {
+		if (256L != self && 245L != self) {
 
 		} else {
 
@@ -1139,6 +1158,98 @@ public class PlayerController implements ApplicationContextAware {
 		model.addAttribute("code", code);
 
 		return "common/success";
+
+	}
+
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/qq/login", method = RequestMethod.POST)
+	public String qqlogin(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model)
+			throws Exception {
+		log.info("you want login with qq");
+		response.setContentType("text/html;charset=utf-8");
+		try {
+			return "redirect:" + (new Oauth().getAuthorizeURL(request));
+		} catch (QQConnectException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/qq/callback")
+	public String qqCallback(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model)
+			throws Exception {
+
+		response.setContentType("text/html; charset=utf-8");
+
+		PrintWriter out = response.getWriter();
+		String accessToken = null, openID = null;
+		try {
+			AccessToken accessTokenObj = (new Oauth())
+					.getAccessTokenByRequest(request);
+
+			
+			long tokenExpireIn = 0L;
+
+			if (accessTokenObj.getAccessToken().equals("")) {
+				// 我们的网站被CSRF攻击了或者用户取消了授权
+				// 做一些数据统计工作
+				log.info("没有获取到响应参数");
+				model.addAttribute("code", "-6003");
+				return "redirect:/login";
+				
+			} else {
+				accessToken = accessTokenObj.getAccessToken();
+				tokenExpireIn = accessTokenObj.getExpireIn();
+
+				request.getSession().setAttribute("demo_access_token",
+						accessToken);
+				request.getSession().setAttribute("demo_token_expirein",
+						String.valueOf(tokenExpireIn));
+
+				// 利用获取到的accessToken 去获取当前用的openid -------- start
+				OpenID openIDObj = new OpenID(accessToken);
+				openID = openIDObj.getUserOpenID();
+
+				log.info("欢迎你，代号为 " + openID + " 的用户!");
+
+				log.info("<p> start -----------------------------------利用获取到的accessToken,openid 去获取用户在Qzone的昵称等信息 ---------------------------- start </p>");
+				UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
+				UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
+				out.println("<br/>");
+				if (userInfoBean.getRet() == 0) {
+					log.info(userInfoBean.getNickname() + "<br/>");
+				} else {
+					log.info("很抱歉，我们没能正确获取到您的信息，原因是： " + userInfoBean.getMsg());
+				}
+				 loginOfThird(request, response, model, "1", openID, userInfoBean.getNickname());
+				 return "redirect:/m/list";
+
+			}
+		} catch (QQConnectException e) {
+		}
+		 return "redirect:/m/list";
+		
+	
 
 	}
 

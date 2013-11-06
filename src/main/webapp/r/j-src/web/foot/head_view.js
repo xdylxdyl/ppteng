@@ -90,10 +90,9 @@ $(document).ready(function () {
 
         $("#navLogout").click(function () {
 
+                    return true;
 
-            return true;
-
-        });
+                });
 
 
         $("#mobinav").bind("click", function () {

@@ -24,7 +24,7 @@
 				<c:choose>
 					<c:when test="${empty user}">
 						<div class="span4">
-							<form action="/player/login " method="post" class="login-box">
+							<form action="/player/login" method="post" class="login-box">
 								<h2>Login 总用户${count}人</h2>
 
 
@@ -46,14 +46,21 @@
 										href="/player/regedit?type=email">忘记密码</a></span>
 									<button class="btn btn-primary btn-large pull-right">登录</button>
 								</div>
-
-								<div class="login-social">
-									<p>
-										使用以下方式登录，或者 <a href="/player/regedit ">一分钟注册</a>
-									</p>
-									<span id="qqLoginBtn"></span> <span id="wb_connect_btn"></span>
-								</div>
 							</form>
+							<div class="login-social">
+								<p>
+									使用以下方式登录，或者 <a href="/player/regedit">一分钟注册</a>
+								</p>
+								<form action="/player/qq/login" method="post"
+									style="display: inline; margin-right: 1em">
+									<a href="javascript:;" onclick="parentNode.submit();"><img
+										src="/r/img/login/qq_connect_logo_7.png" class="" alt="QQ登录"></a>
+								</form>
+
+								<span id="wb_connect_btn"></span>
+							</div>
+
+
 						</div>
 					</c:when>
 					<c:otherwise>
@@ -106,7 +113,7 @@
 					</div> --%>
 					<div class="item">
 						<img src="/r/img/img_banner_3.jpg" alt="杀人游戏">
-						
+
 					</div>
 				</div>
 			</div>
@@ -118,39 +125,19 @@
 		<div class="container">
 			<div class="row">
 				<div class="span8">
-					<h3 class="" style="color:#0088cc">葡萄藤-好玩的在线桌游</h3>
-					<hr>					
+					<h3 class="" style="color: #0088cc">葡萄藤-好玩的在线桌游</h3>
+					<hr>
+			
 					<div class="row-fluid">
-						<div class="span6">
-							<div class="chapter">
-								<div class="chapter-body">
-									<span class="pull-left"><img src="/r/img/icon_movie.png"
-										alt="电影院" width="64" height="64"></span>
-									<h4>虚拟电影院</h4>
-									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
-								
-								</div>
-							</div>
-							<div class="chapter">
-								<span class="pull-left"><img src="/r/img/icon_killer.png"
-									alt="杀人游戏简化版" width="64" height="64"></span>
-								<div class="chapter-body">
-									<h4>杀人游戏</h4>
-									<p>三个版本的杀人游戏,高雅的简化,平衡的警版,惊喜的不翻牌</p>
-								
-
-								</div>
-							</div>
-						</div>
 						<div class="span6">
 							<div class="chapter">
 								<span class="pull-left"><img
 									src="/r/img/icon_clearance.png" alt="多人扫雷" width="64"
 									height="64"></span>
 								<div class="chapter-body">
-									<h4>炸狼堡</h4>
-									<p>又叫抵抗组织~厌倦了杀手?那么来炸狼堡吧</p>
-								
+									<h4>炸狼堡[抵抗组织]</h4>
+									<p>村民们快背上炸药包~</p>
+
 								</div>
 
 							</div>
@@ -158,12 +145,34 @@
 								<span class="pull-left"><img src="/r/img/icon_design.png"
 									alt="多人扫雷" width="64" height="64"></span>
 								<div class="chapter-body">
-									<h4>捉鬼</h4>
-									<p>两个版本的谁是卧底,不知道自己身份的简化版本,和妙趣横生的猜词版</p>
+									<h4>捉鬼[谁是卧底]</h4>
+									<p>两个版本的谁是卧底</p>
 								</div>
 
 							</div>
 						</div>
+						<div class="span6">
+							<div class="chapter">
+								<div class="chapter-body">
+									<span class="pull-left"><img src="/r/img/icon_movie.png"
+										alt="电影院" width="64" height="64"></span>
+									<h4>虚拟电影院</h4>
+									<p>有了葡萄藤电影院，妈妈再也不用担心我单独看电影了</p>
+
+								</div>
+							</div>
+							<div class="chapter">
+								<span class="pull-left"><img src="/r/img/icon_killer.png"
+									alt="杀人游戏简化版" width="64" height="64"></span>
+								<div class="chapter-body">
+									<h4>杀人游戏</h4>
+									<p>三个版本的杀人游戏</p>
+
+
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 				<div class="span4">
@@ -259,23 +268,22 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<script type="text/javascript"
-			src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
-			data-appid="100372616"
-			data-redirecturi="http://www.ptteng.com/qc_callback.html"
-			charset="utf-8"></script>
-		<script
-			src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1999911523"
-			type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript"
-			src="/r/j-src/game/commons/third.js?version=${frontVersion}"></script>
-		<script type="text/javascript"
-			src="/r/j-src/web/punch/punch.js?version=${frontVersion}"></script>
+	<script
+		src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1999911523"
+		type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript"
+		src="/r/j-src/game/commons/third.js?version=${frontVersion}"></script>
+	<script type="text/javascript"
+		src="/r/j-src/web/punch/punch.js?version=${frontVersion}"></script>
 
-		<script src="/r/j-src/web/index/index.js?v=${frontVersion}"></script>
-		<script type="text/javascript"
-			src="/r/j-src/framework/bootstrap/carousel.js"></script>
+	<script src="/r/j-src/web/index/index.js?v=${frontVersion}"></script>
+	<script type="text/javascript"
+		src="/r/j-src/framework/bootstrap/carousel.js"></script>
+
+
+
 </body>
 </html>
 

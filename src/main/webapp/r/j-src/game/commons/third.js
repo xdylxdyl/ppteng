@@ -18,7 +18,7 @@ var loginView = {
 
 
 var type = parseInt(loginView.getType());
-if (loginView.isLogin()) {
+/*if (loginView.isLogin()) {
 
 } else {
 //qq
@@ -39,7 +39,7 @@ if (loginView.isLogin()) {
         console.log("qq error "+e);
         alert("qq");
     }
-}
+}*/
 //sina
 if (loginView.isLogin()) {
 
