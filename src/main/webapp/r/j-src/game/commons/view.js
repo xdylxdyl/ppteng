@@ -698,6 +698,7 @@ var viewUtil = {
     autoBottom:function (dom) {
 
         var isAuto = controlView.getAutoRoll();
+        console.log("dom is "+dom);
         if (isAuto) {
             var height = $(dom)[0].scrollHeight;
             $(dom).scrollTop(height);
@@ -765,22 +766,22 @@ var controlView = {
             var t = jQuery.now() - message.sendAt;
             if (message.subject == globalView.getCurrentID()) {
 
-                var h="网速很给力";
-                if(t<50){
+                var h = "网速很给力";
+                if (t < 50) {
 
-                }else{
-                    if(t<100){
-                        h="网速正常"
-                    }else{
-                    if(t<300){
-                        h="网速有一点卡"
-                    }else{
-                        h="网速不给力啊"
-                    }
+                } else {
+                    if (t < 100) {
+                        h = "网速正常"
+                    } else {
+                        if (t < 300) {
+                            h = "网速有一点卡"
+                        } else {
+                            h = "网速不给力啊"
+                        }
 
                     }
                 }
-                $("#netSpeedHint").text(h+" 延迟:" + (t) + "毫秒");
+                $("#netSpeedHint").text(h + " 延迟:" + (t) + "毫秒");
             }
         }
 
@@ -933,7 +934,12 @@ var controlView = {
     },
     resetCommand:function () {
 
-        $("#" + selects.$select_command).find('span').text("指令");
+        if ($("#switchFrom").val() == "pc") {
+            $("#" + selects.$select_command).html("指令<span class='caret'></span>");
+        } else {
+            $("#" + selects.$select_command).find('span').text("指令");
+        }
+
         $("#" + selects.$command).attr("data-default", "say");
         controlView.resetObject();
         controlView.switchObject("single");
@@ -942,7 +948,12 @@ var controlView = {
     },
 
     resetExpression:function () {
-        $("#" + selects.$select_expression).find('span').text("神态");
+        if ($("#switchFrom").val() == "pc") {
+                   $("#" + selects.$select_expression).html("神态<span class='caret'></span>");
+               } else {
+            $("#" + selects.$select_expression).find('span').text("神态");
+               }
+
         $("#" + selects.$expression).attr("data-default", "0");
     },
 
@@ -951,7 +962,14 @@ var controlView = {
         $("#" + selects.$command).attr("data-default", "");
     },
     resetObject:function () {
-        $("#" + selects.$select_object).find('span').text("对象");
+
+
+        if ($("#switchFrom").val() == "pc") {
+            $("#" + selects.$select_object).html("对象<span class='caret'></span>");
+        } else {
+            $("#" + selects.$select_object).find('span').text("对象");
+        }
+
         $("#" + selects.$object).attr("data-default", "");
 
     },

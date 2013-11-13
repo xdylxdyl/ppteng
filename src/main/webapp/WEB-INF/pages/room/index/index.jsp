@@ -57,7 +57,11 @@
 										src="/r/img/login/qq_connect_logo_7.png" class="" alt="QQ登录"></a>
 								</form>
 
-								<span id="wb_connect_btn"></span>
+								<form action="/player/weibo/login" method="post"
+									style="display: inline; margin-right: 1em">
+									<a href="javascript:;" onclick="parentNode.submit();"><img
+										src="/r/img/login/weibo_loginButton_16a.png" class="" alt="微博登录">微博登录</a>
+								</form>
 							</div>
 
 
@@ -270,11 +274,8 @@
 		</div>
 	</div>
 
-	<script
-		src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1999911523"
-		type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript"
-		src="/r/j-src/game/commons/third.js?version=${frontVersion}"></script>
+	
+
 	<script type="text/javascript"
 		src="/r/j-src/web/punch/punch.js?version=${frontVersion}"></script>
 

@@ -79,7 +79,7 @@ public class RoomController {
 	public String listRoom(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model, String oldRoom)
 			throws Exception {
-		log.debug("start get room list ");
+		log.info("start get room list ");
 
 		Long uid = cookieUtil.getID(request, response);
 		if (uid == null) {

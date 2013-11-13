@@ -1,305 +1,92 @@
-html, body {
-    background: #f9f9f9;
-    color: #333;
+.fixTop {
+    position: fixed;
+    right: 2em;
+    top: 1em;
+    z-index: 151;
 
 }
+@-webkit-viewport {
+            width: device-width;
+        }
 
-/*head*/
-.navbar {
-    margin-bottom: 0;
-}
+        @-moz-viewport {
+            width: device-width;
+        }
 
-.navbar-inner {
+        @-ms-viewport {
+            width: device-width;
+        }
 
-}
+        @-o-viewport {
+            width: device-width;
+        }
 
-.wrap {
+        @viewport {
+            width: device-width;
+        }
 
-    background: #fff;
-    border: 1px solid #cfcfd6;
+        .main_area {
 
-}
+            overflow: auto;
+        }
 
-.wrap .row-fluid {
+        ul.toolbar {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
 
-}
+        ul.toolbar:after {
+            clear: both;
+            display: table;
+            content: "";
+        }
 
-.box {
-    bottom: 7em;
-}
+        ul.toolbar > li {
+            float: left;
+            display: list-item;
+            list-style: none;
+            margin: 0 10px 10px 0;
+        }
 
-.no-space [class*="span"] {
-    margin-left: 0;
-}
+        ul.toolbar > li.pull-right {
+            float: right;
 
-.foot {
-    background: #f9f9f9;
-    border-top: 1px solid #cfcfd6;
-}
+        }
 
+        ul > li a.color-font {
+            padding-left: 70px;
+        }
 
-/* Lastly, apply responsive CSS fixes as necessary */
-@media ( max-width : 767px) {
-    #footer {
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
+        li label.checkbox, li .help-inline {
+            padding-top: 3px;
+        }
 
-/*left*/
-.sidebar-nav {
-    margin: 0;
-    padding-top: 20px;
-    overflow-y: auto;
-    overflow-x: visible;
-    border: 1px solid #cfcfd6;
-}
+        .dropdown-menu {
+            max-height: 300px;
+            overflow-y: auto;
+        }
 
-.sidebar-nav .nav-list {
-    padding: 0;
-}
+        .dropdown-menu .select {
 
-.sidebar-nav li a {
-    color: #585868;
-    text-shadow: 1px 1px 0 #fff;
-    padding: .1em 1em;
-    border: 0;
-    margin: 0 1px;
-    background: none;
-}
+        }
 
-.vote {
-    color: #d80400;
-    padding: 0 0 0 10px;
-}
+        .color-block {
+            display: block;
+            width: 50px;
+            height: 20px;
+            margin-top: 2px;
+            margin-left: 5px;
+            position: absolute;
+            pointer-events: none;
+        }
 
-.sidebar-toggle {
-    right: 0;
-    top: 0;
-    width: 22px;
-    height: 22px;
-    line-height: 22px;
-    text-align: center;
-    color: #777777;
-    font-size: 20px;
-    font-weight: 900;
-    border-left: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    cursor: pointer;
-}
+        .color-block[data-theme="black"] {
+            background: #000;
+        }
 
-.sidebar-toggle:hover {
-    background: #eee;
-    cursor: pointer;
-}
+        .color-block[data-theme="red"] {
+            background: #f00;
+        }
 
-/*right*/
-.content {
-
-    background: #fff;
-    border: 1px solid #cfcfd6;
-
-}
-
-.content .tab-pane {
-
-    word-break: break-all;
-    overflow: auto;
-
-}
-
-.video {
-    position: relative;
-    overflow: hidden;
-    zoom: 1;
-    color: #999;
-}
-
-.video .video-player {
-
-    text-align: center;
-    margin: 0 auto;
-}
-
-.death.tabbable {
-    box-shadow: -1px 0 5px #eee;
-}
-
-.death .nav-tabs > .active > a {
-    border: none;
-    background: transparent;
-}
-
-.inner-space {
-    padding: 20px 20px 0 20px;
-    box-sizing: border-box;
-}
-
-.inner-space:after {
-    clear: both;
-    display: table;
-    content: "";
-}
-
-.form-horizontal .control-label {
-    padding-top: 4px;
-    text-align: left;
-}
-
-.btn.medium {
-    font-size: 12px;
-    font-weight: bold;
-}
-
-ul.toolbar {
-    display: block;
-    margin: 0;
-    padding: 0;
-}
-
-ul.toolbar:after {
-    clear: both;
-    display: table;
-    content: "";
-}
-
-ul.toolbar > li {
-    float: left;
-    display: list-item;
-    list-style: none;
-    margin: 0 10px 10px 0;
-}
-
-ul.toolbar > li.pull-right {
-    float: right;
-
-}
-
-ul > li a.color-font {
-    padding-left: 70px;
-}
-
-li label.checkbox, li .help-inline {
-    padding-top: 3px;
-}
-
-.dropdown-menu {
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.dropdown-menu .select {
-
-}
-
-.color-block {
-    display: block;
-    width: 50px;
-    height: 20px;
-    margin-top: 2px;
-    margin-left: 5px;
-    position: absolute;
-    pointer-events: none;
-}
-
-.color-block[data-theme="black"] {
-    background: #000;
-}
-
-.color-block[data-theme="red"] {
-    background: #f00;
-}
-
-/*music*/
-/*a { color: #888; text-decoration: none; }*/
-#wrapper {
-    width: 400px;
-    margin: 0 auto;
-}
-
-#wrapper ol {
-    padding: 0px;
-    margin: 0px;
-    list-style: decimal-leading-zero inside;
-    color: #ccc;
-    width: 460px;
-    border-top: 1px solid #ccc;
-    font-size: 0.9em;
-}
-
-#wrapper ol li {
-    position: relative;
-    margin: 0px;
-    padding: 9px 2px 10px;
-    border-bottom: 1px solid #ccc;
-    cursor: pointer;
-}
-
-#wrapper ol li a {
-    display: block;
-    text-indent: -3.3ex;
-    padding: 0px 0px 0px 20px;
-}
-
-#wrapper li.playing {
-    color: #aaa;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3);
-}
-
-#wrapper li.playing a {
-    color: #000;
-}
-
-#wrapper li.playing:before {
-    content: '♬';
-    width: 14px;
-    height: 14px;
-    padding: 3px;
-    line-height: 14px;
-    margin: 0px;
-    position: absolute;
-    left: -24px;
-    top: 9px;
-    color: #000;
-    font-size: 13px;
-    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
-}
-
-/*icon*/
-.icon-ready, .icon-unready, .icon-living, .icon-die, .icon-lastword, .icon-king {
-    background-image: url("../../img/user-status.png");
-}
-
-.icon-ready {
-    background-position: 0 0;
-}
-
-.icon-unready {
-    background-position: -15px 0;
-}
-
-.icon-living {
-    background-position: -30px 0;
-}
-
-.icon-die {
-    background-position: -45px 0;
-}
-
-.icon-lastword {
-    background-position: -60px 0;
-}
-
-.icon-king {
-    background-position: -75px 0;
-}
-
-.reflect {
-    text-shadow: rgba(0, 0, 0, 0.5) 0 5px 5px;
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(200, 200, 240, 0.55)), to(rgba(255, 255, 255, 0.55)));
-    border-radius: 5px;
-    -webkit-box-reflect: below 10px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, 1)));
-}
 

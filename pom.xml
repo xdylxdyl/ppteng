@@ -784,7 +784,11 @@
 			<version>1.0</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>weibo</groupId>
+			<artifactId>weibo-login</artifactId>
+			<version>1.0</version>		
+		</dependency>
 
 
 	</dependencies>

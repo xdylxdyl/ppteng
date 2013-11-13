@@ -21,6 +21,7 @@
 <input type="hidden" id="first" value="${first}">
 <div id="stageShow" class="hide">${stageShow}</div>
 <div id="contents" class="hide">${contents}</div>
+
 <div id="escape" class="hide"></div>
 
 

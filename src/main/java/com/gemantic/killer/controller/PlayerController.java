@@ -26,6 +26,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+
+import weibo4j.Account;
+import weibo4j.Users;
+import weibo4j.model.WeiboException;
+import weibo4j.org.json.JSONArray;
+import weibo4j.org.json.JSONObject;
+
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.common.util.DESUtil;
@@ -359,26 +367,29 @@ public class PlayerController implements ApplicationContextAware {
 
 		Long uid = cookieUtil.getID(request, response);
 		log.info(" uid " + uid + " want offline ");
-		// mock a message of logout
-		Room r = this.memberService.getRoomOfUser(uid);
-		if (r == null) {
-
-		} else {
-			Message m = new Message();
-			m.setVersion(r.getVersion());
-			m.setSubject(uid.toString());
-			m.setPredict("logout");
-			m.setWhere(r.getId().toString());
-			r.getMessages().offer(m);
-			this.roomService.updateRoom(r);
-			this.memberService.userLogOut(r.getId(), uid);
-		}
-
-		log.info(uid + " offline  ");
-		cookieUtil.clearCookie(response);
-
-		// 怎么把用户所在的房间踢掉
 		String url = "/";
+		
+		if(uid==null){
+			
+		}else{
+			// mock a message of logout
+			Room r = this.memberService.getRoomOfUser(uid);
+			if (r == null) {
+
+			} else {
+				Message m = new Message();
+				m.setVersion(r.getVersion());
+				m.setSubject(uid.toString());
+				m.setPredict("logout");
+				m.setWhere(r.getId().toString());
+				r.getMessages().offer(m);
+				this.roomService.updateRoom(r);
+				this.memberService.userLogOut(r.getId(), uid);
+			}
+
+			log.info(uid + " offline  ");
+			cookieUtil.clearCookie(response);
+		}
 		log.info(url);
 		return "redirect:" + url;
 	}
@@ -1177,7 +1188,7 @@ public class PlayerController implements ApplicationContextAware {
 		log.info("you want login with qq");
 		response.setContentType("text/html;charset=utf-8");
 		try {
-			return "redirect:" + (new Oauth().getAuthorizeURL(request));
+			return "redirect:" + (new  Oauth().getAuthorizeURL(request));
 		} catch (QQConnectException e) {
 			e.printStackTrace();
 		}
@@ -1247,6 +1258,66 @@ public class PlayerController implements ApplicationContextAware {
 			}
 		} catch (QQConnectException e) {
 		}
+		 return "redirect:/m/list";
+		
+	
+
+	}
+	
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/weibo/login", method = RequestMethod.POST)
+	public String weibologin(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model)
+			throws Exception {
+		log.info("you want login with qq");
+		response.setContentType("text/html;charset=utf-8");
+		
+	return "redirect:" + (new weibo4j.Oauth().authorize("code","",""));
+		
+		
+
+	}
+
+	/**
+	 * 获取玩家的状态信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/player/weibo/callback")
+	public String weiboCallback(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model,String code)
+			throws Exception {
+
+		response.setContentType("text/html; charset=utf-8");
+		weibo4j.Oauth oauth = new weibo4j.Oauth();
+		PrintWriter out = response.getWriter();
+		String accessToken = null, openID = null;
+		weibo4j.http.AccessToken at=oauth.getAccessTokenByCode(code);
+		
+		
+		Account am = new Account();
+		am.client.setToken(at.getAccessToken());
+		JSONObject uid = am.getUid();
+		System.out.println(uid.toString());
+		Users um = new Users();
+		openID=uid.getString("uid");		
+		um.client.setToken(at.getAccessToken());
+		weibo4j.model.User user = um.showUserById(openID);
+		
+		
+		 loginOfThird(request, response, model, "1", openID, user.getName());
 		 return "redirect:/m/list";
 		
 	

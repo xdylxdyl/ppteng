@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="../j-src/framework/bootstrap/3.0.2/bootstrap.min.css" rel="stylesheet">
+    <link href="../j-src/framework/grumble/css/grumble.min.css" rel="stylesheet">
+    <link href="../css/room/mstyle.css" rel="stylesheet">
+
+
+
+
+</head>
+<body>
+<div class='container'>
+<div class='row'>
+
+<div class="col-sm-12 well header clickHide" id='roomHeader'>
+
+
+    <h3><span id="playerRole">杀手</span>
+        <small><span id="gamePhase">未开始</span>
+        </small>
+    </h3>
+    <div class="btn-toolbar" role="toolbar">
+        <button type="button" class="btn btn-primary" id="readyButton">准备</button>
+        <button type="button" class="btn btn-primary" id="startButton">开始</button>
+        <button type="button" class="btn  btn-danger pull-right" id="exitButton">退出</button>
+        <button type="button" class="btn btn-default pull-right" id="fromButton">电脑</button>
+
+    </div>
+
+
+</div>
+<span id="countDown"  class="badge fixTop" >04:00</span>
+
+<div class='col-sm-12 main_area' id="game_area">
+
+
+    <p>1</p>
+
+    <p>2</p>
+
+    <p>3</p>
+
+    <p>4</p>
+
+    <p>5</p>
+
+    <p>6</p>
+
+    <p>7</p>
+
+    <p>8</p>
+
+    <p>9</p>
+
+    <p>1</p>
+
+    <p>2</p>
+
+    <p>3</p>
+
+    <p>4</p>
+
+    <p>5</p>
+
+    <p>6</p>
+
+    <p>7</p>
+
+    <p>8</p>
+
+    <p>9</p>
+
+    <p>1</p>
+
+    <p>2</p>
+
+    <p>3</p>
+
+    <p>4</p>
+
+    <p>5</p>
+
+    <p>6</p>
+
+    <p>7</p>
+
+    <p>8</p>
+
+    <p>9</p>
+
+    <p>1</p>
+
+    <p>2</p>
+
+    <p>3</p>
+
+    <p>4</p>
+
+    <p>5</p>
+
+    <p>6</p>
+
+    <p>7</p>
+
+    <p>8</p>
+
+    <p>9</p>
+
+
+</div>
+
+
+<div class='col-sm-12 tool clickHide well' id="pcontroller">
+
+
+    <div class="btn-group dropup">
+        <button type="button" data-default="" id="select_expression"
+                class="btn btn-default dropdown-toggle" data-toggle="dropdown">神态
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu" id="expression" role="menu" aria-labelledby="dLabel">
+            <li data-default="0"><a href="#">神态</a></li>
+            <li class="divider"></li>
+            <li data-default="1"><a href="#">温柔的</a></li>
+        </ul>
+    </div>
+
+
+    <div class="btn-group dropup">
+        <button type="button" data-default="" id="select_color"
+                data-default="#000"
+                class="btn btn-default dropdown-toggle" data-toggle="dropdown">颜色
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu" id="color">
+
+            <li data-default="#000"><a href="#">颜色</a></li>
+            <li class="divider"></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+        </ul>
+    </div>
+
+    <div class="btn-group dropup">
+        <button type="button" data-default="" id="select_command"
+                data-default="#000"
+                class="btn btn-default dropdown-toggle" data-toggle="dropdown">指令
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu" id="command">
+
+            <li data-default="#000"><a href="#">颜色</a></li>
+            <li class="divider"></li>
+            <li data-default="#000000">
+                <div class="color-block" style="background:#000000"></div>
+                <a href="#" class="color-font">高级黑</a></li>
+        </ul>
+    </div>
+
+
+    <div class="btn-group dropup" id="objectGroup">
+        <button type="button" data-default="" id="select_object"
+                data-default="#000"
+                class="btn btn-default dropdown-toggle" data-toggle="dropdown">对象
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu" id="object">
+
+        </ul>
+    </div>
+
+    <div id="multiObjectGroup" class="hide"><select class="multiselect" multiple="multiple" id="multiObject">
+    </select></div>
+
+
+</div>
+
+
+<div class="input-group col-sm-12 foot" id="foot">
+
+    <input type="text" class="form-control" placeholder="说点什么" id="sayInput"> <a href="#"
+                                                                                 class="btn medium btn-primary input-group-addon"
+                                                                                 id="sayButton">发送</a>
+
+
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript"
+        src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript"
+        src="../j-src/framework/bootstrap/3.0.2/bootstrap.min.js"></script>
+<script src="../j-src/framework/grumble/js/jquery.grumble.min.js"></script>
+<script type="text/javascript"
+        src="../j-src/framework/bootstrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="../j-src/framework/bootstrap/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="../j-src/framework/jquery.pin-gh-pages/jquery.pin.min.js"></script>
+
+<script src="../../r/j-src/web/foot/mfoot.js"></script>
+</body>
+</html>

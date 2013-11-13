@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
+
 <div class="navbar">
 	<div class="navbar-inner">
 		<span class="brand"> <small><a
@@ -16,7 +17,7 @@
 			<li><a
 				href="/m/play/enter.do?rid=${room.id}&uid=${uid}&from=${switchFrom}"
 				id="fromButton" rel="tooltip" title="切换访问模式(手机/电脑)"
-				data-original-title="切换访问模式(手机/电脑)" data-placement="bottom">手机/电脑</a></li>
+				data-original-title="切换访问模式(手机/电脑)" data-placement="bottom">手机</a></li>
 			<li><a href="#" id="exitButton" rel="tooltip" title="点此离开房间"
 				data-original-title="点此离开房间" data-placement="bottom">退出房间 <i
 					class="icon-off"></i></a></li>

@@ -25,15 +25,20 @@ var burgModel = {
         { id:"agree", name:"通过"
         },
         {
-            id:"disagree", name:"不通过"
+            id:"disagree", name:"否决"
         }
 
     ],
-    dismissalObjectHint:{
-        "agree":"通过",
-        "disagree":"不通过"
+    dismissalResultHint:{
+            "agree":"村长给出的名单通过了~",
+            "disagree":"村长被罢免了~"
 
-    },
+        },
+    dismissalActionHint:{
+            "agree":"通过",
+            "disagree":"否决"
+
+        },
     actionObject:[
         { id:"agree", name:"炸毁"
         },
@@ -262,8 +267,8 @@ var burgController = {
                     color:colorConfig.system,
                     expression:controlView.showExpression(message.expression),
                     subject:playerService.getPlayer(message.subject).name,
-                    firstAction:"认为小组名单 ",
-                    content:"[ " + burgModel.dismissalObjectHint[message.object] + " ]"
+                    firstAction:"[ " + burgModel.dismissalActionHint[message.object] + " ]",
+                    content:" 村长给出的小组名单~~ "
                 }
                 var contentID = selects.$gameArea;
                 var c = contentTemplate.generateSystemContent(content)
@@ -277,14 +282,14 @@ var burgController = {
                     color:colorConfig.system,
                     expression:controlView.showExpression(message.expression),
                     subject:playerService.getPlayer(message.subject).name,
-                    firstAction:"村长的审核结果为 ",
-                    content:"[ " + burgModel.dismissalObjectHint[message.object] + " ]"
+                    firstAction:"在大家的一致表决里,",
+                    content:"" + burgModel.dismissalResultHint[message.object] + ""
                 }
                 var contentID = selects.$gameArea;
                 var c = contentTemplate.generateSystemContent(content)
                 gameAreaView.showContent(contentID, c);
 
-                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "dismissal",  burgModel.dismissalObjectHint[message.object], burgModel.clz[message.object]);
+                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "dismissal",  burgModel.dismissalResultHint[message.object], burgModel.clz[message.object]);
 
                 break;
 
@@ -599,7 +604,10 @@ var wolfView = {
                     //没有结束
 
                     place = "deadArea";
+                }
 
+                if("game" != globalView.getRoomType()){
+                    place = "deadArea";
                 }
                 break;
 
@@ -931,7 +939,7 @@ var ghostSimpleService = {
                 var nameString = playerService.getNamesByIdLists(vt.members,",");
                 burgRoomView.showDetail(burgIndex, kt, "king", playerService.getPlayer(vt.king).name, "");
                 burgRoomView.showDetail(burgIndex, kt, "member", nameString, "");
-                burgRoomView.showDetail(burgIndex, kt, "dismissal", burgModel.dismissalObjectHint[vt.dismissal], "");
+                burgRoomView.showDetail(burgIndex, kt, "dismissal", burgModel.dismissalResultHint[vt.dismissal], "");
                 burgRoomView.showDetail(burgIndex, kt, "action", burgModel.actionResultHint[burg.result], "");
                 if ("unkknown" != burg.result) {
                     burgRoomView.showDetail(burgIndex, null, "result", burgModel.actionResultHint[burg.result], burgModel.clz[burg.result]);
