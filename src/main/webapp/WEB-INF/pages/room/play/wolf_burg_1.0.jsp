@@ -400,38 +400,12 @@
 	</div>
 </div>
 
-
-
-
-
 <tiles:insertDefinition name="commonJSImport" />
 
 
 
-<script type="text/javascript"
-	src="/r/j-src/framework/audio/audio.min.js"></script>
-
-<script
-	src="<%=request.getContextPath() %>/r/j-src/web/music/music.js?v=${frontVersion}"></script>
-
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/base.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/action.js?v=${frontVersion}"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/wolf/burg/1.0/wolf_burg_1.0.js?v=${frontVersion}"></script>
 
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/view.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
 
 

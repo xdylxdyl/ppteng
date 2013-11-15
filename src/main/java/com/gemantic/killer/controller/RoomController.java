@@ -222,7 +222,7 @@ public class RoomController {
 		}
 
 		if (StringUtils.isBlank(from)) {
-			if (request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+			if (request.getHeader("User-Agent").indexOf("Mobile") != -1||request.getHeader("User-Agent").indexOf("MSIE") != -1) {
 				from="mobile";
 				// you're in mobile land
 			} else {

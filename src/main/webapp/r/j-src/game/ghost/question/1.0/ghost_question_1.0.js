@@ -59,7 +59,7 @@ var ghostQuestionModel = {
         king:"国王"
     },
 
-    rightName:{
+    rightContent:{
         vote:"指证",
         topic:"出题",
         answer:"回答"
@@ -536,7 +536,7 @@ var ghostView = {
 
 
 var ghostQuestionRightView = {
-    branchRight:function (right) {
+    rightView:function (right) {
         switch (right) {
             case "vote" :
                 ghostQuestionRightView.commandRight(right);
@@ -554,7 +554,7 @@ var ghostQuestionRightView = {
     },
 
     commandRight:function (right) {
-        rightView.showCommandRight(right, ghostQuestionModel.rightName[right]);
+        rightView.showCommandRight(right, ghostQuestionModel.rightContent[right]);
         $("#" + selects.$sayButton).prop("disabled", false);
     },
     sayRight:function (right) {
@@ -724,9 +724,9 @@ var ghostSimpleService = {
 
 versionFunction = {
     //处理权限的展示
-    "rightView":ghostQuestionRightView.branchRight,
+    "rightView":ghostQuestionRightView.rightView,
     //处理权限对应的数据
-    "rightContent":ghostQuestionModel.rightName,
+    "rightContent":ghostQuestionModel.rightContent,
     //初始化设置
     "initSetting":ghostQuestionSettingView.initSetting,
     //获取初始化参数

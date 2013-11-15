@@ -5,6 +5,10 @@
  * Time: 下午12:52
  * To change this template use File | Settings | File Templates.
  */
+
+
+
+
 function switchInvisible(id) {
     var dom = $("#" + id);
     var hide = dom.is(":hidden");//是否隐藏
@@ -34,6 +38,9 @@ $(document).ready(function () {
 
     }
 
+  var x=  "arg1:{native_object},arg2:{name_3002},arg3:{4}";
+var message={};
+    console.log(x+" : "+ x.template(message));
 
     controlHeight();
     $(window).resize(controlHeight);

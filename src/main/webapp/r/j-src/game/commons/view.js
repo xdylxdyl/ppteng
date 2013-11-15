@@ -44,6 +44,33 @@ var settingView = {
         }
 
     },
+    resetTime:function () {
+        $(".settingConfig").each(function () {
+            var id = $(this).attr("id");
+            if (id.indexOf("Time") >= 0) {
+                $(this).val($(this).val() / 60000);
+                $("<span>分</span>").insertAfter($(this));
+            } else {
+
+            }
+
+        });
+    },
+    getDefaultSettingParameter:function () {
+        $(".settingConfig").each(function () {
+            var id = $(this).attr("id");
+            if (id.index("Time") >= 0) {
+                $(this).val($(this).val() * 60000);
+            } else {
+
+            }
+
+        });
+
+        var params = jQuery("#setting").serialize();
+        return params;
+
+    },
 
     showSetting:function (info) {
         $("#" + selects.$settingArea).html(info);
@@ -65,6 +92,10 @@ var settingView = {
         settingView.showAutoSetting();
         if (versionFunction["initSetting"]) {
             versionFunction["initSetting"]()
+        } else {
+            settingView.resetTime();
+
+
         }
 
         $("#autoSettingCheckBox").on("click", function () {
@@ -84,7 +115,13 @@ var settingView = {
 
 
         $("#" + selects.$submitSetting).bind("click", function () {
-            var s = versionFunction["getSettingParameter"]();
+            var s;
+            if (versionFunction["getSettingParameter"]) {
+                s = versionFunction["getSettingParameter"]();
+            } else {
+                s = settingView.getDefaultSettingParameter();
+            }
+
             var settingHtml = settingService.saveSetting(s);
             alert("设置已更改~~");
 
@@ -422,6 +459,13 @@ var rightView = {
                 console.log("Commons view not process right: " + right + " start version view ");
                 if (versionFunction["rightView"]) {
                     versionFunction["rightView"](right);
+                } else {
+                    if (versionFunction["rightContent"]) {
+                        rightView.showCommandRight(right, versionFunction["rightContent"][right]);
+                    } else {
+
+                    }
+
                 }
         }
 
@@ -474,7 +518,7 @@ var rightView = {
 
 
 var gameAreaView = {
-    showMessageContent:function (message, type) {
+/*    showMessageContent:function (message, type) {
         var content = "";
         switch (type) {
             case "system":
@@ -489,10 +533,16 @@ var gameAreaView = {
                 break;
         }
 
-        var contentID = versionFunction["contentID"](message.predict);
+        var contentID =selects.$gameArea;
+        if(versionFunction["contentID"]){
+            var contentID = versionFunction["contentID"](message.predict);
+        }else{
+
+        }
+
         gameAreaView.showContent(contentID, content);
 
-    },
+    },*/
 
     updateRubbishText:function () {
 
@@ -698,7 +748,7 @@ var viewUtil = {
     autoBottom:function (dom) {
 
         var isAuto = controlView.getAutoRoll();
-        console.log("dom is "+dom);
+        console.log("dom is " + dom);
         if (isAuto) {
             var height = $(dom)[0].scrollHeight;
             $(dom).scrollTop(height);
@@ -758,7 +808,12 @@ var controlView = {
         return "";
     },
     isMute:function () {
-        return  $("#sayButton").prop("disabled");
+        var right=  $("#sayButton").prop("disabled");
+        if(right&&'say'==controlView.getCommandValue()){
+            return true;
+        }else{
+            return false;
+        }
     },
     showDelay:function (message) {
         if (message.sendAt) {
@@ -949,10 +1004,10 @@ var controlView = {
 
     resetExpression:function () {
         if ($("#switchFrom").val() == "pc") {
-                   $("#" + selects.$select_expression).html("神态<span class='caret'></span>");
-               } else {
+            $("#" + selects.$select_expression).html("神态<span class='caret'></span>");
+        } else {
             $("#" + selects.$select_expression).find('span').text("神态");
-               }
+        }
 
         $("#" + selects.$expression).attr("data-default", "0");
     },

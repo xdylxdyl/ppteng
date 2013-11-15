@@ -77,7 +77,12 @@ function array2splitString(arrays, split) {
 }
 
 function splitString2Array(string, split) {
-    var result = string.split(split)
-    return result;
+    if(string==null){
+        string=="";
+    }else{
+        var result = string.split(split)
+          return result;
+    }
+
 
 }

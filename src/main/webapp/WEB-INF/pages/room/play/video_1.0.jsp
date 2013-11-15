@@ -142,23 +142,6 @@
 <tiles:insertDefinition name="commonJSImport" />
 
 	<script src="/r/j-src/game/video/video.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/model.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/service.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/base.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/action.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/game/commons/view.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/comet.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/httpUtil2.js?v=${frontVersion}"></script>
-<script
-	src="<%=request.getContextPath() %>/r/j-src/util/timeUtil.js?v=${frontVersion}"></script>
-
 
 
 

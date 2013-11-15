@@ -1,10 +1,180 @@
+
+
+
+(function ($) {
+    $.fn.extend({
+        "rightClick":function (fn) {
+            $(this).bind('contextmenu', function (e) {
+                return false;
+            });
+            $(this).mousedown(function (e) {
+                if (3 == e.which) {
+                    fn.call($(this), e);
+                }
+            });
+        }
+    });
+
+    $.bindLR = function (elem, type, data, fn, intv) {
+        var L_BUTTON = $.browser.msie ? 1 : 0;
+        var R_BUTTON = $.browser.msie ? 0 : 2;
+        var LR_BUTTON = 3; // ie
+        var orgType = type.substr(2);
+        var L_flag = false;
+        var R_flag = false;
+        var getTime = function () {
+            return +new Date;
+        };
+        var lrId = getTime();
+
+        // elem节点的$.cache
+        elem.data('lrId', lrId);
+        var orgFns = [];
+
+        for (var i in $.cache) {
+            // 找到原来的绑定功能
+            if ($.cache[i]['lrId'] == lrId) {
+                var fns = $.cache[i]['events'][orgType];
+                for (var j in fns) {
+                    orgFns.push(fns[j]);
+                    elem.unbind(orgType, fns[j]);
+                }
+                //移除它
+                elem.removeData('lrId');
+                break;
+            }
+        }
+        elem.data('lrTempEvents', orgFns);
+        var timer = getTime();
+        var timeOut;
+        var reset = function () {
+            L_flag = false;
+            R_flag = false;
+            clearTimeout(timeOut);
+        };
+        var orgFnHandle = function (e, data) {
+            reset();
+            for (var i = 0; i < orgFns.length; i++) {
+                orgFns[i].call(elem, e, data);
+            }
+        };
+        var L_event = function (e, data) {
+            if (!R_flag) { //等待
+                // 如果是LR_BUTTON，就不等了
+                // 在IE下LR_BUTTON调用L_BUTTON事件
+                if (getTime() - timer > intv) {
+                    L_flag = true;
+                    timer = getTime();
+                    timeOut = setTimeout(
+                        function () {
+                            orgFnHandle(e, data);
+                        },
+                        intv + 1
+                    );
+                }
+            } else {
+                reset();
+                var deltT = getTime() - timer;
+                if (deltT <= intv) {
+                    fn.call(elem, e, data);
+                } else {
+                    orgFnHandle(e, data);
+                }
+            }
+        };
+        var R_event = function (e, data) {
+            if (!L_flag) {
+                if (getTime() - timer > intv) {
+                    R_flag = true;
+                    timer = getTime();
+                    timeOut = setTimeout(
+                        function () {
+                            orgFnHandle(e, data);
+                        },
+                        intv + 1
+                    );
+                }
+            } else {
+                reset();
+                var deltT = getTime() - timer;
+                if (deltT <= intv) {
+                    fn.call(elem, e, data)
+                } else {
+                    orgFnHandle(e, data);
+                }
+            }
+        };
+        var eventHandle = function (e, data) {
+            if (L_BUTTON === e.button)
+                L_event(e, data);
+            else if (R_BUTTON === e.button)
+                R_event(e, data);
+            else if (LR_BUTTON === e.button) { //ie
+                timer = getTime();
+                fn.call(elem, e, data);
+            }
+        };
+        //禁止右键菜单功能;
+        elem.bind('contextmenu', function () {
+            return false;
+        });
+        //绑定新的
+        elem.bind(orgType, data, eventHandle);
+    };
+    $.unbindLR = function (elem, type) {
+        elem.unbind('contextmenu');
+        elem.unbind(type);
+        var orgType = type.substr(2);
+        elem.unbind(orgType);
+        var lrId = Math.random();
+        elem.data('lrId', lrId);
+        for (var i in $.cache) {
+            if ($.cache[i]['lrId'] == lrId) {
+                var fns = $.cache[i]['lrTempEvents'];
+                for (var j in fns) {
+                    elem.bind(orgType, function () {
+                        fns[j].apply(elem, arguments)
+                    });
+                }
+                //移除它
+                elem.removeData('lrId');
+                elem.removeData('lrTempEvents');
+                break;
+            }
+        }
+    };
+    $.fn.bindLR = function (type, data, fn, intv) {
+        if ($.isFunction(data)) {
+            intv = fn || 500;
+            fn = data;
+            data = {};
+        } else {
+            data = data || {};
+            fn = fn || {};
+            intv = intv || 500;
+        }
+        // lr 绑到 $(...).trigger()
+        this.bind(type, data, fn);
+        if (type.substr(0, 2) == 'lr') {
+            $.bindLR(this, type, data, fn, intv);
+        }
+        return this;
+    };
+    $.fn.unbindLR = function (type) {
+        $.unbindLR(this, type);
+        return this;
+    }
+})(jQuery);
+
+
+
 var gameView = {
     hideDieArea:function () {
 
     }
 }
 
-$(document).ready(function () {
+
     timer = null;
     //左键
     $("#inner").on("click", "div", function () {
@@ -928,176 +1098,8 @@ $(document).ready(function () {
         //   "settingPostParameter":settingPostParameter89,,
 
 
-    }
-
-
-});
-
-
-(function ($) {
-    $.fn.extend({
-        "rightClick":function (fn) {
-            $(this).bind('contextmenu', function (e) {
-                return false;
-            });
-            $(this).mousedown(function (e) {
-                if (3 == e.which) {
-                    fn.call($(this), e);
-                }
-            });
-        }
-    });
-
-    $.bindLR = function (elem, type, data, fn, intv) {
-        var L_BUTTON = $.browser.msie ? 1 : 0;
-        var R_BUTTON = $.browser.msie ? 0 : 2;
-        var LR_BUTTON = 3; // ie
-        var orgType = type.substr(2);
-        var L_flag = false;
-        var R_flag = false;
-        var getTime = function () {
-            return +new Date;
-        };
-        var lrId = getTime();
-
-        // elem节点的$.cache
-        elem.data('lrId', lrId);
-        var orgFns = [];
-
-        for (var i in $.cache) {
-            // 找到原来的绑定功能
-            if ($.cache[i]['lrId'] == lrId) {
-                var fns = $.cache[i]['events'][orgType];
-                for (var j in fns) {
-                    orgFns.push(fns[j]);
-                    elem.unbind(orgType, fns[j]);
-                }
-                //移除它
-                elem.removeData('lrId');
-                break;
-            }
-        }
-        elem.data('lrTempEvents', orgFns);
-        var timer = getTime();
-        var timeOut;
-        var reset = function () {
-            L_flag = false;
-            R_flag = false;
-            clearTimeout(timeOut);
-        };
-        var orgFnHandle = function (e, data) {
-            reset();
-            for (var i = 0; i < orgFns.length; i++) {
-                orgFns[i].call(elem, e, data);
-            }
-        };
-        var L_event = function (e, data) {
-            if (!R_flag) { //等待
-                // 如果是LR_BUTTON，就不等了
-                // 在IE下LR_BUTTON调用L_BUTTON事件
-                if (getTime() - timer > intv) {
-                    L_flag = true;
-                    timer = getTime();
-                    timeOut = setTimeout(
-                        function () {
-                            orgFnHandle(e, data);
-                        },
-                        intv + 1
-                    );
-                }
-            } else {
-                reset();
-                var deltT = getTime() - timer;
-                if (deltT <= intv) {
-                    fn.call(elem, e, data);
-                } else {
-                    orgFnHandle(e, data);
-                }
-            }
-        };
-        var R_event = function (e, data) {
-            if (!L_flag) {
-                if (getTime() - timer > intv) {
-                    R_flag = true;
-                    timer = getTime();
-                    timeOut = setTimeout(
-                        function () {
-                            orgFnHandle(e, data);
-                        },
-                        intv + 1
-                    );
-                }
-            } else {
-                reset();
-                var deltT = getTime() - timer;
-                if (deltT <= intv) {
-                    fn.call(elem, e, data)
-                } else {
-                    orgFnHandle(e, data);
-                }
-            }
-        };
-        var eventHandle = function (e, data) {
-            if (L_BUTTON === e.button)
-                L_event(e, data);
-            else if (R_BUTTON === e.button)
-                R_event(e, data);
-            else if (LR_BUTTON === e.button) { //ie
-                timer = getTime();
-                fn.call(elem, e, data);
-            }
-        };
-        //禁止右键菜单功能;
-        elem.bind('contextmenu', function () {
-            return false;
-        });
-        //绑定新的
-        elem.bind(orgType, data, eventHandle);
     };
-    $.unbindLR = function (elem, type) {
-        elem.unbind('contextmenu');
-        elem.unbind(type);
-        var orgType = type.substr(2);
-        elem.unbind(orgType);
-        var lrId = Math.random();
-        elem.data('lrId', lrId);
-        for (var i in $.cache) {
-            if ($.cache[i]['lrId'] == lrId) {
-                var fns = $.cache[i]['lrTempEvents'];
-                for (var j in fns) {
-                    elem.bind(orgType, function () {
-                        fns[j].apply(elem, arguments)
-                    });
-                }
-                //移除它
-                elem.removeData('lrId');
-                elem.removeData('lrTempEvents');
-                break;
-            }
-        }
-    };
-    $.fn.bindLR = function (type, data, fn, intv) {
-        if ($.isFunction(data)) {
-            intv = fn || 500;
-            fn = data;
-            data = {};
-        } else {
-            data = data || {};
-            fn = fn || {};
-            intv = intv || 500;
-        }
-        // lr 绑到 $(...).trigger()
-        this.bind(type, data, fn);
-        if (type.substr(0, 2) == 'lr') {
-            $.bindLR(this, type, data, fn, intv);
-        }
-        return this;
-    };
-    $.fn.unbindLR = function (type) {
-        $.unbindLR(this, type);
-        return this;
-    }
-})(jQuery);
+
 
 
 /*======================================*/

@@ -280,7 +280,7 @@ killGameAreaView = {
 
 
 var simpleRightView = {
-    branchRight:function (right) {
+    rightView:function (right) {
         switch (right) {
             case "vote" :
                 simpleRightView.commandRight(right);
@@ -458,7 +458,7 @@ var simpleService = {
 
 versionFunction = {
     //处理权限的展示
-    "rightView":simpleRightView.branchRight,
+    "rightView":simpleRightView.rightView,
     //处理权限对应的数据
     "rightContent":commandSimpleSetting,
     //初始化设置

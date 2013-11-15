@@ -21,6 +21,67 @@ var burgModel = {
     burgIndex:1,
     attemptCount:1,
     memberCount:2,
+    templateConfig:{
+        "assignKing":{"template":" 【系统消息】第({native_object}/3)次尝试,{name_subject} 被指定为村长,认真挑选行动小组名单吧~",
+            "color":colorConfig.system},
+        "dispatch":{"template":" 【系统消息】{name_subject}指定 [{name_object}] 做为今天晚上炸狼堡的名单~~",
+            "color":colorConfig.system
+        },
+        "dismissal":{"template":" 【系统消息】{name_subject} [{hint_object}]了村长给出的小组名单~~ ",
+            "color":colorConfig.system,
+            "hint":{"agree":"通过",
+                "disagree":"否决"}
+        },
+        "dismissalResult":{"template":" 【系统消息】{name_subject} 在大家的一致表决里,{hint_object} 村长被[{hint_object}]了~~",
+            "color":colorConfig.system,
+            "hint":{"agree":"通过",
+                "disagree":"罢免"}},
+        "burgDetail":{"template":" 【系统消息】{native_subject}号狼堡的小组人员数目是[{native_object}]名",
+            "color":colorConfig.system
+        },
+        "die":{"template":" 【系统消息】{name_subject}已经离开房间,宣告死亡", "color":colorConfig.system},
+        "action":{"template":"[密] 【系统消息】{name_subject}你对本次狼堡采取的行动是 [{hint_object}] ",
+            "color":colorConfig.system,
+            "hint":{  "agree":"炸毁",
+                "disagree":"不炸"}
+        },
+        "bombResult":{"template":" 【系统消息】{native_subject}号城堡的结果是 [{hint_object}]",
+            "color":colorConfig.system,
+            "hint":{"bomb":"成功炸毁",
+                "unbomb":"未炸毁"}
+        },
+        "decryption":{"template":" 【系统消息】{name_subject}的身份是 [{hint_object}]",
+            "color":colorConfig.system,
+            "hint":{"water":"水民",
+                "wolf":"狼人"}
+        },
+        "time":{"template":"【系统消息】{hint_object}",
+            "color":colorConfig.system,
+            "hint":{
+                "dispatch":"选人阶段,村长要担负起选择行动小组成员名单的重任了~~",
+                "dismissal":"大家要认真审核村长提出的名单~通过投票来决定是否通过~",
+                "action":"行动时间到了~~GoGoGo(如果是七人以上,四号狼堡需要至少两个人选择不炸才能保卫成功)",
+                "assignKing":"被指定为村长,认真挑选行动小组名单吧~"
+            }
+
+        },
+        "over":{"template":"【系统消息】游戏结束，{hint_object}胜利！~~",
+            "color":colorConfig.system,
+            "hint":{
+                "wolf win":"狼人",
+                "water win":"水民"
+
+            }
+        },
+
+        "start":{"template":"【系统消息】游戏开始了~狼人和水民们开始狂欢吧~~",
+            "color":colorConfig.system
+
+        }
+
+
+
+    },
     dismissalObject:[
         { id:"agree", name:"通过"
         },
@@ -30,15 +91,15 @@ var burgModel = {
 
     ],
     dismissalResultHint:{
-            "agree":"村长给出的名单通过了~",
-            "disagree":"村长被罢免了~"
+        "agree":"村长给出的名单通过了~",
+        "disagree":"村长被罢免了~"
 
-        },
+    },
     dismissalActionHint:{
-            "agree":"通过",
-            "disagree":"否决"
+        "agree":"通过",
+        "disagree":"否决"
 
-        },
+    },
     actionObject:[
         { id:"agree", name:"炸毁"
         },
@@ -61,19 +122,10 @@ var burgModel = {
     king:-500,
     playerStatus:{
         living:"living"
-
-
     },
     role:{
         water:"water",
         wolf:"wolf"
-    },
-    hint:{
-        dispatch:"选人阶段,村长要担负起选择行动小组成员名单的重任了~~",
-        dismissal:"大家要认真审核村长提出的名单~通过投票来决定是否通过~",
-        action:"行动时间到了~~GoGoGo(如果是七人以上,四号狼堡需要至少两个人选择不炸才能保卫成功)",
-        assignKing:"被指定为村长,认真挑选行动小组名单吧~"
-
     },
     actionHint:{
         dispatch:"做为今天晚上炸狼堡的名单~~"
@@ -104,7 +156,6 @@ var burgModel = {
         over:"【当前状态】结束",
         action:"【当前状态】行动"
 
-
     },
 
     roleName:{
@@ -113,26 +164,12 @@ var burgModel = {
         king:"村长"
     },
 
-    rightName:{
+    rightContent:{
         dispatch:"指派",
         dismissal:"审核",
         action:"行动"
 
-    },
-    settingPostParameter:function (rid, version, dispatchTime, dismissalTime, actionTime) {
-        return{
-            rid:rid,
-            version:version,
-            setting:[
-                {"dispatchTime":dispatchTime},
-                {"dismissalTime":dismissalTime},
-                {"actionTime":actionTime}
-
-            ]
-        }
     }
-
-
 
 
 }
@@ -146,7 +183,7 @@ var burgContentView = {
 
 
 
-    getContentID:function (action) {
+    contentID:function (action) {
         return selects.$gameArea;
     }
 
@@ -178,7 +215,7 @@ var burgPlayerView = {
 
 };
 //房间状态相关.如显身身份,当前状态等
-var burgRoomView = {
+var burgDetailView = {
     updateDetailTitle:function () {
 
         $("#detail_process").empty().html("当前进度" + burgModel.burgIndex + "号城堡第" + burgModel.attemptCount + "次尝试,已炸毁狼堡" + burgModel.bombBurgCount + "次,已成功保卫狼堡" + burgModel.unbombBurgCount + "次");
@@ -191,8 +228,8 @@ var burgRoomView = {
         } else {
 
         }
-        if(clz==""){
-            clz="text-warning";
+        if (clz == "") {
+            clz = "text-warning";
         }
         $("#" + id).empty().removeClass().addClass(clz).html(content);
     }
@@ -224,166 +261,53 @@ var burgController = {
         return result;
     },
     parseMessage:function (message) {
+        contentTemplate.showContent(message);
         switch (message.predict) {
             case "assignKing" :
-
                 var p = playerService.getPlayer(message.subject);
-
-                var content = {
-                    color:message.color,
-                    expression:controlView.showExpression(message.expression),
-                    subject:"第(" + message.object + ")/3次尝试,"+p.name,
-                    firstAction:"",
-                    content:burgModel.hint[message.predict]
-                }
-                var contentID = selects.$gameArea;
-                var c = contentTemplate.generateSystemContent(content)
-                gameAreaView.showContent(contentID, c);
                 burgPlayerView.changePlayerStatus(message);
                 burgModel.attemptCount = parseInt(message.object);
-                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "king", p.name, "");
-                burgRoomView.updateDetailTitle();
+                burgDetailView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "king", p.name, "");
+                burgDetailView.updateDetailTitle();
                 break;
-
             case "dispatch" :
-
-                var nameString = playerService.getNamesByIds(message.object,",");
-                var content = {
-                    color:colorConfig.system,
-                    expression:controlView.showExpression(message.expression),
-                    subject:playerService.getPlayer(message.subject).name,
-                    firstAction:"指定",
-                    content:"[ " + nameString + " ]" + burgModel.actionHint[message.predict]
-                }
-                var contentID = selects.$gameArea;
-                var c = contentTemplate.generateSystemContent(content)
-                gameAreaView.showContent(contentID, c);
-
-                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "member", nameString, "");
+                burgDetailView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "member", playerService.getNamesByIds(message.object, ","), "");
                 break;
             case "dismissal" :
-
-                var content = {
-                    color:colorConfig.system,
-                    expression:controlView.showExpression(message.expression),
-                    subject:playerService.getPlayer(message.subject).name,
-                    firstAction:"[ " + burgModel.dismissalActionHint[message.object] + " ]",
-                    content:" 村长给出的小组名单~~ "
-                }
-                var contentID = selects.$gameArea;
-                var c = contentTemplate.generateSystemContent(content)
-                gameAreaView.showContent(contentID, c);
-
-
                 break;
             case "dismissalResult" :
-
-                var content = {
-                    color:colorConfig.system,
-                    expression:controlView.showExpression(message.expression),
-                    subject:playerService.getPlayer(message.subject).name,
-                    firstAction:"在大家的一致表决里,",
-                    content:"" + burgModel.dismissalResultHint[message.object] + ""
-                }
-                var contentID = selects.$gameArea;
-                var c = contentTemplate.generateSystemContent(content)
-                gameAreaView.showContent(contentID, c);
-
-                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "dismissal",  burgModel.dismissalResultHint[message.object], burgModel.clz[message.object]);
-
+                burgDetailView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "dismissal", burgModel.dismissalResultHint[message.object], burgModel.clz[message.object]);
                 break;
-
             case  "burgDetail":
-                var content = {
-                    color:colorConfig.system,
-                    expression:controlView.showExpression(message.expression),
-                    subject:message.subject + "号狼堡",
-                    firstAction:"的小组人员数是",
-                    content:"[ " + message.object + " ]"
-                }
-                var contentID = selects.$gameArea;
-                var c = contentTemplate.generateSystemContent(content)
-                gameAreaView.showContent(contentID, c);
                 burgModel.memberCount = parseInt(message.object);
                 burgModel.burgIndex = parseInt(message.subject);
-
-
-                break;
-
-                break;
-
-
-            case "set dismissal" :
-                burgController.setVote(message);
-                break;
-            case "clear dismissal" :
-                burgController.clearVote(message);
                 break;
             case "time" :
                 burgController.timeChange(message);
                 break;
             case "die" :
                 playerService.die(message)
-                gameAreaView.showMessageContent(message);
                 gameView.switchArea(message);
                 break;
             case "assign" :
                 //本地存入自己身份
                 playerService.assign(message);
-                wolfView.assignRole(message);
-
+                burgView.assignRole(message);
                 break;
             case "action" :
-
-                var content = {
-                    color:colorConfig.system,
-                    expression:controlView.showExpression(message.expression),
-                    subject:"[密]"+playerService.getPlayer(message.subject).name,
-                    firstAction:"你对本次狼堡采取的行动是",
-                    content:"[ " + burgModel.actionObjectHint[message.object] + " ]"
-                }
-                var contentID = selects.$gameArea;
-                var c = contentTemplate.generateSystemContent(content)
-                gameAreaView.showContent(contentID, c);
                 break;
-
-
             case "bombResult":
-                var name = message.subject + "号城堡"
-                var content = {
-                    color:colorConfig.system,
-                    expression:controlView.showExpression(message.expression),
-                    subject:name,
-                    firstAction:"的结果是",
-                    content:"[ " + burgModel.actionResultHint[message.object] + " ]"
-                }
-                var contentID = selects.$gameArea;
-                var c = contentTemplate.generateSystemContent(content)
-                gameAreaView.showContent(contentID, c);
-                burgRoomView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "action", burgModel.actionResultHint[message.object], burgModel.clz[message.object]);
-                burgRoomView.showDetail(burgModel.burgIndex, null, "result", burgModel.actionResultHint[message.object], burgModel.clz[message.object]);
-
-                if("bomb"==message.object){
+                burgDetailView.showDetail(burgModel.burgIndex, burgModel.attemptCount, "action", burgModel.actionResultHint[message.object], burgModel.clz[message.object]);
+                burgDetailView.showDetail(burgModel.burgIndex, null, "result", burgModel.actionResultHint[message.object], burgModel.clz[message.object]);
+                if ("bomb" == message.object) {
                     burgModel.bombBurgCount++;
-                }else{
+                } else {
                     burgModel.unbombBurgCount++;
                 }
-                burgRoomView.updateDetailTitle();
+                burgDetailView.updateDetailTitle();
                 break;
             case "decryption" :
-
-                var content = {
-                    color:colorConfig.system,
-                    expression:controlView.showExpression(message.expression),
-                    subject:playerService.getPlayer(message.subject).name,
-                    firstAction:"的身份是",
-                    content:"[ " + burgModel.roleName[message.object] + " ]"
-                }
-                var contentID = selects.$gameArea;
-                var c = contentTemplate.generateSystemContent(content)
-                gameAreaView.showContent(contentID, c);
                 break;
-
             case "status" :
                 burgController.status(message);
                 break;
@@ -396,9 +320,6 @@ var burgController = {
                 break;
             case "say":
                 burgController.say(message);
-                break;
-            case "sort" :
-                wolfView.showSort(message);
                 break;
 
             default :
@@ -415,31 +336,11 @@ var burgController = {
         controlView.clearCountDownTime();
         controlView.setCountDownTime(message.object);
 
-        var content = {
-            color:message.color,
-            expression:controlView.showExpression(message.expression),
-            subject:playerService.getPlayer(message.subject).name,
-            firstAction:"",
-            content:burgModel.hint[message.subject]
-        }
-        var contentID = selects.$gameArea;
-        var c = contentTemplate.generateSystemContent(content)
-        gameAreaView.showContent(contentID, c);
-
-
     },
 
     say:function (message) {
-
-        //1.get content from message
-
-        //2.get place from message
-
-        //3.show content at place
-
         var p = playerService.getPlayer(message.subject);
-        wolfView.say(message.subject, p.name, message.content, message.expression, message.color, message.object, "");
-
+        burgView.say(message.subject, p.name, message.content, message.expression, message.color, message.object, "");
 
     },
 
@@ -452,35 +353,7 @@ var burgController = {
         playerListView.setStatus(message.subject, message.object);
 
 
-    },
-
-
-    isShowDispatch:function (message) {
-        if ("day" == globalView.getGameStatus()) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    answer:function (message) {
-
-
-        wolfView.answer(playerService.getPlayer(message.subject).name,
-            playerService.getPlayer(message.object).name, message.color, message.expression, message.content);
-
-
-    },
-
-
-    setVote:function (message) {
-
-        playerListView.setVote(message.subject, message.object);
-
-    },
-    clearVote:function () {
-        $("nav li img").text("");
     }
-
 
 
 };
@@ -489,7 +362,7 @@ var burgController = {
 /**
  * 游戏区域
  */
-var wolfView = {
+var burgView = {
     assignRole:function (message) {
         var player = playerService.getPlayer(message.object);
         var hint = $("#" + selects.$playerRole).text();
@@ -500,59 +373,13 @@ var wolfView = {
         }
         $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
     },
-    systemContent:function (message) {
-        console.log(message.predict + " get system content");
-        var c = burgModel.hint[message.predict];
-        var content = {
-            color:message.color,
-            expression:controlView.showExpression(message.expression),
-            subject:playerService.getPlayer(message.subject).name,
-            firstAction:first,
-            content:c
-        }
-
-
-        console.log(content);
-        return content;
-
-    },
-    content:function (message) {
-        return burgModel.roleName[message.object];
-    },
     clearHeadArea:function () {
 
-        wolfView.emptyCard();
-        wolfView.emptyRole();
+        burgView.emptyRole();
     },
-    emptyCard:function (card) {
-
-        $("#" + selects.$playerCard).empty();
-
-
-    },
-
     emptyRole:function (card) {
 
-
         $("#" + selects.$playerRole).empty();
-
-
-    },
-    displayCard:function (card) {
-
-        if (card == "" || card == undefined) {
-            return;
-        }
-        var hint = "【卡牌】" + card;
-        $("#" + selects.$playerCard).removeClass().addClass("text-error").empty().html(hint);
-
-
-    },
-    displayRole:function (role) {
-
-        var hint = "【角色】" + role;
-        $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
-
 
     },
 
@@ -569,30 +396,19 @@ var wolfView = {
         } else {
             obj = "";
         }
-
-        if (!command) {
-            command = "";
-
-        }
         //say出现的位置 这个.话说.原来死人说的话是JS控制的么
         //1、死人（dead_area）——a、游戏结束后；b、游戏未结束时。 2、活人——a、白天； b、遗言时； css、晚上（killer_area）。
         var player = playerService.getPlayer(id);
         var place = "normal";
-
-
         switch (player.status) {
             case burgModel.playerStatus.die:
-                if ($("#time").val() == "over" || $("#time").val() == "question") {
-
+                if ($("#time").val() == "over") {
                 } else {
                     //没有结束
-
                     place = "deadArea";
-
                 }
                 break;
             case burgModel.playerStatus.king:
-
                 break;
             case burgModel.playerStatus.living:
                 //delay message
@@ -606,7 +422,7 @@ var wolfView = {
                     place = "deadArea";
                 }
 
-                if("game" != globalView.getRoomType()){
+                if ("game" != globalView.getRoomType()) {
                     place = "deadArea";
                 }
                 break;
@@ -615,69 +431,19 @@ var wolfView = {
 
 
         }
+        var str = "<p style='color:" + color + "'>[" + name + "] " + express + obj + command + " 说：" + content + "</p>";
+        var cid = selects.$gameArea;
 
         switch (place) {
             case "normal":
-                $("#" + selects.$gameArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + command + " 说：" + content + "</p>");
-                viewUtil.autoBottom($("#" + selects.$gameArea));
                 break;
             case "deadArea":
-                $("#" + selects.$dieArea).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + command + " 说：" + content + "</p>");
-                viewUtil.autoBottom($("#" + selects.$dieArea));
+
+                cid = selects.$dieArea;
                 break;
             default:
         }
-
-        if (burgModel.rightName.description == command) {
-            $("#" + selects.$description).append("<p style='color:" + color + "'>[" + name + "] " + express + obj + command + " 说：" + content + "</p>");
-            viewUtil.autoBottom($("#" + selects.$description));
-        }
-
-
-    },
-    description:function (message, p) {
-
-        $("#" + selects.$gameArea).append("<p style='color:" + color + "'>[" + p.name + "] " + express + obj + command + " 说：" + content + "</p>");
-        viewUtil.autoBottom($("#" + selects.$gameArea));
-    },
-    vote:function (subjectName, objectName, color, exp, content) {
-
-
-        $("#" + selects.$gameArea).append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>");
-        viewUtil.autoBottom($("#" + selects.$gameArea));
-    },
-
-    answer:function (subjectName, objectName, color, exp, content) {
-
-
-        $("#" + selects.$gameArea).append("<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 回答 : " + content + " </p>");
-        viewUtil.autoBottom($("#" + selects.$gameArea));
-    },
-
-
-    die:function (id, name, action) {
-        $("#" + id).children("a").removeClass().addClass("die");
-        switch (action) {
-            case "vote":
-                $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】 积毁销骨，众口铄金，[" + name + "]你就认命吧！</p>");
-
-                break;
-            case "drown":
-                $("#" + selects.$gameArea).append("<p style='color:#F00;'>【系统消息】[" + name + "]无视国王的权威,失去了证明自己清白的机会.就这么被淹死了</p>");
-
-                break;
-            default :
-                ;
-        }
-
-
-    },
-    showContentForGameArea:function (content) {
-        if (content == "" || content == undefined) {
-
-        } else {
-            $("#" + selects.$gameArea).append("<p><span style='color: #F00'>" + content + "</span></p>");
-        }
+        gameAreaView.showContent(cid, str);
 
     },
     showConentForGamePhase:function (content) {
@@ -693,76 +459,26 @@ var wolfView = {
         $("#" + selects.$playerRole).empty();
     },
     showOver:function (recordID, obj) {
-
-        var recordLink = "<a href='/record/enter?recordID=" + recordID + "' target='_blank'>查看战例</a>";
-        var shareLink = "http://42.121.113.70/record/enter?recordID=" + recordID;
-        var share;
-        switch (obj) {
-            case "wolf win" :
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，狼人胜利！</p> ");
-                share = "这局杀人游戏[简化]中,杀手又赢了~,抢走了2000金币~点此链接回放场景,重现杀人现场: " + shareLink + ";";
-                break;
-            case "water win" :
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！</p> ");
-                share = "这局杀人游戏[简化]中,水民又赢了~,赢回了2000金币~点此链接回放场景,重现水民分析实况:" + shareLink + ";";
-                break;
-            default :
-                $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏终止</p> ");
-        }
-
-
         //时间清空
         clearTimeout(timer);
         timer = null;
         $("#" + selects.$countDown).val("00:00");
-        viewUtil.autoBottom($("#" + selects.$gameArea));
-
 
     },
-    showSort:function (message) {
-        var list = JSON.parse(message.object)
-        var names = [];
-        for (var l in list) {
-            var player = playerService.getPlayer(list[l]);
-            names.push(player.name)
-        }
-        wolfView.showContentForGameArea(burgModel.hint.sort(JSON.stringify(names)))
+    displayRole:function (role) {
 
-
+        var hint = "【角色】" + role;
+        $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
     }
 
 
 }
 
-
-var wolfRightView = {
-    branchRight:function (right) {
-        switch (right) {
-            case "dispatch":
-                // wolfRightView.dispatch(right);
-                wolfRightView.commandRight(right);
-                break;
-            default :
-                wolfRightView.commandRight(right);
-
-        }
-
-    },
-    dispatch:function (right) {
-
-        rightView.showCommandRight(right, burgModel.rightName[right]);
-        $("#" + selects.$sayButton).prop("disabled", false);
-
-
-    },
+var burgRightView = {
 
     commandRight:function (right) {
-        rightView.showCommandRight(right, burgModel.rightName[right]);
+        rightView.showCommandRight(right, burgModel.rightContent[right]);
         $("#" + selects.$sayButton).prop("disabled", false);
-    },
-    sayRight:function (right) {
-        $("#" + selects.$sayButton).prop("disabled", false);
-
     },
     commandFilter:function (right, playerList) {
 
@@ -782,7 +498,6 @@ var wolfRightView = {
             default :
                 var objectStr = "<li data-default=''><a href='#'>对象</a></li> <li class='divider'></li>";
                 $("#object").empty().append(objectStr);
-
                 break;
         }
 
@@ -790,34 +505,6 @@ var wolfRightView = {
     }
 
 
-
-}
-
-var wolfSettingView = {
-    timeSetting:["dispatchTime", "dismissalTime", "actionTime"],
-
-    initSetting:function () {
-
-        for (var index in wolfSettingView.timeSetting) {
-            var dom = $("#" + wolfSettingView.timeSetting[index]);
-            dom.val(dom.val() / 60000);
-            $("<span>分</span>").insertAfter(dom);
-        }
-    },
-
-    getSettingParameter:function () {
-        for (var index in wolfSettingView.timeSetting) {
-            var dom = $("#" + wolfSettingView.timeSetting[index]);
-            dom.val(dom.val() * 60000);
-        }
-        var params = jQuery("#setting").serialize();
-        return params;
-    },
-
-
-    autoSettingShow:function (auto) {
-
-    }
 
 }
 
@@ -848,12 +535,11 @@ var gameView = {
             $("#" + gameView.startEmpty[index]).empty();
         }
 
-        burgModel.burgIndex=1;
-           burgModel.bombBurgCount=0;
-           burgModel.unbombBurgCount=0;
-           burgModel.attemptCount=1;
+        burgModel.burgIndex = 1;
+        burgModel.bombBurgCount = 0;
+        burgModel.unbombBurgCount = 0;
+        burgModel.attemptCount = 1;
 
-        $("#" + selects.$gameArea).append("<p style='color:#F00'>【系统消息】 游戏开始了~狼人和水民们开始狂欢吧</p>");
 
         playerListView.sortPlayer();
         playerListView.clearPlayerNameClass();
@@ -862,7 +548,6 @@ var gameView = {
         var p = playerService.getPlayer(globalView.getCurrentID());
         gameView.showSecondArea(p);
         notifyUtil.sendNotify("各位大神", "前方发现狼堡,速度归队", "");
-
 
 
     },
@@ -878,9 +563,9 @@ var gameView = {
         settingView.displaySetting();
 
 
-        wolfView.showOver(recordID, obj);
-        wolfView.showConentForGamePhase(burgModel.phase["over"]);
-        wolfView.clearHeadArea();
+        burgView.showOver(recordID, obj);
+        burgView.showConentForGamePhase(burgModel.phase["over"]);
+        burgView.clearHeadArea();
         gameView.showDieArea();
     },
     showDieArea:function () {
@@ -905,16 +590,16 @@ var gameView = {
 
 }
 
-var ghostSimpleService = {
+var burgService = {
     parseDetail:function (data) {
         roomService.parsePerson(data.person);
-        ghostSimpleService.parseGame(data.game);
+        burgService.parseGame(data.game);
         roomService.parseRight(data.right);
-        ghostSimpleService.parseCount(data.votes);
-        ghostSimpleService.parseRole(data.role);
-        ghostSimpleService.parseGroup(data.group);
-        ghostSimpleService.parseKing(data.king);
-        ghostSimpleService.parseBurgs(data.burgs);
+        burgService.parseCount(data.votes);
+        burgService.parseRole(data.role);
+        burgService.parseGroup(data.group);
+        burgService.parseKing(data.king);
+        burgService.parseBurgs(data.burgs);
     },
     parseKing:function (king) {
 
@@ -936,13 +621,13 @@ var ghostSimpleService = {
             var burgIndex = k;
             var burg = v;
             $.each(v.actionDetails, function (kt, vt) {
-                var nameString = playerService.getNamesByIdLists(vt.members,",");
-                burgRoomView.showDetail(burgIndex, kt, "king", playerService.getPlayer(vt.king).name, "");
-                burgRoomView.showDetail(burgIndex, kt, "member", nameString, "");
-                burgRoomView.showDetail(burgIndex, kt, "dismissal", burgModel.dismissalResultHint[vt.dismissal], "");
-                burgRoomView.showDetail(burgIndex, kt, "action", burgModel.actionResultHint[burg.result], "");
+                var nameString = playerService.getNamesByIdLists(vt.members, ",");
+                burgDetailView.showDetail(burgIndex, kt, "king", playerService.getPlayer(vt.king).name, "");
+                burgDetailView.showDetail(burgIndex, kt, "member", nameString, "");
+                burgDetailView.showDetail(burgIndex, kt, "dismissal", burgModel.dismissalResultHint[vt.dismissal], "");
+                burgDetailView.showDetail(burgIndex, kt, "action", burgModel.actionResultHint[burg.result], "");
                 if ("unkknown" != burg.result) {
-                    burgRoomView.showDetail(burgIndex, null, "result", burgModel.actionResultHint[burg.result], burgModel.clz[burg.result]);
+                    burgDetailView.showDetail(burgIndex, null, "result", burgModel.actionResultHint[burg.result], burgModel.clz[burg.result]);
 
                 }
 
@@ -950,7 +635,7 @@ var ghostSimpleService = {
             });
         });
 
-        burgRoomView.updateDetailTitle();
+        burgDetailView.updateDetailTitle();
 
 
     },
@@ -961,14 +646,6 @@ var ghostSimpleService = {
         }
 
     },
-    parseCard:function (data) {
-        if (data == null) {
-            return;
-        }
-
-        wolfView.displayCard(data.card);
-    },
-
     parseGroup:function (group) {
         if (group == null) {
             return;
@@ -980,8 +657,6 @@ var ghostSimpleService = {
             var names = playerService.getGroupNames(group);
             var hint = burgModel.roleHint.wolf(names);
             $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
-
-
         }
     },
     parseRole:function (data) {
@@ -992,7 +667,7 @@ var ghostSimpleService = {
         var p = playerService.getPlayer(data.id)
         p.role = data.role;
         playerService.updatePlayer(p);
-        wolfView.displayRole(burgModel.roleName[data.role]);
+        burgView.displayRole(burgModel.roleName[data.role]);
 
 
     },
@@ -1000,7 +675,6 @@ var ghostSimpleService = {
         if (data == null) {
             return;
         }
-
         globalView.setGameStatusHint(burgModel.phase[data.status]);
 
         globalView.setGameStatus(data.status);
@@ -1012,42 +686,30 @@ var ghostSimpleService = {
         burgModel.bombBurgCount = data.bombBurgCount;
         burgModel.unbombBurgCount = data.unbombBurgCount;
 
-
     }
 }
 
 versionFunction = {
-    //处理权限的展示
-    "rightView":wolfRightView.branchRight,
-    //处理权限对应的数据
-    "rightContent":burgModel.rightName,
-    //初始化设置
-    "initSetting":wolfSettingView.initSetting,
-    //获取初始化参数
-    "getSettingParameter":wolfSettingView.getSettingParameter,
-    "autoSettingShow":wolfSettingView.autoSettingShow,
     //解析消息
     "parseMessage":burgController.parseMessage,
     //解析房间Detail,用于页面刷新及进入房间
-    "parseDetail":ghostSimpleService.parseDetail,
-    //设置参数
-    "settingPostParameter":burgModel.settingPostParameter,
+    "parseDetail":burgService.parseDetail,
     //游戏中发言
     "say":burgController.say,
+    //检查游戏中的指令是否合法
+    commandCheck:burgController.commandCheck,
+    //指令中的过滤器
+    commandFilter:burgRightView.commandFilter,
+    //==================我是愤怒的分割线=====以上是逻辑和代码====以下是配置=========//
     //游戏中开始游戏的限制
     "readyCount":4,
-    //playercount -1
+    //游戏中开始游戏最大人数的限制
     "readyMaxCount":9,
-    //Command Hint
-    "commandHint":wolfView.getCommandHint,
-    commandCheck:burgController.commandCheck,
-    commandFilter:wolfRightView.commandFilter,
-    contentID:burgContentView.getContentID,
-    content:wolfView.content,
-    systemContent:wolfView.systemContent
+    //选择命令后的提示
+    "commandHint":burgView.getCommandHint,
+    //处理权限对应的数据
+    "rightContent":burgModel.rightContent,
 
+    "templateConfig":burgModel.templateConfig
 }
-
-
-
 

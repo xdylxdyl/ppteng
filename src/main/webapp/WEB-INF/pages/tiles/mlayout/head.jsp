@@ -4,8 +4,8 @@
 
 
 	<h3>
-		<span id="playerRole">杀手</span> <small><span id="gamePhase">未开始</span>
-			</span> <span class="brand"> </span> <span class="brand"> <small
+		 <small><span id="playerRole">杀手</span><span id="gamePhase">未开始</span>
+			<span class="brand"> </span> <span class="brand"> <small
 				id="playerRole"></small>
 		</span> <span class="brand"> <small id="playerCard"></small>
 		</span> <span class="brand"> <span id="count"></span></span> </small>

@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<select class="multiselect" multiple="multiple" id="multiObject">
+<select class="multiselect dropup" multiple="multiple" id="multiObject">
     <option value="cheese">Cheese</option>
     <option value="tomatoes">Tomatoes</option>
     <option value="mozarella">Mozzarella</option>
@@ -82,6 +82,7 @@
             buttonWidth:'auto',
             buttonContainer:'<div class="btn-group" />',
             maxHeight:false,
+            dropupAuto:false,
             buttonText:function (options) {
 
                 var result = [];

@@ -44,7 +44,7 @@ var LabsDIYModel = {
         king:"国王"
     },
 
-    rightName:{
+    rightContent:{
         announce:"结束",
         private:"私聊"
 
@@ -347,7 +347,7 @@ var LabsDIYView = {
 
 
 var LabsDIYRightView = {
-    branchRight:function (right) {
+    rightView:function (right) {
         switch (right) {
             case "announce" :
                 LabsDIYRightView.commandRight(right);
@@ -361,7 +361,7 @@ var LabsDIYRightView = {
     },
 
     commandRight:function (right) {
-        rightView.showCommandRight(right, LabsDIYModel.rightName[right]);
+        rightView.showCommandRight(right, LabsDIYModel.rightContent[right]);
         $("#" + selects.$sayButton).prop("disabled", false);
     },
     sayRight:function (right) {
@@ -503,9 +503,9 @@ var LabsDIYService = {
 
 versionFunction = {
     //处理权限的展示
-    "rightView":LabsDIYRightView.branchRight,
+    "rightView":LabsDIYRightView.rightView,
     //处理权限对应的数据
-    "rightContent":LabsDIYModel.rightName,
+    "rightContent":LabsDIYModel.rightContent,
     //初始化设置
     "initSetting":LabsDIYSettingView.initSetting,
     //获取初始化参数

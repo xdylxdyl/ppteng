@@ -29,7 +29,7 @@
 			<div class="controls"> 
         <spring:bind path="setting.setting[${entry.key}]">
 				<input id="${entry.key}" name="setting[${entry.key}]"
-					value="${entry.value}" class="input-xlarge" type="text" />
+					value="${entry.value}" class="input-xlarge settingConfig" type="text" />
 			
                         
 			</spring:bind>
