@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+</head>
+<body  ng-app="qm" >
+
+
+<div ng-controller="test_Ctrl" id="controller">
+    <input type="button" value="测试" id="btn"> <br/>
+    <input type="text" id="text_txt" value="{{value}}" echo="{{echo}}"/>
+
+    <p>{{echo}}</p>
+
+    <p>{{value}}</p>
+
+    <input type="text" id="text_txt2" ng-model="xxx" placeholder="Enter a name here">
+
+    <h1>Hello {{xxx}}!</h1>
+
+
+</div>
+
+
+
+
+<!--
+<div ng-app="xx" ng-controller="test_Ctrl2" id="controller2">
+    <input type="button" value="测试" id="btn2"> <br/>
+    <input type="text" id="text_txt3" value="{{value}}" echo="{{echo}}"/>
+
+    <p>{{echo}}</p>
+
+    <p>{{value}}</p>
+    <input type="text" id="text_txt4" ng-model="xxx" placeholder="Enter a name here">
+
+    <h1>Hello {{xxx}}!</h1>
+</div>
+-->
+
+
+</body>
+</html>
+
+
+<script type="text/javascript" src="../../j-src/framework/angular/angular.min.js"></script>
+<script type="text/javascript" src="../../j-src/framework/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+    var app = angular.module("qm", []);
+
+    app.controller("test_Ctrl", function ($scope) {
+        $scope.value = "haha";
+        $scope.echo = "1";
+    });
+
+    var xx = angular.module("xx", []);
+    xx.controller("test_Ctrl2", function ($scope) {
+        $scope.value = "haha";
+        $scope.echo = "1";
+
+    });
+    $("#btn").on("click", function () {
+
+        //获取到文本框对象
+        var input = angular.element($("body"));
+
+        //获取文本框的scope
+        var scope = input.scope();
+        //  //修改value值
+        scope.value = "哈哈";
+        scope.echo = "xd";
+        scope.xxx = "yyyyy";
+        //   //方法一:  调用$apply()方法，angular推荐使用
+        scope.$apply();
+
+    })
+
+    $("#btn2").on("click", function () {
+
+        //获取到文本框对象
+        var input = angular.element($("#controller2"));
+
+        //获取文本框的scope
+        var scope = input.scope();
+        //  //修改value值
+        scope.value = "哈哈";
+        scope.echo = "xd";
+        //   //方法一:  调用$apply()方法，angular推荐使用
+        scope.$apply();
+        //   //方法二:  调用$digest()方法，不推荐    //scope.$digest();
+    })
+
+
+</script>

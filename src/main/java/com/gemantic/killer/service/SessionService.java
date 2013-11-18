@@ -10,6 +10,8 @@ public interface SessionService {
 
 	public StatefulKnowledgeSession getSesseion(Message message)throws ServiceException,ServiceDaoException;
 
-	public void removeSession(Message message)throws ServiceException,ServiceDaoException;;
+	public void removeSession(Message message)throws ServiceException,ServiceDaoException;
+
+	public void removeRoomSession(Long id)throws ServiceException,ServiceDaoException;
 
 }

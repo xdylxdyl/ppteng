@@ -93,6 +93,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			log.error("error room is " + room + " message is " + message);
 			log.info("because room error so retract room ");
 			roomService.removeRoom(room.getId());
+			this.sessionService.removeSession(message);
 
 		}
 		// 应该是开始游戏之后才记录.
@@ -476,6 +477,15 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 		}
 
+	}
+
+	@Override
+	public void removeRoom(Room room) throws ServiceException,
+			ServiceDaoException {
+		roomService.removeRoom(room.getId());
+		this.sessionService.removeRoomSession(room.getId());
+
+		
 	}
 
 }

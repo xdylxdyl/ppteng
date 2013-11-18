@@ -14,7 +14,7 @@
  */
 
 
-
+var app = angular.module('myApp', []);
 
 function ajaxJson(url, type, param, parse, timeout, dataType, async) {
     lastMessageSendAt = jQuery.now();

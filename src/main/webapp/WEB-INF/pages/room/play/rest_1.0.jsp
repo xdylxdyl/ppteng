@@ -69,7 +69,7 @@
 							</blockquote>
 
 
-							<div class="" id="news_public" ng-app="myApp">
+							<div class="" id="news_public">
 
 								<div class="span12">
 

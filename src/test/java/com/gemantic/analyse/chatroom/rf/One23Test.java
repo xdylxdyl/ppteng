@@ -682,36 +682,46 @@ public class One23Test {
 	@Test
 	public void testWolfBurgRule() throws ServiceException,
 			ServiceDaoException, IOException {
-
-		String diyVersion = "wolf_burg_1.0";
-	
-		String currentVersion = diyVersion;
-		Room room = new Room("sss", 3L, currentVersion);
-		Setting s = settingService.getSetting(currentVersion);
-		log.info("wolf setting "+s);
-		room.setSetting(s);
-		room.setId(5000L);
-		this.droolsGameMessageService.createRoom(room);
 		
+		for(int i=0;i<10;i++){
 
-		List<String> messages = FileUtil
-				.readFileAsList("src/test/resources/wolf_burg.txt");
-		log.info("get messageis "+messages);
-		List<Message> ms = new ArrayList();
+			log.info("====================== create room "+i);
+			String diyVersion = "wolf_burg_1.0";
+		
+			Long rid=Long.valueOf(i);
+			String currentVersion = diyVersion;
+			Room room = new Room("sss", rid, currentVersion);
+			Setting s = settingService.getSetting(currentVersion);
+			log.info("wolf setting "+s);
+			room.setSetting(s);
+			room.setId(rid);
+			this.droolsGameMessageService.createRoom(room);
+			
 
-		Long rid = null;
+			List<String> messages = FileUtil
+					.readFileAsList("src/test/resources/wolf_burg.txt");
+			log.info("get messageis "+messages);
+			List<Message> ms = new ArrayList();
 
-		for (String message : messages) {
-			if (message.startsWith("#")) {
-				continue;
+			
+
+			for (String message : messages) {
+				if (message.startsWith("#")) {
+					continue;
+				}
+
+				Message m = MessageUtil.parse(diyVersion, message);
+				log.info("message start=========================== " + m);
+				List<Message> ms2 = this.droolsGameMessageService.generate(m, room);
+				log.info(ms2);
+				log.info("message over =============================");
 			}
-
-			Message m = MessageUtil.parse(diyVersion, message);
-			log.info("message start=========================== " + m);
-			List<Message> ms2 = this.droolsGameMessageService.generate(m, room);
-			log.info(ms2);
-			log.info("message over =============================");
+			
+			
+		
+			this.droolsGameMessageService.removeRoom(room);
 		}
+
 
 	}
 

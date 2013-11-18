@@ -59,6 +59,8 @@ public interface MessageService {
 	public void sendMessage(Message message) throws ServiceException,ServiceDaoException;
 	
 	
+	public void removeRoom(Room room)throws ServiceException,ServiceDaoException;
+	
 
 
 	

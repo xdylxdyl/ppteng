@@ -1,4 +1,4 @@
-var app = angular.module('myApp', []);
+
 app.filter('timeConvert', function () {
     return function (value) {
         return  new Date(value).toLocaleTimeString();

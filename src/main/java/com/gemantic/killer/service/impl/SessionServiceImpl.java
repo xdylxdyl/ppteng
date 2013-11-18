@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -39,6 +40,25 @@ public class SessionServiceImpl implements SessionService {
 	private List<String> rules=new ArrayList();
 
 	private Map<Long,StatefulKnowledgeSession> roomID_Session=new HashMap();
+	
+	
+	
+	private Map<String,KnowledgeBase> version_kBase=new HashMap();
+	
+	@PostConstruct
+	private void initKBase() throws ServiceException{
+		
+		
+		Long time=System.currentTimeMillis();
+		for(String version:version_path.keySet()){
+			Long vtime=System.currentTimeMillis();
+			this.initSession(version);
+			log.info(version +" init kbase use time "+(System.currentTimeMillis()-vtime));
+		}
+		log.info("init over ,use time "+(System.currentTimeMillis()-time));
+		
+	}
+	
 
 	public StatefulKnowledgeSession getSesseion(Message message)
 			throws ServiceException, ServiceDaoException {
@@ -58,7 +78,10 @@ public class SessionServiceImpl implements SessionService {
 	}
 
 	private StatefulKnowledgeSession initSession(String version) throws ServiceException {
-		KnowledgeBase kbase = null;
+		
+		KnowledgeBase kbase = this.version_kBase.get(version);
+		if(kbase==null){
+			log.info("first init "+version);
 			try {
 				List<String> allPaths=new ArrayList();
 				allPaths.addAll(this.rules);
@@ -71,6 +94,7 @@ public class SessionServiceImpl implements SessionService {
 				allPaths.addAll(path);
 				
 				kbase=this.initKbase(allPaths);
+				this.version_kBase.put(version, kbase);
 			
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
@@ -79,6 +103,13 @@ public class SessionServiceImpl implements SessionService {
 				log.error(version);
 				throw new ServiceException(-1314);
 			}
+		}else{
+			log.info("already cache "+version);
+			
+		}
+		
+		
+			
 		
 		StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
 		return ksession;
@@ -92,12 +123,15 @@ public class SessionServiceImpl implements SessionService {
 		KnowledgeBuilderErrors errors = kbuilder.getErrors();
 		log.info("start init "+ paths.toString());
 		for(String path:paths){
-			ResourceType type=ResourceTypeUtil.parseType(path);
+			Long m=System.currentTimeMillis();
+			ResourceType type=ResourceTypeUtil.parseType(path);		
 			if(type==null){
 				throw new ServiceException(-1315,"unknown file type ");
 				
 			}
+			//耗时最长
 			kbuilder.add(ResourceFactory.newClassPathResource(path),type);
+			
 			errors = kbuilder.getErrors();
 			if (errors.size() > 0) {
 				for (KnowledgeBuilderError error : errors) {
@@ -106,11 +140,14 @@ public class SessionServiceImpl implements SessionService {
 				throw new IllegalArgumentException("Could not parse knowledge "+ path);
 			}
 			
+			
 		}
 		
 		
-		KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();		
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+		
+	
 		log.info("init "+ paths.toString() +" use time "+ (System.currentTimeMillis()-start));
 		return kbase;
 	}
@@ -137,11 +174,35 @@ public class SessionServiceImpl implements SessionService {
 		StatefulKnowledgeSession session=this.roomID_Session.get(roomID);
 		if(session==null){
 			return ;
-		}else{
+		}else{		
 			session.dispose();
 			this.roomID_Session.remove(roomID);
 		}
 	}
+
+	public Map<String, KnowledgeBase> getVersion_kBase() {
+		return version_kBase;
+	}
+
+	public void setVersion_kBase(Map<String, KnowledgeBase> version_kBase) {
+		this.version_kBase = version_kBase;
+	}
+
+	@Override
+	public void removeRoomSession(Long id) throws ServiceException,
+			ServiceDaoException {
+	
+		StatefulKnowledgeSession session=this.roomID_Session.get(id);
+		if(session==null){
+			return ;
+		}else{		
+			session.dispose();
+			this.roomID_Session.remove(id);
+		}
+	}
+	
+	
+	
 	
 	
 	

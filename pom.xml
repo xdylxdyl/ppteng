@@ -829,6 +829,7 @@
 					</webApp>
 
 					<scanIntervalSeconds>3</scanIntervalSeconds>
+					
 					<scanTargetPatterns>
 						<scanTargetPattern>
 							<directory>src/main/webapp</directory>

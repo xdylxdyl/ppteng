@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <!doctype html>
-<html>
+<html >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -12,7 +12,7 @@
 
 
 </head>
-<body>
+<body ng-app="myApp">
 
  <tiles:insertAttribute name="header" />
 
