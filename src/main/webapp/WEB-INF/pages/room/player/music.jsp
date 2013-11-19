@@ -10,7 +10,7 @@
 <input id="uid" type="hidden" value="${current.id}" />
 <input id="name" type="hidden" value="${current.name}" />
 
-
+<title>${current.name}-音乐-葡萄藤轻游戏</title>
 
 <!-- container start  -->
 <div class="span9">

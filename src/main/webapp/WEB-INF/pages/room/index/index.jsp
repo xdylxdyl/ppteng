@@ -226,9 +226,7 @@
 					<p>
 						<a href="http://www.sjwyb.com/" target="_blank">手机网游帮</a>
 					<p>
-					<p>
-						<a href="http://www.yoyone.net" target="_blank">优选网站目录</a>
-					</p>
+				
 				</div>
 				<div class="span3">
 					<p>

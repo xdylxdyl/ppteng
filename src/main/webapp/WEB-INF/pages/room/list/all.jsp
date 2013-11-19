@@ -4,7 +4,7 @@
 <html ng-app="">
 <head>
 <meta charset=utf-8">
-<title>LogIn</title>
+<title>${uname}-葡萄藤轻游戏</title>
 
 
 <input type="hidden" value="${oldRoom}" id="oldRoom">

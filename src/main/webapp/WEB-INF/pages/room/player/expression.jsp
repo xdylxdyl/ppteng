@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/r/css/tagit/jquery.tagit.css">
 <link rel="stylesheet" href="/r/css/tagit/tagit.ui-zendesk.css">
 
-
+<title>${current.name}-神态-葡萄藤轻游戏</title>
 <input id="uid" type="hidden" value="${current.id}" />
 <input id="name" type="hidden" value="${current.name}" />
 

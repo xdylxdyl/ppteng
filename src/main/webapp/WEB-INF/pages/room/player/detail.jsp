@@ -7,7 +7,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/r/css/music.css?v=${frontVersion}">
 
-
+<title>${current.name}-葡萄藤轻游戏</title>
 
 
 </head>

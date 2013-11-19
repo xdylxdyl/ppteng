@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="/r/css/clippy/clippy.css"
 	media="all">
 
-
+<title>站长-关于我们-葡萄藤轻游戏</title>
 <div class="span9">
 	<script src="/r/j-src/framework/clippy/clippy.js"></script>
 	<script src="/r/j-src/web/about/master.js"></script>

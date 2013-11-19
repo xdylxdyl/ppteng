@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
-
+<title>扫雷排行榜-葡萄藤轻游戏</title>
 <input type="hidden" id="version" value="${smallVersion}"></input>
  <div class="span9">
 <div class="container" >

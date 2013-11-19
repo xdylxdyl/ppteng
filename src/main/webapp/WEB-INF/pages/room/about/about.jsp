@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-
+<title>简介-关于我们-葡萄藤轻游戏</title>
 
 <div class="span9">
 	<div class="hero-unit">

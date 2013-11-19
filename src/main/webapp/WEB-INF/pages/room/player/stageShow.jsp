@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-
+<title>${current.name}-出场秀-葡萄藤轻游戏</title>
 
 
 <link rel="stylesheet" href="/r/css/tagit/jquery.tagit.css">

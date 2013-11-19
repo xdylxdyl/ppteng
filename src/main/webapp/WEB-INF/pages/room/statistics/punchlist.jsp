@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <link href="/r/css/player/punchlist.css" rel="stylesheet">
-
+<title>打卡统计-${current.name}-葡萄藤轻游戏</title>
 
 
 <input type="hidden" id="punch" value="${punch}" />

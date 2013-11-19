@@ -1,6 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
+
+<title><%@ include
+											file="../../room/version/show.jsp"%>-战例-葡萄藤轻游戏</title>
+
 <input type="hidden" id="version" value="${version}"></input>
 <c:set var="pversion" value="${version}"></c:set>
 <div class="span9">

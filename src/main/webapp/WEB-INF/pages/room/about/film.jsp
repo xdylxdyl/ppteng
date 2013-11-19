@@ -9,7 +9,7 @@
 		<link rel="stylesheet"
 			href="/r/j-src/framework/countdown/countdown/jquery.countdown.css" />
 		<html ng-app="">
-
+<title>虚拟电影院-关于我们-葡萄藤轻游戏</title>
 <div class="span9">
 
 	<div>

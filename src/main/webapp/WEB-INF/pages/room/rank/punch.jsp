@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="../../includes/includes.jsp"%>
 
-
+<title>勤奋排行榜-葡萄藤轻游戏</title>
 
 <link href="/r/css/user_detail.css" rel="stylesheet" />
 <link href="/r/css/button.css" rel="stylesheet" />

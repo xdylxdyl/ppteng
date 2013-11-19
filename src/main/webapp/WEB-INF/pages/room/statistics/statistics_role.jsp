@@ -3,7 +3,7 @@
 <%@ include file="../../includes/includes.jsp"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-
+<title>角色统计-${current.name}-简化-杀人游戏-葡萄藤轻游戏</title>
 <link href="/r/css/player/punchlist.css" rel="stylesheet">
 
 

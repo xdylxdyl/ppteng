@@ -5,7 +5,7 @@
 
 
 
-
+<title>${current.name}-转账-葡萄藤轻游戏</title>
 
 <!-- container start  -->
 <div class="span9">

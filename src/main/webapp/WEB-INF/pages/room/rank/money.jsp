@@ -4,7 +4,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 
-
+<title>财富排行榜-葡萄藤轻游戏</title>
 
 <link href="/r/css/user_detail.css" rel="stylesheet" />
 <link href="/r/css/button.css" rel="stylesheet" />

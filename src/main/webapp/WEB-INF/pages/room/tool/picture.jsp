@@ -7,7 +7,7 @@
 	html, body { height:100%; overflow:hidden; }
 	body { margin:0; }
 </style>
-
+<title>图片处理-工具-葡萄藤轻游戏</title>
 
 <div class="span9" style="height:35em;overflow:auto">
 <div id="altContent">
