@@ -6,15 +6,11 @@
 	<div class="navbar-inner">
 		<span class="brand"> <small><a
 				href="/player/detail?uid=${room.createrID}" id="createName"></a></small>
-		</span> <!-- <span class="brand"> <small id="gamePhase">{{gameDeail.gamePhase}}</small>
-		</span> <span class="brand"> <small id="playerRole">{{gameDeail.personDetail.playerRole}}</small>
-		</span> <span class="brand"> <small id="playerCard">{gameDeail.personDetail.playerCard}}</small>
-		</span> <span class="brand"> <span id="count">{{gameDeail.gameCount}}</span></span> -->
-		
-		 <span class="brand"> <small id="gamePhase"></small>
-		</span> <span class="brand"> <small id="playerRole"></small>
+		</span> <span class="brand"> <small id="gamePhase"></small></small>
 		</span> <span class="brand"> <small id="playerCard"></small>
-		</span> <span class="brand"> <span id="count"></span></span>
+		</span> <span class="brand"> <span id="count"></span></span>  
+
+		
 
 
 		<ul class="nav pull-right">

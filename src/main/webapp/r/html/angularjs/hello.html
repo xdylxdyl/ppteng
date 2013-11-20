@@ -4,10 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title></title>
 </head>
-<body  ng-app="qm" >
+<body ng-app="qm">
 
 
-<div ng-controller="test_Ctrl" id="controller">
+<div id="controller" ng-controller="test_Ctrl">
     <input type="button" value="测试" id="btn"> <br/>
     <input type="text" id="text_txt" value="{{value}}" echo="{{echo}}"/>
 
@@ -22,10 +22,8 @@
 
 </div>
 
+<h1>Hello {{xxx}}!</h1>
 
-
-
-<!--
 <div ng-app="xx" ng-controller="test_Ctrl2" id="controller2">
     <input type="button" value="测试" id="btn2"> <br/>
     <input type="text" id="text_txt3" value="{{value}}" echo="{{echo}}"/>
@@ -37,7 +35,7 @@
 
     <h1>Hello {{xxx}}!</h1>
 </div>
--->
+
 
 
 </body>
@@ -54,40 +52,56 @@
         $scope.echo = "1";
     });
 
-    var xx = angular.module("xx", []);
-    xx.controller("test_Ctrl2", function ($scope) {
+    app.controller("test_Ctrl2", function ($scope) {
         $scope.value = "haha";
         $scope.echo = "1";
-
     });
+
     $("#btn").on("click", function () {
 
-        //获取到文本框对象
-        var input = angular.element($("body"));
+            //获取到文本框对象
+   /*      var input = angular.element($("body"));
 
-        //获取文本框的scope
-        var scope = input.scope();
-        //  //修改value值
-        scope.value = "哈哈";
-        scope.echo = "xd";
-        scope.xxx = "yyyyy";
-        //   //方法一:  调用$apply()方法，angular推荐使用
-        scope.$apply();
+         //获取文本框的scope
+         var scope = input.scope();
+         //  //修改value值
+         scope.value = "哈哈";
+         scope.echo = "xd";
+         scope.xxx = "yyyyy";
+         //   //方法一:  调用$apply()方法，angular推荐使用
+         scope.$apply();*/
+
+
+        var model = {};
+        model.value="哈哈2222";
+        model.echo="xd222222";
+        model.xxx="xxxxxxxxxxxxxxxxxxxxxYYYYYYYYYYYYYYYYY";
+        angularUtil.updateModels("controller2",model);
+/*
+        var model2 = {};
+        model.value="哈哈111";
+        model.echo="xd1111";
+        model.xxx="1111";
+        angularUtil.updateModels("controller",model);*/
 
     })
+    var angularUtil = {
+        updateModels:function (id,models) {
+            var s = angular.element($("#"+id)).scope();
+            $.each(models, function(key, value){
+                    console.log(key, value);
+                s[key] = value;
+                });
+            s.$apply();
+        }
+    }
 
     $("#btn2").on("click", function () {
 
-        //获取到文本框对象
-        var input = angular.element($("#controller2"));
-
-        //获取文本框的scope
-        var scope = input.scope();
-        //  //修改value值
-        scope.value = "哈哈";
-        scope.echo = "xd";
-        //   //方法一:  调用$apply()方法，angular推荐使用
-        scope.$apply();
+        var model = [];
+        model.push({value:"哈哈"});
+        model.push({echo:"xd"});
+        angularUtil.updateModels(model);
         //   //方法二:  调用$digest()方法，不推荐    //scope.$digest();
     })
 

@@ -55,7 +55,7 @@ var burgModel = {
             "hint":{"water":"水民",
                 "wolf":"狼人"}
         },
-        "time":{"template":"【系统消息】{hint_object}",
+        "time":{"template":"【系统消息】{hint_subject}",
             "color":colorConfig.system,
             "hint":{
                 "dispatch":"选人阶段,村长要担负起选择行动小组成员名单的重任了~~",
@@ -431,7 +431,7 @@ var burgView = {
 
 
         }
-        var str = "<p style='color:" + color + "'>[" + name + "] " + express + obj + command + " 说：" + content + "</p>";
+        var str = "<p style='color:" + color + "'>[" + name + "] " + express + obj  + " 说：" + content + "</p>";
         var cid = selects.$gameArea;
 
         switch (place) {

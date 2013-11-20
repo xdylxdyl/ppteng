@@ -15,6 +15,17 @@
 
 
 var app = angular.module('myApp', []);
+var angularUtil = {
+    updateModels:function (id,models) {
+        var s = angular.element($("#"+id)).scope();
+        $.each(models, function(key, value){
+                console.log(key, value);
+            s[key] = value;
+            });
+        s.$apply();
+    }
+}
+
 
 function ajaxJson(url, type, param, parse, timeout, dataType, async) {
     lastMessageSendAt = jQuery.now();
@@ -445,7 +456,14 @@ $(function () {
     var audio = a[0];
     first = $('ol a').attr('data-src');
     $('ol li').first().addClass('playing');
-    audio.load(first);
+
+
+    if(audio!=undefined){
+        audio.load(first);
+    }else{
+
+    }
+
 
     // Load in a track on click
     $('ol').on("click","li",function (e) {
