@@ -324,6 +324,13 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			}
 
 		}
+		if (version.contains("simple")&&!version.contains("ghost")) {
+			// 杀人游戏6人三分钟
+			if (r.getPlayers().size() >= 6 && time > 3 * 60 * 1000) {
+				return true;
+			}
+
+		}
 		
 		if (version.contains("burg")) {
 			// 
