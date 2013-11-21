@@ -50,7 +50,7 @@
 
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane active" id="game_area"></div>
+						<div class="tab-pane active lined-paper" id="game_area"></div>
 						
 						<div class="tab-pane" id="setting_area"></div>
 						<div class="tab-pane" id="music_area">

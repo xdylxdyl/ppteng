@@ -1,5 +1,9 @@
+if (app) {
 
-var app = angular.module('myApp', []);
+} else {
+
+    var app = angular.module('myApp', []);
+}
 app.filter('timeConvert', function () {
     return function (value) {
         return  new Date(value).toLocaleTimeString();
@@ -39,7 +43,7 @@ var newsService = {
 
 
 function publicCtrl($scope, $timeout) {
-    $scope.publicFeed =  newsService.getPublicFeed();
+    $scope.publicFeed = newsService.getPublicFeed();
     $scope.refresh = function () {
         $scope.publicFeed = newsService.getPublicFeed();
     };

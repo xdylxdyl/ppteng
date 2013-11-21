@@ -229,7 +229,7 @@ public class PlayerController implements ApplicationContextAware {
 		boolean success = false;
 		Long loginUID = null;
 		// 首先判断email
-		if (email == null) {
+		if (StringUtils.isBlank(email)) {
 			// 没有Email再判断是否是cookie
 			uid = cookieUtil.getID(request, response);
 			log.debug(uname + "  id: " + uid);

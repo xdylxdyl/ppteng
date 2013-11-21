@@ -8,6 +8,11 @@
 
 
 var timer = null;
+var gameDetail={
+    creater:""
+}
+
+
 
 var burgModel = {
     clz:{
@@ -548,6 +553,7 @@ var gameView = {
         var p = playerService.getPlayer(globalView.getCurrentID());
         gameView.showSecondArea(p);
         notifyUtil.sendNotify("各位大神", "前方发现狼堡,速度归队", "");
+
 
 
     },

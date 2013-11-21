@@ -47,10 +47,10 @@
 <script type="text/javascript">
     var app = angular.module("qm", []);
 
-    app.controller("test_Ctrl", function ($scope) {
+    test_Ctrl= function ($scope) {
         $scope.value = "haha";
         $scope.echo = "1";
-    });
+    };
 
     app.controller("test_Ctrl2", function ($scope) {
         $scope.value = "haha";
@@ -76,7 +76,7 @@
         model.value="哈哈2222";
         model.echo="xd222222";
         model.xxx="xxxxxxxxxxxxxxxxxxxxxYYYYYYYYYYYYYYYYY";
-        angularUtil.updateModels("controller2",model);
+        angularUtil.updateModels("controller",model);
 /*
         var model2 = {};
         model.value="哈哈111";

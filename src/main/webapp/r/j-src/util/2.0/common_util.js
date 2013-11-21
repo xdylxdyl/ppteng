@@ -15,13 +15,27 @@
 
 
 var app = angular.module('myApp', []);
+app.filter('nameConvert', function () {
+    return function (id) {
+        return "管理:"+playerService.getNamesByIds(id, ",");
+
+
+    }
+});
+
+app.controller("gameDetailController", function ($scope) {
+    $scope.detail = {
+        creater:""
+    };
+
+});
 var angularUtil = {
-    updateModels:function (id,models) {
-        var s = angular.element($("#"+id)).scope();
-        $.each(models, function(key, value){
-                console.log(key, value);
+    updateModels:function (id, models) {
+        var s = angular.element($("#" + id)).scope();
+        $.each(models, function (key, value) {
+            console.log(key, value);
             s[key] = value;
-            });
+        });
         s.$apply();
     }
 }
@@ -419,7 +433,6 @@ $(document).ready(function () {
 });
 
 
-
 var musicService = {
     getMusics:function () {
 
@@ -432,10 +445,9 @@ var musicService = {
 }
 function MusicCtrl($scope) {
     $scope.musics = musicService.getMusics();
-    $scope.refreshMusic = function() {
-           $scope.musics = musicService.getMusics();
-       };
-
+    $scope.refreshMusic = function () {
+        $scope.musics = musicService.getMusics();
+    };
 
 
 };
@@ -458,15 +470,15 @@ $(function () {
     $('ol li').first().addClass('playing');
 
 
-    if(audio!=undefined){
+    if (audio != undefined) {
         audio.load(first);
-    }else{
+    } else {
 
     }
 
 
     // Load in a track on click
-    $('ol').on("click","li",function (e) {
+    $('ol').on("click", "li", function (e) {
         e.preventDefault();
         $(this).addClass('playing').siblings().removeClass('playing');
         audio.load($('a', this).attr('data-src'));

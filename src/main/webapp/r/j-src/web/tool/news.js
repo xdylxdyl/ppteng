@@ -6,7 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
-$(document).ready(function() {
+
+$(document).ready(function () {
     headView.highLight("tool");
     leftView.highLight("nav_news");
 

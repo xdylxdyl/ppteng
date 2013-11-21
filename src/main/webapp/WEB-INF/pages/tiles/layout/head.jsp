@@ -3,14 +3,16 @@
 
 
 <div class="navbar">
-	<div class="navbar-inner">
+	<div class="navbar-inner" ng-controller="gameDetailController"
+		id="navbar-inner">
 		<span class="brand"> <small><a
-				href="/player/detail?uid=${room.createrID}" id="createName"></a></small>
-		</span> <span class="brand"> <small id="gamePhase"></small></small>
-		</span> <span class="brand"> <small id="playerCard"></small>
-		</span> <span class="brand"> <span id="count"></span></span>  
+				href="/player/detail?uid=${room.createrID}" id="createName">{{detail.creater|nameConvert}}</a></small>
+		</span> <span class="brand"> <small id="gamePhase"></small>
+		</span> <span class="brand"> <small id="playerRole"></small></span> <span
+			class="brand"> <small id="playerCard"></small>
+		</span> <span class="brand"> <span id="count"></span></span>
 
-		
+
 
 
 		<ul class="nav pull-right">

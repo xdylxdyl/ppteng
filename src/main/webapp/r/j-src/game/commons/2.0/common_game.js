@@ -1672,7 +1672,13 @@ var playerListView = {
     },
     displayCreater:function (player) {
 
-        $("#" + selects.$createName).empty().html("管理员:" + player.name);
+        var model = {
+            detail:{creater:player.id}
+        }
+        angularUtil.updateModels("navbar-inner",model);
+
+
+       // $("#" + selects.$createName).empty().html("管理员:" + player.name);
 
     },
 
