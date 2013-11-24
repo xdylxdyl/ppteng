@@ -1011,7 +1011,7 @@ public class PlayerController implements ApplicationContextAware {
 			type = "music";
 		}
 		User user = this.userService.getObjectById(uid);
-		log.info(uid + " get " + user);
+		//log.info(uid + " get " + user);
 
 		model.addAttribute("current", user);
 		model.addAttribute("type", type);

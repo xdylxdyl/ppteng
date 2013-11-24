@@ -56,6 +56,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 		//有可能会空
 		if (_connection.isOpen()) {
 			// log.info(this.uid+" send message "+data);
+		
 			_connection.sendMessage(data);
 		} else {
 			this.messages.add(data);
@@ -102,6 +103,10 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 	public void onOpen(Connection connection) {
 
 		_connection = connection;
+		
+		_connection.setMaxIdleTime(30*60*1000);
+		log.info("set max idle Time "+_connection.getMaxIdleTime());
+		
 		try {
 			if (this.messages.isEmpty()) {
 				connection.sendMessage("already open ~~" + this.uid);
