@@ -6,7 +6,8 @@
 <meta charset="utf-8">
 <meta name="author" content="chill">
 <!-- baidu -->
-<meta name="baidu-site-verification" content="q0jbDNzQNO3kVJKt" />
+
+<meta name="baidu-site-verification" content="04YDpDPg12" />
 <!-- bing -->
 <meta name="msvalidate.01" content="51CEFB2B69018B64000F7820DB27B187" />
 <!-- qq -->
