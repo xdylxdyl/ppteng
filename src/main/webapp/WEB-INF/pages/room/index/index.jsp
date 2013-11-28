@@ -267,6 +267,9 @@
 					<p>
 						<a href="http://www.neihan8.com/gaoxiaomanhua/" target="_blank">搞笑漫画</a>
 					<p>
+					<p>
+						<a href="http://www.kppx.net" target="_blank">kp品学网</a>
+					<p>
 				</div>
 			</div>
 		</div>
