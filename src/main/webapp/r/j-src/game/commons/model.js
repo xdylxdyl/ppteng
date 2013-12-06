@@ -1,26 +1,3 @@
-String.prototype.template = function () {
-    var msg = arguments[0];
-
-    return this.replace(/\{(native|name|hint)_([^\}]*)\}/g, function (m, pre, parameter) {
-        var result;
-        console.log(m);
-        console.log(pre);
-        console.log(parameter);
-        switch (pre) {
-            case "native":
-                result = msg[parameter];
-                break;
-            case "name":
-                result = playerService.getNamesByIds(msg[parameter], ",");
-                break;
-            case "hint":
-
-                result = versionFunction.templateConfig[msg.predict].hint[msg[parameter]];
-                break;
-        }
-        return result;
-    });
-}
 
 
 var expression = {
@@ -65,58 +42,7 @@ var colorConfig = {
 
 }
 
-var contentTemplate = {
-    generateUserContent:function (content) {
-        return   "<p style='font-weight:bold;color:" + content.color + "'>[" + content.subject + "] " + content.expression + " " + content.firstAction + " [" + content.object + "] " + content.secondAction + " : " + content.content + " </p>"
-    },
-    generateSystemContent:function (content, message) {
-        var str = "";
-        if (content == null || content.template == null) {
-            str = "";
-        } else {
 
-            str = "<p style='color:" + content.color + ";'>" + content.template.template(message) + "</p>";
-        }
-
-
-        return str;
-
-    },
-    convertMessage2Content:function (message) {
-        var cid = selects.$gameArea;
-        var config = burgModel.templateConfig[message.predict];
-        var t = "";
-        if (config) {
-            if (config.contentID) {
-                cid = config.contentID;
-            }
-            var color = message.color;
-            if (config.color) {
-                color = config.color;
-            }
-            if (burgModel.templateConfig[message.predict]) {
-                if (burgModel.templateConfig[message.predict].template) {
-                    t = burgModel.templateConfig[message.predict].template;
-
-                }
-            }
-        }
-
-        return  {
-            color:color,
-            expression:controlView.showExpression(message.expression),
-            template:t,
-            contentID:cid
-        }
-    },
-    showContent:function (message) {
-        var c = contentTemplate.convertMessage2Content(message);
-        var str = contentTemplate.generateSystemContent(c, message);
-        gameAreaView.showContent(c.contentID, str);
-    }
-
-
-}
 
 var action = {
     say:"说"

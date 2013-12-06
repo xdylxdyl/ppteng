@@ -48,8 +48,8 @@
     var app = angular.module("qm", []);
 
     test_Ctrl= function ($scope) {
-        $scope.value = "haha";
-        $scope.echo = "1";
+        $scope.value = "没变没变";
+        $scope.echo = "Echo没变没变";
     };
 
     app.controller("test_Ctrl2", function ($scope) {
@@ -74,8 +74,6 @@
 
         var model = {};
         model.value="哈哈2222";
-        model.echo="xd222222";
-        model.xxx="xxxxxxxxxxxxxxxxxxxxxYYYYYYYYYYYYYYYYY";
         angularUtil.updateModels("controller",model);
 /*
         var model2 = {};

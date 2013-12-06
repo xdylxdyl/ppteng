@@ -18,11 +18,11 @@
 	<div ng-repeat="pfeed in publicFeed">
 
 		<h4>
-			<a href="{{pfeed.link}}" target="_blank">{{pfeed.title}}</a>
+			<a href="{{pfeed.link}}" target="_blank" ng-cloak>{{pfeed.title}}</a>
 		</h4>
 		<blockquote>
 
-			<small> {{pfeed.pubDate|timeConvert}}</small>
+			<small ng-cloak> {{pfeed.pubDate|timeConvert}}</small>
 		</blockquote>
 
 

@@ -6,16 +6,12 @@
 	<div class="navbar-inner" ng-controller="gameDetailController"
 		id="navbar-inner">
 		<span class="brand"> <small><a
-				href="/player/detail?uid=${room.createrID}" id="createName">{{detail.creater|nameConvert}}</a></small>
-		</span> <span class="brand"> <small id="gamePhase"></small>
-		</span> <span class="brand"> <small id="playerRole"></small></span> <span
+				href="/player/detail?uid=${room.createrID}" id="createName" ng-bind="detail.creater|nameConvert"></a></small>
+		</span> <span class="brand"> <small id="gamePhase" ng-bind="detail.phase|phaseConvert"></small>
+		</span> <span class="brand"> <small id="playerRole" ng-bind="detail.role|roleConvert"></small></span> <span
 			class="brand"> <small id="playerCard"></small>
 		</span> <span class="brand"> <span id="count"></span></span>
-
-
-
-
-		<ul class="nav pull-right">
+			<ul class="nav pull-right">
 
 			<li><a
 				href="/m/play/enter.do?rid=${room.id}&uid=${uid}&from=${switchFrom}"

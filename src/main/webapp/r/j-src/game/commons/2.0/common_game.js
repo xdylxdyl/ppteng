@@ -133,7 +133,25 @@ var contentTemplate = {
         var c = contentTemplate.convertMessage2Content(message);
         var str = contentTemplate.generateSystemContent(c, message);
         gameAreaView.showContent(c.contentID, str);
+    },
+    updateAngularModel:function (message) {
+        console.log("will update angularjs " + message);
+        var ms = [];
+        if (burgModel.templateConfig[message.predict]) {
+            if (burgModel.templateConfig[message.predict].updateAngularModel) {
+                ms = burgModel.templateConfig[message.predict].updateAngularModel;
+                console.log(ms);
+                $.each(ms, function (i, val) {
+                    var m = ms[i];
+                    angularUtil.updateModel(m.id, m.key, m["template"].template(message));
+                });
+
+            }
+
+
+        }
     }
+
 
 
 }
@@ -341,8 +359,6 @@ var selects = {
 
 
 }
-
-
 
 
 /*
@@ -785,29 +801,29 @@ var playerService = {
         }
         return null;
     },
-    getNamesByIds:function(idsring,split){
-        if(split==""){
-            split==",";
+    getNamesByIds:function (idsring, split) {
+        if (split == "") {
+            split == ",";
         }
         var ids = splitString2Array(idsring, split);
-                     var names = [];
-                     for (var index in ids) {
-                         var name = playerService.getPlayer(ids[index]).name
-                         names.push(name);
-                     }
+        var names = [];
+        for (var index in ids) {
+            var name = playerService.getPlayer(ids[index]).name
+            names.push(name);
+        }
 
-          return array2splitString(names, split);
+        return array2splitString(names, split);
 
     },
-    getNamesByIdLists:function(ids,split){
+    getNamesByIdLists:function (ids, split) {
 
-                     var names = [];
-                     for (var index in ids) {
-                         var name = playerService.getPlayer(ids[index]).name
-                         names.push(name);
-                     }
+        var names = [];
+        for (var index in ids) {
+            var name = playerService.getPlayer(ids[index]).name
+            names.push(name);
+        }
 
-          return array2splitString(names, split);
+        return array2splitString(names, split);
 
     }
 
@@ -1246,6 +1262,12 @@ var roomParseService = {
         }
 
 
+        /*   var s = angular.element($("#navbar-inner")).scope();
+         s.text="yyyy";
+
+         s.$apply();*/
+
+
     },
     ready:function (message) {
 
@@ -1675,10 +1697,10 @@ var playerListView = {
         var model = {
             detail:{creater:player.id}
         }
-        angularUtil.updateModels("navbar-inner",model);
+        angularUtil.updateModels("navbar-inner", model);
 
 
-       // $("#" + selects.$createName).empty().html("管理员:" + player.name);
+        // $("#" + selects.$createName).empty().html("管理员:" + player.name);
 
     },
 
@@ -1885,31 +1907,31 @@ var rightView = {
 
 
 var gameAreaView = {
-/*    showMessageContent:function (message, type) {
-        var content = "";
-        switch (type) {
-            case "system":
-                content = viewUtil.message2SystemContent(message);
-                break;
-            case "user":
-                content = viewUtil.message2UserContent(message);
+    /*    showMessageContent:function (message, type) {
+     var content = "";
+     switch (type) {
+     case "system":
+     content = viewUtil.message2SystemContent(message);
+     break;
+     case "user":
+     content = viewUtil.message2UserContent(message);
 
-                break;
-            default :
-                content = viewUtil.message2UserContent(message);
-                break;
-        }
+     break;
+     default :
+     content = viewUtil.message2UserContent(message);
+     break;
+     }
 
-        var contentID =selects.$gameArea;
-        if(versionFunction["contentID"]){
-            var contentID = versionFunction["contentID"](message.predict);
-        }else{
+     var contentID =selects.$gameArea;
+     if(versionFunction["contentID"]){
+     var contentID = versionFunction["contentID"](message.predict);
+     }else{
 
-        }
+     }
 
-        gameAreaView.showContent(contentID, content);
+     gameAreaView.showContent(contentID, content);
 
-    },*/
+     },*/
 
     updateRubbishText:function () {
 
@@ -2175,10 +2197,10 @@ var controlView = {
         return "";
     },
     isMute:function () {
-        var right=  $("#sayButton").prop("disabled");
-        if(right&&'say'==controlView.getCommandValue()){
+        var right = $("#sayButton").prop("disabled");
+        if (right && 'say' == controlView.getCommandValue()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     },
@@ -2751,9 +2773,6 @@ var controlView = {
     }
 
 }
-
-
-
 
 
 $(document).ready(function () {

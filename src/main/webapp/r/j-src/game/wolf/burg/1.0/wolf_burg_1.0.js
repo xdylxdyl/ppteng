@@ -8,10 +8,6 @@
 
 
 var timer = null;
-var gameDetail={
-    creater:""
-}
-
 
 
 var burgModel = {
@@ -29,6 +25,15 @@ var burgModel = {
     templateConfig:{
         "assignKing":{"template":" 【系统消息】第({native_object}/3)次尝试,{name_subject} 被指定为村长,认真挑选行动小组名单吧~",
             "color":colorConfig.system},
+        "assign":{
+            updateAngularModel:[
+                {id:"navbar-inner",
+                    key:"detail.phase",
+                    value:"",
+                    template:"{native_subject}"
+                }
+            ]
+        },
         "dispatch":{"template":" 【系统消息】{name_subject}指定 [{name_object}] 做为今天晚上炸狼堡的名单~~",
             "color":colorConfig.system
         },
@@ -67,8 +72,21 @@ var burgModel = {
                 "dismissal":"大家要认真审核村长提出的名单~通过投票来决定是否通过~",
                 "action":"行动时间到了~~GoGoGo(如果是七人以上,四号狼堡需要至少两个人选择不炸才能保卫成功)",
                 "assignKing":"被指定为村长,认真挑选行动小组名单吧~"
-            }
+            },
+            phase:{
+                dispatch:"【当前状态】选人",
+                dismissal:"【当前状态】审核",
+                over:"【当前状态】结束",
+                action:"【当前状态】行动"
 
+            },
+            updateAngularModel:[
+                {id:"navbar-inner",
+                    key:"detail.phase",
+                    value:"",
+                    template:"{native_subject}"
+                }
+            ]
         },
         "over":{"template":"【系统消息】游戏结束，{hint_object}胜利！~~",
             "color":colorConfig.system,
@@ -81,6 +99,13 @@ var burgModel = {
 
         "start":{"template":"【系统消息】游戏开始了~狼人和水民们开始狂欢吧~~",
             "color":colorConfig.system
+
+        },
+        "say":{    updateAngularModel:{id:"navbar-inner",
+            key:"detail.phase",
+            value:"",
+            template:"{native_subject}"
+        }
 
         }
 
@@ -267,6 +292,7 @@ var burgController = {
     },
     parseMessage:function (message) {
         contentTemplate.showContent(message);
+        contentTemplate.updateAngularModel(message);
         switch (message.predict) {
             case "assignKing" :
                 var p = playerService.getPlayer(message.subject);
@@ -288,7 +314,24 @@ var burgController = {
                 burgModel.burgIndex = parseInt(message.subject);
                 break;
             case "time" :
-                burgController.timeChange(message);
+
+                /* updateAngularModel:{id:"navbar-inner",
+                 key:"detail.phase",
+                 value:"",
+                 template:"{native_subject}"
+                 var m = burgModel.templateConfig[message.predict].updateAngularModel;*/
+
+                //angularUtil.updateModel("navbar-inner","detail.phase", message.subject);
+
+                /* var m = burgModel.templateConfig.time.updateAngularModel;
+                 var value = m["template"].template(message);
+                 console.log(value);
+                 angularUtil.updateModel(m.id, m.key, value);*/
+
+                var status = message.subject;
+                globalView.setGameStatus(status);
+                controlView.clearCountDownTime();
+                controlView.setCountDownTime(message.object);
                 break;
             case "die" :
                 playerService.die(message)
@@ -297,7 +340,7 @@ var burgController = {
             case "assign" :
                 //本地存入自己身份
                 playerService.assign(message);
-                burgView.assignRole(message);
+                // burgView.assignRole(message);
                 break;
             case "action" :
                 break;
@@ -333,15 +376,6 @@ var burgController = {
 
     },
 
-
-    timeChange:function (message) {
-
-        var status = message.subject;
-        globalView.setGameStatus(status);
-        controlView.clearCountDownTime();
-        controlView.setCountDownTime(message.object);
-
-    },
 
     say:function (message) {
         var p = playerService.getPlayer(message.subject);
@@ -436,7 +470,7 @@ var burgView = {
 
 
         }
-        var str = "<p style='color:" + color + "'>[" + name + "] " + express + obj  + " 说：" + content + "</p>";
+        var str = "<p style='color:" + color + "'>[" + name + "] " + express + obj + " 说：" + content + "</p>";
         var cid = selects.$gameArea;
 
         switch (place) {
@@ -553,7 +587,6 @@ var gameView = {
         var p = playerService.getPlayer(globalView.getCurrentID());
         gameView.showSecondArea(p);
         notifyUtil.sendNotify("各位大神", "前方发现狼堡,速度归队", "");
-
 
 
     },
@@ -673,7 +706,10 @@ var burgService = {
         var p = playerService.getPlayer(data.id)
         p.role = data.role;
         playerService.updatePlayer(p);
-        burgView.displayRole(burgModel.roleName[data.role]);
+
+
+        var message={subject:data.role, predict:"assign"};
+        contentTemplate.updateAngularModel(message);
 
 
     },
@@ -681,8 +717,17 @@ var burgService = {
         if (data == null) {
             return;
         }
-        globalView.setGameStatusHint(burgModel.phase[data.status]);
 
+        //ontentTemplate.updateAngularModel({object:data.status,predict:"time"});
+
+
+        var message={subject:data.status, predict:"time"};
+        contentTemplate.updateAngularModel(message);
+
+
+
+
+        // globalView.setGameStatusHint(burgModel.phase[data.status]);
         globalView.setGameStatus(data.status);
         controlView.setCountDownTime(data.remainTime);
         var uid = globalView.getCurrentID();
@@ -716,6 +761,8 @@ versionFunction = {
     //处理权限对应的数据
     "rightContent":burgModel.rightContent,
 
-    "templateConfig":burgModel.templateConfig
+    "templateConfig":burgModel.templateConfig,
+    //角色名字
+    "roleName":burgModel.roleName
 }
 

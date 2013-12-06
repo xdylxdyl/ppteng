@@ -80,7 +80,7 @@
 										</h4>
 										<blockquote>
 
-											<small> {{pfeed.pubDate|timeConvert}}</small>
+											<small ng-cloak> {{pfeed.pubDate|timeConvert}}</small>
 										</blockquote>
 
 

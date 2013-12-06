@@ -842,8 +842,9 @@
 
 
 					<webAppConfig>
-						<defaultsDescriptor>webdefault.xml</defaultsDescriptor>
-					</webAppConfig>
+						<defaultsDescriptor>src/main/resource/webdefault222.xml</defaultsDescriptor>
+					</webAppConfig>		
+					
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
 							<port>9090</port>

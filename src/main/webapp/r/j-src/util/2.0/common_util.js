@@ -14,19 +14,66 @@
  */
 
 
+
+
+String.prototype.template = function () {
+    var msg = arguments[0];
+
+    return this.replace(/\{(native|name|hint)_([^\}]*)\}/g, function (m, pre, parameter) {
+        var result;
+        switch (pre) {
+            case "native":
+                result = msg[parameter];
+                break;
+            case "name":
+                result = playerService.getNamesByIds(msg[parameter], ",");
+                break;
+            case "hint":
+
+                result = versionFunction.templateConfig[msg.predict].hint[msg[parameter]];
+                break;
+        }
+        return result;
+    });
+}
+
+
 var app = angular.module('myApp', []);
 app.filter('nameConvert', function () {
     return function (id) {
-        return "管理:"+playerService.getNamesByIds(id, ",");
+        return playerService.getNamesByIds(id, ",");
 
+
+    }
+});
+app.filter('phaseConvert', function () {
+    return function (ph) {
+        console.log("phase is " + ph);
+        if (versionFunction.templateConfig) {
+            return versionFunction.templateConfig.time.phase[ph];
+        }
+
+    }
+});
+
+app.filter('roleConvert', function () {
+    return function (ph) {
+        console.log("role is " + ph);
+        if (versionFunction.roleName) {
+            return versionFunction.roleName[ph];
+        }
 
     }
 });
 
 app.controller("gameDetailController", function ($scope) {
     $scope.detail = {
-        creater:""
+        creater:"",
+        phase:"",
+        role:""
+
     };
+    $scope.text = "xxxx";
 
 });
 var angularUtil = {
@@ -34,8 +81,23 @@ var angularUtil = {
         var s = angular.element($("#" + id)).scope();
         $.each(models, function (key, value) {
             console.log(key, value);
-            s[key] = value;
+            $.extend(s[key], value);
         });
+        s.$apply();
+    },
+
+    updateModel:function (id, key, value) {
+        console.log(id + "===" + key + "=======" + value);
+        var s = angular.element($("#" + id)).scope();
+        var as = key.split(".");
+        var m = value;
+        for (var i = as.length - 1; i > 0; i--) {
+            var temp = {};
+            temp[as[i]] = m;
+            m = temp;
+        }
+        console.log(JSON.stringify(s[as[0]]) + " will replace " + JSON.stringify(m));
+        $.extend(s[as[0]], m);
         s.$apply();
     }
 }

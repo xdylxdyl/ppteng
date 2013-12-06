@@ -75,7 +75,7 @@
 		</c:when>
 
 		<c:when test="${'forget'==type}">
-			<form:form modelAttribute="user" action="/player/regedit "
+			<form:form modelAttribute="user" action="/player/regedit"
 				method="post">
 
 
@@ -122,7 +122,7 @@
 
 
 	<c:when test="${'email'==type}">
-		<form action="/player/forget " method="post">
+		<form action="/player/forget" method="post">
 
 
 			<h1>找回密码</h1>
@@ -148,7 +148,7 @@
 
 
 	<c:otherwise>
-		<form:form modelAttribute="user" action="/player/regedit "
+		<form:form modelAttribute="user" action="/player/regedit"
 			method="post">
 
 
@@ -157,26 +157,26 @@
 				<input name="id" value="${user.id}" id="id" type="hidden" readonly />
 			</spring:bind>
 
-			<h1>Create Your Account</h1>
-			
+			<h1>创建帐户</h1>
+
 
 			<div class="signin-action">
-				<p>一分钟注册:</p>
+
 				<label for="name">name</label>
 				<spring:bind path="user.name">
-					<input type="text" id="name" name="name" placeholder="Name"
-						class="sign" value="${user.name}">
+					<input type="text" id="name" name="name"
+						placeholder="昵称,可任意填写并随时更改" class="sign" value="${user.name}">
 				</spring:bind>
 				<label for="email">email</label>
 				<spring:bind path="user.email">
-					<input type="text" id="email" name="email" placeholder="Email"
-						class="sign" value="${user.email}">
+					<input type="text" id="email" name="email"
+						placeholder="邮箱,非常重要,用于登录及找回密码" class="sign" value="${user.email}">
 				</spring:bind>
 
 				<label for="password">password</label>
 				<spring:bind path="user.password">
 					<input type="password" id="password" name="password"
-						placeholder="Password" class="sign" value="${user.password}">
+						placeholder="密码" class="sign" value="${user.password}">
 				</spring:bind>
 			</div>
 			<div class="signin-action">
@@ -186,13 +186,13 @@
 			<div id="escape"></div>
 
 
-			<a href="/" class="return">返回登录</a>
-	</div>
-	<div class="regedit_hint">
-		<label class="hint" id="reg_hint"><spring:message
-				code="${code}" /></label>
-	</div>
-	</form:form>
+		
+
+			<div class="regedit_hint">
+				<label class="hint" id="reg_hint"><spring:message
+						code="${code}" /></label>
+			</div>
+		</form:form>
 
 	</c:otherwise>
 	</c:choose>
