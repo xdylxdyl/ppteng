@@ -282,7 +282,7 @@ li label.checkbox, li .help-inline {
 }
 
 .lined-paper {
-    background-image: linear-gradient(90deg, transparent 7em, #abced4 79px, #abced4 2em, transparent 81px), linear-gradient(#eee .1em, transparent .1em);
+    background-image: linear-gradient(90deg, transparent 79px, transparent 81px), linear-gradient(#eee .1em, transparent .1em);
     background-size: 1500% 1.4em;
 }
 
