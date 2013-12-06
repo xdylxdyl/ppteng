@@ -104,7 +104,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 
 		_connection = connection;
 		
-		_connection.setMaxIdleTime(30*60*1000);
+		_connection.setMaxIdleTime(24*60*60*1000);
 		log.info("set max idle Time "+_connection.getMaxIdleTime());
 		
 		try {
