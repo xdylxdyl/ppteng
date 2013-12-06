@@ -65,7 +65,7 @@ public class One23Test {
 	@After
 	public void destory() {
 		context.close();
-		log.info(" how to destory ");
+		log.info(" how to destory   s");
 
 	}
 
