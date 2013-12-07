@@ -10,7 +10,7 @@
 	<definition name="ptt" template="/WEB-INF/pages/tiles/all/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/pages/room/tiles/head.jsp" />	
 		<put-attribute name="footer"
-			value="/WEB-INF/pages/room/tiles//foot.jsp" />
+			value="/WEB-INF/pages/room/tiles/foot.jsp" />
 
 	</definition>
 

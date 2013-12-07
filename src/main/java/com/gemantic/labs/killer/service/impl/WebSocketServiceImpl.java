@@ -40,7 +40,10 @@ public class WebSocketServiceImpl implements WebSocketService
 	public WebSocket createWebSocket(Long uid) {
 		log.info("websocket is "+webSockets);
 		if (webSockets.containsKey(uid)) {
-
+			//should disconnect old tailorSocket.
+			TailorSocket socket =webSockets.get(uid);
+			socket.closeConnect();
+			
 		} else {
 			log.info(uid + " will be create new socket");
 			TailorSocket socket = new TailorSocket(uid,messageService);

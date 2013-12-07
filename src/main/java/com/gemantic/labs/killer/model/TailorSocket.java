@@ -34,7 +34,7 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 		this.uid = uid;
 
 		this.messageService = messageService;
-		log.info("create new socket " + uid);
+		log.info("create new socket " + uid);		
 
 	}
 
@@ -94,6 +94,9 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 			e.printStackTrace();
 		}
 	}
+	public void closeConnect(){
+		this._connection.close();
+	};
 
 	public boolean isOpen() {
 		return _connection.isOpen();
@@ -101,8 +104,11 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 
 	@Override
 	public void onOpen(Connection connection) {
+	
 
-		_connection = connection;
+		_connection = connection;		
+		
+		
 		
 		_connection.setMaxIdleTime(24*60*60*1000);
 		log.info("set max idle Time "+_connection.getMaxIdleTime());

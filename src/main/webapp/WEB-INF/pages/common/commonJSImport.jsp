@@ -17,6 +17,7 @@
 <script type="text/javascript"
 	src="/r/j-src/framework/audio/audio.min.js"></script>
 <script src="/r/j-src/framework/angular/angular.min.js"></script>
+<script src="/r/j-src/framework/bootstrap/box/bootbox.min.js"></script>
 <script
 	src="<%=request.getContextPath() %>/r/j-src/util/2.0/common_util.js?v=${frontVersion}"></script>
 	<script

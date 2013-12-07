@@ -463,6 +463,11 @@ var webSocketUtil = {
         console.log("connection close .reopen it ");
         $("#netSpeedHint").empty().html("断线了...点击此处<a href=''  id='reconnect'>重连</a>");
 
+        bootbox.alert("神马情况,断线了,找不到服务器~点击确定,重新找找", function () {
+            webSocketUtil.retry();
+        });
+
+
     },
     _onerror:function (m) {
 
