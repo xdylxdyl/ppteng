@@ -38,9 +38,9 @@ $(document).ready(function () {
 
     }
 
-  var x=  "arg1:{native_object},arg2:{name_3002},arg3:{4}";
+
 var message={};
-    console.log(x+" : "+ x.template(message));
+
 
     controlHeight();
     $(window).resize(controlHeight);
