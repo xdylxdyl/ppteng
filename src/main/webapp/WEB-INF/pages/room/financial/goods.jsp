@@ -17,7 +17,7 @@
 				<h2>
 					<a
 						href="http://iyanwo.taobao.com/shop/view_shop.htm?user_number_id=51210886"
-						target="_blank">艾燕窝</a>
+						target="_blank">1.艾燕窝</a>
 				</h2>
 				<blockquote>葡萄藤官方合作伙伴</blockquote>
 				<p></p>
@@ -62,7 +62,39 @@
 			</div>
 
 		</div>
+		<hr>
+	
+		<div class="row-fluid">
+			<div class="span12">
+				<h2>
+					<a href="http://shop57698199.taobao.com/?v=1" target="_blank">2.爱尚宝贝屋</a>
+				</h2>
+				<blockquote>葡萄藤官方合作伙伴</blockquote>
+				<p></p>
+				<p class="">不敢说价格最低，但质量一定对得起大家！甚至敢拉亲朋好友、左邻右舍来照顾生意，而不怕出门被拍砖！</p>
+				<p></p>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="span6">
+				<h4 class="text-error">五元兑换券</h4>
+				<div class="row-fluid">
+					<div class="span6">
+						<img alt="140x140"
+							src="http://img02.taobaocdn.com/imgextra/i2/T1urO.XgJbXXasRPv2-670012614.jpg" />
+					</div>
+					<div class="span6">
+						<p class="text-success">50000葡萄币</p>
+					</div>
+				</div>
+				<p></p>
+				<p></p>
 
+				<button class="btn btn-primary" type="button" disabled="disabled">兑换(敬待开放)</button>
+			</div>
+
+		</div>
 
 
 	</div>
