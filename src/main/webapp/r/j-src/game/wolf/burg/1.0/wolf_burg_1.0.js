@@ -28,7 +28,7 @@ var burgModel = {
         "assign":{
             updateAngularModel:[
                 {id:"navbar-inner",
-                    key:"detail.phase",
+                    key:"detail.role",
                     value:"",
                     template:"{native_subject}"
                 }
