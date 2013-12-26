@@ -4,6 +4,8 @@
     <title></title>
 
     <link href="../j-src/framework/bootstrap/3.0.2/bootstrap.min.css" rel="stylesheet">
+    <link href="../j-src/framework/bootstrap/bootstrap-multiselect.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -12,7 +14,53 @@
 
 
     <button type="button" class="btn btn-default" id="hello">点我</button>
-    <button type="button" class="btn btn-default" id="hello2">点我</button>
+    <button type="button" class="btn btn-default" id="hello2">dialog</button>
+    <button type="button" class="btn btn-default" id="hello3">prompt</button>
+    <button type="button" class="btn btn-default" id="hello4">confirm</button>
+
+
+</div>
+
+<div>
+    <!-- Button trigger modal -->
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">以下名单中选出三个人,做为今天晚上炸狼堡的人选</h4>
+                </div>
+                <div class="modal-body">
+
+                    <!--     <select class="multiselect dropup" multiple="multiple" id="multiObject">
+                             <option value="cheese">Cheese</option>
+                             <option value="tomatoes">Tomatoes</option>
+                             <option value="mozarella">Mozzarella</option>
+                             <option value="mushrooms">Mushrooms</option>
+                             <option value="pepperoni">Pepperoni</option>
+                             <option value="onions">Onions</option>
+                         </select>-->
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+</div>
+<!-- /.modal
+
 </div>
 <!-- set up the modal to start hidden and fade in and out -->
 <!--<div id="myModal" class="modal fade">
@@ -35,20 +83,145 @@
         src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript"
         src="../j-src/framework/bootstrap/3.0.2/bootstrap.min.js"></script>
+<script type="text/javascript" src="../j-src/framework/bootstrap/bootstrap-multiselect.js"></script>
 <script src="../j-src/framework/bootstrap/box/bootbox.min.js"></script>
 <!-- sometime later, probably inside your on load event callback -->
 <script>
-    $("#hello").on("click", function () {
-        bootbox.alert("神马情况,断线了,你抛弃服务器了么~点击确定重新连接",function(){
-            alert("thanks");
+    var h = '<select class="multiselect dropup" multiple="multiple" id="multiObject"></select>';
+
+    function initMultiSelect() {
+        alert($("#multiObject").html());
+        var object = [
+            {label:"222", value:"xd"},
+            {label:"333", value:"qt"}
+        ];
+
+        $("#multiObject").multiselect('dataprovider', object);
+
+    }
+
+    function initMultiSelectItem(objects) {
+        var objectStr = "";
+        $.each(objects, function (index, value) {
+            var o = value;
+            objectStr = objectStr + "<option value='" + o.id + "'>" + o.name + "</option>"
+
+        })
+        return objectStr;
+
+    }
+
+    function init() {
+        $('.multiselect').multiselect({
+            buttonClass:'btn',
+            buttonWidth:'auto',
+            buttonContainer:'<div class="btn-group" />',
+            maxHeight:false,
+            dropupAuto:false,
+            buttonText:function (options) {
+
+                var result = [];
+                options.each(function () {
+                    result.push($(this).attr("value"));
+                });
+                console.log(result);
+
+                if (options.length == 0) {
+                    return '对象 <b class="caret"></b>';
+                }
+                else if (options.length > 3) {
+                    return options.length + ' selected  <b class="caret"></b>';
+                }
+                else {
+                    var selected = '';
+                    options.each(function () {
+                        selected += $(this).text() + ', ';
+                    });
+                    return selected.substr(0, selected.length - 2) + ' <b class="caret"></b>';
+                }
+            }
         });
+
+
+    }
+
+
+    // init();
+
+    $("#hello").on("click", function () {
+        var content = "神马情况,断线了,你抛弃服务器了么~点击确定重新连接";
+        var x="xx".split(",");
+        console.log(" x "+x);
+
+        var y=[];
+        y="yy".split(",");
+        console.log(" y "+y+" length "+ y.length);
+
+        var z=[];
+        z.push("zz".split(","))
+
+        console.log(" z "+z);
+        bootbox.alert(content, function () {
+
+        });
+
 
     });
 
+    $("#hello3").on("click", function () {
+        var content = "神马情况,断线了,你抛弃服务器了么~点击确定重新连接";
+
+        bootbox.prompt(content, function (xx) {
+            alert(xx);
+        })
+
+    });
+    $("#hello4").on("click", function () {
+        var content = "神马情况,断线了,你抛弃服务器了么~点击确定重新连接";
+
+        bootbox.confirm(content, function (xx) {
+            alert(xx);
+        })
+
+    });
     $("#hello2").on("click", function () {
-        bootbox.alert("Hello world!", function () {
-            Example.show("Hello world callback");
+        var id = 0;
+
+        var bootboxModal = bootbox.dialog({
+            message:h,
+            title:"<small>选人了选人了</small>",
+            buttons:{
+                success:{
+                    label:"confirm",
+                    className:"btn-success",
+                    callback:function () {
+                        var result = [];
+                        options.each(function () {
+                            result.push($(this).attr("value"));
+                        });
+                    }
+                },
+                danger:{
+                    label:"cancel",
+                    className:"btn-danger",
+                    callback:function () {
+                        alert("id is " + id);
+                        id = 3;
+
+                    }
+                }
+            },
+            show:false
+
+
         });
+
+
+        bootboxModal.on("shown.bs.modal", function () {
+            initMultiSelect()
+        });
+
+        bootboxModal.modal("show");
 
 
     });

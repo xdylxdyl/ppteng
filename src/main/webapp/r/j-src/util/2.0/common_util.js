@@ -19,7 +19,7 @@
 String.prototype.template = function () {
     var msg = arguments[0];
 
-    return this.replace(/\{(native|name|hint)_([^\}]*)\}/g, function (m, pre, parameter) {
+    var r = this.replace(/\{(native|array|name|hint|model)_([^\}]*)\}/g, function (m, pre, parameter) {
         var result;
         switch (pre) {
             case "native":
@@ -28,13 +28,18 @@ String.prototype.template = function () {
             case "name":
                 result = playerService.getNamesByIds(msg[parameter], ",");
                 break;
+            case "model":
+                result = versionFunction.model[parameter];
+                break;
             case "hint":
-
                 result = versionFunction.templateConfig[msg.predict].hint[msg[parameter]];
                 break;
         }
         return result;
     });
+
+
+    return r;
 }
 
 
@@ -66,6 +71,20 @@ app.filter('roleConvert', function () {
     }
 });
 
+
+app.filter('rightConvert', function () {
+    return function (ph) {
+        console.log("right is " + ph);
+        if (versionFunction.rightContent) {
+            var result = versionFunction.rightContent[ph];
+            console.log(ph + " right convert " + result);
+            return result;
+        }
+
+    }
+});
+
+
 app.controller("gameDetailController", function ($scope) {
     $scope.detail = {
         creater:"",
@@ -76,20 +95,67 @@ app.controller("gameDetailController", function ($scope) {
     $scope.text = "xxxx";
 
 });
+
+app.controller("footController", function ($scope) {
+    $scope.rights = [];
+
+    $scope.processRight = function (right) {
+
+        var ms = versionFunction.templateConfig.right.updateAngularModel;
+        $.each(ms, function (i, val) {
+            var m = ms[i];
+            boxUtil.showBox(m.box[right]);
+
+        });
+
+
+    };
+
+});
+
+
 var angularUtil = {
     updateModels:function (id, models) {
         var s = angular.element($("#" + id)).scope();
+        if (s == null || s == undefined) {
+            console.log(id + " scope not exist");
+            return;
+        }
         $.each(models, function (key, value) {
             console.log(key, value);
             $.extend(s[key], value);
         });
         s.$apply();
     },
+    clearModels:function (id, key) {
+        console.log(id + "===" + key + "=======");
+        var s = angular.element($("#" + id)).scope();
+        if (s == null || s == undefined) {
+            console.log(id + " scope not exist");
+            return;
+        }
+        var as = key.split(".");
+        console.log(key + " get key split array lengt " + as.length)
+        var m = null;
+        for (var i = as.length; i > 0; i--) {
+            var temp = {};
+            temp[as[i]] = m;
+            m = temp;
+        }
+        console.log(JSON.stringify(s[as[0]]) + " will replace " + JSON.stringify(m));
+        $.extend(true, s, m);
+        s.$apply();
+    },
 
     updateModel:function (id, key, value) {
         console.log(id + "===" + key + "=======" + value);
         var s = angular.element($("#" + id)).scope();
+        if (s == null || s == undefined) {
+            console.log(id + " scope not exist");
+            return;
+        }
         var as = key.split(".");
+        console.log(key + " get key split array lengt " + as.length)
         var m = value;
         for (var i = as.length - 1; i > 0; i--) {
             var temp = {};
@@ -102,6 +168,133 @@ var angularUtil = {
     }
 }
 
+function initMultiSelect(objects) {
+
+    $("#boxMultiObject").multiselect('dataprovider', objects);
+
+}
+var boxUtil = {
+    showBox:function (config) {
+
+        var type = config.type;
+        console.log(type + "  config is " + JSON.stringify(config));
+        switch (type) {
+            case "dialog":
+                var title = config.title.template();
+                var message = config.content.template();
+
+
+                var sourceType = config.sourceType;
+
+
+                switch (sourceType) {
+                    case "multiSelect":
+                        var h = '<select class="multiselect dropup" multiple="multiple" id="boxMultiObject"></select>';
+                        message = message + h;
+
+
+                        break;
+                    case "select":
+
+
+                        break;
+                    case "none":
+                        break;
+                    default:
+                        break;
+
+                }
+
+                var source = config.source;
+
+
+                console.log("titles is " + title);
+                console.log("message is " + message);
+                var successCallback = function () {
+                    alert("confirm?");
+                    angularUtil.clearModels("footController", "rights");
+
+                };
+
+                var bootboxModal = bootbox.dialog({
+                    message:message,
+                    title:title,
+                    buttons:{
+                        success:{
+                            label:"确定",
+                            className:"btn-success",
+                            callback:successCallback
+                        },
+                        danger:{
+                            label:"取消",
+                            className:"btn-danger"
+
+                        }
+                    },
+                    show:false
+
+                });
+
+                bootboxModal.on("shown.bs.modal", function () {
+
+                    switch (sourceType) {
+                        case "multiSelect":
+                            var objects = [
+                                {
+                                    label:"xd",
+                                    value:"1"
+                                },
+                                {
+                                    label:"qt",
+                                    value:"2"
+                                },
+                                {
+                                    label:"aa",
+                                    value:"3"
+                                },
+                                {
+                                    label:"lover",
+                                    value:"4"
+                                },
+                                {
+                                    label:"hell",
+                                    value:"5"
+                                }
+                            ];
+                            initMultiSelect(objects);
+                            break;
+                        case "select":
+                            break;
+                        case "none":
+                            break;
+                        default:
+                            break;
+
+                    }
+
+                });
+
+                bootboxModal.modal("show");
+
+                break;
+            case "confirm":
+
+                var content = "神马情况,断线了,你抛弃服务器了么~点击确定重新连接";
+
+                bootbox.confirm(content, function (xx) {
+                    alert(xx);
+                })
+
+                break;
+            case "alert":
+                break;
+
+        }
+
+
+    }
+
+}
 
 function ajaxJson(url, type, param, parse, timeout, dataType, async) {
     lastMessageSendAt = jQuery.now();
@@ -553,4 +746,20 @@ $(function () {
     });
 });
 
+/*var bclass=["dog","christmas","outside"];
+var bindex=0;
+switch_background = function () {
+    $.each(bclass, function (i, val) {
+          var m = bclass[i];
+        $(".christmas_background").removeClass(m)
+      });
+    bindex++;
+    var index=bindex%bclass.length;
+    console.log("index"+index+" class is "+bclass[index]);
+
+    $(".christmas_background").addClass(bclass[index]);
+
+    st = setTimeout(switch_background, 5000);
+}
+var st = setTimeout(switch_background, 5000);*/
 

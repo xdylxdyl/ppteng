@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -27,7 +27,6 @@ import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.model.Record;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.service.MessageService;
-import com.gemantic.killer.service.RecordService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.util.BombUtil;
 import com.gemantic.killer.util.MessageUtil;
@@ -268,6 +267,13 @@ public class BombTest {
 	@Test
 	public void testNull(){
 		
+		
+		Set<String> s=new HashSet();
+		s.add("1");
+		s.add("2");
+		String[] a2=(String[]) s.toArray();
+		log.info(s.toString());
+		log.info(a2.toString());
 	}
 
 }

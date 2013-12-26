@@ -423,6 +423,11 @@ var playerListView = {
         $("#" + nameId).removeClass().addClass(clasz);
 
     },
+    setIconClass:function (id, clasz) {
+        var nameId = id + "_icon";
+        $("#" + nameId).removeClass().addClass(clasz);
+
+    },
     clearPlayerNameClass:function () {
         for (var key in id_name) {
             this.setClass(key, "");
@@ -518,31 +523,31 @@ var rightView = {
 
 
 var gameAreaView = {
-/*    showMessageContent:function (message, type) {
-        var content = "";
-        switch (type) {
-            case "system":
-                content = viewUtil.message2SystemContent(message);
-                break;
-            case "user":
-                content = viewUtil.message2UserContent(message);
+    /*    showMessageContent:function (message, type) {
+     var content = "";
+     switch (type) {
+     case "system":
+     content = viewUtil.message2SystemContent(message);
+     break;
+     case "user":
+     content = viewUtil.message2UserContent(message);
 
-                break;
-            default :
-                content = viewUtil.message2UserContent(message);
-                break;
-        }
+     break;
+     default :
+     content = viewUtil.message2UserContent(message);
+     break;
+     }
 
-        var contentID =selects.$gameArea;
-        if(versionFunction["contentID"]){
-            var contentID = versionFunction["contentID"](message.predict);
-        }else{
+     var contentID =selects.$gameArea;
+     if(versionFunction["contentID"]){
+     var contentID = versionFunction["contentID"](message.predict);
+     }else{
 
-        }
+     }
 
-        gameAreaView.showContent(contentID, content);
+     gameAreaView.showContent(contentID, content);
 
-    },*/
+     },*/
 
     updateRubbishText:function () {
 
@@ -554,6 +559,7 @@ var gameAreaView = {
         $("#" + selects.$gameArea).empty().append("<p style='color:#F00'id='rubbish' count='" + count + "'>" +
             "【系统消息】您曾在上一个房间里挂过尸,目前正在为您处理第[" + count + "]条过期消息,请耐心等待,上个房间挂尸期间较长,处理过期消息时间就越长" +
             "</p>");
+
 
     },
     completeRubbishText:function () {
@@ -808,10 +814,10 @@ var controlView = {
         return "";
     },
     isMute:function () {
-        var right=  $("#sayButton").prop("disabled");
-        if(right&&'say'==controlView.getCommandValue()){
+        var right = $("#sayButton").prop("disabled");
+        if (right && 'say' == controlView.getCommandValue()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     },

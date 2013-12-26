@@ -609,12 +609,12 @@ var gameView = {
     },
     showDieArea:function () {
         $("#" + selects.$secondArea).show();
-        $("#" + selects.$secondArea).removeClass().addClass("span3");
-        $("#" + selects.$mainArea).removeClass().addClass("span9");
+        $("#" + selects.$secondArea).removeClass("hide").addClass("col-md-3");
+        $("#" + selects.$mainArea).removeClass("col-md-10").addClass("col-md-7");
     },
     hideDieArea:function () {
         $("#" + selects.$secondArea).hide();
-        $("#" + selects.$mainArea).removeClass().addClass("span12");
+        $("#" + selects.$mainArea).removeClass("col-md-7").addClass("col-md-10");
     },
     showSecondArea:function (p) {
         if (playerStatus.die == p.status || playerStatus.unready == p.status || playerStatus.king == p.status) {

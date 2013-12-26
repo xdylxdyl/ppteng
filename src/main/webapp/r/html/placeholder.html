@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<style>
+    form#csi_call {
+        width: 622px;
+    }
+
+    form#csi_call input {
+        width: auto;
+    }
+
+    form#csi_call select {
+        width: auto;
+    }
+
+    form#csi_call textarea.fullwidth {
+        width: 610px;
+        max-width: 911px;
+        max-height: 305px;
+        margin-left: 0px;
+    }
+
+    form#csi_call li.fullwidth {
+        width: 622px;
+    }
+
+    form#csi_call input#submit {
+        margin-right: 0px;
+    }
+
+</style>
+
+<body>
+
+<div class="title"><h2>CSI Call</h2></div>
+<!-- /div.title -->
+<form id="csi_call">
+    <ul>
+        <li><h3>Call CSI</h3></li>
+        <li>Good morning this is <input type="text" value="Clint">, I am the <input type="text" value="CSR"> from SOME
+            COMPANY. Am I speaking with <input type="text" value="Mr Customer">?
+        </li>
+        <li>How are you today?</li>
+
+        <li>Is now a convenient time to speak?</li>
+        <li>Great, Can I please confirm your details are correct? (Note: update details on Source Details tab.)</li>
+        <li class="fullwidth"><h3>How was your experience at the dealership ........?</h3></li>
+        <li><textarea name="feedback" placeholder="Be Aware that this information will be sent to dealers in reporting."
+                      class="textarea-h fullwidth"></textarea></li>
+        <li class="fullwidth"><h3 class="fleft">Would you recommend the brand to Friends/Family? Why?</h3>
+
+            <h3 class="fright">Rating: <select name="rating">
+                <option>N/A</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select></h3>
+            <div class="clear"></div>
+        </li>
+        <li><textarea name="feedback" placeholder="Be Aware that this information will be sent to dealers in reporting."
+                      class="textarea-h fullwidth"></textarea></li>
+        <li class="fullwidth"><h3 class="fleft">Would you recommend the dealership to Friends/Family? Why?</h3>
+
+            <h3 class="fright">Rating: <select name="rating">
+                <option>N/A</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select></h3>
+            <div class="clear"></div>
+        </li>
+        <li><textarea name="feedback" placeholder="Be Aware that this information will be sent to dealers in reporting."
+                      class="textarea-h fullwidth"></textarea></li>
+        <li>I would like to take this opportunity to talk to you about a great online service we offer called My
+            NETWORK. My NETWORK. has some great member benefits like an online service history record, New Zealand music
+            you can download and reminders for servicing
+        </li>
+        <li>Do you have access to the internet?</li>
+        <li>Thank you very much for your time today.</li>
+        <li>If you do have any other questions feel free to call us on 0800 15151515151.</li>
+        <li>Goodbye</li>
+        <li class="fullwidth"><input type="submit" id="submit" value="Submit"></li>
+    </ul>
+    <div class="clear"></div>
+    <!-- /div.clear -->
+</form>
+
+<script>
+/*-- PLUGIN --*/
+/*
+ *
+ * Placeholder.js 1.1
+ * Creates placeholder on inputs/textareas for browsers that don't support it (well, IE...)
+ *
+ * @ Created by Guillaume Gaubert
+ * @ http://widgetulous.com/placeholderjs/
+ * @ © 2011 Guillaume Gaubert
+ *
+ * @ Default use :
+ *   Placeholder.init();
+ *
+ */
+
+
+Placeholder = {
+
+    // The normal and placeholder colors
+    defaultSettings:{
+        normal:'#000000',
+        placeholder:'#C0C0C0',
+        wait:false,
+        classFocus:'',
+        classBlur:''
+    },
+
+
+    init:function (settings) {
+        // Merge default settings with the ones provided
+        if (settings) {
+            // Merge the desired settings
+            for (var property in settings) {
+                Placeholder.defaultSettings[property] = settings[property];
+            }
+        }
+
+        // Let's make the funky part...
+        // Get inputs and textareas
+        var inputs = document.getElementsByTagName("input");
+        var textareas = document.getElementsByTagName("textarea");
+        // Merge all that
+        var elements = Placeholder.utils.concat(inputs, textareas);
+        // Bind events to all the elements
+        for (var i = 0; i < elements.length; i++) {
+            var placeholder = elements[i].getAttribute("placeholder");
+
+            if (placeholder && elements[i].type == "text" || elements[i].type == "password" || elements[i].type == "textarea") {
+                var _input = elements[i];
+
+                // Bind events
+                _input.onclick = function () {
+                    Placeholder.onSelected(this);
+                };
+
+                _input.onblur = function () {
+                    Placeholder.unSelected(this);
+                };
+                // Only if we want that wait feature
+                if (Placeholder.defaultSettings.wait) {
+                    _input.onkeyup = function () {
+                        Placeholder.onType(this);
+                    };
+                }
+
+                // Set style and value
+                Placeholder.style.inactive(_input);
+                _input.value = placeholder;
+                //_input.className = Placeholder.defaultSettings.class;
+
+                // Check for parent forms
+                var forms = document.getElementsByTagName('form');
+                for (var f = 0; f < forms.length; f++) {
+                    if (forms[f]) {
+                        // Check if the current input is a child of that form
+                        var children = forms[f].children;
+                        if (Placeholder.utils.contains(children, _input)) {
+                            // Bind the submit to clear all empty fields
+                            forms[f].onsubmit = function () {
+                                Placeholder.submitted(this);
+                            };
+                        }
+                    }
+                }
+
+            }
+        }
+        ;
+    },
+
+    // Called when an input/textarea is selected
+    onSelected:function (input) {
+        if (Placeholder.defaultSettings.wait == true) {
+            if (input.value == input.getAttribute('placeholder')) {
+                Placeholder.utils.caret(input);
+            }
+        }
+        else {
+            if (input.value == input.getAttribute('placeholder')) {
+                input.value = '';
+            }
+            Placeholder.style.normal(input);
+        }
+    },
+
+    // Called on onkeypressed of an input/textarea, used for the 'wait' setting
+    onType:function (input) {
+        var placeholder = input.getAttribute('placeholder');
+        if (input.value != placeholder) {
+            var diff = input.value.length - placeholder.length;
+            // Check if this is the first character typed
+            if (diff >= 1 && input.value.indexOf(placeholder) != -1) {
+                input.value = input.value.substring(0, diff);
+            }
+            Placeholder.style.normal(input);
+        }
+        // Check if the text field is empty, so back to the inactive state
+        if (input.value.length == 0) {
+            Placeholder.style.inactive(input);
+            input.value = placeholder;
+            Placeholder.utils.caret(input);
+        }
+    },
+
+    // Called when an input/textarea is unselected
+    // It applies the placeholder state if input value is empty
+    unSelected:function (input) {
+        // Reset a placeholder if the user didn't type text
+        if (input.value.length <= 0) {
+            Placeholder.style.inactive(input);
+            input.value = input.getAttribute("placeholder");
+        }
+    },
+
+    // Called when a form containing an input/textarea is submitted
+    // If one of these are empty (placeholder is left), we clear the value for each
+    submitted:function (form) {
+        var children = form.children;
+        for (var i = 0; i < children.length; i++) {
+            if (children[i]) {
+                var node = children[i];
+                if (node.tagName.toLowerCase() == "input" || node.tagName.toLowerCase() == "textarea") {
+                    if (node.value == node.getAttribute('placeholder')) {
+                        node.value = "";
+                    }
+                }
+            }
+        }
+    },
+
+
+    // Style
+    // Manage styles for normal and inactive
+
+    style:{
+        // Apply the normal style to the element
+        normal:function (input) {
+            // Check if class if set so we use that
+            if (Placeholder.defaultSettings.classFocus) {
+                input.className = Placeholder.defaultSettings.classFocus;
+            }
+            else {
+                // Use the text color
+                input.style.color = Placeholder.defaultSettings.normal;
+            }
+        },
+
+        // Apply the inactive style to the element
+        inactive:function (input) {
+            // Check if class if set so we use that
+            if (Placeholder.defaultSettings.classBlur) {
+                input.className = Placeholder.defaultSettings.classBlur;
+            }
+            else {
+                // Use the text color
+                input.style.color = Placeholder.defaultSettings.placeholder;
+            }
+        },
+    },
+
+    // Utils
+    // Private methods
+
+    utils:{
+        // Check if array contains el
+        contains:function (array, el) {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i]) {
+                    if (array[i] == el) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        },
+        // Merge two node lists
+        concat:function (node1, node2) {
+            var array = [];
+            for (var i = 0; i < node1.length; i++) {
+                if (node1[i]) {
+                    array.push(node1[i]);
+                }
+            }
+            for (var i = 0; i < node2.length; i++) {
+                if (node2[i]) {
+                    array.push(node2[i]);
+                }
+            }
+            return array;
+        },
+        // Set caret position to the beginning
+        caret:function (input) {
+            if (input.setSelectionRange) {
+                input.focus();
+                input.setSelectionRange(0, 0);
+            }
+            else if (input.createTextRange) {
+                var range = input.createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', 0);
+                range.moveStart('character', 0);
+                range.select();
+            }
+        }
+    }
+};
+
+
+/*-- FUNCTION --*/
+$(function () {
+    // Placeholder
+    Placeholder.init();
+});
+
+</script>
+
+
+</body>
+</html>

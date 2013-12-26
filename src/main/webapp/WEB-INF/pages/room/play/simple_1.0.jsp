@@ -53,7 +53,7 @@
                    
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active lined-paper" id="game_area">
+                    <div class="tab-pane active lined-paper snow" id="game_area">
 
                      </div>
                     
@@ -110,11 +110,7 @@
 </div>
 	
 	
-	
-	
-	
-	
-<tiles:insertDefinition name="commonJSImport" />
+
 
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/kill/accept.js?v=${frontVersion}"></script>

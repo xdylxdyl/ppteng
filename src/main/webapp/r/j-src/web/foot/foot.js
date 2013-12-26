@@ -15,7 +15,7 @@ $('#inputText').focus(function () {
         $("#selectExpression").click();
     })
 });
-/*宽度min-width: 600px时页面高度控制*/
+
 function controlHeight() {
     var winH;
     if ($(window).height() <= 300) {
@@ -23,24 +23,41 @@ function controlHeight() {
     } else {
         winH = $(window).height();
     }
-    var headH = $('.navbar').outerHeight();
-    var footH = $('.foot').outerHeight();
-    var mainH = winH - headH - footH - 20;
-    var contentH = mainH - $('ul.nav-tabs').outerHeight();
-    $('.sidebar-nav').css({
+
+    var headH = getHeigh($(".header"));
+    var footH = getHeigh($(".foot"))
+    var toolH = getHeigh($(".tool"))
+
+    var mainH = winH - footH - headH - toolH-20;
+    $('.autoheight_area').css({
         maxHeight:mainH,
         minHeight:mainH
     });
-    $('.tab-pane').css({
-        maxHeight:contentH,
-        minHeight:contentH
-    });
+    var navH=getHeigh($(".nav-tabs"));
+    var paneH=mainH-navH-60;
+
+    $(".tab-pane").css({
+        maxHeight:paneH,
+        minHeight:paneH
+    })
+
+
+
+    console.log("foot:" + footH + " main:" + mainH + " head:" + headH + " tool:" + toolH + " all:" + winH+" navh "+navH+" paneH "+paneH);
 
 }
-$(function () {
-    controlHeight();
-    $(window).resize(controlHeight);
-});
+
+function getHeigh(dom) {
+
+    var height = dom.outerHeight(true);
+    console.log(" get height size "+height);
+    var hide = dom.is(":hidden");//是否隐藏
+    if (hide) {
+        height = 0;
+    }
+    return height;
+}
+
 
 
 $("#expression").on("click", "li", function () {
@@ -82,44 +99,17 @@ $("#object").on("click", "li", function () {
 
 })
 
-$('.multiselect').multiselect({
-    buttonClass:'btn',
-    buttonWidth:'auto',
-    buttonContainer:'<div class="btn-group" />',
-    maxHeight:false,
-    buttonText:function (options) {
-        var text="";
-        if (options.length == 0) {
-            text= '对象 <b class="caret"></b>';
-        }
-        else if (options.length > 3) {
-            text= options.length + ' selected  <b class="caret"></b>';
-        }
-        else {
-            var selected = '';
-            options.each(function () {
-                selected += $(this).text() + ', ';
-            });
-            text= selected.substr(0, selected.length - 2) + ' <b class="caret"></b>';
-        }
-        var result = [];
-        options.each(function () {
-            result.push($(this).attr("value"));
-        });
-        controlView.multiObject=result;
-
-
-
-        return text;
-    }
-});
-
 
 function extracted(mid, did) {
-    var txt = $(this).text();
-    var val = $(this).attr('data-default');
+        var txt = $(this).text();
+        var val = $(this).attr('data-default');
 
-    $("#" + mid).find('span').text(txt);
-    $("#" + did).attr('data-default', val);
+        $("#" + mid).html(txt + "<span class='caret'></span>");
+        $("#" + did).attr('data-default', val);
 
-}
+    }
+
+$(window).resize(controlHeight);
+$(document).ready(function(){
+    controlHeight();
+})

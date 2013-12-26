@@ -1,6 +1,7 @@
 package com.gemantic.analyse.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,6 +99,17 @@ public class ZipTest {
 			
 		}
 		return 0;
+	}
+	
+	@Test
+	public void testArrays(){
+
+		List<String> s=new ArrayList();
+		s.add("1");
+		s.add("2");
+		
+		log.info(s.toString());
+		
 	}
 
 }

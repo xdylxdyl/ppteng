@@ -115,6 +115,11 @@
             });
             var objectStr = "<option value='xxxx'>xd</option>"
             $("#multiObject").append(objectStr);
+            var object = [
+                  {label:"222", value:"xd"},
+                  {label:"333", value:"qt"}
+              ];
+            $("#multiObject").multiselect('dataprovider', object);
             $("#multiObject").multiselect("rebuild");
 
         })
