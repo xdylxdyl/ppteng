@@ -267,13 +267,6 @@ public class BombTest {
 	@Test
 	public void testNull(){
 		
-		
-		Set<String> s=new HashSet();
-		s.add("1");
-		s.add("2");
-		String[] a2=(String[]) s.toArray();
-		log.info(s.toString());
-		log.info(a2.toString());
 	}
 
 }
