@@ -1777,7 +1777,7 @@ var playerListView = {
 
         $("#" + selects.$playerRole).removeClass().empty().html(hint);
         if (killGameAreaView.Role.killer == role || killGameAreaView.Role.police == role) {
-            $("#" + selects.$playerRole).addClass("text-error");
+            $("#" + selects.$playerRole).addClass("text-danger");
         }
 
 
@@ -1812,7 +1812,7 @@ var playerListView = {
 
         $("#" + selects.$playerRole).removeClass().empty().html(hint);
         if (killGameAreaView.Role.killer == role || killGameAreaView.Role.police == role) {
-            $("#" + selects.$playerRole).addClass("text-error");
+            $("#" + selects.$playerRole).addClass("text-danger");
         }
 
 
