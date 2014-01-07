@@ -795,7 +795,20 @@ var controlView = {
     hideRecordEmpty:[selects.$select_expression, selects.$select_color, selects.$select_command, selects.$select_object, selects.$sayButton, selects.$sayInput, selects.$sayLabel, selects.$multiObjectGroup],
     hideGameEmpty:[selects.$multiObjectGroup],
 
+    setObjectValue:function (type, value) {
+        switch (type) {
+            case "multiObject":
+                controlView.multiObject = value;
+                break;
+            case "object":
+                controlView.object = value;
+                break;
+            default :
+                break;
 
+        }
+
+    },
     getContent:function (message) {
         if (versionFunction["systemContent"]) {
             return versionFunction["systemContent"](message);

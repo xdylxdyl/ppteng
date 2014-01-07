@@ -43,14 +43,13 @@ function controlHeight() {
 
 
 
-    console.log("foot:" + footH + " main:" + mainH + " head:" + headH + " tool:" + toolH + " all:" + winH+" navh "+navH+" paneH "+paneH);
+    //console.log("foot:" + footH + " main:" + mainH + " head:" + headH + " tool:" + toolH + " all:" + winH+" navh "+navH+" paneH "+paneH);
 
 }
 
 function getHeigh(dom) {
 
     var height = dom.outerHeight(true);
-    console.log(" get height size "+height);
     var hide = dom.is(":hidden");//是否隐藏
     if (hide) {
         height = 0;

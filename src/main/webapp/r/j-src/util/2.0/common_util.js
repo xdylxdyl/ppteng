@@ -75,6 +75,7 @@ app.filter('roleConvert', function () {
 app.filter('rightConvert', function () {
     return function (ph) {
         console.log("right is " + ph);
+        ph = ph.trim();
         if (versionFunction.rightContent) {
             var result = versionFunction.rightContent[ph];
             console.log(ph + " right convert " + result);
@@ -100,6 +101,7 @@ app.controller("footController", function ($scope) {
     $scope.rights = [];
 
     $scope.processRight = function (right) {
+        right = right.trim();
 
         var ms = versionFunction.templateConfig.right.updateAngularModel;
         $.each(ms, function (i, val) {
@@ -137,17 +139,18 @@ var angularUtil = {
         var as = key.split(".");
         console.log(key + " get key split array lengt " + as.length)
         var m = null;
-        for (var i = as.length; i > 0; i--) {
+        for (var i = as.length - 1; i >= 0; i--) {
             var temp = {};
             temp[as[i]] = m;
             m = temp;
         }
-        console.log(JSON.stringify(s[as[0]]) + " will replace " + JSON.stringify(m));
+        console.log(JSON.stringify(s[as[0]]) + " will replace by " + JSON.stringify(m));
         $.extend(true, s, m);
+        console.log(JSON.stringify(s[as[0]]) + " after replace  " + JSON.stringify(m));
         s.$apply();
     },
 
-    updateModel:function (id, key, value) {
+    updateModel:function (id, key, value, type) {
         console.log(id + "===" + key + "=======" + value);
         var s = angular.element($("#" + id)).scope();
         if (s == null || s == undefined) {
@@ -163,7 +166,17 @@ var angularUtil = {
             m = temp;
         }
         console.log(JSON.stringify(s[as[0]]) + " will replace " + JSON.stringify(m));
-        $.extend(s[as[0]], m);
+        if ("append" == type) {
+
+        } else {
+            if (as.length > 1) {
+                $.extend(s[as[0]], m);
+            } else {
+                s[key] = value;
+            }
+
+        }
+
         s.$apply();
     }
 }
@@ -173,30 +186,89 @@ function initMultiSelect(objects) {
     $("#boxMultiObject").multiselect('dataprovider', objects);
 
 }
+
+function initRadio(objects) {
+    var h = "";
+    $.each(objects, function (key, value) {
+
+        var html = '<label class="btn btn-primary"> <input type="radio" name="' + key + '" id="' + key + '">' + value + '</label>';
+        h = h + html;
+    })
+    $("#boxObject").html(h);
+}
+
+
 var boxUtil = {
+    getObjectValue:function (type, value) {
+        var object = "";
+        switch (type) {
+            case "multiSelect":
+                object = boxUtil.getCheckdMultiObjectValue();
+                break;
+            case "confirm":
+                object = value;
+                break;
+
+            default:
+                object = boxUtil.getCheckdMultiObjectValue();
+                break;
+
+        }
+
+        return object;
+
+    },
+
+    getCheckdMultiObjectValue:function () {
+        var selected = [];
+        $('#boxMultiObject option:selected').each(function () {
+            selected.push([$(this).val()]);
+        });
+        return selected;
+    },
+
+    checkMultiCount:function (limit) {
+        var selected = boxUtil.getCheckdMultiObjectValue();
+        if (selected.length == limit) {
+            selected = selected;
+            return true;
+        } else {
+            alert("必须选择 " + limit + " 个");
+            return false;
+        }
+
+
+    },
+
     showBox:function (config) {
 
         var type = config.type;
         console.log(type + "  config is " + JSON.stringify(config));
+
+
+        var successLabel = "";
+        var cancelLabel = "";
+
         switch (type) {
             case "dialog":
                 var title = config.title.template();
                 var message = config.content.template();
-
-
+                console.log(title + " : " + message);
                 var sourceType = config.sourceType;
-
-
                 switch (sourceType) {
                     case "multiSelect":
-                        var h = '<select class="multiselect dropup" multiple="multiple" id="boxMultiObject"></select>';
+                        var h = '<div><select class="multiselect dropup" multiple="multiple" id="boxMultiObject"></select></div>';
                         message = message + h;
-
-
+                        successLabel = "确定";
+                        cancelLabel = "取消";
                         break;
                     case "select":
+                        break;
 
+                    case "confirm":
 
+                        successLabel = config.successCallback.label;
+                        cancelLabel = config.cancelCallback.label;
                         break;
                     case "none":
                         break;
@@ -210,24 +282,84 @@ var boxUtil = {
 
                 console.log("titles is " + title);
                 console.log("message is " + message);
+
                 var successCallback = function () {
-                    alert("confirm?");
-                    angularUtil.clearModels("footController", "rights");
+                    var result = true;
+
+                    if (config.successCallback.method != undefined && config.successCallback.method != "") {
+                        var param = config.successCallback.param.template();
+                        result = config.successCallback.method(param);
+
+                    }
+                    if (result) {
+                        //update target
+
+
+                        var value = config.successCallback.value;
+                        var object = boxUtil.getObjectValue(config.sourceType, value);
+
+                        controlView.setObjectValue(config.target, object);
+                        // send message
+                        console.log("i will send message ");
+                        var predict = config.predict;
+                        roomService.sendMessage(predict, sourceType);
+
+
+                    } else {
+                        return false;
+
+                    }
+
 
                 };
+
+                var cancelCallback = function () {
+
+                    if ("multiSelect" == sourceType) {
+                        return true;
+                    }
+                    var result = true;
+
+                    if (config.cancelCallback.method != undefined && config.cancelCallback.method != "") {
+                        var param = config.cancelCallback.param.template();
+                        result = config.cancelCallback.method(param);
+
+                    }
+
+                    if (result) {
+                        //update target
+                        var value = config.cancelCallback.value;
+                        var object = boxUtil.getObjectValue(config.sourceType, value);
+
+                        controlView.setObjectValue(config.target, object);
+
+                        // send message
+                        console.log("i will send message ");
+                        var predict = config.predict;
+                        roomService.sendMessage(predict, sourceType);
+
+
+                    } else {
+
+
+                    }
+
+                };
+
 
                 var bootboxModal = bootbox.dialog({
                     message:message,
                     title:title,
                     buttons:{
                         success:{
-                            label:"确定",
+                            label:successLabel,
                             className:"btn-success",
                             callback:successCallback
                         },
                         danger:{
-                            label:"取消",
-                            className:"btn-danger"
+                            label:cancelLabel,
+                            className:"btn-danger",
+                            callback:cancelCallback
 
                         }
                     },
@@ -239,32 +371,22 @@ var boxUtil = {
 
                     switch (sourceType) {
                         case "multiSelect":
-                            var objects = [
-                                {
-                                    label:"xd",
-                                    value:"1"
-                                },
-                                {
-                                    label:"qt",
-                                    value:"2"
-                                },
-                                {
-                                    label:"aa",
-                                    value:"3"
-                                },
-                                {
-                                    label:"lover",
-                                    value:"4"
-                                },
-                                {
-                                    label:"hell",
-                                    value:"5"
-                                }
-                            ];
+
+                            var objects = config.source.method(config.source.param);
+                            console.log("get objects " + objects);
                             initMultiSelect(objects);
                             break;
                         case "select":
                             break;
+                        case "radio":
+
+                            var objects = config.source.method(config.source.param);
+                            console.log("get objects " + objects);
+                            initRadio(objects);
+
+                            break;
+
+
                         case "none":
                             break;
                         default:
@@ -279,8 +401,8 @@ var boxUtil = {
                 break;
             case "confirm":
 
-                var content = "神马情况,断线了,你抛弃服务器了么~点击确定重新连接";
 
+                var content = config.content.template();
                 bootbox.confirm(content, function (xx) {
                     alert(xx);
                 })
@@ -456,6 +578,9 @@ function isJson(content) {
 
 function array2splitString(arrays, split) {
 
+    if (split == null || split == undefined) {
+        split = ",";
+    }
     var result = "";
     for (var i = 0; i < arrays.length; i++) {
         if (i == arrays.length - 1) {
@@ -475,7 +600,11 @@ function splitString2Array(string, split) {
         string == "";
     } else {
         var result = string.split(split)
-        return result;
+        var r = []
+        $.each(result, function (k, v) {
+            r.push(result[k].trim());
+        });
+        return r;
     }
 
 
@@ -747,19 +876,41 @@ $(function () {
 });
 
 /*var bclass=["dog","christmas","outside"];
-var bindex=0;
-switch_background = function () {
-    $.each(bclass, function (i, val) {
-          var m = bclass[i];
-        $(".christmas_background").removeClass(m)
-      });
-    bindex++;
-    var index=bindex%bclass.length;
-    console.log("index"+index+" class is "+bclass[index]);
+ var bindex=0;
+ switch_background = function () {
+ $.each(bclass, function (i, val) {
+ var m = bclass[i];
+ $(".christmas_background").removeClass(m)
+ });
+ bindex++;
+ var index=bindex%bclass.length;
+ console.log("index"+index+" class is "+bclass[index]);
 
-    $(".christmas_background").addClass(bclass[index]);
+ $(".christmas_background").addClass(bclass[index]);
 
-    st = setTimeout(switch_background, 5000);
+ st = setTimeout(switch_background, 5000);
+ }
+ var st = setTimeout(switch_background, 5000);*/
+
+
+var myStringUtils = {
+    filterAray:function (array, filter) {
+        var result = [];
+        var re = new RegExp(filter);
+
+        $.each(array, function (i, val) {
+            var a = array[i];
+            var b = re.test(a);
+            if (b) {
+                result.push(a);
+            } else {
+
+            }
+
+        })
+
+        return result;
+    }
+
 }
-var st = setTimeout(switch_background, 5000);*/
 

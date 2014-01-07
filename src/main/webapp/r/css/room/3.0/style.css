@@ -1,11 +1,21 @@
+.my-fluid-container {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 15px;
+}
+
 body {
     background: #f9f9f9;
     color: #333;
 }
-
-/*head*/
+.zero_margin{
+    margin: 0px;
+}
 .navbar {
     margin-bottom: 0;
+}
+.nav{
+    margin-bottom: 20px;
 }
 
 .navbar-inner {
@@ -66,11 +76,11 @@ body {
 
 /*right*/
 .content {
-    min-width: 400px;
     position: relative;
-    background: #fefefe;
-    margin-left: 200px;
-    border-left: 1px solid #cfcfd6;
+    min-width: 100px;
+    background: #FFFFFF;
+
+
 }
 
 .content .tab-pane {
@@ -102,13 +112,7 @@ body {
     background: transparent;
 }
 
-/*foot*/
-.foot {
-    background: #f9f9f9;
-    border-top: 1px solid #cfcfd6;
-    min-width: 600px;
 
-}
 
 .inner-space {
     padding: 20px 20px 0 20px;
@@ -247,7 +251,7 @@ li label.checkbox, li .help-inline {
 
 /*icon*/
 .icon-ready, .icon-unready, .icon-living, .icon-die, .icon-lastword, .icon-king {
-    background-image: url("../../img/user-status.png");
+    background-image: url("../../../img/user-status.png") ;
 }
 
 .icon-ready {
@@ -282,8 +286,46 @@ li label.checkbox, li .help-inline {
 }
 
 .lined-paper {
-    background-image: linear-gradient(#eee .1em, transparent .1em);
+   background-image: linear-gradient(#eee .1em, transparent .1em);
     background-size: 1500% 1.4em;
+
+
 }
 
+
+.christmas_background{
+     background-position: center;
+     background-repeat: no-repeat;
+}
+
+
+.dog{
+    background-image: url(http://bizhi.xue163.com/downpic/upload_xue163s/flashAll/s800/20120516/1337135460DD3e8x.jpg);
+}
+
+.snow{
+    background-image: url(http://bizhi.xue163.com/downpic/upload_xue163s/flashAll/s800/20120516/1337135466Vw2SAE.jpg);
+}
+.cat{
+    background-image: url(http://bizhi.xue163.com/downpic/upload_xue163s/flashAll/s800/20120516/1337135462AeJpdA.jpg);
+}
+
+.outside{
+    background-image: url(http://bizhi.xue163.com/downpic/upload_xue163s/flashAll/s800/20120516/1337135458x7T6G4.jpg);
+}
+.tree{
+    background-image: url( http://img7.ph.126.net/TjtbxW6Ml5FwlVtM75em4Q==/3220918158501389727.png);
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+  background-repeat: no-repeat;
+  margin-top: 1px;
+}
 

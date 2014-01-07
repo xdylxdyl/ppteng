@@ -237,7 +237,15 @@ public class RoomController {
 			return "/room/mplay/" + version;
 		} else {
 			model.addAttribute("switchFrom", "mobile");
-			return "/room/play/" + version;
+			if(version.contains("wolf")){
+				log.info(version+" is version 2");
+				return "/room/play2/" + version;
+			}else{
+				log.info(version+" is old version");
+				return "/room/play/" + version;
+			}
+			
+			
 		}
 
 	}

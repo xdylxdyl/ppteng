@@ -10,7 +10,8 @@
 	src="/r/j-src/framework/bootstrap/bootstrap-tab.js"></script>
 <script type="text/javascript"
 	src="/r/j-src/framework/bootstrap/bootstrap-modal.js"></script>
-<script type="text/javascript" src="/r/j-src/framework/bootstrap/bootstrap-multiselect.js"></script>
+<script type="text/javascript"
+	src="/r/j-src/framework/bootstrap/3.0.2/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="/r/j-src/framework/bootstrap/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="/r/j-src/framework/kibo/kibo.js"></script>

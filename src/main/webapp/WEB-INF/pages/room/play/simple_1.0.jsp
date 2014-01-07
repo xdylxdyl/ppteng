@@ -112,6 +112,7 @@
 	
 
 
+<tiles:insertDefinition name="commonJSImport" />
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/kill/accept.js?v=${frontVersion}"></script>
 <script

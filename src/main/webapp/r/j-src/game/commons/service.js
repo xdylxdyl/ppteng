@@ -333,6 +333,11 @@ var settingService = {
 }
 
 var roomService = {
+    getRadioHint:function(predict){
+
+        return  versionFunction.model.templateConfig[predict].hint;
+
+    },
     appendContent:function () {
         var content = $(this).text();
         controlView.appendSay(content);

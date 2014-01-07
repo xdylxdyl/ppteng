@@ -101,11 +101,60 @@ var burgModel = {
             "color":colorConfig.system
 
         },
-        "say":{    updateAngularModel:{id:"navbar-inner",
-            key:"detail.phase",
-            value:"",
-            template:"{native_subject}"
-        }
+        "say":{    updateAngularModel:[
+            {id:"navbar-inner",
+                key:"detail.phase",
+                value:"",
+                template:"{native_subject}"
+            }
+        ]
+
+        },
+        "right":{    updateAngularModel:[
+            {id:"footController",
+                key:"rights",
+                value:"",
+                template:"{native_object}",
+                update_type:"",
+                type:"array",
+                filter:"dispatch|dismissal|action",
+                box:{
+                    dispatch:{
+                        title:"选择小组人员名单",
+                        content:"村长请指定{model_memberCount}人,做为晚上炸狼堡的人员名单",
+                        "source":{method:playerService.getFilterMultiObject, param:"living"},
+                        "type":"dialog",
+                        "sourceType":"multiSelect",
+                        "target":"multiObject",
+                        "successCallback":{method:boxUtil.checkMultiCount, param:"{model_memberCount}"},
+                        "cancelCallback":"",
+                        "predict":"dispatch"
+                    },
+                    dismissal:{ title:"审核名单",
+                        content:"村民们请对村长给出的人员名单给出自己的意见",
+                        "source":{method:roomService.getRadioHint, param:"dismissal"},
+                        "type":"dialog",
+                        "sourceType":"confirm",
+                        "target":"object",
+                        "successCallback":{method:"", param:"", label:"通过", value:"agree"},
+                        "cancelCallback":{method:"", param:"", label:"拒绝", value:"disagree"},
+                        "predict":"dismissal"
+                    },
+                    action:{title:"炸狼堡",
+                        content:"是否要炸毁狼堡呢",
+                        "source":{method:roomService.getRadioHint, param:"action"},
+                        "type":"dialog",
+                        "sourceType":"confirm",
+                        "target":"object",
+                        "successCallback":{method:"", param:"", label:"炸毁", value:"bomb"},
+                        "cancelCallback":{method:"", param:"", label:"不炸", value:"umbomb"},
+                        "predict":"action"
+
+                    }
+
+                }
+            }
+        ]
 
         }
 
@@ -514,6 +563,12 @@ var burgView = {
 }
 
 var burgRightView = {
+    rightView:function (right) {
+        var message = {};
+        message.predict = "right";
+        message.object = right;
+        contentTemplate.updateAngularModel(message);
+    },
 
     commandRight:function (right) {
         rightView.showCommandRight(right, burgModel.rightContent[right]);
@@ -630,6 +685,7 @@ var gameView = {
 }
 
 var burgService = {
+
     parseDetail:function (data) {
         roomService.parsePerson(data.person);
         burgService.parseGame(data.game);
@@ -708,7 +764,7 @@ var burgService = {
         playerService.updatePlayer(p);
 
 
-        var message={subject:data.role, predict:"assign"};
+        var message = {subject:data.role, predict:"assign"};
         contentTemplate.updateAngularModel(message);
 
 
@@ -721,10 +777,8 @@ var burgService = {
         //ontentTemplate.updateAngularModel({object:data.status,predict:"time"});
 
 
-        var message={subject:data.status, predict:"time"};
+        var message = {subject:data.status, predict:"time"};
         contentTemplate.updateAngularModel(message);
-
-
 
 
         // globalView.setGameStatusHint(burgModel.phase[data.status]);
@@ -763,6 +817,11 @@ versionFunction = {
 
     "templateConfig":burgModel.templateConfig,
     //角色名字
-    "roleName":burgModel.roleName
+    "roleName":burgModel.roleName,
+    //process right
+    rightMessage:true,
+
+    model:burgModel
+
 }
 

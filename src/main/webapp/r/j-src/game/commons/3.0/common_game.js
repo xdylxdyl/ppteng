@@ -19,29 +19,6 @@
 
 
 
-String.prototype.template = function () {
-    var msg = arguments[0];
-
-    return this.replace(/\{(native|name|hint)_([^\}]*)\}/g, function (m, pre, parameter) {
-        var result;
-        console.log(m);
-        console.log(pre);
-        console.log(parameter);
-        switch (pre) {
-            case "native":
-                result = msg[parameter];
-                break;
-            case "name":
-                result = playerService.getNamesByIds(msg[parameter], ",");
-                break;
-            case "hint":
-
-                result = versionFunction.templateConfig[msg.predict].hint[msg[parameter]];
-                break;
-        }
-        return result;
-    });
-}
 
 var expression = {
 
@@ -134,8 +111,26 @@ var contentTemplate = {
         var str = contentTemplate.generateSystemContent(c, message);
         gameAreaView.showContent(c.contentID, str);
     },
+
+    filter:function (m, txt) {
+        var result = [];
+        if (m.filter) {
+            var filterStr = m["filter"];
+            $.each(txt, function (i, val) {
+                var content = $.trim(val);
+                if (filterStr.indexOf(content) > -1) {
+                    console.log(filterStr + " contains " + content);
+
+                } else {
+                    console.log(filterStr + " not contains " + content);
+                    result.push(content);
+                }
+            })
+        }
+        return result;
+    },
     updateAngularModel:function (message) {
-        console.log("will update angularjs " + message);
+        console.log("will update angularjs " + JSON.stringify(message));
         var ms = [];
         if (burgModel.templateConfig[message.predict]) {
             if (burgModel.templateConfig[message.predict].updateAngularModel) {
@@ -143,7 +138,18 @@ var contentTemplate = {
                 console.log(ms);
                 $.each(ms, function (i, val) {
                     var m = ms[i];
-                    angularUtil.updateModel(m.id, m.key, m["template"].template(message));
+                    //这个时候怎么控制数组呢.Template返回的只能是Object啊.
+
+                    if (m.type == "array") {
+                        console.log(JSON.stringify(message) + " is array ");
+                        var arrays = m["template"].template(message).split(",");
+                        var result = myStringUtils.filterAray(arrays, m.filter);
+                        angularUtil.updateModel(m.id, m.key, result, m.update_type);
+                    } else {
+                        console.log(JSON.stringify(message) + " is string ");
+                        angularUtil.updateModel(m.id, m.key, m["template"].template(message), m.update_type);
+                    }
+
                 });
 
             }
@@ -588,6 +594,35 @@ var recordService = {
 }
 
 var playerService = {
+    getFilterMultiObject:function (filter) {
+        var mo = [];
+        var filters = playerService.getAllByFilter(filter);
+
+        $.each(filters, function (k, v) {
+            var p = filters[k];
+            var o = {};
+            o.label = p.name;
+            o.value = p.id;
+
+            mo.push(o);
+        })
+
+        return mo;
+    },
+    getAllByFilter:function (filter) {
+        var result = [];
+        for (var key in id_name) {
+            var player = playerService.getPlayer(key);
+            if (filter == player.status) {
+                result.push(player);
+            }
+
+
+        }
+        return result;
+
+    },
+
     assign:function (message) {
         var p = playerService.getPlayer(message.object);
         p.role = message.subject;
@@ -600,7 +635,7 @@ var playerService = {
     clearCount:function (status) {
         if ("night" == status || "lastword" == status) {
             for (var key in id_name) {
-                var player = this.getPlayer(key);
+                var player = playerService.getPlayer(key);
                 player.count = 0;
 
 
@@ -613,7 +648,7 @@ var playerService = {
         var result = [];
 
         for (var key in group) {
-            var player = this.getPlayer(group[key]);
+            var player = playerService.getPlayer(group[key]);
             result.push(player.name);
         }
         return result;
@@ -623,7 +658,7 @@ var playerService = {
         var result = [];
 
         for (var key in id_name) {
-            var player = this.getPlayer(id_name[key]);
+            var player = playerService.getPlayer(id_name[key]);
             if (role == player.role) {
                 result.push(player.name);
             }
@@ -689,7 +724,7 @@ var playerService = {
     getAllPlayer:function () {
         var result = [];
         for (var key in id_name) {
-            var player = this.getPlayer(key);
+            var player = playerService.getPlayer(key);
             result.push(player);
 
         }
@@ -709,7 +744,7 @@ var playerService = {
         }
 
         for (var key in id_name) {
-            var player = this.getPlayer(key);
+            var player = playerService.getPlayer(key);
             var status = player.status;
             switch (status) {
                 case playerStatus.king :
@@ -747,9 +782,9 @@ var playerService = {
     setStartStatus:function () {
         //只有已准备的玩家才是活着的
         for (var key in id_name) {
-            var p = this.getPlayer(key);
+            var p = playerService.getPlayer(key);
             if (playerStatus.ready == p.status) {
-                this.setStatus(key, playerStatus.living);
+                playerService.setStatus(key, playerStatus.living);
             }
 
         }
@@ -758,7 +793,7 @@ var playerService = {
     statusCount:function (status, c) {
         var count = 0;
         for (var key in id_name) {
-            var player = this.getPlayer(key);
+            var player = playerService.getPlayer(key);
 
             if (status == player.status) {
                 count++;
@@ -865,6 +900,15 @@ var settingService = {
 }
 
 var roomService = {
+    sendMessage:function (predict, type) {
+        //success
+        var message = controlView.getMessage();
+        message.predict = predict;
+        var object = controlView.getObjectValue(type);
+        message.object = object;
+        cometService.sendMessage(message);
+
+    },
     appendContent:function () {
         var content = $(this).text();
         controlView.appendSay(content);
@@ -960,6 +1004,12 @@ var roomService = {
                 rightView.branch(right);
             }
         }
+        var message = {};
+        message.predict = "right";
+        message.object = array2splitString(data.right, ",");
+        console.log("right converts to string " + message)
+        contentTemplate.updateAngularModel(message);
+
 
     },
 
@@ -1190,6 +1240,9 @@ var roomParseService = {
             //以下这些内容都是和游戏版本相关的,但是也有公共的部分
             case "right" :
                 this.right(message);
+                if (versionFunction["rightMessage"]) {
+                    versionFunction["parseMessage"](message);
+                }
                 break;
             case "setting" :
                 this.setting(message);
@@ -1724,7 +1777,7 @@ var playerListView = {
 
         $("#" + selects.$playerRole).removeClass().empty().html(hint);
         if (killGameAreaView.Role.killer == role || killGameAreaView.Role.police == role) {
-            $("#" + selects.$playerRole).addClass("text-danger");
+            $("#" + selects.$playerRole).addClass("text-error");
         }
 
 
@@ -1759,7 +1812,7 @@ var playerListView = {
 
         $("#" + selects.$playerRole).removeClass().empty().html(hint);
         if (killGameAreaView.Role.killer == role || killGameAreaView.Role.police == role) {
-            $("#" + selects.$playerRole).addClass("text-danger");
+            $("#" + selects.$playerRole).addClass("text-error");
         }
 
 
@@ -1781,12 +1834,13 @@ var playerListView = {
     appendPlayerItem:function (player) {
         var voteID = player.id + "_vote";
         var nameID = player.id + "_name";
+        var icondID = player.id + "_icon";
         if (player.count == 0) {
 
-            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span id='" + nameID + "'>" + player.name + "</span><span class='vote' id='" + voteID + "'></span></a></li>";
+            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "' id='" + icondID + "'></i><span id='" + nameID + "'>" + player.name + "</span><span class='vote' id='" + voteID + "'></span></a></li>";
             $("#" + selects.$playerList).append(item);
         } else {
-            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "'></i><span id='" + nameID + "'>" + player.name + "<span class='vote' id='" + voteID + "'>+" + player.count + "</span></a></span></a></li>";
+            var item = "<li id='" + player.id + "'><a href='/player/detail?uid=" + player.id + "' target='_blank'><i class='icon-" + player.status + "' id='" + icondID + "'></i><span id='" + nameID + "'>" + player.name + "<span class='vote' id='" + voteID + "'>+" + player.count + "</span></a></span></a></li>";
             $("#" + selects.$playerList).append(item);
 
 
@@ -1892,6 +1946,10 @@ var rightView = {
         controlView.emptyCommand();
         controlView.resetObject();
         controlView.emptyObject();
+
+
+        console.log("clear rights");
+       angularUtil.clearModels("footController","rights");
 
 
     },
@@ -2178,6 +2236,24 @@ var controlView = {
     hideRecordEmpty:[selects.$select_expression, selects.$select_color, selects.$select_command, selects.$select_object, selects.$sayButton, selects.$sayInput, selects.$sayLabel, selects.$multiObjectGroup],
     hideGameEmpty:[selects.$multiObjectGroup],
 
+    setObjectValue:function (type, value) {
+         switch (type) {
+             case "multiObject":
+                 controlView.multiObject = value;
+                 break;
+             case "object":
+                 controlView.object = value;
+                 break;
+             default :
+                 break;
+
+         }
+
+     },
+
+    getObjectModel:function(){
+      return   controlView.object;
+    },
 
     getContent:function (message) {
         if (versionFunction["systemContent"]) {
@@ -2361,14 +2437,29 @@ var controlView = {
         var expression = $("#expression").attr("data-default");
         return  expression == "" || expression == undefined ? expression = 0 : expression;
     },
-    getObjectValue:function () {
-        if (controlView.objectType == "single") {
-            var object = $("#object").attr("data-default");
-            return  object == "" || object == undefined ? object = -500 : object;
-        } else {
+    getObjectValue:function (type) {
 
-            return controlView.getMultiObject();
+        if (type) {
+
+        } else {
+            type = controlView.objectType;
         }
+        var object = "";
+        switch (type) {
+            case "multiSelect":
+                object = controlView.getMultiObject();
+                break;
+            case "confirm":
+                object = controlView.getObjectModel();
+                break;
+            default:
+                object = $("#object").attr("data-default");
+                object == "" || object == undefined ? object = -500 : object;
+
+                break;
+        }
+        return object;
+
 
     },
     getCommandValue:function () {
@@ -2378,11 +2469,9 @@ var controlView = {
     },
     resetCommand:function () {
 
-        if ($("#switchFrom").val() == "pc") {
-            $("#" + selects.$select_command).html("指令<span class='caret'></span>");
-        } else {
-            $("#" + selects.$select_command).find('span').text("指令");
-        }
+
+        $("#" + selects.$select_command).html("指令<span class='caret'></span>");
+
 
         $("#" + selects.$command).attr("data-default", "say");
         controlView.resetObject();
@@ -2392,11 +2481,9 @@ var controlView = {
     },
 
     resetExpression:function () {
-        if ($("#switchFrom").val() == "pc") {
-            $("#" + selects.$select_expression).html("神态<span class='caret'></span>");
-        } else {
-            $("#" + selects.$select_expression).find('span').text("神态");
-        }
+
+        $("#" + selects.$select_expression).html("神态<span class='caret'></span>");
+
 
         $("#" + selects.$expression).attr("data-default", "0");
     },
@@ -2408,11 +2495,8 @@ var controlView = {
     resetObject:function () {
 
 
-        if ($("#switchFrom").val() == "pc") {
-            $("#" + selects.$select_object).html("对象<span class='caret'></span>");
-        } else {
-            $("#" + selects.$select_object).find('span').text("对象");
-        }
+        $("#" + selects.$select_object).html("对象<span class='caret'></span>");
+
 
         $("#" + selects.$object).attr("data-default", "");
 
@@ -2766,6 +2850,7 @@ var controlView = {
     },
     objectType:"single",
     multiObject:[],
+    object:"",
     getMultiObject:function () {
 
         return array2splitString(controlView.multiObject, ",");
@@ -2780,7 +2865,7 @@ $(document).ready(function () {
         $.ajaxSettings.traditional = true;
         //初始化，获取房间所有信息,有可能是玩的房间,有可能是战例播放
 
-        if ("game" != globalView.getRoomType()) {
+        if ("record" == globalView.getRoomType()) {
             initRecord();
 
         } else {
@@ -2830,8 +2915,8 @@ $(document).ready(function () {
                 //error
                 alert(formatResult.message);
             }
-
             event.preventDefault();
+
 
         }
 

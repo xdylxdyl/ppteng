@@ -8,9 +8,8 @@
 
 
 	<definition name="ptt" template="/WEB-INF/pages/tiles/all/layout.jsp">
-		<put-attribute name="header" value="/WEB-INF/pages/room/tiles/head.jsp" />	
-		<put-attribute name="footer"
-			value="/WEB-INF/pages/room/tiles/foot.jsp" />
+		<put-attribute name="header" value="/WEB-INF/pages/room/tiles/head.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/pages/room/tiles/foot.jsp" />
 
 	</definition>
 
@@ -27,6 +26,22 @@
 	</definition>
 
 	<definition name="/room/play/*" extends="game.room">
+		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
+
+
+	</definition>
+
+	<definition name="game.room2" template="/WEB-INF/pages/tiles/layout2/layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/pages/tiles/layout2/head.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/tiles/layout2/body.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/pages/tiles/layout2/foot.jsp" />
+
+	</definition>
+
+	<definition name="/room/play2/*" extends="game.room2">
 		<put-attribute name="body" value="/WEB-INF/pages/{0}.jsp" />
 	</definition>
 
@@ -143,7 +158,8 @@
 
 
 	<definition name="/player/form/init" extends="ptt">
-		<put-attribute name="body" value="/WEB-INF/pages//player/form/init.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages//player/form/init.jsp" />
 		<put-attribute name="title" value="葡萄藤轻游戏(杀人游戏,多人扫雷)-注册"
 			type="string" />
 	</definition>
@@ -198,10 +214,11 @@
 
 	<!--leftNavHead -->
 	<definition name="musicList" template="/WEB-INF/pages/room/music/show.jsp" />
-	
-		<!--room,-playerList -->
-	<definition name="playerList" template="/WEB-INF/pages/tiles/mlayout/playerlist.jsp" />
-	
+
+	<!--room,-playerList -->
+	<definition name="playerList"
+		template="/WEB-INF/pages/tiles/mlayout/playerlist.jsp" />
+
 
 
 	<!--leftNavHead -->
