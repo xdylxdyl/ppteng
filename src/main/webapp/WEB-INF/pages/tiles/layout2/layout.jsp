@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${room.name}</title>
 
 
 <link href="/r/j-src/framework/bootstrap/3.0.2/bootstrap.min.css"

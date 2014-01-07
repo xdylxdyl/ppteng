@@ -2,9 +2,9 @@
 <%@ include file="../../includes/includes.jsp"%>
  <div class="well col-md-12" ng-controller="gameDetailController"
 	id="navbar-inner">
-			<span class="brand"> <a
+			<span class="brand"> 管理 <a
 				href="/player/detail?uid=${room.createrID}" id="createName"
-				ng-bind="detail.creater|nameConvert"></a>
+				ng-bind="detail.creater|nameConvert" target="_blank"></a>
 			</span> <span class="brand"  id="gamePhase" ng-bind="detail.phase|phaseConvert"> 
 			</span> <span class="brand" id="playerRole"
 				ng-bind="detail.role|roleConvert"></span> <span class="brand" id="playerCard">

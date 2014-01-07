@@ -29,6 +29,9 @@ function controlHeight() {
     var toolH = getHeigh($(".tool"))
 
     var mainH = winH - footH - headH - toolH-20;
+    if(mainH<400){
+        mainH=400;
+    }
     $('.autoheight_area').css({
         maxHeight:mainH,
         minHeight:mainH

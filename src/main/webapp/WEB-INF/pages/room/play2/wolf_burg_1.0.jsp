@@ -5,8 +5,7 @@
 <!--left list-->
 
 <div class="col-md-2" id="sidebar-nav">
-	<div class="well autoheight_area">
-		<p>玩家列表</p>
+	<div class="well autoheight_area">		
 		<ul class="nav nav-list sidebar-nav" id="playerList">
 
 
