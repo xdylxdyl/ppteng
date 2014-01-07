@@ -84,7 +84,7 @@
 	<bean id="version_path_simple" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-				<!-- <entry key="simple_1.0">
+			 <entry key="simple_1.0">
 					<list>
 						<value>killer/simple2/simple_model.drl</value>
 						<value>killer/simple2/simple_query.drl</value>
@@ -165,7 +165,7 @@
 						<value>ghost/soul/soul_game.rf</value>
 					</list>
 				</entry>
-	-->	
+
 				<entry key="rest_1.0">
 					<list>
 
