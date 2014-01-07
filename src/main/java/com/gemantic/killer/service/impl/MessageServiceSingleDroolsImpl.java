@@ -126,24 +126,13 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		// log.info(operater +
 		// " =========== start,room  ======================== " + r);
 		Long start = System.currentTimeMillis();
-		StatefulKnowledgeSession ksession = sessionService.getSesseion(operater
-				.getMessage());
-
-		FactHandle fo = ksession.insert(operater);
-
-		// log.info(operater + " =========== after insert");
-		FactHandle fm = ksession.insert(operater.getMessage());
-		if (IsRoomMessage(operater.getMessage(), r)) {
-			// log.info("room operator " + operater.getMessage());
-			ksession.startProcess("room");
-		} else {
-			// log.info("game operator " + operater.getMessage());
-			ksession.startProcess("game");
-		}
-
-		ksession.fireAllRules();
-		ksession.retract(fo);
-		ksession.retract(fm);
+		
+		
+		boolean type=IsRoomMessage(operater.getMessage(), r);
+		sessionService.processSession(operater,r,type);
+		
+		
+		
 
 		// 什么时候关闭Session呢.规则里触发游戏结束的事件.
 

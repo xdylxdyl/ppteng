@@ -19,7 +19,7 @@
 <link href="/r/css/bootstrap-multiselect.css" rel="stylesheet">
 <link href="/r/css/room/3.0/style.css" rel="stylesheet">
 
-
+<input type="hidden" id="bootstrapVersion" value="3">
 <input type="hidden" id="switchFrom" value="${switchFrom}">
 <input type="hidden" id="uid" value="${uid}">
 <!-- 玩家ID -->

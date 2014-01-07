@@ -161,7 +161,7 @@ var ghostSimpleController = {
 
     wrongTopic:function (message) {
 
-        $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + message.content + "]不符合规范,第一个词是水民卡,第二个词是幽灵卡,中间以空格隔开</p>");
+        $("#" + selects.$gameArea).append("<p style='color:#F00;'> 【系统消息】 [" + message.content + "]不符合规范,第一个词是水民卡,第二个词是幽灵卡,中间以英文逗号,隔开</p>");
 
 
     },

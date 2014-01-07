@@ -2378,11 +2378,9 @@ var controlView = {
     },
     resetCommand:function () {
 
-        if ($("#switchFrom").val() == "pc") {
+
+
             $("#" + selects.$select_command).html("指令<span class='caret'></span>");
-        } else {
-            $("#" + selects.$select_command).find('span').text("指令");
-        }
 
         $("#" + selects.$command).attr("data-default", "say");
         controlView.resetObject();
@@ -2392,11 +2390,9 @@ var controlView = {
     },
 
     resetExpression:function () {
-        if ($("#switchFrom").val() == "pc") {
+
             $("#" + selects.$select_expression).html("神态<span class='caret'></span>");
-        } else {
-            $("#" + selects.$select_expression).find('span').text("神态");
-        }
+
 
         $("#" + selects.$expression).attr("data-default", "0");
     },
@@ -2408,11 +2404,9 @@ var controlView = {
     resetObject:function () {
 
 
-        if ($("#switchFrom").val() == "pc") {
+
             $("#" + selects.$select_object).html("对象<span class='caret'></span>");
-        } else {
-            $("#" + selects.$select_object).find('span').text("对象");
-        }
+
 
         $("#" + selects.$object).attr("data-default", "");
 

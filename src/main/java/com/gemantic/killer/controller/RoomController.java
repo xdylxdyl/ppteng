@@ -221,7 +221,9 @@ public class RoomController {
 			model.addAttribute("first", "notFirst");
 		}
 
+		
 		if (StringUtils.isBlank(from)) {
+			
 			if (request.getHeader("User-Agent").indexOf("Mobile") != -1||request.getHeader("User-Agent").indexOf("MSIE") != -1) {
 				from="mobile";
 				// you're in mobile land
@@ -229,6 +231,7 @@ public class RoomController {
 				// nope, this is probably a desktop
 				from="pc";
 			}
+			log.info(request.getHeader("User-Agent")+" so from is "+from);
 		}
 
 		if ("mobile".equals(from)) {
@@ -236,6 +239,7 @@ public class RoomController {
 
 			return "/room/mplay/" + version;
 		} else {
+			
 			model.addAttribute("switchFrom", "mobile");
 			if(version.contains("wolf")){
 				log.info(version+" is version 2");

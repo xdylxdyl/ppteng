@@ -20,6 +20,7 @@ import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.exception.ServiceErrorCode;
+import com.gemantic.killer.factory.MyDroolsSession;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.service.MemberService;
 import com.gemantic.killer.service.RoomService;
@@ -57,9 +58,9 @@ public class MemberServiceImpl implements MemberService {
 		Message m = new Message("-500", "get", "member");
 		m.setVersion(r.getVersion());
 		m.setWhere(r.getId().toString());
-		StatefulKnowledgeSession ksession = sessionService.getSesseion(m);
+		MyDroolsSession ksession = sessionService.getSesseion(m);
 
-		QueryResults results = ksession.getQueryResults("member of room");
+		QueryResults results = ksession.getKsession().getQueryResults("member of room");
 		List<Long> ids = new ArrayList();
 		for (QueryResultsRow row : results) {
 			Set persons = (Set) row.get("ids");
