@@ -146,8 +146,8 @@ var burgModel = {
                         "type":"dialog",
                         "sourceType":"confirm",
                         "target":"object",
-                        "successCallback":{method:"", param:"", label:"炸毁", value:"bomb"},
-                        "cancelCallback":{method:"", param:"", label:"不炸", value:"umbomb"},
+                        "successCallback":{method:"", param:"", label:"炸毁", value:"agree"},
+                        "cancelCallback":{method:"", param:"", label:"不炸", value:"disagree"},
                         "predict":"action"
 
                     }
