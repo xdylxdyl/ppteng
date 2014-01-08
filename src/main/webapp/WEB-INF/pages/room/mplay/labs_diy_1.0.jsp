@@ -8,5 +8,6 @@
 
 
 
-
+<script
+	src="<%=request.getContextPath() %>/r/j-src/game/labs/diy/1.0/labs_diy_1.0.js?v=${frontVersion}"></script>
 

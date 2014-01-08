@@ -107,9 +107,10 @@
 
 
 
-
+<tiles:insertDefinition name="commonJSImport" />
+<%-- 
 	<script
-	src="<%=request.getContextPath() %>/r/j-src/util/snow.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/util/snow.js?v=${frontVersion}"></script> --%>
 
 <script
 	src="<%=request.getContextPath() %>/r/j-src/game/labs/diy/1.0/labs_diy_1.0.js?v=${frontVersion}"></script>

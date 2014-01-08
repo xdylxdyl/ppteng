@@ -13,9 +13,10 @@ var timer = null;
 var burgModel = {
     clz:{
         "agree":"text-success",
-        "disagree":"text-error",
+        "disagree":"text-danger",
         "bomb":"text-success",
-        "unbomb":"text-error"
+        "unbomb":"text-danger",
+        "highlight":"text-danger"
     },
     bombBurgCount:0,
     unbombBurgCount:0,
@@ -289,7 +290,7 @@ var burgPlayerView = {
     playerHeight:function (id) {
         playerListView.setClass(burgModel.king, "");
         burgModel.king = id;
-        playerListView.setClass(id, "text-error");
+        playerListView.setClass(id, burgModel.clz.highlight);
     }
 
 };
@@ -363,19 +364,6 @@ var burgController = {
                 burgModel.burgIndex = parseInt(message.subject);
                 break;
             case "time" :
-
-                /* updateAngularModel:{id:"navbar-inner",
-                 key:"detail.phase",
-                 value:"",
-                 template:"{native_subject}"
-                 var m = burgModel.templateConfig[message.predict].updateAngularModel;*/
-
-                //angularUtil.updateModel("navbar-inner","detail.phase", message.subject);
-
-                /* var m = burgModel.templateConfig.time.updateAngularModel;
-                 var value = m["template"].template(message);
-                 console.log(value);
-                 angularUtil.updateModel(m.id, m.key, value);*/
 
                 var status = message.subject;
                 globalView.setGameStatus(status);
@@ -459,7 +447,7 @@ var burgView = {
         } else {
             hint = hint + "," + player.name;
         }
-        $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
+        $("#" + selects.$playerRole).removeClass().addClass(burgModel.clz.highlight).empty().html(hint);
     },
     clearHeadArea:function () {
 
@@ -556,7 +544,7 @@ var burgView = {
     displayRole:function (role) {
 
         var hint = "【角色】" + role;
-        $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
+        $("#" + selects.$playerRole).removeClass().addClass(burgModel.clz.highlight).empty().html(hint);
     }
 
 
@@ -751,7 +739,7 @@ var burgService = {
         } else {
             var names = playerService.getGroupNames(group);
             var hint = burgModel.roleHint.wolf(names);
-            $("#" + selects.$playerRole).removeClass().addClass("text-error").empty().html(hint);
+            $("#" + selects.$playerRole).removeClass().addClass(burgModel.clz.highlight).empty().html(hint);
         }
     },
     parseRole:function (data) {

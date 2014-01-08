@@ -8,13 +8,16 @@ body {
     background: #f9f9f9;
     color: #333;
 }
-.zero_margin{
+
+.zero_margin {
     margin: 0px;
 }
+
 .navbar {
     margin-bottom: 0;
 }
-.nav{
+
+.nav {
     margin-bottom: 20px;
 }
 
@@ -25,7 +28,7 @@ body {
 /*left*/
 .sidebar-nav {
     position: absolute;
-    width: 200px;
+
     float: left;
     margin: 0;
     padding-top: 20px;
@@ -80,7 +83,6 @@ body {
     min-width: 100px;
     background: #FFFFFF;
 
-
 }
 
 .content .tab-pane {
@@ -111,8 +113,6 @@ body {
     border: none;
     background: transparent;
 }
-
-
 
 .inner-space {
     padding: 20px 20px 0 20px;
@@ -251,7 +251,7 @@ li label.checkbox, li .help-inline {
 
 /*icon*/
 .icon-ready, .icon-unready, .icon-living, .icon-die, .icon-lastword, .icon-king {
-    background-image: url("../../../img/user-status.png") ;
+    background-image: url("../../../img/user-status.png");
 }
 
 .icon-ready {
@@ -286,46 +286,46 @@ li label.checkbox, li .help-inline {
 }
 
 .lined-paper {
-   background-image: linear-gradient(#eee .1em, transparent .1em);
+    background-image: linear-gradient(#eee .1em, transparent .1em);
     background-size: 1500% 1.4em;
 
-
 }
 
-
-.christmas_background{
-     background-position: center;
-     background-repeat: no-repeat;
+.christmas_background {
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-
-.dog{
+.dog {
     background-image: url(http://bizhi.xue163.com/downpic/upload_xue163s/flashAll/s800/20120516/1337135460DD3e8x.jpg);
 }
 
-.snow{
+.snow {
     background-image: url(http://bizhi.xue163.com/downpic/upload_xue163s/flashAll/s800/20120516/1337135466Vw2SAE.jpg);
 }
-.cat{
+
+.cat {
     background-image: url(http://bizhi.xue163.com/downpic/upload_xue163s/flashAll/s800/20120516/1337135462AeJpdA.jpg);
 }
 
-.outside{
+.outside {
     background-image: url(http://bizhi.xue163.com/downpic/upload_xue163s/flashAll/s800/20120516/1337135458x7T6G4.jpg);
 }
-.tree{
-    background-image: url( http://img7.ph.126.net/TjtbxW6Ml5FwlVtM75em4Q==/3220918158501389727.png);
+
+.tree {
+    background-image: url(http://img7.ph.126.net/TjtbxW6Ml5FwlVtM75em4Q==/3220918158501389727.png);
 }
 
 [class^="icon-"],
 [class*=" icon-"] {
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  *margin-right: .3em;
-  line-height: 14px;
-  vertical-align: text-top;
-  background-repeat: no-repeat;
-  margin-top: 1px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    *margin-right: .3em;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-repeat: no-repeat;
+    margin-top: 1px;
+    margin-right: 4px;
 }
 
