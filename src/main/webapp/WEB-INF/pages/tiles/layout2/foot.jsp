@@ -7,8 +7,7 @@
 
 <!--footer-->
 <div class="col-md-12 ">
-	<div class="panel panel-default" ng-controller="footController"
-		id="footController">
+	<div class="panel panel-default" id="footController">
 
 
 

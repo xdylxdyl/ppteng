@@ -147,6 +147,7 @@ var contentTemplate = {
                         angularUtil.updateModel(m.id, m.key, result, m.update_type);
                     } else {
                         console.log(JSON.stringify(message) + " is string ");
+                        angularUtil.clearModels(m.id, m.key);
                         angularUtil.updateModel(m.id, m.key, m["template"].template(message), m.update_type);
                     }
 
@@ -1949,7 +1950,7 @@ var rightView = {
 
 
         console.log("clear rights");
-       angularUtil.clearModels("footController","rights");
+      // angularUtil.clearModels("gameController","rights");
 
 
     },

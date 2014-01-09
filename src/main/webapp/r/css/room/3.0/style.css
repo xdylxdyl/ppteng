@@ -13,27 +13,14 @@ body {
     margin: 0px;
 }
 
-.navbar {
-    margin-bottom: 0;
-}
-
-.nav {
-    margin-bottom: 20px;
-}
-
-.navbar-inner {
-    min-width: 600px;
+.autoheight_area{
+    overflow-y: auto;
 }
 
 /*left*/
 .sidebar-nav {
-    position: absolute;
-
-    float: left;
     margin: 0;
     padding-top: 20px;
-    max-height: 478px;
-    min-height: 278px;
     overflow-y: auto;
     overflow-x: visible;
 }

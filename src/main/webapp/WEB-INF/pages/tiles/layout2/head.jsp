@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="../../includes/includes.jsp"%>
- <div class="well col-md-12" ng-controller="gameDetailController"
+ <div class="well col-md-12"
 	id="navbar-inner">
 			<span class="brand"> 管理 <a
 				href="/player/detail?uid=${room.createrID}" id="createName"

@@ -9,26 +9,23 @@
 <body ng-app="qm">
 
 
-
-
 <div id="controller" ng-controller="test_Ctrl">
-    <input type="button" value="测试" id="btn"> <br/>
-    <input type="button" value="清除" id="btn2"> <br/>
-  <!--  <input type="text" id="text_txt" value="{{value}}"/>-->
-
-
+    <input type="button" value="更新1" id="btn"> <br/>
+    <input type="button" value="更新2" id="btn2"> <br/>
+    <input type="button" value="清除" id="btn3"> <br/>
+    <!--  <input type="text" id="text_txt" value="{{value}}"/>-->
 
 
     value
-    <p>{{value}}</p>
+    <p id="key" ng-bind="level.key"></p>
 
 
     level.value
-    <p>value:{{level.value}}</p>
+    <p ng-bind="level.value"></p>
 
-   <!-- echo: <p ng-bind="echo"></p>
+    <!-- echo: <p ng-bind="echo"></p>
 
-    value :<p ng-bind="value"></p>-->
+     value :<p ng-bind="value"></p>-->
 
     <!--<input type="text" id="text_txt2" ng-model="xxx" placeholder="Enter a name here">
 
@@ -39,15 +36,15 @@
 
 
 <script type="text/javascript">
-function musicPaused() {
-var music = document.getElementById("clickSound");
-music.pause();
-}
+    function musicPaused() {
+        var music = document.getElementById("clickSound");
+        music.pause();
+    }
 </script>
 <audio id="clickSound" autoplay="autoplay">
-<source src="/r/music/christmas.mp3">
+    <source src="/r/music/christmas.mp3">
 </audio>
-<input id="music" type="button" onclick="musicPaused()" value="停止" />
+<input id="music" type="button" onclick="musicPaused()" value="停止"/>
 <!--
 <h1>Hello {{xxx}}!</h1>
 
@@ -78,13 +75,14 @@ music.pause();
     test_Ctrl = function ($scope) {
         $scope.value = "没变没变";
         $scope.echo = "Echo没变没变";
-        $scope.level={
-                       key:"key",
-                       value:"value"
-              }
+        $scope.level = {
+            key:"key",
+            value:"value"
+        }
     };
 
 
+    var v2 = 0;
 
     $("#btn").on("click", function () {
 
@@ -102,14 +100,24 @@ music.pause();
 
 
         var model = {};
-        model.value = "哈哈变了吧";
-        angularUtil.updateModel("controller", "value",model.value,"");
+        model.value = v2++;
+        angularUtil.updateModel("controller", "level.key", model.value, "");
+        var model2 = {};
+        model2.value = v33++;
+        angularUtil.updateModel("controller", "level.value", model2.value, "");
 
-         var model2 = {};
-         model.value="哈哈111";
-        angularUtil.updateModel("controller", "level.value",model.value,"");
+
+
+
     })
 
+
+    var v33 = 0;
+
+    $("#btn2").on("click", function () {
+
+        $("#key").html("嘿嘿嘿嘿我也来改一下这个值")
+    })
     var angularUtil = {
         updateModels:function (id, models) {
             var s = angular.element($("#" + id)).scope();
@@ -133,7 +141,7 @@ music.pause();
             var as = key.split(".");
             console.log(key + " get key split array lengt " + as.length)
             var m = null;
-            for (var i = as.length-1; i >= 0; i--) {
+            for (var i = as.length - 1; i >= 0; i--) {
                 var temp = {};
                 temp[as[i]] = m;
                 m = temp;
@@ -163,10 +171,10 @@ music.pause();
             if ("append" == type) {
 
             } else {
-                if(as.length>1){
-                    $.extend(s[as[0]], m);
-                }else{
-                    s[key]=value;
+                if (as.length > 1) {
+                    $.extend(true, s[as[0]], m);
+                } else {
+                    s[key] = value;
                 }
 
             }
@@ -175,12 +183,12 @@ music.pause();
         }
     }
 
-    $("#btn2").on("click", function () {
+
+    $("#btn3").on("click", function () {
 
 
-
-        angularUtil.clearModels("controller","level.value");
-        angularUtil.clearModels("controller","value");
+        angularUtil.clearModels("controller", "level.value");
+        angularUtil.clearModels("controller", "value");
 
         //   //方法二:  调用$digest()方法，不推荐    //scope.$digest();
     })

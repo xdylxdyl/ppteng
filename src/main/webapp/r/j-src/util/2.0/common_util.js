@@ -55,7 +55,12 @@ app.filter('phaseConvert', function () {
     return function (ph) {
         console.log("phase is " + ph);
         if (versionFunction.templateConfig) {
-            return versionFunction.templateConfig.time.phase[ph];
+            var r = versionFunction.templateConfig.time.phase[ph];
+            console.log(ph + " is convert 2 " + r);
+            return r;
+        } else {
+            console.log(ph + " phase not get convert config ");
+            return ph;
         }
 
     }
@@ -65,7 +70,13 @@ app.filter('roleConvert', function () {
     return function (ph) {
         console.log("role is " + ph);
         if (versionFunction.roleName) {
-            return versionFunction.roleName[ph];
+
+            var r = versionFunction.roleName[ph];
+            console.log(ph + " is convert 2 " + r);
+            return r;
+        } else {
+            console.log(ph + " role not get convert config ");
+            return ph;
         }
 
     }
@@ -80,24 +91,22 @@ app.filter('rightConvert', function () {
             var result = versionFunction.rightContent[ph];
             console.log(ph + " right convert " + result);
             return result;
+        } else {
+            console.log(ph + " right not get convert config ");
+            return ph;
         }
 
     }
 });
 
 
-app.controller("gameDetailController", function ($scope) {
+app.controller("gameController", function ($scope) {
     $scope.detail = {
         creater:"",
         phase:"",
         role:""
 
     };
-    $scope.text = "xxxx";
-
-});
-
-app.controller("footController", function ($scope) {
     $scope.rights = [];
 
     $scope.processRight = function (right) {
@@ -165,18 +174,18 @@ var angularUtil = {
             temp[as[i]] = m;
             m = temp;
         }
-        console.log(JSON.stringify(s[as[0]]) + " will replace " + JSON.stringify(m));
+        console.log(JSON.stringify(s[as[0]]) + " will replace by" + JSON.stringify(m));
         if ("append" == type) {
 
         } else {
             if (as.length > 1) {
-                $.extend(s[as[0]], m);
+                $.extend(true, s[as[0]], m);
             } else {
                 s[key] = value;
             }
 
         }
-
+        console.log(JSON.stringify(s[as[0]]) + " after replace " + JSON.stringify(m));
         s.$apply();
     }
 }

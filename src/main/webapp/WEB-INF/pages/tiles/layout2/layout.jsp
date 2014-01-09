@@ -72,7 +72,7 @@
 </head>
 <body>
 
-	<div class='my-fluid-container'>
+	<div class='my-fluid-container' ng-controller="gameController" id="gameController">
 		<div class='row header'>
 			<tiles:insertAttribute name="header" />
 		</div>
