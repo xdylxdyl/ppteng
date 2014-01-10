@@ -604,6 +604,7 @@ then
    
     LogUtil.log(" action bomb disagree  start  =================");
     modify($bombAction){setResult("disagree")};
+      modify($right){setRight(new HashSet()),setIsNotify(false)};
     LogUtil.log(" action bomb disagree  over  ================="); 
    
 end
@@ -711,16 +712,29 @@ when
     $game:Game(status=="action",$currentBurg:currentBurg)
     $burg:Burg(id==$currentBurg,$memberCount:memberCount,$bombWolfCount:bombWolfCount)     
           //get all readys
-    $agreeCounts:ArrayList()
+    ($agreeCounts:ArrayList()
 	      from accumulate(
 	      $bombAction:BombAction(result=="agree")	     
 	      init(List ls=new ArrayList();),
 	      action(ls.add($bombAction);),
 	      result(ls)
-	      ); 
+	      );
+	      and 
     eval($agreeCounts.size()+$bombWolfCount>$memberCount)
+    )    
+    or
+    (
+    $message:Message(subject=="dispatch",predict=="switch")
+    and 
+    Game(status=="action") 
+    )  
+    
     not BurgDie()
     King($kid:id)
+    
+    
+    
+    
  then
  
  LogUtil.log(" burg die process  start============="); 
@@ -744,6 +758,20 @@ when
     $operater:Operater()
     (
       //get all readys
+    $unknownCounts:ArrayList()
+	      from accumulate(
+	      $bombAction:BombAction(result=="unknown")	     
+	      init(List ls=new ArrayList();),
+	      action(ls.add($bombAction);),
+	      result(ls)
+	      );    
+    
+    and
+    
+    eval($unknownCounts.size()==0)
+    
+    and
+      //get all readys
     $disAgreeCounts:ArrayList()
 	      from accumulate(
 	      $bombAction:BombAction(result=="disagree")	     
@@ -752,14 +780,12 @@ when
 	      result(ls)
 	      );    
     and 
+    
     Game(status=="action")   
     and 
     eval($disAgreeCounts.size()>=$bombWolfCount)
     )
-    or
-    ($message:Message(subject=="dispatch",predict=="switch"))
-    and 
-    Game(status=="action")   
+   
     or
     (
      Game()
@@ -1058,6 +1084,7 @@ when
     (BurgDie())
     or
     (BurgLiving())
+    not $message:Message(predict=="burgDetail")
  
  then
    LogUtil.log(" burg switch process start=============");   
