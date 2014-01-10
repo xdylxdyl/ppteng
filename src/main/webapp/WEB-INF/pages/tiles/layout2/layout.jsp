@@ -62,7 +62,7 @@
 <script src="/r/j-src/framework/angular/angular.min.js"></script>
 <script src="/r/j-src/framework/bootstrap/box/bootbox.min.js"></script>
 <script
-	src="<%=request.getContextPath() %>/r/j-src/util/2.0/common_util.js?v=${frontVersion}"></script>
+	src="<%=request.getContextPath() %>/r/j-src/util/2.0/common_util3.js?v=${frontVersion}"></script>
 
 	
 <script
