@@ -19,8 +19,7 @@
 String.prototype.template = function () {
     var msg = arguments[0];
 
-    var isnull=false;
-    var r = this.replace(/\{(native|array|name|hint|model)_([^_\}]*)_*([^\}]*)\}/g, function (m, pre, parameter,clz) {
+    var r = this.replace(/\{(native|array|name|hint|model)_([^\}]*)\}/g, function (m, pre, parameter) {
         var result;
         switch (pre) {
             case "native":
@@ -34,25 +33,12 @@ String.prototype.template = function () {
                 break;
             case "hint":
                 result = versionFunction.templateConfig[msg.predict].hint[msg[parameter]];
-                if( versionFunction.templateConfig[msg.predict].hint[msg[parameter]]==undefined){
-                    isnull=true;
-                }
-                 break;
-        }
-        if(clz){
-            console.log(clz+" is clz");
-            result="<span class='"+clz+"'>"+result+"</span>";
-        }else{
-            console.log("no clz ");
+                break;
         }
         return result;
     });
 
 
-
-    if(isnull){
-        return null;
-    }
     return r;
 }
 
@@ -68,16 +54,8 @@ app.filter('nameConvert', function () {
 app.filter('phaseConvert', function () {
     return function (ph) {
         console.log("phase is " + ph);
-        if (ph == null || ph == "" || ph == undefined) {
-            return;
-        }
         if (versionFunction.templateConfig) {
-            var r = versionFunction.templateConfig.time.phase[ph];
-            console.log(ph + " is convert 2 " + r);
-            return r;
-        } else {
-            console.log(ph + " phase not get convert config ");
-            return ph;
+            return versionFunction.templateConfig.time.phase[ph];
         }
 
     }
@@ -86,21 +64,8 @@ app.filter('phaseConvert', function () {
 app.filter('roleConvert', function () {
     return function (ph) {
         console.log("role is " + ph);
-        if (ph == null || ph == "" || ph == undefined) {
-            return;
-        }
         if (versionFunction.roleName) {
-
-            var r = versionFunction.roleName[ph];
-            var names = playerService.getRoleGroupNames(ph);
-            if (names.length > 1) {
-                r = r + " : " + JSON.stringify(names);
-            }
-            console.log(ph + " is convert 2 " + r);
-            return r;
-        } else {
-            console.log(ph + " role not get convert config ");
-            return ph;
+            return versionFunction.roleName[ph];
         }
 
     }
@@ -111,29 +76,28 @@ app.filter('rightConvert', function () {
     return function (ph) {
         console.log("right is " + ph);
         ph = ph.trim();
-        if (ph == null || ph == "" || ph == undefined) {
-            return;
-        }
         if (versionFunction.rightContent) {
             var result = versionFunction.rightContent[ph];
             console.log(ph + " right convert " + result);
             return result;
-        } else {
-            console.log(ph + " right not get convert config ");
-            return ph;
         }
 
     }
 });
 
 
-app.controller("gameController", function ($scope) {
+app.controller("gameDetailController", function ($scope) {
     $scope.detail = {
         creater:"",
         phase:"",
         role:""
 
     };
+    $scope.text = "xxxx";
+
+});
+
+app.controller("footController", function ($scope) {
     $scope.rights = [];
 
     $scope.processRight = function (right) {
@@ -201,18 +165,18 @@ var angularUtil = {
             temp[as[i]] = m;
             m = temp;
         }
-        console.log(JSON.stringify(s[as[0]]) + " will replace by" + JSON.stringify(m));
+        console.log(JSON.stringify(s[as[0]]) + " will replace " + JSON.stringify(m));
         if ("append" == type) {
 
         } else {
             if (as.length > 1) {
-                $.extend(true, s[as[0]], m);
+                $.extend(s[as[0]], m);
             } else {
                 s[key] = value;
             }
 
         }
-        console.log(JSON.stringify(s[as[0]]) + " after replace " + JSON.stringify(m));
+
         s.$apply();
     }
 }
@@ -949,4 +913,3 @@ var myStringUtils = {
     }
 
 }
-
