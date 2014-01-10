@@ -24,7 +24,7 @@ var burgModel = {
     attemptCount:1,
     memberCount:2,
     templateConfig:{
-        "assignKing":{"template":" 【系统消息】第({native_object}/3)次尝试,{name_subject} 被指定为村长,认真挑选行动小组名单吧~",
+        "assignKing":{"template":" 【系统消息】第({native_object_text-info}/3)次尝试,{name_subject_text-info} 被指定为村长,在选人阶段,村长要担负起选择行动小组成员名单的重任了~~",
             "color":colorConfig.system},
         "assign":{
             updateAngularModel:[
@@ -35,44 +35,45 @@ var burgModel = {
                 }
             ]
         },
-        "dispatch":{"template":" 【系统消息】{name_subject}指定 [{name_object}] 做为今天晚上炸狼堡的名单~~",
+        "dispatch":{"template":" 【系统消息】{name_subject_text-info} 指定 [{name_object_text-info}] 做为今天晚上炸狼堡的名单~~大家要认真审核村长提出的名单~通过投票来决定是否通过~",
             "color":colorConfig.system
         },
-        "dismissal":{"template":" 【系统消息】{name_subject} [{hint_object}]了村长给出的小组名单~~ ",
+        "dismissal":{"template":" 【系统消息】{name_subject} [{hint_object_text-info}]了村长给出的小组名单~~ ",
             "color":colorConfig.system,
             "hint":{"agree":"通过",
                 "disagree":"否决"}
         },
-        "dismissalResult":{"template":" 【系统消息】{name_subject} 在大家的一致表决里,{hint_object} 村长被[{hint_object}]了~~",
+        "dismissalResult":{"template":" 【系统消息】{name_subject_text-info} 在大家的一致表决里,给出的名单被[{hint_object_text-info}]了~~",
             "color":colorConfig.system,
             "hint":{"agree":"通过",
                 "disagree":"罢免"}},
-        "burgDetail":{"template":" 【系统消息】{native_subject}号狼堡的小组人员数目是[{native_object}]名",
+        "burgDetail":{"template":" 【系统消息】{native_subject_text-info}号狼堡的战斗开始了,{native_subject_text-info}号狼堡的小组人员数目是[{native_object_text-info}]名",
             "color":colorConfig.system
         },
-        "die":{"template":" 【系统消息】{name_subject}已经离开房间,宣告死亡", "color":colorConfig.system},
-        "action":{"template":"[密] 【系统消息】{name_subject}你对本次狼堡采取的行动是 [{hint_object}] ",
+        "die":{"template":" 【系统消息】{name_subject_text-info}已经离开房间,宣告死亡", "color":colorConfig.system},
+        "action":{"template":"[密] 【系统消息】{name_subject_text-info}你对本次狼堡采取的行动是 [{hint_object_text-info}] ",
             "color":colorConfig.system,
             "hint":{  "agree":"炸毁",
                 "disagree":"不炸"}
         },
-        "bombResult":{"template":" 【系统消息】{native_subject}号城堡的结果是 [{hint_object}]",
+        "bombResult":{"template":" 【系统消息】{native_subject_text-info}号城堡的结果是 [{hint_object_text-info}]",
             "color":colorConfig.system,
             "hint":{"bomb":"成功炸毁",
                 "unbomb":"未炸毁"}
         },
-        "decryption":{"template":" 【系统消息】{name_subject}的身份是 [{hint_object}]",
+        "decryption":{"template":" 【系统消息】{name_subject_text-info}的身份是 [{hint_object_text-info}]",
             "color":colorConfig.system,
-            "hint":{"water":"水民",
+            "hint":{
                 "wolf":"狼人"}
         },
         "time":{"template":"【系统消息】{hint_subject}",
             "color":colorConfig.system,
             "hint":{
-                "dispatch":"选人阶段,村长要担负起选择行动小组成员名单的重任了~~",
+                "action":"行动时间到了~~GoGoGo(如果是七人以上,四号狼堡需要至少两个人选择不炸才能保卫成功)"
+               /* "dispatch":"选人阶段,村长要担负起选择行动小组成员名单的重任了~~",
                 "dismissal":"大家要认真审核村长提出的名单~通过投票来决定是否通过~",
-                "action":"行动时间到了~~GoGoGo(如果是七人以上,四号狼堡需要至少两个人选择不炸才能保卫成功)",
-                "assignKing":"被指定为村长,认真挑选行动小组名单吧~"
+
+                "assignKing":"被指定为村长,认真挑选行动小组名单吧~"*/
             },
             phase:{
                 dispatch:"【当前状态】选人",

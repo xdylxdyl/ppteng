@@ -58,7 +58,8 @@ var ptitle = {
 }
 
 var colorConfig = {
-    "system":"#F00"
+    "system":"#F00",
+    "waring":"#00F"
 
 }
 
@@ -67,12 +68,18 @@ var contentTemplate = {
         return   "<p style='font-weight:bold;color:" + content.color + "'>[" + content.subject + "] " + content.expression + " " + content.firstAction + " [" + content.object + "] " + content.secondAction + " : " + content.content + " </p>"
     },
     generateSystemContent:function (content, message) {
-        var str = "";
+        var str = null;
         if (content == null || content.template == null) {
-            str = "";
-        } else {
 
-            str = "<p style='color:" + content.color + ";'>" + content.template.template(message) + "</p>";
+        } else {
+            var r=content.template.template(message);
+            if(r==null){
+                return str;
+            }else{
+                str = "<p style='color:" + content.color + ";'>" + r + "</p>";
+            }
+
+
         }
 
 
@@ -109,7 +116,12 @@ var contentTemplate = {
     showContent:function (message) {
         var c = contentTemplate.convertMessage2Content(message);
         var str = contentTemplate.generateSystemContent(c, message);
-        gameAreaView.showContent(c.contentID, str);
+        if(str!=null){
+            gameAreaView.showContent(c.contentID, str);
+        }else{
+
+        }
+
     },
 
     filter:function (m, txt) {
@@ -252,7 +264,8 @@ var PlayerAction = {
     "/eat":"直接抓起馒头大的包子塞到嘴里,水都来不及喝,就这么直接咽了下去",
     "/hungry":"忽然觉得前胸贴后背,肚子咕咕叫,顿时什么兴致都没有了,一脚踹开还在呻吟的另一位,光着身子就奔厨房去了",
     "/sleep":"看了看XD在自己的身边,于是就拉着他的手沉沉睡去了,还梦到了自己和XD一起在一个一望无际的草原中看星星",
-    "/jump":"轻轻一跃,就到了最高的摘星塔尖上,众人顿时吸了一口气,这塔可是高达几万米啊"
+    "/jump":"轻轻一跃,就到了最高的摘星塔尖上,众人顿时吸了一口气,这塔可是高达几万米啊",
+    "/smile":"慢慢回头,露出了迷人的微笑"
 
 }
 
@@ -645,6 +658,7 @@ var playerService = {
 
     },
 
+
     getGroupNames:function (group) {
         var result = [];
 
@@ -659,7 +673,7 @@ var playerService = {
         var result = [];
 
         for (var key in id_name) {
-            var player = playerService.getPlayer(id_name[key]);
+            var player = playerService.getPlayer(key);
             if (role == player.role) {
                 result.push(player.name);
             }
