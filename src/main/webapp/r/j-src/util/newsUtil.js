@@ -22,7 +22,6 @@ var restModel = {
 
 }
 
-
 var newsService = {
 
 

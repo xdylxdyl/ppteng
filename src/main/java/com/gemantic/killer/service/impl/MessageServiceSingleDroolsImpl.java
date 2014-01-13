@@ -107,13 +107,8 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 					+ operater.getTimerMessages());
 			roomTimerSevice.nextMessages(operater.getTimerMessages());
 		}
-		// 怎么对顺序排序
-		/*
-		 * log.info(message.getId() + " user time is " +
-		 * (System.currentTimeMillis() - start));
-		 */
-
-		// log.info(operater.getNextMessages());
+	
+		
 		return operater.getNextMessages();
 
 	}
@@ -276,6 +271,8 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 			// log.info("room over ===================" + r);
 
 		}
+		
+		
 
 		return operater;
 	}

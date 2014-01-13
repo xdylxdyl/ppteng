@@ -66,6 +66,9 @@
 					<button class="btn btn-info" id="startButton">开始游戏</button>
 				</li>
 				<li>
+					<button class="btn btn-info hide" id="fightAdminButton">抢管理</button>
+				</li>
+				<li>
 					<button class="btn btn-info" id="replayButton">播放战例</button>
 				</li>
 				<li class="pull-right" id="netSpeedHintLI"><span class="text-success help-inline"

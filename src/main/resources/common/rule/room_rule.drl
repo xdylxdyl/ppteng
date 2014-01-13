@@ -195,29 +195,6 @@ then
 end
 
 
-rule 'change admin'
-ruleflow-group "change admin"
-when
-	//conditions
-	    $room:Room($creater:creater,$rid:id)
-    not Player(id==$creater)
-     $person:Player($pid:id)
-then      
-	
-	// LogUtil.log("change admin =================");
-	$room.setCreater($pid);
-	update($room);
-	
-	  Message admin=new Message($pid,"admin",$rid); 
-     insert(admin);
-     
-     
-   //  LogUtil.log("change admin over =================");
-
-    
-end
-
-
 
 
 
@@ -376,7 +353,47 @@ end
 
 
 
+rule 'admin logout'
+ruleflow-group "logout action"
+when
+	//conditions
+	$room:Room($creater:creater,$rid:id)   
+    $message:Message(subject==$creater,predict=="logout")     
+   
+then      
+	
+	 LogUtil.log("change admin logout=================");
+	//$room.setCreater($pid);
+	//update($room);
+	
+	 Message admin=new Message($rid,"admin logout",""); 
+     insert(admin);     
+     LogUtil.log("change admin logout over =================");
+end
 
+
+rule 'fight admin'
+ruleflow-group "logout action"
+when
+	//conditions
+	$room:Room($creater:creater,$rid:id)
+    $message:Message($subject:subject,predict=="fight admin")
+    not Player(id==$creater)   
+then      
+	
+	 LogUtil.log("fight admin =================");
+
+	 modify($room){setCreater($subject)};  
+	 Message admin=new Message($rid,"change admin",$subject); 
+     insert(admin);     
+     
+     retract($message);
+     
+  LogUtil.log("fight admin over =================");
+
+    
+end
+ 
 
 
 

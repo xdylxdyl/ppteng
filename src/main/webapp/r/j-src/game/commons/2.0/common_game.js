@@ -42,7 +42,7 @@ String.prototype.template = function () {
         return result;
     });
 }
-
+var isChangeAdmin = false;
 var expression = {
 
     "1":"温柔的",
@@ -332,6 +332,7 @@ var selects = {
     $startButton:"startButton",
     $replayButton:"replayButton",
     $exitButton:"exitButton",
+    $fightAdminButton:"fightAdminButton",
     $command:"command",
     $object:"object",
     $expression:"expression",
@@ -470,6 +471,7 @@ var initRecord = function () {
 
     //默认隐藏
     $("#" + selects.$playerRole).hide();
+
 
     gameView.hideDieArea();
 
@@ -882,6 +884,12 @@ var roomService = {
         return  ajaxJson("/record/detail", "get", param, null, 5000, "json");
     },
 
+
+    fightAdmin:function(param){
+        return  ajaxJson("/m/admin/fight", "post", param, null, 5000, "json");
+
+    },
+
     parseCount:function (counts) {
 
         var status = globalView.getGameStatus();
@@ -1180,6 +1188,12 @@ var roomParseService = {
             case "logout" :
                 this.log(message);
                 break;
+            case "admin logout":
+                this.adminLogout(message);
+                break;
+            case "change admin":
+                        this.changeAdmin(message);
+                        break;
             case "kick" :
                 this.kick(message);
                 break;
@@ -1194,6 +1208,13 @@ var roomParseService = {
             case "setting" :
                 this.setting(message);
                 break;
+
+            case "over":
+
+                versionFunction["parseMessage"](message);
+                this.adminLogout(message);
+                break;
+
             default:
                 // console.log("room parse over,start version parse");
                 versionFunction["parseMessage"](message);
@@ -1287,6 +1308,59 @@ var roomParseService = {
     },
 
 
+
+    isDisplayFightAdmin:function () {
+        var isDisplay = true;
+        if(   isChangeAdmin ){
+            isChangeAdmin = false;
+            return true;
+        }
+
+        if ("over" != $("#time").val()) {
+            isChangeAdmin = true;
+            isDisplay= false;
+        } else {
+
+
+        }
+        return isDisplay;
+
+    },
+    changeAdmin:function(message){
+
+
+
+
+        var p=playerService.getPlayer(message.object);
+
+        var content="【系统消息】哈哈哈哈哈,"+ p.name+" 抢到了管理的位置,赞一个";
+        content=  "<p style='color:#F00;'>" + content + "</p>";
+        gameAreaView.showContent(selects.$gameArea, content);
+
+        var creater = playerService.getPlayer(message.object);
+        playerListView.displayCreater(creater);
+
+
+        $("#"+selects.$fightAdminButton).hide();
+
+        isChangeAdmin=false;
+
+
+
+
+    },
+
+    adminLogout:function (message) {
+
+        var isDisplay = this.isDisplayFightAdmin();
+        if (isDisplay) {
+            $("#" + selects.$fightAdminButton).show();
+
+        } else {
+
+        }
+
+    },
     log:function (message) {
         //进入退出游戏，1、需要通报全场；2、加减玩家列表响应的玩家信息。
         var id = message.subject;
@@ -2379,8 +2453,7 @@ var controlView = {
     resetCommand:function () {
 
 
-
-            $("#" + selects.$select_command).html("指令<span class='caret'></span>");
+        $("#" + selects.$select_command).html("指令<span class='caret'></span>");
 
         $("#" + selects.$command).attr("data-default", "say");
         controlView.resetObject();
@@ -2391,7 +2464,7 @@ var controlView = {
 
     resetExpression:function () {
 
-            $("#" + selects.$select_expression).html("神态<span class='caret'></span>");
+        $("#" + selects.$select_expression).html("神态<span class='caret'></span>");
 
 
         $("#" + selects.$expression).attr("data-default", "0");
@@ -2404,8 +2477,7 @@ var controlView = {
     resetObject:function () {
 
 
-
-            $("#" + selects.$select_object).html("对象<span class='caret'></span>");
+        $("#" + selects.$select_object).html("对象<span class='caret'></span>");
 
 
         $("#" + selects.$object).attr("data-default", "");
@@ -2955,6 +3027,15 @@ $(document).ready(function () {
         $('[href][auto-bottom]').on("shown", function () {
             var linkID = $(this).attr("href");
             viewUtil.autoBottom($(linkID));
+        })
+
+
+        $("#"+selects.$fightAdminButton).on("click",function(){
+
+            var param={rid:globalView.getRoomID()};
+            roomService.fightAdmin(param);
+            $("#"+selects.$fightAdminButton).hide();
+
         })
 
 

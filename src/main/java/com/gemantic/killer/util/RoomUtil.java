@@ -32,21 +32,9 @@ public class RoomUtil {
 			Map setting = r.getSetting().getSetting();
 			String level = r.getSetting().getSetting().get("mineLevel");
 			//Todo == 重构这段代码.对于扫雷.哪种情况不给钱.
-			if ("level6" != level) {
-
-				String settingVersion = setting.get("rowCount") + "_"
-						+ setting.get("columnCount") + "_"
-						+ setting.get("mineCount");
-				if (settingVersion.equals("9_9_10")
-						|| settingVersion.equals("16_16_40")
-						|| settingVersion.equals("16_30_99")
-						|| settingVersion.equals("40_40_500")
-						|| settingVersion.equals("100_100_2000")) {
-
-					return settingVersion;
-				} else {
-
-				}
+			if ("level6" != level&&"level5"!=level)  {
+                         return level;
+				
 			} else {
 				//训练模式不给钱
 

@@ -569,4 +569,51 @@ public class RoomController {
 
 	}
 
+	/**
+	  抢管理
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+
+	@RequestMapping(value = "/m/admin/fight", method = RequestMethod.POST)
+	public String fightAdmin(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model, @RequestParam Long rid)
+			throws Exception {
+
+		Long uid = cookieUtil.getID(request, response);
+		if (uid == null) {
+			model.addAttribute("code", "-1");
+			return "/common/success";
+		}
+		Room r = this.roomService.getRoom(rid);
+		if (r == null) {
+			model.addAttribute("code", "-1");
+			return "/common/success";
+		}
+		
+		
+		Message loginMessage = new Message(uid.toString(), "fight admin", "-500",
+				"#0000FF", "78", rid.toString(), "", r.getVersion(),
+				System.currentTimeMillis());
+		List<Message> messages = this.droolsGameMessageService.generate(
+				loginMessage, r);
+		if(messages.size()>0){
+			r.setCreaterID(uid);
+			log.info(r+" update admin "+uid);
+		}else{
+		   log.info(r+" not udpate admin "+uid);	
+		}
+		this.roomService.updateRoom(r);
+		
+		MessageUtil.sendMessage(r.getVersion(), messages, this.pushClient);
+		
+		model.addAttribute("code", "0");
+		return "/common/success";
+	}
+	
+	
 }

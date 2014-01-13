@@ -362,7 +362,7 @@ var gameView = {
                         mineSettingView.updateSettingParameter("level2", 16, 30, 99, true);
                         break;
                     case "3":
-                        mineSettingView.updateSettingParameter("level3", 40, 40, 500, true);
+                        mineSettingView.updateSettingParameter("level3", 40, 40, 250, true);
                         break;
                     case "4":
                         mineSettingView.updateSettingParameter("level4", 100, 100, 2000, true);
