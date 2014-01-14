@@ -642,6 +642,7 @@ var gameView = {
         globalView.setGameStatus(gameGlobalStatus.over);
 
         playerService.setUnreadyStatus();
+        playerService.clearRole();
         //只重新显示.不用重新计算
         settingView.displaySetting();
 
@@ -650,6 +651,7 @@ var gameView = {
         burgView.showConentForGamePhase(burgModel.phase["over"]);
         burgView.clearHeadArea();
         gameView.showDieArea();
+
     },
     showDieArea:function () {
         $("#" + selects.$secondArea).show();

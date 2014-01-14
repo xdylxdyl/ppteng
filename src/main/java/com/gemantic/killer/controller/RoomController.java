@@ -601,14 +601,15 @@ public class RoomController {
 				System.currentTimeMillis());
 		List<Message> messages = this.droolsGameMessageService.generate(
 				loginMessage, r);
-		if(messages.size()>0){
-			r.setCreaterID(uid);
-			log.info(r+" update admin "+uid);
-		}else{
-		   log.info(r+" not udpate admin "+uid);	
-		}
-		this.roomService.updateRoom(r);
-		
+		for(Message m:messages){
+			if("change admin".equals(m.getPredict())){
+				r.setCreaterID(uid);
+				log.info(r+" update admin "+uid);	
+			}else{
+				 log.info(r+" not udpate admin "+uid);	
+			}
+		}		
+		this.roomService.updateRoom(r);		
 		MessageUtil.sendMessage(r.getVersion(), messages, this.pushClient);
 		
 		model.addAttribute("code", "0");

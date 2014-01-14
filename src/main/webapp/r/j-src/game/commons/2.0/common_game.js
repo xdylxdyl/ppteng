@@ -885,7 +885,7 @@ var roomService = {
     },
 
 
-    fightAdmin:function(param){
+    fightAdmin:function (param) {
         return  ajaxJson("/m/admin/fight", "post", param, null, 5000, "json");
 
     },
@@ -952,7 +952,9 @@ var roomService = {
         }
 
         playerListView.sortPlayer();
-    }, parseRoom:function (data) {
+    },
+
+    parseRoom:function (data) {
 
     },
     parseRight:function (data) {
@@ -1192,8 +1194,8 @@ var roomParseService = {
                 this.adminLogout(message);
                 break;
             case "change admin":
-                        this.changeAdmin(message);
-                        break;
+                this.changeAdmin(message);
+                break;
             case "kick" :
                 this.kick(message);
                 break;
@@ -1212,7 +1214,7 @@ var roomParseService = {
             case "over":
 
                 versionFunction["parseMessage"](message);
-                this.adminLogout(message);
+                this.displayFightAdmin(message);
                 break;
 
             default:
@@ -1308,44 +1310,49 @@ var roomParseService = {
     },
 
 
-
     isDisplayFightAdmin:function () {
         var isDisplay = true;
-        if(   isChangeAdmin ){
+        if (isChangeAdmin) {
             isChangeAdmin = false;
-            return true;
-        }
-
-        if ("over" != $("#time").val()) {
-            isChangeAdmin = true;
-            isDisplay= false;
         } else {
+            if ("over" != $("#time").val()) {
+                isChangeAdmin = true;
+                isDisplay = false;
+            } else {
 
+
+            }
 
         }
+
+
         return isDisplay;
 
     },
-    changeAdmin:function(message){
+    displayFightAdmin:function () {
+        if (isChangeAdmin) {
+            $("#" + selects.$fightAdminButton).show();
+            isChangeAdmin=false;
+        } else {
+
+        }
+    },
+    changeAdmin:function (message) {
 
 
+        var p = playerService.getPlayer(message.object);
 
-
-        var p=playerService.getPlayer(message.object);
-
-        var content="【系统消息】哈哈哈哈哈,"+ p.name+" 抢到了管理的位置,赞一个";
-        content=  "<p style='color:#F00;'>" + content + "</p>";
+        var content = "【系统消息】哈哈哈哈哈," + p.name + " 抢到了管理的位置,赞一个";
+        content = "<p style='color:#F00;'>" + content + "</p>";
         gameAreaView.showContent(selects.$gameArea, content);
 
         var creater = playerService.getPlayer(message.object);
         playerListView.displayCreater(creater);
 
 
-        $("#"+selects.$fightAdminButton).hide();
+        $("#" + selects.$fightAdminButton).hide();
 
-        isChangeAdmin=false;
-
-
+        isChangeAdmin = false;
 
 
     },
@@ -3030,11 +3037,11 @@ $(document).ready(function () {
         })
 
 
-        $("#"+selects.$fightAdminButton).on("click",function(){
+        $("#" + selects.$fightAdminButton).on("click", function () {
 
-            var param={rid:globalView.getRoomID()};
+            var param = {rid:globalView.getRoomID()};
             roomService.fightAdmin(param);
-            $("#"+selects.$fightAdminButton).hide();
+            $("#" + selects.$fightAdminButton).hide();
 
         })
 

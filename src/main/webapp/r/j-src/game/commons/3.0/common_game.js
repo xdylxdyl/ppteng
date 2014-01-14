@@ -72,10 +72,10 @@ var contentTemplate = {
         if (content == null || content.template == null) {
 
         } else {
-            var r=content.template.template(message);
-            if(r==null){
+            var r = content.template.template(message);
+            if (r == null) {
                 return str;
-            }else{
+            } else {
                 str = "<p style='color:" + content.color + ";'>" + r + "</p>";
             }
 
@@ -116,9 +116,9 @@ var contentTemplate = {
     showContent:function (message) {
         var c = contentTemplate.convertMessage2Content(message);
         var str = contentTemplate.generateSystemContent(c, message);
-        if(str!=null){
+        if (str != null) {
             gameAreaView.showContent(c.contentID, str);
-        }else{
+        } else {
 
         }
 
@@ -828,6 +828,19 @@ var playerService = {
         }
 
     },
+
+    clearRole:function () {
+        for (var key in id_name) {
+            this.setRole(key, "");
+        }
+
+    },
+    setRole:function (id, role) {
+        if (id_name[id]) {
+            id_name[id].role = role;
+        }
+    },
+
     updateUserInfo:function (userInfo) {
         return ajaxJson("/player/update?", "post", userInfo, null, 5000, "html");
 
@@ -1964,7 +1977,7 @@ var rightView = {
 
 
         console.log("clear rights");
-      // angularUtil.clearModels("gameController","rights");
+        // angularUtil.clearModels("gameController","rights");
 
 
     },
@@ -2252,22 +2265,22 @@ var controlView = {
     hideGameEmpty:[selects.$multiObjectGroup],
 
     setObjectValue:function (type, value) {
-         switch (type) {
-             case "multiObject":
-                 controlView.multiObject = value;
-                 break;
-             case "object":
-                 controlView.object = value;
-                 break;
-             default :
-                 break;
+        switch (type) {
+            case "multiObject":
+                controlView.multiObject = value;
+                break;
+            case "object":
+                controlView.object = value;
+                break;
+            default :
+                break;
 
-         }
+        }
 
-     },
+    },
 
-    getObjectModel:function(){
-      return   controlView.object;
+    getObjectModel:function () {
+        return   controlView.object;
     },
 
     getContent:function (message) {
