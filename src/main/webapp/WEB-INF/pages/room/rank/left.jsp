@@ -25,16 +25,16 @@
 			<li id="leftNav_simple_third"><a
 				href="/rank/statistics?type=simple_third&query=thirdWin&secondQuery=third">三人总榜</a></li>
 			<li class="nav-header">扫雷榜单</li>
+			<li id="leftNav_level0"><a
+				href="/mine/statistics/level0">初级</a></li>
 			<li id="leftNav_level1"><a
-				href="/mine/statistics/level1">初级</a></li>
-			<li id="leftNav_level2"><a
-				href="/mine/statistics/level2">中级</a></li>
+				href="/mine/statistics/level1">中级</a></li>
+				<li id="leftNav_level2"><a
+				href="/mine/statistics/level2">高级</a></li>
 				<li id="leftNav_level3"><a
-				href="/mine/statistics/level3">高级</a></li>
+				href="/mine/statistics/level3">仙级</a></li>
 				<li id="leftNav_level4"><a
-				href="/mine/statistics/level4">仙级</a></li>
-				<li id="leftNav_level5"><a
-				href="/mine/statistics/level5">神级</a></li>
+				href="/mine/statistics/level4">神级</a></li>
 		</ul>
 	</div>
 	<!--/.well -->
