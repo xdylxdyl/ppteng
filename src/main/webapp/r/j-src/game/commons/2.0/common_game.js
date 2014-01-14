@@ -916,6 +916,8 @@ var roomService = {
             uids.push(id);
         }
 
+        var a = globalView.getCreaterId();
+        var adminExist = false;
         //由nameID获取真正name
         var name = this.getPerson(rid, uids);
         for (var j = 0; j < name.length; j++) {
@@ -923,11 +925,23 @@ var roomService = {
             var p = new player(name[j].id, name[j].name, data[j].status, data[j].count == null ? 0 : data[j].count, "", data[j].money);
             playerService.addPlayer(p.id, p);
             // playerListView.login(p);
+            if (name[j].id == a) {
+                adminExist = true;
+            }
 
         }
 
         playerListView.sortPlayer();
         globalView.showSelf(playerService.getPlayer(globalView.getCurrentID()));
+
+
+        if (adminExist) {
+
+        } else {
+            roomParseService.adminLogout();
+        }
+
+
     },
 
     parseRecord:function (data) {
@@ -1332,7 +1346,7 @@ var roomParseService = {
     displayFightAdmin:function () {
         if (isChangeAdmin) {
             $("#" + selects.$fightAdminButton).show();
-            isChangeAdmin=false;
+            isChangeAdmin = false;
         } else {
 
         }
