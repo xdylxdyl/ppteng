@@ -226,6 +226,9 @@
 					<p>
 						<a href="http://www.sjwyb.com/" target="_blank">手机网游帮</a>
 					<p>
+					<p>
+						<a href="http://www.youxuanlicai.com" target="_blank">理财排行</a>
+					<p>
 				
 				</div>
 				<div class="span3">
