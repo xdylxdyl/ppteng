@@ -38,7 +38,7 @@ import com.gemantic.killer.service.MessageService;
 import com.gemantic.killer.service.RoomService;
 import com.gemantic.killer.service.SettingService;
 import com.gemantic.killer.util.MessageUtil;
-@Ignore
+//@Ignore
 public class One23Test {
 
 	private static final Log log = LogFactory.getLog(One23Test.class);

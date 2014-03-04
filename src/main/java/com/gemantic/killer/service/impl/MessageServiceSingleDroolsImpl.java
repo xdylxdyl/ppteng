@@ -13,8 +13,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.drools.runtime.StatefulKnowledgeSession;
-import org.drools.runtime.rule.FactHandle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +21,7 @@ import com.gemantic.common.exception.ServiceException;
 import com.gemantic.commons.push.client.PushClient;
 import com.gemantic.killer.common.model.Message;
 import com.gemantic.killer.common.model.Operater;
+import com.gemantic.killer.common.model.Setting;
 import com.gemantic.killer.model.Room;
 import com.gemantic.killer.model.User;
 import com.gemantic.killer.service.MemberService;
@@ -144,6 +143,7 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 
 			r.setStatus(Room.status_start);
 			r.setPlayers(operater.getPlayers());
+			r.setSetting(operater.getSetting());
 
 			this.roomService.updateRoom(r);
 
@@ -448,6 +448,24 @@ public class MessageServiceSingleDroolsImpl implements MessageService {
 		return operator.getNextMessages();
 
 	}
+	
+	
+	@Override
+	public Setting querySetting(Room room) throws ServiceException,
+			ServiceDaoException {
+		Message createMessage = MessageUtil.parse(
+				room.getVersion(),
+				room.getCreaterID() + ",setting,query,1000000,78,"
+						+ room.getId(), "");
+
+		Operater operator = new Operater(createMessage);		
+		process(operator, room);
+		// 怎么对顺序排序
+		return operator.getSetting();
+
+	}
+	
+	
 
 	@Override
 	public void sendMessage(Message message) throws ServiceException,

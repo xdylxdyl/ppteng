@@ -7,12 +7,13 @@
  */
 
 
-var settingPostParameter = function (rid, version, killCount, dayTime, nightTime, lastwordTime) {
+var settingPostParameter = function (rid, version, killCount, dayTime, nightTime, lastwordTime, policeCount) {
     return{
         rid:rid,
         version:version,
         setting:[
             {"killerCount":killCount},
+            {"policeCount":policeCount},
             {"dayTime":dayTime},
             {"nightTime":nightTime},
             {"lastwordTime":lastwordTime}
@@ -55,29 +56,29 @@ killGameAreaView = {
         votePerson:function (color, subjectName, exp, objectName, objectName, content) {
             return "<p style='font-weight:bold;color:" + color + "'>[" + subjectName + "] " + controlView.showExpression(exp) + " 指证 [" + objectName + "] 说 : " + content + " </p>";
         },
-        killPerson:function (killerName,exp,objName,content) {
+        killPerson:function (killerName, exp, objName, content) {
             return "<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "杀了 [" + objName + "] 说 : " + content + " </p>";
         },
-        checkPerson:function (killerName,exp,objName,content) {
-           return  "<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "查证 [" + objName + "] 说 : " + content + " </p>";
+        checkPerson:function (killerName, exp, objName, content) {
+            return  "<p style='color:#F00;'>" + killerName + " " + controlView.showExpression(exp) + "查证 [" + objName + "] 说 : " + content + " </p>";
         },
 
-        killerWin:function(recordLink){
-          return "<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink;
+        killerWin:function (recordLink) {
+            return "<p style='color:#F00'>【系统消息】 游戏结束，杀手胜利！</p> " + recordLink;
         },
-        waterWin:function(recordLink){
-           return "<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！</p> " + recordLink;
+        waterWin:function (recordLink) {
+            return "<p style='color:#F00'>【系统消息】 游戏结束，水民胜利！</p> " + recordLink;
 
         },
 
-        recordLink:function(recordID){
-         return   "<a href='/record/enter?recordID=" + recordID + "' target='_blank'>查看战例</a>";
+        recordLink:function (recordID) {
+            return   "<a href='/record/enter?recordID=" + recordID + "' target='_blank'>查看战例</a>";
         },
-        decryption:function(name,role){
-         return   "<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + killGameAreaView.RoleName[role] + "</p>"
+        decryption:function (name, role) {
+            return   "<p style='color:#F00;'> 【系统消息】 [" + name + "] 是" + killGameAreaView.RoleName[role] + "</p>"
         },
-        lastwordHint:function(name){
-           return "<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听[" + name + "] 的最后一句话。</p>";
+        lastwordHint:function (name) {
+            return "<p style='color:#F00;'>【系统消息】 [" + name + "]  被杀了,遗言时间，静下来聆听[" + name + "] 的最后一句话。</p>";
         }
 
 
@@ -85,7 +86,7 @@ killGameAreaView = {
     },
     View:{
         say:function (color, name, express, content) {
-            return  "<p  style='color:" + color + "'>[" + name + "] " + express  + " 说：" + content + "</p>"
+            return  "<p  style='color:" + color + "'>[" + name + "] " + express + " 说：" + content + "</p>"
         }
 
     },
@@ -330,18 +331,18 @@ var simpleSettingView = {
         return params;
     },
 
-      autoSettingShow:function (auto) {
-            if (auto) {
-                //autosetting
-                $("#policeCountGroup").hide();
-                $("#killerCountGroup").hide();
+    autoSettingShow:function (auto) {
+        if (auto) {
+            //autosetting
+            $("#policeCount").attr("readonly", true);
+            $("#killerCount").attr("readonly", true);
 
-            } else {
-                $("#killerCountGroup").show();
-                $("#killerCountGroup").show();
+        } else {
+            $("#killerCount").attr("readonly", false);
+            $("#policeCount").attr("readonly", false);
 
-            }
         }
+    }
 }
 
 
@@ -365,6 +366,7 @@ var gameView = {
         var p = playerService.getPlayer(globalView.getCurrentID());
 
         gameView.showSecondArea(p);
+        globalView.setGameStatus("run");
 
         notifyUtil.sendNotify("举起手来", "杀人了杀人了杀人了", "");
 
@@ -416,12 +418,12 @@ var simpleService = {
         simpleService.parseGroup(data.group);
     },
 
-    parseGroup:function(group){
-        var p=playerService.getPlayer(globalView.getCurrentID());
-        if(killGameAreaView.Role.water==p.role){
+    parseGroup:function (group) {
+        var p = playerService.getPlayer(globalView.getCurrentID());
+        if (killGameAreaView.Role.water == p.role) {
 
-        }else{
-            playerListView.displayRole(p.role,group);
+        } else {
+            playerListView.displayRole(p.role, group);
 
         }
 
@@ -481,7 +483,5 @@ versionFunction = {
 
 
 }
-
-
 
 

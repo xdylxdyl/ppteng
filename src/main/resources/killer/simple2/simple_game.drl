@@ -114,7 +114,7 @@ no-loop true
 when
 	//conditions    
     $message:Message($subject:subject,predict=="start",$time:time)
-    $room:Room(status=="unrun")  
+    $room:Room(status=="unrun",$setting:setting)  
     not Game()  
     
     //get all players
@@ -161,6 +161,10 @@ then
 	 Map role_count=new HashMap();
 		role_count.put("killer", killerCount);	 
 		role_count.put("water", waterCount);
+		
+	  
+		
+		
 
 	 //get uid id List
 	 List ls=getIDFromPlayer($allReadys);
@@ -216,8 +220,11 @@ then
 	
 	
 	
-	//4 update room status ||repeat with game			
-	modify($room){setStatus("run")};
+	//4 update room status ||repeat with game	
+	$setting.put("killerCount", String.valueOf(killerCount));	 
+    $setting.put("waterCount", waterCount);
+			
+	modify($room){setStatus("run"),setSetting($setting)};
 	
 	
 	

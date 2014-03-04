@@ -690,6 +690,7 @@ var gameView = {
         gameView.clearDescription();
         var p = playerService.getPlayer(globalView.getCurrentID());
         gameView.showSecondArea(p);
+        globalView.setGameStatus("run");
         notifyUtil.sendNotify("各位大神", "国王生气了，赶紧上朝", "");
 
     },

@@ -13,6 +13,16 @@
                      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
+	<bean id="jspVersionSetting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>				
+				<entry key="wolf_burg_1.0" value="3">
+				</entry>
+					<entry key="ghost_question_2.0" value="3">
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
 
 
 	<bean id="setting" class="java.util.HashMap">
@@ -55,7 +65,7 @@
 	<bean id="simple_1.0_setting" class="java.util.HashMap">
 		<constructor-arg>
 			<map>
-				<entry key="killerCount" value="1">
+				<entry key="killerCount" value="0">
 				</entry>
 				<entry key="dayTime" value="240000">
 				</entry>
@@ -263,7 +273,9 @@
 				<entry key="playerCount" value="玩家人数">
 				</entry>
 				<entry key="killerCount" value="杀手人数">
-				</entry>				
+				</entry>			
+				<entry key="waterCount" value="水民人数">
+				</entry>		
 				<entry key="policeCount" value="警察人数">
 				</entry>
 				<entry key="dayTime" value="白天时间">

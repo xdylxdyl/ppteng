@@ -10,7 +10,16 @@
             http://www.springframework.org/schema/sca http://www.springframework.org/schema/sca/spring-sca.xsd">
 
 
-
+	<bean id="jspVersionSetting" class="java.util.HashMap">
+		<constructor-arg>
+			<map>				
+				<entry key="wolf_burg_1.0" value="3">
+				</entry>
+					<entry key="ghost_question_2.0" value="3">
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
 
 	<bean id="setting" class="java.util.HashMap">
 		<constructor-arg>

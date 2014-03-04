@@ -362,7 +362,7 @@ var gameView = {
                         mineSettingView.updateSettingParameter("level2", 16, 30, 99, true);
                         break;
                     case "3":
-                        mineSettingView.updateSettingParameter("level3", 40, 40, 250, true);
+                        mineSettingView.updateSettingParameter("level3", 40, 40, 360, true);
                         break;
                     case "4":
                         mineSettingView.updateSettingParameter("level4", 100, 100, 2000, true);
@@ -774,7 +774,7 @@ var gameView = {
 
 
             mineView.startCountTime();
-
+            globalView.setGameStatus("run");
             notifyUtil.sendNotify("各位雷神", "游戏已开始，速度带手指头归位", "");
 
         },

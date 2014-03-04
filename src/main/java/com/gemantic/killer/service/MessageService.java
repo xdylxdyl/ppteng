@@ -2,11 +2,10 @@ package com.gemantic.killer.service;
 
 import java.util.List;
 
-
-
 import com.gemantic.common.exception.ServiceDaoException;
 import com.gemantic.common.exception.ServiceException;
 import com.gemantic.killer.common.model.Message;
+import com.gemantic.killer.common.model.Setting;
 import com.gemantic.killer.model.Room;
 
 
@@ -60,6 +59,9 @@ public interface MessageService {
 	
 	
 	public void removeRoom(Room room)throws ServiceException,ServiceDaoException;
+
+	public  Setting querySetting(Room room) throws ServiceException,
+			ServiceDaoException;
 	
 
 

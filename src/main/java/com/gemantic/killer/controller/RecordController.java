@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -69,6 +70,11 @@ public class RecordController {
 
 	@Autowired
 	private CookieUtil cookieUtil;
+	
+	
+
+	@Resource(name = "jspVersionSetting")	
+	private Map<String,String> jspVersionSetting;
 
 	/**
 	 * 游戏准备
@@ -239,7 +245,16 @@ public class RecordController {
 		model.addAttribute("record", record);
 		model.addAttribute("room", record.getRoom());
 		model.addAttribute("type", "record");
-		return "/room/play/" + version;
+		
+		
+		if("3".equals(this.jspVersionSetting.get(version))){
+			log.info(version+" is version 2");
+			return "/room/play2/" + version;
+		}else{
+			log.info(version+" is old version");
+			return "/room/play/" + version;
+		}
+		
 	}
 
 	/**

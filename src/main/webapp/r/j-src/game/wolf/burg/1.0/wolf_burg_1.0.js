@@ -630,6 +630,7 @@ var gameView = {
         gameView.hideDieArea();
         var p = playerService.getPlayer(globalView.getCurrentID());
         gameView.showSecondArea(p);
+        globalView.setGameStatus("run");
         notifyUtil.sendNotify("各位大神", "前方发现狼堡,速度归队", "");
 
 

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -65,6 +66,13 @@ public class RoomController {
 
 	@Autowired
 	private CookieUtil cookieUtil;
+	
+	@Resource(name = "jspVersionSetting")	
+	private Map<String,String> jspVersionSetting;
+	
+	
+	
+	
 
 	/**
 	 * 房间列表
@@ -241,7 +249,7 @@ public class RoomController {
 		} else {
 			
 			model.addAttribute("switchFrom", "mobile");
-			if(version.contains("wolf")){
+			if("3".equals(this.jspVersionSetting.get(version))){
 				log.info(version+" is version 2");
 				return "/room/play2/" + version;
 			}else{

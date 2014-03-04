@@ -1652,8 +1652,6 @@ var settingView = {
             //autosetting
             $("#ghostCountGroup").hide();
             $("#autoSettingGroup").hide();
-
-            ;
             $("#autoSetting").val("true");
 
         } else {

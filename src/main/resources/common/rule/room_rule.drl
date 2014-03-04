@@ -123,13 +123,13 @@ no-loop true
 when
 	//conditions
 
-    $message:Message(predict=="setting")
+    $message:Message(predict=="setting",object=="update")
     $operater:Operater($setting:setting)
     $room:Room()
     
 then      
 	
-	// LogUtil.log("update room setting start =================");
+	 LogUtil.log("update room setting start =================");
 	 
 	 
 
@@ -139,7 +139,7 @@ then
 	// LogUtil.log($setting.getSetting());
      update($room);  
      
-   // LogUtil.log("update room setting over =================");
+    LogUtil.log("update room setting over =================");
 
     
 end
@@ -688,6 +688,29 @@ end
 
 
 
+
+
+rule 'setting notify'
+ruleflow-group "phase convert"
+
+when
+	//conditions
+    Message(predict=="start")
+     $room:Room($setting:setting,$version:version,$id:id) 
+    $operater:Operater()
+
+   
+then      
+	
+	LogUtil.log("setting notify ================= ");	  
+	
+	 Setting set=new Setting($version,Long.valueOf($id),$setting);
+     $operater.setSetting(set);  
+	
+     Message settingMessage=new Message("-500","setting","init"); 
+	 insert(settingMessage);      
+	LogUtil.log("setting notify over =================");
+end
 
 
 

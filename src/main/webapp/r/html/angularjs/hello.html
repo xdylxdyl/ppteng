@@ -30,9 +30,22 @@
     <!--<input type="text" id="text_txt2" ng-model="xxx" placeholder="Enter a name here">
 
     <h1>Hello {{xxx}}!</h1>-->
+    <div ng-repeat="game in games">
+        <p>{{game.name}}</p>
+    ==============================================
+        <div ng-repeat="sub in game.subVersion">
+            <p>{{sub.name}}</p>
+        </div>
+
+    </div>
 
 
 </div>
+
+
+
+
+
 
 
 <script type="text/javascript">
@@ -79,6 +92,38 @@
             key:"key",
             value:"value"
         }
+        $scope.games= [
+            {
+                name:"杀人游戏",
+                subVersion:[
+                    {
+                        name:"1.0",
+                        alias:"简化"
+
+                    },
+                    {
+                        name:"2.0",
+                        alias:"警版"
+                    }
+
+                ]
+            },
+            {
+                 name:"捉鬼",
+                 subVersion:[
+                     {
+                         name:"1.0",
+                         alias:"简化"
+
+                     },
+                     {
+                         name:"2.0",
+                         alias:"猜词"
+                     }
+
+                 ]
+             }
+        ]
     };
 
 

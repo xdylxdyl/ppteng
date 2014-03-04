@@ -101,7 +101,9 @@ public class RoomSettingFormController {
 
 			} else {
 
-				setting = room.getSetting();
+				//从Drools里拿数据Setting的数据				
+				
+				setting=room.getSetting();				
 				log.info(rid + " get user setting " + setting);
 
 			}
@@ -114,6 +116,11 @@ public class RoomSettingFormController {
 		model.addAttribute("settingDisplay", settingDisplay);
 		return "/room/form/setting";
 
+	}
+
+	private Setting converMessage2Setting(List<Message> messages) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**

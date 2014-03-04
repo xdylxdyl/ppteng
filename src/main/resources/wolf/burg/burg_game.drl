@@ -193,7 +193,7 @@ no-loop true
 	//conditions    
 when
     $message:Message($subject:subject,predict=="start",$time:time)
-    $room:Room(status=="unrun")  
+    $room:Room(status=="unrun",$setting:setting)  
     not Game()  
     
     //get all players
@@ -317,7 +317,10 @@ then
 	
 	
 	//4 update room status ||repeat with game			
-	modify($room){setStatus("run")};
+	$setting.put("wolfCount", String.valueOf(wolfCount));	
+    $setting.put("waterCount", waterCount);
+			
+	modify($room){setStatus("run"),setSetting($setting)};
 	
 	
 	
