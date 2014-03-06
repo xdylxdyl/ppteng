@@ -190,7 +190,8 @@ then
 				  insert(r);	  
 				  VoteStatus vs=new VoteStatus(uid,new ArrayList(),new ArrayList(),new ArrayList());
 				  insert(vs);				
-				  Message assignMessage=new Message(role,"assign",uid); 
+				  Message assignMessage=new Message(role,"assign",uid);
+				   
 				  insert(assignMessage);	  
 				  
 				   Message livingMessage=new Message(uid,"living",""); 
@@ -533,8 +534,8 @@ when
     $oldVote:Vote(id==$id,$old:vote)
     $newVoteStatus:VoteStatus(id==$vote,$newVoteMe:voters)
     $oldVoteStatus:VoteStatus(id==$old,$oldVoteMe:voters)
-    Player(id==$id,status=="living")
-    Player(id==$vote,status=="living")
+    Player(id==$id)
+    Player(id==$vote)
     $game:Game($status:status)
    
     eval($old!=$vote)
@@ -640,8 +641,8 @@ no-loop true
 when
     $voteConvert:VoteConvert($id:id,$vote:vote,type=="check")
     $voteStatus:VoteStatus(id==$vote,$voters:policeVoters)    
-    Player(id==$id,status=="living")
-    Player(id==$vote,status=="living")
+    Player(id==$id)
+    Player(id==$vote)
     Game($status:status,$liverCount:liverCount)
     not Vote(id==$id,type=="check")
     Right(id==$id,right contains "check")
@@ -673,8 +674,8 @@ when
     $oldVote:Vote(id==$id,$old:vote)
     $newVoteStatus:VoteStatus(id==$vote,$newVoteMe:policeVoters)
     $oldVoteStatus:VoteStatus(id==$old,$oldVoteMe:policeVoters)
-    Player(id==$id,status=="living")
-    Player(id==$vote,status=="living")
+    Player(id==$id)
+    Player(id==$vote)
     $game:Game($status:status)
     Role(id==$id,$role:Role)
     eval($old!=$vote)
@@ -714,7 +715,7 @@ when
   
    $living_ids:HashSet()
 	      from accumulate(
-	      Player($pid:id,status=="living")	     
+	      Player($pid:id,status=="living"||status=="lastword")	     
 	      init(Set ls=new HashSet();),
 	      action(ls.add($pid);),
 	      result(ls)
@@ -780,7 +781,7 @@ ruleflow-group "person status"
 no-loop true
 when
 	//conditions
-	$player:Player(status=="living",$uid:id)	
+	$player:Player(status=="living"||status=="lastword",$uid:id)	
 	CheckConfirm()	 
     Room(status=="run")
     Game(status=="night")    
@@ -806,7 +807,7 @@ ruleflow-group "person status"
 no-loop true
 when
 	//conditions
-	$player:Player(status=="living",$uid:id)
+	$player:Player(status=="living"||status=="lastword",$uid:id)
 	KillConfirm()	
     Room(status=="run")
     Game(status=="night")    
@@ -1474,7 +1475,7 @@ ruleflow-group "message accept"
 salience 100
 no-loop true 
 when
-     $message:Message($subject:subject,predict=="assign",$object:object,$accepts:accepts)   
+     $message:Message($subject:subject,predict=="assign",object=="water",$object:object,$accepts:accepts)   
 	 
 	 
 then
@@ -1508,7 +1509,9 @@ salience 50
 no-loop true 
 when
      $message:Message($subject:subject,predict=="say"||predict=="check"||predict=="kill",$accepts:accepts)
-        eval($message.getAccepts().size()==0)     
+     
+     
+     eval($message.getAccepts().size()==0)     
 	 Role(id==$subject,$role:role)
 	 
 	 $living_ids:HashSet()
@@ -1619,7 +1622,7 @@ ruleflow-group "message accept"
 salience 50
 no-loop true 
 when
-     $message:Message($subject:subject,predict=="assign",$accepts:accepts)   
+     $message:Message($subject:subject,predict=="assign",object!="water",$accepts:accepts)   
         eval($message.getAccepts().size()==0)  
 	 Role(id==$subject,$role:role)
 	 $all_group_ids:ArrayList()
