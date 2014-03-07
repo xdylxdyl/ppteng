@@ -22,7 +22,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="span3">
-					<p>旗下网站</p>
+					<p>旗下作品</p>
+					<p>
+						<a href="http://www.ptteng.com/mobile/download" target="_blank">桌游精灵</a>
+					</p>
 					<p>
 						<a href="http://114.242.145.78:17788/" target="_blank">圈子通讯录</a>
 					</p>
@@ -35,6 +38,7 @@
 					<p>
 						<a href="http://dicewar.cloudfoundry.com/" target="_blank">夜店骰子</a>
 					</p>
+
 
 				</div>
 				<div class="span3">
@@ -76,8 +80,8 @@
 
 				</div>
 				<div class="span3">
-					<p>扫下二维码记住我们</p>
-					<img src="/r/img/qrcode.png" alt="葡萄藤二维码">
+					<p>手机软件：桌游精灵下载</p>
+					<img src="/r/img/mobile/spirit.png" alt="葡萄藤二维码">
 				</div>
 
 			</div>
@@ -111,7 +115,6 @@
 			<p>花一点点时间~~下载以下浏览器以访问本站(点击即可下载)~~站长答应你们的是新浏览器会比旧浏览器有更多更新的功能~~</p>
 			<p>动画~~更快的响应速度~~更适合移动端以及各种不同的屏幕~~更智能的通知~~亲们,换了吧~求你们了~~5555</p>
 			<p>
-			
 			<ul>
 				<li><p>
 						<a href="http://www.firefox.com.cn/download/" target="_blank">FireFox</a>
