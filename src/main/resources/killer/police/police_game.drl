@@ -250,6 +250,7 @@ when
     (Game(status!="day") and $message:Message($subject:subject,predict=="time",subject=="vote"))   
     or 
     (Game(status!="night") and $message:Message($subject:subject,predict=="time",subject=="kill"||subject=="check"))  
+    
 	 or 
     (Game(status!="lastword") and $message:Message($subject:subject,predict=="time",subject=="lastword"))   
     
@@ -392,7 +393,7 @@ then
 end
 
 rule 'phase clear kill message '
-ruleflow-group "phase clear"
+ruleflow-group "phase convert"
 no-loop true
 when
 	//conditions    
@@ -408,7 +409,7 @@ then
 end
 
 rule 'phase clear check message '
-ruleflow-group "phase clear"
+ruleflow-group "phase convert"
 no-loop true
 when
 	//conditions    
@@ -418,9 +419,9 @@ when
 then      
 	//actions
    //actions
-     LogUtil.log("phase clear check confirm  start================= "); 
+     LogUtil.log("phase clear check message  start================= "); 
      retract($message);
-     LogUtil.log("phase clear check confirm  over =================");   
+     LogUtil.log("phase clear check message  over =================");   
 end
 
 //===========phase clear============over 
@@ -656,7 +657,8 @@ then
                    
     $voters.add($id);
      modify($voteStatus){setPoliceVoters($voters)};
-          LogUtil.log($liverCount+"change vote "+$voteStatus); 
+     
+     LogUtil.log($liverCount+"change vote "+$voteStatus); 
     
      Message setVoteMessage=new Message($vote,"set check",String.valueOf($voters.size()));
      insert(setVoteMessage);      
@@ -668,25 +670,20 @@ rule 'change check'
 ruleflow-group "phase action"
 no-loop true 
 when
-    $voteConvert:VoteConvert($id:id,$vote:vote,type=="check")
-    $right:Right(id==$vote,right contains "check")
-    Vote(id==$id,type=="check")
-    $oldVote:Vote(id==$id,$old:vote)
+    $voteConvert:VoteConvert($id:id,$vote:vote,type=="check")    
+    $oldVote:Vote(id==$id,type=="check",$old:vote)
+   
     $newVoteStatus:VoteStatus(id==$vote,$newVoteMe:policeVoters)
     $oldVoteStatus:VoteStatus(id==$old,$oldVoteMe:policeVoters)
     Player(id==$id)
     Player(id==$vote)
     $game:Game($status:status)
-    Role(id==$id,$role:Role)
     eval($old!=$vote)
     not CheckConfirm()
 then
     LogUtil.log("change check start  ================="); 
-    retract($oldVote);
-    
-     
-     Vote vote=new Vote($id,$vote,"check");
-     insert(vote);
+
+     modify($oldVote){setVote($vote)};
      
      $oldVoteMe.remove($id);
      modify($oldVoteStatus){setPoliceVoters( $oldVoteMe)};	
@@ -1475,7 +1472,7 @@ ruleflow-group "message accept"
 salience 100
 no-loop true 
 when
-     $message:Message($subject:subject,predict=="assign",object=="water",$object:object,$accepts:accepts)   
+     $message:Message($subject:subject,predict=="assign",subject=="water",$object:object,$accepts:accepts)   
 	 
 	 
 then
@@ -1624,21 +1621,21 @@ no-loop true
 when
      $message:Message($subject:subject,subject!="water",predict=="assign",$accepts:accepts)   
         eval($message.getAccepts().size()==0)  
-	 Role(id==$subject,$role:role)
+	
 	 $all_group_ids:ArrayList()
 	      from accumulate(
-	      Role($id:id,role==$role)	     
+	      Role($id:id,role==$subject)	     
 	      init(List ls=new ArrayList();),
 	      action(ls.add($id);),
 	      result(ls)
 	      );
-	 Game()	
+
 	 
 then
-     LogUtil.log(" group say start  ============="+$message); 
+     LogUtil.log(" group assign start  ============="+$message); 
     
      modify($message){setAccepts($all_group_ids)};    
-    LogUtil.log("group say over =============");
+    LogUtil.log("group assign over =============");
     
 end
 
