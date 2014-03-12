@@ -210,7 +210,7 @@ then
 	//4 update room status ||repeat with game			
 	$setting.put("killerCount", String.valueOf(killerCount));
 	$setting.put("policeCount", String.valueOf(policeCount));
-    $setting.put("waterCount", waterCount);
+    $setting.put("waterCount", String.valueOf(waterCount));
 			
 	modify($room){setStatus("run"),setSetting($setting)};
 	

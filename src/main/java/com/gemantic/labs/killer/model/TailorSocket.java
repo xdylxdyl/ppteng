@@ -95,7 +95,10 @@ public class TailorSocket implements WebSocket.OnTextMessage {
 		}
 	}
 	public void closeConnect(){
-		this._connection.close();
+		if(this._connection!=null){
+			this._connection.close();
+		}
+		
 	};
 
 	public boolean isOpen() {
