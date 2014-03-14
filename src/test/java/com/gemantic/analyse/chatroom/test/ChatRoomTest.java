@@ -18,7 +18,7 @@ public class ChatRoomTest {
 	@Test
 	public void testTime() {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = new Date(1311091199999L);
+		Date date = new Date(1311091199929L);
 		System.out.println(df.format(date));
 	}
 	
