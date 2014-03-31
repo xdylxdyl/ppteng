@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
@@ -75,6 +76,8 @@ public class ZipTest {
 				+ MyTimeUtil.convertLong2String(1364309002676L, "yyyy-MM-dd"));
 		
 		log.info(System.currentTimeMillis());
+		
+		log.info("test is "+MapUtils.isNotEmpty(new HashMap()));
 	}
 
 	public void testCount() {
