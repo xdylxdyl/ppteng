@@ -45,7 +45,7 @@
 	<properties>
 		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
 		<tuscany.version>1.4</tuscany.version>
-		<scallop.version>1.4.3</scallop.version>
+		<scallop.version>1.5</scallop.version>
 		<hibernate.annotations.version>3.4.0.GA</hibernate.annotations.version>
 		<gemantic.workflow.lib.version>0.2</gemantic.workflow.lib.version>
 		<gemantic.dashboard_client.lib.version>0.1</gemantic.dashboard_client.lib.version>
@@ -789,6 +789,12 @@
 			<artifactId>weibo-login</artifactId>
 			<version>1.0</version>		
 		</dependency>
+		
+		
+		
+		
+		
+		
 
 
 	</dependencies>
@@ -805,8 +811,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<encoding>utf-8</encoding>
 				</configuration>
 
