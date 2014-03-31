@@ -15,8 +15,7 @@
 				href="/money/flow?uid=${current.id}&type=out">现金流出</a></li>
 				<li id="leftNav_trade"><a
 				href="/money/trade ">转账</a></li> 
-				<li class="nav-header">物品</li>
-					<li id="leftNav_goods"><a href="/financial/goods">可兑换</a></li>
+			
 			
 		</ul>
 	</div>

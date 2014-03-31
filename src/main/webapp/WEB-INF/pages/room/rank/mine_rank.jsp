@@ -4,6 +4,7 @@
 <input type="hidden" id="version" value="${smallVersion}"></input>
  <div class="span9">
 <div class="container" >
+    
 	<c:forEach items="${mines}" var="mine" begin="0" step="1"
 		varStatus="status">
 	<c:set var="record" value="${records[mine.rid]}"></c:set>	

@@ -148,6 +148,42 @@
 			</div>
 
 		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="span12">
+				<h2>
+					<a href="http://shop109777494.taobao.com/shop/view_shop.htm?spm=a1z0e.1.10010.3.367DDz&qq-pf-to=pcqq.c2c&v=1" target="_blank">4.小杨钱币收藏</a>
+					<a class="btn btn-primary pull-right"
+						href="http://shop57698199.taobao.com/?v=1" target="_blank">去看看</a>
+				</h2>
+				<blockquote>葡萄藤官方合作伙伴</blockquote>
+				<p></p>
+				<p class="">新店开张~价优货好~优惠联系 QQ　40658146</p>
+				<p></p>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="span6">
+				<h4 class="text-error">五元兑换券</h4>
+				<div class="row-fluid">
+					<div class="span6">
+						<img alt="140x140"
+							src="http://img01.taobaocdn.com/bao/uploaded/i1/T1xCD.FsBcXXXXXXXX_!!0-item_pic.jpg_240x240.jpg" />
+					</div>
+					<div class="span6">
+						<p class="text-success">50000葡萄币</p>
+					</div>
+				</div>
+				<p></p>
+				<p></p>
+
+				<button class="btn btn-primary" type="button" disabled="disabled">兑换</button>
+			</div>
+
+		</div>
+
+
 
 
 

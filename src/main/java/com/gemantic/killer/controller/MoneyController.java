@@ -199,13 +199,5 @@ public class MoneyController {
 	
 	
 
-	
-	@RequestMapping(value = "/financial/{type}")
-	public String finanical(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model, @PathVariable String type)
-			throws Exception {
-
-		return "/room/financial/" + type;
-	}
 
 }

@@ -13,6 +13,8 @@
 			<li id="nav_deposit"><a href="/tool/deposit">充值</a></li>
 			<li id="nav_picture"><a href="/tool/picture">图片处理</a></li>
 			<li id="nav_games"><a href="/tool/games">游戏推荐</a></li>
+		    <li class="nav-header">物品</li>
+			<li id="nav-goods"><a href="/tool/goods">可兑换</a></li>
 		
 
 
