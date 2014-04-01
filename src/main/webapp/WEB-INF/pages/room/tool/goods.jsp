@@ -154,7 +154,7 @@
 				<h2>
 					<a href="http://shop109777494.taobao.com/shop/view_shop.htm?spm=a1z0e.1.10010.3.367DDz&qq-pf-to=pcqq.c2c&v=1" target="_blank">4.小杨钱币收藏</a>
 					<a class="btn btn-primary pull-right"
-						href="http://shop57698199.taobao.com/?v=1" target="_blank">去看看</a>
+						href="http://shop109777494.taobao.com/shop/view_shop.htm?spm=a1z0e.1.10010.3.367DDz&qq-pf-to=pcqq.c2c&v=1" target="_blank">去看看</a>
 				</h2>
 				<blockquote>葡萄藤官方合作伙伴</blockquote>
 				<p></p>
