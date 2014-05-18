@@ -35,6 +35,10 @@
 			<div class="row-fluid">
 				<div class="img pull-right">
 					<img src="${current.icon}" id="img">
+					<form enctype="multipart/form-data" method="post">
+<input name="file" type="file" id="icon_file" />
+<input type="submit" value="Upload" id="file_upload"/>
+</form>
 				</div>
 				<div class="info-text">
 					<p id="editSignature">${current.sign}</p>
@@ -45,6 +49,10 @@
 						<p contenteditable="true" id="imgUrl" class="imgUrl"></p>
 						<a href="#" class="btn" id="preview">预览(若预览不成功,无法保存头像)</a>
 					</div>
+					<div>
+					
+					
+</div>
 				</div>
 			</div>
 			<!--额外信息-->

@@ -1,5 +1,7 @@
 package com.gemantic.killer.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 
 
@@ -1330,5 +1334,31 @@ public class PlayerController implements ApplicationContextAware {
 		this.context = applicationContext;
 
 	}
+	
+	
+    /**
+     * @描述 文件上传演示操作
+     * @时间 2013-7-26 下午5:17:42
+*/
+    @ResponseBody
+    @RequestMapping(value = "/player/icon", method = RequestMethod.POST)
+    public String doFileUpload( HttpServletRequest request,
+			HttpServletResponse response, ModelMap model,@RequestParam MultipartFile file)
+            throws IllegalStateException, IOException {
+    	log.info("hello upload ");
+    	int code=0;
+    	log.info(file.getOriginalFilename());
+    	
+       
+            try{
+            file.transferTo(new File("d:/tmp/test/" + file.getOriginalFilename()));
+            }catch(Throwable t){
+            	t.printStackTrace();
+            	log.error(t.getMessage());
+            }
+        model.addAttribute("code", code);
+
+		return "common/success";
+    }
 
 }
