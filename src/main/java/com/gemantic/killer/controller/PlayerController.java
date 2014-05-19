@@ -30,8 +30,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
-
 import weibo4j.Account;
 import weibo4j.Users;
 import weibo4j.model.WeiboException;
@@ -372,10 +370,10 @@ public class PlayerController implements ApplicationContextAware {
 		Long uid = cookieUtil.getID(request, response);
 		log.info(" uid " + uid + " want offline ");
 		String url = "/";
-		
-		if(uid==null){
-			
-		}else{
+
+		if (uid == null) {
+
+		} else {
 			// mock a message of logout
 			Room r = this.memberService.getRoomOfUser(uid);
 			if (r == null) {
@@ -827,20 +825,26 @@ public class PlayerController implements ApplicationContextAware {
 		}
 		User oldUser = this.userService.getObjectById(uid);
 
-		String fullName = "/data/user_info/" + uid;
-		boolean isUpdateIcon = false;
+		if (StringUtils.isBlank(user.getIcon())) {
 
-		try {
-			FileUtil.saveImage(user.getIcon(), fullName);
-			isUpdateIcon = true;
-		} catch (Exception e) {
-			log.error(fullName + " save failure " + user);
+			log.info("not update img ");
+		} else {
 
-		}
-		log.info(fullName + " is update " + isUpdateIcon);
-		if (isUpdateIcon) {
-			oldUser.setIcon("/r/user_info/" + uid + "?version="
-					+ System.currentTimeMillis());
+			String fullName = "/data/user_info/" + uid;
+			boolean isUpdateIcon = false;
+
+			try {
+				FileUtil.saveImage(user.getIcon(), fullName);
+				isUpdateIcon = true;
+			} catch (Exception e) {
+				log.error(fullName + " save failure " + user);
+
+			}
+			log.info(fullName + " is update " + isUpdateIcon);
+			if (isUpdateIcon) {
+				oldUser.setIcon("/r/user_info/" + uid + "?version="
+						+ System.currentTimeMillis());
+			}
 		}
 
 		oldUser.setName(user.getName());
@@ -1015,7 +1019,7 @@ public class PlayerController implements ApplicationContextAware {
 			type = "music";
 		}
 		User user = this.userService.getObjectById(uid);
-		//log.info(uid + " get " + user);
+		// log.info(uid + " get " + user);
 
 		model.addAttribute("current", user);
 		model.addAttribute("type", type);
@@ -1187,12 +1191,11 @@ public class PlayerController implements ApplicationContextAware {
 	 */
 	@RequestMapping(value = "/player/qq/login", method = RequestMethod.POST)
 	public String qqlogin(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model)
-			throws Exception {
+			HttpServletResponse response, ModelMap model) throws Exception {
 		log.info("you want login with qq");
 		response.setContentType("text/html;charset=utf-8");
 		try {
-			return "redirect:" + (new  Oauth().getAuthorizeURL(request));
+			return "redirect:" + (new Oauth().getAuthorizeURL(request));
 		} catch (QQConnectException e) {
 			e.printStackTrace();
 		}
@@ -1211,8 +1214,7 @@ public class PlayerController implements ApplicationContextAware {
 	 */
 	@RequestMapping(value = "/player/qq/callback")
 	public String qqCallback(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model)
-			throws Exception {
+			HttpServletResponse response, ModelMap model) throws Exception {
 
 		response.setContentType("text/html; charset=utf-8");
 
@@ -1222,7 +1224,6 @@ public class PlayerController implements ApplicationContextAware {
 			AccessToken accessTokenObj = (new Oauth())
 					.getAccessTokenByRequest(request);
 
-			
 			long tokenExpireIn = 0L;
 
 			if (accessTokenObj.getAccessToken().equals("")) {
@@ -1231,7 +1232,7 @@ public class PlayerController implements ApplicationContextAware {
 				log.info("没有获取到响应参数");
 				model.addAttribute("code", "-6003");
 				return "redirect:/login";
-				
+
 			} else {
 				accessToken = accessTokenObj.getAccessToken();
 				tokenExpireIn = accessTokenObj.getExpireIn();
@@ -1256,18 +1257,17 @@ public class PlayerController implements ApplicationContextAware {
 				} else {
 					log.info("很抱歉，我们没能正确获取到您的信息，原因是： " + userInfoBean.getMsg());
 				}
-				 loginOfThird(request, response, model, "1", openID, userInfoBean.getNickname());
-				 return "redirect:/m/list";
+				loginOfThird(request, response, model, "1", openID,
+						userInfoBean.getNickname());
+				return "redirect:/m/list";
 
 			}
 		} catch (QQConnectException e) {
 		}
-		 return "redirect:/m/list";
-		
-	
+		return "redirect:/m/list";
 
 	}
-	
+
 	/**
 	 * 获取玩家的状态信息
 	 * 
@@ -1279,14 +1279,11 @@ public class PlayerController implements ApplicationContextAware {
 	 */
 	@RequestMapping(value = "/player/weibo/login", method = RequestMethod.POST)
 	public String weibologin(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model)
-			throws Exception {
+			HttpServletResponse response, ModelMap model) throws Exception {
 		log.info("you want login with qq");
 		response.setContentType("text/html;charset=utf-8");
-		
-	return "redirect:" + (new weibo4j.Oauth().authorize("code","",""));
-		
-		
+
+		return "redirect:" + (new weibo4j.Oauth().authorize("code", "", ""));
 
 	}
 
@@ -1301,30 +1298,26 @@ public class PlayerController implements ApplicationContextAware {
 	 */
 	@RequestMapping(value = "/player/weibo/callback")
 	public String weiboCallback(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model,String code)
+			HttpServletResponse response, ModelMap model, String code)
 			throws Exception {
 
 		response.setContentType("text/html; charset=utf-8");
 		weibo4j.Oauth oauth = new weibo4j.Oauth();
 		PrintWriter out = response.getWriter();
 		String accessToken = null, openID = null;
-		weibo4j.http.AccessToken at=oauth.getAccessTokenByCode(code);
-		
-		
+		weibo4j.http.AccessToken at = oauth.getAccessTokenByCode(code);
+
 		Account am = new Account();
 		am.client.setToken(at.getAccessToken());
 		JSONObject uid = am.getUid();
 		System.out.println(uid.toString());
 		Users um = new Users();
-		openID=uid.getString("uid");		
+		openID = uid.getString("uid");
 		um.client.setToken(at.getAccessToken());
 		weibo4j.model.User user = um.showUserById(openID);
-		
-		
-		 loginOfThird(request, response, model, "1", openID, user.getName());
-		 return "redirect:/m/list";
-		
-	
+
+		loginOfThird(request, response, model, "1", openID, user.getName());
+		return "redirect:/m/list";
 
 	}
 
@@ -1334,31 +1327,31 @@ public class PlayerController implements ApplicationContextAware {
 		this.context = applicationContext;
 
 	}
-	
-	
-    /**
-     * @描述 文件上传演示操作
-     * @时间 2013-7-26 下午5:17:42
-*/
-    @ResponseBody
-    @RequestMapping(value = "/player/icon", method = RequestMethod.POST)
-    public String doFileUpload( HttpServletRequest request,
-			HttpServletResponse response, ModelMap model,@RequestParam MultipartFile file)
-            throws IllegalStateException, IOException {
-    	log.info("hello upload ");
-    	int code=0;
-    	log.info(file.getOriginalFilename());
-    	
-       
-            try{
-            file.transferTo(new File("d:/tmp/test/" + file.getOriginalFilename()));
-            }catch(Throwable t){
-            	t.printStackTrace();
-            	log.error(t.getMessage());
-            }
-        model.addAttribute("code", code);
+
+	/**
+	 * @描述 文件上传演示操作
+	 * @时间 2013-7-26 下午5:17:42
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/player/icon", method = RequestMethod.POST)
+	public String doFileUpload(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model,
+			@RequestParam MultipartFile file) throws IllegalStateException,
+			IOException {
+		log.info("hello upload ");
+		int code = 0;
+		log.info(file.getOriginalFilename());
+
+		Long uid = cookieUtil.getID(request, response);
+		try {
+			file.transferTo(new File("/data/user_info/" + uid));
+		} catch (Throwable t) {
+			t.printStackTrace();
+			log.error(t.getMessage());
+		}
+		model.addAttribute("code", code);
 
 		return "common/success";
-    }
+	}
 
 }
