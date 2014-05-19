@@ -71,6 +71,12 @@ var userEditView = function () {
 
     }
 };
+
+function PreviewImage() {
+
+};
+
+
 $(document).ready(function () {
 
 
@@ -113,7 +119,7 @@ $(document).ready(function () {
 
             var formData = new FormData();
 
-            formData.append("file", document.getElementById('icon_file').files[0]);
+            formData.append("file", $('#icon_file')[0].files[0]);
 
             xhr.upload.addEventListener("progress", uploadProgress, false);
 
@@ -131,6 +137,14 @@ $(document).ready(function () {
 
 
         })
+        $("#icon_file").on("change", function () {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL($("#icon_file")[0].files[0]);
+
+            oFReader.onload = function (oFREvent) {
+                $("#img").attr("src", oFREvent.target.result)  ;
+            };
+        });
 
         //上传进度
 
