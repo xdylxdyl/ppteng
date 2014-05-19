@@ -1345,13 +1345,17 @@ public class PlayerController implements ApplicationContextAware {
 		Long uid = cookieUtil.getID(request, response);
 		try {
 			file.transferTo(new File("/data/user_info/" + uid));
+			User user = this.userService.getObjectById(uid);
+			user.setIcon("/r/user_info/" + uid + "?version="
+					+ System.currentTimeMillis());
+			this.userService.update(user);
 		} catch (Throwable t) {
 			t.printStackTrace();
 			log.error(t.getMessage());
 		}
 		model.addAttribute("code", code);
 
-		return "common/success";
+		return "/common/success";
 	}
 
 }

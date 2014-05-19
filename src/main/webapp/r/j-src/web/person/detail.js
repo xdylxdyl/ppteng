@@ -169,7 +169,7 @@ $(document).ready(function () {
 
         function uploadComplete(evt) {
 
-            alert(evt.target.responseText);
+            alert("上传成功");
 
         }
 
