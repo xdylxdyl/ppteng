@@ -182,7 +182,42 @@
 			</div>
 
 		</div>
+         <hr>
+         <div class="row-fluid">
+			<div class="span12">
+				<h2>
+					<a href="http://www.15tiance.com/" target="_blank">5.天策淘宝店装修</a>
+					<a class="btn btn-primary pull-right"
+						href="http://www.15tiance.com/" target="_blank">去看看</a>
+				</h2>
+				<blockquote>葡萄藤官方合作伙伴</blockquote>
+				<p></p>
+				<p class="">最专业的淘宝/天猫店铺装修，简装修提供针对葡萄藤玩家独一无二的“一折简装优惠”（原价<s>1800</s>元）  精装修仅需要3600元 </p>
+				<p></p>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="span6">
+				<h4 class="text-error">180元简装一折优惠券</h4>
+				<div class="row-fluid">
+					<div class="span6">
+						<img alt="140x140"
+							src="http://www.15tiance.com/images/tc002.png" />
+					</div>
+					<div class="span6">
+						<p class="text-success">180万葡萄币</p>
+					</div>
+				</div>
+				<p></p>
+				<p></p>
 
+				<button class="btn btn-primary" type="button" disabled="disabled">兑换</button>
+			</div>
+
+		</div>
+         
+       
 
 
 
