@@ -192,14 +192,14 @@
 				</h2>
 				<blockquote>葡萄藤官方合作伙伴</blockquote>
 				<p></p>
-				<p class="">最专业的淘宝/天猫店铺装修，简装修提供针对葡萄藤玩家独一无二的“一折简装优惠”（原价<s>1800</s>元）  精装修仅需要3600元 </p>
+				<p class="">最专业的淘宝/天猫店铺装修，精典装修提供针对葡萄藤玩家独一无二的“一折精典装修优惠”（原价<s>1800</s>元）  精装修仅需要3600元 </p>
 				<p></p>
 			</div>
 		</div>
 		<hr>
 		<div class="row-fluid">
 			<div class="span6">
-				<h4 class="text-error">180元简装一折优惠券</h4>
+				<h4 class="text-error">180元精典装修一折优惠券</h4>
 				<div class="row-fluid">
 					<div class="span6">
 						<img alt="140x140"
