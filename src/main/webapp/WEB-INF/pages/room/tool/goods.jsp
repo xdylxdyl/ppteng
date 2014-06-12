@@ -209,9 +209,12 @@
 						<p class="text-success">180万葡萄币</p>
 					</div>
 				</div>
+				<div >
 				<p></p>
-				<p></p>
-
+				<p>满足以下任一条的玩家可参与优惠券兑换：</p>
+				<p class="text-error">1.在葡萄藤注册时间满一年的玩家</p>
+				<p class="text-error">2.任职葡萄藤论坛满三个月的版主</p>
+                </div>
 				<button class="btn btn-primary" type="button" disabled="disabled">兑换</button>
 			</div>
 
