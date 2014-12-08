@@ -69,7 +69,10 @@ public class RankController {
 			page=1;
 		}
 		if(size==null){
-			size=21;
+			size=20;
+		}
+		if(size>50){
+			size=50;
 		}
 		Integer start=(page-1)*size;
 		List<Long> userIDS=new ArrayList();
