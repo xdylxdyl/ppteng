@@ -170,7 +170,7 @@
 									alt="杀人游戏简化版" width="64" height="64"></span>
 								<div class="chapter-body">
 									<h4>杀人游戏</h4>
-									<p>三个版本的杀人游戏</p>
+									<p>这个世界最后一个在线玩简化游戏的地方</p>
 
 
 								</div>
