@@ -16,36 +16,53 @@
 
 	<div class="container">
 		<div class="row section">
-			<div class="span3 left-box">
+			<div class="span3">
 
 
 
 
-				<div class="left-box-in">
-					<h4>
-						<small>欢迎你</small>,${uname}
-					</h4>
-					<img src="http://www.ptteng.com${user.icon}" class="portrait"
-						id="portrait_img" style="max-width: 16em; height: 8em"> <br>
-					<br>
-					<blockquote>
-						<small id="money">金币 ${user.money}</small>
-						<c:choose>
-							<c:when test="${empty punchCount}">
-								<div id="punchBox">
-									<div id="punchOver"></div>
-									<span class="btn btn-primary" id="punch">打卡</span>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<small>连续打卡${punchCount}天,额外获取金币 ${punchCount}*100</small>
-							</c:otherwise>
-						</c:choose>
-					</blockquote>
-					<c:if test="${empty my_room}">
-						<a href="" class="btn btn-primary" id="createRoom">创建房间</a>
-					</c:if>
+				<div class="row  left-box">
+					<div class="left-box-in">
+						<h4>
+							<small>欢迎你</small>,${uname}
+						</h4>
+						<img src="http://www.ptteng.com${user.icon}" class="portrait"
+							id="portrait_img" style="max-width: 16em; height: 8em"> <br>
+						<br>
+						<blockquote>
+							<small id="money">金币 ${user.money}</small>
+							<c:choose>
+								<c:when test="${empty punchCount}">
+									<div id="punchBox">
+										<div id="punchOver"></div>
+										<span class="btn btn-primary" id="punch">打卡</span>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<small>连续打卡${punchCount}天,额外获取金币 ${punchCount}*100</small>
+								</c:otherwise>
+							</c:choose>
+						</blockquote>
+						<c:if test="${empty my_room}">
+							<a href="" class="btn btn-primary" id="createRoom">创建房间</a>
+						</c:if>
+
+					</div>
 				</div>
+				<hr>
+				<div class="row left-box">
+					<div class="span12 left-box-in">
+						<img
+							src="http://bbs.ptteng.com/data/attachment/forum/201412/18/143718br3tba3u3xrr53ax.png"
+							class="portrait" style="max-width: 16em; height: 8em"> <br>
+						<h4>扫码领红包，人民币~~</h4>
+						<a
+							href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5792&extra="
+							class="btn btn-primary"  target="_blank"id="createRoom">查看详情</a>
+					</div>
+				</div>
+
+
 			</div>
 
 
@@ -71,19 +88,22 @@
 
 
 								<div class="span3" ng-repeat="config in versionConfig">
-								<h3 class="" ng-cloak>{{config.title}}</h3>								
-										
-								
-										<img class="img-polaroid fix-img" ng-src="{{config.img}}">
-										   
-										
-										
-										<h3><a href="" class="btn btn-primary  createCategory" version="{{config.version}}" >创建</a></h3>
-										<hr>
-									
+									<h3 class="" ng-cloak>{{config.title}}</h3>
+
+
+									<img class="img-polaroid fix-img" ng-src="{{config.img}}">
+
+
+
+									<h3>
+										<a href="" class="btn btn-primary  createCategory"
+											version="{{config.version}}">创建</a>
+									</h3>
+									<hr>
+
 								</div>
-								
-								
+
+
 
 
 
