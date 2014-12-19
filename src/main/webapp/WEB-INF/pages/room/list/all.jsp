@@ -58,7 +58,7 @@
 						<h4>扫码领红包，人民币~~</h4>
 						<a
 							href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5792&extra="
-							class="btn btn-primary"  target="_blank"id="createRoom">查看详情</a>
+							class="btn btn-primary"  target="_blank">查看详情</a>
 					</div>
 				</div>
 
