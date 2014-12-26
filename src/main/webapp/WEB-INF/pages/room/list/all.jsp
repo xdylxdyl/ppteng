@@ -55,7 +55,8 @@
 						<img
 							src="http://bbs.ptteng.com/data/attachment/forum/201412/18/143718br3tba3u3xrr53ax.png"
 							class="portrait" style="max-width: 16em; height: 8em"> <br>
-						<h4><span>扫码领红包,人民币,最高1000元，骗你是小狗~~</span></h4>
+						<h4><span>扫码领红包,人民币</span></h4>
+						<h4><span>最高1000元，骗你是小狗~~</span></h4>
 						<h4><small>圣诞&元旦【小礼物】</small></h4>
 						<a
 							href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5792&extra="
