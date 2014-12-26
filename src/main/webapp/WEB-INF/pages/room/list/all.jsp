@@ -68,7 +68,7 @@
 				<div class="row left-box">
 					<div class="span12 left-box-in">
 						<img
-							src="http://bbs.ptteng.com/data/attachment/forum/201412/18/145326jstt1p8otitilg33.jpg"
+							src="http://bbs.ptteng.com/data/attachment/forum/201412/26/144537wlyjfz7t8jjyol63.jpg"
 							class="portrait" style="max-width: 16em; height: 8em"> <br>
 						<h4><span>加入戳群来一起玩吧</span></h4>
 						
