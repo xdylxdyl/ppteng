@@ -465,7 +465,7 @@ var gameView = {
                 $("#columnCount").val(100);
             }
             var m = parseInt($("#mineCount").val());
-            if (m > c * r) {
+            if (m >= c * r) {
                 m = c * r / 2;
             }
             var level = $("#mineLevel").val();
