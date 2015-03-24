@@ -49,33 +49,7 @@
 
 					</div>
 				</div>
-				<hr>
-				<div class="row left-box">
-					<div class="span12 left-box-in">
-						<img
-							src="http://bbs.ptteng.com/data/attachment/forum/201412/18/143718br3tba3u3xrr53ax.png"
-							class="portrait" style="max-width: 16em; height: 8em"> <br>
-						<h4><span>扫码领红包,人民币</span></h4>
-						<h4><span>最高1000元，骗你是小狗~~</span></h4>
-						<h4><small>圣诞&元旦【小礼物】</small></h4>
-						<a
-							href="http://bbs.ptteng.com/forum.php?mod=viewthread&tid=5792&extra="
-							class="btn btn-primary"  target="_blank">查看详情</a>
-					</div>
-				</div>
 				
-				
-				<hr>
-				<div class="row left-box">
-					<div class="span12 left-box-in">
-						<img
-							src="http://bbs.ptteng.com/data/attachment/forum/201412/26/144537wlyjfz7t8jjyol63.jpg"
-							class="portrait" style="max-width: 16em; height: 8em"> <br>
-						<h4><span>加入戳群来一起玩吧</span></h4>
-						
-						
-					</div>
-				</div>
 
 
 			</div>
