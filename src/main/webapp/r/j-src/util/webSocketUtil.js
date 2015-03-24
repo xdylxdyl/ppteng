@@ -34,7 +34,7 @@ var webSocketUtil = {
             if (index > 0) {
 
             } else {
-                location = "ws://192.168.11.68:9090/servlet/websocket?uid=" + uid;
+                location = "ws://127.0.0.1:9090/servlet/websocket?uid=" + uid;
             }
             console.log(" this will create websocket ? " + location);
 
