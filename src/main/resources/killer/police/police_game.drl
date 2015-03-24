@@ -990,12 +990,10 @@ when
        
        }    
     } 
-    if("vote".equals($type)||"logout".equals($type)){
     
-     //if die of vote 
      Message decryption=new Message($id,"decryption",$role);  
      insert(decryption);
-    }
+    
     	
     
     modify($person){setStatus("die")};
