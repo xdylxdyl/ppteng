@@ -587,7 +587,7 @@ then
                    
     $voters.add($id);
      modify($voteStatus){setKillerVoters($voters)};
-          LogUtil.log($liverCount+"change vote "+$voteStatus); 
+          LogUtil.log($liverCount+" change vote "+$voteStatus); 
     
      Message setVoteMessage=new Message($vote,"set kill",String.valueOf($voters.size()));
      insert(setVoteMessage);      
@@ -600,15 +600,12 @@ ruleflow-group "phase action"
 no-loop true 
 when
     $voteConvert:VoteConvert($id:id,$vote:vote,type=="kill")
-    $right:Right(id==$vote,right contains "kill")
-    Vote(id==$id,type=="kill")
-    $oldVote:Vote(id==$id,$old:vote)
+    $right:Right(id==$id,right contains "kill")
+    $oldVote:Vote(id==$id,$old:vote,type=="kill")
     $newVoteStatus:VoteStatus(id==$vote,$newVoteMe:killerVoters)
     $oldVoteStatus:VoteStatus(id==$old,$oldVoteMe:killerVoters)
-    Player(id==$id,status=="living")
-    Player(id==$vote,status=="living")
-    $game:Game($status:status)
-    Role(id==$id,$role:Role)
+    Player(id==$id)
+    Player(id==$vote)
     eval($old!=$vote)
     not KillConfirm()
 then
@@ -778,11 +775,11 @@ ruleflow-group "person status"
 no-loop true
 when
 	//conditions
-	$player:Player(status=="living"||status=="lastword",$uid:id)	
+	Role($uid:id,role=="police")
+	$player:Player(status=="living"||status=="lastword",id==$uid)	
 	CheckConfirm()	 
     Room(status=="run")
-    Game(status=="night")    
-    Role(id==$uid,role=="police")
+    Game(status=="night")
     $right:Right(id==$uid)
    
 then      
