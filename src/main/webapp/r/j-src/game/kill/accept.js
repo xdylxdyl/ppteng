@@ -97,6 +97,7 @@ killController.decryption = function (message) {
         var name = playerService.getName(message.subject);
 
         $("#" + selects.$gameArea).append(killGameAreaView.Hint.decryption(name,message.object));
+        viewUtil.autoBottom($("#" + selects.$gameArea));
 
     }
 

@@ -387,6 +387,7 @@ var gameView = {
         killGameAreaView.showOver(recordID, obj);
         killGameAreaView.showConentForGamePhase(killGameAreaView.Phase["over"]);
         gameView.showDieArea();
+        viewUtil.autoBottom($("#" + selects.$gameArea));
     },
     showDieArea:function () {
         $("#" + selects.$secondArea).show();
