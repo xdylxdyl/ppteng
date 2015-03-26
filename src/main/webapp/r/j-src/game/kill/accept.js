@@ -113,6 +113,8 @@ killController.assign = function (message) {
     playerService.updatePlayer(p);
     playerListView.appendRole(p);
 
+
+
 };
 
 

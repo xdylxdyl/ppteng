@@ -286,4 +286,17 @@ li label.checkbox, li .help-inline {
     background-size: 1500% 1.4em;
 }
 
+.role_background {
+    background-position:center;
+    background-repeat: no-repeat;
 
+}
+.killer {
+    background-image: url(../../img/person/killer.jpg);
+    background-size:80px 60px;
+
+}
+.police {
+    background-image: url(../../img/person/police2.jpg);
+    background-size:78px 80px;
+}

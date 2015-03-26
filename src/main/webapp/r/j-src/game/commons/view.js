@@ -315,10 +315,12 @@ var playerListView = {
 
     },
 
+
     displayRole:function (role, group) {
         var hint = "";
         switch (role) {
             case killGameAreaView.Role.water:
+
                 break;
             case killGameAreaView.Role.killer:
                 var names = playerService.getGroupNames(group);
@@ -337,6 +339,7 @@ var playerListView = {
         if (killGameAreaView.Role.killer == role || killGameAreaView.Role.police == role) {
             $("#" + selects.$playerRole).addClass("text-error");
         }
+        gameAreaView.displayRoleBackground(role);
 
 
     },
@@ -549,6 +552,25 @@ var gameAreaView = {
 
      },*/
 
+    displayRoleBackground:function(role){
+        switch (role) {
+            case killGameAreaView.Role.water:
+
+                $("#" + selects.$gameArea).removeClass("role_background police killer")
+                break;
+            case killGameAreaView.Role.killer:
+                $("#" + selects.$gameArea).removeClass("role_background killer");
+                $("#" + selects.$gameArea).addClass("role_background police")
+                break;
+            case killGameAreaView.Role.police:
+                $("#" + selects.$gameArea).removeClass("role_background police");
+                $("#" + selects.$gameArea).addClass("role_background killer")
+                break;
+            default:
+                break;
+        }
+
+    },
     updateRubbishText:function () {
 
         var countStr = $("#rubbish").attr("count");

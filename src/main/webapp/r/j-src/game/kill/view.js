@@ -272,6 +272,7 @@ killGameAreaView = {
         clearTimeout(timer);
         timer = null;
         $("#" + selects.$countDown).val("00:00");
+
         viewUtil.autoBottom($("#" + selects.$gameArea));
 
 
@@ -369,6 +370,7 @@ var gameView = {
         globalView.setGameStatus("run");
 
         notifyUtil.sendNotify("举起手来", "杀人了杀人了杀人了", "");
+
 
 
     },
