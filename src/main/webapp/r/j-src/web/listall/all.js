@@ -86,28 +86,28 @@ function VersionConfigCtrl($scope) {
     $scope.test = "xx";
     $scope.versionConfig = [
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201504/28/113135txvxxjxzwpgxjiwa.jpg",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111240tbpbm4hh422azsva.jpg",
             version:"simple_1.0",
             title:"杀人游戏 简化版"
         },
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201504/28/113139l1efoy0vec11ynci.jpg",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111241h67tuc6gfzreceki.jpg",
             version:"killer_police_1.0",
             title:"杀人游戏 警版"
         },
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201504/28/113142d138nqksa3azknll.jpg",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111241b4j5orcp5xuc9auc.jpg",
             version:"killer_police_secret_1.0",
             title:"杀人游戏 警版不翻牌"
         },
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201504/28/113153wbq8v4g2vb8eg8vv.jpg",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111243mn5n2x256xj22szn.jpg",
             version:"ghost_simple_1.0",
             title:"捉鬼游戏 简化版"
         },
 
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201504/28/113156uznapgbpjlbjzlt4.jpg",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111244a9rhzmmh0rqzmz1b.jpg",
             version:"ghost_question_2.0",
             title:"捉鬼游戏 猜词版"
         },
@@ -119,7 +119,7 @@ function VersionConfigCtrl($scope) {
 
 
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201504/28/113150m2tdydggtt11e4y9.jpg",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111242foxwxjpapbiz8fpp.jpg",
             version:"wolf_burg_1.0",
             title:"炸狼堡"
         },
@@ -127,22 +127,22 @@ function VersionConfigCtrl($scope) {
 
 
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201504/28/113130ddyd8m85lg05b5e8.jpg",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111239tccjmmq7wd2ss62z.jpg",
             version:"mine_1.0",
             title:"多人扫雷"
         },
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201504/28/113147i3umuf3egdk9fugm.jpg",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111242cmiccyy0ucayk00q.jpg",
             version:"video_1.0",
             title:"虚拟电影院"
         },
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201308/22/182411xulua22kl4w6k4u0.png",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111238y1c1m71pjl5ajhhv.jpg",
             version:"labs_diy_1.0",
             title:"DIY游戏室"
         },
         {
-            img:"http://bbs.ptteng.com/data/attachment/forum/201504/28/113127qu4twwggm67x4z4t.jpg",
+            img:"http://bbs.ptteng.com/data/attachment/forum/201504/30/111238vbjep7vbyuypuvx9.jpg",
             version:"rest_1.0",
             title:"茶座"
         }
